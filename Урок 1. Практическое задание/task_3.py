@@ -22,3 +22,45 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+# Сложность: O(N log N)
+def max_profit_1(dict_firm):
+	"""
+	Данное решение проще читается но выше сложность
+	"""
+	lst_d = list(dict_firm.items())
+	lst_d.sort(key=lambda i: i[1])
+	return lst_d[-3:]
+
+# Сложность: O(N) возможно из-за цикла while нужно умножить на 3 - О(3*N)
+def max_profit_2(dic_firm):
+	"""
+	Данное решение имеет более сложную конструкцию, может быть из-за моих кривых рук,
+	но меньшую сложность чем с применением сортировки
+	"""
+	lst_result = []
+	lst_d = list(dic_firm.items())
+	cnt = 0
+	while cnt < 3:
+		result = max(lst_d, key=lambda i: i[1])
+		lst_result.append(result)
+		lst_d.remove(result)
+		cnt += 1
+	return lst_result
+	
+	
+firm_dic = {
+	'firm_1': 1000,
+	'firm_2': 10000,
+	'firm_3': 5000,
+	'firm_4': 8000,
+	'firm_5': 50000,
+	'firm_6': 6000,
+	'firm_7': 20000
+}
+
+
+if __name__ == '__main__':
+	
+	print(max_profit_1(firm_dic))
+	print(max_profit_2(firm_dic))

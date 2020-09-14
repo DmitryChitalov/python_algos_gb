@@ -17,3 +17,31 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+
+# скорее проще можно было, но такой вариант мне показался наглядней
+def min_o_n2(lst):
+	mn = lst[0]
+	for i in range(len(lst)):
+		for j in range(len(lst)):
+			if lst[j] < lst[i]:
+				if lst[j] < mn:
+					mn = lst[j]
+	return mn
+
+
+def min_o_n(lst):
+	mn = lst[0]
+	for i in range(1, len(lst)):
+		if lst[i] < mn:
+			mn = lst[i]
+	return mn
+
+
+if __name__ == '__main__':
+	rnd_list = [random.randint(1, 100) for i in range(10)]
+	
+	print(rnd_list)
+	print(min_o_n(rnd_list))
+	print(min_o_n2(rnd_list))
