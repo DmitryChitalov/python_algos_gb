@@ -26,9 +26,9 @@ def check_1(lst_obj):
     Алгоритм 3:
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: O(len(..)).
     """
-    lst_to_set = set(lst_obj)  # !!!
+    lst_to_set = set(lst_obj)  # преобразование в множество - O(len(..)), присваивание - O(1)
     return lst_to_set
 
 
@@ -41,12 +41,12 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: O(n**2) так как рассматриваем худший случай.
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # функция len - O(1), цикл - O(n)
+        if lst_obj[j] in lst_obj[j+1:]:    # цикл в цикле - O(n**2)
+            return False                   # O(1)
+    return True                            # O(1)
 
 
 #############################################################################################
@@ -57,14 +57,14 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: O(n*log_n)
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # list() - O(len(...)), присваивание - O(1)
+    lst_copy.sort()                          # O(n*log_n)
+    for i in range(len(lst_obj) - 1):        # len - O(1), вычитание O(1), цикл O(n)
+        if lst_copy[i] == lst_copy[i+1]:     # сравнение O(1), получение по индексу O(1) + O(1)
+            return False                     # O(1)
+    return True                              # O(1)
 
 #############################################################################################
 
