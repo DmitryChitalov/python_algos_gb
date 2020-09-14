@@ -27,3 +27,68 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# Решение #1.
+
+USERS_1 = [
+    {"login": "lev", "password": "gn4o3bgg", "verify": True},
+    {"login": "prav", "password": "asd032fng3", "verify": False},
+    {"login": "alexsei", "password": "yfdfkmysq", "verify": True},
+    {"login": "gosha", "password": "asndkjdxf", "verify": False},
+    {"login": "nikita", "password": "209hg43", "verify": False},
+    {"login": "danil228", "password": "x2398f2", "verify": True},
+    {"login": "sasha", "password": "v3094", "verify": False},
+]
+
+
+def do_auth_1(login, password):
+    for one_user in USERS_1: # O(N)
+        if one_user["login"] == login and one_user["password"] == password:  # O(1)
+            if one_user["verify"]:  # O(1)
+                print(f'[v] Пользователь {login} допущен к ресурсу.')
+            else:
+                print(f'[!] Пользователь {login} не прошел активацию.')
+            return
+    print(f'[x] Пользователь {login} не найден!')
+
+# Итого: O(N)
+
+do_auth_1(login='sergey', password='293gns9df') # Не существует.
+do_auth_1(login='gosha', password='asndkjdxf') # Не активировал запись.
+do_auth_1(login='alexsei', password='yfdfkmysq') # Допущен к ресурсу.
+print()
+
+##########################################################################################################
+
+# Решение #2.
+
+USERS_2 = {
+    "lev": {"password": "gn4o3bgg", "verify": True},
+    "prav": {"password": "asd032fng3", "verify": False},
+    "alexsei": {"password": "yfdfkmysq", "verify": True},
+    "gosha": {"password": "asndkjdxf", "verify": False},
+    "nikita": {"password": "209hg43", "verify": False},
+    "danil228": {"password": "x2398f2", "verify": True},
+    "sasha": {"password": "v3094", "verify": False},
+}
+
+
+def do_auth_2(login, password):
+    if USERS_2.get(login, {}).get('password') == password: # O(1)
+        if USERS_2[login]["verify"]: # O(1)
+            print(f'[v] Пользователь {login} допущен к ресурсу.')
+        else:
+            print(f'[!] Пользователь {login} не прошел активацию.')
+    else:
+        print(f'[x] Пользователь {login} не найден!')
+
+# Итого: O(1)
+
+do_auth_2(login='sergey', password='293gns9df') # Не существует.
+do_auth_2(login='gosha', password='asndkjdxf') # Не активировал запись.
+do_auth_2(login='alexsei', password='yfdfkmysq') # Допущен к ресурсу.
+
+'''
+Решение №2 эффективнее, т.к. мы не пробегаем по всему списку, проверяя каждый элемент, а напрямую
+обращаемся к нему. А только затем проверяем его значение.
+'''

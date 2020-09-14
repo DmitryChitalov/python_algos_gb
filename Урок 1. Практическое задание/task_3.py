@@ -14,7 +14,6 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 
-
 Сама задача:
 Имеется хранилище с информацией о компаниях: название и годовая прибыль.
 Для реализации хранилища можно применить любой подход,
@@ -22,3 +21,40 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+def get_top_company_1(lst):
+    for first_company in lst: # O(N)
+        for second_company in lst: # O(N)
+            if first_company["profit"] < second_company["profit"]: # O(1)
+                break
+        else:
+            return f'Компания: {first_company["title"]}. Доход: {first_company["profit"]}'
+
+# Итого: O(N^2)
+
+def get_top_company_2(lst):
+    top_company = {}
+    for one_company in lst: # O(N)
+        if not top_company or top_company["profit"] < one_company["profit"]: # O(1)
+            top_company = one_company # O(1)
+    return f'Компания: {top_company["title"]}. Доход: {top_company["profit"]}'
+
+# Итого: O(N)
+
+company_list = [
+    {"title": "Лукойл", "profit": 100},
+    {"title": "Аэрофлот", "profit": 302},
+    {"title": "Мегафон", "profit": 82},
+    {"title": "МТС", "profit": 230},
+    {"title": "KFC", "profit": 391},
+    {"title": "Tele2", "profit": 32},
+]
+
+print(get_top_company_1(lst=company_list))
+print(get_top_company_2(lst=company_list))
+
+'''
+Решение №2 является более эффективным, т.к. мы проходим по списку только 1 раз, а в решении №1 - len() раз.
+Сложность решения №2 - O(N) линейная, а решения №1 - O(N^2) квадратичная => решение №2 более эффективно!
+'''
+

@@ -17,3 +17,26 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+def get_min_first(lst):
+	'''Сложность O(N^2)'''
+	for el_first in lst:
+		for el_second in lst:
+			if el_first > el_second:
+				break
+		else:
+			return el_first
+
+
+def get_min_second(lst):
+	'''Сложность O(N)'''
+	tmp_min = None
+	for el in lst:
+		if tmp_min is None or el < tmp_min :
+			tmp_min = el
+	return tmp_min
+
+
+lst = [-8, -10, -45, -16, 19, -39, 50, 48, -10, -23, -37, 33, 10, 17, -6, -15]
+print(get_min_first(lst))
+print(get_min_second(lst))
