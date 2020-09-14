@@ -27,3 +27,49 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+user = {
+	'user_1': [12345, 'no'],
+	'user_2': [10000, 'no'],
+	'user_3': [54321, 'no']
+}
+
+# Сложность: O(N)
+def log_in_1(login, password):
+	if login in user:
+		if password == user[login][0]:
+			user[login][1] = 'yes'
+			print(f'{login} успешно прошол аутентификацию')
+		else:
+			print('Не верный пароль')
+	else:
+		print(f'Пользователя с логином {login} не существует')
+
+# Сложность: O(N)
+def log_in_2(login, password):
+	for k, v in user.items():
+		if login == k and password == v[0]:
+			user[k][1] = 'yes'
+			print(f'{login} успешно прошол аутентификацию')
+			break
+	else:
+		print(f'Не верный логин или пароль')
+
+
+if __name__ == '__main__':
+	
+	log_in_1('user_1', 12345)
+	print(user['user_1'])
+	log_in_1('user_2', 15987)
+	print(user['user_2'])
+	
+	log_in_2('user_2', 10000)
+	print(user['user_2'])
+	log_in_2('user_3', 15987)
+	print(user['user_3'])
+
+"""
+Сложно оценить какой метод эффективней, так как я не смог принципиально по другому реализовать второй метод
+возможно потому что не до конца понял задание
+"""
