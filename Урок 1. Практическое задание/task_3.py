@@ -22,3 +22,68 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+profit_companies = {'Mercury': 1_522_142,
+                    'Venus': 3_152_121,
+                    'Earth': 2_456_236,
+                    'Mars': 236_421_541,
+                    'Jupiter': 2_145_412,
+                    'Uranium': 1_426_512,
+                    'Saturn': 2_145_461,
+                    'Neptune': 8_761_254,
+                    'Pluto': 14_985_547,
+                    }
+
+#########################################################################################################
+""" 
+Решение №1 сложность O(n**2)
+"""
+
+
+def search_top_circle_max(dict_companies):
+    """
+    функция получает словарь с кампаниями и их прибылью,
+    возвращяет компанию с наибольшей прибылью
+    """
+
+    max_profit = 0
+    dist_tmp = {}
+    for key, value in dict_companies.items():  # O(n)
+        if value > max_profit:                 # O(1)
+            max_profit = value                 # O(1)
+            dist_tmp = {}                      # O(1)
+            dist_tmp.setdefault(key, value)    # O(1)
+    return dist_tmp
+
+
+def search_top_circle(dict_companies_tmp):
+    """
+    функция получает словарь с кампаниями и их прибылью,
+    вызавает функцию поиска компании с максимальной прибыль в цикле 3 раза,
+    создает список из трех компаний с максимальной прибылью и выводит их
+    """
+    dict_top_three = []
+    for el in range(3):                                     # O(n)
+        tmp = search_top_circle_max(dict_companies_tmp)     # O(n**2) в цикле вызываеться функция с циклом
+        dict_top_three.extend(*tmp.items())                 # O(1)
+        dict_companies_tmp.pop(*tmp)                        # O(1)
+    print(dict_top_three)
+
+
+search_top_circle(profit_companies.copy())
+
+#########################################################################################################
+""" 
+Решение №2 сложность O(n)
+это решение эффективней так, как O(n) эффективней O(n**2) и занимает намного меньше строчек кода.
+
+"""
+
+
+def search_top_sorted(dict_companies):
+    print(sorted(dict_companies.items(), key=lambda x: x[1])[-1:-4:-1])  # O(n) - создание копии при сорт.
+
+
+search_top_sorted(profit_companies)
+
+##########################################################################################################

@@ -27,3 +27,65 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+bd_users = {'Zeus': ['mnbhjh25', True],
+            'Athena': ['nvjdkn154', False],
+            'Heracles': ['absds444', False],
+            'Aphrodite': ['14djhsgjd', True],
+            'Gera': ['sfmbh45dff', True],
+            'Hades': ['sfhvhf16', True],
+            'Hermes': ['fjsjssj2s545', False],
+            }
+
+#########################################################################################################
+"""
+Решение №1 сложность  O(9)
+это решение лучше на одну операцию. И оно лучше читаеться
+"""
+
+
+def authentication_first(data_user, bd_users_in_f):
+    """
+    функция получает логин и пароль пользователя,
+    проверяет наличие такого пользователя в базе и активацию учетной записи,
+    если пользователя нет придлагает регистрацию,
+    если учетка не активированна тогда активацию
+    """
+    login, password = data_user  # O(1)
+    if bd_users_in_f.get(login) is None or password != bd_users_in_f.get(login)[0]:  # O(1)+(1)+O(1)+(O(1)+O(1))
+        print('invalid username or password')
+    elif bd_users_in_f.get(login)[1] is False:  # (O(1)+O(1)) + O(1)
+        print('activate your account')
+    else:
+        print('Welcome')
+
+
+####################################################################################################
+"""
+Решение №2 сложность  O(10)
+"""
+
+
+def authentication_second(data_user, bd_users_in_f):
+    """
+        функция получает логин и пароль пользователя,
+        проверяет наличие такого пользователя в базе и активацию учетной записи,
+        если пользователя нет придлагает регистрацию,
+        если учетка не активированна тогда активацию
+    """
+    if data_user[0] in bd_users_in_f.keys():  # O(1) + O(1) + O(1)
+        if data_user[1] == bd_users_in_f[data_user[0]][0]:  # O(1) + O(1) + O(1) + O(1)
+            if bd_users_in_f[data_user[0]][1] is True:  # O(1) + O(1) + O(1)
+                print('Welcome')
+            print('activate your account')
+    else:
+        print('invalid username or password')
+
+
+###########################################################################################################
+
+if __name__ == '__main__':
+
+    user_1 = ['Athena', 'nvjdkn154']
+    authentication_first(user_1, bd_users)
+    authentication_second(user_1, bd_users)

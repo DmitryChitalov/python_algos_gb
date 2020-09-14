@@ -17,3 +17,42 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+
+def min_number_first(list_numbers):
+    """
+    функция принимает список чисел, ищет минимальное значения и возвращяет его.
+    сложность O(n**2), функция соответствует ТЗ но второй цикл избыточен.
+    """
+    min_num = list_numbers[0]
+
+    for el in list_numbers:
+        for elem in list_numbers:
+            if el > elem:
+                if elem < min_num:
+                    min_num = elem
+    return min_num
+##############################################################################################
+
+
+def min_number_second(list_numbers):
+    """
+    функция принимает список чисел, ищет минимальное значения и возвращяет его.
+    сложность O(n)
+    """
+    min_num = None
+    for num in list_numbers:
+        if min_num is None:
+            min_num = num
+        if min_num > num:
+            min_num = num
+    return min_num
+
+
+############################################################################################
+
+list_n = [random.randint(-100, 100) for num in range(200)]
+# print(min(list_n))
+print(min_number_first(list_n))
+print(min_number_second(list_n))
