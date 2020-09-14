@@ -17,3 +17,27 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+
+def alg_1(z_list):
+    z_min = 1
+    for item_1 in z_list:
+        for item_2 in z_list:
+            if (item_1 > item_2) and (item_2 < z_min):
+                z_min = item_2
+    return z_min
+
+
+def alg_2(z_list):
+    z_min = 1
+    for item in z_list:
+        if z_min > item:
+            z_min = item
+    return z_min
+
+
+z_list = random.sample(range(0, 100), 10)
+print(z_list)
+
+print('алгоритм 1 = ', alg_1(z_list), '\n', 'алгоритм 2 = ', alg_2(z_list))

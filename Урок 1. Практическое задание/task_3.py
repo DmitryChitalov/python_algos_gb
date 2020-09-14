@@ -22,3 +22,34 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+def var_1(comp): # 1+1+1+N+1+1+1+1
+    z = 0 # 1
+    z_list = [] # 1
+    sorted_x = sorted(comp.items()) # 1
+    for item in sorted_x: # N
+        z_list.append(item) # 1
+        z += 1 # 1
+        if z == 3: break # 1
+    return z_list # 1
+
+
+def var_2(comp): # N+1
+    inverse = [(key, value) for key, value in comp.items()] # сложность генератора не нашел, предположу, что N, 1+1+N
+    return inverse[:3] #1
+
+
+def var_3(comp): # 1+1+1+N+1
+    sort = sorted(comp.items(), key=lambda kv: kv[0]) # сложность лямбды не нашел, предположу, что N. 1+1+1+N
+    return sort[:3] #1
+
+
+comp = {'фирма_1': 5, 'фирма_2': 4, 'фирма_3': 3, 'фирма_4': 2, 'фирма_5': 1}
+print(var_1(comp))
+print(var_2(comp))
+print(var_3(comp))
+
+# Оценка эффективности:
+# предположительно генератор и Лямбда эффективнее цикла по причине отсутствия лишнего присваивания
+# по моему мнению более правильно использовать лямбду
