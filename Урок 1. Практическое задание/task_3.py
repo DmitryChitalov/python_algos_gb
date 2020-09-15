@@ -22,3 +22,57 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+# Первое решение, сложность квадратичная О(n**2)
+
+companies_profit = {
+    'A': 10000000,
+    'B': 12309903,
+    'C': 53427893,
+    'D': 65674332,
+    'E': 35678766,
+    'F': 89766532,
+    'G': 17007535,
+    'H': 57854378,
+}
+
+
+def top_profit(comp_prof):
+    max_profit = 0
+    max_profit_company = {}
+    for key, value in comp_prof.items():
+        if value > max_profit:
+            max_profit = value
+            max_profit_company = {}
+            max_profit_company.setdefault(key, value)
+    return max_profit_company
+
+
+def top_3_profit(comp_prof):
+    top_3_comp = []
+    for el in range(3):
+        comp = top_profit(comp_prof)
+        top_3_comp.extend(*comp.items())
+        comp_prof.pop(*comp)
+    print(top_3_comp)
+
+
+top_3_profit(companies_profit)
+
+
+# Второе решение, сложность линейная O(n)
+
+
+def top_companies(comp_prof):
+    top_company = list(comp_prof.items())
+    top_company.sort(key=lambda x: x[1])
+    top_company.reverse()
+    for i in top_company[:3]:
+        print(f'Прибыль компании {i[0]} составляет {i[1]}')
+
+
+top_companies(companies_profit)
+
+# Таким образом, второе решение является более оптимальным, поскольку,
+# во-первых, оно задействует меньшее количество шагов, согласно О-нотации,
+# во-вторых, является более простым

@@ -27,3 +27,52 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# Первое решение, сложность кубическая O(n^3)
+
+users_info = {
+    'Vlad': ['jhr43fd', 'true'],
+    'Oleg': ['jkn812s', 'false'],
+    'Anna': ['12nd9fj', 'true'],
+    'Olga': ['2nkf0fd', 'false']
+}
+
+
+def auth_check(info):
+    login = input('Введите логин:')
+    pwd = input('Введите пароль:')
+    for i in info.items():
+        if login in i and pwd == str(i[1][0]):
+            if i[1][1] == 'true':
+                print('Учетная запись активирована')
+            else:
+                print('Необходимо активировать учетную запись')
+
+
+auth_check(users_info)
+
+# Второе решение, сложность кубическая O(n^3)
+
+users_info = {
+    'Vlad': ['jhr43fd', 'true'],
+    'Oleg': ['jkn812s', 'false'],
+    'Anna': ['12nd9fj', 'true'],
+    'Olga': ['2nkf0fd', 'false']
+}
+
+
+def auth_check_2(info):
+    login = input('Введите логин:')
+    pwd = input('Введите пароль:')
+    if login in info.keys():
+        if login == info(login):
+            if info(pwd) == 'true':
+                print('Учетная запись активирована')
+    else:
+        print('Необходимо активировать учетную запись')
+
+
+auth_check_2(users_info)
+
+# Сложность у обоих решений одинаковая, однако, второй код,
+# на мой взгляд, читается лучше
