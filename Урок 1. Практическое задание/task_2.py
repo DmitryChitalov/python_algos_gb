@@ -17,3 +17,31 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+from random import sample
+
+
+def min_val_slow(lst):
+    size = len(lst) - 1
+    for i in range(size):
+        for j in range(size - i):
+            if lst[j] > lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+
+    return lst[0]
+
+
+def min_val(lst):
+    res = None
+    for val in lst:
+        if res is None or res > val:
+            res = val
+
+    return res
+
+
+lst = sample(range(-100, 100), 10)
+
+print(lst)
+print(min_val_slow(lst))
+print(min_val(lst))

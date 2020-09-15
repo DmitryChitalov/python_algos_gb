@@ -22,3 +22,23 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+def most_common(coll, num):
+    res = {}
+
+    for k, w in sorted(coll.items(), key=lambda item: item[1], reverse=True): # O(n) + O(n)
+        res[k] = w
+        num -=1
+        if num == 0:
+            break
+    return res
+
+
+profits = {'test1': 340000,
+           'test2': 400000,
+           'test3': 600000,
+           'test4': 456767}
+
+# Сложность O(n) где n - размер словаря profits
+print(most_common(profits, 3))
