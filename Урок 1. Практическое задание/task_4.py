@@ -27,3 +27,33 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+my_dict = {'user1': [111, 'True'], 'user2': [222, 'True'], 'user3': [333, 'False']}
+
+
+# O(N)
+def activation_status(my_dict):
+    login = input('input login: ')  # O(1)
+    pwd = input('input pwd: ')  # O(1)
+    for i in my_dict.items():  # O(N)
+        if login in i and pwd == str(i[1][0]):  # O(N)
+            if i[1][1] == 'True':
+                print("Ваша аккаунт активирован.")
+            else:
+                print("!!! Активируйте уч. запись!!!")
+
+
+activation_status(my_dict)
+
+
+# O(N)
+def account(login):
+    val = my_dict.get(login)  # O(1)
+    if val[1] == 'True':  # O(N)
+        print('Your account in active')
+    else:
+        print('Your account is blocked')
+
+
+account('user3')
+# Обе функии одиноковой О-натации = О(N), второй вариант короче, 
+#так-как там не обязательно вводить полные данные, для проверки статуса активации.

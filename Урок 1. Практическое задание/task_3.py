@@ -22,3 +22,20 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+my_dict = {'company': 100, 'company2': 400, 'company3': 50, 'company4': 700, 'compay5': 900, 'company6': 200}
+# O(N log N))
+def company_profit(my_dict):
+    profit = list(my_dict.items())  # O(len(...))
+    profit.sort(key=lambda i: i[1])  # O(N log N)
+    return profit[3:]  # или profit[-3:]	# O(N)
+
+
+print(company_profit(my_dict))
+
+# O(N**2), хотя есть предположение что это O(N)
+for i in range(3):
+    profit = max(my_dict.values())  # O(1)
+    company = ''.join([i for i in my_dict if my_dict[i] == profit])  # O(N)
+    print(f'{company} : {profit}')
+    del my_dict[company]
+# O(N log N) будет работать эффективнее, чем O(N**2), но медленнее, чем O(N)

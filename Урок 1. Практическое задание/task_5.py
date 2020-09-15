@@ -18,3 +18,25 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+class StackPlate():
+    def __init__(self, max_stack):
+        self.max_stack = 5
+        self.new_stack = []
+        self.cnt_stack = 0
+
+    def empty_stack(self):  # Проверяем пустой ли стэк
+        return self.new_stack == []
+
+    def push_stack(self, el):  # предполагаем, что верхний эл. находится вконце
+        while len(self.new_stack) <= self.max_stack:
+            if len(self.new_stack) < self.max_stack:
+                self.new_stack.append(el)
+            else:
+                self.new_stack = []
+                self.cnt_stack += 1
+        return self.new_stack, self.cnt_stack
+
+    def pop_stack(self): # удаляем последний эл.
+        if len(self.new_stack) !=0:
+            self.new_stack.pop()
+        return self.new_stack
