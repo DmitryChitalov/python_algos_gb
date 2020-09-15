@@ -17,3 +17,32 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+
+# Первый, в виде функции, должен обеспечивать поиск минимального значения для списка.
+# В основе алгоритма должно быть сравнение каждого числа со всеми другими элементами списка.
+# Сложность такого алгоритма: O(n^2) - квадратичная.
+def search_min_1(lst: list) -> int:
+    for i in range(len(lst)):
+        for j in range(len(lst)):
+            if lst[i] < lst[j]:
+                lst[i], lst[j] = lst[j], lst[i]
+    return lst[0]
+
+
+# Второй, в виде функции, должен обеспечивать поиск минимального значения для списка.
+# Сложность такого алгоритма: O(n) - линейная.
+def search_min_2(lst: list) -> int:
+    min_itm = lst[0]
+    for i in range(1, len(lst)):
+        if lst[i] < min_itm:
+            min_itm = lst[i]
+    return min_itm
+
+
+for j in range(10):
+    lst = random.sample(range(-100000, 100000), j)
+
+print(search_min_1(lst))
+print(search_min_2(lst))
