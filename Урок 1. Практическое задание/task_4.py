@@ -27,3 +27,57 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+class User:
+    def __init__(self, login, pwd):
+        self._login = login
+        self._pwd = pwd
+        self._is_active = False
+
+    def __hash__(self):
+        return hash(self._login)
+
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            return self._login == other._login
+        return self._login == other
+
+    @property
+    def is_active(self):
+        return self._is_active
+
+    def activate(self):
+        self._is_active = True
+
+    def __str__(self):
+        return f'login: {self._login}, password: {self._pwd}, is active: {self._is_active}'
+
+
+class Site:
+    def __init__(self):
+        self._users = dict()
+
+    @staticmethod
+    def _question():
+        return input('User not found. For add new one press <a>, for cancel press any other key: ') == 'a'
+
+    def check_user(self, login):
+        res = self._users.get(login) # O(1)
+        if res is None and Site._question():
+            res = self._add_user(login)
+        elif not res.is_active:
+            res.activate()
+
+        return res
+
+    def _add_user(self, login):
+        new_user = User(login, input('pwd:'))
+        new_user.activate()
+
+        return self._users.setdefault(login, new_user) # O(1)
+
+
+site = Site()
+print(site.check_user('test_user'))
+print(site.check_user('test_user'))
