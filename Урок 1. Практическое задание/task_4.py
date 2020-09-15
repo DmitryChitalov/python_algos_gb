@@ -27,3 +27,63 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users_data_storage = {
+    'atimofeev': ['12345', 1],
+    'pfedotova': ['Rhsv2014', 0],
+    'lsemenova': ['KjB43Hsf', 1],
+    'mkuznetsov': ['password', 1],
+    'kmartinova': ['28081985', 0],
+    'kakimochkin': ['Pfdnhfrd900', 0],
+}
+
+
+def user_check_1(login, password):
+    """ О(n)
+        Из-за перебора значений в словаре увеличивается время и ресурсы, затрачиваемые на вычисления.
+    """
+    if login in users_data_storage.keys():  # О(n)
+        if password == users_data_storage[login][0]:
+            if not users_data_storage[login][1]:
+                if input('Учётная запись не активированна. Для активации введите 1: ') == "1":
+                    users_data_storage[login][1] = 1
+                    return 'Вход выполнен.'
+                else:
+                    return 'Введено некорректное значение. Учётная запись не активированна'
+            else:
+                return 'Вход выполнен.'
+        else:
+            return 'Не верный пароль'
+    else:
+        return 'Такой аккаунт не зарегистрирован'
+
+
+def user_check_2(login, password):
+    """ O(1)
+        Самое эффективное решение из представленных, т.к. при увеличении входных данных,
+        выделяемая память под алгоритм не изменяется.
+    """
+    try:
+        if password == users_data_storage[login][0]:
+            if users_data_storage[login][1] == 1 or \
+                    input('Учётная запись не активированна. Для активации введите 1: ') == "1":
+                users_data_storage[login][1] = 1
+                return 'Вход выполнен.'
+            else:
+                return 'Введено некорректное значение. Учётная запись не активированна'
+        else:
+            return 'Не верный пароль'
+    except KeyError:
+        return 'Такой аккаунт не зарегистрирован'
+
+
+print(user_check_1('atimofeev', '12345'))
+print(user_check_1('mkuznetsov', '12345'))
+print(user_check_1('kmartinova', '28081985'))
+print(user_check_1('atimfeev', '12345'))
+print('')
+
+print(user_check_2('atimofeev', '12345'))
+print(user_check_2('mkuznetsov', '12345'))
+print(user_check_2('pfedotova', 'Rhsv2014'))
+print(user_check_2('atimfeev', '12345'))
