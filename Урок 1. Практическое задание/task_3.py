@@ -22,3 +22,30 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+companies = {'Nike': 19000,
+             'Reebok': 210000,
+             'Adidas': 230000,
+             'Puma': 2300,
+             'Le coq': 23000,
+             'Lacoste': 1300
+             }
+
+# way_1 Сложность: O(log n). Предпочтительный способ.
+
+for num, el in enumerate(sorted(companies.items(), key=lambda x: x[1], reverse=True)[:3], 1):  # O(n) and O(log n)
+    print(f'{num} место: {el[0]}')  # O(1)
+
+# way_2  Сложность: O(n^2)
+
+var_list = list(companies.values())
+checker = len(var_list) - 3  # O(1)
+result = []  # O(1)
+while len(var_list) != checker:  # O(n^2)
+    for k, v in companies.items():  # O(n)
+        if v == max(var_list):  # O(n)
+            result.append(k)  # O(1)
+            var_list.remove(v)  # O(n)
+
+for num, el in enumerate(result, 1):  # O(n)
+    print(f'{num} место: {el}')  # O(1)

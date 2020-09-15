@@ -27,3 +27,41 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users_data = {
+    'id_0001': ['vanya_8', 'md_5_3534543', True],
+    'id_0002': ['den4uk93', 'md_5_7853676', True],
+    'id_0003': ['mirqqqa!', 'md_5_8945549', False],
+    'id_0004': ['DonTCry', 'md_5_3494305', True],
+    'id_0005': ['Vl@d@4k@', 'md_5_4343502', False]
+}
+
+query1 = ['den4uk93', 'md_5_7853676']
+query2 = ['Vl@d@4k@', 'md_5_4343502']
+query3 = ['fR13nd1k', 'md_5_3242344']
+
+# way_1 Сложность: O(n^2). Предпочтительный способ.
+
+created_list = list(users_data.values())
+
+check = False  # O(1)
+for num, el in enumerate(created_list, 0):  # O(n^2)
+    if query2[0] == created_list[num][0] and query2[1] == created_list[num][1]:  # O(n)
+        if created_list[num][2]:  # O(n)
+            print('Добро пожаловать')  # O(1)
+        else:
+            print('Нужно активировать учётную запись')  # O(1)
+
+# way_2 Сложность: O(n^3).
+
+for k, v in users_data.items():  # O(n^3)
+    if query1[0] in v[0]:  # O(n)
+        if query1[1] in v[1]:  # O(n)
+            if v[2]:  # O(n)
+                print('Добро пожаловать')  # O(1)
+            else:
+                print('Нужно активировать учётную запись')  # O(1)
+        else:
+            print('Неверный пароль')  # O(1)
+    else:
+        print('Учётки нет')  # O(1)
