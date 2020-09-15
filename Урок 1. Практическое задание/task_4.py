@@ -27,3 +27,65 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+### Вариант 1. Пароль и отметка об активации учетной записи размещены в значении словаря
+
+def user_verification(active_db: dict, username: str, password: str) -> dict:
+    key = username
+    if key in active_db.keys() and active_db[key] == [password, True]:
+        print(f'Hello {username}')
+    elif key in active_db.keys() and active_db[key] == [password, False]:
+        active = input('Пользовватель не активен, активировать (y/n): ')
+        if active == 'y':
+            print(f'Hello {username}')
+            active_db[key] = [password, True]
+    elif key in active_db.keys() and active_db[key][0] != password:
+        print('Неправильный пароль')
+    elif key not in active_db.keys():
+        reg = input('Хотите зарегистрироваться? (y/n): ')
+        if reg == 'y':
+            active_db[key] = [password, False]
+            print('Учетная запись создана, для активации еще раз войдите в программу')
+        else:
+            print('До свидания!')
+    return active_db  # O(N)
+
+
+### Вариант 2. Пароль и логин размещены в ключе словаря
+
+def database(user_db: dict, username: str, password: str) -> dict:
+    user = (username, password)
+    if user in user_db.keys() and user_db[user] == True:
+        print(f'Hello {username}')
+    elif user in user_db.keys() and user_db[user] == False:
+        active = input('Пользовватель не активен, активировать (y/n): ')
+        if active == 'y':
+            print(f'Hello {username}')
+            user_db[user] = True
+    else:
+        reg = input('Хотите зарегистрироваться? (y/n): ')
+        if reg == 'y':
+            user_db[user] = False
+            print('Учетная запись создана, для активации еще раз войдите в программу')
+        else:
+            print('До свидания!')
+    return user_db  # O(N)
+
+
+""" Второй вариант быстрее, а первый удобнее для пользователя """
+
+active_db = {
+    'Bill': ['236', False],
+    'Nik': ['123', True],
+}
+user_db = {
+    ('Bill', '236'): False,
+    ('Nik', '123'): True,
+}
+username = input('Enter your name: ')
+password = input('Enter password: ')
+user_verification(active_db, username, password)
+database(user_db, username, password)
+print(user_db)
+print(active_db)
