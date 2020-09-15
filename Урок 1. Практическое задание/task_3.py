@@ -4,7 +4,15 @@
 Для этой задачи:
 1) придумайте 1-3 решения (желательно хотя бы два)
 2) оцените сложность каждого решения в нотации О-большое
+
+
+1- O(nlogn)
+2- O(n^2)
+
+
 3) сделайте вывод, какое решение эффективнее и почему
+1 вариант предпочтительне, ибо его сложность меньше чем у второго
+
 
 Примечание:
 Без выполнения пунктов 2 и 3 задание считается нерешенным. Пункты 2 и 3 можно выполнить
@@ -22,3 +30,80 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+import random
+
+storage = dict(zip(['Газпром Межрегионгаз, ООО', 'Агроторг, ООО', 'Газпромнефть-Региональные Продажи, '
+                                                                  'ООО', 'Лента, ООО', 'Газпром Газэнергосеть, ООО',
+                    'Ростелеком, ПАО', 'О`Кей, ООО',
+                    'Стройгазконсалтинг, ООО', 'Стнг, АО', 'Петербургская Сбытовая Компания, АО',
+                    'Газпромнефть - Корпоративные Продажи, ООО', 'Четыре Сезона, ООО',
+                    'Группа "Илим", АО', 'Газпром Межрегионгаз Санкт-Петербург, ООО',
+                    'Авиакомпания "Россия", АО', 'Престиж, ООО', 'Ленэнерго, ПАО',
+                    'Пивоваренная Компания "Балтика", ООО', 'ТГК-1, ПАО', 'Газпромнефть-Аэро, АО',
+                    'Силовые Машины, ПАО', 'ОСК, АО', 'ЛГСС, АО', 'МРСК Северо-Запада, ПАО', 'Волга, ООО',
+                    'Транснефть - Балтика, ООО',
+                    'Рольф Эстейт Санкт-Петербург, ООО',
+                    'Газпром ЮРГМ Девелопмент, АО', 'Юлмарт, НАО', 'Гознак, АО'],
+                   [random.randint(2000000, 15000000) for i in range(31)]))
+
+print(sorted(storage.values())[-3:])
+def profit(args):
+    """
+
+    :param args:
+    :return:
+    """
+    # l = list(args.values()) #1
+    l = sorted(storage.values())[-3:]
+    res_dict = {}
+    for key, val in args.items():
+        if val in l:
+            res_dict[key] = val
+
+    return l, res_dict
+
+
+def profit2(args):
+    """
+
+    :param args:
+    :return:
+    """
+    l = list(args.values())
+    res_list = []
+    while len(res_list) != 3:
+        mymax = l[0]
+        for i in l:
+            if i >= mymax:
+                mymax = i
+        res_list.append(mymax)
+        l.remove(mymax)
+    res_dict = {}
+    for key, val in args.items():
+        if val in res_list:
+            res_dict[key] = val
+    return res_list, res_dict
+
+
+print('первая', profit(storage))
+
+print('вторая', profit2(storage))
+
+def profit3(args):
+    """
+
+    :param args:
+    :return:
+    """
+    storage2 = list(zip(storage.values(),storage.keys()))
+    s = sorted(storage2)
+    print(s[-3:])
+    res_list = [i[0] for i in s[-3:]]
+    res_dict = {}
+    for key, val in args.items():
+        if val in res_list:
+            res_dict[key] = val
+    return res_list, res_dict
+
+
+print('третья', profit3(storage))
