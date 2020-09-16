@@ -27,3 +27,46 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+'''Сложность O(n)'''
+
+
+def checker1(data):
+    login = input('login: ')
+    password = input('password: ')
+    finish = False
+    for i in data.items():  # O(n)
+        if login == i[0] and password == i[1][0]:
+            if i[1][1]:
+                print('Вход выполнен успешно!')
+                finish = True
+            else:
+                print('Пожалуйста пройдите процедуру активации аккаунта')
+                finish = True
+
+    if not finish:
+        print('Неверный логин или пароль')
+
+
+'''Сложность: O(1) - самое эффективное т.к. ассимптотическая сложность наименьшая'''
+
+
+def checker2(data):
+    login = input('login: ')
+    password = input('password: ')
+    try:
+        if password == data[login][0]:
+            if data[login][1]:
+                print('Вход выполнен успешно!')
+            else:
+                print('Пожалуйста пройдите процедуру активации аккаунта')
+        else:
+            print('Неверный логин или пароль')
+    except KeyError:
+        print('Неверный логин или пароль')
+
+
+users = {'Вася Пупкин': ['12345', True], 'Коновалова Елизавета': ['131324', False]}
+print(users)
+checker1(users)
+print('*'*100)
+checker2(users)

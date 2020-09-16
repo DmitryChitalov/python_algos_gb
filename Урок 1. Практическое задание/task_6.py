@@ -15,3 +15,50 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+
+class QueueClass:
+    def __init__(self):
+        self.elems = []
+        self.elems_sq = []
+
+
+    def is_empty(self):
+        return self.elems == []
+
+    def to_queue(self, item):
+        self.elems.insert(0, item)
+
+    def from_queue(self):
+        return self.elems.pop()
+
+    def size(self):
+        return len(self.elems)
+
+    def send_to_second_Queue(self):
+        self.elems_sq.insert(0, self.from_queue())
+
+    def sq_is_empty(self):
+        return self.elems_sq == []
+
+    def sq_to_queue(self, item):
+        self.elems_sq.insert(0, item)
+
+    def sq_from_queue(self):
+        return self.elems_sq.pop()
+
+    def sq_size(self):
+        return len(self.elems_sq)
+
+
+c = QueueClass()
+c.to_queue(123)
+c.send_to_second_Queue()
+c.sq_to_queue('hello')
+print(c.sq_is_empty())
+print(c.sq_size())
+print(c.sq_from_queue())
+print(c.sq_size())
+print(c.sq_from_queue())
+print(c.sq_is_empty())
+
