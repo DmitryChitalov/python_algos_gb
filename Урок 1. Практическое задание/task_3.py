@@ -22,3 +22,54 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+'''Сложность: O(n**2)'''
+
+
+def finder1(data):
+    numbers = []
+    for i in data:
+        numbers.append(i[1])
+    result = []
+    for i in range(3):
+        index = numbers.index(max(numbers))
+        numbers.pop(index)
+        result.append(data.pop(index))
+    print(result)
+
+
+'''Сложность: O(n**2)'''
+
+
+def finder2(data):
+    ln = len(data)
+    for item in range(ln - 1):
+        for j in range(ln - item - 1):
+            if data[j][1] < data[j + 1][1]:
+                data[j], data[j + 1] = data[j + 1], data[j]
+    print(data[:3])
+
+
+'''Сложность: O(n) - самое эффективное т.к. ассимптотическая сложность наименьшая'''
+
+
+def finder3(data):
+    first, second, third = [None, 0], [None, 0], [None, 0]
+    for item in data:
+        if item[1] > first[1]:
+            first, second, third = item, first, second
+        elif item[1] > second[1]:
+            second, third = item, second
+        elif item[1] > third[1]:
+            third = item
+    print(first)
+    print(second)
+    print(third)
+
+
+company = [["ИП Вася Пупкин", 60000000], ["ООО Мали", 10000000], ["Росатом", 498000000000], ["Сбербанк", 241100000000]]
+finder1(company[:])
+print('*' * 100)
+finder2(company[:])
+print('*' * 100)
+finder3(company[:])
