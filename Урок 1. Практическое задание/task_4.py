@@ -27,3 +27,30 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+data = {'log':'Ann', 'pas':'AAA', 'sign':'0'}
+def chekin(l, p):                                      #O(len(n)
+    dict_1 = {'log': l, 'pas': p}
+    if dict_1['log'] == data['log'] and dict_1['pas'] == data['pas']:
+        if data['sign'] == '1':
+            print('You are welcome')
+            return
+        print('You should activate your profile')
+        return
+    print('Incorrect login or password')
+chekin('Ann', 'AAA')
+
+def chekin_1(l, p):                                 #O(1)  Это решение эффективнее, сложность меньше.
+    if l in data.values():
+        if data['pas'] == p:
+            if data['sign'] == '1':
+                print('You are welcome')
+                return
+            print('You should activate your profile')
+            return
+        print('Incorrect password')
+        return
+    print('Incorrect login')
+    return
+chekin_1('Ann', 'AAA')
+
+
