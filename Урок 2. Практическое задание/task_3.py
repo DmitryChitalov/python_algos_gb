@@ -15,3 +15,16 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+def calc_num(user_num):
+    global even
+    if len(user_num) != 0:
+        even.append(user_num[-1])
+        return calc_num(user_num[:-1])
+    else:
+        return print(even)
+
+
+global even
+even = []
+user_num = list(input('Введите число'))
+calc_num(user_num)

@@ -16,3 +16,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def calc_num(user_num):
+    global even
+    global not_even
+    if len(user_num) != 0:
+        if (int(user_num[0]) % 2) == 0:
+            even += 1
+        else:
+            not_even += 1
+        return calc_num(user_num[1:])
+    else:
+        return print('Количество четных и нечетных цифр в числе равно: ({0}, {1})'.format(even, not_even))
+
+
+global even
+global not_even
+even = 0
+not_even = 0
+user_num = list(input('Введите число'))
+calc_num(user_num)
