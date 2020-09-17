@@ -9,3 +9,44 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+# import random
+#
+# a = random.randint(0, 100)
+# print(a)
+#
+# count = 10
+# answer_user = int(input('Отгадайте число от 0 до 100 за 10 попыток: '))
+# count -= 1
+# while count != 0:
+#
+#     if answer_user > a:
+#         answer_user = int(input(f'Ваше число больше загаданного, осталось попыток- {count}:'))
+#         count -= 1
+#     if answer_user < a:
+#         answer_user = int(input(f'Ваше число меньше загаданного, осталось попыток- {count}:'))
+#         count -= 1
+#     else:
+#         print('Поздравляю, вы отгадали!')
+#         break
+import random
+a = random.randint(0, 100)
+print(a)
+
+
+def func(num, count=10):
+    answer_user = int(input('Отгадайте число от 0 до 100 за 10 попыток: '))
+    if count == 0:
+        print(f'Вы проиграли. было загадано: {num}')
+        return
+    if answer_user > num:
+        print(f'Ваше число больше загаданного, осталось попыток- {count}')
+        func(num, count-1)
+    if answer_user < num:
+        print(f'Ваше число меньше загаданного, осталось попыток {count}')
+        func(num, count - 1)
+    if answer_user == num:
+        print('Поздравляю, вы отгадали!')
+
+
+func(a)

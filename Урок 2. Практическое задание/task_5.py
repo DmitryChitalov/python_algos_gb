@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+# for  el in range(32, 127):
+#     print(f" | {el}-{chr(el)} | ", end='' )
+#     if el % 10 == 0:
+#         print()
+
+def symbols(el = 32):
+    if el == 128:
+        print(' ')
+
+    else:
+        return f'{el} - {chr(el)} {symbols(el+1)}'
+        # не сообразил как вывести в виде таблицы, была такая идея
+        # return f'{el} - {chr(el)} {symbols(el + 1)} {el % 10 == 0, print()}'
+print(symbols())
