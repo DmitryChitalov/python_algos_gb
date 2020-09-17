@@ -9,3 +9,29 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+
+def game(number, count=1):
+    if count == 11:
+        return
+    while True:
+        data = input(f'Попытка №{count}: ')
+        if data.isdigit():
+            data = int(data)
+            break
+        else:
+            print('Введите число!!!')
+    if count == 10 and data != number:
+        print(f'Неправильно! Число было - {number}')
+    elif data == number:
+        print(f'Ты угадал с {count} попытки!')
+    else:
+        print(f'Неправильно твоё число {"больше" if data > number else "меньше"} чем загаданное')
+        print(f'Осталось {10 - count} попыток')
+        game(number, count + 1)
+
+
+rand_number = randint(0, 100)
+print(f'Я загадал число от 1 до 100 попробуй отгадать его за 10 попыток!')
+game(rand_number)

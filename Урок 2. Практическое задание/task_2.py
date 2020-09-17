@@ -16,3 +16,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_or_uneven(string):
+    if (int(string) // (10 ** (len(string) - 1))) % 2:
+        result = (0, 1)
+    else:
+        result = (1, 0)
+    if len(string) == 1:
+        return result
+    new_data = even_or_uneven(string[1:])
+    return result[0] + new_data[0], result[1] + new_data[1]
+
+
+while True:
+    data = input('Ведите число: ')
+    if data.isdigit():
+        break
+    else:
+        print('Введите число!!!')
+
+print(f'Количество четных и нечетных цифр в числе равно: {even_or_uneven(data)}')
