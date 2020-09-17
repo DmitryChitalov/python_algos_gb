@@ -28,3 +28,47 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+math_opr = ('0', '+', '-', '*', '/')
+
+def message():
+	print('Ваш ввод не соответствует заданным требованиям\nПоробуйте еще раз')
+
+def calculator(number1, number2, opr):
+	if opr == '+':
+		return number1 + number2
+	elif opr == '-':
+		return number1 - number2
+	elif opr == '*':
+		return number1 * number2
+	elif opr == '/':
+		if number2 == 0:
+			return None
+		return number1 / number2
+		
+
+def calculator_interface():
+	usr_input_opr = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+	if usr_input_opr in math_opr:
+		if usr_input_opr == '0':
+			return None
+		else:
+			usr_number1 = input('Введите первое число: ')
+			if usr_number1.isdigit():
+				usr_number2 = input('Введите второе число: ')
+				if usr_number2.isdigit():
+					print(calculator(int(usr_number1), int(usr_number2), usr_input_opr))
+					calculator_interface()
+				else:
+					message()
+					calculator_interface()
+			else:
+				message()
+				calculator_interface()
+	else:
+		message()
+		calculator_interface()
+
+
+if __name__ == '__main__':
+	calculator_interface()
