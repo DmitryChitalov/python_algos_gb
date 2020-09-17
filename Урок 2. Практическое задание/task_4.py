@@ -9,3 +9,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import math
+
+
+def get_sum(max_count, now_count=1):
+    if max_count == now_count:
+        return 1
+    return math.pow(-0.5, now_count) + get_sum(max_count, now_count + 1)
+
+
+user_number = int(input('[?] Введите количество элементов: '))
+print(f'[=] Количество элементов: {user_number}, их сумма: {get_sum(user_number)}')

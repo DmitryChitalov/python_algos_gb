@@ -18,3 +18,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def get_symbs(code=32):
+    if code == 128:
+        return
+    if not (code - 32) % 10:
+        print()
+    print(f'{code} - {chr(code)}', end=' ')
+    get_symbs(code=code + 1)
+
+
+get_symbs()

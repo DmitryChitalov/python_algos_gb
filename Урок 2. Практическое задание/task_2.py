@@ -16,3 +16,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def check_number(str_number, options=[0, 0]):
+    if str_number == '':
+        return options
+    else:
+        last_number = str_number[-1]
+        if int(last_number) % 2:
+            # Нечетное
+            options[1] += 1
+            return check_number(str_number=str_number[:-1], options=options)
+        else:
+            # Четное
+            options[0] += 1
+            return check_number(str_number=str_number[:-1], options=options)
+
+
+user_number = input('[?] Введите число: ')
+number_info = check_number(user_number)
+print(f'[=] Количество четных чисел: {number_info[0]}')
+print(f'[=] Количество нечетных чисел: {number_info[1]}')
