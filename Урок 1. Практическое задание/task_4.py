@@ -27,3 +27,40 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# 1 способ
+
+
+def activation_check_1(arr):
+    for i in range(len(arr)):
+        if arr[i]['activation']:
+            print('Доступ разрешен.')
+        else:
+            print('Активируйте свой аккаунт.')
+
+
+# 2 способ
+
+def activation_check_2(arr):
+    for i in users:
+        if i['activation']:
+            print('Доступ разрешен.')
+        else:
+            print('Активируйте свой аккаунт.')
+
+
+users = [
+    {'name': 'user1', 'password': 12345, 'activation': True},
+    {'name': 'user2', 'password': 54321, 'activation': False},
+    {'name': 'user2', 'password': 54321, 'activation': True}
+]
+
+activation_check_1(users)
+print('#' * 40)
+activation_check_2(users)
+
+'''
+что-то я написал одно и то же, только разными "фломастерами", не идёт что-то другое в голову...
+Сложность O(n)
+'''
