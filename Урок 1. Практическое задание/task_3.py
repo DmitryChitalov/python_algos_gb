@@ -22,3 +22,51 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+company_income = {
+                    'Yandex': 100,
+                    'Тинькофф Банк': 99,
+                    'EPAM': 105,
+                    'ГК Eqvanta': 34,
+                    'Банк "Точка"': 22,
+                    'Avito': 87,
+                    'Alternativa Games': 65,
+                    'FunBox': 98
+}
+# 1 вариант
+
+
+company_income_list = list(company_income.items())
+
+
+def max_income_1(lst):
+    lst.sort(key=lambda y: y[1], reverse=True)
+    return lst[0:3]
+
+
+for i in max_income_1(company_income_list):
+    print(i[0], ':', i[1])
+
+print('#' * 50)
+
+
+# 2 вариант
+
+
+def max_income_2(lst):
+    for i in range(len(lst)):
+        max_value = i
+        for j in range(i + 1, len(lst)):
+            if lst[j][1] > lst[max_value][1]:
+                max_value = j
+        lst[i], lst[max_value] = lst[max_value], lst[i]
+    return lst[0:3]
+
+
+for i in max_income_2(company_income_list):
+    print(i[0], ':', i[1])
+
+'''
+1 вариант сложность O(n * log(n))
+2 вариант сложность O(n^2)
+первый вариант и по скорости и по коду предпочтительней.
+'''

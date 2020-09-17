@@ -17,3 +17,32 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+from random import randint
+
+
+def min_list_number_1(lst):
+    for i in lst:
+        is_min = True
+        for j in lst:
+            if i > j:
+                is_min = False
+        if is_min:
+            return i
+
+
+def min_list_number_2(lst):
+    min_number = lst[0]
+    for i in lst:
+        if i < min_number:
+            min_number = i
+    return min_number
+
+
+some_list = [randint(1, 100) for i in range(10)]
+print('Алкоритм сложности O(n^2):')
+print('Список:', some_list)
+print('Минимальный элемент:', min_list_number_1(some_list))
+print('-' * 70)
+print('Алгоритм сложности O(n).')
+print('Список:', some_list)
+print('Минимальный элемент:', min_list_number_2(some_list))
