@@ -15,3 +15,10 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+def recursion(number):
+    if number < 10:
+        return number
+    return number%10*10**len(str(number//10)) + recursion(number//10)
+
+print(recursion(14454266778576899707978575889568079090707098067846576763563265))
+
