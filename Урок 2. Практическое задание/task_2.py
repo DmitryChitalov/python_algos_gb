@@ -16,3 +16,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def calc_dig(num, even=0, odd=0):
+    if num == 0:
+        print(f'Четных: {even}, нечетных: {odd}')
+        return
+
+    if (num % 10) % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    calc_dig(num // 10, even, odd)
+
+
+if __name__ == '__main__':
+    calc_dig(int(input('Введите число: ')))
