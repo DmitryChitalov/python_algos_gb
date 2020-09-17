@@ -15,3 +15,14 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+def revert_func(num):
+    global num_revert
+    if num != 0:
+        a = num % 10
+        num_revert.append(a)
+        return revert_func(num // 10)
+    else:
+        return ''.join(str(num_revert))
+
+num_revert = []
+print(revert_func(num = int(input('input = '))))

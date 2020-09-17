@@ -6,3 +6,19 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+print('Доказательство: 1+2+..+n = n(n+1)/2')
+n = int(input('Введите значание n = '))
+def func(n):
+    if n == 0:
+        return 0
+    else:
+        return n + func(n - 1)
+
+
+def func2(n):
+    return n * (n + 1) / 2
+
+if func(n) == func2(n):
+    print('True')
+else:
+    print('False')
