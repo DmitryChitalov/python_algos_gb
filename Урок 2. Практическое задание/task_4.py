@@ -9,3 +9,35 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def input_number():
+    """
+    функция запрашивает у пользователя натуральное число, проверяет правельность ввода
+    """
+    try:
+        number = int(input('Введите количество элементов: '))
+        return number
+    except Exception as e:
+        print("Ошибка ввода")
+        return input_number()
+
+
+def sum_series(counter: int, _n=1, _flag=1):
+    """
+    функция рекурсивно считает сумму ряд состоящего из counter элементов
+    _n - увеличивающийся делитель, _flag - (1 или -1)
+    :param _flag: (1 или -1)
+    :param _n: увеличивающийся делитель
+    :param counter: int
+    :return: float
+    """
+    if counter == 0:
+        return 0
+    digit = (1 / _n) * _flag
+    _flag *= -1
+    return sum_series(counter - 1, _n * 2, _flag) + digit
+
+
+if __name__ == '__main__':
+    print(sum_series(input_number()))

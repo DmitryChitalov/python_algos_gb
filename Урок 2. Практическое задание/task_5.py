@@ -18,3 +18,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_symbol_ascii(_counter_symbol=32, _table=[]):
+    """
+    функия рекурсивно выводит таблицу символов ASCII
+    """
+    if _counter_symbol == 128:
+        print(*_table)
+        return
+    if _counter_symbol % 10 == 2:
+        _table.append('\n')
+    _table.append(f'{_counter_symbol} - {chr(_counter_symbol)}')
+
+    _counter_symbol += 1
+    get_symbol_ascii(_counter_symbol, _table)
+
+
+if __name__ == '__main__':
+
+    get_symbol_ascii()

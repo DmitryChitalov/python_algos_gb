@@ -28,3 +28,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+    """
+    функция запрашивает у пользователя знак операции и числа, вычисляет и выводит ответ
+    и вызывает себя для продолжения. Выход при вводе 0 вместо знака операции.
+    """
+
+    try:
+        operation = input('Введите знак операции "+", "-", "*", "/", или 0 для завершения: ')
+        if operation == '0':
+            print('goodbye')
+            return None
+
+        assert operation in ("+", "-", "*", "/")
+
+        first_num, second_num = map(float, input('введите два числа через пробел: ').split())
+        if operation == "+":
+            answer = first_num + second_num
+        elif operation == "-":
+            answer = first_num - second_num
+        elif operation == "*":
+            answer = first_num * second_num
+        else:
+            answer = first_num / second_num
+        print(f'ответ: {answer}')
+        return calculator()
+    except ZeroDivisionError as e:
+        print('на 0 делить нельзя')
+        return calculator()
+    except Exception as e:
+        print('ошибка ввода')
+        return calculator()
+
+
+if __name__ == '__main__':
+    calculator()

@@ -16,3 +16,40 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def input_number():
+    """
+    функция запрашивает у пользователя натуральное число, проверяет правельность ввода
+    """
+    try:
+        number = int(input('Введите натуральное число: '))
+        return number
+    except Exception as e:
+        print("Ошибка ввода")
+        return input_number()
+
+
+def number_composition(num: int, _even_counter=0, _odd_counter=0):
+    """
+    функция рекурсивно считает четные и нечетные цифры введенного натурального числа
+    и выводит результат
+    """
+
+    digit = num % 10
+
+    if digit % 2 == 0:
+        _even_counter += 1
+    else:
+        _odd_counter += 1
+
+    if num // 10 == 0:
+        print(f'четных цифр: {_even_counter} , не четных цифр: {_odd_counter}')
+        return
+    return number_composition(num // 10, _even_counter, _odd_counter)
+
+
+if __name__ == '__main__':
+
+    number_composition(input_number())
+
