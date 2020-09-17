@@ -18,3 +18,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def asci_func(num):
+    global cnt
+    if num <= 127:
+        tbl.append(f'{num} - {chr(num)}')
+        cnt += 1
+        if cnt % 10 == 0:
+            tbl.append('\n')
+        return asci_func(num + 1)
+    return print(' | '.join(tbl))
+cnt = 0
+tbl = []
+asci_func(32)

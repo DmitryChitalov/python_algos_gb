@@ -16,3 +16,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def num_func(num):
+    global cnt_even
+    global cnt_odd
+    global num_even
+    global num_odd
+    if num // 10 != 0:
+
+        a = num % 10
+        if a % 2 == 0:
+            cnt_even += 1
+            num_even.append(a)
+        else:
+            cnt_odd += 1
+            num_odd.append(a)
+        return num_func(num // 10)
+
+    print(f'четные - {num_even} количество -{cnt_even}', '\n' f'нечетные - {num_odd} количество - {cnt_odd}')
+
+
+cnt_even = 0
+cnt_odd = 0
+num_even = []
+num_odd = []
+num_func(523576841926548231)

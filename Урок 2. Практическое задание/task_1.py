@@ -28,3 +28,29 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def calc():
+    global num1
+    global num2
+    global operation
+    num1 = input('num1 = ')
+    num2 = input('num2 = ')
+    operation = input('+, *, -, / = ')
+    if (num1.isdigit() and num2.isdigit()):
+        if operation == 0:
+            return "выход"
+        elif operation == '+':
+            print(int(num1) + int(num2))
+            #return calc()
+        elif operation == '-':
+            print(int(num1) - int(num2))
+        elif operation == '*':
+            print(int(num1) * int(num2))
+        elif operation == '/':
+            try:
+                print(int(num1) / int(num2))
+            except ZeroDivisionError:
+            calc()
+            print(int(num1) / int(num2))
+
+    return calc()
+calc()
