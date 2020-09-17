@@ -9,3 +9,27 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import time
+
+
+def random_game(our_number=False, attempts=10):
+    if attempts + 1:
+        if our_number:
+            user_number = int(input(f'[?] Ваше предположение ({our_number}): '))
+            if our_number > user_number:
+                print(f'[!] Ваше число меньше. Осталось попыток: {attempts}')
+            elif our_number < user_number:
+                print(f'[!] Ваше число больше. Осталось попыток: {attempts}')
+            else:
+                print(f'[v] Вы отгадали число, потратив попыток: {10 - attempts}')
+                return
+        else:
+            our_number = int(time.time() * 10000) % 100
+        random_game(our_number, attempts - 1)
+    else:
+        print(f'[x] Ха-ха Вы проиграли! Я загадал число {our_number}')
+        return
+
+
+random_game()
