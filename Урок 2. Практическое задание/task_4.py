@@ -9,3 +9,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+some_list = []
+
+
+def sum_list(n):
+    if n == 0:
+        print(sum(some_list))
+        return
+    if len(some_list) == 0:
+        some_list.append(-2 / -2)
+    else:
+        some_list.append(some_list[-1] / -2)
+    return sum_list(n-1),
+
+
+sum_list(int(input("Ведите целое число: ")))
+
+
