@@ -15,3 +15,19 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def reverse(string):
+    if len(string) == 1:
+        return int(string) // (10 ** (len(string) - 1))
+    return str(reverse(string[1:])) + str(int(string) // (10 ** (len(string) - 1)))
+
+
+while True:
+    data = input('Введите число, которое требуется перевернуть: ')
+    if data.isdigit():
+        break
+    else:
+        print('Введите число!!!')
+
+print(f'Перевернутое число: {reverse(data)}')

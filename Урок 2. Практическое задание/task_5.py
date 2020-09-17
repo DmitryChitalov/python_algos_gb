@@ -18,3 +18,35 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def writer(s, end):
+    remainder = end - s
+    result = ''
+    if remainder < 10:
+        for i in range(remainder + 1):
+            result += f'|{s + i} {chr(s + i)}|'
+        result += '\n'
+        return result
+    else:
+        for i in range(10):
+            result += f'|{s + i} {chr(s + i)}|'
+        result += '\n'
+        return result + writer(s + 10, end)
+
+
+while True:
+    data = input('Введите начальный ascii код: ')
+    if data.isdigit():
+        break
+    else:
+        print('Введите число!!!')
+
+while True:
+    data2 = input('Введите конечный ascii код: ')
+    if data2.isdigit():
+        break
+    else:
+        print('Введите число!!!')
+
+print(writer(int(data), int(data2)))
