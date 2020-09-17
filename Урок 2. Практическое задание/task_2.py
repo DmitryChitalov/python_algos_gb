@@ -16,3 +16,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def recursion(numbers):
+    chet, nechet = 0, 0
+
+    if not numbers:
+        return chet, nechet
+
+    chet, nechet = recursion(numbers // 10)
+
+    if numbers%2:
+        nechet += 1
+    else:
+        chet += 1
+
+    return chet, nechet
+
+
+print(recursion(123404787857958697756746875960967978647758458785698))
