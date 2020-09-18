@@ -1,7 +1,7 @@
 """
 Задание 2.
 
-Реализуйте два алгоритма.
+Реализуйте два  алгоритма.
 
 Первый, в виде функции, должен обеспечивать поиск минимального значения для списка.
 В основе алгоритма должно быть сравнение каждого числа со всеми другими элементами списка.
@@ -17,3 +17,49 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+# ! 1 должен обеспечивать поиск минимального значения для списка.
+# В основе алгоритма должно быть сравнение каждого числа со всеми другими элементами списка.
+# Сложность такого алгоритма: O(n^2) - квадратичная.
+def func(nums):
+    min_elem = 0
+    for elem in range(len(nums) - 1):
+        if nums[elem] <= nums[elem + 1]:
+            nums[elem], nums[elem + 1] = nums[elem + 1], nums[elem]
+        else:
+            min_elem = nums[elem + 1]
+    print(min_elem)
+
+
+short_list777 = [6, 3, 12, 2, 5, 8, 1, 12, 7, 10]
+func(short_list777)
+
+
+def min_num(num):
+    min_elem = 0
+    for i in range(len(num) - 1):  # O(n)
+        if num[i] < num[i + 1]:  # O(1)
+            num[i], num[i + 1] = num[i+1], num[i]
+            min_elem = num[i + 1]
+    return min_elem  # O(1)
+
+
+short_list = [6, 3, 12, 2, 5, 8, 1, 12, 7, 10]
+print(min_num(short_list))
+
+
+##########################
+# O(n^2) не допер сам
+def second_search(nums):
+    for i in nums:
+        is_min = True
+        for j in nums:
+            if i > j:
+                is_min = False
+        if is_min:
+            return i
+
+
+num_list1 = [2, 5, 9, 2, 1, 3, 6]
+second_search(num_list1)

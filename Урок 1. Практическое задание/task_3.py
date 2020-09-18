@@ -22,3 +22,34 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+# словарь, компании и прибыль
+comp_dict = {'komp1': 23000, 'komp2': 15000,
+             'komp3': 45000, 'komp4': 32000,
+             'komp5': 39000, 'komp6': 27000}
+
+# как то так сделал, вар 1(O(N *logN))
+
+
+def top_3_comp(a):
+    list_dict = list(a.items())
+    list_dict.sort(key=lambda i: i[1], reverse=True)  # !!!!
+    for komp in list_dict[:3]:  # O(n)
+        print(komp[0], ':', komp[1])  # O(n)
+
+
+top_3_comp(comp_dict)
+
+# 2 вар ########### O(n)
+
+
+def top_3(elem):
+    new_dict = {}
+    some_sh = dict(elem)
+    for i in range(3):  # O(n)
+        max_el = max(some_sh.items(), key=lambda val: val[1])  # O(1)
+        del some_sh[max_el[0]]  # O(n)
+        new_dict[max_el[0]] = max_el[1]  # O(n)
+    return new_dict  # O(1)
+
+
+print(top_3(comp_dict))
