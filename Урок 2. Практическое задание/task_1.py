@@ -28,3 +28,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def count():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation == '0':
+        print('Работа программы завершена.')
+        return
+    if operation in ('+', '-', '*', '/'):
+        num_1 = input('Ввежите первое число: ')
+        num_2 = input('Введите второе число: ')
+        if num_1.isdigit() and num_2.isdigit():
+            num_1 = int(num_1)
+            num_2 = int(num_2)
+            if operation == '+':
+                print(f'{num_1 + num_2}')
+                count()
+            elif operation == '-':
+                print(f'{num_1 - num_2}')
+                count()
+            elif operation == '*':
+                print(f'{num_1 * num_2}')
+                count()
+            elif operation == '/':
+                try:
+                    print(f'{num_1 / num_2}')
+                    count()
+                except ZeroDivisionError:
+                    print('На 0 делить нельзя.')
+                    count()
+        print('Вы ввели строку вместо числа.')
+    print('Введите корректные данные.')
+    count()
+
+
+count()
