@@ -16,3 +16,14 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def main(st, even, odd):
+    if len(st) == 0:
+        return even, odd
+    if int(st[:1]) % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    return main(st[1:], even, odd)
+
+
+print(main('123', 0, 0))
