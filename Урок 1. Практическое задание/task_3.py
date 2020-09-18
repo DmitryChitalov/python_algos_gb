@@ -22,3 +22,33 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+company_data = {
+  "company_1": 150000,
+  "company_2": 50000,
+  "company_3": 100000,
+  "company_4": 80000,
+  "company_5": 30000,
+  "company_6": 10000,
+  "company_7": 35000,
+  "company_8": 700000,
+  "company_9": 85000
+}
+
+# решение 1 - с помощью генератора - сложность O(NlogN) за счет sorted
+
+comp_represent = {k: v for k, v in sorted(company_data.items(), key=lambda item: item[1], reverse=True)}
+first_three = list(comp_represent.items())[:3]
+print (f"три компании с наибольшей прибылью (с помощью генератора): {first_three}")
+
+
+# решение 2 - с помощью цикла - сложность O(N^2)
+
+companies_list = [comp for comp in company_data.items()]
+for i in range(len(companies_list)):
+    for j in range(len(companies_list)):
+        if companies_list[i][1] > companies_list[j][1]:
+            companies_list[i], companies_list[j] = companies_list[j], companies_list[i]
+print(f"три компании с наибольшей прибылью (с помощью цикла): {companies_list[: 3]}")
+
+# решение 1 эффективнее решения 2 так как имеет меньшую сложность O(NlogN), чем вариант со вложенным циклом O(N^2)

@@ -17,3 +17,36 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+from random import sample
+
+
+def min_search_on2(num_list):
+    """нахождение минимального числа из списка с использованием алгоритма с квадратичной сложностью O(n^2)"""
+    current_min = num_list[0]
+    for num_1 in num_list:
+        for num_2 in num_list:
+            if num_1<=num_2 and num_1 < current_min:
+               current_min = num_1
+
+    return current_min
+
+#O (n^2) - квадратичная сложность
+
+def min_search_on(num_list):
+    """нахождение минимального числа из списка с использованием алгоритма с линейной сложностью O(n)"""
+    current_min = num_list[0]
+    for num in num_list:
+        if num < current_min:
+            current_min = num
+    return current_min
+
+
+input_num = sample(range(-50, 50), 10)
+print (f"список чисел - {input_num}")
+minim_num_1 = min_search_on2(input_num)
+minim_num_2 = min_search_on2(input_num)
+
+print (f"минимальное число [алгоритм O(n^2)]: {minim_num_1}")
+print (f"минимальное число [алгоритм O(n)]  : {minim_num_2}")
