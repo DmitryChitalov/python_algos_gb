@@ -34,9 +34,11 @@ user_db = [{'username': 'User_01', 'password': 'user_01_pass', 'acc_activated': 
            {'username': 'User_04', 'password': 'user_04_pass', 'acc_activated': False},
            {'username': 'User_05', 'password': 'user_05_pass', 'acc_activated': True}
 ]
-# вариант 1 сложность O(N)
+# вариант 1 сложность O(len(...)) (зависит от количества пользователей и позиции текущего пользователя в списке)
+
 
 def user_auth(username):
+
     username_input = username
     for record in user_db:
         if username_input == record.get('username'):
@@ -45,12 +47,38 @@ def user_auth(username):
             else:
                 password_input = input("Введите пароль:")
                 if record.get('password') == password_input:
-                    print (f'пользователь {username_input} авторизован')
+                    print(f'пользователь {username_input} авторизован')
                 else:
-                    print (f'неверный пароль')
+                    print(f'неверный пароль')
             exit()
     print(f'пользователь {username_input} не найден')
 
 
+# вариант 2 сложность O(len(...)) (производительность filter в строке 63 тоже зависит от количества пользователей)
+# в варианте 2 заменил цикл for на lambda функцию с фильтром, однако, в целом, сложность остается на том же уровне.
+# считаю, что варианты эквивалентны, но предпочтение у варианта 2, так как у варианта 1 с циклом код получился сложнее.
+
+
+def user_auth2(username):
+
+    username_input = username
+    current_user = list(filter(lambda person: person['username'] == username_input, user_db))
+    if not current_user:
+        print(f'пользователь {username_input} не найден')
+    else:
+        if not current_user[0].get('acc_activated'):
+            print(f'пожалуйста, завершите активацию')
+        else:
+            password_input = input("Введите пароль:")
+            if current_user[0].get('password') == password_input:
+                print(f'пользователь {username_input} авторизован')
+            else:
+                print(f'неверный пароль')
+
+
 user_input = input('Введите имя пользователя:')
-user_auth(user_input)
+
+# для корректной работы функции user_auth2 вызов функции user_auth должен быть закомментирован (из-за exit() at line 53)
+
+#user_auth(user_input)
+user_auth2(user_input)
