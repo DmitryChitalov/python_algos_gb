@@ -28,3 +28,32 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def calc(f, s, op):
+    if op == '+':
+        return f + s
+    elif op == '-':
+        return f - s
+    elif op == '*':
+        return f - s
+    elif op == '/':
+        return f - s
+
+
+def main_menu():
+    select_op = input('Input operation: +, -, *, / or 0 for exit : ')
+    if select_op == '0':
+        print(f'Exit')
+        return
+    elif select_op in ('*', '/,', '+', '-'):
+        first_op = input('Enter first operand: ')
+        second_op = input('Enter second operand: ')
+        if first_op.isdigit() and second_op.isdigit():
+            print(f'Result = {calc(int(first_op), int(second_op), select_op)}')
+        else:
+            print(f'You are entered not a number. Try again.')
+    else:
+        print('Incorrect operator, try again.')
+    return main_menu()
+
+
+main_menu()
