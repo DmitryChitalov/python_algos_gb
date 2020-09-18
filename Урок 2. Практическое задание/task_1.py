@@ -22,9 +22,52 @@
 Введите операцию (+, -, *, / или 0 для выхода): +
 Введите первое число: 214
 Введите второе число: 234
-Ваш результат 448
+
 Введите операцию (+, -, *, / или 0 для выхода): -
 Введите первое число: вп
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator(n=0, res=0):
+    count = res
+    if count == 0:
+        num1 = input('Введите первое число: ')
+        if num1.isdigit():
+            num1 = int(num1)
+        else:
+            print('Вы вместо числа ввели строку. Исправьтесь')
+    else:
+        num1 = n
+    num2 = input('Введите второе число: ')
+    if num2.isdigit():
+        num2 = int(num2)
+    else:
+        print('Вы вместо числа ввели строку. Исправьтесь')
+    sign = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if sign not in ['+', '-', '*', '/', '0']:
+        print('неверный знак')
+    elif sign == '+':
+        num1 += num2
+        count += 1
+    elif sign == '-':
+        num1 -= num2
+        count += 1
+    elif sign == '*':
+        num1 *= num2
+        count += 1
+    elif sign == '/':
+        if num2 != 0:
+            num1 = num1 / num2
+            count += 1
+        else:
+            print('невозможность деления на ноль')
+    elif sign == '0':
+        print(f'Ваш результат {num1}')
+        return num1
+    print(num1)
+    calculator(num1, count)
+
+
+calculator()
