@@ -15,3 +15,21 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def reverse(num, stack=None):
+    if stack is None:
+        stack = []
+
+    if num == 0:
+        return ''.join(stack)
+
+    stack.append(str(num % 10))
+
+    return reverse(num // 10, stack)
+
+
+if __name__ == '__main__':
+
+    vise = reverse(int(input("Введите число: ")))
+    print(f'{vise}')

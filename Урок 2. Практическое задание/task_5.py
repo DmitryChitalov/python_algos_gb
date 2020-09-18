@@ -18,3 +18,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def suffix(code):
+    return '\n' if code != 32 and (code - 32) % 9 == 0 else ''
+
+
+def chr_name(code):
+    return f'{code} - "{chr(code)}" {suffix(code)}'
+
+
+def ascii_table(code=32):
+    if code == 127:
+        return chr_name(code)
+    return chr_name(code) + ascii_table(code + 1)
+
+
+if __name__ == '__main__':
+    print(ascii_table())
