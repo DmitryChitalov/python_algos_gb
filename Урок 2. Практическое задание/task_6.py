@@ -9,3 +9,28 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def guess_number(idx=1, result=random.randint(0, 100)):
+    max_try = 3
+    # print(f'загадано: {result}')
+    user_number = int(input(f'Введите число от 0 до 100: '))
+    if user_number > result:
+        print('Вы ввели слишком большое число.')
+    elif user_number < result:
+        print('Вы ввели слишком маленькое число.')
+
+    if user_number != result and idx == max_try:
+        print(f'Мне жаль, но Вы проиграли! Загадано было {result}')
+    elif user_number != result and idx < max_try:
+        print(f'Осталось попыток: {max_try - idx}')
+        idx +=1
+        guess_number(idx, result)
+    else:
+        print(f'Вы угадали!')
+
+
+guess_number()
+
+
