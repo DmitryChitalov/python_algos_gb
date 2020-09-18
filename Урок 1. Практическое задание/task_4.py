@@ -27,3 +27,30 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+user_db = [{'username': 'User_01', 'password': 'user_01_pass', 'acc_activated': True},
+           {'username': 'User_02', 'password': 'user_02_pass', 'acc_activated': False},
+           {'username': 'User_03', 'password': 'user_03_pass', 'acc_activated': True},
+           {'username': 'User_04', 'password': 'user_04_pass', 'acc_activated': False},
+           {'username': 'User_05', 'password': 'user_05_pass', 'acc_activated': True}
+]
+# вариант 1 сложность O(N)
+
+def user_auth(username):
+    username_input = username
+    for record in user_db:
+        if username_input == record.get('username'):
+            if not record.get('acc_activated'):
+                print(f'пожалуйста, завершите активацию')
+            else:
+                password_input = input("Введите пароль:")
+                if record.get('password') == password_input:
+                    print (f'пользователь {username_input} авторизован')
+                else:
+                    print (f'неверный пароль')
+            exit()
+    print(f'пользователь {username_input} не найден')
+
+
+user_input = input('Введите имя пользователя:')
+user_auth(user_input)
