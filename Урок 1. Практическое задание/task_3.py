@@ -22,3 +22,65 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+companies_dict = {
+    'Company1': 10_000,
+    'Company2': 40_000,
+    'Company3': 25_000,
+    'Company4': 32_000,
+    'Company5': 28_000,
+    'Company6': 17_000,
+}
+
+
+def max_search1(dic, top):
+    """ О(n**2) цикл в цикле.
+        Перебираем каждую пару ключ-значение из словаря.
+        Если значение больше предыдущей пары и ключ ещё не содержится в результате, то добавляем в результат.
+        Повторяем top (второй аргумент функции) раз.
+
+        Квадраимчная функция неэффективная из-за вложенного цикла, занимет много памяти.
+    """
+    result = {}
+    for n in range(top):
+        max_val = 0
+        top_company = ''
+        for key, value in dic.items():
+            if value > max_val and key not in result.keys():
+                max_val = value
+                top_company = key
+        result[top_company] = max_val
+    return result
+
+
+def max_search2(dic, top):
+    """ О(n log n)
+        Генерируем список на основе полученного словаря, сортируем по убыванию,
+        возвращаем только топ (второй агрумент функции).
+
+        Более эффективное решение, занимает меньше памяти, количество операций значительно меньше при равном n
+    """
+    result = [[value, key] for key, value in dic.items()]
+    result.sort(reverse=True)
+    return result[0:top]
+
+
+def max_search3(dic, top):
+    """ О(n)
+        Ищем максимум среди текущих значений словаря, добавляем эту пару в итог и удаляем их основного списка.
+        Повторяем нужное количество раз (второй агрумент функции).
+
+        Самое эффективное решение из представленных, задействовано минимум памяти, максимальная скорость выполнения.
+    """
+    start_dic = dic.copy()
+    result = []
+    for i in range(top):
+        maximum = max(start_dic.items(), key=lambda el: el[1])
+        start_dic.pop(maximum[0])
+        result += maximum
+    return result
+
+
+print(max_search1(companies_dict, 3))
+print(max_search2(companies_dict, 3))
+print(max_search3(companies_dict, 3))
