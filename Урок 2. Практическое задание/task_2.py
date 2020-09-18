@@ -15,4 +15,35 @@
 Пример:
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
+
+Разобьем на две задачи
+1. разделение числа на составные числа
+2. подсчет четных и не четных
 """
+l =[]
+def count_num(n):
+    # пишем базовый случай
+    p = n // 10
+    d = n % 10
+    if p == 0:
+        return  f'{n}'
+    # print(d)
+    # count_num(p)
+    return f'{d} {count_num(p)}'
+
+def even_ord(n):
+    n = [int(x) for x in n.split()]
+    even = 0
+    odd = 0
+    for i in n:
+        if  i % 2 ==0:
+            even +=1
+        else:
+            odd +=1
+
+    return f"Количество четных и нечетных цифр в числе равно: ({even}, {odd})"
+
+
+print(even_ord(count_num(123444)))
+
+

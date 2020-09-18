@@ -18,3 +18,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def recurcy(start=32, stop=128, step=10):
+    if start == stop:
+        return f'{start}-{chr(start)} '
+    # print(f'{start}-{chr(start)} ', end='')
+    return f'{start}-{chr(start)} {recurcy(start + 1)}'
+
+
+d = recurcy()
+d = d.split(' ')
+k = 0
+for i in range(len(d)):
+    k += 1
+    if k % 10 == 0:
+        d[i] = d[i] + '\n'
+
+print(' '.join(d))

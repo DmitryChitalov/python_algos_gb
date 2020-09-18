@@ -28,3 +28,35 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+'Пользователь вводит знак и два чмсла'
+'Эти числа передаются в функцию'
+
+
+def calc_recurs(symb= None, a = None, b = None):
+    print('Введите операцию (+, -, *, / или 0 для выхода):')
+    symb = input().rstrip()
+    # if symb not in ['+', '-', '*', '/']:
+    if symb == '0':
+        return
+    print('Ведите первое число:')
+    a = int(input().rstrip())
+    print('Ведите второе число:')
+    b = int(input().rstrip())
+    if symb == '+':
+        print(f'Ваш результат {a + b}')
+        calc_recurs()
+    elif symb == '-':
+        print(f'Ваш результат{a - b}')
+        calc_recurs()
+    elif symb == '*':
+        print(f'Ваш результат{a * b}')
+        calc_recurs()
+    elif symb == '/':
+        print(f'Ваш результат{a / b}')
+        calc_recurs()
+    else:
+        print(f'Введен не верный знак')
+        calc_recurs()
+
+calc_recurs()
