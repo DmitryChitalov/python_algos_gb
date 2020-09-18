@@ -16,3 +16,17 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def numbers(number, even=0, odd=0):
+    if number == 0:
+        print(f'Количество четных чисел - {even}; нечетных - {odd}')
+        return
+    if number % 2 == 0:
+        even += 1
+        numbers(number // 10, even, odd)
+    else:
+        odd += 1
+        numbers(number // 10, even, odd)
+
+
+numbers(2468130)

@@ -6,3 +6,27 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+number = random.randint(2, 100)
+print(f'n = {number}')
+
+
+def func_1(n):
+    if n == 0:
+        return 0
+    else:
+        return n + func_1(n -1)
+
+
+def func_2(n):
+    return n * (n + 1) / 2
+
+
+print(f'Сума n элементов = {func_1(number)}')
+print(f'Значение выражения = {func_2(number)}')
+
+if func_1(number) == func_2(number):
+    print('Теорема доказана!')
+else:
+    print('Теорема не доказана.')

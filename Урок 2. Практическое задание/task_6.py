@@ -9,3 +9,25 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+rand_num = random.randint(0, 100)
+
+
+def game(num, attempts=10):
+    user_answer = int(input('Введите число от 0 до 100: '))
+    if attempts == 0:
+        print(f'Игра окончена, Вы проиграли. Было загадано число {num}')
+        return
+    if user_answer > num:
+        print(f'Вы ввели слишком большое число, осталось {attempts} попыток.')
+        game(num, attempts - 1)
+    if user_answer < num:
+        print(f'Вы ввели слишком маленькое число, осталось {attempts} попыток.')
+        game(num, attempts - 1)
+    if user_answer == num:
+        print('Поздравляем, Вы отгадали число!')
+
+
+game(rand_num)
