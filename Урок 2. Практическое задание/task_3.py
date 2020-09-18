@@ -15,3 +15,15 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+def rev_numbers(a, b=0):
+    if a == 0:
+        print(b)
+    if a != 0:
+        last_num = a % 10
+        b *= 10
+        b += last_num
+        rev_numbers(a // 10, b)
+
+
+rev_numbers(1234)
