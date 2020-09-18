@@ -9,3 +9,23 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def play_in_numbers(number, attempts=10):
+	if attempts == 0:
+		print('Вы проиграли')
+		return None
+	usr_number = int(input('Введите число от 0 до 100: '))
+	if usr_number == number:
+		print('вы угадали')
+	elif usr_number > number:
+		print('Ваше число больше')
+		play_in_numbers(number, attempts - 1)
+	else:
+		print('Ваше число меньше')
+		play_in_numbers(number, attempts - 1)
+
+
+if __name__ == '__main__':
+	play_in_numbers(random.randint(0, 100))

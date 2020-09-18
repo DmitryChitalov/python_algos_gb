@@ -6,3 +6,20 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def theorem(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return n + theorem(n - 1)
+
+
+if __name__ == '__main__':
+    n = 10
+    number = n * (n + 1) / 2
+    print(theorem(n))
+    print(number)
+    print(theorem(n) == number)
