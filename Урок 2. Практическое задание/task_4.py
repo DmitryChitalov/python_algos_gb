@@ -9,3 +9,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_el(n: int) -> float:
+    itm = 1
+    result = 0
+    while n > 0:
+        result += itm
+        itm = -1 * itm / 2
+        n -= 1
+        sum_el(n)
+    return result
+
+
+num = int(input('Введите число: '))
+print(sum_el(num))

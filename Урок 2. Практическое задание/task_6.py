@@ -9,3 +9,28 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def number(n: int, count=1) -> str:
+    v = n
+    c = count
+    while c < 10:
+        result = int(input(f'Введите число от 0 до 100:  '))
+        if result > v:
+            print('Ваше число больше загаданного!')
+            c += 1
+            number(n, c)
+        elif result < v:
+            print('Ваше число меньше загаданного!')
+            c += 1
+            number(n, c)
+        elif result == v:
+            return f'Вы угадали число {n}'
+    return f'Попытки закончены, было загадано число {n}'
+
+
+n = random.randint(0, 100)
+print(f'n = {n}')
+print(number(n))

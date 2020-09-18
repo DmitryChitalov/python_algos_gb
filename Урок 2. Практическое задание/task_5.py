@@ -18,3 +18,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def asci_table(number=32) -> str:
+    x = 128
+    char = []
+    if number < x:
+        for i in range(10):
+            if number < x:
+                itm = f'{number} - {chr(number)}'
+                number += 1
+                char.append(itm)
+        print(' '.join(char))
+
+        # while number < x:
+        asci_table(number)
+    else:
+        return ''
+
+
+asci_table()

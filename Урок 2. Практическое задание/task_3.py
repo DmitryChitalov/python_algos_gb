@@ -15,3 +15,17 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def inverse_members(num: int, res=0) -> int:
+    n = num
+    result = res
+    while n > 0:
+        result = (n - (n // 10) * 10) + result * 10
+        n = n // 10
+        inverse_members(n, result)
+    return result
+
+
+num = int(input('Введите число: '))
+print(inverse_members(num))
