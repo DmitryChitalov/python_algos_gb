@@ -9,3 +9,12 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_sum(lst_obj, n_of_recursion=int(input('how many el u want to count?: '))):
+    if len(lst_obj) == 1:
+        return lst_obj[0]
+    return lst_obj[0] + get_sum(lst_obj[1:n_of_recursion])
+
+
+print(get_sum([1, -0.5, 0.25, -0.125]))
