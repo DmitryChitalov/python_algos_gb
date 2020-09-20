@@ -22,34 +22,3 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
-
-firms = [{'name': 'firm_1', 'profit': 5000},
-         {'name': 'firm_2', 'profit': 3000},
-         {'name': 'firm_3', 'profit': 1000},
-         {'name': 'firm_4', 'profit': 7000},
-         {'name': 'firm_5', 'profit': 8000},
-         {'name': 'firm_6', 'profit': 500},
-         {'name': 'firm_7', 'profit': 7000},
-         {'name': 'firm_8', 'profit': 10000}]
-
-# решение 1
-# O(n)
-best_firms = []
-firms_copy = firms.copy()
-for i in range(3):
-    z = max((x for x in firms_copy), key=lambda y: y['profit'])
-    best_firms.append(z)
-    firms_copy.remove(z)
-print(best_firms)
-
-
-# решение 2
-# O(n log n)
-firms.sort(key=lambda y: y['profit'], reverse=True)
-print([firms[i] for i in range(len(firms)) if i < 3])
-
-'''
-Вывод:
-Второе решение выглядит предпочтительнее, т.к. меньше строк кода
-Но с учетом нотации О-большое первое решение будет эффективнее по производительности. 
-'''

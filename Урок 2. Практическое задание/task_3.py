@@ -15,13 +15,3 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
-
-
-def reverse(a, b):
-    if a == 0:
-        return int(b)
-    return reverse(a//10, b + str(a % 10))
-
-
-n = int(input('Введите число: '))
-print(reverse(n, ''))
