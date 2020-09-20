@@ -17,3 +17,25 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+def m_int(int_list):
+    min_int = 10
+    for i in int_list:
+        if i < min_int:
+            min_int = i
+    return min_int
+
+
+a = m_int([2, 3, 4, 5, 7, 10])
+print(a)
+
+
+def m_int_2(int_list):
+    return min(int_list)
+
+
+a = m_int_2([3, 4, 5, 7, 10])
+print(a)
+
+
