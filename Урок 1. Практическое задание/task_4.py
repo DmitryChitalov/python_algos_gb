@@ -27,3 +27,99 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# Функция #1 Линейная. Jптимальная, так как использует только 1 цикл for in
+
+def user_login(users, users_input):
+    login = False
+    password = False
+    auth = False
+    for k, v in users.items():
+        user = v
+        if user['login'] == users_input['login']:
+            login = True
+        else:
+            login = False
+        if user['password'] == users_input['password']:
+            password = True
+        else:
+            password = False
+        if user['authorisation']:
+            auth = True
+        else:
+            auth = False
+        if login and password and auth:
+            break
+
+    if login & password & auth:
+        print('Вам разрешен вход')
+    if not auth:
+        print('Вы не прошли авторизацию. Пройдите ее')
+    if not password:
+        print('Вы ввели не правильный пароль')
+    if not login:
+        print('Вы ввели не правильный логин')
+
+
+# Функция #2. O(n^2). Функция не оптимальна, так как использует два цикла for in, а это - квадратичная функция.
+def user_login_2(users, users_input):
+    login = False
+    password = False
+    auth = False
+    pass_in = ()
+
+    for k, v in users.items():
+        for i in v:
+            if i == 'login':
+                if v[i] == users_input['login']:
+                    login = True
+                else:
+                    login = False
+            if i == 'password':
+                if v[i] == users_input['password']:
+                    password = True
+                else:
+                    password = False
+            if i == 'authorisation':
+                if v[i] == True:
+                    auth = True
+                else:
+                    auth = False
+            if login and password and auth:
+                break
+
+    if login & password & auth:
+        print('Вам разрешен вход')
+    if not auth:
+        print('Вы не прошли авторизацию. Пройдите ее')
+    if not password:
+        print('Вы ввели не правильный пароль')
+    if not login:
+        print('Вы ввели не правильный логин')
+
+
+
+
+# Словарь с сохраненными пользователями
+users = {'user_1':
+    {
+        'login': 'login_1',
+        'password': 'password_1',
+        'authorisation': True
+    },
+
+    'user_2':
+        {
+            'login': 'login_2',
+            'password': 'password_2',
+            'authorisation': False
+        }
+}
+
+# Ввод пользователя
+users_input = {'login': 'login_1',
+               'password': 'password_1'}
+
+# Запуск функций
+user_login(users, users_input)

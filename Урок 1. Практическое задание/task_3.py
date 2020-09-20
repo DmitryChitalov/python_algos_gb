@@ -22,3 +22,41 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+import collections
+
+companies = {
+    'First': 1000,
+    'Second': 3000,
+    'Third': 5000,
+    'Fourth': 9000,
+    'Fifth': 500
+}
+
+# Алгоритм O(n^2)
+companies_2 = companies.copy()
+max_company = ''
+max_companies = {}
+num = 0
+
+while len(max_companies) < 3:
+    for k, v in companies_2.items():
+        if v > num:
+            num = v
+            max_company = k
+    max_companies[max_company] = companies_2[max_company]
+    companies_2.pop(max_company)
+    num = 0
+
+print(len(max_companies))
+print(max_companies)
+
+# Конастантная. Этот подход более эффективен, так как занимает конкретное коллиество
+# действий вне зависимости от вх. элементов.
+companies_3 = companies.copy()
+max_companies_2 = collections.Counter(companies_3)
+max_companies_2 = max_companies_2.most_common(3)
+print(max_companies_2)
+
+
+
+
