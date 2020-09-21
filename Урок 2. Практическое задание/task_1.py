@@ -28,3 +28,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+    symb = input('Введите операцию (+, -, *, / или 0 для выхода)')
+
+    if symb == str(0):
+        print('выход из калькулятора')
+        exit()
+
+    if symb not in ['+', '-', '*', '/']:
+        print('введите верный символ')
+        return calculator()
+
+    else:
+        num1 = int(input('Введите первое число:'))
+        num2 = int(input('Введите второе число:'))
+        if symb == '+':
+            result = num1 + num2
+        if symb == '-':
+            result = num1 - num2
+        if symb == '*':
+            result = num1 * num2
+        if symb == '/':
+            if num2 == 0:
+                print('деление на ноль невозможно')
+                return calculator()
+            else:
+                result = num1 / num2
+
+    print(f'Ваш результат: {result}')
+    return calculator()
+
+
+calculator()

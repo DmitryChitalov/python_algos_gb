@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def print_ascii_table (starting_num = 32):
+
+    if starting_num == 128:
+        return
+    else:
+        starting_num = starting_num
+        char = chr(starting_num)
+        if (starting_num-1)%10!=0:
+            print(f'{starting_num} - {char}', end =" ")
+        else:
+            print(f'{starting_num} - {char}')
+        starting_num +=1
+        print_ascii_table(starting_num)
+        return
+
+print_ascii_table()

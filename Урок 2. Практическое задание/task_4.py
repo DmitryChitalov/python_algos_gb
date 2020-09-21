@@ -9,3 +9,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def elements_sum(quantity, sum_el=1, next_el=1):
+    if quantity == 1:
+        print(f'сумма введенного количества элементов ряда чисел 1, -0.5, 0.25... равна {sum_el}')
+        return
+    else:
+        next_el = next_el / -2
+        sum_el = sum_el + next_el
+        quantity -= 1
+        elements_sum(quantity,sum_el,next_el)
+
+elements_quantity = int(input('введите количество элементов:'))
+elements_sum(elements_quantity)

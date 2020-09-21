@@ -15,3 +15,18 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+def num_reversal(num,reversed_num=0):
+
+    if len(num) == 0:
+        print (f'перевернутое число: {reversed_num}')
+        return
+    else:
+        digit = int(num[-1])
+        reversed_num = 10*reversed_num+digit
+        trimmed_num = num[:-1]
+        num_reversal(trimmed_num,reversed_num)
+
+user_num = str(3486)
+print(f'изначальное число: {user_num}')
+num_reversal(user_num)
