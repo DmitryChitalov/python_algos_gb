@@ -9,3 +9,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def find_sum(num, start=1, my_sum=0, elem=1):
+    if start == num:
+        # sum += elem
+        # elem *= -0.5
+        my_sum += elem
+        print(f'Сумма чисел: {my_sum}')
+    else:
+        my_sum += elem
+        elem *= -0.5
+        find_sum(num, start + 1, my_sum, elem)
+
+
+find_sum(3)
