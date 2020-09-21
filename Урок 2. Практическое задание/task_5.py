@@ -18,3 +18,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_func(start=32, stop=127):
+    result = ''
+    if (start - 2) % 10 == 0:  # Косметический эффект
+        result += f'\n |'
+    if start == stop:
+        result += f' {start}: {chr(start)} |'
+    else:
+        if start < 100:  # Косметический эффект
+            result += f' 0{start}: {chr(start)} |'
+            result += f'{ascii_func(start + 1)}'
+        else:
+            result += f' {start}: {chr(start)} |'
+            result += f'{ascii_func(start + 1)}'
+    return result
+
+
+print(ascii_func())
