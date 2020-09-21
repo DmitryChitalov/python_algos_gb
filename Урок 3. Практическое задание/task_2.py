@@ -15,3 +15,16 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+
+login = input('Введите логин: ')
+salt = hashlib.sha256(b'login').hexdigest()
+pwd = input('Введите пароль: ')
+pwd1 = input('Введите пароль повторно: ')
+pwd_sha = hashlib.sha256(pwd.encode() + salt.encode()).hexdigest() + '*' + salt
+pwd_sha1 = hashlib.sha256(pwd1.encode() + salt.encode()).hexdigest() + '*' + salt
+if pwd_sha == pwd_sha1:
+    print("Вы ввели верный пароль.")
+    print(pwd_sha)
+else:
+    print('ERROR!')
