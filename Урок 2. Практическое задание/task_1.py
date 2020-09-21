@@ -27,4 +27,36 @@
 Введите первое число: вп
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
+
+
 """
+
+
+def operation():
+    n = input("Введите операцию или 0 для выхода: ")
+    if n == str(0):
+        return "Выход"
+    else:
+        if n in '+-/*':
+            try:
+                number_one = int(input("Введите первое число "))
+                number_two = int(input("Введите второе число "))
+                if n == '+':
+                    print(f'{number_one} + {number_two} = {number_one + number_two}')
+                elif n == "-":
+                    print(f'{number_one} - {number_two} = {number_one - number_two}')
+                elif n == "/":
+                    print(f'{number_one} / {number_two} = {number_one / number_two}')
+                elif n == "*":
+                    print(f'{number_one} * {number_two} = {number_one * number_two}')
+                
+            except ValueError:
+                print("Вы ввели не число, пожалуйста, введите число")
+            operation()
+        else:
+            print("Введен неверный символ, попробуйте еще раз")
+            operation()
+
+
+
+operation()
