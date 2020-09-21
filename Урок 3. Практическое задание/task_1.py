@@ -10,3 +10,55 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+import timeit
+
+
+def time_func(func):
+    print(format(timeit.timeit(func), '.4f'))
+
+
+@time_func
+def list():
+    my_list = [i for i in range(-5, 5)]
+    return my_list
+
+
+@time_func
+def dict():
+    my_dict = {}
+    my_dict['one'] = 1
+    my_dict['two'] = 2
+    my_dict['three'] = 3
+    my_dict['four'] = 4
+    my_dict['five'] = 5
+    my_dict['six'] = 6
+    my_dict['seven'] = 7
+    my_dict['eight'] = 8
+    my_dict['nine'] = 9
+    my_dict['ten'] = 10
+    return my_dict
+
+
+print('Извлечение:')
+
+
+@time_func
+def idx_func():
+    my_list = [i for i in range(-5, 5)]
+    return my_list[3]
+
+
+@time_func
+def key_func():
+    my_dict = {'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
+               'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10}
+    return my_dict.get('four')
+# Наполнение словаря проходит практически в 2 раза быстрее, т.к. у списка идет линейная O(N),
+# а у словоря константная O(1). Та же самая ситуация наблюдается и при взятии элемента
+# по индексу / по ключу. Словарь в обоих случаях(наполнение/взятие по ключу) отрабатывает быстрее списка
+
+# 1.3453                  1.1925               1.4142
+# 0.7884                  0.9235               0.7321
+# Извлечение:                Извлечение:             Извлечение:
+# 1.3051                  1.3720               1.3112
+# 0.6464                  0.6554               0.6280
