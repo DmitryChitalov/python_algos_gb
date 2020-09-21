@@ -6,3 +6,17 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def operation(n, sum_n=0, rav_n=1):
+    if sum_n == rav_n:
+        return print('Равенство равно')
+    elif sum_n < rav_n:
+        rav_n = n * (n + 1) / 2
+        operation(n, sum_n+1, rav_n)
+        
+try:
+    n = int(input("Введите число: "))
+    operation(n)
+except ValueError:
+    print("Вы ввели не число, пожалуйста, введите число")

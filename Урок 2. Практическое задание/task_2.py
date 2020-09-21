@@ -16,3 +16,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count(number, even=0, odd=0):
+    if number == 0:
+        return print(f'Во веденном Вами числе четных: {even} и нечетных: {odd} чисел')
+    else:
+        num_one = number % 10
+        if num_one % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        number = number // 10
+        count(number, even, odd)
+
+
+try:
+    number = int(input("Введите число: "))
+    count(number)
+except ValueError:
+    print(f"Вы ввели не число, пожалуйста, введите число ")

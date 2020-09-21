@@ -15,3 +15,20 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def obr_number(number, number_two=0):
+    if number == 0:
+        return print(f'Обратное число {number_two}')
+    else:
+        num_one = number % 10
+        number_two = (number_two * 10) + num_one
+        number = number // 10
+        obr_number(number, number_two)
+
+
+try:
+    number = int(input("Введите число: "))
+    obr_number(number)
+except ValueError:
+    print(f"Вы ввели не число, пожалуйста, введите число ")
