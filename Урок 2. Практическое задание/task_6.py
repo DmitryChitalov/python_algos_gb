@@ -9,3 +9,25 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def soothsayer(number, effort=0):
+    if effort == 10:
+        print('Ты проиграл!')
+    else:
+        user_number = (int(input(f'Попытка {effort + 1} из 10. Отгадай число: ')))
+        if user_number == number:
+            print('Ты победил!')
+        elif user_number < number:
+            print(f'Твоё число меньше.')
+            soothsayer(number, effort + 1)
+        elif user_number > number:
+            print(f'Твоё число больше.')
+            soothsayer(number, effort + 1)
+
+
+rand_num = random.randint(1, 100)
+
+soothsayer(rand_num)
