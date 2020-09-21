@@ -15,3 +15,28 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+from hashlib import pbkdf2_hmac
+from binascii import hexlify
+
+login = str(input('Введите логин: '))
+password = str(input('Введите пароль: '))
+hash_password = pbkdf2_hmac(hash_name='sha256',
+                          password=password.encode(),
+                          salt=login.encode(),
+                          iterations=100000)
+res = hexlify(hash_password)
+print(res)
+
+password_check = str(input('Повторите пароль: '))
+hash_password_check = pbkdf2_hmac(hash_name='sha256',
+                          password=password_check.encode(),
+                          salt=login.encode(),
+                          iterations=100000)
+res_check = hexlify(hash_password_check)
+if res_check == res:
+    print('Успешно!')
+else:
+    print('Пароль не совпадает!')
+
+
