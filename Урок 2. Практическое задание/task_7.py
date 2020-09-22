@@ -6,3 +6,34 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def number():
+    """ Запрос числа """
+    try:
+        return int(input('Введите число: '))
+    except ValueError:
+        print('Вы ввели не число.')
+        return numbers()
+
+
+def calculation(n, x=0):
+    """ Сумма чисел от 1 до n. """
+    if n == x:
+        return n
+    return x + calculation(n, x+1)
+
+
+def comparison(n):
+    """ Функция сравнения + вывод. """
+    z = calculation(n)
+    y = n * (n + 1) / 2
+    if z == y:
+        print(f'Для множества натуральных чисел равенство "1+2+...+n = n(n+1)/2" выполняется!')
+        print(f'1+2+...+{n} = {z}')
+        print(f'{n}({n}+1)/2 = {int(y)}')
+
+
+q = number()
+print(q)
+comparison(q)

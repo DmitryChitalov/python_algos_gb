@@ -15,3 +15,26 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def number():
+    """ Запрос числа """
+    try:
+        return int(input('Введите число, которое требуется перевернуть: '))
+    except ValueError:
+        print('Вы ввели не число.')
+        return numbers()
+
+
+def revers_number(x, y=0):
+    """ Реверс числа. """
+    if x == 0:
+        print(f'Перевернутое число: {y}')
+    else:
+        y = y * 10 + x % 10
+        x = x // 10
+        return revers_number(x, y)
+
+
+x = number()
+revers_number(x)
