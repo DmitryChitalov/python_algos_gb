@@ -15,3 +15,19 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+from hashlib import pbkdf2_hmac
+from binascii import hexlify
+
+hash_db = b'5ddcce9b50adbd4b57414eeca9c10b41bd9afc4125556d1895aa9f2c9eae67ef'  # хеш пароля 123 в базе данных
+user_name = b'John@gmail.com'  # логин пользователя, считаем уникальным
+user_pass = input('Enter your password : ')
+get_pass_hash = pbkdf2_hmac(hash_name='sha256',
+                            password=user_pass.encode(),
+                            salt=user_name,
+                            iterations=10000)
+print(f'Hash in database      : {hash_db}')
+print(f'Hash of your password : {hexlify(get_pass_hash)}')
+if hash_db == hexlify(get_pass_hash):
+    print(f'Your password is right')
+else:
+    print(f'Your password is incorrect')
