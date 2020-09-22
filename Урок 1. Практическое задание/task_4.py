@@ -27,3 +27,41 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+# Вариант 1: Сложность : O(1) - более удачная реализация
+
+
+def check_usr_1(users, usr_name, usr_pass):
+    usr_check = users.get(usr_name)
+    if usr_check is not None:
+        if usr_check[0] == usr_pass and usr_check[1]:
+            return 'Welcome !'
+        elif usr_check[0] == usr_pass and not usr_check[1]:
+            return 'You are ot activated yet'
+        elif usr_check[0] != usr_pass:
+            return 'Wrong password'
+    else:
+        return 'Unknown user'
+
+
+# Вариант 2: Сложность :  O(n)  Наличие цикла, делает этот вариант менее эффективным.
+
+
+def check_usr_2(users, usr_name, usr_pass):
+    for some_k, some_v in users.items():
+        if some_k == usr_name:
+            if some_v[0] == usr_pass and some_v[1]:
+                return 'Welcome !'
+            elif some_v[0] == usr_pass and not some_v[1]:
+                return 'You are ot activated yet'
+            elif some_v[0] != usr_pass:
+                return 'Wrong password'
+    return 'Unknown user'
+
+
+some_users = {'First': ['Pass', True], 'Second': ['addaZ', False], 'Third': ['zack54', True]}
+print(check_usr_1(some_users, 'First', 'Pass'))
+print(check_usr_1(some_users, 'Second', 'addaZ'))
+print(check_usr_1(some_users, 'Third', 'addaZ'))
+
+print(check_usr_2(some_users, 'Third', 'addaZ'))
+print(check_usr_2(some_users, 'First', 'Pass'))
