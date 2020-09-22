@@ -20,7 +20,6 @@ def rand (total =5):
         return
     if num > x:
         print(f'Ваше число больше X, осталось попыток {total-1}' )
-        # total -= total
         rand(total-1)
     elif num < x:
         # total -= total

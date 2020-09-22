@@ -15,3 +15,14 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+
+user_pass = input('введите пароль \n').encode()
+hash_pass = hashlib.sha3_256(user_pass).hexdigest()
+# print(hash_pass) #a03ab19b866fc585b5cb1812a2f63ca861e7e7643ee5d43fd7106b623725fd67
+user_pass = input('введите пароль \n').encode()
+user_hash_pass = hashlib.sha3_256(user_pass).hexdigest()
+if user_hash_pass == hash_pass:
+    print('Пароль верен')
+else:
+    print('Пароль неверен')
