@@ -9,3 +9,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def summ_of_elements (n, idx=0, result=0):
+    if idx == n:
+        print(f'Количество элментов: {n}, их сумма: {result}')
+    else:
+        result +=(-0.5)**idx
+        idx +=1
+        summ_of_elements(n, idx, result)
+
+
+summ_of_elements(n = int(input('Введите количество элементов: ')))

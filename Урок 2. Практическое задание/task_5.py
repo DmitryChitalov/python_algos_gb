@@ -18,3 +18,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_table(idx=32, j=0):
+    elem_in_str = 10
+    if idx == 127:
+        return
+    else:
+        elem = chr(idx)
+        print(f'{idx} - {chr(idx)} ', end="")
+        j +=1
+        idx +=1
+        if j%elem_in_str == 0:
+            print('')
+        ascii_table(idx, j)
+
+
+ascii_table()
+

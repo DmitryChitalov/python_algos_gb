@@ -22,3 +22,86 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+import random
+
+
+def generate_dict(dict_size):
+    """
+    Функция генерирует и возвращает словарь, требуемый в задании: ключи - рандомно сгениерированные названия компаний,
+    значения - рандомно сгенерируемые значения прибылей компаний.
+    По умолчанию название компании состоит из 4 символов, размер словаря можно задать параметром dict_size,
+    который функция получает на вход.
+    Для генерации данных используем генератор и zip
+    """
+    names_list = []
+    profit_list = []
+    for k in range(dict_size):
+        name = ''
+        for i in range(0, 4):
+            name += chr(random.randint(65, 90))
+        names_list.append(name)
+    profit_list = [random.randint(100, 100000) for i in range(dict_size)]
+    res_dict = dict(zip(names_list, profit_list))
+    return res_dict
+
+dict_1 = generate_dict(5)
+# Выводим словарь в удобном виде
+print('Our dict is:')
+for key, value in dict_1.items():
+    print(f'\t{key}: {value}')
+print('-----------------')
+
+
+def max_3_value_from_dict_1(user_dict):
+    """
+    Функция принимает словарь, состоящий из ключей (строка) и значений (чисел), находит 3 максимальные значения
+    и печатает на экран три пары "ключ: значения", которые соответствуют 3-м максимальным значениям.
+    Мой комментарий:
+    Это решение через sort и срезы мне нравится больше, нагляднее что ли получается,
+    несмотря на то, что немного теряем скорость при сортировке.
+    Далее генератором делаем новый словарик и выводим его в нормальном виде.
+    Сложность:  O(n log n)
+
+    """
+    value_list = [value for value in user_dict.values()]  # n
+    value_list.sort()                                     # n log n
+    value_list = value_list[-3:]                          # n
+    res_dict = {key: value for key, value in user_dict.items() if value in value_list} # n
+    print('1st func --> 3 max profit companies:')
+    for key, value in res_dict.items():
+        print(f'\t{key}: {value}')
+    print('-----------------')
+
+
+def max_3_value_from_dict_2(user_dict):
+    """
+        Функция принимает словарь, состоящий из ключей (строка) и значений (чисел), находит 3 максимальные значения
+        и печатает на экран три пары "ключ: значения", которые соответствуют 3-м максимальным значениям.
+        Мой комментарий:
+        Это решение через циклы мне нравится чуть меньше (просто визуально).
+        Тут мы ищем максимумальное число, далее удаляем это число из списка,
+        и снова ищем максимум в новом списке (и так 3 раза), а найденные значения максимума записываем в новый списочек
+        (ну это как вариант, можно и сразу выводить), кажется что с записью в список как-то более системно.
+        В итоге этот алгоритм работает быстрее в О-нотации, чем вариант с сортом и срезами.
+        Там мы теряем на сортировке как раз.
+        Сложность:  O(n)
+
+        """
+    res_list = []
+    value_list = [value for value in user_dict.values()] # n
+    for idx in range(3): # 3
+        max_element = value_list[0] # 1
+        for element in value_list: # n
+            if element > max_element:
+                max_element = element # 1
+        value_list.remove(max_element) # n
+        res_list.append(max_element) # 1
+    res_dict = {key: value for key, value in user_dict.items() if value in res_list} # n
+    print('2nd func --> 3 max profit companies:')
+    for key, value in res_dict.items():
+        print(f'\t{key}: {value}')
+
+
+max_3_value_from_dict_1(dict_1)
+max_3_value_from_dict_2(dict_1)
