@@ -15,3 +15,28 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+from hashlib import pbkdf2_hmac
+from binascii import hexlify
+
+
+def password_entry():
+	password = input('Введите пароль: ')
+	password_hash_b = pbkdf2_hmac(hash_name='sha256', password=password.encode(), salt=b'salt', iterations=100000)
+	return hexlify(password_hash_b)
+
+
+def password_verification(pswd):
+	password = input('Введите пароль еще раз для проверки: ')
+	password_hash_b = pbkdf2_hmac(hash_name='sha256', password=password.encode(), salt=b'salt', iterations=100000)
+	if pswd == hexlify(password_hash_b):
+		print('Вы ввели правильный пароль')
+	else:
+		print('Вы ввели неправильный пароль')
+
+if __name__ == '__main__':
+	password_hash = password_entry()
+	
+	print(f'В базе данных хранится строка: {password_hash}')
+	
+	password_verification(password_hash)
