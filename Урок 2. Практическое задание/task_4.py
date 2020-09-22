@@ -9,3 +9,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def the_sum(x, y=1.0):
+    if x == 1:
+        print(y)
+        return y
+    elif x % 2 == 0:
+        print(y)
+        return y + the_sum(x - 1, -(y / 2))
+    elif x % 2 == 1:
+        print(y)
+        return y + the_sum(x - 1, -(y / 2))
+
+
+x = float(input('Введите количество элементов: '))
+
+print(the_sum(x))

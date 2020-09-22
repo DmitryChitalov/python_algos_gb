@@ -16,3 +16,31 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def number():
+    """ Запрос числа """
+    try:
+        return int(input('Введите число: '))
+    except ValueError:
+        print('Вы ввели не число.')
+        return numbers()
+
+
+def counting(x, y=0, z=0):
+    """ Подсчет четных и нечетных чисел в числе """
+    if x == 0:
+        print(f'Количество четных чисел в числе равно: {y}. Количество нечетных цифр в числе равно: {z}.')
+    else:
+        one_number = x % 10
+        x = x // 10
+        if one_number % 2 == 0:
+            y += 1
+            return counting(x, y, z)
+        else:
+            z += 1
+            return counting(x, y, z)
+
+
+q = number()
+counting(q)

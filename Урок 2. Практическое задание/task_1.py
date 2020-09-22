@@ -28,3 +28,46 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def operation():
+    """ Запрос операции """
+    x = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if x == '+' or x == '-' or x == '*' or x == '/':
+        return x
+    elif x == '0':
+        return False
+    else:
+        print(f'Вы ввели неверный знак символ')
+        return operation()
+
+
+def numbers():
+    """ Запрос чисел """
+    try:
+        x = float(input('Введите первое число: '))
+        y = float(input('Введите второе число: '))
+    except ValueError:
+        print('Вы ввели не число.')
+        return numbers()
+    return x, y
+
+
+def calculator():
+    """ Калькулятор """
+    z = operation()
+    if not z:
+        return print(f'Программа завершена.')
+    x, y = numbers()
+    if z == '+':
+        print(f'Ваш результат {x + y}')
+    elif z == '-':
+        print(f'Ваш результат {x - y}')
+    elif z == '*':
+        print(f'Ваш результат {x * y}')
+    elif z == '/':
+        print(f'Ваш результат {x / y}')
+    calculator()
+
+
+calculator()
