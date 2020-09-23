@@ -15,3 +15,19 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+import hashlib
+
+
+def pwd_hash(pwd, salt):
+    return hashlib.sha256(pwd.encode() + salt.encode()).hexdigest()
+
+
+if __name__ == '__main__':
+    login = input('login: ')
+    encrypt_pwd = pwd_hash(input('type password: '), login)
+
+    print(f'Password hash is: {encrypt_pwd}')
+
+    if encrypt_pwd == pwd_hash(input('re-type password: '), login):
+        print('Correct password')
