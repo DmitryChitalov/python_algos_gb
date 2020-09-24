@@ -15,3 +15,26 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+########################################################################################################################
+
+import hashlib
+
+
+def password():
+    user_password = input('Введите пароль: ')
+    salt = hashlib.sha256(b'Hakuna_Matata').hexdigest()
+    result = hashlib.sha256(salt.encode() + user_password.encode()).hexdigest() + ':' + salt
+    print(result)
+    user_password_2 = input('Ещё раз введите пароль: ')
+    result_2 = hashlib.sha256(salt.encode() + user_password_2.encode()).hexdigest() + ':' + salt
+    if result_2 == result:
+        print("Пароль верный.")
+    return
+
+
+password()
+
+
+
+
+

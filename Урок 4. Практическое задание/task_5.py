@@ -14,9 +14,11 @@
 Подумайте и по возможности определите сложность каждого алгоритма
 """
 
+from timeit import timeit
+
 
 def simple(i):
-    """Без использования «Решета Эратосфена»"""
+    
     count = 1
     n = 2
     while count <= i:
@@ -35,5 +37,29 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+i_10 = 10
+i_100 = 100
+i_1000 = 1000
+
+print(timeit('simple(i_10)',
+             setup='from __main__ import simple, i_10',
+             number=10000))
+print(timeit('simple(i_100)',
+             setup='from __main__ import simple, i_100',
+             number=10000))
+print(timeit('simple(i_1000)',
+             setup='from __main__ import simple, i_1000',
+             number=10000))
+
+"""
+    С увеличением числа, время так же увеличивается, причем многократно.
+    Последнее время, i_1000, программа так и не вывела, так как я остановил работу,
+    прошло больше 2-х минут. 
+"""
+
+
+
+
+
+
+

@@ -16,3 +16,25 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+even = []
+uneven = []
+
+
+def numbers(some_list):
+    if len(some_list) == 0:
+        print("Количество четных чисел: ", len(even))
+        print("Количество нечетных чисел: ", len(uneven))
+        return
+    n = int(some_list.pop())
+    if n % 2 == 0:
+        even.append(n)
+    else:
+        uneven.append(n)
+    return numbers(some_list)
+
+
+list_numbers = [i for i in input('Введите целое число: ')]
+numbers(list_numbers)
+
+

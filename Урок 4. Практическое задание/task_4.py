@@ -10,6 +10,8 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -25,6 +27,11 @@ def func_1():
            f'оно появилось в массиве {m} раз(а)'
 
 
+print(timeit('func_1()',
+             setup='from __main__ import func_1',
+             number=10000))
+
+
 def func_2():
     new_array = []
     for el in array:
@@ -37,5 +44,31 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+print(timeit('func_2',
+             setup='from __main__ import func_2',
+             number=10000))
+
+
+def func_3():
+    max_3 = [array.count(i) for i in array]
+    elem_3 = array[max_3.index(max(max_3))]
+    return f'Чаще всего встречается число {elem_3}, ' \
+           f'оно появилось в массиве {max(max_3)} раз(а)'
+
+
+print(timeit('func_3',
+             setup='from __main__ import func_3',
+             number=10000))
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+
+"""
+          Не особо понятно, так как третья функция быстрее остальных только в 50% случаев,
+        в остольном, либо время равно с func_2, либо слегка дольше. По разному. 
+        Но выглядит более лаконичко, нежели остальные. 
+"""
+
