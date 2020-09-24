@@ -14,15 +14,18 @@
 Подумайте и по возможности определите сложность каждого алгоритма
 """
 
+import math
+from timeit import timeit
+
 
 def simple(i):
     """Без использования «Решета Эратосфена»"""
     count = 1
     n = 2
-    while count <= i:
+    while count <= i:  # O(N)
         t = 1
         is_simple = True
-        while t <= n:
+        while t <= n:  # O(N)
             if n % t == 0 and t != 1 and t != n:
                 is_simple = False
                 break
@@ -32,8 +35,48 @@ def simple(i):
                 break
             count += 1
         n += 1
-    return n
+    return n  # O(N**2)
+
+
+def simple_re(n, i_max):
+    a = []
+    for i in range(i_max + 1):  # O(N)
+        a.append(i)
+    a[1] = 0
+    i = 2
+    while i <= i_max:  # O(N)
+        if a[i] != 0:
+            j = i + i
+            while j <= i_max:  # O(N)
+                a[j] = 0
+                j = j + i
+        i += 1
+
+    a = set(a)
+    a.remove(0)
+    return sorted(a)[n - 1]  # O(N**2)
+
+
+def prime_counting_function(i):
+    """ Функция возвращает верхнюю границу отрезка на котором лежат
+    i-e количество простых чисел. Функция основана на теореме о
+    распределении простых чисел, она утверждает, что функция
+    распределения простых чисел. Количество простых чисел на отрезке
+    [1;n] растёт с увеличением n как n / ln(n).
+    """
+
+    number_of_primes = 0
+    number = 2
+    while number_of_primes <= i:
+        number_of_primes = number / math.log(number)
+        number += 1
+    return number
 
 
 i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+i_max = prime_counting_function(i)
+
+"""Порядок времени выполнения обоих алгоритмов одинаков, но на практике наивный алгоритм работает быстрее
+при данной постановке задачи. Количество итераций внутренних циклов у него ограничено номером искомого числа,
+в то время, как второму алгоритму нужно сформировать массив, длинна которого значительно больше этого числа 
+и увеливается в геометрической прогрессии при увеличении числа. Кроме того, эту длину нужно еще и вычислить."""
