@@ -20,7 +20,6 @@ def recursive_reverse(number):
         return str(number % 10)
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
-
 num_100 = randint(10000, 1000000)
 num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
@@ -54,6 +53,12 @@ def memoize(f):
             cache[args] = f(*args)
             return cache[args]
     return decorate
+
+
+"""
+Мемоизация в данной ситуации нужна. Ведь при одинаковых параметрах функция будет выполняться только
+первый раз. В последующих случаях возвращаемое значение будет браться из словаря, что ускоряет алгоритм.
+"""
 
 
 @memoize
