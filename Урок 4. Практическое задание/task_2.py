@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -79,3 +80,53 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+def reverse_mem(number):
+    return int(str(number)[::-1])
+
+
+print('Функция reverse_mem')
+print(
+    timeit(
+        'reverse_mem(num_100)',
+        setup='from __main__ import reverse_mem, num_100',
+        number=10000))
+print(
+    timeit(
+        'reverse_mem(num_1000)',
+        setup='from __main__ import reverse_mem, num_1000',
+        number=10000))
+print(
+    timeit(
+        'reverse_mem(num_10000)',
+        setup='from __main__ import reverse_mem, num_10000',
+        number=10000))
+
+
+@memoize
+def reverse_mem(number):
+    return int(str(number)[::-1])
+
+
+print('Оптимизированная функция reverse_mem')
+print(
+    timeit(
+        'reverse_mem(num_100)',
+        setup='from __main__ import reverse_mem, num_100',
+        number=10000))
+print(
+    timeit(
+        'reverse_mem(num_1000)',
+        setup='from __main__ import reverse_mem, num_1000',
+        number=10000))
+print(
+    timeit(
+        'reverse_mem(num_10000)',
+        setup='from __main__ import reverse_mem, num_10000',
+        number=10000))
+
+"""Memoization – свойство функций сохранять (кешировать) результаты вычислений, 
+чтобы не вычислять их повторно, что позволяет достичь прироста скорости работы за 
+счет потерь в свободной памяти. Применение свойств разных типов данных позволяет 
+достичь похожего результата"""
