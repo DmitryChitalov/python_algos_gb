@@ -9,6 +9,7 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -37,5 +38,23 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    new_array = sorted([(i, array.count(i)) for i in set(array)], key=lambda t: t[1], reverse=True)
+    return f'Чаще всего встречается число {new_array[0][0]}, ' \
+           f'оно появилось в массиве {new_array[0][1]} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit("func_1", setup="from __main__ import func_1", number=100000))
+"""0.0012917999999999992"""
+print(timeit("func_2", setup="from __main__ import func_2", number=100000))
+"""0.0012051000000000006"""
+print(timeit("func_3", setup="from __main__ import func_3", number=100000))
+"""0.0012094999999999988"""
+
+"""
+Получилось, что все три функции работают примерно одинаково.
+"""
