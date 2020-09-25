@@ -11,8 +11,14 @@
 
 Добавьте аналитику: что вы сделали и почему
 """
+"""
+решил попробывать оптимизировать код с помощью генератора списка,
+это оказалось правельным решением. В среднем генератор работает в 2 раза быстрее чем цикл.
+1.1985113 - func_1
+0.5908133 - func_2
+"""
 
-from timeit import timeit
+import timeit
 
 
 def func_1(nums):
@@ -21,3 +27,14 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [x for x in nums if x % 2 == 0]
+
+
+my_list = list(range(1000))
+
+print(timeit.timeit("func_1(my_list)", setup="from __main__ import func_1, my_list", number=10000))
+print(timeit.timeit("func_2(my_list)", setup="from __main__ import func_2, my_list", number=10000))
+
