@@ -10,3 +10,36 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+
+
+from time import time
+
+
+def fill_list(n):
+    the_list = []
+    start_time = time()
+    for i in range(n):
+        the_list.append(i)
+        # the_list.index(i)
+    print(time() - start_time)
+    return the_list
+
+
+def fill_dict(n):
+    start_time = time()
+    the_dict = dict()
+    for i in range(n):
+        the_dict[i] = i
+        # the_dict.get(i)
+    print(time() - start_time)
+    return the_dict
+
+
+fill_list(10000999)
+fill_dict(10000999)
+# Список заполняется быстрее, а поиск элемента в нем происходит медленнее.
+# Результат заполнения списка 1.264601469039917, словаря 1.3649451732635498.
+
+# fill_list(100500)
+# fill_dict(100500)
+# Результат поиска у списка 86.18016338348389, у словаря 0.02214670181274414.
