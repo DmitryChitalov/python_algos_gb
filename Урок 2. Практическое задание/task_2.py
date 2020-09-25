@@ -16,3 +16,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def counting(num, count_1=0, count_2=0):
+    if len(str(num)) == 0:
+        print(f'{count_1} {count_2}')
+    else:
+        num_2 = int(num) % 10
+        if num_2 % 2 == 0:
+            count_1 += 1
+            num = str(num[:-1])
+            counting(num, count_1, count_2)
+        else:
+            count_2 += 1
+            num = str(num[:-1])
+            counting(num, count_1, count_2)
+
+
+counting('12345788')
+
