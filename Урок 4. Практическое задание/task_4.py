@@ -5,10 +5,11 @@
 которое встречается в массиве чаще всего.
 
 Сделайте профилировку каждого алгоритма через timeit
-
-Попытайтесь написать третью версию, которая будет самой быстрой.
+ самой быстрой.
+Попытайтесь написать третью версию, которая будет
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -37,5 +38,20 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    count_numbers = [array.count(i) for i in array]
+    most_freq_el = array[count_numbers.index(max(count_numbers))]
+    return f'Чаще всего встречается число {most_freq_el}, ' \
+           f'оно появилось в массиве {max(count_numbers)} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+print(timeit.timeit('func_1()', setup='from __main__ import func_1', number=10000))
+print(timeit.timeit('func_2()', setup='from __main__ import func_2', number=10000))
+print(timeit.timeit('func_3()', setup='from __main__ import func_3', number=10000))
+
+
+# попытался написать свою функцию, но быстрее она не получилась, хотя использовал встроенные функции((
+
