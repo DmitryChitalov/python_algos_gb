@@ -21,3 +21,20 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for i, el in enumerate(nums) if el % 2 == 0]
+
+
+print(timeit("""def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr"""))
+
+print(timeit("""def func_2(nums):
+    return [i for i, x in enumerate(nums) if x % 2 == 0]"""))
+
+# попробовал через генератор, но время показывает примерно одинаковое, зато функция стала в одну строку.
