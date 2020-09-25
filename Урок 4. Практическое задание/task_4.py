@@ -37,5 +37,25 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    my_array = [array.count(i) for i in array]
+    m = max(my_array)
+    num = array[my_array.index(max(my_array))]
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit("func_1", setup="from __main__ import func_1", number=10000))
+print(timeit("func_2", setup="from __main__ import func_2", number=10000))
+print(timeit("func_3", setup="from __main__ import func_3", number=10000))
+
+# Время выполнения func_1: 0.0001594000000000005
+# Время выполнения func_2: 0.00015029999999999905
+# Время выполнения func_3: 0.0001497000000000026
+# Таким образом, с помощью генератора удалось сократить время выполнения функции,
+# но незначительно
+
