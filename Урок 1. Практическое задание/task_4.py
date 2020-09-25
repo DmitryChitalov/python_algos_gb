@@ -3,9 +3,16 @@
 
 Для этой задачи:
 1) придумайте 1-3 решения (желательно хотя бы два)
-2) оцените сложность каждого решения в нотации О-большое
-3) сделайте вывод, какое решение эффективнее и почему
+2) оцените сложность каждого решения в нотации О-большое"""
+# Для первого решения - O(n)
+# Для вторго решения - O(n)
 
+
+"""3) сделайте вывод, какое решение эффективнее и почему"""
+# Второй способ предпочтительнне: при одинаковой сложности, но при большом словаре пльзовательей
+# использование гененратора с yield предпочтительнее
+
+"""
 Примечание:
 Без выполнения пунктов 2 и 3 задание считается нерешенным. Пункты 2 и 3 можно выполнить
 через строки документации в самом коде.
@@ -27,3 +34,64 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+user_list = [{'user': 'ivan', 'password': 'ivan123', 'active_user': True},
+             {'user': 'vova', 'password': 'vova123', 'active_user': False},
+             {'user': 'slava', 'password': 'slava123', 'active_user': False},
+             {'user': 'kolya', 'password': 'kolya123', 'active_user': True}]
+
+
+# 1 способ
+def check_user():
+    user_ = 0
+    # user_name = input().rstrip()
+    # user_pass = input().rstrip()
+    user_name = 'kolya'  # 1
+    user_pass = 'kolya123'  # 1
+    for el in user_list:  # n
+        if user_name == el['user']:  # 1
+            if user_pass == el['password']:  # 1
+                if el['active_user'] is True:  # 1
+                    return print(f'{el["user"]} Добро пожаловать')
+                else:
+                    return print('Необходимо пройти активацию')
+
+            return print('Ваш пароль не верен, повторите попытку')
+
+        else:
+            user_ = user_ + 1  # 1
+    if user_ == len(user_list):  # 1
+        return print('Пользователь не существует')
+
+
+check_user()
+
+# 2 способ
+def number_user_list():
+    for i in user_list:
+        yield i
+
+
+def check_user2():
+    user_ = 0
+    # user_name = input().rstrip()
+    # user_pass = input().rstrip()
+    user_name = 'slava'  # 1
+    user_pass = 'slava123'  # 1
+    for el in number_user_list():  # n
+        if user_name == el['user']:  # 1
+            if user_pass == el['password']:  # 1
+                if el['active_user'] is True:  # 1
+                    return print(f'{el["user"]} Добро пожаловать')
+                else:
+                    return print('Необходимо пройти активацию')
+
+            return print('Ваш пароль не верен, повторите попытку')
+
+        else:
+            user_ = user_ + 1  # 1
+    if user_ == len(user_list):  # 1
+        return print('Пользователь не существует')
+
+
+check_user2()

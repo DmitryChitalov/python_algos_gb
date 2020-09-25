@@ -11,19 +11,37 @@
 Если у вас есть идеи, предложите вариант оптимизации.
 """
 
+""" В не мемоизированном варианте функция возвращает неверный результат
+я внес исправления в функцию, не повлиявший на ее сложность
+По итоговым тестам видно, что мемоизованная фунция работете быстрее в 10, так что мемоизация 
+уместна. 
+"""
+
 from timeit import timeit
 from random import randint
 
 
-def recursive_reverse(number):
+def recursive_reverse1(number):
     if number == 0:
-        return str(number % 10)
+        return f'{str(number % 10)}'
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
+def recursive_reverse(number):
+    if number // 10 == 0:
+        return f'{number}'
+    return f'{number % 10}{recursive_reverse1(number // 10)}'
+    # return f'{number % 10}{num(number // 10)}'
+
+
+
+# print(recursive_reverse(12))
+# print(recursive_reverse1(12))
 
 num_100 = randint(10000, 1000000)
 num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
+
+
 
 print('Не оптимизированная функция recursive_reverse')
 print(
@@ -62,6 +80,9 @@ def recursive_reverse_mem(number):
         return ''
     return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
 
+# print(recursive_reverse_mem(12))
+# print(recursive_reverse(12))
+# print(recursive_reverse1(12))
 
 print('Оптимизированная функция recursive_reverse_mem')
 print(
