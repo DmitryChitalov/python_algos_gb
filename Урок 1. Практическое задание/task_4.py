@@ -27,3 +27,50 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# Вывод: первый варинт эфективнее, т.к. быстрее
+
+user_data = {
+    'user1': {'pswd': '123456', 'activation': True},
+    'user2': {'pswd': '123456', 'activation': False}
+}
+
+
+# Первый вариант. Сложность = O(1)
+def authorization_1(users, user_name, user_pswd):
+    if users.get(user_name):
+        if users[user_name]['pswd'] != user_pswd:
+            return f'Для пользователя {user_name} указан неверный пароль!'
+        elif users[user_name]['pswd'] == user_pswd and not users[user_name]['activation']:
+            return f'{user_name}, Вам необходимо активировать учетную запись!'
+        elif users[user_name]['pswd'] == user_pswd and users[user_name]['activation']:
+            return f'{user_name}, добро пожаловать в систему!'
+    return f'Пользователя с именем "{user_name}" не найдено =('
+
+
+# Второй варинат O(n)
+def authorization_2(users, user_name, user_pswd):
+    for key, val in users.items():
+        if key == user_name:
+            if val['pswd'] != user_pswd:
+                return f'Для пользователя {user_name} указан неверный пароль!'
+            elif val['pswd'] == user_pswd and not val['activation']:
+                return f'{user_name}, Вам необходимо активировать учетную запись!'
+            elif val['pswd'] == user_pswd and val['activation']:
+                return f'{user_name}, добро пожаловать в систему!'
+    return f'Пользователя с именем "{user_name}" не найдено =('
+
+
+print(authorization_1(user_data, 'user1', '123'))
+print(authorization_1(user_data, 'user1', '123456'))
+print(authorization_1(user_data, 'user2', '123'))
+print(authorization_1(user_data, 'user2', '123456'))
+print(authorization_1(user_data, 'user3', '123'))
+
+print(f'\n{"*" * 55}\n')
+
+print(authorization_2(user_data, 'user1', '123'))
+print(authorization_2(user_data, 'user1', '123456'))
+print(authorization_2(user_data, 'user2', '123'))
+print(authorization_2(user_data, 'user2', '123456'))
+print(authorization_2(user_data, 'user3', '123'))
