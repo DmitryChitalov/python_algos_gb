@@ -22,3 +22,20 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+# Вариант 1 : O(n Log n)
+# Вариант не самый удачный за счет повышеной сложности в алгоритме(использование sorted)
+
+var_d = {'Рога и копыта': 5000, 'Пупкин и Со': 15000, 'MMM': 22000, 'Loser&Co': 7000, 'People': 13500}
+var_company = sorted(var_d.values(), reverse=True)[:3]
+for key, value in var_d.items():
+    if value in var_company:
+        print(f'{key}')
+
+
+# Вариант 2 : O(n**2)
+# Вариант более оптимален, хоть и использует алгоритм с квадратичной сложностью
+for i in range(3):
+    max_value = max(var_d.values())
+    max_keys = [k for k, v in var_d.items() if v == max_value]
+    print(max_value, max_keys)
+    del var_d[max_keys[0]]

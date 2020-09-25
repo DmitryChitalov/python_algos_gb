@@ -21,3 +21,16 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if i % 2 == 0]
+
+
+num = [10, 5, 3, 8, 0, 1]
+print(f'func_1 = {timeit.timeit("func_1(num)", setup="from __main__ import func_1, num")}')
+print(f'func_2 = {timeit.timeit("func_2(num)", setup="from __main__ import func_2, num")}')
+"""
+Выполнил перебор массива через генератор, скорость выпонения уменьшилась, хоть и незначительно.
+Таким образом видим, что перебор  и заполнение массива с помошью генератора работает быстрее.
+Хотя сложность выполнения в обоих примерах одинаковая O(n)
+"""
