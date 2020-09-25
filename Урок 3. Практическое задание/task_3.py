@@ -14,3 +14,13 @@
 р
 а
 """
+import hashlib
+
+s = input("Введите строку из маленьких латинских букв: ")
+count = set()
+N = len(s)
+for i in range(N):
+    for j in range(N, i, -1):
+        print(s[i:j])
+        count.add(hashlib.sha1(s[i:j].encode('utf-8')).hexdigest())
+print(f"Количество уникальных подстрок равно: {len(count)}, хеши: {count}")
