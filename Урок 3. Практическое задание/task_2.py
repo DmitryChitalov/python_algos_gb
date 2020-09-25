@@ -15,3 +15,28 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+
+from uuid import uuid4
+from hashlib import sha256
+
+
+salt = uuid4().hex.encode()
+
+
+def create_hash(password):
+    return sha256(salt + password.encode()).hexdigest()
+
+
+def comparison(password, new_password):
+    return True if password == new_password else False
+
+
+password = create_hash(input('Введите пароль: '))
+print(f'В базе данных хранится строка: {password}')
+new_password = create_hash(input('Введите пароль еще раз для проверки: '))
+
+if comparison(password, new_password):
+    print(f'Пароли совпадают.')
+else:
+    print(f'Пароли не совпадают.')
