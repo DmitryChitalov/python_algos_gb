@@ -11,6 +11,10 @@
 """
 
 
+
+import cProfile
+from timeit import timeit
+
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
         return
@@ -34,3 +38,14 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+print(revers(123))
+print(revers_2(123))
+print(revers_3(123))
+
+setup = 'from __main__ import revers, revers_2, revers_3 '
+# cProfile.run('revers(123)')
+# print(timeit('revers(123)', setup=setup), 'revers')
+# cProfile.run('revers_2(123)')
+# print(timeit('revers(132)', setup=setup), 'revers_2')
+# cProfile.run('revers_3(123)')
+# print(timeit('revers_3(123)', setup=setup),'revers_3')
