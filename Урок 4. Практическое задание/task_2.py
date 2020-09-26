@@ -79,3 +79,34 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+def recursive_reverse_over_str(_num):
+    _num = str(_num)
+    return int(_num[::-1])
+
+
+print('Моя реализация функции recursive_reverse_over_str')
+print(
+    timeit(
+        'recursive_reverse_over_str(num_100)',
+        setup='from __main__ import recursive_reverse_over_str, num_100',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_over_str(num_1000)',
+        setup='from __main__ import recursive_reverse_over_str, num_1000',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_over_str(num_10000)',
+        setup='from __main__ import recursive_reverse_over_str, num_10000',
+        number=10000))
+
+"""
+Моя идея заключается в использовании среза строки, в которую переводится искомое число.
+Моя реализация оказалась быстрее не оптимизированной функции и медленнее оптимизированной. 
+Я пробовал различные циклы, но все они оказывались медленнее решения, которое я оставил здесь. 
+Вывод: мемоизация здесь нужна. Она, в данном случае, оказалась наиболее быстрым вариантом выполнения задачи, так как
+она позволяет сохранить результат выволнения функции и использовать его при следующем её вызове
+"""
