@@ -9,6 +9,8 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
+import cProfile
+import timeit
 
 
 def revers(enter_num, revers_num=0):
@@ -34,3 +36,14 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+print(timeit.timeit('revers', setup='from __main__ import revers', number=1000))
+cProfile.run('revers')
+print(timeit.timeit('revers_2', setup='from __main__ import revers_2', number=1000))
+cProfile.run('revers_2')
+print(timeit.timeit('revers_3', setup='from __main__ import revers_3', number=1000))
+cProfile.run('revers_3')
+
+'''
+Последняя функция более эффективнее, так как использует встроенныую функцию(срез), а они всегда быстрее.
+'''
