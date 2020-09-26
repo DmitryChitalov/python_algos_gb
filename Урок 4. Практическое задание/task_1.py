@@ -11,8 +11,7 @@
 
 Добавьте аналитику: что вы сделали и почему
 """
-
-from timeit import timeit
+import timeit
 
 
 def func_1(nums):
@@ -21,3 +20,16 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    new_arr = [i for i in nums if i % 2 == 0]
+    return new_arr
+
+
+print(timeit.timeit('func_1', setup='from __main__ import func_1', number=1000))
+print(timeit.timeit('func_2', setup='from __main__ import func_2', number=1000))
+
+'''
+Я преобразовал код через использование генератора, так как он работает быстрее, чeм функция append
+'''

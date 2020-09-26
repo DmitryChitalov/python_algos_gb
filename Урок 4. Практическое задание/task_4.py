@@ -9,6 +9,8 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+import timeit
+import collections
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -37,5 +39,19 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    results = collections.Counter(array).most_common(1)
+    return f'Элемент {results[0][0]} встречается чаще всего,' \
+           f'а именно {results[0][1]} раза'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+print(timeit.timeit('func_1', setup='from __main__ import func_1', number=1000))
+print(timeit.timeit('func_2', setup='from __main__ import func_2', number=1000))
+print(timeit.timeit('func_3', setup='from __main__ import func_3', number=1000))
+
+'''
+Третья функция более оптимальна, так как использует встроенную функцию
+'''
