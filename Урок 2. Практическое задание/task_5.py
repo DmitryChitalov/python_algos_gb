@@ -18,3 +18,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+row = []
+
+
+def table(kod=32):
+    if kod == 128:
+        return
+    row.append("%4d-%s" % (kod, chr(kod)))
+    if len(row) == 10:
+        print(''.join(row))
+        row.clear()
+    if kod == 127 and len(row) > 0:
+        print(''.join(row))
+    return table(kod+1)
+
+
+table()
+
