@@ -25,3 +25,45 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple, defaultdict
+
+"""Решение с использованием namedtuple"""
+
+firms = namedtuple('Firm', 'id name q_1 q_2 q_3 q_4 summ')
+firms_list = []
+
+num = int(input('Введите количество предприятий для расчета прибыли: '))
+for i in range(1, num+1):
+    id = i
+    name = input(f'Введите название предприятия # {i}: ')
+    q_1, q_2, q_3, q_4 = input('Через пробел введите прибыль данного предприятия за каждый квартал(всего 4 квартала)').split()
+    summ = float(q_1) + float(q_2) + float(q_3) + float(q_4)
+    firms_list.append(firms._make((id, name, q_1, q_2, q_3, q_4, summ)))
+print(firms_list)
+
+avg_profit = (sum([i.summ for i in firms_list]) / len(firms_list))
+print(f'Средняя годовая прибыль всех предприятий: {avg_profit}')
+list_above_avg = [i.name for i in firms_list if i.summ >= avg_profit]
+print(f"Предприятия, с прибылью выше или равно среднего значения: {';'.join(list_above_avg)}")
+list_below_avg = [i.name for i in firms_list if i.summ < avg_profit]
+print(f"Предприятия, с прибылью ниже среднего значения: {';'.join(list_below_avg)}")
+
+
+"""Решение с использованием defaultdict"""
+
+firms = defaultdict(list)
+
+num = int(input('Введите количество предприятий для расчета прибыли: '))
+for i in range(1, num+1):
+    name = input(f'Введите название предприятия # {i}: ')
+    profit = [float(i) for i in input('Через пробел введите прибыль данного предприятия за каждый квартал(всего 4 квартала): ').split()]
+    firms[name] = profit
+print(firms)
+
+avg_profit = (sum([sum(i) for i in firms.values()]) / len(firms))
+print(f'Средняя годовая прибыль всех предприятий: {avg_profit}')
+list_above_avg = [key for key, value in firms.items() if sum(value) >= avg_profit]
+print(f"Предприятия, с прибылью выше или равно среднего значения: {';'.join(list_above_avg)}")
+list_below_avg = [key for key, value in firms.items() if sum(value) < avg_profit]
+print(f"Предприятия, с прибылью ниже среднего значения: {';'.join(list_below_avg)}")
+
