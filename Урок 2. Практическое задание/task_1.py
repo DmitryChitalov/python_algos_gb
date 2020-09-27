@@ -28,3 +28,50 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+# Честно говоря не понял, можно ли в функции рекурсивно себя вызывать несколько раз в разных частях программы
+# (если разные сценарии срабатывают)? или рекурсивный вызов должен быть только один раз в конце?
+
+def calculator_recursion():
+    action = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if action == '0':
+        print('Вы вышли')
+        return
+    elif action in ['+', '-', '/', '*']:
+        x = input('Введите первое число: ')
+        try:
+            x = float(x) # тут можно инт ставить, если считаем, что только целые числа можно вводить
+        except ValueError as e:
+            print('Вы ввели строку, а надо только цифры. Давайте начнём всё сначала')
+            calculator_recursion()
+            return
+
+        y = input('Введите второе число: ')
+        try:
+            y = float(y) # тут можно инт ставить, если считаем, что только целые числа можно вводить
+        except ValueError as e:
+            print('Вы ввели строку, а надо только цифры. Давайте начнём всё сначала')
+            calculator_recursion()
+            return
+
+        if action == '+':
+            res = x + y
+        elif action == '-':
+            res = x - y
+        elif action == '*':
+            res = x * y
+        elif action == '/':
+            try:
+                res = x / y
+            except ZeroDivisionError as e:
+                print(f'Делить на ноль нехорошо: {e}')
+                calculator_recursion()
+                return
+        print(f'{x} {action} {y} = {res}')
+        calculator_recursion()
+    else:
+        print('Такое нельзя вводить! Исправляйтесь.')
+        calculator_recursion()
+
+
+calculator_recursion()
