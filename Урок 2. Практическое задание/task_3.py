@@ -15,3 +15,19 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def rec_number_reverse(number, result=0):
+    if number == 0:
+        return print(f'Перевернутое число: {result}')
+
+    else:
+        result = (result * 10) + (number % 10)
+        number //= 10
+        return rec_number_reverse(number, result)
+
+
+try:
+    rec_number_reverse(int(input('Введите число, которое требуется перевернуть: ')))
+except ValueError:
+    print('Введено некорректное значение, завершение программы')

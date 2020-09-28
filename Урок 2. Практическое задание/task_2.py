@@ -16,3 +16,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def rec_numbers_count(number, even_count=0, uneven_count=0):
+    if number == 0:
+        return print(f'Количество четных и нечетных цифр в числе равно: ({even_count}, {uneven_count})')
+
+    else:
+        if number % 2 == 0:
+            even_count += 1
+        else:
+            uneven_count += 1
+        rec_numbers_count(number//10, even_count, uneven_count)
+
+
+try:
+    rec_numbers_count(int(input('Введите число: ')))
+except ValueError:
+    print('Введено некорректное значение, завершение программы')

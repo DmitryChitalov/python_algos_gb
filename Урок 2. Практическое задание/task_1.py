@@ -28,3 +28,49 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def rec_calculator():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+
+    if operation == '0':
+        print('Выход из программы')
+
+    else:
+        if operation in '+-*/':
+            try:
+                nuber_1 = int(input('Введите первое чиисло: '))
+                nuber_2 = int(input('Введите второе чиисло: '))
+
+                if operation == '+':
+                    result = nuber_1 + nuber_2
+                    print(f'Сумма = {result}')
+
+                elif operation == '-':
+                    result = nuber_1 - nuber_2
+                    print(f'Разница = {result}')
+
+                elif operation == '*':
+                    result = nuber_1 * nuber_2
+                    print(f'Произведение = {result}')
+
+                elif operation == '/':
+                    if nuber_2 == 0:
+                        print('ОШИБКА!: Деление на 0')
+                    else:
+                        result = nuber_1 / nuber_2
+                        print(f'Частное = {result}')
+
+                else:
+                    print(f'ОШИБКА!: Непредвиденная ситуация')
+
+            except ValueError:
+                print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+
+        else:
+            print('Введена некорректная операция')
+
+        return rec_calculator()
+
+
+rec_calculator()
