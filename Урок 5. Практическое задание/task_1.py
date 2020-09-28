@@ -25,3 +25,61 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import defaultdict
+
+
+def input_profit():
+	text = 'через пробел введите прибыль данного предприятия\n' \
+	       'за каждый квартал(Всего 4 квартала): '
+	lst = [int(i) for i in input(text).split()]
+	if len(lst) == 4:
+		return lst
+	else:
+		if len(lst) > 4:
+			return lst[0:3]
+		else:
+			for j in range(4 - len(lst), 4):
+				lst.append(0)
+			return lst
+
+
+def input_firm():
+	return input('Введите название предприятия: ')
+
+
+def input_count_firm():
+	return int(input('Введите количество предприятий для расчета прибыли: '))
+
+
+def average_annual_profit(dd):
+	count = 0
+	summ = 0
+	for k, v in dd.items():
+		count += 1
+		summ += sum(v)
+	return summ / count
+
+
+def sort_firm(dd, average):
+	text1 = ''
+	text2 = ''
+	for k, v in dd.items():
+		if sum(v) >= average:
+			text1 += (k + ' ')
+		else:
+			text2 += (k + ' ')
+	
+	return f'\nПредприятия, с прибылью выше среднего значения: {text1}\n\n' \
+	       f'Предприятия, с прибылью ниже среднего значения: {text2}'
+
+
+if __name__ == '__main__':
+	d = defaultdict(list)
+	for i in range(input_count_firm()):
+		firm = input_firm()
+		d[firm] = input_profit()
+	
+	average_profit = average_annual_profit(d)
+	print(f'Средняя годовая прибыль всех предприятий: {average_profit}')
+	
+	print(sort_firm(d, average_profit))
