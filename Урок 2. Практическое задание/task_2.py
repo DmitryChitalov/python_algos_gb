@@ -16,3 +16,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_even_odd(num, even=0, not_even=0):
+    if num == 0:
+        return f'четных - {even}, не четных - {not_even}'
+    else:
+        cur_n = num % 10
+        num = num // 10
+        if cur_n % 2 == 0:
+            even += 1
+            return count_even_odd(num, even, not_even)
+        else:
+            not_even += 1
+            return count_even_odd(num, even, not_even)
+
+
+numb = int(input('Введите число: '))
+print(f'В числе {numb} {count_even_odd(numb)}')
