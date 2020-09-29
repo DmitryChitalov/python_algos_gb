@@ -7,5 +7,24 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
-Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def guess_num(attempt=1, number_attempts=10, hidden_numb=random.randint(0, 100)):
+    print(f'Попытка № {attempt}')
+    user_response = int(input('Угодайте число от 0 до 100: '))
+    if attempt >= number_attempts:
+        print(f'Вы проиграли! Было загадано число {hidden_numb}')
+    elif user_response == hidden_numb:
+        print(f'Вы угадали!  Было загадано число {hidden_numb}')
+    else:
+        if user_response > hidden_numb:
+            print(f'Загаданное число меньше')
+        else:
+            print(f'Загаданное число больше')
+        guess_num(attempt + 1)
+
+
+guess_num()

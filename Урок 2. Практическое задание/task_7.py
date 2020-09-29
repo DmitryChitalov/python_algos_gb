@@ -6,3 +6,14 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def set_check(n, left=0, right=1):
+    if left == right:
+        print(f'Равенство верно')
+    elif left < right:
+        return set_check(n, left + 1, n * (n + 1) // 2)
+
+
+user_input = int(input('Введите число: '))
+set_check(user_input)
