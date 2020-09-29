@@ -11,3 +11,20 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+from collections import defaultdict
+from functools import reduce
+
+loc_dict = defaultdict(list)
+num_1 = input('Введите первое значение: ').upper()
+num_2 = input('Введите второе значение: ').upper()
+
+loc_dict = num_1, num_2
+
+print(loc_dict)
+hex_int = [int(''.join(i), 16) for i in loc_dict]
+
+sum_ = sum(hex_int)
+mul = reduce(lambda x, y:  x * y, hex_int)
+
+print(hex(sum_).upper()[2:])
+print(hex(mul).upper()[2:])

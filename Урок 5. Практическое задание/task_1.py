@@ -25,3 +25,29 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+
+company = namedtuple('Company', 'company_name money')
+
+comp_ = {}
+
+total_profit = 0
+num_comp = int(input('Введите количество фирм для расчета прибыли: '))
+for i in range(num_comp):
+    comp = company(
+        company_name=input('Введите название фирмы: '),
+        money=sum(map(int, input(f'Введите через пробел прибыль фирмы поквартально: ').split(' ')))
+    )
+    total_profit += comp.money
+    comp_[comp.company_name] = comp.money
+avg = total_profit / num_comp
+print(f'Общая среднегодовая прибыль = {avg}')
+for n, m in comp_.items():
+    if m > avg:
+        print(f'Прибыль {n}, выше среднего = {n}')
+    else:
+        print(f'Прибыль {n}, ниже среднего = {n}')
+
+"""
+Если можно на лекции привести реальный пример, когда работа с этой коллекцией была востребована.
+"""
