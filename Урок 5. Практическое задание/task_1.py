@@ -25,3 +25,57 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import defaultdict, namedtuple
+
+
+def average_profit_defaultdict():
+    data = defaultdict(int)
+    quantity = int(input('Введите количество предприятий для расчета прибыли: '))
+    for i in range(quantity):
+        title = input('Введите название предприятия: ')
+        profit = input('через пробел введите прибыль данного предприятия '
+                       'за каждый квартал(Всего 4 квартала): ').split(' ')
+        profit_sum = sum([int(el) for el in profit])
+        data[title] += profit_sum
+
+    data_average = defaultdict(str)
+    average = sum(data.values()) / quantity
+    data_average[f'average'] = average
+    for key, val in data.items():
+        if val >= average:
+            data_average['above_average'] += key + ' '
+        else:
+            data_average['below_average'] += key + ' '
+    return f'Средняя годовая прибыль всех предприятий: {average:.2f} \n' \
+           f'Предприятия, с прибылью выше среднего значения: {data_average["above_average"]} \n' \
+           f'Предприятия, с прибылью ниже среднего значения: {data_average["below_average"]}'
+
+
+def average_profit_namedtuple():
+    Data = namedtuple('Data_company', 'title profit_average')
+    quantity = int(input('Введите количество предприятий для расчета прибыли: '))
+    all_company_list = []
+    average = 0
+    for i in range(quantity):
+        title = input('Введите название предприятия: ')
+        profit = input('через пробел введите прибыль данного предприятия '
+                       'за каждый квартал(Всего 4 квартала): ')
+        profit = sum([int(el) for el in profit.split(' ')])
+        average += profit
+        all_company_list.append(Data._make([title, profit]))
+    average /= quantity
+    above_average, below_average = '', ''
+    for el in all_company_list:
+        if el.profit_average > average:
+            above_average += el.title + ' '
+        else:
+            below_average += el.title + ' '
+
+    return f'Средняя годовая прибыль всех предприятий: {average:.2f} \n' \
+           f'Предприятия, с прибылью выше среднего значения: {above_average} \n' \
+           f'Предприятия, с прибылью ниже среднего значения: {below_average}'
+
+
+
+print(average_profit_defaultdict())
+print(average_profit_namedtuple())
