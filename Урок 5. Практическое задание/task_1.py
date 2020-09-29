@@ -25,3 +25,35 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple, defaultdict
+
+cols = ['first', 'second', 'third', 'fourth']
+
+factory = namedtuple('factory', cols)
+factory_dict = defaultdict(int)
+
+factory_dict['factory_1'] = factory(235, 34534, 55, 235)
+factory_dict['factory_2'] = factory(345, 34, 543, 34)
+factory_dict['factory_3'] = factory(5242, 252, 6512, 11)
+factory_dict['factory_4'] = factory(212, 142, 121, 532)
+factory_dict['factory_5'] = factory(245, 786, 6567, 22)
+
+
+def average_profit(factory_dict):
+    average = 0
+    left_average = []
+    right_average = []
+    for i in factory_dict.values():
+        average += sum(i) / len(factory_dict)
+    for i, j in factory_dict.items():
+        if sum(j) < average:
+            left_average.append(i)
+        else:
+            right_average.append(i)
+    return f'Средняя годовая прибыль всех предприятий: {average}. \n' \
+           f'Предприятия, с прибылью ниже среднего значения:  {", ".join(left_average)}.\n' \
+           f'Предприятия, с прибылью выше среднего значения:  {", ".join(right_average)}'
+
+
+print(average_profit(factory_dict))
