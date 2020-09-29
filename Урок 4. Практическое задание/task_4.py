@@ -9,9 +9,9 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
-
 
 def func_1():
     m = 0
@@ -24,7 +24,6 @@ def func_1():
     return f'Чаще всего встречается число {num}, ' \
            f'оно появилось в массиве {m} раз(а)'
 
-
 def func_2():
     new_array = []
     for el in array:
@@ -36,6 +35,28 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
+def func_3():
+    a_set = set(array)
+    mfreq = None
+    n = 0
+    for item in a_set:
+        N = array.count(item)
+        if N > n:
+            n = N
+            mfreq = item
+    return f'Чаще всего встречается число {mfreq}, ' \
+           f'оно появилось в массиве {n} раз(а)'
 
 print(func_1())
 print(func_2())
+print(func_3())
+
+"""
+Третий алгоритм (func_3) работает бысрее, 
+чем первый (func_1) и второй (func_2)
+
+"""
+
+print(timeit.timeit("func_1()", setup="from __main__ import func_1", number = 1000000))
+print(timeit.timeit("func_2()", setup="from __main__ import func_2", number = 1000000))
+print(timeit.timeit("func_3()", setup="from __main__ import func_3", number = 1000000))
