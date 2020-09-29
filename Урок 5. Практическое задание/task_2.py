@@ -11,3 +11,29 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+from collections import namedtuple
+hex_series = namedtuple('Hex', ['name', 'series'])
+
+
+def concat_hex(arg1, arg2):
+    result = [hex_series(name='A', series=list(arg1)),hex_series('B', list(arg2))]
+    print(f'Произведение двух чисел {result[0].name} = {"".join(result[0].series)} и {result[1].name}'
+          f' = {"".join(result[1].series)} равно '
+          f'{(hex(int("".join(result[0].series),16) * int("".join(result[1].series),16)))[2:].upper() } ')
+
+def mult_hex(arg1, arg2):
+    result = [hex_series(name='A', series=list(arg1)), hex_series('B', list(arg2))]
+    print(f'Сумма двух чисел {result[0].name} = {"".join(result[0].series)} и {result[1].name}'
+          f' = {"".join(result[1].series)} равно '
+         f'{(hex(int("".join(result[0].series),16) + int("".join(result[1].series),16)))[2:].upper() } ')
+
+# print(a,b)
+# print(hex(int(a,16)*int(b,16)))
+concat_hex('d12','fde')
+mult_hex('d12','fde')
+
+print(hex(int('d12', 16) * int('fde', 16)))
+
+
+
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/python_algos_gb.iml" filepath="$PROJECT_DIR$/.idea/python_algos_gb.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/python_first_level/.idea/python_first_level.iml" filepath="$USER_HOME$/PycharmProjects/python_first_level/.idea/python_first_level.iml" />
+    </modules>
+  </component>
+</project>
