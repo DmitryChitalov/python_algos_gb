@@ -25,3 +25,23 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import defaultdict
+
+
+comp_dict = defaultdict(int)
+companies = int(input('[?] Введите количество предприятий для расчета прибыли: '))
+for numb in range(companies):
+    name = input(f'\n[{numb + 1}] Введите название предприятия: ')
+    for one_profit in input(f'[?] Введите прибыль за 4 квартала: ').split():
+        comp_dict[name] += int(one_profit)
+        comp_dict['common_profit'] += int(one_profit)
+
+average_profit = comp_dict["common_profit"] / companies
+print(f'\n[=] Средняя годовая прибыль всех предприятий: {round(average_profit, 2)}')
+
+top_companies = [name for name in comp_dict if name != "common_profit" and comp_dict[name] > average_profit]
+print(f'[>] Предприятия, с прибылью выше среднего значения: {", ".join(top_companies)}')
+
+worst_companies = [name for name in comp_dict if name != "common_profit" and comp_dict[name] < average_profit]
+print(f'[>] Предприятия, с прибылью ниже среднего значения: {", ".join(worst_companies)}')
