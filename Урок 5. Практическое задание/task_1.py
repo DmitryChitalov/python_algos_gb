@@ -25,3 +25,50 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+
+
+def data_from_user():
+    count = int(input('Введите количество фирм: '))
+    data_firm = namedtuple('data_firm', 'name I II III IV')
+    list_firms_all = []
+    while count > 0:
+        list_firm = data_firm(
+            name=input('Введите название фирмы: '),
+            I=input('Введите прибыль за I квартал: '),
+            II=input('Введите прибыль за II квартал: '),
+            III=input('Введите прибыль за III квартал: '),
+            IV=input('Введите прибыль за IV квартал: ')
+        )
+        list_firms_all.append(list_firm)
+        count -= 1
+    return list_firms_all
+
+
+def middle_profit_firm(list_firms_in: list):
+    dict_middle_profit_firm = {}
+    for firm in list_firms_in:
+        dict_middle_profit_firm[firm.name] = sum(map(int, firm[1:]))
+    return dict_middle_profit_firm
+
+
+def count_middle_profit_all(middle_profit_firm_in: dict):
+    return sum(middle_profit_firm_in.values()) / len(middle_profit_firm_in)
+
+
+def print_firms(middle_profit_firms_in: list, profit_year_firm_in: dict):
+    list_up = []
+    list_down = []
+    for firm in profit_year_firm_in.keys():
+        if profit_year_firm_in.get(firm) > middle_profit_firms_in:
+            list_up.append(firm)
+        else:
+            list_down.append(firm)
+    print(f'фирмы с прибылью больше средней {list_up}\n'
+          f'фирмы с прибылью меньше средней {list_down}'
+          )
+
+
+profit_year_firm = middle_profit_firm(data_from_user())
+middle_profit_firms = count_middle_profit_all(profit_year_firm)
+print_firms(middle_profit_firms, profit_year_firm)
