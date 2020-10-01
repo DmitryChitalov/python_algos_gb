@@ -21,3 +21,20 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(num):
+    return [i for i, el in enumerate(num) if el % 2 == 0]
+
+
+val = [el for el in range(10101)]
+
+print(f'func_1 = '
+      f'{timeit("func_1(val)", setup="from __main__ import func_1, val", number=10000)}')
+
+print(f'func_2 = '
+      f'{timeit("func_2(val)", setup="from __main__ import func_2, val", number=10000)}')
+
+'''
+сделал вторую функцию через генератор, т.к. он работает быстрее
+'''
