@@ -9,3 +9,29 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+import random
+
+steps = [i for i in range(10)]
+
+
+def game(num):
+    answer = int(input("Введите число: "))
+    steps.pop()
+    if len(steps) == 0:
+        print(f'Попытки кончились, вы не угадали(( \nПравильное число: {num}')
+        return
+
+    if answer > num:
+        print("Меньше!")
+    elif answer == num:
+        print("Вы угадали!")
+        return
+    elif answer < num:
+        print("Больше!")
+    return game(num)
+
+
+number = random.randint(0, 100)
+game(number)

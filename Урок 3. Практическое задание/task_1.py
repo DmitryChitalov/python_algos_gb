@@ -10,3 +10,61 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+########################################################################################################################
+
+import time
+
+
+def my_first_decorator(func):
+
+    def time_function():
+        time_open = time.perf_counter()
+        func()
+        time_close = time.perf_counter()
+        print(time_close - time_open)
+    return time_function()
+
+
+@my_first_decorator
+def list_i():
+    some_list = [i for i in range(1, 6)]
+    print(some_list)
+
+
+@my_first_decorator
+def dict_i():
+    some_dict = {}
+    some_dict['Вилки'] = 10
+    some_dict['Ложки'] = 10
+    some_dict['Ножи'] = 10
+    some_dict['Чайные ложки'] = 20
+    some_dict['Салфетки'] = 100
+    print(some_dict)
+
+
+########################################################################################################################
+
+
+@my_first_decorator
+def list_i():
+    some_list = [i for i in range(1, 6)]
+    some_list.pop()
+    some_list.sort()
+    return some_list
+
+
+@my_first_decorator
+def dict_i():
+    some_dict = {'Вилки': 10, 'Ложки': 10, 'Ножи': 10, 'Чайные ложки': 20, 'Салфетки': 100}
+    some_dict.pop('Ножи')
+    some_dict.values()
+    return some_dict
+
+
+"""
+Показатели времени во всех случаях показывают, заполнение словаря происходит быстрее, нежели списка
+(список - O(n), словарь - O(1)),
+однако операции, проводимые над объектами, показали обратное, список намного быстрее выполнил 
+задачи. У словаря операция извлечения гораздо медленнее.
+"""
+
