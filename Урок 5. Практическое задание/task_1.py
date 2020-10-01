@@ -25,3 +25,41 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+
+def determine_average_profit():
+    base_companies = 'company'
+    average_profit = {}
+    num_enterprises = int(input('Введите количество предприятий: '))
+    company_data = namedtuple(base_companies, 'name period_1 period_2 period_3 period_4')
+
+    for i in range(num_enterprises):
+        company = company_data(name=input('\nВведите название предприятия: '),
+                               period_1=int(input('Введите прибыль за первый квартал:  ')),
+                               period_2=int(input('Введите прибыль за второй квартал: ')),
+                               period_3=int(input('Введите прибыль за третий квартал: ')),
+                               period_4=int(input(f'Введите прибыль за четвертый квартал: '))
+                               )
+
+        average_profit[company.name] = \
+            (company.period_1 + company.period_2 + company.period_3 + company.period_4) / 4
+
+    sum_mean_values = 0
+    for val in average_profit.values():
+        sum_mean_values += val
+    sum_mean_values = sum_mean_values / num_enterprises
+
+    print(f'\nСредняя годовая прибыль всех предприятий = {sum_mean_values}\n')
+
+    for key, val in average_profit.items():
+        if val == sum_mean_values:
+            print(f'У компании "{key}" средняя прибыль')
+        elif val > sum_mean_values:
+            print(f'У компании "{key}" прибыль выше среднего')
+        elif val < sum_mean_values:
+            print(f'У компании "{key}" прибыль ниже среднего')
+
+
+determine_average_profit()
