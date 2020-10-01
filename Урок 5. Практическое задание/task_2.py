@@ -11,3 +11,22 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+import collections
+import functools
+
+
+def calc_hexadecimal_num(n):
+    nums = collections.defaultdict(list)
+    for i in range(n):
+        val = input(f'Введите {i + 1} шестнадцатиричное число: ')
+        nums[f'{i + 1}-{val}'] = list(val)
+
+    gen = [int(''.join(i), 16) for i in nums.values()]
+    sum_num = sum(gen)
+    product_num = functools.reduce(lambda a, b: a * b, gen)
+
+    print(f'Сумма = {list("%x" % sum_num)}')
+    print(f'Произведение =  {list("%x" % product_num)}')
+
+
+calc_hexadecimal_num(2)
