@@ -25,3 +25,36 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+import collections
+import random
+
+company_count = '5'
+companies = collections.defaultdict(list)
+for i in range(int(company_count)):
+    name = f'Company_{i}'
+    profit = [random.randint(0, 100) for i_2 in range(4)]
+    # print(profit)
+    companies[name] = profit
+
+# print(companies)
+
+total_profit = 0
+for p in companies.values():
+    for i in p:
+        total_profit += int(i)
+
+print(f'Средняя прибыль компаний составила {total_profit / int(company_count)}')
+companies_max = []
+companies_min = []
+for n, p in companies.items():
+    if sum(p) > total_profit / int(company_count):
+        companies_max.append(n)
+        # print(sum(p))
+    else:
+        companies_min.append(n)
+        # print(sum(p))
+
+print(f'У компаний {companies_min} прибыль ниже среднего')
+print(f'У компаний {companies_max} прибыль выше среднего')
+
