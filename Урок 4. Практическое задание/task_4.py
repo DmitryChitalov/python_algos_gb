@@ -10,6 +10,8 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -36,6 +38,40 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
+# пытался написать 3-ю функцию (и множества использовал и тд), но быстрее всего получилось с list comprehension,
+# это быстрее чем 2-й вариант, но всё равно медленнее чем цикл. Цикл очень быстрый (1-й вариант).
 
-print(func_1())
-print(func_2())
+
+def func_3():
+    new_array = [array.count(el) for el in array]
+    max_3 = max(new_array)
+
+    elem = array[new_array.index(max_3)]
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_3} раз(а)'
+
+# делаем замеры
+# 1-й вариант
+
+print(
+    timeit(
+        "func_1()",
+        setup='from __main__ import func_1',
+        number=100000))
+
+# 2-й вариант
+
+print(
+    timeit(
+        "func_2()",
+        setup='from __main__ import func_2',
+        number=100000))
+
+# 3-й вариант
+
+print(
+    timeit(
+        "func_3()",
+        setup='from __main__ import func_3',
+        number=100000))
+
