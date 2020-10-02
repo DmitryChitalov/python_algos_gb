@@ -11,3 +11,39 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+
+from collections import deque, namedtuple
+
+
+def hex_calc_addition(_list):
+    result = 0
+    for el in _list:
+        result += int(''.join(el.value), 16)
+    return list(hex(result)[2:].upper())
+
+
+def hex_calc_multiplication(_list):
+    _numbers = deque([])
+    for el in _list:
+        _numbers.append(int(''.join(el.value), 16))
+    return list(hex(_numbers[0] * _numbers[1])[2:].upper())
+
+
+def hex_calculate():
+    my_col = namedtuple('number', 'value')
+    numbers = []
+    for el in range(0, 2):
+        _my_col = my_col(
+            value=list(input(f'Введите {el + 1} шестнадцатеричное число: '))
+        )
+        numbers.append(_my_col)
+    operand = input('Что нужно сделать с числом (* или +): ')
+    if operand == '*':
+        return hex_calc_multiplication(numbers)
+    elif operand == '+':
+        return hex_calc_addition(numbers)
+    else:
+        return print('Что-то не так с операндом!')
+
+
+print(f'Результат: {hex_calculate()}')
