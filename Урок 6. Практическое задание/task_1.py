@@ -13,3 +13,55 @@
 ВНИМАНИЕ: ЗАДАНИЯ, В КОТОРЫХ БУДУТ ГОЛЫЕ ЦИФРЫ ЗАМЕРОВ (БЕЗ АНАЛИТИКИ)
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 """
+
+from memory_profiler import profile
+
+
+@profile
+def calc_factorial(f):
+    if f == 0:
+        return 1
+    elif f < 0:
+        print('Факториал расчитывается только для натуральных чисел!')
+    else:
+        return calc_factorial(f - 1) * f
+
+
+user_number = 5  # int(input('Введите число для расчета его факториала - '))
+print(f'Факториал числа {user_number} = {calc_factorial(user_number)}')
+
+'''
+Line #    Mem usage    Increment   Line Contents
+================================================
+    19     12.5 MiB     12.5 MiB   @profile
+    20                             def calc_factorial(f):
+    21     12.5 MiB      0.0 MiB       if f == 0:
+    22     12.5 MiB      0.0 MiB           return 1
+    23                                 elif f < 0:
+    24                                     print('Факториал расчитывается только для натуральных чисел!')
+    25                                 else:
+    26                                     return calc_factorial(f - 1) * f
+    
+узких мест в данном коде нет, но любопытно то что сколько раз вызывается рекурсия,
+столько раз и отображается информация по памяти
+
+У меня Windows 7 x68
+PyCharm ver. 11.0.8
+'''
+
+
+@profile
+def my_func(num_1, num_2, num_3):
+    if num_2 >= num_1 <= num_3:
+        return num_2 + num_3
+    elif num_1 > num_2 < num_3:
+        return num_1 + num_3
+    else:
+        return num_2 + num_1
+
+
+print(my_func(0, 1, 2))
+print(my_func(2, 1, 0))
+print(my_func(5, 5, 5))
+print(my_func(100, 50, 100))
+print(my_func(50, 100, 50))
