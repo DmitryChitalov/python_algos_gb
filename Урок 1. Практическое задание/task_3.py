@@ -22,3 +22,17 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+from collections import Counter
+import operator
+companies = {'Bank': 250000, 'Plant': 120000, 'Factory':500000, 'Camping': 100000, 'Market':580000}
+
+k = Counter(companies)           #O(1)  Кажется наиболее оптимальным (если только импортируемые модули не добавляют сложность)
+best_companies = k.most_common(3)
+print(best_companies)
+
+print(dict(sorted(companies.items(), key=operator.itemgetter(1), reverse=True)[:3])) # O(len(n))
+
+the_best = list(companies.items())      #O(N)
+the_best.sort(key = lambda i:i[1], reverse = True)
+for i in the_best[:3]:
+    print(i[0], ':', i[1])

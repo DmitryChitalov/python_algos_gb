@@ -14,3 +14,10 @@
 р
 а
 """
+
+def substrings(a):
+    length = len(a)
+    return [(a[i:j + 1]) for i in range(length) for j in range(i, length)]
+    
+print(set(substrings('рара')))
+
