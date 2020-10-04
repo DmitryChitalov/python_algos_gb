@@ -17,3 +17,34 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+def find_min_hard(user_list):
+    """
+    Каждое число списка сравнивается со всеми числами списака.
+    Сложность О(N**2)
+    return: int, минимальное значение списка
+    """
+    for i in user_list:
+        min_list = i
+        for j in user_list:
+            if min_list > j: min_list = j
+    return min_list
+
+def find_min_line(user_list):
+    """
+    Сначала берётся минимальное число первое число списака, дальше идёт сравнение с каждым последующим числом.
+    Сложность: O(N)
+    return: int, минимальное значение списка
+    """
+    min_list = user_list[0]
+    for i in user_list:
+        if min_list > i: min_list = i
+    return min_list
+
+a = [i for i in range(1,20)]
+b = [i for i in range(19,0,-1)]
+
+print(find_min_hard(a))
+print(find_min_line(a))
+print(find_min_hard(b))
+print(find_min_line(b))
