@@ -10,24 +10,13 @@
 Вам нужно доработать программу так, чтобы она могла выполнить проверку на палиндром
 и в таких строках (включающих пробелы)
 """
-from importfromlesson import DequeClass
 
+import string
 
-def pal_checker(string):
-    dc_obj = DequeClass()
+def is_palindrome(s):
+    whitelist = set(string.ascii_lowercase)
+    s = s.lower()
+    s = ''.join([char for char in s if char in whitelist])
+    return s == s[::-1]
 
-    for el in string:
-        dc_obj.add_to_rear(el)
-
-    still_equal = True
-
-    while dc_obj.size() > 1 and still_equal:
-        first = dc_obj.remove_from_front()
-        last = dc_obj.remove_from_rear()
-        if first[::-1] != last: ##по идее вот тут должно быть сравнение слова с ним же наоборот
-            still_equal = False
-
-    return still_equal
-
-
-print(pal_checker("молоко делили ледоколом"))
+print(is_palindrome('молоко делили ледоколом'))
