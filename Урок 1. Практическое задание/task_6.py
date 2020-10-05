@@ -15,3 +15,35 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+
+class TaskBoard():
+    def __init__(self):
+        self.task = []
+        self.exec = []
+
+    def push_in(self, task):
+        return self.task.insert(0,task)
+
+    def base_exec(self):
+        self.exec.append(self.task.pop())
+        return self.exec
+
+    def return_exec_task(self):
+        return self.task
+
+    def refine_task(self):
+        self.task.insert(0,self.task.pop())
+        return self.task
+
+class1 = TaskBoard()
+for i in range(5):
+    class1.push_in(f'task {i}')
+print(class1.task)
+
+print(class1.base_exec())
+print(class1.return_exec_task())
+print(class1.refine_task())
+print(class1.base_exec())
+print(class1.refine_task())
+

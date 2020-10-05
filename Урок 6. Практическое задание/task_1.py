@@ -13,3 +13,58 @@
 ВНИМАНИЕ: ЗАДАНИЯ, В КОТОРЫХ БУДУТ ГОЛЫЕ ЦИФРЫ ЗАМЕРОВ (БЕЗ АНАЛИТИКИ)
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 """
+from memory_profiler import profile
+import numpy as np
+
+@profile
+def asd():
+    list_ = list(range(10**5))
+    list_ = []
+    return True
+asd()
+
+'''проверим, что коллекция array из модуля numpy
+использует меньше памяти'''
+@profile
+def np1():
+    list_ = list(range(10**5)) # 2,9 MiB - increment
+    list_1 = np.arange(10**5) # 0,4 MiB - increment
+    list_ = []
+    return list_1
+# действительно, хранение большого списка как <class 'numpy.ndarray'> по памяти выгодно
+np1()
+
+"""Задача на проверку четности элементов из большого массива натуральных чисел"""
+#
+@profile
+def even1():
+    result = []
+    raw_list = list(range(10**5)) # 3.7 MiB
+    for i in raw_list:
+        if i % 2 == 0 :
+            result.append(i) # 0.1 MiB
+    return result
+
+even1()
+
+"Используем генератор"
+@profile
+def even2():
+    raw_list = list(range(10**5)) # 3.7 MiB
+    return [i for i in raw_list if i %2 ==0] # 0.1 MiB
+
+even2()
+# Использоваине генераторной функции не дало выиграша по памяти
+def yield_():
+    for i in range(10**5):
+        yield i
+
+@profile
+def even3():
+    a= [i for i in yield_() if i %2 ==0] # 0.3 MiB
+    return a
+
+
+even3()
+
+# Использоваине конструкции  yield дало значиельный выигрыш по памяти
