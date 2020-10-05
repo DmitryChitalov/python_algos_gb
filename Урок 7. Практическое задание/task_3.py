@@ -13,3 +13,11 @@
 arr[m]
 from statistics import median
 """
+from random import randint
+from statistics import median
+
+nums = int(input('Введите m, для массива 2m + 1: '))
+orig_list = [randint(-100, 100) for _ in range(2 * nums + 1)]
+print(f'Медиана списка {orig_list} равна {median(orig_list)}')
+
+# Выполнено без сортировки, но с подсказкой (если я кончно правильно понял задание)
