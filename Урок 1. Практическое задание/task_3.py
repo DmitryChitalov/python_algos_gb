@@ -24,3 +24,20 @@
 """
 
 
+
+dict_company = {'Ип Ваня': 23234, 'ООО дынька': 23123,
+                'OOO красава': 66666, 'Ип Петя': 43242, 'ИП маша': 43432, 'ооо рога':23132}
+
+
+sorted(dict_company.items(), key=lambda x: x[1], reverse = True) ##O(nlogn)
+
+from collections import Counter
+print(dict(Counter(dict_company).most_common(3)))##O(log n)
+
+
+import heapq
+v = list(dict_company.values())
+print(heapq.nlargest(3,v)) ##O(n)
+
+
+## третий вариант максимально быстрый, делаем из словаря список, и по нему проходимся быстрым поиском
