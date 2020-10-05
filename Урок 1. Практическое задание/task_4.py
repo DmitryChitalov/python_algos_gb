@@ -27,3 +27,12 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {'Tolik':('password', True), 'Lolik':('password', True), 'Bolik':('password', False)}
+
+for i in users:
+    if users[i][1]:
+        print('Wellcome ', i)
+    else:
+        print(i, ', you not activate your email. Please, check email and click on the link.')
+
