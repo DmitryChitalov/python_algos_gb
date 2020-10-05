@@ -18,3 +18,109 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+import random
+
+
+class Plates_stack:
+    __max_stack_size = 5
+    __stacks = []
+    __num = 0
+
+    def add_plate(self, name = ''):
+        if name == '':
+            name = self.random_name()
+        self.__num += 1
+        name = f"{self.__num} - {name}"
+        if self.stacks_count() == 0:
+            self.__stacks.append([name])
+            return name
+        for stack in self.__stacks:
+            if len(stack) < self.__max_stack_size:
+                stack.append(name)
+                return name
+        self.__stacks.append([name])
+    
+    def get_plate(self):
+        if len(self.__stacks) > 0:
+            plate = self.__stacks[len(self.__stacks) - 1].pop()
+            if len(self.__stacks[len(self.__stacks) - 1]) == 0:
+                self.__stacks.pop()
+            return plate
+        else:
+            return None
+
+    def get_plate_from_stack(self, idx_stack):
+        if len(self.__stacks[idx_stack]) > 0:
+            return self.__stacks[idx_stack].pop()
+        else:
+            return None
+
+    def plates_show(self):
+        print('\nВывод тарелок:')
+        print('=' * 30, end="\n")
+        for i, stack in enumerate(self.__stacks):
+            print(f"Стопка {i + 1}:\n{'-' * 30}")
+            for j, plate in enumerate(stack):
+                print(f"{j + 1}: {plate}")
+            print('-' * 30, end='\n\n')
+
+    def stacks_count(self):
+        """
+        Возвращает количество стопок с тарелками
+
+        """
+        return len(self.__stacks)
+
+    def plates_count(self):
+        """
+        Возвращает количество тарелок в каждой стопке
+
+        """
+        return [len(stack) for stack in self.__stacks]
+    
+    def random_name(self):
+        shape = ['Круглая', 'Овальная', 'Квадратная', 'Многоугольная', 'Необычная']
+        color = ['Белая', 'Желтая', 'Красная', 'Черная', 'Зеленая', 'Синия', 'Радужная']
+        size = ['Маленькая', 'Средеяя', 'Большая', 'Огромная', 'Глубокая', 'Суповая', 'Прямая']
+        return f"{random.choice(size)} {random.choice(color)} {random.choice(shape)}"
+
+
+
+######################################
+plates = Plates_stack()
+
+# Положим в стопки 12 тарелок
+for i in range(12):
+    plates.add_plate()
+plates.plates_show()
+print(f"Количество стопок: {plates.stacks_count()}")
+print(f"Количество торелок по стопкам: {plates.plates_count()}")
+
+# Заберем 3 тарелки
+for i in range(3):
+    print(f"Забрали тарелку: {plates.get_plate()}")
+plates.plates_show()
+print(f"Количество стопок: {plates.stacks_count()}")
+print(f"Количество торелок по стопкам: {plates.plates_count()}")
+
+# Заберем 2 тарелки из первой стопки
+for i in range(2):
+    print(f"Забрали тарелку: {plates.get_plate_from_stack(0)}")
+plates.plates_show()
+print(f"Количество стопок: {plates.stacks_count()}")
+print(f"Количество торелок по стопкам: {plates.plates_count()}")
+
+# Добавим 6 тарелок
+for i in range(6):
+    plates.add_plate()
+plates.plates_show()
+print(f"Количество стопок: {plates.stacks_count()}")
+print(f"Количество торелок по стопкам: {plates.plates_count()}")
+
+# Заберем 20 тарелок
+for i in range(20):
+    print(f"Забрали тарелку: {plates.get_plate()}")
+plates.plates_show()
+print(f"Количество стопок: {plates.stacks_count()}")
+print(f"Количество торелок по стопкам: {plates.plates_count()}")
