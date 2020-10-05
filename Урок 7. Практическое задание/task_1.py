@@ -12,3 +12,22 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+from timeit import timeit
+from random import randint
+list_ = [randint(-100, 100) for _ in range(10)]
+print(list_)
+
+def buble_sort(arg):
+    for j in range(len(arg) - 1):
+        count_ =0
+        for i in range(len(arg) - 1):
+            if arg[i] < arg[i + 1]:
+                arg[i], arg[i + 1] = arg[i + 1], arg[i]
+                count_ +=1 # 8.545053844 1.2607724
+        if count_== 0: break
+    return arg
+
+print(timeit('buble_sort(list_)', 'from __main__ import buble_sort, list_'))
+"""Выводы: без доработки алгоритм работет медленне ~ в 8 раз
+8.545053844 1.2607724
+"""
