@@ -17,3 +17,22 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+
+def func1(input_list: list):            # Общая сложность O(N^2) + 3 * O(1)
+    min_val = input_list[0]             # O(1)
+    for step in input_list:             # O(N)
+        if step < min_val:              # O(N)
+            min_val = step              # O(1)
+    return min_val                      # O(1)
+
+
+def func2(input_list: list):            # Общая сложность O(N)
+    return min(input_list)              # O(N)
+
+
+my_list = [round(random.random(), 5) for j in range(0, 200)]
+# создаю список из 200 элементов от 0 до 1
+print(func1(my_list))
+print(func2(my_list))
