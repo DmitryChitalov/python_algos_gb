@@ -22,3 +22,84 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+from task_2 import check
+import random
+
+@check
+def top3_1(storage):
+    """
+    Сложность алгоритма O(n*log(n)) - линейно-логарифмическая.
+    Основной вклад в сложность вносит сортировка функцией sorted.
+
+    Алгоритм краток, полагается на эффективную встроенную функцию
+    сортировки, но не оптимален по времени.
+    """
+    i = 0
+    sort_storage = sorted(storage.keys(), key = lambda x: storage[x], \
+                          reverse=True)
+    for company in sort_storage:
+        print(f'{company}: {storage[company]}')
+        i += 1
+        if i >= 3:
+            break
+
+@check
+def top3_2(storage):
+    """
+    Сложность алгоритма O(n) - линейная.
+    Несмотря на наличие вложенного цикла, количество итераций внешнего
+    цикла ограничено константой, благодаря чему при бесконечно большом n
+    цикл не оказывает значительного влияния на сложность алгоритма.
+
+    Алгоритм использует дополнительную память на создание списка, но
+    благодаря этому его сложность уменьшается. Самый быстрый из
+    представленных алгоритмов.
+    """
+    storage = storage.copy()
+    profits = list(storage.values())
+    top = []
+    for i in range(3):
+        richiest = max(profits)
+        top.append(richiest)
+        profits.remove(richiest)
+    for money in top:
+        for company, profit in storage.items():
+            if profit == money:
+                print(f'{company}: {storage.pop(company)}')
+                break
+
+@check
+def top3_3(storage):
+    """
+    Сложность алгоритма O(n) - линейная.
+
+    Вариация алгоритма top2_2. Уменьшается число проходов, что должно
+    ещё больше ускорить работу алгоритма. Однако измерения времени
+    показывают, что он примерно вдвое медленнее предшественника.
+    """
+    for i in range(3):
+        storage = storage.copy()
+        top = dict([max(storage.items(), key = lambda x: x[1])])
+        for company, profit in top.items():
+            storage.pop(company)
+            print(f'{company}: {profit}')
+
+if __name__ == '__main__':
+    # Создание словаря-хранилища компаний.
+    n = 100000
+    chars = 'abcdefghxyzmnk'
+    companies = []
+    for i in range(n):
+        companies.append(''.join([str(w) for w in random.sample( \
+        chars, len(chars))]).capitalize())
+    profits = random.sample(range(100000, 99999999), n)
+    storage = {x: y for x, y in zip(companies, profits)}
+    # print(storage)
+
+    # Нахождение прибыльнейших компаний.
+    print('Проверим первый способ:')
+    top3_1(storage)
+    print('Проверим второй способ:')
+    top3_2(storage)
+    print('Проверим третий способ:')
+    top3_3(storage)
