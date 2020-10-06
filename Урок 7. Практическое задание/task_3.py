@@ -13,3 +13,32 @@
 arr[m]
 from statistics import median
 """
+
+from statistics import median
+from random import randint
+
+
+def sort_alg(_list):
+    for i in _list:
+        _left = [el for el in _list if el < i]
+        _right = [el for el in _list if el > i]
+        if _list.count(i) > 1:
+            if len(_left) < len(_right):
+                for el in range(_list.count(i) - 1):
+                    _left.append(i)
+                if len(_left) == len(_right):
+                    return i
+            elif len(_left) > len(_right):
+                for el in range(_list.count(i) - 1):
+                    _right.append(i)
+                if len(_left) == len(_right):
+                    return i
+        if len(_left) == len(_right):
+            return i
+
+
+orig_list = [randint(0, 100) for el in range(11)]
+
+
+print(f'Проверка через модуль: {median(orig_list)}')
+print(f'Мой результат: {sort_alg(orig_list)}')
