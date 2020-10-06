@@ -16,3 +16,16 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def odd_even_counter(str_num, odd=0, even=0):
+    if len(str_num) == 0:
+        return print(f'Your number contains {odd} odds and {even} evens digits.')
+    elif int(str_num[0]) % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    return odd_even_counter(str_num[1:], odd, even)
+
+
+odd_even_counter('23121423')

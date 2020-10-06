@@ -28,3 +28,25 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calc():
+    operator = input('your operator? Press 0 to exit: ')
+    while operator != '+' and operator != '-' and operator != '/' and operator != '*' and operator != '0':
+        operator = input('error! Please enter correct operator: ')
+    if operator == '0':
+        return print('bye')
+    num = int(input('number: '))
+    num2 = int(input('number2: '))
+    if operator == '+':
+        return print(num + num2), calc()
+    elif operator == '-':
+        return print(num - num2), calc()
+    elif operator == '*':
+        return print(num * num2), calc()
+    elif operator == '/':
+        if num2 == 0:
+            return print('error! - Zerodevision!!'), calc()
+        return print(num / num2), calc()
+
+
+calc()

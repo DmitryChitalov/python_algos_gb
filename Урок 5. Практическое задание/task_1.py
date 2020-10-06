@@ -25,3 +25,21 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+"""Класс collections.namedtuple()"""
+from collections import namedtuple
+
+RES = namedtuple('firms', 'firm_name profit')
+firms_list = []
+average = 0
+q = int(input('how many firms: '))
+while q != 0:
+    firms_profit = RES(
+        firm_name=input('Ut firm: '),
+        profit=sum([int(i) for i in input('firms profit: ').split()])
+    )
+    firms_list.append(firms_profit)
+
+    q -= 1
+
+print(firms_list)
+# не знаю как считать среднюю прибыль
