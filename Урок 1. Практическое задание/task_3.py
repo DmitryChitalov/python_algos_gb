@@ -41,9 +41,9 @@ def get_rich_company(dictionary) -> int:
     return dict_value
 
 
-## Добились константной сложности, но нет ключа (какая компания)
+## Добились линейной сложности
 def get_rich_company2(dictionary) -> int:
-    return max(dictionary.values())  # O(1)
+    return max(dictionary.values())  # O(n)
 
 
 v_dictionary = dict_init(5)
