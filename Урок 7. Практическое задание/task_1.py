@@ -12,3 +12,21 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+
+from random import shuffle
+
+
+def b_sort(arr):
+    n = 1
+    while n < len(arr):
+        for i in range(len(arr) - n):
+            if arr[i] < arr[i + 1]:
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
+        n += 1
+
+if __name__ == '__main__':
+    arr = [i for i in range(-100, 100)]
+    shuffle(arr)
+    print(arr)
+    b_sort(arr)
+    print(arr)
