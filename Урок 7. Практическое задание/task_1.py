@@ -12,3 +12,70 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+
+import random as rd
+from timeit import timeit
+
+
+def gen_numb():
+    while True:
+        new_numb = rd.randint(-100, 100)
+        if new_numb != 100:
+            return new_numb
+
+
+def bubble_sort_bad(lst):
+    n = 1
+    while n < len(lst):
+        for i in range(len(lst) - n):
+            if lst[i] < lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+        n += 1
+    return lst
+
+def bubble_sort_good(lst):
+    n = 1
+    while n < len(lst):
+        # Если за проход не выполнено ни одной перестановки, то алгоритм завершиться досрочно.
+        go_again = False
+        for i in range(len(lst) - n):
+            if lst[i] < lst[i + 1]:
+                go_again = True
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+        if not go_again:
+            break
+        n += 1
+    return lst
+
+
+my_list = [gen_numb() for _ in range(rd.randint(10, 20))]
+print(f'[1] Сгенерированный список:\t\t\t{my_list}')
+bad_list = bubble_sort_bad(my_list[:])
+print(f'[2] Отсортированный список (обычный пузырек):\t{bad_list}')
+good_list = bubble_sort_good(my_list[:])
+print(f'[3] Отсортированный список (улучшенный):\t{good_list}')
+
+print()
+# Исправил: заменил my_list на my_list[:], т.к. раньше список сортировался только при первом вызове функции.
+result_bad = timeit("bubble_sort_bad(my_list[:])", "from __main__ import bubble_sort_bad, my_list", number=100000)
+result_good = timeit("bubble_sort_good(my_list[:])", "from __main__ import bubble_sort_good, my_list", number=100000)
+
+print(f'Результат выполнения обычной сортировки:\t{result_bad} сек.')
+print(f'Результат выполнения улучшенной сортировки:\t{result_good} сек.')
+print(f'Улучшенная сортировка выполняется быстрее в:\t{round(result_bad / result_good, 2)} раз.')
+
+
+"""
+Результат выполнения кода:
+    [1] Сгенерированный список:                     [-46, -88, 8, -60, 16, 96, 11, 21, 62, 43, 40, 98, 59, 5, -84, 10]
+    [2] Отсортированный список (обычный пузырек):   [98, 96, 62, 59, 43, 40, 21, 16, 11, 10, 8, 5, -46, -60, -84, -88]
+    [3] Отсортированный список (улучшенный):        [98, 96, 62, 59, 43, 40, 21, 16, 11, 10, 8, 5, -46, -60, -84, -88]
+
+    Результат выполнения обычной сортировки:        2.0684060509999997 сек.
+    Результат выполнения улучшенной сортировки:     1.9344725010000001 сек.
+    Улучшенная сортировка выполняется быстрее в:    1.07 раз.
+
+Вывод: В улучшенной сортировки не выполняются "пустые" проходы по списку, когда он уже отсортирован.
+       При не очень больших списках результат будет мало заметен, но он сильнее различается при увеличении
+       длины списка.
+"""

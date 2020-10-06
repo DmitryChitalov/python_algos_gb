@@ -13,3 +13,60 @@
 arr[m]
 from statistics import median
 """
+
+import random as rd
+from statistics import median
+
+
+def gnome_sort(lst):
+    """
+    Гномья сортировка основана на технике, используемой обыкновенным голландским садовым гномом.
+    По существу, он смотрит на два соседних цветочных горшка, если они находятся в правильном порядке,
+    то он переходит на один горшок вперед, иначе он меняет их местами и возвращается на один горшок назад.
+    Граничные условия: если позади нет ни одного горшка – он шагает вперед, а если нет следующего горшка,
+    тогда он закончил.
+    """
+    def change_idx(now_id, max_idx, did_sort=True):
+        if did_sort:
+            if now_id:
+                now_id -= 1
+            else:
+                now_id += 1
+        else:
+            if now_id + 1 == max_idx:
+                return
+            else:
+                now_id += 1
+
+        return now_id
+
+    idx = 0
+    max_idx = len(lst) - 1
+    while True:
+        if lst[idx] > lst[idx + 1]:
+            lst[idx], lst[idx + 1] = lst[idx + 1], lst[idx]
+            idx = change_idx(idx, max_idx, True)
+        else:
+            idx = change_idx(idx, max_idx, False)
+        if idx is None:
+            break
+
+
+m_number = rd.randint(10, 15)
+print(f'[!] m = {m_number} => 2 * m + 1 = 2 * {m_number} + 1 = {2 * m_number + 1}')
+my_list = [rd.randint(-9, 9) for _ in range(2 * m_number + 1)]
+print(f'[1] Сгенерированный список: {my_list}')
+gnome_sort(my_list)
+print(f'[2] Отсортированный список: {my_list}')
+print(f'[v] Медианой списка: {my_list[m_number]} ({median(my_list)}) [совпадение: {my_list[m_number] == median(my_list)}]')
+
+"""
+Результат выполнения программы:
+    [!] m = 13 => 2 * m + 1 = 2 * 13 + 1 = 27
+    [1] Сгенерированный список: [-9, 4, -8, -1, 2, -7, 9, -7, 0, -2, 9, 2, 5, 6, 2, 5, 2, 6, 9, 6, -7, -4, 5, -5, -1, -3, -2]
+    [2] Отсортированный список: [-9, -8, -7, -7, -7, -5, -4, -3, -2, -2, -1, -1, 0, 2, 2, 2, 2, 4, 5, 5, 5, 6, 6, 6, 9, 9, 9]
+    [v] Медианой списка: 2 (2) [совпадение: True]
+Вывод: Для выполнения задания применил сортировку Гномьим методом, суть которой описал в теле функции.
+       Затем нашел медиану списка взятием элемента с индексом m (my_list[m_number]) и сравнил ее с медианой,
+       полученной через модуль statistics функцией median.
+"""
