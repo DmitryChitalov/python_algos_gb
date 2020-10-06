@@ -17,3 +17,28 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+def min_value_1(lst: list):
+    """
+    Сложность O(n^2) - квадратичная
+    """
+    min_value = float('inf')
+    for i in lst:
+        for j in lst:
+            if i < j and i < min_value:
+                min_value = i
+    return min_value
+
+
+def min_value_2(lst: list):
+    """
+    Сложность O(n) - линейная
+    """
+    return min(lst)
+
+
+if __name__ == '__main__':
+    test_list = [4, 67, -5, 567, -10, 0, -54]
+    print(min_value_1(test_list))
+    print(min_value_2(test_list))
