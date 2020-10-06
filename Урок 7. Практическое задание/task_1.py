@@ -22,6 +22,7 @@ import timeit
 
 def bubble_sort(input_list):
     input_list = copy.copy(input_list)
+    #print(input_list)
     for numb in range(len(input_list)-1, 0, -1):
         for i in range(numb):
             if input_list[i] < input_list[i+1]:
@@ -34,6 +35,7 @@ def bubble_sort(input_list):
 
 def bubble_sort_modified(input_list):
     input_list = copy.copy(input_list)
+    #print(input_list)
     for numb in range(len(input_list)-1, 0, -1):
         replacements = False
         for i in range(numb):
@@ -51,12 +53,12 @@ print()
 
 sorted_list_1 = bubble_sort(user_list)
 print(f'отсортированный по убыванию список (функция 1): {sorted_list_1}')
-print(timeit.timeit("bubble_sort(user_list)", setup="from __main__ import bubble_sort, user_list", number=10000))
+print(timeit.timeit("bubble_sort(user_list)", setup="from __main__ import bubble_sort, user_list", number=10))
 
 sorted_list_2 = bubble_sort_modified(user_list)
 print(f'отсортированный по убыванию список (функция 2): {sorted_list_2}')
 print(timeit.timeit("bubble_sort_modified(user_list)", setup="from __main__ import bubble_sort_modified, user_list",
-                    number=10000))
+                    number=10))
 
 '''
 Результат теста по времени:
