@@ -37,7 +37,8 @@ def sort_alg(_list):
             return i
 
 
-orig_list = [randint(0, 100) for el in range(11)]
+m = int(input('Введите любое чётное число: '))
+orig_list = [randint(0, 100) for el in range(2 * m + 1)]
 
 
 print(f'Проверка через модуль: {median(orig_list)}')
