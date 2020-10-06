@@ -12,3 +12,58 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+
+
+import timeit
+import random
+
+
+def reversed_bubble_sort(lst):
+    n = 1
+    while n < len(lst):
+        for i in range(len(lst) - n):
+            if lst[i] < lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+        n += 1
+    return lst
+
+
+def smart_bubble_sort(lst):
+    n = 1
+    while n < len(lst):
+        sort_check = True
+        for i in range(len(lst) - n):
+            if lst[i] < lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+                sort_check = False
+        if sort_check:
+            break
+        n += 1
+    return lst
+
+
+lst_1 = [random.randint(-100, 100) for i in range(10)]
+copy_lst_1 = lst_1.copy()
+print(f'Исходный список: {lst_1}')
+print(f'Отсортированный список: {reversed_bubble_sort(copy_lst_1)}')
+print(f'Время выполнения кода: {timeit.timeit("reversed_bubble_sort(copy_lst_1)", setup="from __main__ import reversed_bubble_sort, copy_lst_1", number=100)} сек')
+print()
+
+copy_lst_2 = lst_1.copy()
+print(f'Исходный список: {lst_1}')
+print(f'Отсортированный список: {smart_bubble_sort(copy_lst_2)}')
+print(f'Время выполнения оптимизированного кода: {timeit.timeit("smart_bubble_sort(copy_lst_2)", setup="from __main__ import smart_bubble_sort, copy_lst_2", number=100)} сек')
+
+
+"""
+Исходный список: [23, 23, -76, -2, 64, -84, -20, 8, -45, -100]
+Отсортированный список: [64, 23, 23, 8, -2, -20, -45, -76, -84, -100]
+Время выполнения кода: 0.001095299999999997 сек
+
+Исходный список: [23, 23, -76, -2, 64, -84, -20, 8, -45, -100]
+Отсортированный список: [64, 23, 23, 8, -2, -20, -45, -76, -84, -100]
+Время выполнения оптимизированного кода: 0.000179099999999998 сек
+
+Таким образом, в данном случае, оптимизация кода не дает желаемого результата по времени, так как оптимизированный код
+выполняется дольше обычного.
+"""
