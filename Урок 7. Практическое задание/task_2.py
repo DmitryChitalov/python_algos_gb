@@ -51,3 +51,10 @@ def merge_sort(lst_obj):
 my_list_sort = merge_sort(my_list)
 print(f'Отсортированный массив: {my_list_sort}')
 print(timeit('merge_sort(my_list)', setup='from __main__ import merge_sort, my_list', number=1))
+# замер времени 3.2099999999868345e-05
+print(timeit('merge_sort(my_list.copy())', setup='from __main__ import merge_sort, my_list', number=100))
+# замер времени 0.0012554000000002397
+print(timeit('merge_sort(my_list.copy())', setup='from __main__ import merge_sort, my_list', number=1000))
+# замер времени 0.014161400000000324
+print(timeit('merge_sort(my_list.copy())', setup='from __main__ import merge_sort, my_list', number=10000))
+# замер времени 0.06151060000000008

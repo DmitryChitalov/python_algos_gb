@@ -16,7 +16,7 @@ from timeit import timeit
 import random
 
 
-# время до оптимизации: 0.990234
+# время до оптимизации: 1.0199867
 def bubble_sort(lst_obj):
     n = 1
     while n < len(lst_obj):
@@ -27,7 +27,7 @@ def bubble_sort(lst_obj):
     return lst_obj
 
 
-# время после оптимизации 0.01288699999999987
+# время после оптимизации 1.4656912999999998
 def bubble_sort_1(lst_obj):
     flag = True
     while flag:
@@ -40,9 +40,6 @@ def bubble_sort_1(lst_obj):
 
 
 my_list = [random.randint(-100, 100) for _ in range(100)]
-copy_my_list = my_list.copy()
-print(timeit('bubble_sort(copy_my_list)', setup='from __main__ import bubble_sort, copy_my_list', number=1000))
-print(bubble_sort(copy_my_list))
-print(timeit('bubble_sort_1(copy_my_list)', setup='from __main__ import bubble_sort_1, copy_my_list', number=1000))
-print(copy_my_list)
-# замеры показали, что оптимизация имеет смысл
+print(timeit('bubble_sort(my_list.copy())', setup='from __main__ import bubble_sort, my_list', number=1000))
+print(timeit('bubble_sort_1(my_list.copy())', setup='from __main__ import bubble_sort_1, my_list', number=1000))
+# замеры показали, что оптимизация смысла не имеет
