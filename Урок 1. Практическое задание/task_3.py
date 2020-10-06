@@ -22,3 +22,71 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+company_list = [["google",500],["Apple",1000],["amazon",800],["yandex",100],["netflix",400]]
+
+
+
+
+#Алгоритм 1
+#O(n)
+
+def keyFunc(item):
+   return item[1]
+
+def check_1(company_list):
+	company_list_copy = company_list
+	company_list_copy.sort(key = keyFunc, reverse = True)
+	return(company_list_copy)
+
+#new_company_list = check_1(company_list)
+
+#print(new_company_list[0],new_company_list[1],new_company_list[2])
+
+
+#Алгоритм 2
+# O(n), так как тут вызвается цикл, где n - длина списка company_list
+"""
+
+top_3_list_v2 = []
+
+top_3_list_v2.append(company_list[0])
+"""
+for n in company_list:
+	if n[1] > top_3_list_v2[0][1]:
+		top_3_list_v2.insert(0,n)
+"""
+for m in company_list:
+	for idx, val in enumerate(top_3_list_v2):
+		if m[1] > val[1]:
+			top_3_list_v2.insert(idx,m)
+
+print(top_3_list_v2)
+"""
+
+#Алгоритм 3
+# O(n^3), так как тут трижды вызвается цикл, где n - длина списка company_list
+
+company_list_copy = company_list
+
+def check3(company_list):
+	max_ = company_list[0]
+	for n in company_list:
+		for m in company_list:
+			if max_[1]<m[1]:
+				max_ = m
+	return(max_)
+
+top_3_list_v3 = []
+
+while len(top_3_list_v3)<3:
+	comp = check3(company_list_copy)
+	top_3_list_v3.append(check3(company_list_copy))
+	company_list_copy.remove(comp)
+
+#print(top_3_list_v3)
+
+
+
+#Вывод: алгоритм 1 эффективнее, потому что в нем доминирующую часть операций занимает нотация O(n), который производит меньше вычислений, чем O(n^3) или O(n^2)
