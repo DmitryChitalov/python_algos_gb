@@ -28,7 +28,7 @@ def check_1(lst_obj):
 
     Сложность: 1
     """
-    lst_to_set = set(lst_obj)  # константа О(1)
+    lst_to_set = set(lst_obj)  # константа О(n), где n -- длина lst_obj
     return lst_to_set
 
 
@@ -59,7 +59,7 @@ def check_3(lst_obj):
 
     Сложность: O(n)
     """
-    lst_copy = list(lst_obj)                 # О(1)
+    lst_copy = list(lst_obj)                 # O(n) в зависимости от длины списка
     lst_copy.sort()                          # O(n) в зависимости от длины списка
     for i in range(len(lst_obj) - 1):        # O(n)
         if lst_copy[i] == lst_copy[i+1]:     # О(1)

@@ -47,3 +47,14 @@ def check_2(numbers):
 
 print(check_2(numbers))
 
+
+#Алгоритм 2, второй вариант
+def check_2_v2(numbers):
+    for i in range(len(numbers)):
+        for j in range(len(numbers)):
+            if numbers[j] < numbers[i]:
+                numbers[i], numbers[j] = numbers[j], numbers[i]
+        return numbers[i]
+
+
+print(check_2_v2(numbers))
