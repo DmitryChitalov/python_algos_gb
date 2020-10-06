@@ -22,3 +22,20 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+def three_richest_1(companies: dict):
+    """ сложность O(n log n)"""
+    sorted_comps = sorted(companies.items(), key=lambda x: x[1], reverse=True)
+    # O(n log n)
+    result = {}
+    for i in range(3):
+        result[sorted_comps[i][0]] = sorted_comps[i][1]  # O(n)
+    return result
+
+
+if __name__ == '__main__':
+    test_dict = {'alfa': 1000, 'beta': 500, 'gamma': 1500, 'delta': 1600,
+                 'epsilon': 400}
+
+    print(three_richest_1(test_dict))
