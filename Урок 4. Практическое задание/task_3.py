@@ -10,6 +10,11 @@
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
 
+from timeit import timeit
+import cProfile
+
+nums = 100
+
 
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
@@ -21,6 +26,11 @@ def revers(enter_num, revers_num=0):
         revers(enter_num, revers_num)
 
 
+print(timeit('revers(nums)',
+             setup='from __main__ import revers, nums',
+             number=10000))
+
+
 def revers_2(enter_num, revers_num=0):
     while enter_num != 0:
         num = enter_num % 10
@@ -29,8 +39,32 @@ def revers_2(enter_num, revers_num=0):
     return revers_num
 
 
+print(timeit('revers_2(nums)',
+             setup='from __main__ import revers_2, nums',
+             number=10000))
+
+
 def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
 
+
+print(timeit('revers_3(nums)',
+             setup='from __main__ import revers_3, nums',
+             number=10000))
+
+
+def functions():
+    revers(nums)
+    revers_2(nums)
+    revers_3(nums)
+
+
+cProfile.run('functions()')
+
+"""
+Вывод: Последняя функция, revers_3, имеет общую сложность O(1), 
+        что является самой быстрой из предоставленных.
+    
+"""
