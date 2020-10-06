@@ -17,3 +17,45 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+def check(alg):
+    """
+    Декоратор для подсчета времени исполнения алгоритма.
+    """
+    def check_time(*args):
+        import time
+        start = time.time()
+        res = alg(*args)
+        print(f'Время выполнения: {time.time() - start}')
+        return res
+    return check_time
+
+@check
+def min_lst_quad(lst):
+    """
+    Сложность алгоритма O(n^2).
+    """
+    res = lst[0]
+    for i in range(len(lst)):
+        for j in range(len(lst)):
+            if lst[j] < lst[i] and lst[j] < res:
+                res = lst[j]
+    return res
+
+@check
+def min_lst_lin(lst):
+    """
+    Сложность алгоритма O(n).
+    Можно решить с использованием встроенной функции min().
+    """
+    res = lst[0]
+    for i in range(len(lst)-1):
+        if res > lst[i+1]:
+            res = lst[i+1]
+    return res
+
+if __name__ == '__main__':
+    src_lst = [i for i in range(10000)]
+    print('Проверим функцию с квадратичной сложностью:')
+    print(min_lst_quad(src_lst))
+    print('Проверим функцию с линейной сложностью:')
+    print(min_lst_lin(src_lst))

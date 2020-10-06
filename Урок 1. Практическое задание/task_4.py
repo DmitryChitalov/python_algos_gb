@@ -27,3 +27,70 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+import random
+
+def auth_1(storage):
+    """
+    Сложность алгоритма O(1) - константная.
+    В этом алгоритме не используется обход ключей словаря. Вместо этого
+    происходит поиск элемента, который в ассоциированном массиве
+    занимает постоянное время.
+    Быстрейший алгоритм из представленных.
+    """
+    user = input('Введите имя пользователя: ')
+    password = input('Введите пароль: ')
+    if storage.get(user, False):
+        if storage[user][0] == password:
+            if storage[user][1]:
+                print('Доступ разрешен.')
+            else:
+                print('Учетная запись не активирована. Пройдите '
+                      'активацию пожалуйста.')
+        else:
+            print('Введен неверный пароль.')
+    else:
+        print('Введенное имя пользователя не обнаружено в системе.')
+
+def auth_2(storage):
+    """
+    Сложность алгоритма O(n) - линейная.
+    Используется поэлементный обход ключей словаря.
+    Алгоритм не оптимизирован для быстрого поиска, он медленнее auth_1.
+    """
+    user = input('Введите имя пользователя: ')
+    password = input('Введите пароль: ')
+    for usr in storage.keys():
+        if usr == user:
+            if storage[usr][0] == password:
+                if storage[usr][1]:
+                    print('Доступ разрешен.')
+                    break
+                else:
+                    print('Учетная запись не активирована. Пройдите '
+                          'активацию пожалуйста.')
+                    break
+            else:
+                print('Введен неверный пароль.')
+                break
+    else:
+        print('Введенное имя пользователя не обнаружено в системе.')
+
+if __name__ == '__main__':
+    # Создание словаря-хранилища учетных записей.
+    n = 100000
+    chars = 'abcdefghxyzmnk'
+    users = []
+    for i in range(n):
+        users.append(''.join([str(w) for w in random.sample( \
+        chars, len(chars))]))
+    passwords = random.sample(range(100000, 99999999), n)
+    storage = {x: (str(y), random.choice((True, False))) for x, y, in \
+               zip(users, passwords)}
+    for k, v in storage.items():
+        print(f'{k}: {v}')
+
+    # Проверка аутентификации.
+    print('Первый способ:')
+    auth_1(storage)
+    print('Второй способ:')
+    auth_2(storage)
