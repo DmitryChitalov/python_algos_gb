@@ -12,3 +12,69 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+
+import random as rd
+from timeit import timeit
+
+
+def gen_numb():
+    while True:
+        new_numb = rd.randint(-100, 100)
+        if new_numb != 100:
+            return new_numb
+
+
+def bubble_sort_bad(lst):
+    n = 1
+    while n < len(lst):
+        for i in range(len(lst) - n):
+            if lst[i] < lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+        n += 1
+    return lst
+
+def bubble_sort_good(lst):
+    n = 1
+    while n < len(lst):
+        # Если за проход не выполнено ни одной перестановки, то алгоритм завершиться досрочно.
+        go_again = False
+        for i in range(len(lst) - n):
+            if lst[i] < lst[i + 1]:
+                go_again = True
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+        if not go_again:
+            break
+        n += 1
+    return lst
+
+
+my_list = [gen_numb() for _ in range(rd.randint(10, 20))]
+print(f'[1] Сгенерированный список:\t\t\t{my_list}')
+bad_list = bubble_sort_bad(my_list[:])
+print(f'[2] Отсортированный список (обычный пузырек):\t{bad_list}')
+good_list = bubble_sort_good(my_list[:])
+print(f'[3] Отсортированный список (улучшенный):\t{good_list}')
+
+print()
+
+result_bad = timeit("bubble_sort_bad(my_list)", "from __main__ import bubble_sort_bad, my_list", number=100000)
+result_good = timeit("bubble_sort_good(my_list)", "from __main__ import bubble_sort_good, my_list", number=100000)
+
+print(f'Результат выполнения обычной сортировки:\t{result_bad} сек.')
+print(f'Результат выполнения улучшенной сортировки:\t{result_good} сек.')
+print(f'Улучшенная сортировка выполняется быстрее в:\t{round(result_bad / result_good, 2)} раз.')
+
+
+"""
+Результат выполнения кода:
+    [1] Сгенерированный список:                     [71, 14, 79, 49, 60, 98, -44, -16, -28, -1, -23, -48, 11, -23, 78, 71, -11, -34, -91]
+    [2] Отсортированный список (обычный пузырек):   [98, 79, 78, 71, 71, 60, 49, 14, 11, -1, -11, -16, -23, -23, -28, -34, -44, -48, -91]
+    [3] Отсортированный список (улучшенный):        [98, 79, 78, 71, 71, 60, 49, 14, 11, -1, -11, -16, -23, -23, -28, -34, -44, -48, -91]
+
+    Результат выполнения обычной сортировки:        1.736140963 сек.
+    Результат выполнения улучшенной сортировки:     0.16623889199999997 сек.
+    Улучшенная сортировка выполняется быстрее в:    10.44 раз.
+
+Вывод: В улучшенной сортировки не выполняются "пустые" проходы по списку, когда он уже отсортирован.
+       Это будет давать особенно большой выигрыш по времени, если длина списка большая.
+"""
