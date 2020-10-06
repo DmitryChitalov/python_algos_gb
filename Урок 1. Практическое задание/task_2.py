@@ -17,3 +17,28 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+## Реализация весьма не удачного поиска - велосипед
+def search_min(int_arr_list):
+    global minimum
+    if len(int_arr_list) > 0:       # O(n)
+        minimum = int_arr_list[0]   # O(1)
+        for m in int_arr_list:      # O(n)
+            if minimum > m:         # O(n)
+                minimum = m         # O(1)
+    return minimum
+
+
+def search_min2(int_arr_list):
+    minimal = min(int_arr_list)     # O(n) - используем встроенную функцию
+    return minimal
+
+
+num_set = [1, 2, 3, 5, 7]
+
+result = search_min(num_set)
+print(f"Result: {result} the Array is: {num_set}")
+##
+result = search_min2(num_set)
+print(f"Result2: {result} the Array is: {num_set}")
