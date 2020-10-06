@@ -18,76 +18,89 @@
 
 
 class TasksQueue:
-    __queues = []
-    __current_id = 0
-    __completed_tasks = []
+    """
+    Класс очереди
+    """
 
-    def add_task(self, queue_id, description):
+    def __init__(self, title):
+        """
+        :param title: Название очереди
+        """
+        self.__title = title
+        self.__tasks = []
+
+    def title(self):
+        """
+        :return: Возвращает наименование текущей очереди
+        """
+        return self.__title
+
+    def add_task(self, task_id, description):
         """Добавление задачи в очередь
-        """
-        if self.__check_queue_id(queue_id):
-            self.__current_id += 1
-            self.__queues[queue_id]['tasks'].append({
-                'id': self.__current_id,
-                'description': description
-            })
-            return True
-        else:
-            return False
 
-    def current_task(self, queue_id):
-        """Просмотр текущей задачи в очереди
+        :param task_id: ID задачи, присвоенный менеджером очередей
+        :param description: Описание задачи
         """
-        if self.__check_queue_id(queue_id):
-            print(f"\n{'=' * 30}\nТекущая задача в очереди \"{self.__queues[queue_id]['title']}\":\n{'=' * 30}")
-            if len(self.__queues[queue_id]['tasks']) > 0:
-                task = self.__queues[queue_id]['tasks'][0]
-                print(f"{task['id']}: {task['description']}")
-            else:
-                print('Нет задач')
-            print("=" * 30, end='\n\n')
-        else:
-            print('Такой очереди нет')
-
-    def show_queue_tasks(self, queue_id):
-        """Просмотр всех задач очереди
-        """
-        if self.__check_queue_id(queue_id):
-            print(f"\n{'=' * 30}\nЗадачи очереди \"{self.__queues[queue_id]['title']}\" ({queue_id}):\n{'=' * 30}")
-            if len(self.__queues[queue_id]['tasks']) > 0:
-                for i, task in enumerate(self.__queues[queue_id]['tasks'], 1):
-                    print(f"{i}: {task['description']} ({task['id']})")
-            else:
-                print('В очереди нет задач')
-            print("=" * 30, end='\n\n')
-        else:
-            print('Такой очереди нет')
-    
-    def create_queue(self, title):
-        """Создание очереди
-        """
-        self.__queues.append({
-            'title': title,
-            'tasks': []
+        self.__tasks.append({
+            'id': task_id,
+            'description': description
         })
 
-    def move_task(self, from_id, to_id):
-        """Перемещение задачи из одной очереди в другую
+    def remove_task(self):
+        """Удаление задачи из очереди
+
+        :return: Возвращает удаленную задачу
         """
-        if self.__check_queue_id(from_id) and self.__check_queue_id(to_id) and len(self.__queues[from_id]['tasks']) > 0:
-            self.__queues[to_id]['tasks'].append(self.__queues[from_id]['tasks'].pop(0))
-            return True
+        if self.tasks_count() > 0:
+            return self.__tasks.pop(0)
         else:
-            return False
-    
-    def task_completed(self, queue_id):
-        """Перемещение задачи из очереди в список выполненных задач
+            return None
+
+    def current_task(self):
+        """Вывод на экран текущей задачи в очереди
         """
-        if self.__check_queue_id(queue_id) and len(self.__queues[queue_id]['tasks']) > 0:
-            self.__completed_tasks.append(self.__queues[queue_id]['tasks'].pop(0))
-            return True
+        print(f"\n{'=' * 30}\nТекущая задача в очереди \"{self.__title}\":\n{'=' * 30}")
+        if self.tasks_count() > 0:
+            print(f"{self.__tasks[0]['id']}: {self.__tasks[0]['description']}")
         else:
-            return False
+            print('Нет задач')
+        print("=" * 30, end='\n\n')
+
+    def tasks_show(self):
+        """Вывод на экран всех задач из очереди
+
+        """
+        print(f"\n{'=' * 30}\nЗадачи очереди \"{self.__title}\":\n{'=' * 30}")
+        if self.tasks_count() > 0:
+            for i, task in enumerate(self.__tasks, 1):
+                print(f"{i}: {task['description']} ({task['id']})")
+        else:
+            print('В очереди нет задач')
+        print("=" * 30, end='\n\n')
+
+    def tasks_count(self):
+        """
+        :return: Возвращает количество задач в очереди
+        """
+        return len(self.__tasks)
+
+
+class Queues:
+    """
+    Класс для управления очередями
+    """
+    __last_task_id = 0
+
+    def __init__(self):
+        self.__queues = []
+        self.__completed_tasks = []
+
+    def create_queue(self, title):
+        """Создание очереди
+
+        :param title: Наименование очереди
+        """
+        self.__queues.append(TasksQueue(title))
 
     def show_queues(self):
         """Просмотр всех очередей с количеством задач в них
@@ -95,15 +108,85 @@ class TasksQueue:
         print(f"\n{'=' * 30}\nОчереди:\n{'=' * 30}")
         if len(self.__queues) > 0:
             for i, queue in enumerate(self.__queues):
-                print(f"{i}: {queue['title']} (Задач: {len(queue['tasks'])})")
+                print(f"{i}: {queue.title()} (Задач: {queue.tasks_count()})")
         else:
             print("Нет очередей")
         print(f"{'-' * 30}\nЗавершенных задач: {len(self.__completed_tasks)}")
 
         print("=" * 30, end='\n\n')
 
-    def __check_queue_id(self, queue_id):
+    def add_task(self, queue_id, description):
+        """Добавление задачи в очередь
+
+        :param queue_id: Индекс очереди, в которую добавляется задача
+        :param description: Описание добавляемой задачи
+        :return: Возвращает True или False в зависимости от результата
+        """
+        if self.__check_index(queue_id):
+            self.__last_task_id += 1
+            self.__queues[queue_id].add_task(self.__last_task_id, description)
+            return True
+        else:
+            return False
+
+    def current_task(self, queue_id):
+        """Просмотр текущей задачи в очереди
+
+        :param queue_id: Индекс интересуемой очереди
+        """
+        if self.__check_index(queue_id):
+            self.__queues[queue_id].current_task()
+        else:
+            print('Такой очереди нет')
+
+    def move_task(self, from_id, to_id):
+        """Перемещение задачи из одной очереди в другую
+
+        :param from_id: Индекс очереди, из которой забирается задача
+        :param to_id: Индекс очереди в которую перемещается задача
+        :return: Возвращается True или False в зависимости от результата
+        """
+        if self.__check_index(from_id) and self.__check_index(to_id):
+            task = self.__queues[from_id].remove_task()
+            if task:
+                self.__queues[to_id].add_task(task['id'], task['description'])
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def task_completed(self, queue_id):
+        """Перемещение задачи из очереди в список выполненных задач
+
+        :param queue_id: Индекс очереди, из которой забирается задача
+        :return: Возвращается True или False в зависимости от результата
+        """
+        if self.__check_index(queue_id):
+            task = self.__queues[queue_id].remove_task()
+            if task:
+                self.__completed_tasks.append(task)
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def show_queue_tasks(self, queue_id):
+        """Просмотр всех задач очереди
+
+        :param queue_id: Индекс очереди, задачи которой вывести на экран
+        """
+        if self.__check_index(queue_id):
+            self.__queues[queue_id].tasks_show()
+        else:
+            print('Такой очереди нет')
+
+    def __check_index(self, queue_id):
         """Проверка на существование очереди
+
+        :param queue_id: Индекс очереди, которую необходимо проверить на наличие
+        :return: Возвращает True или False в зависимости от результата
         """
         if len(self.__queues) > queue_id:
             return True
@@ -113,7 +196,7 @@ class TasksQueue:
 
 ###################################
 
-tq = TasksQueue()
+tq = Queues()
 tq.show_queues()
 
 # Добавляем задачи в очередь (очередь еще не создана)

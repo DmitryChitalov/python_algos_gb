@@ -55,24 +55,27 @@ def get_best_1(companies, count = 3):
     Вариант 1.
     Функция выбора определенного количества лучших компаний из списка.
 
+    Сложность: O(3n**2 + 3n)
+    Этот вариант худший!!!
+
     """
     bests = []
-    for comp in companies:
-        if len(bests) == 0:
-            bests.append(comp)
+    for comp in companies:                                          # O(n * (1 + n + 1 + 2n + 1)) = O(3n**2 + 3n)
+        if len(bests) == 0:                                         # O(1)
+            bests.append(comp)                                      # O(1)
             continue
-        if len(bests) < count:
-            for i in range(len(bests)):
-                if comp['profit_year'] > bests[i]['profit_year']:
-                    bests.insert(i, comp)
+        if len(bests) < count:                                      # O(n + 1)
+            for i in range(len(bests)):                             # O(n + 1)
+                if comp['profit_year'] > bests[i]['profit_year']:   # O(1)
+                    bests.insert(i, comp)                           # O(1)
                     break
-                if i == len(bests) - 1:
-                    bests.append(comp)
+                if i == len(bests) - 1:                             # O(1)
+                    bests.append(comp)                              # O(1)
             continue
-        for i in range(len(bests)):
-            if comp['profit_year'] > bests[i]['profit_year']:
-                bests.insert(i, comp)
-                bests.pop()
+        for i in range(len(bests)):                                 # O(1 + n * 2) = O(2n + 1)
+            if comp['profit_year'] > bests[i]['profit_year']:       # O(1 * 2) = O(2)
+                bests.insert(i, comp)                               # O(1)
+                bests.pop()                                         # O(1)
                 break
     return bests
 
@@ -83,10 +86,11 @@ def get_best_2(companies, count = 3):
     Вариант 2.
     Функция выбора определенного количества лучших компаний из списка.
 
+    Сложность: O(n log n + n)
+    Этот вариант лучший!!!
+
     """
-    l_func = lambda comp: comp['profit_year']
-    return sorted(companies, key=l_func, reverse=True)[:count]
-    # return sorted(companies, key=lambda comp: comp['profit_year'], reverse=True)[:count]
+    return sorted(companies, key=lambda comp: comp['profit_year'], reverse=True)[:count]    # O(n log n + n)
 
 
 ###########################################
@@ -95,16 +99,18 @@ def get_best_3(companies, count = 3):
     Вариант 3.
     Функция выбора определенного количества лучших компаний из списка.
 
+    Сложность: O(2n**2 + 4n)
+
     """
     bests = []
-    while count > 0:
-        indx_max = 0
-        for j in range(1, len(companies)):
-            if companies[j]['profit_year'] > companies[indx_max]['profit_year']:
-                indx_max = j
-        bests.append(companies[indx_max])
-        companies.pop(indx_max)
-        count -= 1
+    while count > 0:                                                                # O(2n**2 + 4n)
+        indx_max = 0                                                                # O(1)
+        for j in range(1, len(companies)):                                          # O(1 + n * 1) = O(n + 1)
+            if companies[j]['profit_year'] > companies[indx_max]['profit_year']:    # O(1)
+                indx_max = j                                                        # O(1)
+        bests.append(companies[indx_max])                                           # O(1)
+        companies.pop(indx_max)                                                     # O(n)
+        count -= 1                                                                  # O(1)
     return bests
 
 

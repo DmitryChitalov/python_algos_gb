@@ -22,12 +22,23 @@
 import random
 
 
-class Plates_stack:
-    __max_stack_size = 5
-    __stacks = []
+class PlatesStack:
     __num = 0
 
-    def add_plate(self, name = ''):
+    def __init__(self, max_stack_size):
+        """
+
+        :param max_stack_size: Максимальное число тарелок в стопке
+        """
+        self.__stacks = []
+        self.__max_stack_size = max_stack_size
+
+    def add_plate(self, name=''):
+        """Добавление тарелки в стопку
+
+        :param name: Имя тарелки
+        :return: Возвращает имя добавленной тарелки
+        """
         if name == '':
             name = self.random_name()
         self.__num += 1
@@ -40,8 +51,13 @@ class Plates_stack:
                 stack.append(name)
                 return name
         self.__stacks.append([name])
+        return name
     
     def get_plate(self):
+        """Взять тарелку из последней стопки
+
+        :return: Возвращает имя взятой тарелки
+        """
         if len(self.__stacks) > 0:
             plate = self.__stacks[len(self.__stacks) - 1].pop()
             if len(self.__stacks[len(self.__stacks) - 1]) == 0:
@@ -51,12 +67,20 @@ class Plates_stack:
             return None
 
     def get_plate_from_stack(self, idx_stack):
+        """Взять тарелку из определенной стопки
+
+        :param idx_stack: Индекс стопки, из которой берется тарелка
+        :return: Возвращает имя взятой тарелки
+        """
         if len(self.__stacks[idx_stack]) > 0:
             return self.__stacks[idx_stack].pop()
         else:
             return None
 
     def plates_show(self):
+        """Печать имен всех тарелок во всех стопках
+
+        """
         print('\nВывод тарелок:')
         print('=' * 30, end="\n")
         for i, stack in enumerate(self.__stacks):
@@ -66,29 +90,32 @@ class Plates_stack:
             print('-' * 30, end='\n\n')
 
     def stacks_count(self):
-        """
-        Возвращает количество стопок с тарелками
+        """Количество стопок
 
+        :return: Возвращает количество стопок с тарелками
         """
         return len(self.__stacks)
 
     def plates_count(self):
-        """
-        Возвращает количество тарелок в каждой стопке
+        """Количество тареолк в стопках
 
+        :return: Возвращает количество тарелок в каждой стопке
         """
         return [len(stack) for stack in self.__stacks]
     
     def random_name(self):
+        """Генератор случайного имени для тарелок
+
+        :return: Возвращает случайное имя для тарелки
+        """
         shape = ['Круглая', 'Овальная', 'Квадратная', 'Многоугольная', 'Необычная']
         color = ['Белая', 'Желтая', 'Красная', 'Черная', 'Зеленая', 'Синия', 'Радужная']
         size = ['Маленькая', 'Средеяя', 'Большая', 'Огромная', 'Глубокая', 'Суповая', 'Прямая']
         return f"{random.choice(size)} {random.choice(color)} {random.choice(shape)}"
 
 
-
 ######################################
-plates = Plates_stack()
+plates = PlatesStack(5)
 
 # Положим в стопки 12 тарелок
 for i in range(12):
