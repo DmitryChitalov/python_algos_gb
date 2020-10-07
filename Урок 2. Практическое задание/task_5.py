@@ -18,3 +18,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_show(start=32, stop=127, colcount=10, column=1):
+    """Рекурсивная функция для вывода символов таблицы ASCII с их кодами
+
+    :param start: С кода какого символа начать (включительно)
+    :param stop: Кодом какого символа закончить (включительно)
+    :param colcount: На сколько столбцов разбить вывод таблицы символов
+    :param column: Текущий номер столбца (начинается счет с 1)
+    :return: Только вывод в терминал
+    """
+    if column > colcount or column <= 0:
+        column = 1
+    if start > stop:
+        return
+    print(f"{start} - {chr(start)}", end=("\t" if column < colcount else "\n"))
+    ascii_show(start + 1, stop, colcount, column + 1)
+    return
+
+
+###########################################
+ascii_show()
