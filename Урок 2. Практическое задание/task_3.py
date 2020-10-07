@@ -17,10 +17,12 @@
 """
 
 
-def reverse_value(val_str: str):
-    if len(val_str) == 1:
-        return val_str[0]
-    return reverse_value(val_str[1:]) + val_str[0]
+def reverse_value(num):
+    num_size = len(str(num))
+    one_dig = (num // 10 ** (num_size - 1))
+    if num_size == 1:
+        return one_dig
+    return f'{reverse_value(num - one_dig * 10 ** (num_size - 1))}{one_dig}'
 
 
-print(f'Перевернутое число: {reverse_value(input("Введите число, которое требуется перевернуть: "))}')
+print(f'Перевернутое число: {reverse_value(int(input("Введите число, которое требуется перевернуть: ")))}')

@@ -8,13 +8,14 @@
 """
 
 
-def equation_proof(n, n_init=0):
+def equation_proof(n, n_init=0, sum=0):
     if not n_init:
         n_init = n
     if not (n - 1):
-        return f'{int(n_init*(n+1)/2)} = {n_init}({n_init}+1)/2 = 1'
+        return f'n(n+1)/2:\t{int(n_init*(n_init+1)/2)} = {n_init}({n_init}+1)/2\n1+2+...+n:\t{sum + 1} = 1'
     else:
-        return f'{equation_proof(n - 1, n_init)}+{n}'
+        sum += n
+        return f'{equation_proof(n - 1, n_init, sum)}+{n}'
 
 
 print(equation_proof(4))

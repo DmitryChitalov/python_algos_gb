@@ -18,18 +18,20 @@
 """
 
 
-def get_even_odd_amount(num: str, even_nums=0, odd_nums=0):
-    try:
-        if int(num[0]) % 2:
-            odd_nums += 1
-        else:
-            even_nums += 1
-        if len(num) == 1:
-            print(f'Количество четных и нечетных цифр в числе равно: ({even_nums}, {odd_nums})')
-        else:
-            get_even_odd_amount(num[1:], even_nums, odd_nums)
-    except ValueError:
-        print('Введенно некорретное число! Надо было ввести натуральное число!')
+def get_even_odd_amount(num, even_nums=0, odd_nums=0):
+    num_size = len(str(num))  # Перевод в строку тк число может быть произвольного размера и проще так
+    one_dig = (num // 10**(num_size - 1))
+    if one_dig % 2:
+        odd_nums += 1
+    else:
+        even_nums += 1
+    if num_size == 1:
+        print(f'Количество четных и нечетных цифр в числе равно: ({even_nums}, {odd_nums})')
+    else:
+        get_even_odd_amount(num - one_dig * 10**(num_size - 1), even_nums, odd_nums)
 
 
-get_even_odd_amount(input('Введите число: '))
+try:
+    get_even_odd_amount(int(input('Введите число: ')))
+except ValueError:
+    print('Введенно некорретное число! Надо было ввести натуральное число!')
