@@ -22,14 +22,12 @@ def count_even_odd():
     print('введите число')
     n = int(input())
     even=odd=0
-    while n>0:
-        if n==0:
-            return 0
-        if n%2 == 0:
-            even += 1
-        else:
-            odd += 1
-        n = n//10
+    if n==0:
+        return 0
+    if n%2 == 0:
+        even += 1
+    else:
+        odd += 1
     print("четных - %d, нечетных - %d" % (even, odd))
 
 count_even_odd()
