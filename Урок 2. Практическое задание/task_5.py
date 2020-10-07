@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import binascii
+
+
+def ascii_table(start=32, cur_symbol=0):
+    if cur_symbol < start:
+        cur_symbol = start
+    out_str = f'{cur_symbol} - {str(binascii.a2b_hex(f"{hex(cur_symbol)}"[2:]))[2:-1]}'
+    if cur_symbol != start and not (cur_symbol - start + 1) % 10:
+        out_str += '\n'
+    if cur_symbol == 127:
+        return out_str
+    else:
+        return out_str + ' ' + ascii_table(start, cur_symbol + 1)
+
+
+print(ascii_table())

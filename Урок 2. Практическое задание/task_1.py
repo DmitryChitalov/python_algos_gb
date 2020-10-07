@@ -28,3 +28,44 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def alu_func():
+    operation_list = [
+        '+',
+        '-',
+        '*',
+        '/'
+    ]
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation != '0':
+        if operation in operation_list:
+            try:
+                a = int(input('Введите первое число: '))
+                b = int(input('Введите второе число: '))
+            except ValueError:
+                print('Введенно неверное число! Попробуйте еще раз или введите 0 для выхода')
+                return alu_func()
+            if operation == '+':
+                print(f'Ваш результат: {a + b}')
+                return alu_func()
+            elif operation == '-':
+                print(f'Ваш результат: {a - b}')
+                return alu_func()
+            elif operation == '*':
+                print(f'Ваш результат: {a * b}')
+                return alu_func()
+            elif operation == '/':
+                try:
+                    print(f'Ваш результат: {a / b}')
+                except ZeroDivisionError:
+                    print('Ай яй яй! На ноль делить нельзя! Попробуйте еще раз или введите 0 для выхода')
+                return alu_func()
+        else:
+            print('Введенна некорректная операция! Попробуйте еще раз или введите 0 для выхода')
+            return alu_func()
+    else:
+        print('\nCiao!')
+
+
+alu_func()

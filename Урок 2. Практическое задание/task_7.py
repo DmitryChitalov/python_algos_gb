@@ -6,3 +6,16 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def equation_proof(n, n_init=0, sum=0):
+    if not n_init:
+        n_init = n
+    if not (n - 1):
+        return f'n(n+1)/2:\t{int(n_init*(n_init+1)/2)} = {n_init}({n_init}+1)/2\n1+2+...+n:\t{sum + 1} = 1'
+    else:
+        sum += n
+        return f'{equation_proof(n - 1, n_init, sum)}+{n}'
+
+
+print(equation_proof(4))
