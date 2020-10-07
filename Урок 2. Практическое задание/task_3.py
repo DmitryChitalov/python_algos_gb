@@ -15,3 +15,34 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def reverse_number():
+    number = None
+
+    def number_input():
+        nonlocal number
+        inp = input('Введите число: ')
+        if inp.isdigit():
+            number = inp
+            return
+        else:
+            print('Вы вместо числа ввели строку (((. Исправьтесь')
+            number_input()
+
+    def reverser(num):
+        if num == 0:
+            return
+        else:
+            print(num % 10, end='')
+            return reverser(num // 10)
+
+    number_input()
+    number = int(number)
+    print('Перевернутое число: ', end='')
+    reverser(number)
+    print()
+
+
+if __name__ == '__main__':
+    reverse_number()

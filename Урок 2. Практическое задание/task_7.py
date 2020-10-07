@@ -6,3 +6,22 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def checker(n: int):
+
+    def recur(num):
+        if num == 0:
+            return 0
+        else:
+            return num + recur(num-1)
+
+    def mat(num):
+        return num * (num + 1) / 2
+
+    return recur(n) == mat(n)
+
+
+if __name__ == '__main__':
+
+    print(checker(456))
