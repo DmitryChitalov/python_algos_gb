@@ -15,3 +15,16 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def changeling(numb):
+    if numb == '':
+        return 0
+    change_n = str(numb)[0]
+    return changeling(str(numb)[1:]) * 10 + int(change_n)
+
+
+if __name__ == '__main__':
+
+    a = 1234567
+    print(changeling(a))
