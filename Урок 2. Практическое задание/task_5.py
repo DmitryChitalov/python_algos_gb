@@ -18,3 +18,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def table_ASCII(n = 32):
+    if n == 128:
+        return ''
+    if (n - 2) % 10 == 0:
+        return '\n{0} - {1} {2}'.format(n, chr(n), table_ASCII(n+1))
+    return '{0} - {1} {2}'.format(n, chr(n), table_ASCII(n+1))
+
+
+if __name__ == '__main__':
+
+    print(table_ASCII())
