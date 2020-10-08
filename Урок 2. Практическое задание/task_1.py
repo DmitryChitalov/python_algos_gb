@@ -28,3 +28,32 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+    sign = input("Введите знак операции +, -, *, /, для выхода введите 0: ")
+    if sign == "0":
+        return "Программа завершена"
+    first_number = int(input("Введите первое число: "))
+    second_number = int(input("Введите второе число: "))
+    if not second_number and sign == "/":
+        print("Делить на ноль нельзя! Введите новые данные")
+        return calculator()
+    if sign == "+":
+        print(f"Результат: {first_number + second_number}")
+        return calculator()
+    elif sign == "-":
+        print(f"Результат: {first_number - second_number}")
+        return calculator()
+    elif sign == "*":
+        print(f"Результат: {first_number * second_number}")
+        return calculator()
+    elif sign == "/":
+        print(f"Результат: {first_number / second_number}")
+        return calculator()
+    else:
+        print("Введите правильный знак операции +, -, *, /")
+        return calculator()
+
+
+calculator()

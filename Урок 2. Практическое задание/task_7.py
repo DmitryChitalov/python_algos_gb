@@ -6,3 +6,17 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def left_expression(n):
+    if n == 1:
+        return 1
+    return n + left_expression(n - 1)
+
+
+def compare(n):
+    right_expression = n * (n + 1) / 2
+    return "Выражения равны!" if left_expression(n) == right_expression else "Выражения не равны"
+
+
+print(compare(30))
