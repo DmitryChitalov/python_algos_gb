@@ -16,3 +16,17 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def hello_world(num, even, noteven):
+    if num == 0:
+        print(f'Чётных: {even}, нечётных: {noteven}')
+        return
+    if (num % 10) % 2 == 0:
+        even += 1
+    else:
+        noteven += 1
+    hello_world(num // 10, even, noteven)
+
+my_num = int(input("Укажите натуральное число: "))
+even = 0
+n_even = 0
+hello_world(my_num, even, n_even)
