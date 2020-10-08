@@ -15,3 +15,16 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+import sys
+
+sys.setrecursionlimit(10000)
+
+def rev(num):
+    tmp = num % 10
+    if num // 10 != 0:
+        return f'{str(tmp)} {rev(num // 10)}'
+    else:
+        return f'{str(tmp)}'
+
+number = int(input("Введите число и я его разверну: "))
+print(rev(number))
