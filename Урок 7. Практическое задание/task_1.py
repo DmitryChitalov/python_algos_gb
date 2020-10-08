@@ -48,31 +48,30 @@ print(f'Отсортированный 1 - {bubble_sort(copy_list)}')
 print(f'Отсортированный 2 - {bubble_sort_2(copy_list)}')
 
 print('замеры 100')
-print(timeit("bubble_sort(copy_list)", setup="from __main__ import bubble_sort, copy_list", number=100))
-print(timeit("bubble_sort_2(copy_list)", setup="from __main__ import bubble_sort_2, copy_list", number=100))
+print(timeit("bubble_sort(orig_list.copy())", setup="from __main__ import bubble_sort, orig_list", number=100))
+print(timeit("bubble_sort_2(orig_list.copy())", setup="from __main__ import bubble_sort_2, orig_list", number=100))
 
 print('замеры 1000')
-print(timeit("bubble_sort(copy_list)", setup="from __main__ import bubble_sort, copy_list", number=1000))
-print(timeit("bubble_sort_2(copy_list)", setup="from __main__ import bubble_sort_2, copy_list", number=1000))
+print(timeit("bubble_sort(orig_list.copy())", setup="from __main__ import bubble_sort, orig_list", number=1000))
+print(timeit("bubble_sort_2(orig_list.copy())", setup="from __main__ import bubble_sort_2, orig_list", number=1000))
 
 print('замеры 10000')
-print(timeit("bubble_sort(copy_list)", setup="from __main__ import bubble_sort, copy_list", number=10000))
-print(timeit("bubble_sort_2(copy_list)", setup="from __main__ import bubble_sort_2, copy_list", number=10000))
+print(timeit("bubble_sort(orig_list.copy())", setup="from __main__ import bubble_sort, orig_list", number=10000))
+print(timeit("bubble_sort_2(orig_list.copy())", setup="from __main__ import bubble_sort_2, orig_list", number=10000))
 
 """
-Исходный - [-92, 89, 54, 37, 43, -39, -5, -26, 50, 30, 20, -89, 3, -86, -32]
-Отсортированный 1 - [89, 54, 50, 43, 37, 30, 20, 3, -5, -26, -32, -39, -86, -89, -92]
-Отсортированный 2 - [89, 54, 50, 43, 37, 30, 20, 3, -5, -26, -32, -39, -86, -89, -92]
-
+Исходный - [60, -12, 17, -32, -66, -7, 43, 72, -64, 81, -42, 30, 78, -77, 7]
+Отсортированный 1 - [81, 78, 72, 60, 43, 30, 17, 7, -7, -12, -32, -42, -64, -66, -77]
+Отсортированный 2 - [81, 78, 72, 60, 43, 30, 17, 7, -7, -12, -32, -42, -64, -66, -77]
 замеры 100
-0.0018270000000000022
-0.00022909999999999944
+0.0034456
+0.0030446000000000015
 замеры 1000
-0.019298799999999998
-0.0022936999999999957
+0.0315103
+0.033415
 замеры 10000
-0.19204569999999999
-0.022897600000000018
+0.32961209999999996
+0.30797019999999997
 
-По результатам замеров видим, что оптимизированная сортировка пузырьком работает на порядок быстрее.
+По результатам замеров видим, что оптимизированная сортировка пузырьком работает так же.
 """
