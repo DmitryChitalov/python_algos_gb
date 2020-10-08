@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+
+def ASCII(a,b,nextLine):
+   if a < b:
+       print("%4d-%s" % (a, chr(a)), end='')
+       nextLine -= 1
+       if nextLine < 0:
+           print()
+           nextLine = 10
+       a += 1
+
+   ASCII(a,b,nextLine)
+
+ASCII(32,128,10)
