@@ -16,3 +16,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+# решение имеет недостаток: при вводе 0 - выводит (0, 0)
+def even_odd(number):
+    e = 0
+    o = 0
+    if number < 0:
+        number = -number
+    elif number == 0:
+        return e, o
+
+    if number % 2:
+        o += 1
+    else:
+        e += 1
+
+    return even_odd(number//10)[0] + e, even_odd(number//10)[1] + o
+
+
+if __name__ == '__main__':
+
+    a = 12345
+    print(even_odd(a))
+
+

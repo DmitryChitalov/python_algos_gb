@@ -28,3 +28,43 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def just_calc():
+
+    opers = ['+', '-', '*', '/']
+
+    user_oper = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if user_oper == '0':
+        return True
+    if list(set(user_oper) & set(opers)) == []:
+        print('Некорректная операция')
+        return just_calc()
+
+    try:
+        user_fisrt_numb = int(input('Введите первое число: '))
+        user_second_numb = int(input('Введите второе число: '))
+    except ValueError:
+        print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+        return just_calc()
+
+    if user_oper == '+':
+        output = user_fisrt_numb + user_second_numb
+        print('= ', output)
+    elif user_oper == '-':
+        output = user_fisrt_numb - user_second_numb
+        print('= ', output)
+    elif user_oper == '*':
+        output = user_fisrt_numb * user_second_numb
+        print('= ', output)
+    elif user_oper == '/':
+        output = user_fisrt_numb / user_second_numb
+        print('= ', output)
+
+    print('Ещё один круг')
+    return just_calc()
+
+if __name__ == '__main__':
+    print('Hi!')
+    just_calc()
+    print('Bay!')
+
