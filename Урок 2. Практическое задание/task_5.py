@@ -18,3 +18,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+first = 32
+last = 127
+def print_ascii(n: int, last: int):
+    if n > last:
+        return
+    print(f'{n:>3} - {chr(n)}') if n % 10 == 1 \
+        else print(f'{n:>3} - {chr(n)}', end=' ')
+    n += 1
+    return print_ascii(n, last)
+
+print_ascii(first, last)

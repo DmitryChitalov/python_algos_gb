@@ -9,3 +9,25 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+def enter():
+    n = input('Отгадайте число: ')
+    if not n.isdigit():
+        print('Некорректный ввод.')
+        return enter()
+    return int(n)
+
+def guessing(num: int, hidden: int, count = 1):
+    print(hidden)
+    max_count = 10
+    count += 1
+    if count > max_count:
+        return print('Попытки закончились. Вы проиграли =(')
+    if num == hidden:
+        return print('Вы угадали! Поздравляю с победой!')
+    else:
+        return guessing(enter(), hidden, count)
+
+guessing(enter(), random.randint(1, 100))

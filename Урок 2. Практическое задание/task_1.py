@@ -28,3 +28,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def enter():
+    op = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if op == '0':
+        return 0
+    elif not op in ('+', '-', '*', '/'):
+        print('Недопустимая операция.')
+        return enter()
+    try:
+        num1 = float(input('Введите первое число: '))
+        num2 = float(input('Введите второе число: '))
+    except ValueError:
+        print('Введенная строка не является числом.')
+        return enter()
+    return op, num1, num2
+
+def calculate():
+    args = enter()
+    if not args:
+        return
+    op = args[0]
+    num1 = args[1]
+    num2 = args[2]
+    try:
+        selector = {
+            '+': num1 + num2,
+            '-': num1 - num2,
+            '*': num1 * num2,
+            '/': num1 / num2
+        }
+        print(f'Результат: {selector[op]}')
+    except ZeroDivisionError:
+        print('Делить на нуль нельзя!')
+    return calculate()
+
+if __name__ == '__main__':
+    calculate()
