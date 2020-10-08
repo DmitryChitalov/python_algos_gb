@@ -27,3 +27,52 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+users = {
+    'user1': {'pass': 123456, 'authentication': True},
+    'user2': {'pass': 11111, 'authentication': False},
+    'user3': {'pass': 222222, 'authentication': True}
+}
+
+
+# Общая сложность O(n)
+def authentication(hash_users, user_name, user_pass):
+    for hash_name, hash_pass in hash_users.items():  # O(n)
+        # print(u_n, '#:#', pasv['pass'], ':', pasv['authentication'])
+        if user_name == hash_name and user_pass == hash_pass['pass']:  # O(1)
+            if not hash_pass['authentication']:  # вложеная проверка на активность учетной записи O(1)
+                return 'Учетная запись не активна!\nАктивируйте её и перезайдите!'  # O(1)
+            else:
+                # print(hash_name, ':', hash_pass['pass'])
+                return f"\tДобро пожаловать!\nСтатус учетной записи: {hash_pass['authentication']}"
+        elif user_name == hash_name and user_pass != hash_pass['pass']:
+            return "Ошибка ввода пароля!\nПопробуйте еще раз"
+        elif user_name != hash_name and user_pass == hash_pass['pass']:
+            return "Ошибка ввода логина!\nПопробуйте еще раз!"
+
+        return "Такого пользователя не существует!!\nСоздайте аккаунт"
+
+
+# login = input("Введите имя пользователя: ")
+login = 'user1'
+# passvd = input("Введите пароль: ")
+# passvd= int(passvd)
+passvd = 123456
+print(authentication(users, login, passvd))
+
+print('#' * 30)
+
+login = 'user1'
+passvd = 124456
+
+if users.get(login):
+    if users[login]['pass'] == passvd:
+        if not users[login]['authentication']:  # вложеная проверка на активность учетной записи O(1)
+            print('Учетная запись не активна!\nАктивируйте её и перезайдите!')  # O(1)
+        else:
+            # print(hash_name, ':', hash_pass['pass'])
+            print(f"\tДобро пожаловать!\nСтатус учетной записи: {users[login]['authentication']}")
+    elif users[login]['pass'] != passvd:
+        print("\tОшибка ввода пароля!\nПопробуйте еще раз")
+
+else:
+    print("Такого пользователя не существует!!\nСоздайте аккаунт")
