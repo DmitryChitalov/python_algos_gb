@@ -14,3 +14,19 @@
 р
 а
 """
+
+########################################################################################################################
+
+string = input('Введите строку: ')
+some_list = []
+some_dict = {}
+for i in range(len(string)):
+    for j in range(len(string)-1 if i == 0 else len(string), i, -1):
+        some_list.append(hash(string[i:j]))
+        some_dict[string[i:j]] = hash(string[i:j])
+
+print(list(some_dict.keys()))
+print(f'Количество подстрок в строке: {len(set(some_list))}')
+
+
+

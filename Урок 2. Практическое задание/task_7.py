@@ -6,3 +6,23 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check(n):
+    numbers = []
+    expression = int(n * (n + 1) / 2)
+
+    def sum_numbers(m):
+        if m == 0:
+            return sum(numbers)
+        numbers.append(m)
+        return sum_numbers(m-1)
+
+    if expression == sum_numbers(n):
+        print("Равенство выполнено.")
+    else:
+        print("Равенство не выполнено.")
+
+
+check(7)
+

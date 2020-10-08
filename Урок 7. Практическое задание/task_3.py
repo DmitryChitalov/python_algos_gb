@@ -13,3 +13,32 @@
 arr[m]
 from statistics import median
 """
+########################################################################################################################
+
+from random import randint
+from statistics import median
+
+med = 2 * int(input('Введите натуральное число: ')) + 1
+some_list = []
+while len(some_list) < med:
+    some_list.append(randint(0, 20))
+
+
+print(some_list)
+
+
+def gnome(data):
+    i, j, size = 1, 2, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i, j = j, j + 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            i -= 1
+            if i == 0:
+                i, j = j, j + 1
+    return data
+
+
+print(gnome(some_list))
+print(median(some_list))
