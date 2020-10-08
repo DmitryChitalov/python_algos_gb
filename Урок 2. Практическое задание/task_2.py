@@ -16,3 +16,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def enter():
+    num = input('Введите натуральное число: ')
+    if not num.isdigit():
+        print('Некорректный ввод.')
+        return enter()
+    return int(num)
+
+
+def check_parity(num: int, p_count = 0, np_count = 0):
+    num = num // 10
+    if (num % 10) & 1:
+        np_count += 1
+    else:
+        p_count += 1
+    if not num:
+        return p_count, np_count
+    return check_parity(num, p_count, np_count)
+
+print(f'Количество четных и нечетных цифр в числе равно: '
+      f'{check_parity(enter())}.')

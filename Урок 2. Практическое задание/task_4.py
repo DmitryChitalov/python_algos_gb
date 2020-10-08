@@ -9,3 +9,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def enter():
+    n = input('Введите количество элементов: ')
+    if not n.isdigit():
+        print('Некорректный ввод.')
+        return enter()
+    return int(n)
+
+def geom_progr(n: int, next = 1, res = 1):
+    next = next / (-2)
+    n -= 1
+    res += next
+    if n == 1:
+        return res
+    return geom_progr(n, next, res)
+
+print(f'Сумма элементов - {geom_progr(enter())}.')
