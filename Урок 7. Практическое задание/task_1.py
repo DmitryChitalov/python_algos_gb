@@ -49,25 +49,25 @@ def bubble_sort_opt(our_list):
 orig_list = [random.randint(-100, 100) for _ in range(10)]
 # замеры 10
 print('Базовый алгоритм')
-print(timeit.timeit("bubble_sort(orig_list)", setup="from __main__ import bubble_sort, orig_list", number=1))
+print(timeit.timeit("bubble_sort(orig_list[:])", setup="from __main__ import bubble_sort, orig_list", number=1))
 print('Модифицированный алгоритм')
-print(timeit.timeit("bubble_sort_opt(orig_list)", setup="from __main__ import bubble_sort_opt, orig_list", number=1))
+print(timeit.timeit("bubble_sort_opt(orig_list[:])", setup="from __main__ import bubble_sort_opt, orig_list", number=1))
 
 
 orig_list = [random.randint(-100, 100) for _ in range(100)]
 # замеры 100
 print('Базовый алгоритм')
-print(timeit.timeit("bubble_sort(orig_list)", setup="from __main__ import bubble_sort, orig_list", number=1))
+print(timeit.timeit("bubble_sort(orig_list[:])", setup="from __main__ import bubble_sort, orig_list", number=1))
 print('Модифицированный алгоритм')
-print(timeit.timeit("bubble_sort_opt(orig_list)", setup="from __main__ import bubble_sort_opt, orig_list", number=1))
+print(timeit.timeit("bubble_sort_opt(orig_list[:])", setup="from __main__ import bubble_sort_opt, orig_list", number=1))
 
 
 orig_list = [random.randint(-100, 100) for _ in range(1000)]
 # замеры 1000
 print('Базовый алгоритм')
-print(timeit.timeit("bubble_sort(orig_list)", setup="from __main__ import bubble_sort, orig_list", number=1))
+print(timeit.timeit("bubble_sort(orig_list[:])", setup="from __main__ import bubble_sort, orig_list", number=1))
 print('Модифицированный алгоритм')
-print(timeit.timeit("bubble_sort_opt(orig_list)", setup="from __main__ import bubble_sort_opt, orig_list", number=1))
+print(timeit.timeit("bubble_sort_opt(orig_list[:])", setup="from __main__ import bubble_sort_opt, orig_list", number=1))
 
 """
 Модифицированный алгоритм эффективнее т.к. 
