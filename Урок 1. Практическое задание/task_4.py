@@ -27,3 +27,40 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+import random
+
+
+# 1: O(n)
+def auth_v1(users_db, username, password):
+    for key, value in users_db.items():
+        if key == username:
+            if value['is_active']:
+                if value['password'] == password:
+                    return "Доступ предоставлен!"
+                else:
+                    return "Не верный пароль!"
+            else:
+                return "Необходимо активировать учетную запись!"
+    return "Пользователя с таким именем не существует!"
+
+
+# 2: O(1)
+def auth_v2(users_db, username, password):
+    if users_db.get(username):
+        if users_db[username]['is_active']:
+            if users_db[username]['password'] == password:
+                return "Доступ предоставлен!"
+            else:
+                return "Не верный пароль!"
+        else:
+            return "Необходимо активировать учетную запись!"
+    else:
+        return "Пользователя с таким именем не существует!"
+
+
+users_db_example = {f'User_{i}': {f'password': f'{i}' * 5, 'is_active': random.choice((True, False))}
+                    for i in range(5)}
+print(f'Словарь пользователей: {users_db_example}\n'
+      f'Результат авторизации: {auth_v1(users_db_example, "User_1", "11111")}\n'
+      f'Результат авторизации: {auth_v2(users_db_example, "User_1", "11111")}')
