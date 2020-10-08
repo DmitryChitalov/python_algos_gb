@@ -12,3 +12,80 @@
 ВНИМАНИЕ: примеры заданий будут размещены в последний день сдачи.
 Но постарайтесь обойтись без них.
 """
+"""Хаффман через коллекции"""
+
+from collections import Counter, deque
+
+
+def my_tree(s):
+    # Counter({'e': 5, ' ': 4, 'h': 2, 'l': 2, 'W': 1, 'n': 1, 'f': 1, 'r': 1, 'z': 1, 's': 1, '!': 1})
+    count = Counter(s)
+    # сортируем и преобразуем в deque([('W', 1), ('n', 1), ('f', 1), ('r', 1), ('z', 1), ('s', 1), ('!', 1), ('h', 2), ('l', 2), (' ', 4), ('e', 5)])
+    sorted_elements = deque(sorted(count.items(), key=lambda item: item[1]))
+    # Проверка, если строка состоит из одного повторяющего символа.
+    if len(sorted_elements) != 1:
+        # Цикл для построения дерева
+        while len(sorted_elements) > 1:
+            # далее цикл объединяет два крайних левых элемента
+            # Вес объединенного элемента (накопленная частота)
+            # веса - 2, 4, 4, 7, 8, 15
+            weight = sorted_elements[0][1] + sorted_elements[1][1]
+            # Словарь из 2 крайних левых элементов, попутно вырезаем их
+            # из "sorted_elements" (из очереди).
+            # comb - объединенный элемент
+            comb = {0: sorted_elements.popleft()[0],
+                    1: sorted_elements.popleft()[0]}
+
+            # Ищем место для ставки объединенного элемента
+            for i, _count in enumerate(sorted_elements):
+                if weight > _count[1]:
+                    continue
+                else:
+                    # Вставляем объединенный элемент
+                    sorted_elements.insert(i, (comb, weight))
+                    break
+            else:
+                # Добавляем объединенный корневой элемент после
+                # завершения работы цикла
+
+                sorted_elements.append((comb, weight))
+    else:
+        # приравниваемыем значение 0 к одному повторяющемуся символу
+        weight = sorted_elements[0][1]
+        comb = {0: sorted_elements.popleft()[0], 1: None}
+        sorted_elements.append((comb, weight))
+    # sorted_elements - deque([({0: {0: {0: 'f', 1: 'r'}, 1: {0: 'W', 1: 'n'}}, 1: ' '}, 8)])
+    # deque([({0: {0: {0: 'f', 1: 'r'}, 1: {0: 'W', 1: 'n'}}, 1: ' '}, 8), ({0: 'e', 1: {0: {0: '!', 1: {0: 'z', 1: 's'}}, 1: {0: 'h', 1: 'l'}}}, 12)])
+
+    # словарь - дерево
+    # deque([({0: {0: {0: {0: 'f', 1: 'r'}, 1: {0: 'W', 1: 'n'}}, 1: ' '}, 1: {0: 'e', 1: {0: {0: '!', 1: {0: 'z', 1: 's'}}, 1: {0: 'h', 1: 'l'}}}}, 20)])
+    return sorted_elements[0][0]
+
+
+code_table = dict()
+
+
+def haffman_code(tree, path=''):
+    # Если элемент не словарь, значит мы достигли самого символа
+    # и заносим его, а так же его код в словарь (кодовую таблицу).
+    if not isinstance(tree, dict):
+        code_table[tree] = path
+    # Если элемент словарь, рекурсивно спускаемся вниз
+    # по первому и второму значению (левая и правая ветви).
+    else:
+        haffman_code(tree[0], path=f'{path}0')
+        haffman_code(tree[1], path=f'{path}1')
+
+
+# строка для кодирования
+s = "When hell freezes  !"
+# 00 11 11 101 010 00 011 011 101 010 00 11 11 1000 1001
+
+# функция заполняет кодовую таблицу (символ-его код)
+# {'f': '0000', 'r': '0001', 'W': '0010', 'n': '0011', ' ': '01', 'e': '10', '!': '1100', 'z': '11010', 's': '11011', 'h': '1110', 'l': '1111'}
+haffman_code(my_tree(s))
+
+# выводим коды для каждого символа
+for i in s:
+    print(code_table[i], end=' ')
+print()
