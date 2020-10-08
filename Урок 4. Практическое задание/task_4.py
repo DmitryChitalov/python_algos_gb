@@ -9,9 +9,10 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+import cProfile
+from timeit import Timer
 
 array = [1, 3, 1, 3, 4, 5, 1]
-
 
 def func_1():
     m = 0
@@ -36,6 +37,28 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
+def func_3():
+    x = max(array, key=array.count)
+    return f'Чаще всего встречается число {x}, '\
+           f'оно появилось в массиве {array.count(x)} раз(а)'
+
 
 print(func_1())
 print(func_2())
+print(func_3())
+
+cProfile.run('func_1')
+cProfile.run('func_2')
+cProfile.run('func_3')
+
+rev_1 = Timer('func_1()', 'from __main__ import func_1')
+print("func_1", rev_1.timeit(number=10000), "milliseconds")
+rev_2 = Timer('func_2()', 'from __main__ import func_2')
+print("func_2", rev_2.timeit(number=10000), "milliseconds")
+rev_3 = Timer('func_3()', 'from __main__ import func_3')
+print("func_3", rev_3.timeit(number=10000), "milliseconds")
+"""
+Задание 4.
+
+задачу ускорить получилось используя встроенные функции
+"""
