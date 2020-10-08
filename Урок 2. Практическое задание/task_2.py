@@ -16,3 +16,41 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+next_inter = True
+
+
+def check_char(p_str, p_idx):
+    if p_str == '-':
+        vsrt = input("Введите число: ")
+        print(vsrt)
+        g_res['even'] = 0
+        g_res['odd'] = 0
+    else:
+        vsrt = p_str
+    if len(vsrt) == 0 or vsrt == None or vsrt == '':
+        print("Строка не определена. Пока!")
+        return
+    else:
+        if len(vsrt) <= p_idx:
+            print("Четные: " + str(g_res['even']) + ", Нечетные: " + str(g_res['odd']))
+            check_char('-', 0)
+        else:
+            if int(vsrt[p_idx]) % 2 == 0:
+                g_res['even'] = g_res['even'] + 1
+            else:
+                g_res['odd'] = g_res['odd'] + 1
+            p_idx = p_idx + 1
+            check_char(vsrt, p_idx)
+
+
+while next_inter:
+    g_res = {'odd': 0, 'even': 0}
+    check_char('-', 0)
+    while True:
+        next_add = input("Хотите продолжить (Да / Нет): ")
+        if next_add.lower() in ('да', 'нет'):
+            next_inter = next_add.lower() == 'да'
+            break
+        else:
+            print("Ошибка ввода: введите ответ еще раз")
