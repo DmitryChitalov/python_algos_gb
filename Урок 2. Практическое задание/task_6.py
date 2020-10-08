@@ -9,3 +9,22 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+def geuss(num, limit):
+    if limit == 0:
+        print(f'Вы проиграли это было {num}')
+        return
+    g_num = int(input(f'Отгадайте число от 0 до 100, у вас {limit} попыток: '))
+    if g_num == num:
+        print(f'Верно, это было {num}')
+        return
+    elif g_num > num:
+        print(f'Ваше число больше загаданного')
+        geuss(num, limit-1)
+    else:
+        print(f'Ваше число меньше загаданного')
+        geuss(num, limit-1)
+
+num = random.randint(0, 100)
+print(num)
+geuss(num, 10)
