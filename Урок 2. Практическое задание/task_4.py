@@ -9,3 +9,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def rec(num, dig=1):
+    if num == 1:
+        return dig
+    return dig + rec(num - 1, dig / 2 * (-1))
+
+
+if __name__ == '__main__':
+    while True:
+        num = input('Введите число: ')
+        if num.isdigit():
+            num = int(num)
+            break
+        else:
+            print('Повторите попытку')
+
+    print(rec(num))
