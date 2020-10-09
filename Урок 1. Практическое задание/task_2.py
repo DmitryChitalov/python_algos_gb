@@ -19,33 +19,30 @@
 А без столкновения со сложностями его не развить.
 """
 
-import random
+from random import randint
 
 
 def min1(lst):
-    """Квадратичная сложность"""
-    min_e = None
-    for i in lst:
-        for j in lst:
-            if i < j:
-                min_e = i
-            else:
-                min_e = j
-        if i < 
-    return min_e
-
-
-def min2(lst):
     """Линейная сложность"""
     min_e = lst[0]
-    for i in lst[1:]:
+    for i in lst:
         if i < min_e:
             min_e = i
     return min_e
 
 
-test_list = [random.randint(-100, 100) for i in range(0, 10)]
+def min2(lst):
+    """Квадратичная сложность"""
+    for i in lst:
+        min_e = True
+        for j in lst:
+            if i > j:
+                min_e = False
+        if min_e:
+            return i
+
+
+test_list = [randint(-100, 100) for i in range(0, 10)]
 print(test_list)
 print(min1(test_list))
 print(min2(test_list))
-

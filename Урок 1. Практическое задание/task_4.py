@@ -27,3 +27,54 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+def auth1(user_lst, name, psw):
+    """
+    Использование встроенных функций.
+    Согласно документации поиск по ключу имеет константную стоимость O(1)
+    """
+    if user_lst.get(name):
+        if user_lst[name]['password'] == psw and user_lst[name]['act']:
+            return 'Пользователь найден, доступ открыт'
+        elif user_lst[name]['password'] == psw and not user_lst[name]['act']:
+            return 'Пользователь найден, необходимо пройти активацию'
+        elif user_lst[name]['password'] != psw:
+            return 'Неверный пароль, доступ запрещен'
+    else:
+        return 'Пользователь не найден'
+
+
+def auth2(user_lst, name, psw):
+    """
+    Поиск пользователя выполняется перебором в цикле,
+    соответственно, стоимость линейная O(n)
+    """
+    for key, val in user_lst.items():
+        if key == name:
+            if val['password'] == psw and val['act']:
+                return 'Пользователь найден, доступ открыт'
+            elif val['password'] == psw and not val['act']:
+                return 'Пользователь найден, необходимо пройти активацию'
+            elif val['password'] != psw:
+                return 'Неверный пароль, доступ запрещен'
+    return 'Пользователь не найден'
+
+
+Users = {'User_1': {'password': '1111', 'act': True},
+         'User_2': {'password': '2222', 'act': False},
+         'User_3': {'password': '3333', 'act': True},
+         'User_4': {'password': '4444', 'act': True},
+         'User_5': {'password': '5555', 'act': False}
+         }
+
+print(auth1(Users, 'User_1', '1111'))
+print(auth1(Users, 'User_2', '1111'))
+print(auth1(Users, 'User_7', '1111'))
+
+print(auth2(Users, 'User_3', '3333'))
+print(auth2(Users, 'User_4', '1111'))
+print(auth2(Users, 'User1', '1111'))
+
+# Первый вармант эффективнее, т.к. он имеет константную стоимость вне зависимости от количества пользователей.
+# У второго варианта стоимость линейная и зависит от числа пользователей
