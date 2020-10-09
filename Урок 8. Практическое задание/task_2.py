@@ -9,6 +9,14 @@
 
 Поработайте с доработанной структурой, позапускайте на реальных данных.
 """
+"""
+Я предлагаю при вставке делать проверку на сравнение вставляемого значения со значение корня.
+И если метод был использован не верно, вызывать нужный метод 
+и выводить в консоль сообщение , что использовался другой метод.
+При дальнейшей доработке, нужно реализовать подобные проверки и методы для всех узлов пути вставки.
+Моих знаний ООП для решения этой задачи сходу не хватает, а дз пора сдавать. Я планирую вернуться к 
+этой задаче после повторения ООП.
+"""
 
 class BinaryTree:
     def __init__(self, root_obj):
@@ -21,6 +29,9 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
+        if new_node >= self.root:
+            print('use insert_right')
+            self.insert_right(new_node)
         # если у узла нет левого потомка
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
@@ -36,6 +47,9 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        if new_node < self.root:
+            print('use insert_left')
+            self.insert_left(new_node)
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -77,3 +91,9 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+r.insert_right(2)
+print(r.get_right_child())
+r.insert_left(50)
+print(r.get_left_child())
+r.insert_left(8)
+print(r.get_left_child())
