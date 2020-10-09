@@ -22,3 +22,44 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+dct = {'АБТ-сервис': 500000,
+       'Альба Тур': 25000,
+       'Грост': 43000,
+       'Шпег': 223000,
+       'Керш': 43000,
+       'Шипшшг': 223000}
+
+dct2 = {}  # O(1)
+
+# O(n)
+for k, v in dct.items():  # O(n)
+    if len(dct2) < 3:  # O(n)
+        dct2[k] = v  # O(1)
+    else:
+        min_k = list(dct2)[0]  # O(n)
+        min_v = dct2[min_k]  # O(1)
+        for k2, v2 in dct2.items():  # O(n)
+            if v2 < min_v:  # O(1)
+                min_k = k2  # O(1)
+                min_v = v2  # O(1)
+        if v > min_v:  # O(1)
+            del dct2[min_k]  # O(1)
+            dct2[k] = v  # O(n)
+
+print(dct2)  # O(1)
+
+# O(n^2)
+lst1 = ['АБТ-сервис', 'Альба Тур', 'Грост', 'Шпег', 'Керш', 'Шипшшг']
+lst2 = [500000, 25000, 43000, 223000, 43000, 223000]
+dct3 = {}  # O(1)
+for i in range(len(lst2)):  # O(n)
+    for j in range(len(lst2)):  # O(n)
+        if lst2[j] < lst2[i]:  # O(1)
+            lst2[i], lst2[j] = lst2[j], lst2[i]  # O(1)
+            lst1[i], lst1[j] = lst1[j], lst1[i]  # O(1)
+for i in (lst1[:3]):  # O(n)
+    for j in (lst2[:3]):  # O(n)
+        dct3[i] = j  # O(1)
+
+print(dct3)

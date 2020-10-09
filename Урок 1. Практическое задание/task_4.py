@@ -27,3 +27,37 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+def check(name, password):  # O(1)
+    if dct[name][0] == password and dct[name][1] is True:  # O(1)
+        return 'Вы успешно прошли аутентификацию!'  # O(1)
+    return 'Повторите попытку!'  # O(1)
+
+
+dct = {'dovgal': [1234567, True],
+       'demidov': [123456, False],
+       'krakov': [34567890, True],
+       'fajeen': [2345678, True],
+       'asdfghjk': [45678987, True],
+       'fghjhhjk': [456789878, True],
+       'kjhgfvbnm': [987654, True]}
+
+while True:  # O(n)
+    name = input('Введите имя: ')  # O(1)
+    if name.isdigit():  # O(1)
+        print('Попробуйте еще раз!')  # O(1)
+    else:
+        break
+
+while True:  # O(n)
+    password = input('Введите пароль: ')  # O(1)
+    if password.isdigit():  # O(1)
+        password = int(password)  # O(1)
+        break
+    else:
+        print('Попробуйте еще раз!')  # O(1)
+
+result = check(name, password)
+print(result)
+# Вывод: сложность линейная
