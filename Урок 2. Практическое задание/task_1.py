@@ -28,3 +28,52 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def rec():
+    lst = ['+', '-', '*', '/', '0']
+
+    while True:
+        sign = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+        if sign not in lst:
+            print('Попробуйте еще раз!')
+        else:
+            break
+
+    if sign == '0':
+        return
+
+    while True:
+        first_digit = input('Введите первое число: ')
+        if first_digit.isdigit():
+            first_digit = int(first_digit)
+            break
+        else:
+            print('Попробуйте еще раз!')
+
+    while True:
+        second_digit = input('Введите второе число: ')
+        if second_digit.isdigit():
+            second_digit = int(second_digit)
+            break
+        else:
+            print('Попробуйте еще раз!')
+
+    if sign == '+':
+        result = first_digit + second_digit
+    elif sign == '-':
+        result = first_digit - second_digit
+    elif sign == '/':
+        if second_digit == 0:
+            result = 'Делить на ноль нельзя'
+        else:
+            result = first_digit / second_digit
+    elif sign == '*':
+        result = first_digit * second_digit
+    print(f'{first_digit} {sign} {second_digit} = {result}')
+
+    rec()
+
+
+if __name__ == '__main__':
+    rec()

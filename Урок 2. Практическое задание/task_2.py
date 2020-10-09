@@ -16,3 +16,30 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def rec(num, even=0, odd=0):
+    if num == 0:
+        return even, odd
+
+    n = num % 10
+    if n % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+
+    return rec(num // 10, even, odd)
+
+
+if __name__ == '__main__':
+
+    while True:
+        num = input('Введите число: ')
+        if num.isdigit():
+            num = int(num)
+            break
+        else:
+            print('Повторите попытку')
+
+    even, odd = rec(num)
+    print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
