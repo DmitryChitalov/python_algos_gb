@@ -9,3 +9,23 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+rnd = random.randint(0, 100)
+
+def game(ans, numb, health = 10):
+    if ans == numb:
+        return print('Вы отгадали число ', numb)
+    elif health == 1:
+        return print('Вы  не отгадали. Загаданное число было ', numb)
+    if ans > numb:
+        health -= 1
+        print('Загаданное число - меньше. У вас осталось ', health, ' попыток')
+        return game(int(input('Введите число ')), numb, health)
+    elif ans < numb:
+        health -= 1
+        print('Загаданное число - больше. У вас осталось ', health, ' попыток')
+        return game(int(input('Введите число ')), numb, health)
+
+a = int(input('Введите число '))
+game(a,rnd)

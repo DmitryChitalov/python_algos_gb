@@ -15,3 +15,14 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+def rec_numb(numb,res = []):
+    numb = list(numb)
+    if numb == []:
+        res = ''.join(res)
+        return print('Перевернутое число: ', res)
+    res.append(numb[-1])
+    return rec_numb(numb[:-1], res)
+
+
+a = input('Введите число, которое требуется перевернуть: ')
+rec_numb(a)

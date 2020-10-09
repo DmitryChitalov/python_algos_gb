@@ -16,3 +16,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def rec_numb(numb, odd_numb = 0, even_numb = 0):
+    numb = list(numb)
+    if numb == []:
+        return print('Количество четных и нечетных цифр в числе равно: ', even_numb, 'и', odd_numb)
+    if int(numb[0]) % 2 == 0:
+        even_numb += 1
+        odd_numb += 0
+        return rec_numb(numb[1:], odd_numb, even_numb)
+    odd_numb += 1
+    even_numb += 0
+    return rec_numb(numb[1:], odd_numb, even_numb)
+
+a = input('ведите число: ')
+rec_numb(a)
