@@ -28,3 +28,51 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def recursive_calc():
+	def oper():
+		operation = input("Введите операцию ")
+		if operation not in ["+","-","*","/"]:
+			print ("действие не найдено")
+			return(oper())
+		return(operation)
+	
+	
+	def first_num():
+		first_number = input("Введите первое число ")
+		#функция isint
+		#if int(first_number) == False:#first_number not in ["+","-","*","/"]:
+		#	print ("Нужно именно число!")
+		#	return(first_num())
+		return(int(first_number))
+	
+	
+	def second_num():
+		second_number = input("Введите второе число ")
+		#if int(second_number) == False:#second_number not in ["+","-","*","/"]:
+		#	print ("Нужно именно число!")
+		#	return(second_num())
+		return(int(second_number))
+	
+	
+	my_oper = oper()
+	my_first_num = first_num()
+	my_second_num = second_num()
+	
+	#switch case
+	if my_oper == "+":
+		res = my_first_num+my_second_num
+	if my_oper == "-":
+		res = my_first_num-my_second_num
+	if my_oper == "*":
+		res = my_first_num*my_second_num
+	if my_oper == "/":
+		res = my_first_num/my_second_num
+	
+	print("Ваш результат "+str(res))
+
+	return recursive_calc()
+
+print(recursive_calc())
+

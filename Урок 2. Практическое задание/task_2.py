@@ -16,3 +16,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def recursive_even_cnt():
+	num = input("Введите число: ")
+
+	even_cnt = 0
+	not_even_cnt = 0
+	for n in num:
+		#найти функцию деления нацело
+		if n in ["0","2","4","6","8"]:
+			even_cnt +=1
+		else:
+			not_even_cnt+=1
+
+	print(f"Количество четных и нечетных цифр в числе равно: ({even_cnt}, {not_even_cnt})")
+
+	return recursive_even_cnt()
+
+print(recursive_even_cnt())
+
