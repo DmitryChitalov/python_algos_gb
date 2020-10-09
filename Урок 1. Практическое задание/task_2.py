@@ -21,18 +21,18 @@
 
 # 1 O(n^2) - квадратичная
 def min_lst_1(lst):
-    for i in range(len(lst)):
-        lst[i]
-        for j in range(len(lst)):
-            if lst[j] < lst[i]:
-                break
-    return lst[j]
+    for i in range(len(lst)):       # O(n)
+        lst[i]                      # O(1)
+        for j in range(len(lst)):   # O(n)
+            if lst[j] < lst[i]:     # O(1)
+                break               # O(1)
+    return lst[j]                   # O(1)
 
 
 # O(n) - линейная
 def min_lst_2(lst):
-    a = min(lst)
-    return a
+    a = min(lst)  # O(n)
+    return a      # O(1)
 
 
 range_list = ([i for i in range(10, 100)])
