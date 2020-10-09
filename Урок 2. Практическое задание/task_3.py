@@ -15,3 +15,24 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def rec(num):
+    mul = pow(10, len(str(num)) - 1)
+    if len(str(num)) == 1:
+        return num
+    else:
+        dig = num % 10
+        return dig * mul + rec(num // 10)
+
+
+if __name__ == '__main__':
+    while True:
+        num = input('Введите число: ')
+        if num.isdigit():
+            num = int(num)
+            break
+        else:
+            print('Повторите попытку')
+
+    print(f'Перевернутое число: {rec(num)}')
