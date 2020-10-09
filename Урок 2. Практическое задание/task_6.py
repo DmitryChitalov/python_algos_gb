@@ -9,3 +9,34 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import random
+
+
+def rec(ran, n=0):
+    if n == 9:
+        print(f'Попытки завершены! Загаданное число: {ran}')
+        return
+    while True:
+        num = input('Введите число: ')
+        if num.isdigit():
+            num = int(num)
+            break
+        else:
+            print('Повторите попытку')
+
+    if num == ran:
+        print('Вы отгадали число!')
+        return
+    elif num > ran:
+        print('Введенное число больше, чем то, что загадано')
+    elif num < ran:
+        print('Введенное число меньше, чем то, что загадано')
+
+    rec(ran, n + 1)
+
+
+if __name__ == '__main__':
+    ran = int(100 * random())
+    print(ran)
+    rec(ran)
