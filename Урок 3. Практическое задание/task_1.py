@@ -10,3 +10,53 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+import time
+import random
+my_dict = {}
+my_list = []
+
+
+def my_timer(f):
+    def tmp(*args, **kwargs):
+        start_time=time.time()
+        result=f(*args, **kwargs)
+        delta_time=time.time() - start_time
+        print ('Время выполнения функции {}' .format(delta_time))
+        return result
+    return tmp
+
+
+@my_timer
+def update_list():
+    for i in range(0, 10000000):
+        my_list.append(random.random())         # O(1) - Время выполнения функции 1.558
+
+
+@my_timer
+def update_dict():
+    for i in range(0, 10000000):
+        my_dict.update({i: random.random()})    # O(1) - Время выполнения функции 2.815
+
+
+@my_timer
+def get_list():
+    for i in range(0, 1000000):
+        x = my_list[i:i+3]                     # O(N) - Время выполнения функции 0.140
+
+
+@my_timer
+def get_dict():
+    for i in range(0, 1000000):
+        x = my_dict.get(i)                    # O(1) - Время выполнения функции 0.088
+
+
+update_list()
+update_dict()
+get_list()
+get_dict()
+
+"""
+Измерения показывают что заполнение списка идет быстрее, чем заполнение словаря. Могу предположить что это потому, 
+что при наполнении словаря, под капотом проверяется наличие/отсутствие в словаре данного ключа, для исключения дублей
+Считывание данных из словаря идет несколько быстрее, применяемый метод get имеет O(1), а у списка O(N)
+"""
