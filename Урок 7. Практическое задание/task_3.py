@@ -13,3 +13,26 @@
 arr[m]
 from statistics import median
 """
+
+from statistics import median
+from timeit import timeit
+
+
+def find_median(value):
+    cp_value = value[:]
+    for i in range(len(value) // 2):
+        cp_value.remove(max(cp_value))
+    return max(cp_value)
+
+
+val = [el for el in range(101)]
+print(f'1. find_median = {find_median(val)}')
+print(f'2. median = {int(median(val))}')
+
+print(timeit('find_median(val)',
+             setup='from __main__ import find_median, val',
+             number=10101))
+
+print(timeit('median(val)',
+             setup='from __main__ import median, val',
+             number=10101))
