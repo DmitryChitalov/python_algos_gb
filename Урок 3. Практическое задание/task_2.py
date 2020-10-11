@@ -15,3 +15,22 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+import hashlib
+
+user_pas = input('Введите пароль: ')
+
+hash_salt = "I am salt!".encode('utf-8')
+
+user_pas_hash = hashlib.sha256(user_pas.encode('utf-8') + hash_salt)
+
+print(f'В базе данных хранится строка: {user_pas_hash.hexdigest()}')
+
+user_pas_new = input('Введите пароль еще раз для проверки: ')
+
+user_pas_hash_new = hashlib.sha256(user_pas_new.encode('utf-8') + hash_salt)
+
+if user_pas_hash.hexdigest() == user_pas_hash_new.hexdigest():
+    print('Вы ввели правильный пароль')
+else:
+    print('Вы ввели неправильный пароль')
