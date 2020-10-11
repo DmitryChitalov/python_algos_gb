@@ -13,3 +13,60 @@
 ВНИМАНИЕ: ЗАДАНИЯ, В КОТОРЫХ БУДУТ ГОЛЫЕ ЦИФРЫ ЗАМЕРОВ (БЕЗ АНАЛИТИКИ)
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 """
+
+from memory_profiler import profile
+from timeit import timeit
+from random import randint
+
+
+@profile
+def max_search(top, flag = 0):
+    """ Перебираем каждую пару ключ-значение из словаря.
+        Если значение больше предыдущей пары и ключ ещё не содержится в результате, то добавляем в результат.
+        Повторяем top (второй аргумент функции) раз.
+
+        Квадратичная функция неэффективная из-за вложенного цикла, занимет много памяти.
+    """
+    dic = {f'Company{x}': x * randint(1, 100) for x in range(100_000)}
+    result = {}
+    for n in range(top):
+        max_val = 0
+        top_company = ''
+        for key, value in dic.items():
+            if value > max_val and key not in result.keys():
+                max_val = value
+                top_company = key
+        result[top_company] = max_val
+    if flag == 1:
+        del dic  # решение по оптимизации памяти - удалить словарь, занимающий много места
+    return result
+
+
+max_search(3)
+max_search(3, 1)
+
+""" Python 3.8.0, 64-разрадная ОС 
+
+    В результатах ниже видно, что при наличии объёмных переменных требуется оптимизация памяти. 
+    Самый верный способ – удалить ссылку на объект, после чего за ненадобностью объект будет удалён "сборщиком мусора".
+
+    Вариант 1 (без удаления словаря):
+    Line #    Mem usage    Increment   Line Contents
+    ================================================
+        21     12.5 MiB     12.5 MiB   @profile
+        ...
+        29     21.4 MiB      1.5 MiB       dic = {f'Company{x}': randint(1, 1000) * x for x in range(100_000)}
+        ...
+        39     21.5 MiB      0.0 MiB       if flag == 1:
+        40                                     del dic  # решение по оптимизации памяти - удалить словарь, занимающий много места
+        41     21.5 MiB      0.0 MiB       return result
+    
+    Вариант 2 (с удалением):
+        21     13.1 MiB     13.1 MiB   @profile
+        ...
+        29     21.5 MiB      1.5 MiB       dic = {f'Company{x}': randint(1, 1000) * x for x in range(100_000)}
+        ...
+        39     21.5 MiB      0.0 MiB       if flag == 1:
+        40     13.3 MiB      0.0 MiB           del dic  # решение по оптимизации памяти - удалить словарь, занимающий много места
+        41     13.3 MiB      0.0 MiB       return result
+"""
