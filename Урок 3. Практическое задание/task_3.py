@@ -14,3 +14,11 @@
 р
 а
 """
+
+# Если честно, не понял задание. Как здесь применить хэш...
+
+test_str = 'papa'
+res = [test_str[i: j] for i in range(len(test_str)) 
+          for j in range(i + 1, len(test_str) + 1)] 
+res.remove(test_str)
+print(set(res))

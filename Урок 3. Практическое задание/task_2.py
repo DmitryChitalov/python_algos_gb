@@ -11,7 +11,32 @@
 
 ПРИМЕР:
 Введите пароль: 123
-В базе данных хранится строка: 555a3581d37993843efd4eba1921f1dcaeeafeb855965535d77c55782349444b
+В базе данных хранится строка:
+555a3581d37993843efd4eba1921f1dcaeeafeb855965535d77c55782349444b
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+
+import hashlib
+import uuid
+import getpass
+
+
+def hashed(pswd: str):
+    return hashlib.sha256(pswd.encode() + salt).hexdigest()
+
+
+salt = uuid.uuid4().bytes
+
+password = hashed(getpass.getpass('Введите пароль: '))
+print(f'В базе данных хранится строка: {password}')
+# getpass скрывает пароль при вводе, так больше похоже на жизнь ))
+
+verification = hashed(getpass.getpass
+                    ('Введите пароль еще раз для проверки: '))
+
+if verification == password:
+    print('Вы ввели правильный пароль')
+else:
+    print('Введенные пароли не совпадают!')
