@@ -23,6 +23,7 @@ class UrlCash:
         for i in self.cash_list:
             if i.hexdigest() == url_hash.hexdigest():
                 flag = False
+                break
         return flag
 
     def add_url(self, url):
