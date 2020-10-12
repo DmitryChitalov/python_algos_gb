@@ -16,3 +16,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_even_odd(num, even_count=0, odd_count=0):
+    num_size = len(str(num))
+    current_digit = (num // 10 ** (num_size - 1))
+    if current_digit % 2:
+        odd_count += 1
+    else:
+        even_count += 1
+    if num_size == 1:
+        print(f'Во введенном числе количество четных цифр равно {even_count}, нечетных -  равно {odd_count})')
+    else:
+        count_even_odd(num - current_digit * 10 ** (num_size - 1), even_count, odd_count)
+
+
+if __name__ == '__main__':
+    try:
+        input_number = int(input('Введите натуральное число для проверки: '))
+        if input_number > 0:
+            count_even_odd(input_number)
+        else:
+            print('Ошибка. Отрицательное число не является натуральным.')
+    except ValueError:
+        print('Ошибка. Введено не натуральное число.')

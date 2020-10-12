@@ -28,3 +28,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculate():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation != '0':
+        if operation in ['+', '-', '*', '/']:
+            try:
+                x = int(input('Введите первое число: '))
+                y = int(input('Введите второе число: '))
+            except ValueError:
+                print('Необходимо ввести число, попробуйте еще раз')
+                return calculate()
+            if operation == '+':
+                print(f'{x} + {y} = {x + y}')
+                return calculate()
+            elif operation == '-':
+                print(f'{x} - {y} = {x - y}')
+                return calculate()
+            elif operation == '*':
+                print(f'{x} * {y} = {x * y}')
+                return calculate()
+            elif operation == '/':
+                try:
+                    print(f'{x} / {y} = {x / y}')
+                except ZeroDivisionError:
+                    print('Нельзя делить на ноль.')
+                return calculate()
+        else:
+            print('Запрашиваемая операция не поддерживается!')
+            return calculate()
+    else:
+        print('\nРабота с программой завершена!')
+
+
+if __name__ == '__main__':
+    calculate()
+
