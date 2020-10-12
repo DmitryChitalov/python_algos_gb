@@ -9,4 +9,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
-# TEST
+
+
+def sum_series_numbers(number_in_row, counter=0, number=1.0, sum_of_numbers=0.0):
+    if counter == number_in_row:
+        return f'Количество элементов = {number_in_row}, их сумма = {sum_of_numbers}'
+    elif counter < number_in_row:
+        return sum_series_numbers(number_in_row, counter + 1, number / 2 * -1, sum_of_numbers + number)
+    else:
+        print('Что-то пошло не так')
+
+
+if __name__ == '__main__':
+    print(sum_series_numbers(int(input('Введите количество элементов: '))))
