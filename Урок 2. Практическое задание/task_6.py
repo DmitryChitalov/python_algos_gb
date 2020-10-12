@@ -9,3 +9,23 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+x = randint(0, 100)
+
+
+def guess(try_count, x):
+    player_number = int(input('Угадайте число: '))
+    if try_count <= 1 or x == player_number:
+        if x == player_number:
+            print('Поздравляю, вы угадали!')
+        print(f'загаданное число - {x}')
+    else:
+        if x > player_number:
+            print('Ваше число меньше загаданного')
+        elif x < player_number:
+            print('Ваше число больше загаданного')
+        guess(try_count - 1, x)
+
+
+guess(10, x)
