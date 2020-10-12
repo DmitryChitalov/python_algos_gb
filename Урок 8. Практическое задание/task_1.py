@@ -12,3 +12,67 @@
 ВНИМАНИЕ: примеры заданий будут размещены в последний день сдачи.
 Но постарайтесь обойтись без них.
 """
+"""
+Задание 1.
+Реализуйте кодирование строки "по Хаффману".
+У вас два пути:
+1) тема идет тяжело? тогда вы можете, опираясь на пример с урока, сделать свою версию алгоритма
+Разрешается и приветствуется изменение имен переменных, выбор других коллекций, различные изменения
+и оптимизации.
+КОПИПАСТ ПРИМЕРА ПРИНИМАТЬСЯ НЕ БУДЕТ!
+2) тема понятна? постарайтесь сделать свою реализацию.
+Вы можете реализовать задачу, например, через ООП или предложить иной подход к решению.
+
+ВНИМАНИЕ: примеры заданий будут размещены в последний день сдачи.
+Но постарайтесь обойтись без них.
+"""
+
+line = input("Введите строку для кодирования: ")
+
+"""Хаффман через коллекции и ООП"""
+from collections import Counter, deque
+
+
+def haffman(line):
+    count = Counter(line)
+    sort_elem = deque(sorted(count.items(), key=lambda item: item[1]))
+    if len(sort_elem) > 1:
+        while len(sort_elem) > 1:
+            weight = sort_elem[0][1] + sort_elem[1][1]
+            o_elem = {0: sort_elem.popleft()[0],
+                      1: sort_elem.popleft()[0]}
+            for i, _count in enumerate(sort_elem):
+                if weight > _count[1]:
+                    continue
+                else:
+                    sort_elem.insert(i, (o_elem, weight))
+                    break
+            else:
+                sort_elem.append((o_elem, weight))
+    else:
+        weight = sort_elem[0][1]
+        comb = {0: sorted_elem.popleft()[0], 1: None}
+        sorted_elements.append((comb, weight))
+    return sort_elem[0][0]
+
+
+code_table = dict()
+
+
+def haf_code(elem, path=''):
+    if not isinstance(elem, dict):
+        code_table[elem] = path
+    
+    else:
+        haf_code(elem[0], path=f'{path}0')
+        haf_code(elem[1], path=f'{path}1')
+
+
+haf_code(haffman(line))
+
+for i in line:
+    print(f'{i}: {code_table[i]}')
+
+"""
+Пока не очень получилось разобраться в данной теме. Попробовала немного видоизменить код из лекции
+"""
