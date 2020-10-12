@@ -15,3 +15,38 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+def get_salt():
+    """
+    Функция создания соли.
+    :return: str
+    """
+    import uuid
+    return uuid.uuid4().hex
+
+def hashing(passw: str, salt):
+    """
+    Функция хеширования введенного папроля.
+    :param passw: str
+    :return: hash
+    """
+    import hashlib
+    return hashlib.sha256(salt.encode() + passw.encode()).hexdigest()
+
+def auth(passw: str, hash_obj, salt):
+    """
+    Функция проверки пароля.
+    :param passw: str
+    :param hash_obj: str
+    :param salt:str
+    :return:None
+    """
+    if hashing(passw, salt) == hash_obj:
+        print('Введён правильный пароль.')
+    else:
+        print('Пароль неверен!')
+    return
+
+salt = get_salt()
+passw = hashing(input('Введите пароль: '), salt)
+print(f'В базе данных хранится строка: {passw}')
+auth(input('Введите пароль ещё раз для проверки: '), passw, salt)
