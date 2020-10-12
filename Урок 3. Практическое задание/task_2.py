@@ -53,7 +53,6 @@ while next_inter:
             user_passw.append(hash_pass)
             user_value = input("Ведите 'Пароль' еще раз: ")
             if user_value != "":
-                hash_pass = ""
                 hash_pass = encode_passwd(user_value)
                 if hash_pass == user_passw[1]:
                     print(f"Пароли совпадают {hash_pass} :: {user_passw[1]}")
