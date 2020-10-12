@@ -16,10 +16,10 @@ import random
 def time_check(func):
     def timech_func(num):
         start_time = time.time()
-        func(num)
+        result = func(num)
         end_time = time.time()
         print(end_time - start_time)
-        return func(num)
+        return result
     return timech_func
 
 
@@ -43,17 +43,16 @@ data2 = dict_creator(3000000) # --> 1.4749236106872559 для миллиона �
 
 test_num = random.randint(0, 1000000)
 start_time = time.time()
-print(data1.index((f'test_key{test_num}', test_num), 0, 1000000))
+print('Index:', data1.index((f'test_key{test_num}', test_num), 0, 1000000))
 end_time = time.time()
 
 print(f'Print list result = {end_time - start_time}')
 
 start_time = time.time()
-print(data2[f'test_key{test_num}'])
+print('Value:', data2[f'test_key{test_num}'])
 end_time = time.time()
 
 print(f'Print dict result = {end_time - start_time}')
-print(type(data1))
 
 """
 Данные функции написаны по единому шаблону, на каждой итерации добавляется по паре значений,
