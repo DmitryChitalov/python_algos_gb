@@ -15,3 +15,14 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+
+salt = 'password'
+
+pswd = hashlib.sha256(salt.encode() + input('Введите пароль ').encode()).hexdigest()
+chec_pswd = hashlib.sha256(salt.encode() + input('Введите пароль еще раз ').encode()).hexdigest()
+
+if pswd == chec_pswd:
+    print('Вы ввели правильный пароль')
+else:
+    print('Вы ввели не правильный пароль')
