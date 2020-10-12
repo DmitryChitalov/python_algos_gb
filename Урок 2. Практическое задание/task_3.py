@@ -15,3 +15,18 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def recursive_reverse():
+	to_reverse =input("Введите число ")
+
+	reversed_ = ""
+
+	for n in to_reverse:
+		reversed_ = n+reversed_
+
+	print(reversed_)
+
+	return recursive_reverse()
+
+print(recursive_reverse())

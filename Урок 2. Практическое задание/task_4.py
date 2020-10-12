@@ -9,3 +9,43 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+a=1
+i=1
+n = int(input("Введите количество элементов: "))
+"""
+def sum_range(a,i,n):
+	if i == n:
+		return a
+		
+	print(a)
+		
+	b = a/-2
+
+	print(b)
+
+	a=a+b
+	print(a)
+
+	i+=1
+
+
+	return(sum_range(a, i, n))
+
+"""
+#Дмитрий, по личным обстоятельствам я  не успел доделать дз. в понедельник обязательно обновлю этот ПР и напишу вам в личку
+"""
+def recursive_sum_range(a,i,n):
+	if i == n:
+		return a
+	i += 1
+
+	print(a)
+	a/=-2
+	print(a)
+	return(a+recursive_sum_range(a,i,n))
+
+
+print(f"итог: {recursive_sum_range(a,i,n)}")
+"""
+
