@@ -13,7 +13,7 @@
 
 import time
 
-
+##делаем декоратор
 def time_counter(func):
     def time_count(*args):
         start_time = time.time()
