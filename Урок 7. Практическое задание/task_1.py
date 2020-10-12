@@ -12,3 +12,69 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+
+
+import timeit
+import random
+
+
+def bubble_sort_1(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+
+def bubble_sort_2(lst_obj):
+    n = 1
+    idx = 0
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+                idx = 1
+        n += 1
+        if idx == 0:
+            return lst_obj
+    return lst_obj
+
+
+
+orig_list = [random.randint(-100, 100) for _ in range(1000)]
+#orig_list = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1]
+
+# замеры 1000
+print('Замеры времени неоптимизированной функции')
+print(timeit.timeit("bubble_sort_1(orig_list[:])", setup="from __main__ import bubble_sort_1, orig_list", number=1))
+
+
+orig_list = [random.randint(-100, 100) for _ in range(1000)]
+
+# замеры 1000
+print('------------------------------------------')
+print('Замеры времени оптимизированной функции')
+print(timeit.timeit("bubble_sort_2(orig_list[:])", setup="from __main__ import bubble_sort_2, orig_list", number=1))
+
+"""
+результаты замеров:
+
+Замеры времени неоптимизированной функции
+0.103345682
+------------------------------------------
+Замеры времени оптимизированной функции
+0.104258605
+
+Анализ: оптимизация не дала эффекта.
+Зато вот если массив уже отсортированный попался, тогда всё намного эффективнее
+(но где ж такой массив в реальной жизни взять?):
+
+Замеры времени неоптимизированной функции
+0.108610421
+------------------------------------------
+Замеры времени оптимизированной функции
+0.00011097299999998644
+
+"""
