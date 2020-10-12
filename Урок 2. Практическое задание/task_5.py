@@ -18,4 +18,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
-# TEST
+
+import binascii
+
+
+def ascii_function(first_element_number=32, last_element_number=127, current_element_number=0):
+    if current_element_number < first_element_number:
+        current_element_number = first_element_number
+    output_string = f'{current_element_number} - {str(binascii.a2b_hex(f"{hex(current_element_number)}"[2:]))[2:-1]}'
+    if current_element_number != first_element_number and not (current_element_number - first_element_number + 1) % 10:
+        output_string += '\n'
+    if current_element_number == last_element_number:
+        return output_string
+    else:
+        return output_string + ' ' + ascii_function(first_element_number, last_element_number,
+                                                    current_element_number + 1)
+
+
+if __name__ == '__main__':
+    print(ascii_function())
+    # print(ascii_function(40, 100, 20))
