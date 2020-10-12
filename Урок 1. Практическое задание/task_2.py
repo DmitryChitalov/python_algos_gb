@@ -11,9 +11,36 @@
 Сложность такого алгоритма: O(n) - линейная.
 
 Примечание:
-Построить список можно через генератор списка.
+Построить список можно через генераторное выражение.
 Если у вас возникают сложности, постарайтесь подумать как можно решить задачу,
 а не писать "мы это не проходили)".
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+from random import randint
+
+
+def min_number(lst):
+    for i in lst:
+        is_min = True
+        for x in lst:
+            if i > x:
+                is_min = False
+        if is_min:
+            return i
+
+
+def min_number2(lst):
+    min_val = lst[0]
+    for i in lst:
+        if i < min_val:
+            min_val = i
+    return min_val
+
+
+
+lst = [randint(0, 40) for i in range(20)]
+print(lst)
+print(min_number(lst))
+print(min_number2(lst))
