@@ -13,3 +13,35 @@
 arr[m]
 from statistics import median
 """
+
+
+from statistics import median
+from random import randint
+
+
+def median_of_array(arr):
+    result = None
+    for idx in range(len(arr)):
+        right = []
+        left = []
+        #print('обнуление')
+        for jdx in range(len(arr)):
+            if arr[idx] >= arr[jdx]:
+                left.append(arr[jdx])
+            if arr[idx] <= arr[jdx]:
+                right.append(arr[jdx])
+            if arr[idx] == arr[jdx] and idx > jdx:
+                left.append(arr[jdx])
+            if arr[idx] == arr[jdx] and idx < jdx:
+                right.append(arr[jdx])
+        if len(left) == len(right):
+            result = arr[idx]
+            return f'медиана из функции: {result}'
+
+
+user_list = [randint(0, 100) for _ in range(9)]
+print(user_list)
+a = sorted(user_list)
+print(a)
+print(median_of_array(user_list))
+print(f'медиана из модуля статистика: {median(user_list)}')
