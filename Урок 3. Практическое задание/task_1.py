@@ -10,3 +10,90 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+
+
+import time
+from uuid import uuid4
+
+
+def time_exec_decorate(decorated_func):
+    """Функция-декоратор для вывода времени выполнения функций
+
+    :param decorated_func: Функция, для которой замеряется время выполнения
+    """
+    def func_wrapper(*arg1):
+        start_time = time.time()
+        result = decorated_func(*arg1)
+        print(f"Время выполнения функции: {time.time() - start_time}")
+        return result
+    return func_wrapper
+
+
+@time_exec_decorate
+def list_gen(length):
+    """Функция для генерации списка случайными данными
+
+    :param length: Требуемая длина списка
+    :return: Возвращает список определенной длины со случайными значениями
+    """
+    return [uuid4().hex for i in range(length)]
+
+
+@time_exec_decorate
+def dict_gen(length):
+    """Функция для генерации словаря со случайными данными
+
+    :param length: Требуемая количество данных в словаре
+    :return: Возвращает словарь с определенным количеством случайных данных
+    """
+    return {i: uuid4().hex for i in range(length)}
+    # return {str(i): uuid4().hex for i in range(length)}
+
+
+@time_exec_decorate
+def get_from_list(lst):
+    return [lst[i] for i in range(len(lst))]
+
+@time_exec_decorate
+def get_from_dict(dct):
+    return [dct[i] for i in range(len(dct))]
+    # return [dct[str(i)] for i in range(len(dct))]
+
+
+##################################
+# Наполнение списка и словаря
+default_length = 100000
+
+print("Генерация списка")
+example_list = list_gen(default_length)
+# >>> Время выполнения функции: 0.5270402431488037
+print(f"В новом сгенерированном списке {len(example_list)} элементов")
+
+print("Генерация словаря")
+example_dict = dict_gen(default_length)
+# >>> Время выполнения функции: 0.5400402545928955
+print(f"В новом сгенерированном словаре {len(example_dict)} элементов")
+
+"""
+Наполнение списка данными в среднем немного быстрее чем наполнение словаря.
+Вероятно это из-за особенностей хранения данных,
+т.к. у словаря помимо ключей на данные создаются индексы (создается хеш-таблица).
+"""
+
+##################################
+# Запрос даных из списка и словаря
+
+print("Запрос данных из списка")
+some_list = get_from_list(example_list)
+# >>> Время выполнения функции: 0.014001846313476562
+print(f"Количество элементов в списке из списка: {len(some_list)}")
+
+print("Запрос данных из словаря")
+some_dict = get_from_dict(example_dict)
+# >>> Время выполнения функции: 0.012000322341918945
+print(f"Количество элементов в списке из словаря: {len(some_dict)}")
+
+"""
+Запрос данных из словаря в среднем немного быстрее чем из списка.
+Вот тут уже сказывается эффект хеш-таблиц.
+"""
