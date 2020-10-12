@@ -16,3 +16,20 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def counter(x, even=0, odd=0):
+    if x == 0:
+        print(f'Во веденном числе {even} четных и {odd} нечетных чисел')
+    else:
+        x1 = x % 10
+        if x1 % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        x = x // 10
+        counter(x, even, odd)
+
+
+counter(0)
+counter(123)
+counter(3456)
+counter(6751879236476)
