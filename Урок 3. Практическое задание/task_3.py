@@ -14,3 +14,13 @@
 р
 а
 """
+
+if __name__ == '__main__':
+    s_str = 'qwerty'
+    n = len(s_str)
+    s_dict = {}
+    for i in range(0, n):
+        for j in range(0, n):
+            s_dict[s_str[i:n-j+i]] = ''
+    s_dict.pop(s_str)
+    print(s_dict.keys())
