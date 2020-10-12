@@ -14,3 +14,17 @@
 р
 а
 """
+
+# Не совсем понял, как и зачем здесь использовать хэш, в остальном вроде получилось.
+
+string = input('Введите строку из строчных латинских букв: ')
+words_set = set([])
+count = set()
+
+for i in range(len(string)):
+    for j in range(len(string) - 1 if i == 0 else len(string), i, -1):
+        words_set.add(string[i:j])
+        count.add(string[i:j])
+for i in words_set:
+    print(i)
+print(f'Количество подстрок в строке: {len(count)}')
