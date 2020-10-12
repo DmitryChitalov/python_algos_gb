@@ -15,3 +15,33 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+from uuid import uuid4
+import hashlib
+
+
+def authorization(hex_dig_res='', salt=''):
+    # проверка на первый вход
+    if hex_dig_res == '':
+        user_pass = input('Введите пароль: ')
+        salt = uuid4().hex
+        user_pass_hash = hashlib.sha256(salt.encode() + user_pass.encode())
+        hash_obj = user_pass_hash.hexdigest()
+        print(hash_obj)
+        # передаём соль, для повторной проверки
+        return authorization(hash_obj, salt)
+    else:
+        user_pass = input('Введите пароль ещё раз: ')
+        user_pass_hash = hashlib.sha256(salt.encode() + user_pass.encode())
+        print(user_pass_hash.hexdigest())
+
+        if hex_dig_res == user_pass_hash.hexdigest():
+            print('Successfully')
+            return True
+        else:
+            print('Collapse')
+            return False
+
+
+if __name__ == '__main__':
+    entrance = authorization()
