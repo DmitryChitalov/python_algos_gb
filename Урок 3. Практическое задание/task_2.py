@@ -15,3 +15,25 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+
+def hash_creator(line):
+    return hashlib.sha256(bytes(line) + bytes((str(pow(len(line), 2))*len(line)).encode(encoding='UTF=8'))).hexdigest()
+
+pwd = str(input("Enter your password: ")).encode(encoding='UTF=8')
+hash_pwd = hash_creator(pwd)
+print(hash_pwd)
+
+check_pwd = str(input("Enter your password: ")).encode(encoding='UTF=8')
+hash_tpwd = hash_creator(check_pwd)
+print(hash_tpwd)
+
+if hash_pwd == hash_tpwd:
+    print("Correct")
+else:
+    print("Access denied!")
+
+
+
+
+
