@@ -15,3 +15,17 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def rec_num(number, rev_num=0):
+	"""Делал по примеру 2го урока"""
+	if number == 0:
+		return rev_num
+
+	else:
+		rev_num = (rev_num * 10) + (number % 10)  # про умножение сам не додумался (((
+		number //= 10
+		return rec_num(number, rev_num)
+
+
+print(rec_num(1234))
