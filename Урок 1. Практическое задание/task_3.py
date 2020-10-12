@@ -22,3 +22,34 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+company_info = {'Macdonalds': 10000,
+                'Adidas': 15000,
+                'Puma': 20000,
+                'Apple': 30000,
+                'Coca-Cola': 40000,
+                'Nike': 50000,
+                'Ikea': 100000,
+                'Rebok': 35000,
+                'Google': 65000}
+
+# O(n*log n)
+dictionary = list(company_info.items())
+dictionary.sort(key=lambda i: i[1], reverse=True)
+for i in range(3):
+    print(dictionary[i][0], ':', dictionary[i][1])
+
+
+# O(n) самый лучший вариант, хотя более длинный
+
+def max_company(companu_input):
+    max_input = {}
+    list_d = dict(companu_input)
+    for i in range(3):
+        maximum = max(list_d.items(), key=lambda k_v: k_v[1])
+        del list_d[maximum[0]]
+        max_input[maximum[0]] = maximum[1]
+    return max_input
+
+
+print(max_company(company_info))
