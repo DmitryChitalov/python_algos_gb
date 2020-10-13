@@ -39,7 +39,6 @@ while i <= 2:          #O(N)
 print(lst_max_profit);                              #O(1)
 
 #2 -
-lst_max_profit2=[]   # O(1)
 dict2 = {             # O(1)
     'firm_1': 50000,
     'firm_2': 60000,
@@ -47,6 +46,13 @@ dict2 = {             # O(1)
     'firm_4': 2000,
     'firm_5': 2000
 }
-print(sorted(dict2.values())[-3:]); #O(N logN) Получается линейно-логарифмическая, менее эфф, чем линейная
+dict_max_profit2= list(dict2.items()) #O(N)
+dict_max_profit2.sort(key=lambda i: i[1],reverse=True) #O(NlogN)
+for i in range(3):
+    print(dict_max_profit2[i][0]);  #O(N)
+
+#O(N logN) Получается линейно-логарифмическая, менее эфф, чем линейная
+#print(dict2.keys(sorted(dict2.values())[-3:]);
+
 
 

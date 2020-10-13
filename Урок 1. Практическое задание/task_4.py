@@ -27,3 +27,36 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+some_users = {'user1':{'pswd':'1234', 'activated': True},
+         'user2':{'pswd':'1234', 'activated': False},
+         'user3':{'pswd':'1234', 'activated': True},
+         'user4':{'pswd':'1234', 'activated': False}
+         }
+#линейная
+def to_authorise (users, user_login, user_pswd):
+    for key, value in users.items():  #O(N)
+        if key == user_login:
+            if value['pswd'] == user_pswd and value['activated'] == True:
+                return ('Welcome!')
+            elif value['pswd'] == user_pswd and value['activated'] == False:
+                return ('You should activate your account')
+            elif value['pswd'] != user_pswd:
+                return ('Wrong password')
+    return 'No such a user';
+
+to_authorise(some_users, 'user3', '1234');
+
+#Константная
+
+def to_authorise_2 (users, user_login, user_pswd):
+    if users.get(user_login):          #O(1)
+        if users[user_login]['pswd'] == user_pswd and users[user_login]['activated']:
+            print('Welcome!')
+        elif users[user_login]['pswd'] == user_pswd and not users[user_login]['activated']:
+            print ('You should activate your account')
+        elif users[user_login]['pswd'] != user_pswd:
+            print ('Wrong password')
+        else:
+            print('No such a user');
+
+to_authorise_2(some_users, 'user1', '1234');
