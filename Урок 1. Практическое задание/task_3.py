@@ -22,3 +22,37 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+#1 - опускаем все константы, получаеися O(N) - линейная. Эфф. Если смысл определения верен, в чем сомнения есть.
+lst_max_profit = [] # O(1)
+dict = {             # O(1)
+    'firm_1': 50000,
+    'firm_2': 60000,
+    'firm_3': 10000,
+    'firm_4': 2000,
+    'firm_5': 2000
+}
+i = 0                  #O(1)
+while i <= 2:          #O(N)
+    lst_max_profit.append(max(dict, key=dict.get))  #O(1)
+    dict.pop(max(dict, key=dict.get))               #O(1)
+    i+=1                                            #O(1)
+print(lst_max_profit);                              #O(1)
+
+#2 -
+dict2 = {             # O(1)
+    'firm_1': 50000,
+    'firm_2': 60000,
+    'firm_3': 10000,
+    'firm_4': 2000,
+    'firm_5': 2000
+}
+dict_max_profit2= list(dict2.items()) #O(N)
+dict_max_profit2.sort(key=lambda i: i[1],reverse=True) #O(NlogN)
+for i in range(3):
+    print(dict_max_profit2[i][0]);  #O(N)
+
+#O(N logN) Получается линейно-логарифмическая, менее эфф, чем линейная
+#print(dict2.keys(sorted(dict2.values())[-3:]);
+
+
+
