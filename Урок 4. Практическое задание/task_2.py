@@ -79,3 +79,34 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+############################################
+def my_reverse(num):
+    return int(str(num)[::-1])
+
+
+print('Собственная функция реверса через строки')
+print(
+    timeit(
+        'my_reverse(num_100)',
+        setup='from __main__ import my_reverse, num_100',
+        number=10000))
+print(
+    timeit(
+        'my_reverse(num_1000)',
+        setup='from __main__ import my_reverse, num_1000',
+        number=10000))
+print(
+    timeit(
+        'my_reverse(num_10000)',
+        setup='from __main__ import my_reverse, num_10000',
+        number=10000))
+
+
+"""
+В целом меморизация тут помогла, но только для повторного реверса,
+т.е. анализ методом timeit() функции с меморизацией не объективен! На единичном использовании разницы нет.
+По этому предложил свою функцию, которая реверсирует цисло через обратный срез строки.
+В итоге оказалось на порядок быстрее.
+"""
