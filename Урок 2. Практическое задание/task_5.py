@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+#я бы точно сама не додумалась. Разобранный пример не с первого раза поняла. и про chr не знала 
+
+def ascii_func(num_from,num_to, output = ''):
+    for i in range(num_from, num_to):
+        if i <= last_number:
+            output += f' {i} - {chr(i)} '
+    print(output)
+    if num_to < last_number:
+        return ascii_func(num_from+step, num_to+step)
+
+first_number=32
+last_number = 127
+step=10
+
+ascii_func(first_number, first_number+step);

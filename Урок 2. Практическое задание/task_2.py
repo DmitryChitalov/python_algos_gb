@@ -16,3 +16,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def count_dig(n, even=0, noteven=0):
+   if n==0:
+       return (f'В числе -  {even} четных и  {noteven} нечетных цифр')
+   else:
+        dig=n%10
+        n=n//10
+        if dig%2 == 0:
+            even+=1
+            return count_dig(n, even, noteven);
+        else:
+            noteven+=1
+        return count_dig(n, even, noteven);
+#(f'В числе {n} -  {len(lsteven)} четных и  {len(lstnoteven)} нечетных цифр')
+   # count_dig(n//10)
+print(count_dig(5623));
