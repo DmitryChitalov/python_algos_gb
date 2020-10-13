@@ -35,7 +35,7 @@ if __name__ == '__main__':
     print(timeit.timeit("func_1(nums)", setup="from __main__ import func_1, nums", number=10000))
     print(timeit.timeit("func_2(nums)", setup="from __main__ import func_2, nums", number=10000))
 """
-    В качестве оптимизации: заменил цикл генераторным выжением
+    В качестве оптимизации: заменил цикл генераторным выражением
     При значении number=1000 - разница практически не заметна, но при увеличении number=10000
     герераторное выражение стабильно быстрее 
 """
