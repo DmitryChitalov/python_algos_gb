@@ -25,7 +25,7 @@ def get_salt():
 
 def hashing(passw: str, salt):
     """
-    Функция хеширования введенного папроля.
+    Функция хеширования введенного пароля.
     :param passw: str
     :return: hash
     """
@@ -46,7 +46,8 @@ def auth(passw: str, hash_obj, salt):
         print('Пароль неверен!')
     return
 
-salt = get_salt()
-passw = hashing(input('Введите пароль: '), salt)
-print(f'В базе данных хранится строка: {passw}')
-auth(input('Введите пароль ещё раз для проверки: '), passw, salt)
+if __name__ == '__main__':
+    salt = get_salt()
+    passw = hashing(input('Введите пароль: '), salt)
+    print(f'В базе данных хранится строка: {passw}')
+    auth(input('Введите пароль ещё раз для проверки: '), passw, salt)

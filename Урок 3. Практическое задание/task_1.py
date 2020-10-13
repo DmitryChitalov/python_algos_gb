@@ -66,30 +66,43 @@ def filling_alt(object, filler):
     """
     if type(object) is list:
         for i in filler:
-            object.insert(i, -1)
+            object.insert(i, True)
     elif type(object) is dict:
-        object.fromkeys(filler, True)
+        object = object.fromkeys(filler, True)
     else:
         print('Переданный объект не может быть обработан.')
     return object
 
-print('Заполняем список в цикле for...')
-filling_for([], range(99999999))
-print('Заполняем словарь в цикле for...')
-filling_for({}, range(99999999))
-print('Используем генератор списка...')
-filling_gen([], range(99999999))
-print('Используем генератор словаря...')
-filling_gen({}, range(99999999))
-print('Используем альтернативный метод списка...')
-filling_alt([], range(99999999))
-print('Используем альтернативный метод словаря...')
-filling_alt({}, range(99999999))
+@check
+def operate(object, n):
+    import random
+    object[random.randint(0, n)]
+    object[random.randint(0, n)] = False
+    del(object[random.randint(0, n)])
 
+if __name__ == '__main__':
+    length = 9999
+    print('Заполняем список в цикле for...')
+    filling_for([], range(length))
+    print('Заполняем словарь в цикле for...')
+    filling_for({}, range(length))
+    print('Используем генератор списка...')
+    filling_gen([], range(length))
+    print('Используем генератор словаря...')
+    filling_gen({}, range(length))
+    print('Используем альтернативный метод списка...')
+    trial_list = filling_alt([], range(length))
+    print('Используем альтернативный метод словаря...')
+    trial_dict = filling_alt({}, range(length))
+    print('Проверим операции над списком...')
+    operate(trial_list, length)
+    print('Проверим операции над словарем...')
+    operate(trial_dict, length)
 """
 Выводы: самый быстрый способ (из представленных) заполнения словаря
 сравним по скорости с самым медленным способом заполнения списка. Такая
 разница в скорости обусловлена накладными расходами на хеширование,
 которые несёт словарь, и которые отсутствуют в списке. В противовес
-этому словарь значительно превосходит список в скорости поиска. 
+этому словарь значительно превосходит список в скорости поиска, т.к.
+сложность . 
 """
