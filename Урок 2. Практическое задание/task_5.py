@@ -18,3 +18,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+# for i in range(32, 128):
+#     print("%4d-%s" % (i, chr(i)), end='')
+#     if i % 10 == 0:
+#         print()
+#
+# print()
+
+def ascii_rec(from_symbol, to_symbol, string = ''):
+    for i in range(from_symbol, to_symbol):
+        if i <= to_symbol:
+            string += f'{i} - {chr(i)}'
+    print(string)
+    if to_symbol < LAST_ASCII_NUM:
+        return ascii_rec(from_symbol + STEP, to_symbol + STEP)
+
+
+first_ascii_num = 32
+STEP = 10
+LAST_ASCII_NUM = 127
+
+ascii_rec(first_ascii_num, first_ascii_num + STEP)
