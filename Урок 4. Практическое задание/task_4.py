@@ -10,6 +10,8 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -37,5 +39,35 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    m = 0
+    num = 0
+    array_new = list(set(array))
+    for i in array_new:
+        count = array.count(i)
+        if count > m:
+            m = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(
+    "timeit функции func_1: "
+    f"{timeit('func_1()', setup='from __main__ import func_1', number=1000000)}")
+print(
+    "timeit функции func_2: "
+    f"{timeit('func_2()', setup='from __main__ import func_2', number=1000000)}")
+print(
+    "timeit функции func_3: "
+    f"{timeit('func_3()', setup='from __main__ import func_3', number=1000000)}")
+
+# timeit функции func_1: 3.2097005000000003
+# timeit функции func_2: 3.8547765999999997
+# timeit функции func_3: 3.0218748999999994
+
+# Вывод: задача ускорена за счет сокращения ненужных переборов с заведомо повторяющимися значениями (такая цель задачи)
