@@ -15,3 +15,19 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+
+def pswd_check():
+    pswd = input('Введите пароль:')
+    salt = 'All you need is love'
+    hash_hex_salt_pswd = hashlib.sha256(pswd.encode()+salt.encode()).hexdigest()
+    print(hash_hex_salt_pswd)
+    pswd_check = input('Введите еще раз пароль для проверки:')
+    hash_hex_salt_pswd_check = hashlib.sha256(pswd_check.encode()+salt.encode()).hexdigest()
+    print(hash_hex_salt_pswd_check)
+    if hash_hex_salt_pswd == hash_hex_salt_pswd_check:
+        return ('Пароль верный')
+    else:
+        return ('Неверный пароль')
+
+print(pswd_check());
