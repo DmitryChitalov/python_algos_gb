@@ -17,7 +17,7 @@ from random import randint
 
 def recursive_reverse(number):
     if number == 0:
-        return str(number % 10)
+        return ''
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
@@ -79,3 +79,7 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+# Вывод: изначально я думал, что мемоизация не нужна, т.к. по сути ведь предыдущий результат не используется в функциях
+# никак, но после проверки и многих брейкпоинтов в коде выяснил, что мемоизация в действительности значительно ускоряет
+# выполнение кода, что на данный момент полностью я понять не могу...
