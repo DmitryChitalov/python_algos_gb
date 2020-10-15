@@ -27,3 +27,26 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+def authorization(users: dict, user_name: str, user_password: str) -> str:
+    if users.get(user_name):
+        if users[user_name]['password'] == user_password and users[user_name]['activation']:
+            return 'Welcome! Enjoy our resource!'
+        elif users[user_name]['password'] == user_password and not users[user_name]['activation']:
+            return 'Please complete activation to continue.'
+        elif users[user_name]['password'] != user_password:
+            return 'Your password is incorrect.'
+    else:
+        'This user dose not exist'
+
+
+my_users = {
+    'user1': {'password': '12345678', 'activation': True},
+    'user2': {'password': '12345678', 'activation': True},
+    'user3': {'password': '12345678', 'activation': False},
+    'user4': {'password': '12345678', 'activation': True},
+    'user5': {'password': '12345678', 'activation': False},
+
+}
+
