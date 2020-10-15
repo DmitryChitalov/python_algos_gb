@@ -10,7 +10,9 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+import timeit
+
+array = [1, 5, 3, 1, 3, 4, 5, 1, 5]
 
 
 def func_1():
@@ -37,5 +39,35 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    m = 0
+    num = 0
+    for i in set(array):
+        count = array.count(i)
+        if count > m:
+            m = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
 print(func_1())
 print(func_2())
+
+print(
+    timeit.timeit(
+        "func_1()",
+        setup='from __main__ import func_1',
+        number=10000))  # время на функцию 1) 0.04517428
+print(
+    timeit.timeit(
+        "func_2()",
+        setup='from __main__ import func_2',
+        number=10000))  # время на функцию 2) 0.046113685
+# по факту 2 вариант та же функция, только в профиль. Через раз выдаёт, что выполняется даже быстрее 1
+print(
+    timeit.timeit(
+        "func_3()",
+        setup='from __main__ import func_3',
+        number=10000))  # время на функцию 3) 0.022407060000000006
+# копируем алгоритм из 1 и добавляем set() в цикле for, что уменьшает количество ненужных проверок с одинаковыми числами
