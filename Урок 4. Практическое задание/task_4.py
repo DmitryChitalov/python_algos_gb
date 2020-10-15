@@ -9,10 +9,11 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from timeit import timeit
 
-array = [1, 3, 1, 3, 4, 5, 1]
+array = [1, 3, 1, 3, 3, 3, 4, 5, 1]
 
-
+print(timeit("""
 def func_1():
     m = 0
     num = 0
@@ -23,8 +24,9 @@ def func_1():
             num = i
     return f'Чаще всего встречается число {num}, ' \
            f'оно появилось в массиве {m} раз(а)'
+"""))
 
-
+print(timeit("""
 def func_2():
     new_array = []
     for el in array:
@@ -35,7 +37,17 @@ def func_2():
     elem = array[new_array.index(max_2)]
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
-
-
+"""))
+'''
 print(func_1())
 print(func_2())
+'''
+print(timeit("""
+def func_3():
+    d = dict.fromkeys(array, 0)
+    for c in array: d[c] += 1
+    list_d = list(d.items())
+    list_d.sort(key=lambda i: i[1])
+    return f'Чаще всего встречается число {list_d[-1][0]}, ' \
+               f'оно появилось в массиве {list_d[-1][1]} раз(а)'
+"""))
