@@ -9,8 +9,10 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+import timeit
+from collections import Counter
 
-array = [1, 3, 1, 3, 4, 5, 1]
+array = [3, 1, 1, 3, 4, 5, 1, 4]
 
 
 def func_1():
@@ -37,5 +39,21 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    max_number = max(array, key=array.count)
+    return f'Чаще всего встречается число {max_number}, ' \
+           f'оно появилось в массиве {array.count(max_number)} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print("func_1() = {}".format(timeit.timeit("func_1()", setup="from __main__ import func_1", number=100000)))
+print("func_2() = {}".format(timeit.timeit("func_2()", setup="from __main__ import func_2", number=100000)))
+print("func_3() = {}".format(timeit.timeit("func_3()", setup="from __main__ import func_3", number=100000)))
+
+"""
+    Думал методы Counter быстрые, но ошибся - не ожидал 
+    Переделал на макс каунт - чуть быстрее
+"""
