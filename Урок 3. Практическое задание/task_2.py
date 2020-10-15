@@ -15,3 +15,23 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+import hashlib
+
+i = 0
+while i < 3:
+    salt = '123'
+    usr_password = input('Введите пароль: ')
+    password_res = hashlib.sha256(salt.encode() + usr_password.encode()).hexdigest()
+    print(f'В базе данных хранится строка: {password_res}')
+    password_accept = input('Введите пароль ещё раз для проверки: ')
+    accept_res = hashlib.sha256(salt.encode() + password_accept.encode()).hexdigest()
+
+    if password_res == accept_res:
+        print('Вы ввели правильный пароль')
+        break
+    else:
+        print(f'Попоробуйте ещё раз, у вас отслаось ещё {i} попыток: ')
+        i += 1
+else:
+    print('Вы ичерпали попытки вода на сегодня попробуйте завтра')
