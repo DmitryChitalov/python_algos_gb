@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -79,3 +80,34 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+print("- " * 50)
+
+
+def reverse_number(n):
+    n_list = list(str(n))
+    n_list.reverse()
+    n2 = "".join(n_list)
+    return f'"Обратное" ему число: {n2}'
+
+print('Самописная функция не оптимизированная reverse_number')
+print(
+    timeit(
+        'reverse_number(num_100)',
+        setup='from __main__ import reverse_number, num_100',
+        number=10000))
+print(
+    timeit(
+        'reverse_number(num_1000)',
+        setup='from __main__ import reverse_number, num_1000',
+        number=10000))
+print(
+    timeit(
+        'reverse_number(num_10000)',
+        setup='from __main__ import reverse_number, num_10000',
+        number=10000))
+
+"""
+    Да, мемоизация, существенно ускоряет работу 
+"""
