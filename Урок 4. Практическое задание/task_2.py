@@ -79,3 +79,37 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Мемоизация в данном решении помогает, поскольку цифры исходного числа,
+помещённые в словарь, извлекаются в дальнейшем крайне быстро. Настолько
+быстро, что затраченное на их поиск время даже незаметно в текущих
+примерах.
+Также обратил внимание на то, что в функции recursive_reverse() допущена
+ошибка. В базовом случае нужно возвращать не return str(number % 10), а
+return ''. В оптимизированном алгоритме ошибки уже нет.
+"""
+def str_reverse(number):
+    """
+    Мой вариант разворота числа. Он немного медленнее, чем рекурсия с
+    мемоизацией, но значительно быстрее обычной и не настолько
+    требователен к памяти.
+    """
+    return str(number)[::-1]
+
+print('Оптимизированная функция str_reverse')
+print(
+    timeit(
+        'str_reverse(num_100)',
+        setup='from __main__ import str_reverse, num_100',
+        number=10000))
+print(
+    timeit(
+        'str_reverse(num_1000)',
+        setup='from __main__ import str_reverse, num_1000',
+        number=10000))
+print(
+    timeit(
+        'str_reverse(num_10000)',
+        setup='from __main__ import str_reverse, num_10000',
+        number=10000))
