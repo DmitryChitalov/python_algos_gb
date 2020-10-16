@@ -10,7 +10,11 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+import timeit
+from collections import Counter
+
 array = [1, 3, 1, 3, 4, 5, 1]
+count = {}
 
 
 def func_1():
@@ -37,5 +41,18 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+# мои варианты
+non_Counter = """Counter()"""
+setup = "from collections import Counter"
+
+count = Counter(array)
+
 print(func_1())
 print(func_2())
+print(count)
+
+print(timeit.timeit("func_1()", setup="from __main__ import func_1", number=100000))
+print(timeit.timeit("func_2()", setup="from __main__ import func_2", number=100000))
+print(sum(timeit.repeat(non_Counter, setup=setup, number=100000)))
+
+# Пока что мой вариант самый долгий, хотя сам год короткий
