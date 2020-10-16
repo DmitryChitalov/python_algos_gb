@@ -25,3 +25,49 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+def set_org(data: str):
+    from collections import namedtuple
+
+    org_template = namedtuple('Organisation', 'name qrt_1 qrt_2 qrt_3 qrt_4')
+    data = data.split()
+    if len(data) != 5:
+        print('Введённые данные некорректны.')
+        return
+    try:
+        org = org_template(name=data[0], qrt_1=int(data[1]), qrt_2=int(data[2]),
+                           qrt_3=int(data[3]), qrt_4=int(data[4]))
+        return org
+    except ValueError:
+        print('Введённые данные некорректны.')
+        return
+
+def stat(org_list: list):
+    print(org_list)
+    if not org_list:
+        print('Нет предприятий для обработки.')
+        return
+    orgs = {org.name: (org.qrt_1 + org.qrt_2 + org.qrt_3 + org.qrt_4)
+            for org in org_list}
+    avg = sum(orgs.values()) / len(orgs)
+    print(f'Средняя годовая прибыль всех предприятий: {avg}.')
+    print('Предприятия, с прибылью выше среднего значения:')
+    for k,v in orgs.items():
+        if v < avg:
+            print(k, end=' ')
+    print()
+    print('Предприятия, с прибылью ниже среднего значения:')
+    for k,v in orgs.items():
+        if v > avg:
+            print(k, end=' ')
+
+if __name__ == '__main__':
+    org_list = []
+    while True:
+        data = input('Введите через пробел название предприятия и прибыль за '
+                     'каждый квартал года данного предприятия.\nЕсли хотите '
+                     'прекратить ввод, напишите "stop": ')
+        if data == 'stop':
+            break
+        elif set_org(data):
+            org_list.append(set_org(data))
+    stat(org_list)
