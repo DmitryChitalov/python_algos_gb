@@ -10,6 +10,8 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -37,5 +39,23 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    pass
+
+
 print(func_1())
 print(func_2())
+
+
+print(timeit.timeit("func_1()", setup="from __main__ import func_1", number=100000))
+print(timeit.timeit("func_2()", setup="from __main__ import func_2", number=100000))
+# print(timeit.timeit("func_3()", setup="from __main__ import func_2", number=100000))
+
+"""
+Первый вариант функции быстрей второго.
+Первый вариант линейная функция, второй вариант квадратичная
+
+Не успел написать свой вариан, до истечения срока  сдачи
+возможно реализовать поиск через lamda функцию.
+Досдам к следующему занятию
+"""
