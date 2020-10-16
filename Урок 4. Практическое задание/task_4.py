@@ -10,6 +10,9 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+import timeit
+from collections import Counter
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -37,5 +40,34 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    return f'{sorted([(i,array.count(i)) for i in set(array)],key=lambda t:t[1])[-1]}'
+
+
+def func_4():
+    counter = Counter(array)
+    return f'{(max(counter, key=counter.get))}'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+print(func_4())
+
+print(timeit.timeit("func_1()", setup="from __main__ import func_1", number=100000))
+print(timeit.timeit("func_2()", setup="from __main__ import func_2", number=100000))
+print(timeit.timeit("func_3()", setup="from __main__ import func_3", number=100000))
+print(timeit.timeit("func_4()", setup="from __main__ import func_4", number=100000))
+"""
+Первый вариант функции быстрей второго.
+Первый вариант линейная функция, второй вариант квадратичная
+Сделал 3-й и 4-й вариант получились еще дольше.
+
+
+1 - 0.2524426
+2 - 0.3702309
+3 - 0.38827829999999997
+4 - 0.44741680000000006
+
+Попробовал еще два варианта, все только медленней.
+"""
