@@ -25,3 +25,46 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import defaultdict
+
+
+def much_smaller(user_dict, average):
+    """
+    Функция принимает defaultdict предприятий и среднее годовое значение прибыли всех предприятий
+    Возвращает наименования в виде 2ух списков, 1) больше, 2) меньши среднего значения прибыли
+    """
+    much = []
+    smaller = []
+    for name_ent, profit in user_dict.items():
+        if profit > average:
+            much.append(name_ent)
+        else:
+            smaller.append(name_ent)
+    return much, smaller
+
+
+enterprise_profit = defaultdict(int)
+count = int(input('Введите количество предприятий для расчета прибыли: '))
+# цикл фо для заполнения словаря предприятие:прибыль
+for i in range(count):
+    sum_ = 0
+    name = input('Введите название предприятия: ')
+    p = input("через пробел введите прибыль данного предприятия"
+              "\nза каждый квартал(Всего 4 квартала):").split()
+    # высчитываем сумму за весь год
+    for i in p:
+        sum_ += int(i)
+    enterprise_profit[name] = sum_
+
+print(enterprise_profit)
+# прибль всех предприятий за год
+sum_ = 0
+for n, p in enterprise_profit.items():
+    sum_ += p
+print('Средняя годовая прибыль всех предприятий: ', sum_/count)
+
+# функция возвращает больше/меньше
+t = much_smaller(enterprise_profit, sum_/count)
+print('Предприятия, с прибылью выше среднего значения: ', t[0])
+print('Предприятия, с прибылью ниже среднего значения: ', t[1])
