@@ -10,10 +10,13 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+
+from timeit import timeit
+
+test_arr = [1, 3, 1, 3, 4, 5, 1, 3, 3, 3]
 
 
-def func_1():
+def func_1(array):
     m = 0
     num = 0
     for i in array:
@@ -25,7 +28,7 @@ def func_1():
            f'оно появилось в массиве {m} раз(а)'
 
 
-def func_2():
+def func_2(array):
     new_array = []
     for el in array:
         count2 = array.count(el)
@@ -37,5 +40,23 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3(array):
+    return max(array, key=array.count)
+
+
+print(func_1(test_arr))
+print(func_2(test_arr))
+print(func_3(test_arr))
+
+print(timeit('func_1(test_arr)',
+             'from __main__ import func_1, test_arr', number=100000))
+
+print(timeit('func_2(test_arr)',
+             'from __main__ import func_2, test_arr', number=100000))
+
+print(timeit('func_3(test_arr)',
+             'from __main__ import func_3, test_arr', number=100000))
+
+"""
+Вывод - реализация через встроенную функцию max быстрее всего
+"""
