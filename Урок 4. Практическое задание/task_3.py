@@ -9,6 +9,8 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
+import cProfile
+import timeit
 
 
 def revers(enter_num, revers_num=0):
@@ -34,3 +36,20 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+user_num = int(input('Введите число: '))
+print('Рекурсия:', timeit.timeit('revers(user_num)',
+                                 setup='from __main__ import revers, user_num', number=10000))
+print('Цыкл:', timeit.timeit('revers_2(user_num)',
+                             setup='from __main__ import revers_2, user_num', number=10000))
+print('Срез:', timeit.timeit('revers_3(user_num)',
+                             setup='from __main__ import revers_3, user_num', number=10000))
+
+cProfile.run('revers(1000000)')
+cProfile.run('revers_2(1000000)')
+cProfile.run('revers_3(1000000)')
+
+"""
+Срезы эффективнее всего.
+В сразах отствутют арефмитичиские выражения. 
+"""
