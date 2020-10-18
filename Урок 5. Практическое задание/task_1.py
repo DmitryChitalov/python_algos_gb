@@ -25,3 +25,42 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+RES = namedtuple('Company', 'quarter1 quarter2 quarter3 quarter4')
+# заполняем шаблон данными
+RESUME_PARTS1 = RES(
+    quarter1='1',
+    quarter2='Ivan',
+    quarter3='Ivan',
+    quarter4='Ivanov'
+)
+RESUME_PARTS2 = RES(
+    quarter1='2',
+    quarter2='45',
+    quarter3='Iv455an',
+    quarter4='Ivano4545v'
+)
+print(RESUME_PARTS1)  # -> Resume(id='1', first_name='Ivan', second_name='Ivanov')
+print(RESUME_PARTS2)  # -> Resume(id='1', first_name='Ivan', second_name='Ivanov')
+print(RESUME_PARTS2.quarter2)  # -> 1
+
+
+def company_data(count_comp, count=0):
+    if count_comp == count:
+        print(RES)
+        return
+    print(count)
+    RES(
+        Company=input("Введите название предприятия: "),
+        quarter1=int(input("введите прибыль данного предприятия за 1 квартал: ")),
+        quarter2=int(input("введите прибыль данного предприятия за 2 квартал: ")),
+        quarter3=int(input("введите прибыль данного предприятия за 3 квартал: ")),
+        quarter4=int(input("введите прибыль данного предприятия за 4 квартал: "))
+    )
+    company_data(count_comp, count + 1)
+
+
+# company_data(int(input("Введите количество предприятий для расчета прибыли: ")))
+# print(RES)
