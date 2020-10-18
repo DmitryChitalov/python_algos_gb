@@ -30,12 +30,12 @@ def timer(f):
 
 @timer
 def create_list():
-    lst=[i for i in range(1,50000)]
+    lst = [i for i in range(1,50000)]
     return lst
 
 @timer
 def create_dict():
-    dct={a:a for a in range(1, 50000)}
+    dct = {a:a for a in range(1, 50000)}
     return dct
 
 #print(create_list());
@@ -70,7 +70,7 @@ print(pop_from_dct());
 def pop_from_lst():
     lst = [i for i in range(1, 50000)]
     for i in lst:
-        if i==2:
+        if i == 2:
             lst.pop(i)
             return lst
 
