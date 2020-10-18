@@ -10,7 +10,7 @@
 """
 import hashlib
 
-cache_pages={}
+cache_pages = {}
 
 
 def ch_url(url):
@@ -18,7 +18,7 @@ def ch_url(url):
     if url in cache_pages:
         print('This URL is already in.')
     else:
-        hash_salt_url= hashlib.sha256(url.encode()+salt.encode()).hexdigest()
+        hash_salt_url = hashlib.sha256(url.encode()+salt.encode()).hexdigest()
         cache_pages.update({url:hash_salt_url})
         print(cache_pages)
 
