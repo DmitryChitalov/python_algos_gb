@@ -21,10 +21,10 @@ def fun():
     set_variations = set()
     N = len(s)
     for i in range(N):
-        if i==0:
-            N=len(s)-1
+        if i == 0:
+            N = len(s)-1
         else:
-            N=len(s)
+            N = len(s)
             for j in range(N, i,-1):
                 #print(s[i:j])
                 set_variations.add(hashlib.md5(s[i:j].encode()).hexdigest())
