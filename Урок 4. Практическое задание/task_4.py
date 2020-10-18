@@ -10,8 +10,11 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+from random import randint
+from timeit import timeit
 
+#array = [1, 3, 1, 3, 4, 5, 1]
+array = [randint(0, 9) for i in range(100)]
 
 def func_1():
     m = 0
@@ -37,5 +40,27 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    elem = max(array, key=array.count)
+    max_2 = array.count(elem)
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_2} раз(а)'
+
+
+print(array)
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit('func_1()', 'from __main__ import func_1', number=10000))
+print(timeit('func_2()', 'from __main__ import func_2', number=10000))
+print(timeit('func_3()', 'from __main__ import func_3', number=10000))
+
+"""
+Оптимизировать можно, только полностью перейдя на встроенные функции. Что и доказывают замеры:
+1.7103761789985583
+1.6925942139969266
+1.6212087439998868
+Хотя разница невелика.
+"""
+
