@@ -68,6 +68,7 @@ if __name__ == '__main__':
                      'прекратить ввод, напишите "stop": ')
         if data == 'stop':
             break
-        elif set_org(data):
+        elif set_org(data):RU
+
             org_list.append(set_org(data))
     stat(org_list)

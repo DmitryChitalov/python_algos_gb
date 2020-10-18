@@ -20,7 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f7f2030-83f4-4c9d-afa3-30acc8006caa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_4.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_4.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +47,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
-  <component name="RunManager" selected="Python.task_1 (1)">
+  <component name="RunManager" selected="Python.task_4">
     <configuration name="task_1 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python_algos_gb" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -65,19 +69,19 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="task_1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="task_2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python_algos_gb" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="/usr/bin/python3.6" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 4. Практическое задание" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 5. Практическое задание" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 4. Практическое задание/task_1.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 5. Практическое задание/task_2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -94,11 +98,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 4. Практическое задание" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 5. Практическое задание" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 4. Практическое задание/task_3.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 5. Практическое задание/task_3.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -115,11 +119,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 4. Практическое задание" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 5. Практическое задание" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 4. Практическое задание/task_4.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 5. Практическое задание/task_4.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -151,11 +155,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.task_1 (1)" />
-        <item itemvalue="Python.task_5" />
-        <item itemvalue="Python.task_1" />
         <item itemvalue="Python.task_4" />
         <item itemvalue="Python.task_3" />
+        <item itemvalue="Python.task_2" />
+        <item itemvalue="Python.task_1 (1)" />
+        <item itemvalue="Python.task_5" />
       </list>
     </recent_temporary>
   </component>
@@ -180,8 +184,13 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="345" y="78" width="732" height="637" key="#Inspections" timestamp="1602931985375">
+      <screen x="67" y="27" width="1299" height="741" />
+    </state>
+    <state x="345" y="78" width="732" height="637" key="#Inspections/67.27.1299.741/1366.0.1024.768@67.27.1299.741" timestamp="1602931985375" />
     <state x="174" y="54" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602827927158">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
@@ -190,22 +199,22 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="499" y="154" width="424" height="484" key="FileChooserDialogImpl/67.27.1299.741/1366.0.1024.768@67.27.1299.741" timestamp="1602868642907" />
-    <state width="1276" height="181" key="GridCell.Tab.0.bottom" timestamp="1602880452398">
+    <state width="1276" height="243" key="GridCell.Tab.0.bottom" timestamp="1603017475601">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1276" height="181" key="GridCell.Tab.0.bottom/67.27.1299.741/1366.0.1024.768@67.27.1299.741" timestamp="1602880452398" />
-    <state width="1276" height="181" key="GridCell.Tab.0.center" timestamp="1602880452398">
+    <state width="1276" height="243" key="GridCell.Tab.0.bottom/67.27.1299.741/1366.0.1024.768@67.27.1299.741" timestamp="1603017475601" />
+    <state width="1276" height="243" key="GridCell.Tab.0.center" timestamp="1603017475600">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1276" height="181" key="GridCell.Tab.0.center/67.27.1299.741/1366.0.1024.768@67.27.1299.741" timestamp="1602880452398" />
-    <state width="1276" height="181" key="GridCell.Tab.0.left" timestamp="1602880452398">
+    <state width="1276" height="243" key="GridCell.Tab.0.center/67.27.1299.741/1366.0.1024.768@67.27.1299.741" timestamp="1603017475600" />
+    <state width="1276" height="243" key="GridCell.Tab.0.left" timestamp="1603017475600">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1276" height="181" key="GridCell.Tab.0.left/67.27.1299.741/1366.0.1024.768@67.27.1299.741" timestamp="1602880452398" />
-    <state width="1276" height="181" key="GridCell.Tab.0.right" timestamp="1602880452398">
+    <state width="1276" height="243" key="GridCell.Tab.0.left/67.27.1299.741/1366.0.1024.768@67.27.1299.741" timestamp="1603017475600" />
+    <state width="1276" height="243" key="GridCell.Tab.0.right" timestamp="1603017475601">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state width="1276" height="181" key="GridCell.Tab.0.right/67.27.1299.741/1366.0.1024.768@67.27.1299.741" timestamp="1602880452398" />
+    <state width="1276" height="243" key="GridCell.Tab.0.right/67.27.1299.741/1366.0.1024.768@67.27.1299.741" timestamp="1603017475601" />
     <state x="205" y="31" key="SettingsEditor" timestamp="1602828941373">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
