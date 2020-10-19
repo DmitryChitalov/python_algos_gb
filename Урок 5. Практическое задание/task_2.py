@@ -11,3 +11,29 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+from collections import deque
+
+def hex_sum(x, y):
+    x = "".join([i for i in x])
+    y = "".join([i for i in y])
+    print(x)
+    print(y)
+    s = hex((int(float.fromhex(x) + float.fromhex(y))))
+    print(s)
+    s = deque(s[::].upper())
+    print(f"Сумма: {s}")
+
+
+def hex_mul(x, y):
+    x = "".join([i for i in x])
+    y = "".join([i for i in y])
+    s = hex((int(float.fromhex(x) * float.fromhex(y))))
+    s = deque(s[::].upper())
+    print(f"Произведение: {s}")
+
+
+x = deque(input("Введите первое число: "))
+y = deque(input("Введите второе число: "))
+
+hex_sum(x, y)
+hex_mul(x, y)
