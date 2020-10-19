@@ -11,7 +11,7 @@
 
 Добавьте аналитику: что вы сделали и почему
 """
-
+# TEST
 from timeit import timeit
 
 
