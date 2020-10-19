@@ -82,7 +82,7 @@ print(
 
 
 def slice_reverse(number):
-    return int(str(number)[::-1])
+    return str(number)[::-1]
 
 
 print('Функция slice_reverse')
@@ -105,7 +105,7 @@ print(
 
 @memoize
 def slice_reverse_mem(number):
-    return int(str(number)[::-1])
+    return str(number)[::-1]
 
 
 print('Оптимизированная функция slice_reverse_mem')
