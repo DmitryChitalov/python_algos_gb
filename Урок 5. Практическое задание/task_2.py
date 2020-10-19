@@ -11,3 +11,15 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+from collections import deque
+
+first_num = deque(input("Enter first HEX-num: "))
+second_num = deque(input("Enter second HEX-num: "))
+
+hex = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+# я понимаю что изобретаю не самый нужный велосипед
+
+def hex_sum(first, second, iter):
+    pass
+
+# тут была бы полезна рекурсия
