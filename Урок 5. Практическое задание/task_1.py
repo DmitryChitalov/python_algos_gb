@@ -27,3 +27,37 @@
 """
 import collections
 
+
+def nt_reader(counter: int):
+    data = []
+    comp_data = collections.namedtuple("Company", 'Name income_1q income_2q income_3q income_4q')
+    while counter > 0:
+        cur_corp = comp_data(
+            Name=input("Укажите название компании: "),
+            income_1q=int(input("Прибыль за 1-й квартал: ")),
+            income_2q=int(input("Прибыль за 2-й квартал: ")),
+            income_3q=int(input("Прибыль за 3-й квартал: ")),
+            income_4q=int(input("Прибыль за 4-й квартал: ")),
+        )
+        data.append(cur_corp)
+        counter -= 1
+    return data
+
+
+corp_num = int(input("Укажите количество компаний для подсчёта: "))
+corp_list = nt_reader(corp_num)
+t_mid_income = 0
+
+for corp in corp_list:
+    t_mid_income += (corp.income_1q + corp.income_2q + corp.income_3q + corp.income_4q)/len(corp_list)
+
+print(f'Средняя прибыль: {t_mid_income}')
+
+for corp in corp_list:
+    mid_income = corp.income_1q + corp.income_2q + corp.income_3q + corp.income_4q
+    if mid_income == t_mid_income:
+        print(f'{corp.Name} - годовая прибыль равна средней')
+    elif mid_income < t_mid_income:
+        print(f'{corp.Name} - годовая прибыль ниже средней')
+    else:
+        print(f'{corp.Name} - годовая прибыль выше средней')
