@@ -25,3 +25,34 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+horns = namedtuple('Horns', 'first_quarter second_quarter third_quarter fourth_quarter')
+
+hoofs = namedtuple('hoofs', 'first_quarter second_quarter third_quarter fourth_quarter')
+
+horns_company = horns(
+    first_quarter=235,
+    second_quarter=345634,
+    third_quarter=55,
+    fourth_quarter=235
+)
+
+hoofs_company = hoofs(
+    first_quarter=345,
+    second_quarter=34,
+    third_quarter=543,
+    fourth_quarter=34
+)
+
+res_horns = (horns_company.first_quarter + horns_company.second_quarter + horns_company.third_quarter
+             + horns_company.fourth_quarter) / 4
+
+res_hoofs = (hoofs_company.first_quarter + hoofs_company.second_quarter + hoofs_company.third_quarter
+             + hoofs_company.fourth_quarter) / 4
+
+if res_horns > 43389.38:
+    print('Предприятия, с прибылью выше среднего значения: Рога \n'
+          'Предприятия, с прибылью ниже среднего значения: Копыта')
+
