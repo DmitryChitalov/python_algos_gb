@@ -16,3 +16,53 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+"""
+Первые два варианта просто мой ход мыслей, воторой рабочий но через цикл
+Третий уже ваш вариант с урока.
+"""
+
+
+# a = int(input('Please enter a number:'))
+#
+#
+# def even_odd_counter(a):
+#     even = 0
+#     odd = 0
+#     if int(str(a % 2) + str(even_odd_counter(a // 10))) == 0:
+#         even += 1
+#     else:
+#         odd += 1
+#     return print(f'Количество четных и нечетных цифр в числе равно: ({even, odd})')
+#
+# even_odd_counter(a)
+
+
+# even = 0
+# odd = 0
+#
+# while a > 0:
+#     if a % 2 == 0:
+#         even += 1
+#     else:
+#         odd += 1
+#     a = a // 10
+# print(f'Количество четных и нечетных цифр в числе равно: ({even, odd})')
+
+
+def recur_even_odd_counter(num: int, even=0, odd=0) -> str:
+    if num == 0:
+        return print(f'Количество четных и нечетных цифр в числе равно: ({even, odd})')
+    else:
+        cur_num = num % 10
+        num = num // 10
+        if cur_num % 2 == 0:
+            even += 1
+            return recur_even_odd_counter(num, even, odd)
+        else:
+            odd += 1
+            return recur_even_odd_counter(num, even, odd)
+
+
+num = int(input('Enter your number:'))
+recur_even_odd_counter(num)

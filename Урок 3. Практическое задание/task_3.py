@@ -14,3 +14,20 @@
 р
 а
 """
+import hashlib
+
+
+s = input('Ведите строку: ').lower()
+r = set()
+
+n = len(s)
+for i in range(n):
+    if i ==0:
+        n == len(s) - 1
+    else:
+        n = len(s)
+    for k in range(n, i, -1):
+        r.add(hashlib.sha256(s[i:k].encode()).hexdigest())
+
+print(r)
+print(f'Количество подстрок в строке {s} равно {len(r)}')

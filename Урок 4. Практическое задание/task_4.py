@@ -9,6 +9,8 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+import timeit
+
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -37,5 +39,5 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+print(timeit.timeit('func_1()', setup='from __main__ import func_1, array', number=1000))
+print(timeit.timeit('func_2()', setup='from __main__ import func_2, array', number=1000))
