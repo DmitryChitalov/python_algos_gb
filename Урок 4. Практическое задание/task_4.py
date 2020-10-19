@@ -9,8 +9,11 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
-
-array = [1, 3, 1, 3, 4, 5, 1]
+from timeit import timeit
+from random import randint
+# array = [1, 3, 1, 3, 4, 5, 1]
+array = [randint(1, 11) for _i in range(20)]
+print(array)
 
 
 def func_1():
@@ -37,5 +40,19 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    el = max(array, key=array.count)
+    return f'Чаще всего встречается число {el}, ' \
+           f'оно появилось в массиве {array.count(el)} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit("func_1()", setup="from __main__ import func_1"))
+print(timeit("func_2()", setup="from __main__ import func_2"))
+print(timeit("func_3()", setup="from __main__ import func_3"))
+
+"""3-й вариант самый быстры за счет использования встроенных функци
+"""
