@@ -11,13 +11,64 @@
 
 Добавьте аналитику: что вы сделали и почему
 """
-
-from timeit import timeit
+import timeit
+from timeit import Timer
 
 
 def func_1(nums):
-    new_arr = []
-    for i in range(len(nums)):
-        if nums[i] % 2 == 0:
-            new_arr.append(i)
-    return new_arr
+	# nums = [3, 54, 6, 7, 3, 13, 23, 12, 17, 41, 44]
+	new_arr = []
+	for i in range(len(nums)):
+		if nums[i] % 2 == 0:
+			new_arr.append(i)
+	return new_arr
+
+
+def func_2(nums):
+	new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+	return new_arr
+
+
+arr_nums = [num for num in range(1000)]
+###########################################
+print("func_1: ", timeit.timeit("func_1(arr_nums)",
+                                "from __main__ import func_1, arr_nums",
+                                number=10000))
+
+print("func_2: ", timeit.timeit("func_2(arr_nums)",
+                                "from __main__ import func_2, arr_nums",
+                                number=10000))
+print("*" * 40)
+############################################
+t1 = Timer(
+	"func_2(arr_nums)",
+	"from __main__ import func_2, arr_nums")
+#############################################
+print("сохранение четных елементов одного списка в другом, в функции_2, занимает: ", t1.timeit(number=10000),
+      "миллисекунд")
+rep_t1 = Timer.repeat(t1, repeat=6, number=10000)  # повторяем данное кол-во запусков несколько раз
+# print(rep_t1)
+
+med_time = sum(rep_t1) / len(rep_t1)  # вычисление среднего значения( для среднего значения, ха! =:~) =:~) =:~) =:~) )
+print(f"Среднее значение для {len(rep_t1)} запусков: ", med_time)
+"""
+Среднее значение на одной машинке при 10000 повторений: 
+	func_1: 3.725706427998375
+	func_2: 3.598350077998475
+	t1 : 3.2900932249904145
+	med_time : 3.3426280709997322
+	
+Среднее значение на второй(по разному, это лучшее):
+	timeit: 2.5831367810260012
+	t1 : 2.54028319300050498
+	med_time : 2.33098176916670735
+
+Среднее значение при 100 000 повторений:
+	func_1: 33.32190441300918
+	func_2: 22.91065355099272
+	t1(func_2): 22.75026907499705
+	med_time(func_2): 30.63634260883312  
+	
+В общем, генератор побыстрее будет, как еще ускорить я хз...
+на 1000 000 не запускал, это капец как долго будет...
+"""
