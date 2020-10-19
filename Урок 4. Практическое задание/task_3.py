@@ -9,7 +9,9 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
-# TEST
+import cProfile
+from timeit import timeit
+from random import randint
 
 
 def revers(enter_num, revers_num=0):
@@ -35,3 +37,22 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+number = randint(100000000000000000000000000, 1000000000000000000000000000000000000)
+print(number)
+
+
+def main():
+    revers(number)
+    revers_2(number)
+    revers_3(number)
+
+
+print(timeit('revers(number)', 'from __main__ import revers, number', number=10000))
+print(timeit('revers_2(number)', 'from __main__ import revers_2, number', number=10000))
+print(timeit('revers_3(number)', 'from __main__ import revers_3, number', number=10000))
+cProfile.run('main()')
+
+"""Вторая быстрее первой за счет исключения рекурсии, 
+третья быстрее второй за счет использования встроенных методов преобразования.
+"""
