@@ -15,3 +15,34 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+
+import hashlib
+from uuid import uuid4
+
+
+# Для примера алгоритма хранения и сравнения пароля будет использоваться соль из модуля uuid
+# (что для примера достаточно)
+salt = uuid4().hex
+
+
+def hashing_pass(password):
+    """Функция для хеширования пароля с использованием соли
+
+    :param password: Пароль пользователя
+    :return: Возвращает посоленный и захешированный пароль
+    """
+    global salt
+    return hashlib.sha3_256(salt.encode() + password.encode()).hexdigest()
+
+
+#########################################
+pswrd = input("Введите пароль: ")
+pswrd_hash = hashing_pass(pswrd)
+print(f"В «БД» записан хеш пароля: {pswrd_hash}")
+
+pswrd = input("Введите пароль еще раз: ")
+if hashing_pass(pswrd) == pswrd_hash:
+    print("Вы ввели правильный пароль!")
+else:
+    print("Не правильно!")
