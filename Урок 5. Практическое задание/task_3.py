@@ -21,31 +21,49 @@ dq = deque()
 
 
 def append(a, el_count=100):
+    """Добавление элементов списка (или очереди deque) в конец
+
+    """
     for _ in range(el_count):
         a.append(randint(0, 100))
 
 
 def pop(a, el_count=100):
+    """Извлечение элементов списка (или очереди deque) с конца
+
+    """
     for _ in range(el_count):
         a.pop()
     
 
 def list_insert_left(a, el_count=100):
+    """Добавление элементов списка в начало
+
+    """
     for _ in range(el_count):
         a.insert(0, randint(-100, -1))
 
 
 def list_pop_left(a, el_count=100):
+    """Извлечение элементов списка из начала
+
+    """
     for _ in range(el_count):
         a.pop(0)
     
 
 def deque_append_left(a,el_count=100):
+    """Добавление элементов очереди deque в начало
+
+    """
     for _ in range(el_count):
         a.appendleft(randint(-100, -1))
 
 
 def deque_pop_left(a, el_count=100):
+    """Извлечение элементов очереди deque из начала
+
+    """
     for _ in range(el_count):
         a.popleft()
 
@@ -79,11 +97,23 @@ def test_deque(a, el_count=100):
 
 
 def repeat_test_list(a, el_count=100, repeat=3):
+    """Тестирование списков несколько раз
+
+    :param a: Список list
+    :param el_count: Количество элементов для добавления/извлечения
+    :param repeat: Сколько раз повторить
+    """
     for _ in range(repeat):
         test_list(a, el_count)
 
 
 def repeat_test_deque(a, el_count=100, repeat=3):
+    """Тестирование очередей несколько раз
+
+    :param a: Очередь
+    :param el_count: Количество элементов для добавления/извлечения
+    :param repeat: Сколько раз повторить
+    """
     for _ in range(repeat):
         test_deque(a, el_count)
 
@@ -143,4 +173,23 @@ cProfile.run('repeat_test_deque(dq, 10000, 3)')
    152844    0.013    0.000    0.013    0.000 {method 'getrandbits' of '_random.Random' objects}
     30000    0.002    0.000    0.002    0.000 {method 'pop' of 'collections.deque' objects}
     30000    0.002    0.000    0.002    0.000 {method 'popleft' of 'collections.deque' objects}
+"""
+
+""" Вывод:
+deque при тестировании cProfile показал значительно лучшие результаты чем списки list,
+особенно что касается обращений к началу списка:
+
+Наполнение случайными данными (append):
+    list()      -> 0.434
+    deque()     -> 0.379
+Извлечение данных с конца (pop):
+    list()      -> 0.007
+    deque()     -> 0.007
+Добавление случайных данных в начало (list_insert_left / deque_append_left):
+    list()      -> 2.088
+    deque()     -> 0.373
+Извлечение данных с начала (list_pop_left / deque_pop_left):
+    list()      -> 0.305
+    deque()     -> 0.006
+
 """

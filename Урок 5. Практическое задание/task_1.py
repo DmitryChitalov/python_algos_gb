@@ -26,7 +26,7 @@
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
 
-from collections import namedtuple, Counter
+from collections import namedtuple
 
 
 companies = []
@@ -52,5 +52,5 @@ while True:
 
 average_all = sum([c.average for c in companies]) / len(companies)
 print(f"Средняя годовая прибыль всех предприятий: {round(average_all, 2)}")
-print(f"Предприятия, с прибылью выше среднего значения: {', '.join([c.name for c in companies if c.average > average_all])}\n")
+print(f"Предприятия, с прибылью выше или равной среднего значения: {', '.join([c.name for c in companies if c.average >= average_all])}\n")
 print(f"Предприятия, с прибылью ниже среднего значения: {', '.join([c.name for c in companies if c.average < average_all])}")
