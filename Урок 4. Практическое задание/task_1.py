@@ -13,6 +13,7 @@
 """
 
 from timeit import timeit
+from typing import List, Any, Callable
 
 
 def func_1(nums):
@@ -21,3 +22,14 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    new_arr = [i for i, el in enumerate(nums) if el % 2 == 0]
+    return new_arr
+
+
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
+print(timeit("func_1(nums)", setup="from __main__ import func_1, nums"))
+print(timeit("func_1(nums)", setup="from __main__ import func_1, nums"))
