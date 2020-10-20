@@ -11,8 +11,7 @@
 Если у вас есть идеи, предложите вариант оптимизации.
 """
 
-from timeit import timeit
-from random import randint
+import timeit
 
 
 def recursive_reverse(number):
@@ -21,26 +20,9 @@ def recursive_reverse(number):
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
-num_100 = randint(10000, 1000000)
-num_1000 = randint(1000000, 10000000)
-num_10000 = randint(100000000, 10000000000000)
+number = 1000
 
-print('Не оптимизированная функция recursive_reverse')
-print(
-    timeit(
-        "recursive_reverse(num_100)",
-        setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
-print(
-    timeit(
-        "recursive_reverse(num_1000)",
-        setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
-print(
-    timeit(
-        "recursive_reverse(num_10000)",
-        setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+print(timeit.timeit("recursive_reverse(number)", setup="from __main__ import recursive_reverse, number"))
 
 
 def memoize(f):
@@ -57,25 +39,13 @@ def memoize(f):
 
 
 @memoize
-def recursive_reverse_mem(number):
+def recursive_reverse__1(number):
     if number == 0:
-        return ''
-    return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
+        return str(number % 10)
+    return f'{str(number % 10)}{recursive_reverse__1(number // 10)}'
 
 
-print('Оптимизированная функция recursive_reverse_mem')
-print(
-    timeit(
-        'recursive_reverse_mem(num_100)',
-        setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
-print(
-    timeit(
-        'recursive_reverse_mem(num_1000)',
-        setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
-print(
-    timeit(
-        'recursive_reverse_mem(num_10000)',
-        setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+print(timeit.timeit("recursive_reverse__1(number)", setup="from __main__ import recursive_reverse__1, number"))
+"""
+Используя мемоизацию скорость программы увеличилась
+"""
