@@ -11,6 +11,11 @@
 """
 
 
+from timeit import timeit
+import cProfile
+from random import randint
+
+
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
         return
@@ -34,3 +39,22 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+test_num = randint(100000000000000, 1000000000000000)
+print(revers(test_num))
+
+print(timeit('revers(test_num)',
+             'from __main__ import revers, test_num', number=1000000))
+
+print(timeit('revers_2(test_num)',
+             'from __main__ import revers_2, test_num', number=1000000))
+
+print(timeit('revers_3(test_num)',
+             'from __main__ import revers_3, test_num', number=1000000))
+
+cProfile.run('revers(test_num)')
+cProfile.run('revers_2(test_num)')
+cProfile.run('revers_3(test_num)')
+
+"""Вывод: наиболее эффективна реализация через срезы, так как это
+оптимизированное встроенное средство"""
