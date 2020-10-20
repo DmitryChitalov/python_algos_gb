@@ -22,3 +22,28 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+my_dict = {'Фирма 6': 60000, 'Фирма 5': 50000, 'Фирма 1': 10000, 'Фирма 2': 20000, 'Фирма 3': 30000, 'Фирма 4': 40000}
+
+
+#  Решение 1
+#  O(n log n )
+
+my_dict_copy = list(my_dict.items())         # O(1)
+my_dict_copy.sort()                          # O(n log n)
+print(f'Решение 1:  {my_dict_copy[(len(my_dict_copy))-3:]}')  # O(1)
+
+
+#  Решение 2
+# O(n)
+my_max = {}
+my_dict_copy2 = my_dict
+
+for i in range(3):
+    max_value = max(my_dict_copy2.items(), key=lambda k_v: k_v[1])
+    del my_dict_copy2[max_value[0]]
+    my_max[max_value[0]] = max_value[1]
+print(f'Решение 2: {my_max}')
+
+
+

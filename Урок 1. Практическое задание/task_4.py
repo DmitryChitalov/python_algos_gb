@@ -27,3 +27,59 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+user = {
+    'user_1': [1111, 'no'],
+    'user_2': [2222, 'no'],
+    'user_3': [3333, 'yes'],
+    'user_4': [3333, 'yes'],
+    'user_5': [3333, 'yes'],
+    'user_6': [3333, 'yes'],
+    'user_7': [3333, 'yes'],
+    'user_8': [3333, 'yes'],
+    'user_9': [3333, 'yes'],
+    'user_10': [3333, 'no']
+}
+
+
+# Сложность: O(n) - линейная
+def login_1(login, password):
+    if login in user:
+        if password == user[login][0] and user[login][1] == 'yes':
+            return f'{login} успешно прошёл аутентификацию'
+        elif password == user[login][0] and user[login][1] == 'no':
+            return f'{login} - учетная запись не активна, хотите активировать?'
+        else:
+            return f'{login} Не верный пароль'
+    else:
+        return f'Пользователя с логином {login} не существует'
+
+
+# сложность O(n) - линейная
+def login_2(login, password):
+    user_copy = list(user.items())
+    for key, value in user_copy:
+        if login == key and password == value[0] and value[1]=='yes':
+            return f'{login} успешно прошёл аутентификацию'
+        elif login == key and password == value[0] and  value[1] == 'no':
+            return f'{login} - учетная запись не активна, хотите активировать?'
+        elif login == key and password != value[0]:
+            return f'{login} Не верный пароль'
+    return f'Пользователя с логином {login} не существует'
+
+
+if __name__ == '__main__':
+
+    print(login_1('user_', 1111))
+    print(f"1 - {login_1('user_1', 1111)}\r")
+    print(f"2 - {login_1('user_2', 1111)}\r")
+    print(f"3 - {login_1('user_3', 3333)}\r")
+    print(f"10 - {login_1('user_0', 3333)}\r")
+
+    print(f"10 - {login_2('user_10', 3333)}\r")
+    print(f"10 - {login_2('user_1', 3333)}\r")
+
+"""
+Оба решения одинаковой сложности. Но второе решение более объемно по количеству кода. В нем необходима конвертация
+ из словаря в список
+"""
