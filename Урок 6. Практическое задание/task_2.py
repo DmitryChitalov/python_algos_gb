@@ -5,3 +5,66 @@
 
 Например, один из вариантов, использование генераторов
 """
+
+'''
+Ниже 2 примера без использование генератора и с использованием генератора.
+Т.к. return копит и возвращает итог операции, то @profile показал следующее
+строка 24 (temp *= i) на входе 19.1 MiB  на выходе 0.1 MiB  и выдал новый столбец Occurences 10000
+остальные строки на входе 19.0 Mib, на выходе 0.0 Mib.
+Но мне хотелость узнать сколько же памяти потребляет функция в целом с генератором и без.
+Итог:Выполнение без использования генератора заняло 0.00390625 Mib.
+Выполнение заняло с использованием генератора 0.0 Mib
+Если бы пример был сложнее, то результат загруженности памяти получился в разы выше.
+'''
+
+import memory_profiler
+from memory_profiler import profile
+
+
+# Пример без использования генератора
+
+@profile
+def fact(num):
+    temp = 1
+    for i in range(1, num + 1):
+        temp *= i
+    return temp
+
+
+n1 = 10000  # "Укажите факториал какого числа Вы хотели бы узнать?
+
+for el in str(fact(n1)):
+    break
+
+if __name__ == "__main__":
+    fact(n1)
+
+    m1 = memory_profiler.memory_usage()
+    m2 = memory_profiler.memory_usage()
+    mem_diff = m2[0] - m1[0]
+
+    print(f'\nВыполнение без использования генератора заняло {mem_diff} Mib')
+
+
+# Пример с генератором
+
+@profile
+def fact(num1):
+    temp = 1
+    for i in range(1, num1 + 1):
+        temp *= i
+    yield temp
+
+
+n = 10000  # "Укажите факториал какого числа Вы хотели бы узнать?
+for el in fact(n):
+    break
+
+if __name__ == "__main__":
+    fact(n)
+
+    m1 = memory_profiler.memory_usage()
+    m2 = memory_profiler.memory_usage()
+    mem_diff = m2[0] - m1[0]
+
+    print(f'\nВыполнение заняло с использованием генератора {mem_diff} Mib')
