@@ -17,3 +17,32 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+from random import randint
+
+random_list = [randint(1, 20) for i in range(20)]
+print(random_list)
+
+
+# Алгоритм №1. O(n^2) - квадратичная
+def find_min1(lst):
+    """Поиск минимального элемента с помощью пузырьковой сортировки"""
+    flag = True
+    while flag:
+        flag = False
+        for i in range(len(lst) - 1):
+            if lst[i] > lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+                flag = True
+    return lst[0]
+
+
+print(f'Минимальный элемент списка: {find_min1(random_list)}. Сложность O(n^2)')
+
+
+# Алгоритм №2. O(n) - линейная
+def find_min2(lst):
+    """Поиск минимального элемента с помощью встроенной функции"""
+    return min(lst)
+
+
+print(f'Минимальный элемент списка: {find_min2(random_list)}. Сложность O(n)')

@@ -27,3 +27,75 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {'person1': [123, True], 'person2': [145, True], 'person3': [183, False], 'person4': [445, False]}
+""" 
+Варианты 1 и 2 имеют одинаковую сложность, но первый вариант более предпочтителен из-за лаконичности и использования in
+вместо for для итерации по словарю.
+"""
+
+
+# Решение 1. Сложность: O(n). Определяется проходом по словарю
+def valid_check1(login, password):
+    if login in users.keys() and users[login][0] == password and users[login][1]:  # O(n) + O(1)
+        print(f'Добро пожаловать, {login}')
+    elif login not in users.keys():  # O(n)
+        print('Пользователя с таким логином не существует')
+    elif login in users.keys() and users[login][0] == password and not users[login][1]:  # O(n) + O(1)
+        print('Ваша учетная запись не активирована')
+        user_answer = int(input('Для активации нажмите 1, для выхода 2: '))  # O(1)
+        if user_answer == 1:
+            users[login][1] = True  # O(1)
+            print(f'Добро пожаловать, {login}')
+        else:
+            print('Сеанс завершен')
+    elif login in users.keys() and users[login][0] != password:  # O(n) + O(1)
+        print('Вы ввели неправильный пароль')
+
+
+def main1():
+    try:
+        login = input('Введите Ваш логин: ')  # O(1)
+        password = int(input('Введите Ваш пароль: '))  # O(1)
+        valid_check1(login, password)
+    except ValueError as err:
+        print('Пароль должен быть числовым', err)
+
+
+# main1()
+
+# Решение 2. Сложность: O(n). Определяется проходом по словарю
+def valid_check2(login, password):
+    count = 0  # O(1)
+    for key, value in users.items():  # O(n)
+        if login != key:
+            count += 1  # O(1)
+            if count == len(users):  # O(1) - len словаря
+                print('Пользователя с таким логином не существует')
+        elif login == key and value[0] == password and value[1]:
+            print(f'Добро пожаловать, {login}')
+            break
+        elif login == key and value[0] == password and not value[1]:  # O(1)
+            print('Ваша учетная запись не активирована')
+            user_answer = int(input('Для активации нажмите 1, для выхода 2: '))  # O(1)
+            if user_answer == 1:  # O(1)
+                users[login][1] = True  # O(1)
+                print(f'Добро пожаловать, {login}')
+                break
+            else:
+                print('Сеанс завершен')
+                break
+        elif login == key and value[0] != password:  # O(1)
+            print('Вы ввели неправильный пароль')
+
+
+def main2():
+    try:
+        login = input('Введите Ваш логин: ')  # O(1)
+        password = int(input('Введите Ваш пароль: '))  # O(1)
+        valid_check2(login, password)
+    except ValueError as err:
+        print('Пароль должен быть числовым', err)
+
+
+main2()
