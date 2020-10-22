@@ -13,3 +13,127 @@
 ВНИМАНИЕ: ЗАДАНИЯ, В КОТОРЫХ БУДУТ ГОЛЫЕ ЦИФРЫ ЗАМЕРОВ (БЕЗ АНАЛИТИКИ)
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 """
+import sys, platform
+
+print(sys.version, platform.architecture())
+'''
+3.8.2 (tags/v3.8.2:7b3ab59, Feb 25 2020, 22:45:29) [MSC v.1916 32 bit (Intel)] ('32bit', 'WindowsPE')
+Правда про 32bit не совсем верно, у меня 64... но platform.architecture(), показывает 32
+
+Задача из 2 урока текущего курса
+1.	Написать программу, которая будет складывать, вычитать, умножать или делить
+два числа. Числа и знак операции вводятся пользователем. После выполнения
+вычисления программа не должна завершаться, а должна запрашивать новые данные
+для вычислений. Завершение программы должно выполняться при вводе символа '0'
+в качестве знака операции. Если пользователь вводит неверный знак
+(не '0', '+', '-', '*', '/'), то программа должна сообщать ему об ошибке и
+снова запрашивать знак операции.
+Также сообщать пользователю о невозможности деления на ноль,
+если он ввел 0 в качестве делителя.
+'''
+from memory_profiler import profile
+@profile
+def calc(oper):
+    if oper == '0':
+        return
+    elif oper not in ['+', '-', '*', '/']:
+        print('Не понятный знак операции. Попробуйте еще раз')
+        return calc(oper = input('Введите операцию (+, -, *, / или 0 для выхода) '))
+    try:
+        a = int(input('Введите первое число: '))
+        b = int(input('Введите второе число: '))
+    except:
+        print('Вы вместо числа ввели строку (((. Исправьтесь')
+        return calc(oper = input('Введите операцию (+, -, *, / или 0 для выхода) '))
+    if oper == '+':
+        print('Ваш результат ', a + b)
+        return calc(oper = input('Введите операцию (+, -, *, / или 0 для выхода) '))
+    elif oper == '-':
+        print('Ваш результат ', a - b)
+        return calc(oper = input('Введите операцию (+, -, *, / или 0 для выхода) '))
+    elif oper == '*':
+        print('Ваш результат ', a * b)
+        return calc(oper = input('Введите операцию (+, -, *, / или 0 для выхода) '))
+    elif oper == '/':
+        print('Ваш результат ', a / b)
+        return calc(oper = input('Введите операцию (+, -, *, / или 0 для выхода) '))
+
+
+calc(oper = input('Введите операцию (+, -, *, / или 0 для выхода) '))
+
+"""
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    35     15.5 MiB     15.5 MiB           1   @profile
+    36                                         def calc(oper):
+    37     15.5 MiB      0.0 MiB           1       if oper == '0':
+    38     15.5 MiB      0.0 MiB           1           return
+    
+Память используется эффективно. Т.к. нет разницы в используемой памяти после каждого выполнения строки
+
+1 задача 5 урока текущего курса
+1.	Пользователь вводит данные о количестве предприятий, их наименования и прибыль
+за 4 квартала (т.е. 4 отдельных числа) для каждого предприятия.
+Программа должна определить среднюю прибыль (за год для всех предприятий)
+и вывести наименования предприятий, чья прибыль выше среднего и отдельно
+вывести наименования предприятий, чья прибыль ниже среднего.
+"""
+from collections import namedtuple
+import numpy as np
+
+comp = namedtuple('company', 'name profit')
+@profile
+def create_data(n):
+    avg_profit_data = []
+    company_list = []
+    for i in range(n):
+        i = comp(
+            name=input('Введите название предприятия '),
+            profit=np.mean(list(map(int, input('через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ').split())))
+        )
+        avg_profit_data.append(i.profit)
+        company_list.append(i)
+    avg = np.mean(avg_profit_data)
+    max_name = ''
+    min_name = ''
+    for comp_count in company_list:
+        if comp_count.profit > avg:
+            max_name = comp_count.name
+        elif comp_count.profit < avg:
+            min_name = comp_count.name
+    return f'Средняя годовая прибыль всех предприятий: {avg} \n' \
+           f'Предприятия, с прибылью выше среднего значения: {max_name} \n' \
+           f'Предприятия, с прибылью ниже среднего значения: {min_name}'
+
+a = int(input('Введите количество предприятий '))
+print(create_data(a))
+
+"""
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    85     23.9 MiB     23.9 MiB           1   @profile
+    86                                         def create_data(n):
+    87     23.9 MiB      0.0 MiB           1       avg_profit_data = []
+    88     23.9 MiB      0.0 MiB           1       company_list = []
+    89     24.1 MiB      0.0 MiB           3       for i in range(n):
+    90     24.1 MiB      0.0 MiB           4           i = comp(
+    91     24.1 MiB      0.0 MiB           2               name=input('Введите название предприятия '),
+    92     24.1 MiB      0.1 MiB           2               profit=np.mean(list(map(int, input('через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ').split())))
+    93                                                 )
+    94     24.1 MiB      0.0 MiB           2           avg_profit_data.append(i.profit)
+    95     24.1 MiB      0.0 MiB           2           company_list.append(i)
+    96     24.1 MiB      0.0 MiB           1       avg = np.mean(avg_profit_data)
+    97     24.1 MiB      0.0 MiB           1       max_name = ''
+    98     24.1 MiB      0.0 MiB           1       min_name = ''
+    99     24.1 MiB      0.0 MiB           3       for comp_count in company_list:
+   100     24.1 MiB      0.0 MiB           2           if comp_count.profit > avg:
+   101     24.1 MiB      0.0 MiB           1               max_name = comp_count.name
+   102     24.1 MiB      0.0 MiB           1           elif comp_count.profit < avg:
+   103     24.1 MiB      0.0 MiB           1               min_name = comp_count.name
+   104     24.1 MiB      0.0 MiB           1       return f'Средняя годовая прибыль всех предприятий: {avg} \n' \
+   105                                                    f'Предприятия, с прибылью выше среднего значения: {max_name} \n' \
+   106                                                    f'Предприятия, с прибылью ниже среднего значения: {min_name}'
+   
+В этой задче я также считаю, что память используется эффективно, как и в предыдущей задаче.
+Хотя на 92 строке, есть разница в памяти, но она не критична на мой взгляд.
+"""
