@@ -10,3 +10,14 @@ deque – это обобщение стеков и очередей.
 Сделайте замеры и оцените, насколько информация в документации
 соответствует дейстивтельности.
 """
+import string
+from collections import deque
+
+
+def create_list():
+    return [c * 3 for c in range(100000)]
+
+
+def deque_rotate():
+    for i in range(100000):
+        new_deque = deque(string.ascii_uppercase)
