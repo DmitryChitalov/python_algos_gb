@@ -21,3 +21,6 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+nums = [ i for i in range(1000)]
+t1 = print(timeit('func_1(nums)', setup='from __main__ import func_1, nums', number=1000 ))

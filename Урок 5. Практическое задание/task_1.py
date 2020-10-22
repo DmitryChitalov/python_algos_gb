@@ -25,3 +25,28 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import defaultdict
+
+'''
+Это задание показалось сложней чем второее как по мне)
+Так и не смог до конца решить заговстку в конце.
+'''
+company_count = int(input('Введите колчиство предприятий для рассчёта прибыли: '))
+
+company_data = defaultdict(int)
+
+i = 0
+while i < company_count:
+    company_name = input('Введите название компании: ')
+    company_for_season_income = input(
+        'Введите через пробел приль даннго предприятия за каждый квартал всего 4 квартала:')
+    lst = company_for_season_income.split()
+    company_data[company_name] = lst
+    for k in company_data.values():
+        for j in k:
+            print(sum(j))
+    i += 1
+
+
+print(company_data)
+
