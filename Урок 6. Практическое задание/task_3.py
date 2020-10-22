@@ -8,6 +8,7 @@
 Ну а обойти как я и уже сказал в первом варинанте можно чрез отсечки.
 """
 
+
 import memory_profiler
 from memory_profiler import profile
 
