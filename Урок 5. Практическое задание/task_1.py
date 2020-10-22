@@ -27,6 +27,7 @@
 """
 from collections import namedtuple
 
+## variables section
 next_inter = True
 incom_list = []
 Company_tbl = []
@@ -86,7 +87,7 @@ if __name__ == "__main__":
             print("- " * 50)
 
         while True:
-            next_add = input("Хотите добавить дополнительного пользователя? (Да / Нет): ")
+            next_add = input("Хотите добавить дополнительное предприятие? (Да / Нет): ")
             if next_add.lower() in ('да', 'нет', 'yes', 'no', 'y', 'n'):
                 next_inter = next_add.lower() in ('да', 'yes', 'y')
                 rich_company.clear()
