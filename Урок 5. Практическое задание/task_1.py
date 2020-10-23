@@ -25,3 +25,31 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+
+firm_num = int(input('Введите количество предприятий для расчета прибыли:'))
+firms = namedtuple('Firm', 'name quarter1 quarter2 quarter3 quarter4')
+firm_average = {}
+for i in range(firm_num):
+    firm=firms(
+        name = input('Введите название предприятия:'),
+        quarter1 = int(input('1 kv')),
+        quarter2=int(input('2 kv')),
+        quarter3=int(input('3 kv')),
+        quarter4=int(input('4 kv'))
+    )
+    firm_average[firm.name] = (firm.quarter1 + firm.quarter2 + firm.quarter3 + firm.quarter4) / 4
+
+total_aver = 0
+for value in firm_average.values():
+    total_aver += value
+total_aver = total_aver / firm_num
+
+for key, value in firm_average.items():
+    if value > total_aver:
+        print(f'{key} - прибыль выше среднего')
+    elif value < total_aver:
+        print(f'{key} - прибыль ниже среднего')
+    elif value == total_aver:
+        print(f'{key} - прибыль cредняя')
+
