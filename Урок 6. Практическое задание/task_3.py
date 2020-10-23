@@ -6,7 +6,6 @@
 from memory_profiler import profile
 
 
-@profile
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
         return
@@ -17,7 +16,13 @@ def revers(enter_num, revers_num=0):
         revers(enter_num, revers_num)
 
 
-revers(123456)
+@profile
+def func(enter_num):
+    revers(enter_num)
+
+
+func(123456)
+
 
 """
 Профилировать с рекурсией напрямую не получится, потому что профилировка будет вызываться то количество раз, которое 
