@@ -17,3 +17,31 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+from random import randint
+
+
+# O(n^2) - квадратичная
+def min_list1(lst_obj):
+    min_value = lst_obj[0]
+    for x in lst_obj:
+        for y in lst_obj:
+            if min_value > y:
+                min_value = y
+            elif min_value > x:
+                min_value = x
+    return min_value
+
+
+# O(n) - линейная
+def min_list2(lst_obj):
+    min_value = lst_obj[0]
+    for x in lst_obj:
+        if min_value > x:
+            min_value = x
+    return min_value
+
+
+lst = [int(randint(0, 100)) for i in range(1, 15)]
+print(lst)
+print(min_list1(lst))
+print(min_list2(lst))
