@@ -25,3 +25,66 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+
+res = namedtuple('Company', 'id name_company product_type staff_size')
+
+# ################################
+# ##### обьект -> компания 1 #####
+ARKO = res(id=1,
+           name_company='Arko',
+           product_type='Mobili',
+           staff_size=1000)
+
+# ################################
+# ##### обьект -> компания 2 #####
+DOC = res(id=2,
+          name_company="DOC",
+          product_type="pezzi di mobili",
+          staff_size=500)
+# ################################
+print('_' * 20, ARKO, '_' * 20)
+for data in ARKO:
+	print(data, end=' ')
+print()
+print('_' * 20, DOC, '_' * 20)
+for data in DOC:
+	print(data, end=' ')
+
+
+def calc():
+	my_var = "Company"
+	n = int(input("Введите кол-во предприятий: "))
+	companies = namedtuple(
+		my_var,
+		"name period_1 period_2 period_3 period_4")
+	profit_medium = {}
+
+	for comp in range(n):
+		company = companies(
+			name=input("Введите название компании: "),
+			period_1=int(input("period 1: ")),
+			period_2=int(input("period 2: ")),
+			period_3=int(input("period 3: ")),
+			period_4=int(input("period 4: "))
+		)
+
+		profit_medium[company.name] = (company.period_1 + company.period_2
+		                               + company.period_3 + company.period_4) / 4
+
+	total_aver = 0
+	for val in profit_medium.values():
+		total_aver += val
+
+	total_aver = total_aver / n
+
+	for k, v in profit_medium.items():
+		if v > total_aver:
+			print(f"{k} прибыль выше среднего")
+		elif v < total_aver:
+			print(f"{k} прибыль ниже среднего")
+		elif v == total_aver:
+			print(f"{k} средняя прибыль")
+
+
+calc()
