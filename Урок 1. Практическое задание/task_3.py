@@ -22,3 +22,45 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+# 1-й вариант: O(n log n) - линейно-логарифмическая
+def max_profit1(dict_obj):
+    lst = list(dict_obj.items())   # O(len(dict_obj))
+    lst.sort(key=lambda i: i[1])  # O(n log n)
+    return lst[2:]
+
+
+# 2-й вариант: O(n^2) - квадратичная
+def max_profit2(dict_obj):
+    lst = list(dict_obj.items())  # O(len(dict_obj))
+    swapped = True
+    while swapped:  # O(n)
+        swapped = False
+        for i in range(len(lst) - 1):  # O(n)
+            if lst[i][1] > lst[i + 1][1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+                swapped = True
+    return lst[2:]
+
+
+# 3-й вариант: (n^4)
+def max_profit3(dict_obj):
+    lst_final = []
+    lst = list(dict_obj.values())  # O(len(dict_obj))
+    for x in range(3):  # O(n)
+        temp = max(lst)   # O(n)
+        res = [key for key in dict_obj if dict_obj[key] == temp]  # O(n)
+        lst_final.append((res[0], temp))  # O(1)
+        lst.remove(temp)  # O(n)
+    return lst_final
+
+
+dict_value = {'Company1': 100000, 'Company2': 150000, 'Company3': 170000, 'Company4': 80000, 'Company5': 90000}
+print(max_profit1(dict_value))
+print(max_profit2(dict_value))
+print(max_profit3(dict_value))
+
+""" 1-й вариант лучше - O(n log n) - линейно-логарифмическая сложность алгоритма, так как при увеличении размера
+ входных данных будет выполнено меньше всего операций по сравнению с другими алгоритмами. 
+"""
