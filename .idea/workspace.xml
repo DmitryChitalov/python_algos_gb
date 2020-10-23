@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="90cec9f3-b94b-45cc-b9a1-69aeca27031c" name="Default Changelist" comment="задача №3 tmp2">
+      <change beforePath="$PROJECT_DIR$/Урок 5. Практическое задание/task_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Урок 5. Практическое задание/task_3.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="lesson_4" />
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1iRzKO8wtr4r9YvRh54pk3TPlCK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.task_3">
+    <configuration name="task_1" type="PythonConfigurationType" factoryName="Python">
+      <module name="python_algos_gb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 5. Практическое задание" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 5. Практическое задание/task_1.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="task_2" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="python_algos_gb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 5. Практическое задание" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 5. Практическое задание/task_2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="task_3" type="PythonConfigurationType" factoryName="Python">
+      <module name="python_algos_gb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 5. Практическое задание" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 5. Практическое задание/task_3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="task_4" type="PythonConfigurationType" factoryName="Python">
+      <module name="python_algos_gb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 4. Практическое задание" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 4. Практическое задание/task_4.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="task_5" type="PythonConfigurationType" factoryName="Python">
+      <module name="python_algos_gb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Урок 2. Практическое задание" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Урок 2. Практическое задание/task_5.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.task_2" />
+      <item itemvalue="Python.task_1" />
+      <item itemvalue="Python.task_3" />
+      <item itemvalue="Python.task_4" />
+      <item itemvalue="Python.task_5" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="90cec9f3-b94b-45cc-b9a1-69aeca27031c" name="Default Changelist" comment="" />
+      <created>1601885127473</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601885127473</updated>
+    </task>
+    <task id="LOCAL-00001" summary="3 задачи из первого блока">
+      <created>1601973501929</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1601973501929</updated>
+    </task>
+    <task id="LOCAL-00002" summary="задача №7 из второго блока">
+      <created>1601979274207</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1601979274207</updated>
+    </task>
+    <task id="LOCAL-00003" summary="задача №1">
+      <created>1602187600607</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1602187600607</updated>
+    </task>
+    <task id="LOCAL-00004" summary="задача №2">
+      <created>1602188521590</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1602188521590</updated>
+    </task>
+    <task id="LOCAL-00005" summary="задача №3">
+      <created>1602189260607</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1602189260607</updated>
+    </task>
+    <task id="LOCAL-00006" summary="задача №4">
+      <created>1602190446913</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1602190446913</updated>
+    </task>
+    <task id="LOCAL-00007" summary="задача №5">
+      <created>1602193508792</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1602193508792</updated>
+    </task>
+    <task id="LOCAL-00008" summary="задача №1">
+      <created>1602450593439</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1602450593439</updated>
+    </task>
+    <task id="LOCAL-00009" summary="задача №2">
+      <created>1602535031341</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1602535031341</updated>
+    </task>
+    <task id="LOCAL-00010" summary="задача №2 - fix">
+      <created>1602535114214</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1602535114214</updated>
+    </task>
+    <task id="LOCAL-00011" summary="задача №1">
+      <created>1602627306311</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1602627306311</updated>
+    </task>
+    <task id="LOCAL-00012" summary="задача №1 опечатка">
+      <created>1602628028068</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1602628028068</updated>
+    </task>
+    <task id="LOCAL-00013" summary="задача №4">
+      <created>1602794519280</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1602794519280</updated>
+    </task>
+    <task id="LOCAL-00014" summary="задача №2">
+      <created>1602797190903</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1602797190903</updated>
+    </task>
+    <task id="LOCAL-00015" summary="задача №1">
+      <created>1603146434194</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1603146434194</updated>
+    </task>
+    <task id="LOCAL-00016" summary="задача №2">
+      <created>1603404227401</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1603404227401</updated>
+    </task>
+    <task id="LOCAL-00017" summary="задача №3 tmp">
+      <created>1603405266611</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1603405266611</updated>
+    </task>
+    <task id="LOCAL-00018" summary="задача №3 tmp2">
+      <created>1603405640895</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1603405640895</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="3 задачи из первого блока" />
+    <MESSAGE value="задача №7 из второго блока" />
+    <MESSAGE value="задача №3" />
+    <MESSAGE value="задача №5" />
+    <MESSAGE value="задача №2 - fix" />
+    <MESSAGE value="задача №1 опечатка" />
+    <MESSAGE value="задача №4" />
+    <MESSAGE value="задача №1" />
+    <MESSAGE value="задача №2" />
+    <MESSAGE value="задача №3 tmp" />
+    <MESSAGE value="задача №3 tmp2" />
+    <option name="LAST_COMMIT_MESSAGE" value="задача №3 tmp2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="184" y="23" width="1071" height="839" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603405957727">
+      <screen x="0" y="23" width="1440" height="839" />
+    </state>
+    <state x="184" y="23" width="1071" height="839" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.839@0.23.1440.839" timestamp="1603405957727" />
+    <state x="231" y="282" width="1033" height="579" key="#xdebugger.evaluate" timestamp="1603403716656">
+      <screen x="0" y="23" width="1440" height="839" />
+    </state>
+    <state x="231" y="282" width="1033" height="579" key="#xdebugger.evaluate/0.23.1440.839@0.23.1440.839" timestamp="1603403716656" />
+    <state width="1419" height="210" key="GridCell.Tab.0.bottom" timestamp="1603406397919">
+      <screen x="0" y="23" width="1440" height="839" />
+    </state>
+    <state width="1419" height="210" key="GridCell.Tab.0.bottom/0.23.1440.839@0.23.1440.839" timestamp="1603406397919" />
+    <state width="1419" height="210" key="GridCell.Tab.0.center" timestamp="1603406397919">
+      <screen x="0" y="23" width="1440" height="839" />
+    </state>
+    <state width="1419" height="210" key="GridCell.Tab.0.center/0.23.1440.839@0.23.1440.839" timestamp="1603406397919" />
+    <state width="1419" height="210" key="GridCell.Tab.0.left" timestamp="1603406397918">
+      <screen x="0" y="23" width="1440" height="839" />
+    </state>
+    <state width="1419" height="210" key="GridCell.Tab.0.left/0.23.1440.839@0.23.1440.839" timestamp="1603406397918" />
+    <state width="1419" height="210" key="GridCell.Tab.0.right" timestamp="1603406397919">
+      <screen x="0" y="23" width="1440" height="839" />
+    </state>
+    <state width="1419" height="210" key="GridCell.Tab.0.right/0.23.1440.839@0.23.1440.839" timestamp="1603406397919" />
+    <state width="1419" height="321" key="GridCell.Tab.1.bottom" timestamp="1603403964048">
+      <screen x="0" y="23" width="1440" height="839" />
+    </state>
+    <state width="1419" height="321" key="GridCell.Tab.1.bottom/0.23.1440.839@0.23.1440.839" timestamp="1603403964048" />
+    <state width="1419" height="321" key="GridCell.Tab.1.center" timestamp="1603403964047">
+      <screen x="0" y="23" width="1440" height="839" />
+    </state>
+    <state width="1419" height="321" key="GridCell.Tab.1.center/0.23.1440.839@0.23.1440.839" timestamp="1603403964047" />
+    <state width="1419" height="321" key="GridCell.Tab.1.left" timestamp="1603403964047">
+      <screen x="0" y="23" width="1440" height="839" />
+    </state>
+    <state width="1419" height="321" key="GridCell.Tab.1.left/0.23.1440.839@0.23.1440.839" timestamp="1603403964047" />
+    <state width="1419" height="321" key="GridCell.Tab.1.right" timestamp="1603403964047">
+      <screen x="0" y="23" width="1440" height="839" />
+    </state>
+    <state width="1419" height="321" key="GridCell.Tab.1.right/0.23.1440.839@0.23.1440.839" timestamp="1603403964047" />
+    <state x="440" y="162" key="git4idea.branch.GitSmartOperationDialog" timestamp="1603054383736">
+      <screen x="0" y="23" width="1440" height="839" />
+    </state>
+    <state x="440" y="162" key="git4idea.branch.GitSmartOperationDialog/0.23.1440.839@0.23.1440.839" timestamp="1603054383736" />
+    <state x="547" y="240" key="refactoring.ChangeSignatureDialog" timestamp="1602445904611">
+      <screen x="0" y="23" width="1440" height="839" />
+    </state>
+    <state x="547" y="240" key="refactoring.ChangeSignatureDialog/0.23.1440.839@0.23.1440.839" timestamp="1602445904611" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Урок 2. Практическое задание/task_1.py</url>
+          <line>52</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Урок 2. Практическое задание/task_1.py</url>
+          <line>41</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Урок 2. Практическое задание/task_1.py</url>
+          <line>59</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Урок 4. Практическое задание/task_2.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -1,0 +1,21 @@
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Default ignored files\n/shelf/\n/workspace.xml\n.idea\n# Byte-compiled / optimized / DLL files\n__pycache__/\n*.py[cod]\n\n# C extensions\n*.so\n\n# Distribution / packaging\nbin/\nbuild/\ndevelop-eggs/\ndist/\neggs/\nlib/\nlib64/\nparts/\nsdist/\nvar/\n*.egg-info/\n.installed.cfg\n*.egg\n\n# Installer logs\npip-log.txt\npip-delete-this-directory.txt\n\n# Unit test / coverage reports\n.tox/\n.coverage\n.cache\nnosetests.xml\ncoverage.xml\n\n# Translations\n*.mo\n\n# Mr Developer\n.mr.developer.cfg\n.project\n.pydevproject\n\n# Rope\n.ropeproject\n\n# Django stuff:\n*.log\n*.pot\n\n# Sphinx documentation\ndocs/_build/
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/.gitignore	(revision e8b66bd3cb3c4163f3e36c4332bd913d6596f6e1)
++++ .idea/.gitignore	(date 1602628108517)
+@@ -51,4 +51,9 @@
+ *.pot
+ 
+ # Sphinx documentation
+-docs/_build/
+\ No newline at end of file
++docs/_build/
++/misc.xml
++/modules.xml
++/inspectionProfiles/profiles_settings.xml
++/python_algos_gb.iml
++/vcs.xml
