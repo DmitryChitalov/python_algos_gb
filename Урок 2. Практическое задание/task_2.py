@@ -16,3 +16,32 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def func_1(number):
+    if number // 10 == 0:
+        return 1 if number % 2 == 0 else 0
+    else:
+        even_number = 1 if number % 2 == 0 else 0
+        n = number // 10
+        return even_number + func_1(n)
+
+
+def func_2(number):
+    if number // 10 == 0:
+        return 1 if number % 2 != 0 else 0
+    else:
+        odd_number = 1 if number % 2 != 0 else 0
+        n = number // 10
+        return odd_number + func_2(n)
+
+
+if __name__ == '__main__':
+    user_input = input('Введите число: ')
+    if user_input.isdigit():
+        even_count = func_1(int(user_input))
+        odd_count = func_2(int(user_input))
+        print(f'Количество четных: {even_count}')
+        print(f'Количество нечетных: {odd_count}')
+    else:
+        print('Неверный ввод')

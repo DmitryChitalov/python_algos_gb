@@ -28,3 +28,50 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+math_signs = ('0', '+', '-', '*', '/')
+
+
+def except_massage():
+    print('Ввод не соответствует заданным требованиям.\nПоробуйте еще раз')
+
+
+def calc(number1, number2, sign):
+    if sign == '+':
+        return number1 + number2
+    elif sign == '-':
+        return number1 - number2
+    elif sign == '*':
+        return number1 * number2
+    elif sign == '/':
+        if number2 == 0:
+            return f'Делить на ноль нельзя'
+        return number1 / number2
+
+
+def calc_interface():
+    usr_input_sign = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if usr_input_sign in math_signs:
+        if usr_input_sign == '0':
+            print(f'Вы нажали 0')
+            # return f'Вы нажали 0'
+        else:
+            usr_number1 = input('Введите первое число: ')
+            if usr_number1.isdigit():
+                usr_number2 = input('Введите второе число: ')
+                if usr_number2.isdigit():
+                    print(calc(int(usr_number1), int(usr_number2), usr_input_sign))
+                    calc_interface()
+                else:
+                    except_massage()
+                    calc_interface()
+            else:
+                except_massage()
+                calc_interface()
+    else:
+        except_massage()
+        calc_interface()
+
+
+if __name__ == '__main__':
+    calc_interface()
