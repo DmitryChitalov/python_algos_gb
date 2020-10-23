@@ -12,6 +12,7 @@ deque – это обобщение стеков и очередей.
 """
 import string
 import time
+import timeit
 from collections import deque
 
 
@@ -26,14 +27,24 @@ def my_timer(f):
     return tmp
 
 
-@my_timer
 def create_list():
-    return [c * 3 for c in range(100000)]
+    return [c * 3 for c in range(100)]
 
 
-@my_timer
 def deque_rotate():
     global new_deque
-    for i in range(100000):
+    for i in range(100):
         new_deque = deque(string.ascii_uppercase)
     return new_deque
+
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if int(nums[i]) % 2 == 0]
+    return new_arr
+
+
+if __name__ == '__main__':
+    nums = "1234567890"
+
+    print(timeit.timeit("create_list()", setup="from __main__ import create_list", number=1000))
+    print(timeit.timeit("deque_rotate()", setup="from __main__ import deque_rotate", number=1000))
