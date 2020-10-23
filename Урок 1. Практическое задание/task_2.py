@@ -17,3 +17,37 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+
+# Первый алгоритм
+
+def min_lst_obj1(lst):
+    min_obj = lst[0]
+    for i in range(len(lst)):
+        for j in range(len(lst)):
+            if lst[i] <= lst[j] and lst[i] <= min_obj:
+                min_obj = lst[i]
+    return min_obj
+
+
+# Второй алгоритм
+
+def min_lst_obj2(lst):
+    min_obj = lst[0]
+    for obj in range(len(lst)):
+        if lst[obj] < min_obj:
+            min_obj = lst[obj]
+    return min_obj
+
+
+"""А можно так, но я не знаю как оценить О-натацию данно встроенной функции
+def min_lst_obj3(lst):
+    return min(lst)
+"""
+#######################################################################
+
+data = [random.randint(0, 1000) for i in range(10)]
+print(data)
+print("Минимальный элемент списка по первому алгоритму -", min_lst_obj1(data))
+print("Минимальный элемент списка по второму алгоритму-", min_lst_obj2(data))
