@@ -17,3 +17,32 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+def list_min_1(lst):
+    """
+    поскольку функция излишне усложнена в соответствии с заданием, решил реализовать в ней обход элементов,
+    а сравнение организовать вызовом второй функции, хотя это тоже бестолково.
+    """
+    min_num = lst[0]
+    for i, el in enumerate(lst):
+        for j in range(i + 1, len(lst)):
+            num = list_min_2([lst[i], lst[j]])
+            if num < min_num:
+                min_num = num
+    return min_num
+
+
+def list_min_2(lst):
+    min_num = lst[0]
+    for i in range(1, len(lst)):
+        if lst[i] < min_num:
+            min_num = lst[i]
+    return min_num
+
+
+list_example = [38, 6, 53, 9, 11]
+
+print(list_min_1(list_example))
+
+print(list_min_2(list_example))
