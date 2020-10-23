@@ -7,8 +7,8 @@
 from timeit import timeit
 from collections import OrderedDict
 
-dict_example = {k: k for k in range(10)}
-ordered_dict_example = {k: k for k in range(10)}
+dict_example = {el: el for el in range(10)}
+ordered_dict_example = {el: el for el in range(10)}
 ordered_dict_example = OrderedDict(ordered_dict_example)
 
 
