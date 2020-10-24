@@ -22,3 +22,32 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+firms_dict = {'Фирма №1': 123, 'Фирма №2': 132, 'Фирма №3': 678, 'Фирма №4': 12, 'Фирма №5': 45, 'Фирма №6': 526,
+              'Фирма №7': 111, 'Фирма №8': 9}
+
+
+# Вариант 1. Сложность: O(n*log n)
+def find_profit1(any_dict):
+    companies_lst = sorted(any_dict.items(), key=lambda x: x[1], reverse=True)  # O(n*log n)
+    companies_3_rich = [(name, profit) for (name, profit) in companies_lst][:3]  # O(n) + O(n)
+    return [el[0] for el in companies_3_rich]  # O(1) + O(n)
+
+
+# Вариант 2. Сложность: O(n^2)
+def find_profit2(any_dict):
+    profits = []
+    for name, profit in any_dict.items():
+        profits.append(any_dict[name])  # O(n)
+    profits.sort(reverse=True)  # O(n*log(n))
+    profits = profits[:3]  # O(n)
+    profitable = []  # O(n)
+    for el in profits:  # O(n^2)
+        for name, profit in any_dict.items():
+            if profit == el:
+                profitable.append(name)  # O(n)
+    return profitable
+
+
+print(f'Три самых прибыльных компании: {find_profit1(firms_dict)} Вариант 1 лучше Сложность: O(n*log n)')
+print(f'Три самых прибыльных компании: {find_profit2(firms_dict)} Вариант 2 хуже Сложность: O(n^2)')
