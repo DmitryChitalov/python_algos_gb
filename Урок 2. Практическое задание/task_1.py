@@ -28,3 +28,34 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation not in ['+', '-', '*', '/', '0']:
+        print('Вы ввели недопустимый знак операции, попробуйте еще раз.')
+        return calc()
+    if operation == '0':
+        return print('Программа завершена')
+    try:
+        x = float(input('Введите первое число: '))
+        y = float(input('Введите второе число: '))
+    except ValueError as err:
+        print('Вы ввели строку вместо числа.', err)
+        return calc()
+    finally:
+        if y == 0:
+            print('На ноль делить нельзя')
+            return calc()
+        if operation == '+':
+            print(f'Сумма введенных чисел равна: {x + y}')
+        elif operation == '-':
+            print(f'Разность введенных чисел равна: {x - y}')
+        if operation == '*':
+            print(f'Произведение введенных чисел равно: {x * y}')
+        elif operation == '/':
+            print(f'Частное введенных чисел равно: {round((x / y), 2)}')
+        return calc()
+
+
+calc()

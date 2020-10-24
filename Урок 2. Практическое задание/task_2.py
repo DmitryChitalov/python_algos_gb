@@ -16,3 +16,26 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+user_number = int(input('Введите любое натуральное число: '))
+i = 0  # счетчик четных цифр
+j = 0  # счетчик нечетных цифр
+
+
+def calc_even(number):
+    global i
+    global j
+    if number // 10 == 0:
+        if number % 2 == 0:
+            i += 1
+        else:
+            j += 1
+    else:
+        if (number % 10) % 2 == 0:
+            i += 1
+        else:
+            j += 1
+        calc_even(number // 10)
+
+
+calc_even(user_number)
+print(f'Количество четных и нечетных цифр в числе равно: {i, j}')

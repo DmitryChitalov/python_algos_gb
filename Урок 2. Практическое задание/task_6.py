@@ -9,3 +9,25 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+rand_number = randint(0, 100)
+
+
+def guess(count):
+    """count - количество попыток"""
+    user_number = int(input('Введите целое число от 0 до 100: '))
+    if user_number == rand_number:
+        print(f'Вы выиграли, загаданное число: {user_number}')
+
+    else:
+        print('Загаданное число больше') if user_number < rand_number else print('Загаданное число меньше')
+        count -= 1
+        print(f'Попыток осталось: {count}')
+        if count == 0:
+            print(f'Вы проиграли, загаданное число: {rand_number}')
+            return
+        guess(count)
+
+
+guess(10)

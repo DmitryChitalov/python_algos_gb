@@ -6,3 +6,29 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from functools import reduce
+
+user_number = int(input('Введите любое натуральное число: '))
+a = []
+
+
+def calc_left(n):
+    """Рекурсивная функция. Заполняет список числами от 1 до n включительно в соответствии с левой частью выражения"""
+    if n // 1 == 0:
+        return n
+    else:
+        a.insert(0, n)
+        n -= 1
+        calc_left(n)
+
+
+def calc_right(n):
+    return int(n * (n + 1) / 2)
+
+
+calc_left(user_number)  # получили список, заполненный числами от 1 до n
+print(a)
+left_part = reduce((lambda x, y: x + y), a)  # вычислили сумму чисел 1 до n (левая часть выражения)
+right_part = calc_right(user_number)  # вычислили правую часть выражения
+
+print(f'{left_part == right_part}, {left_part} = {right_part}')
