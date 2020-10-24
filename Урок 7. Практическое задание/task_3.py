@@ -13,3 +13,25 @@
 arr[m]
 from statistics import median
 """
+
+from statistics import median
+from random import randint
+
+random_list = [randint(0, 10) for _ in range(9)]
+
+
+def find_median(in_list: list):
+    left = []
+    right = []
+
+    # Без сортировки
+    while len(in_list) != 1:
+        left.append(in_list.pop(in_list.index(min(in_list))))
+        right.append(in_list.pop(in_list.index(max(in_list))))
+    return in_list[0]
+
+
+print(f'Исходный массив: {random_list}')
+print(f'Медиана от встроенной функции: {median(random_list)}')
+print(f'Медиана от кастомной функции: {find_median(random_list[:])}')
+print(f'Отсортированный массив: {sorted(random_list)}')
