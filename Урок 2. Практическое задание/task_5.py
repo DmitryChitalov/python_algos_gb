@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_symbols(code=32, count=1, end=''):
+    if code == 128:
+        return
+    else:
+        if count % 10 == 0:
+            end = '\n'
+        else:
+            end = ''
+        print(f'{code} - {chr(code)} ', end=end)
+        count += 1
+        code += 1
+        ascii_symbols(code, count, end)
+
+
+ascii_symbols()

@@ -9,3 +9,37 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+user_number = int(input('Введите количество элементов ряда: '))
+
+
+# Первый вариант решения
+def row_sum1(n, x=1, res=0, count=1):
+    if n == 1:
+        return res + 1, count
+    else:
+        n -= 1
+        x *= -2
+        count += 1  # счетчик числа элеметов в ряде
+        res += 1 / x
+        return row_sum1(n, x, res, count)
+
+
+result, num = row_sum1(user_number)
+print(f'Количество элементов: {num}. Сумма элементов: {result}')
+
+# Второй вариант решения
+arr = []
+
+
+def row_sum2(n, x=1):
+    if n == 1:
+        arr.insert(0, 1)
+    else:
+        n -= 1
+        x *= -2
+        arr.append(1 / x)
+        row_sum2(n, x)
+
+
+row_sum2(user_number)
+print(f'Количество элементов: {len(arr)}. Сумма элементов: {sum(arr)}')
