@@ -6,29 +6,48 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
 from functools import reduce
 
 user_number = int(input('Введите любое натуральное число: '))
+
+
+# Первый вариант вычисления левой части
+def calc_left1(n):
+    """Рекурсивная функция. Вычисляет левую часть выражения, возвращает результат"""
+    if n == 1:
+        return n
+    else:
+        return n + calc_left1(n - 1)
+
+
+# Второй вариант вычисления левой части
 a = []
 
 
-def calc_left(n):
+def calc_left2(n):
     """Рекурсивная функция. Заполняет список числами от 1 до n включительно в соответствии с левой частью выражения"""
-    if n // 1 == 0:
+    if n == 0:
         return n
     else:
         a.insert(0, n)
         n -= 1
-        calc_left(n)
+        calc_left2(n)
 
 
 def calc_right(n):
+    """Вычисляет правую часть выражения"""
     return int(n * (n + 1) / 2)
 
 
-calc_left(user_number)  # получили список, заполненный числами от 1 до n
-print(a)
-left_part = reduce((lambda x, y: x + y), a)  # вычислили сумму чисел 1 до n (левая часть выражения)
-right_part = calc_right(user_number)  # вычислили правую часть выражения
+# вычислили левую часть выражения первым способом
+left_part1 = calc_left1(user_number)
 
-print(f'{left_part == right_part}, {left_part} = {right_part}')
+# вычислили левую часть выражения вторым способом
+calc_left2(user_number)  # получили список, заполненный числами от 1 до n
+left_part2 = reduce((lambda x, y: x + y), a)  # вычислили сумму чисел 1 до n (левая часть выражения)
+
+# вычислили правую часть выражения
+right_part = calc_right(user_number)
+
+print(f'{left_part2 == right_part == left_part1}, {left_part2} = {right_part} = {left_part1}')

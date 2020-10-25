@@ -17,25 +17,23 @@
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
 user_number = int(input('Введите любое натуральное число: '))
-i = 0  # счетчик четных цифр
-j = 0  # счетчик нечетных цифр
 
 
-def calc_even(number):
-    global i
-    global j
+def calc_even(number, i=0, j=0):
     if number // 10 == 0:
         if number % 2 == 0:
             i += 1
         else:
             j += 1
+        return i, j
     else:
         if (number % 10) % 2 == 0:
             i += 1
         else:
             j += 1
-        calc_even(number // 10)
+        return calc_even(number // 10, i, j)
 
 
-calc_even(user_number)
-print(f'Количество четных и нечетных цифр в числе равно: {i, j}')
+even, not_even = calc_even(user_number)
+print(f'Количество четных и нечетных цифр в числе равно: {even, not_even}')
+
