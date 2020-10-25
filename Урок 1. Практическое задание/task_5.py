@@ -18,3 +18,44 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+
+class PlateStackClass:
+
+    def __init__(self, max_size):
+        self.elems = [[]]
+        self.max_size = max_size
+
+    def __str__(self):
+        return str(self.elems)
+
+    def is_empty(self):
+        return self.elems == [[]]
+
+    def push_in(self, el):
+        if len(self.elems[len(self.elems) - 1]) < self.max_size:
+            self.elems[len(self.elems) - 1].append(el)
+        else:
+            self.elems.append([])
+
+    def pop_out(self):
+        result = self.elems[len(self.elems) - 1].pop()
+        if len(self.elems[len(self.elems) - 1]) == 0:
+            self.elems.pop()
+        return result
+
+    def get_value(self):
+        return self.elems[len(self.elems) - 1][len(self.elems[len(self.elems) - 1]) - 1]
+        #Вот эту строку кода вообще не понял
+
+    def stuck_sum(self):
+        sum = 0
+        for stack in self.elems:
+            sum += len(stack)
+        return sum
+
+    def stack_count(self):
+        return len(self.elems)
+
+
+

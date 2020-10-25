@@ -9,3 +9,23 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def guess_num(num , counter):
+    print(f'Try №: {counter}')
+    answer = int(input('Please enter a number from 1 to 100: '))
+    if counter == 10 or num == answer:
+        if num == answer:
+            print('Congratulations')
+        print(f'Right answer is {num}')
+    else:
+        if answer < num:
+            print('Entered number too small')
+        else:
+            print('Entered number too big')
+        guess_num(num, counter + 1)
+
+
+guess_num(random.randint(0, 100), 1)
