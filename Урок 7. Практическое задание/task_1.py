@@ -25,6 +25,7 @@ def create_arr(number):
 
 
 def bubble():
+    """Пузырёк, как учили в школе"""
     arr = create_arr(1000)
     for i in range(len(arr)):
         for j in range(len(arr)):
@@ -33,6 +34,7 @@ def bubble():
 
 
 def bubble_plus():
+    """Пузырёк без лишних проходов"""
     n = 1
     arr = create_arr(1000)
     while n < len(arr):
@@ -43,6 +45,7 @@ def bubble_plus():
 
 
 def bubble_extra_plus():
+    """Пузырёк с флагом на проход без перестановки"""
     n = 1
     arr = create_arr(1000)
     while n < len(arr):
