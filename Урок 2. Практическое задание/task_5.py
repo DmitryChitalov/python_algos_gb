@@ -18,3 +18,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def table_out(ascii_cod):
+    if ascii_cod > 127:
+        return
+    else:
+        if ascii_cod % 10 == 1:
+            print(ascii_cod, '-', chr(ascii_cod))
+        else:
+            print(ascii_cod, '-', chr(ascii_cod), '', end='')
+        table_out(ascii_cod + 1)
+
+
+table_out(32)

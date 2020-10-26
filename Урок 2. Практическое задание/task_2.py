@@ -16,3 +16,20 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def rec_digicalc(number, odd_digits=0, even_digits=0):
+    digit = number % 10
+    if digit % 2:
+        odd_digits += 1
+    else:
+        even_digits += 1
+    number = number // 10
+    if number > 0:
+        rec_digicalc(number, odd_digits, even_digits)
+    else:
+        print(f'Количество четных и нечетных цифр в числе равно: {even_digits}, {odd_digits}')
+        return
+
+
+rec_digicalc(int(input("Введите число: ")))
