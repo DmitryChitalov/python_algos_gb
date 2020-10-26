@@ -10,6 +10,10 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+
+from timeit import timeit, default_timer
+
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,3 +43,36 @@ def func_2():
 
 print(func_1())
 print(func_2())
+
+
+####################################
+def my_func_3():
+    m = 0
+    num = 0
+    set_elems = set(array)
+    for el in set_elems:
+        count = array.count(el)
+        if count > m:
+            m = count
+            num = el
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+print(my_func_3())
+
+
+####################################
+# Профилировка
+print("Профилировка timeit():")
+stmts = ['func_1()', 'func_2()', 'my_func_3()']
+setup = 'from __main__ import func_1, func_2, my_func_3'
+for stmt in stmts:
+    print(f"{stmt}: {timeit(stmt, setup, default_timer, 10000)}")
+
+
+"""
+Вывод:
+Моя функция my_func_3() немного быстрее за счет сокращения количества обхода элементов,
+помещая значения списка во множество, в котором содержатся только уникальные значения.
+"""

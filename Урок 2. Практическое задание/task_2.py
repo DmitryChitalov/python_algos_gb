@@ -16,3 +16,43 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def odd_even(num):
+    """Рекурсивная функция для сортировки цифр входящего числа по четным и нечетным
+
+    :param num: Число для разбора
+    :return: Возвращается 2-хмерный массив, в котором первый массив с индексом 0 содержатся четные, в другом - нечетные
+    """
+    digit = num % 10
+    num = int((num - num % 10) / 10)
+    if num == 0:
+        digits = [[], []]
+        digits[digit % 2].append(digit)
+        return digits
+    digits = odd_even(num)
+    digits[digit % 2].append(digit)
+    return digits
+
+
+def odd_even_output(num):
+    """Функция работает в паре с функцией odd_even()
+    Служит для красивого вывода результата функции odd_even()
+
+    :param num: Число для разбора
+    :return: Только вывод в терминал
+    """
+    digits = odd_even(num)
+    implode = lambda lst: ', '.join([str(el) for el in lst]) if len(lst) > 0 else '---'
+    print(f"Число {num} содержит цифры:")
+    print(f"Четных {len(digits[0])}: ({implode(digits[0])})")
+    print(f"Нечетных {len(digits[1])}: ({implode(digits[1])})")
+    print()
+
+
+#################################
+odd_even_output(2)
+odd_even_output(3)
+odd_even_output(123)
+odd_even_output(34560)
+odd_even_output(3546214104015)
