@@ -12,3 +12,22 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+from random import randint
+
+
+def classic_bubble_sort(arr_len: int):
+    N = arr_len
+    a = []
+    for i in range(N):
+        a.append(randint(-100, 100))
+    print("Before sorting: {}".format(a))
+    for i in range(N - 1):
+        for j in range(N - i - 1):
+            if a[j] > a[j + 1]:
+                a[j], a[j + 1] = a[j + 1], a[j]
+
+    print("*After sorting: {}".format(a))
+
+
+if __name__ == '__main__':
+    classic_bubble_sort(10)
