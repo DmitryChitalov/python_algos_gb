@@ -9,3 +9,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def seq_member(seq_item):
+    return 1 if seq_item == 1 else seq_member(seq_item - 1) / -2
+
+
+def seq_sum(elem_amount):
+    return 1 if elem_amount == 1 else seq_sum(elem_amount - 1) + seq_member(elem_amount)
+
+
+inp_num = int(input("Введите количество элементов: "))
+print(f'Количество элементов - {inp_num}, их сумма - {seq_sum(inp_num)}')
+
+"""
+Одной рекурсией здесь обойтись не получилось, пришлось на две разделить:
+одна вычисляет член последовательности, вторая - их суммирует
+"""

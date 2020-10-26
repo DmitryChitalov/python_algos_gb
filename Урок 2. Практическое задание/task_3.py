@@ -15,3 +15,12 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def rec_countdown(number):
+    str_down = str(number % 10)
+    number = number // 10
+    return str_down + rec_countdown(number) if number > 0 else str_down
+
+
+print(f'Перевернутое число: {rec_countdown(int(input("Введите число, которое требуется перевернуть: ")))}')

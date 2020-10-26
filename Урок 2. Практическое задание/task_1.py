@@ -28,3 +28,44 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def rec_calc(math_op):
+    while math_op not in ('+', '-', '*', '/', '0'):
+        math_op = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if math_op == '0':
+        return
+    while True:
+        try:
+            first_number = int(input("Введите первое число: "))
+            break
+        except ValueError:
+            print("Вы вместо трехзначного числа ввели строку (((. Исправьтесь")
+    while True:
+        try:
+            second_number = int(input("Введите второе число: "))
+            break
+        except ValueError:
+            print("Вы вместо трехзначного числа ввели строку (((. Исправьтесь")
+    if second_number == 0 and math_op == '/':
+        while second_number == 0:
+            print("Делить на ноль нельзя, введите другое число!")
+            while True:
+                try:
+                    second_number = int(input("Введите второе, отличное от ноля число: "))
+                    break
+                except ValueError:
+                    print("Вы вместо трехзначного числа ввели строку (((. Исправьтесь")
+    if math_op == '+':
+        result = first_number + second_number
+    elif math_op == '-':
+        result = first_number - second_number
+    elif math_op == '*':
+        result = first_number * second_number
+    else:
+        result = first_number / second_number
+    print("Ваш результат: ", result)
+    rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода): "))
+
+
+rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода): "))
