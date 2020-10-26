@@ -13,3 +13,27 @@
 arr[m]
 from statistics import median
 """
+from statistics import median
+from random import randint
+
+def sort_lst(lst_obj):
+    min = []
+    max = []
+    i = 0
+    while i < len(lst_obj):
+        if lst_obj[i] < median(lst_obj):
+            min.append(lst_obj[i])
+        else:
+            max.append(lst_obj[i])
+        i +=1
+    return f'элементы меньше медианы: {min} \nэлементы больше медианы: {max}\nмедиана {median(lst_obj)}'
+
+
+orig_list = [randint(-100, 100) for _ in range(int(input('Введите число элементов: ')))]
+print(sort_lst(orig_list))
+'''
+Введите число элементов: 5
+элементы меньше медианы: [-84, -100] 
+элементы больше медианы: [33, 69, -31]
+медиана -31
+'''
