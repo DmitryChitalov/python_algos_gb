@@ -9,3 +9,33 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+
+def randomly_generated(answer, attempt=10):
+    if attempt == 0:
+        print(f'Все попытки кончились, было загадано {answer}')
+        return
+
+    user_answer = input('Угадайте число: ')
+    if user_answer.isdigit():
+        user_answer = int(user_answer)
+
+        attempt -= 1
+        if answer == user_answer:
+            print(f'Ура, Вы угадали!!!')
+        elif answer > user_answer:
+            print(f'Загаданное число больше (осталось {attempt} попыток)')
+            return randomly_generated(answer, attempt)
+        elif answer < user_answer:
+            print(f'Загаданное число меньше (осталось {attempt} попыток)')
+            return randomly_generated(answer, attempt)
+
+    else:
+        print('Введите число!')
+        return randomly_generated(answer, attempt)
+
+
+if __name__ == "__main__":
+    answer_data = randint(0, 100)
+    randomly_generated(answer_data)
