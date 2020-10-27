@@ -9,3 +9,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_row(count, number=1.0):
+    if count == 1:
+        return number
+    else:
+        count -= 1
+        return (number + sum_row(count, (number * (-0.5))))
+
+
+count = int(input('Введите число элементов последовательности: '))
+num = 1
+row = [1]
+for i in range(count - 1):
+    print(num)
+    num = num * (-0.5)
+    row.append(num)
+print(f'Полученный ряд чисел: {row}')
+print(f'Сумма элементов равно {sum_row(count)}')
