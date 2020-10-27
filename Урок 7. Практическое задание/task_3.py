@@ -13,3 +13,33 @@
 arr[m]
 from statistics import median
 """
+
+
+from statistics import median
+from random import randint
+
+
+def gnome_sort(a):
+    i = 0
+    j = 1
+    while i < len(a):
+        if a[i - 1] < a[i]:
+            i = j
+            j += 1
+        else:
+            a[i - 1], a[i] = a[i], a[i - 1]
+            i -= 1
+            if i == 0:
+                i = j
+                j += 1
+    return a
+
+
+m = int(input('Введите целое число: '))
+arr = [randint(0, 1000) for i in range(2 * m + 1)]
+print(arr)
+print('Эталонное значение медианы:', median(arr))
+arr = gnome_sort(arr)
+print(arr)
+print('Медиана: ', arr[m])
+
