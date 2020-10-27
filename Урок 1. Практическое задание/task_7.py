@@ -10,3 +10,13 @@
 Вам нужно доработать программу так, чтобы она могла выполнить проверку на палиндром
 и в таких строках (включающих пробелы)
 """
+
+import string
+
+def is_palindrome(s):
+    whitelist = set(string.ascii_lowercase)
+    s = s.lower()
+    s = ''.join([char for char in s if char in whitelist])
+    return s == s[::-1]
+
+print(is_palindrome('молоко делили ледоколом'))

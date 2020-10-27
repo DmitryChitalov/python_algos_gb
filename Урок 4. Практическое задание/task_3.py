@@ -11,6 +11,10 @@
 """
 
 
+import timeit
+import cProfile
+
+
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
         return
@@ -34,3 +38,20 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+enter_num = int(input('введите число: '))
+revers(enter_num, revers_num=0)
+revers_2(enter_num, revers_num=0)
+revers_3(enter_num)
+
+print(timeit.timeit("revers(enter_num)", setup="from __main__ import revers, enter_num", number=1000))
+print(timeit.timeit("revers_2(enter_num)", setup="from __main__ import revers_2, enter_num", number=1000))
+print(timeit.timeit("revers_3(enter_num)", setup="from __main__ import revers_3, enter_num", number=1000))
+
+cProfile.run('revers(100)')
+cProfile.run('revers_2(100)')
+cProfile.run('revers_3(100)')
+
+"""
+самый эффективный-третий метод
+"""
