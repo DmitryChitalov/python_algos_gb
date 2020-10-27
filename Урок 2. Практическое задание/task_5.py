@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def display_tables(start, finish, count=1):
+    if start == finish + 1:
+        return
+    else:
+        if count % 10 == 0:
+            print(f'{start:3} - {chr(start):3}')
+        else:
+            print(f'{start:3} - {chr(start):3}', end='')
+        count += 1
+        start += 1
+        return display_tables(start, finish, count)
+
+
+if __name__ == "__main__":
+    display_tables(32, 127)

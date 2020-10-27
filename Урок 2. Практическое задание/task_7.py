@@ -6,3 +6,15 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def verifying_set(n):
+    if n == 0:
+        return 0
+    else:
+        return n + verifying_set(n - 1)
+
+
+if __name__ == "__main__":
+    number = 8
+    print(f'{verifying_set(number)} = {number * (number + 1) / 2:.0f}')

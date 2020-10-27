@@ -27,3 +27,47 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# 1-й вариант: # O(1) - константная
+def check_user1(login, password_enter, dict_obj):
+    access_allowed = False
+    password_user = dict_obj[login][0]  # O(1)
+    activated_user = dict_obj[login][1]  # O(1)
+    if activated_user:
+        if password_user == password_enter:
+            access_allowed = True
+        else:
+            print(f"Неверный пароль {password_enter}")
+    else:
+        print(f"Ваша учетная запись - {login} не активирована, хотите ее активровать сейчас?")
+
+    return f"Для пользователя {login} доступ к ресурсу: {access_allowed}!"
+
+
+# 2-й вариант: O(n) - линейная
+def check_user2(login, password_enter, dict_obj):
+    access_allowed = False
+    for k, v in dict_obj.items():  # O(n)
+        if k == login:
+            password_user = v[0]  # O(1)
+            activated_user = v[1]  # O(1)
+            if activated_user:
+                if password_user == password_enter:
+                    access_allowed = True
+                else:
+                    print(f"Неверный пароль {password_enter}")
+            else:
+                print(f"Ваша учетная запись - {login} не активирована, хотите ее активровать сейчас?")
+
+    return f"Для пользователя {login} доступ к ресурсу: {access_allowed}!"
+
+
+dict_value = {'User1': (12345, True), 'User2': (426346, False), 'User3': (12341, True), 'User4': (657967, False)}
+print(check_user1('User2', 426346, dict_value))
+print(check_user2('User1', 12345, dict_value))
+print(check_user2('User3', 643643346, dict_value))
+
+""" 1-й вариант лучше - O(1) - константная сложность алгоритма, так как количество операций не растет
+ и постоянно при любых значениях входных данных по сравнению с другими алгоритмами. 
+"""
