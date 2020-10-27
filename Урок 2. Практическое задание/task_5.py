@@ -18,3 +18,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def chr_row(ascii=32):
+    if ascii == 128:
+        return True
+    print(f' {ascii} - {chr(ascii)}', end = ' ')
+    if (ascii-31)%10 == 0:
+        print('\n')
+
+    chr_row(ascii + 1)
+
+chr_row()
