@@ -14,7 +14,6 @@
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 """
 
-
 from memory_profiler import memory_usage, profile
 import time
 import random
@@ -31,6 +30,7 @@ def my_decorator(function):
         process_time = t_2 - t_1
         process_memory = m_2[0] - m_1[0]
         return f'Время выполнения {function.__name__}: {process_time}, память: {process_memory}'
+
     return wrapper
 
 
@@ -107,10 +107,11 @@ def full_program():
     # В порядке убывания быстродействия: генератор, рекурсия, встроенные функции, цикл.
     print(func_test(my_list))
     # func_test()
+
+
 #  из результатов @profile видно, то проблем с памятью нет.
 
 
 if __name__ == '__main__':
     """Python 3.8, x64"""
     full_program()
-

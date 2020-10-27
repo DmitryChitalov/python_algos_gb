@@ -13,7 +13,6 @@ from memory_profiler import memory_usage, profile
 import numpy as np
 import sys
 
-
 my_str_1 = ''.join(random.choice(ascii_uppercase) for elem in range(1000000))
 my_str_2 = ''.join(random.choice(ascii_uppercase) for el in range(1000000))
 
@@ -28,6 +27,7 @@ def my_decorator(function):
         process_time = t_2 - t_1
         process_memory = m_2[0] - m_1[0]
         return f'Время выполнения: {process_time}, память: {process_memory}'
+
     return wrapper
 
 
@@ -51,4 +51,3 @@ if __name__ == '__main__':
     """Python 3.8, x64"""
     full_program()
 # использование библиотеки NumPy существенно оптимизирует использование памяти при работе с массивами.
-
