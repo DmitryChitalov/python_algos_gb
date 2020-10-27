@@ -14,6 +14,7 @@
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 """
 
+
 from memory_profiler import memory_usage, profile
 import time
 import random
@@ -110,5 +111,6 @@ def full_program():
 
 
 if __name__ == '__main__':
+    """Python 3.8, x64"""
     full_program()
 
