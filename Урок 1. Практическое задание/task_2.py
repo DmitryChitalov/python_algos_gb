@@ -17,3 +17,33 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+from random import randint
+
+
+def min_value_square(lst):
+    for i in range(len(lst)):
+        value = lst[i]
+        min_founded = True
+        for j in range(len(lst)):
+            if value > lst[j]:  # Значит в списке присутствуют значения меньше текущего значения
+                min_founded = False
+        if min_founded:
+            break
+    return value
+
+
+def min_value_line(lst):
+    min_val = lst[0]
+    for i in range(1, len(lst)):
+        if min_val > lst[i]:
+            min_val = lst[i]
+    return min_val
+
+
+input_list = [randint(-10000, 10000) for i in range(100)]
+
+square_min = min_value_square(input_list)
+line_min = min_value_line(input_list)
+
+print(f"Минимальное значение, найденое с помощью алгоритма O(N^2): {square_min}")
+print(f"Минимальное значение, найденое с помощью алгоритма O(N): {line_min}")

@@ -27,3 +27,36 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users_lst = {"user_1": {"pass": "123456", "activated": True},
+         "user_2": {"pass": "qwerty", "activated": False},
+         "user_3": {"pass": "asdfgh", "activated": False},
+         "user_4": {"pass": "zxcvbn", "activated": True}}
+
+# Сложность O(1)
+def auth1(users, login, password):
+    if users.get(login):
+        if users[login]['pass'] == password and users[login]['activated']:
+            return f"Добро пожаловать, {login}!"
+        elif users[login]['pass'] == password and not users[login]['activated']:
+            return f"Учетная запись не активирована!"
+        elif users[login]['pass'] != password:
+            return f"Не верный пароль"
+    else:
+        return "Такого пользователя не существует"
+
+
+# Сложность O(N)
+def auth2(users, login, password):
+    for user in users_lst:
+        if user == login:
+            if users[user]['pass'] == password and users[user]['activated']:
+                return f"Добро пожаловать, {login}!"
+            elif users[user]['pass'] == password and not users[user]['activated']:
+                return f"Учетная запись не активирована!"
+            elif users[user]['pass'] != password:
+                return f"Не верный пароль"
+    return "Такого пользователя не существует"
+
+print(auth1(users_lst, 'user_2', 'qwerty'))
+print(auth2(users_lst, 'user_2', 'qwerty'))
