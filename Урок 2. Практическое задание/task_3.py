@@ -15,3 +15,18 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def d(a=0, res ='', n = 1):
+    if n == 0:
+        return res
+    if a == 0:
+        a = int(input('число '))
+        n = len(str(a)) -1
+        res = res + str(a % 10)
+        a = a // 10
+        return d(a, res, n)
+    res = res + str(a % 10)
+    n = len(str(a)) -1
+    a = a // 10
+    return d(a, res, n)

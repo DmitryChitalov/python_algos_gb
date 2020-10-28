@@ -16,3 +16,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+# Почему return result возвращает Null?
+# Он же в строчке выше в принт уходит корректно.
+
+def d(boo = True, a = 0, result = [0,0]):
+    if boo == True:
+        a = input('число ')
+    l = len(str(a))
+    a = int(a)
+    x = a % 10
+    a = a // 10
+    if x % 2 == 0:
+        result[0] = result[0] + 1
+    else:
+        result[1] = result[1] + 1
+    if l == 1:
+        print(result)
+        return result
+    d(False, a, result)

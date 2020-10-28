@@ -28,3 +28,33 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def calc(boo = True, a = 0):
+    z = input('+, -, *, / или 0 для выхода ')
+    print(z)
+    if z == '0':
+        print('конец')
+        return
+    else:
+        if boo == True:
+            a = int(input('Введите первое число: '))
+            if z == '+':
+                a = a + int(input('Введите второе число: '))
+            elif z == '-':
+                a = a - int(input('Введите второе число: '))
+            elif z == '*':
+                a = a * int(input('Введите второе число: '))
+            elif z == '/':
+                a = a * int(input('Введите второе число: '))
+            print(a)
+            return calc(False, a)
+        if boo != True:
+            if z == '+':
+                a = a + int(input('Введите число: '))
+            elif z == '-':
+                a = a - int(input('Введите число: '))
+            elif z == '*':
+                a = a * int(input('Введите число: '))
+            elif z == '/':
+                a = a * int(input('Введите число: '))
+            print(a)
+            calc(False, a)
