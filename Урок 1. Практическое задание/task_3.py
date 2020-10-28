@@ -22,3 +22,27 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+# Решение 1. Сложность: O(N log N)
+def profit_search_1():
+    r = sorted(comp_dict.items(), key=lambda x: x[1], reverse=True)
+    return r[:3]
+
+
+# Решение 2. Сложность: O(N)
+def profit_search_2(obj):
+    in_max = {}
+    list_d = dict(obj)
+    for i in range(3):
+        maxi = max(list_d.items(), key=lambda k_v: k_v[1])
+        del list_d[maxi[0]]
+        in_max[maxi[0]] = maxi[1]
+    return in_max
+
+
+comp_dict = {'K': 1200, 'M': 1000, 'R': 1500, 'P': 2000}
+print(comp_dict)
+print('1:', profit_search_1())
+print('2:', profit_search_2(comp_dict))
+# Лучшим будет вариант два так как он является линейным и возвращается такой же тип данный
