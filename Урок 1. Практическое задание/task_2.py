@@ -17,3 +17,30 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+### список ###
+
+from random import randrange
+
+new_list = []
+i = 0
+while i <= 15:
+    new_list == new_list.append(randrange(-5000, 5000, 1))
+    i += 1
+
+print(new_list)
+
+#### 1 ####
+
+min_el = new_list[0]
+
+for el in new_list:
+    if el < min_el:
+        min_el = el
+
+print(min_el)
+
+#### 2 ####
+
+min_el = min(new_list)
+print(min_el)
