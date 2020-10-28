@@ -27,3 +27,53 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+# Вариант 1. Сложность: O(n)
+data = {
+    'Maria': ['23423', 1],
+    'Viktor': ['gdfg4', 1],
+    'Lis': ['ffsd', 0],
+    'Dave': ['12345', 1]
+}
+
+
+def autontific(name, passwd):
+    for key, value in data.items():
+        if key == name:
+            if value[0] == passwd:
+                return 'Добро пожаловать'
+            elif value[1] == 0:
+                return 'Вы не прошли авторизацию'
+            elif value[0] != passwd:
+                return 'Введен не правильный пароль'
+    return 'Пользователь с таким имененм не найден'
+
+
+print(autontific('Maria', '2fd'))  # Задаем существующего пользователя но с неправильным паролем
+print(autontific('Maria', '23423'))  # Все данные верны
+print(autontific('Lis', '23423'))  # Пользователь который не прошёл авторизацию
+
+# ------------------------------------------------------------------------------------------------------------------
+
+
+# Вариант 2. Сложность: O(1)
+def authorization(users, user_name, user_password):
+    if users.get(user_name):
+        if users[user_name]['password'] == user_password and users[user_name]['activation']:
+            return 'access granted'
+        elif users[user_name]['password'] == user_password and not users[user_name]['activation']:
+            return 'account not activated'
+        elif users[user_name]['password'] != user_password:
+            return 'access denied'
+    else:
+        return "user's not found"
+
+
+my_users = {
+    'user1': {'password': '1111', 'activation': True},
+    'user2': {'password': '1111', 'activation': False},
+    'user3': {'password': '1111', 'activation': True},
+}
+print(authorization(my_users, 'user4', '1111'))
+
+# ----------------------------------------------------------------------------------------------
+# Вариант два является более эффективным так как в нем не использвуются циклы, а только встроенные функции

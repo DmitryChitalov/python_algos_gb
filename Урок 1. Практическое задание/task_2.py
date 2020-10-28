@@ -17,3 +17,25 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+# 1й вариант. Сложность: O(n^2)
+def min_lst_1(lst_obj):
+    for n in lst_obj:
+        is_min = True
+        for m in lst_obj:
+            if n > m:
+                is_min = False
+        if is_min:
+            return n
+
+
+# 1й вариант. Сложность: O(n)
+def min_lst_2(lst_obj):
+    return min(lst_obj)
+
+
+lst = [i for i in range(1, 10)]  # создаем список
+print(lst)
+print(min_lst_1(lst))
+print(min_lst_2(lst))
