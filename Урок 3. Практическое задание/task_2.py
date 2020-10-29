@@ -40,7 +40,7 @@ def is_user_registered(nick_name):
 
 
 def register_user(nick_name, password):
-    """Функция регистрирует нового пользователя в системе"""
+    """Регистрирует нового пользователя в системе"""
     salt = nick_name + ''.join(
         choice(ascii_letters) for _ in range(10))  # соль = уникальный логин + усложняем комбинацией букв
     auth_data = encode_password(password, salt)  # хешируем пароль с солью
