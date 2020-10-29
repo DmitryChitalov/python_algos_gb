@@ -12,5 +12,39 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
-# TEST
+from timeit import timeit
+import random
 
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+
+def bubble_sort_optimized(lst_obj):
+    go_flag = True
+    while go_flag:
+        go_flag = False
+        for i in range(len(lst_obj) - 1):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+                go_flag = True
+    return lst_obj
+
+
+my_list = [random.randint(-100, 100) for _ in range(100)]
+print(f'{my_list}\n')
+print(f'{bubble_sort(my_list.copy())}\n')
+print(f'{bubble_sort_optimized(my_list.copy())}\n')
+print(timeit('bubble_sort(my_list.copy())',
+             setup='from __main__ import bubble_sort, my_list',
+             number=1000))
+print(timeit('bubble_sort_optimized(my_list.copy())',
+             setup='from __main__ import bubble_sort_optimized, my_list',
+             number=1000))
+# "Оптимизированная" функция менее быстродейственна
