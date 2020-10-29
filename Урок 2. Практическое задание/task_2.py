@@ -32,6 +32,6 @@ def d(boo = True, a = 0, result = [0,0]):
     else:
         result[1] = result[1] + 1
     if l == 1:
-        print(result)
+        #print(result)
         return result
     d(False, a, result)
