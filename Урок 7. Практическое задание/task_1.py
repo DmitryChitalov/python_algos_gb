@@ -37,14 +37,14 @@ def bubble_sort_optimized(lst_obj):
     return lst_obj
 
 
-my_list = [random.randint(-100, 100) for _ in range(100)]
-print(f'{my_list}\n')
-print(f'{bubble_sort(my_list.copy())}\n')
-print(f'{bubble_sort_optimized(my_list.copy())}\n')
-print(timeit('bubble_sort(my_list.copy())',
-             setup='from __main__ import bubble_sort, my_list',
+inp_lst = [random.randint(-100, 100) for _ in range(100)]
+print(f'{inp_lst}\n')
+print(f'{bubble_sort(inp_lst.copy())}\n')
+print(f'{bubble_sort_optimized(inp_lst.copy())}\n')
+print(timeit('bubble_sort(inp_lst.copy())',
+             setup='from __main__ import bubble_sort, inp_lst',
              number=1000))
-print(timeit('bubble_sort_optimized(my_list.copy())',
-             setup='from __main__ import bubble_sort_optimized, my_list',
+print(timeit('bubble_sort_optimized(inp_lst.copy())',
+             setup='from __main__ import bubble_sort_optimized, inp_lst',
              number=1000))
-# "Оптимизированная" функция менее быстродейственна
+# Вывод: "Оптимизированная" функция менее быстродейственна
