@@ -8,3 +8,57 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+from memory_profiler import profile
+from random import randint
+import random
+import timeit
+
+
+def arr_init(arr_length: int):
+    arr = []
+    for i in range(arr_length):
+        arr.append(random.random() * 50)
+    return arr
+
+# @profile()
+def merge_sorting(lst_obj):
+    if len(lst_obj) > 1:
+        center = len(lst_obj) // 2
+        left = lst_obj[:center]
+        right = lst_obj[center:]
+
+        merge_sorting(left)
+        merge_sorting(right)
+
+        i, j, k = 0, 0, 0
+
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                lst_obj[k] = left[i]
+                i += 1
+            else:
+                lst_obj[k] = right[j]
+                j += 1
+            k += 1
+
+        while i < len(left):
+            lst_obj[k] = left[i]
+            i += 1
+            k += 1
+
+        while j < len(right):
+            lst_obj[k] = right[j]
+            j += 1
+            k += 1
+        return lst_obj
+
+
+if __name__ == '__main__':
+    arr_len = 555
+    my_array = arr_init(arr_len)
+    print(f"Array before sorting: {my_array}")
+    print("- " * 50)
+
+    merge_sorting(my_array)
+    # print(f" Array after sorting: {my_array}")
+    print(timeit.timeit("merge_sorting(my_array)", setup="from __main__ import merge_sorting, my_array", number=100))
