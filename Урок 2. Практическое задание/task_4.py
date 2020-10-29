@@ -9,3 +9,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+'''#n=int(input('Введите количество элементов:'))
+lst=[]
+el=1
+while n>=0:
+    el=el/-2
+    lst.append(el)
+    n-=1
+print(sum(lst))'''
+
+def sum_elems(n, el):
+    if n==0:
+       return 0
+    else:
+       return el+sum_elems(n-1, el/-2)
+
+print(sum_elems(4,1));

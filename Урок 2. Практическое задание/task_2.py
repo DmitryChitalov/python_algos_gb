@@ -16,3 +16,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_dig(n, even=0, odd=0):
+    if n == 0:
+        return even, odd
+    else:
+        dig = n % 10
+        n = n // 10
+        if dig % 2 == 0:
+            even += 1
+            return count_dig(n, even, odd)
+        else:
+            odd += 1
+            return count_dig(n, even, odd)
+
+print(count_dig(234))

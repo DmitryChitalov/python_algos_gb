@@ -28,3 +28,28 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    sign = input('Введите операцию (+, -, *, / или 0 для выхода)')
+    dig1 = input('Введите первое число:')
+    if dig1.isdigit():
+        return int(dig1)
+    else:
+        return input('Вы ввели не то... Введите первое число:')
+    dig2 = int(input('Введите второе число:'))
+    if sign == '0':
+        return 'bye'
+    elif sign== '+':
+        return dig1+dig2
+    elif sign == '-':
+        return dig1 - dig2
+    elif sign == '*':
+        return dig1*dig2
+    else:
+        return (dig1 / dig2)
+
+print(calc());
+
+
+
