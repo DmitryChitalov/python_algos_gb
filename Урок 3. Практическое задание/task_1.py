@@ -10,3 +10,43 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+
+import time
+
+list_ = []
+dict_ = {}
+
+def fTime(func):
+    start_time = time.time()
+    func()
+    print((time.time() - start_time)*1000)
+
+@fTime
+def add_ind_dict(any_type = list_):
+    if type(any_type) == type({}):
+        print(type(any_type))
+        for i in range(0, 100):
+            any_type[i] = i
+    else:
+        print(type(any_type))
+        for i in range(0, 100):
+            list_.append([i,i])
+
+@fTime
+def add_ind_dict(any_type = dict_):
+    if type(any_type) == type({}):
+        print(type(any_type))
+        for i in range(0, 100):
+            any_type[i] = i
+    else:
+        print(any_type)
+        for i in range(0, 100):
+            list_.append([i,i])
+
+# Если честно, то я думал, что заполнение словаря должно быть медленнее,
+# т.к. там происходит встроенное хеширование элементов.
+# O(n), насколько я помню, должна быть одинакова.
+# Если Вам не сложно, напишите, пожалуйста, почему заполнение списка занимает большее время.
+
+#add_ind_dict(dict_) почему так не работет? Не могу понять
+
