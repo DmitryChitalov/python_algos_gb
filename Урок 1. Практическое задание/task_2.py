@@ -17,3 +17,25 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+## первый алгоритм
+
+def get_min(n):
+    minimum = n[0]
+    for i in range(1, len(n)):
+        if n[i] < minimum:
+            minimum = n[i]
+    return minimum
+
+## второй алгоритм
+def get_min_2(a):
+    return min(a)
+
+
+## генератор случайного списка
+
+import numpy
+list1 = numpy.random.random_integers(1, 10, 5)
+
+
+print(get_min(list1))
+print(get_min_2(list1))
