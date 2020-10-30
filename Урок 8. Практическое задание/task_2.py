@@ -10,6 +10,7 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных.
 """
 
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -27,12 +28,14 @@ class BinaryTree:
             # формируется новое поддерево
             self.left_child = BinaryTree(new_node)
         # если у узла есть левый потомок
-        else:
+        elif self.left_child is not None:
             # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
             # и спускаем имеющегося потомка на один уровень ниже
             tree_obj.left_child = self.left_child
             self.left_child = tree_obj
+        else:
+            print('у данного узла уже есть два ребенка')
 
     # добавить правого потомка
     def insert_right(self, new_node):
@@ -42,12 +45,14 @@ class BinaryTree:
             # формируется новое поддерево
             self.right_child = BinaryTree(new_node)
         # если у узла есть правый потомок
-        else:
+        elif self.right_child is not None:
             # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
             # и спускаем имеющегося потомка на один уровень ниже
             tree_obj.right_child = self.right_child
             self.right_child = tree_obj
+        else:
+            print('у данного узла уже есть два ребенка')
 
     # метод доступа к правому потомку
     def get_right_child(self):
@@ -67,13 +72,13 @@ class BinaryTree:
 
 
 r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
+print(r.get_root_val())     # 8
+print(r.get_left_child())   # None
 r.insert_left(4)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
+print(r.get_left_child())   # <__main__.BinaryTree object at 0x00B9D610>
+print(r.get_left_child().get_root_val())    # 4
 r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
+print(r.get_right_child())                  # <__main__.BinaryTree object at 0x00B9D658>
+print(r.get_right_child().get_root_val())   # 12
 r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+print(r.get_right_child().get_root_val())   # 16
