@@ -14,7 +14,6 @@
 р
 а
 """
-
 import hashlib
 
 string = 'papa'

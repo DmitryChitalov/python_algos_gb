@@ -15,6 +15,7 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
 import hashlib
 
 base = {'password': None, 'passwordTwo': None}

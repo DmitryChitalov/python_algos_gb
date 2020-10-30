@@ -34,7 +34,6 @@ def add_to_cache():
         print('такой уже есть, или введён не верный')
         add_to_cache()
 
-
 def data_to_hash(url):
     b_salt = bytes(url, 'utf-8')
     print('солим url\'ом')
