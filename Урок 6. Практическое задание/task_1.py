@@ -21,15 +21,14 @@ from memory_profiler import profile
 from timeit import timeit
 from random import randint
 
+usr_number = 23245678019999
 
-nums = [randint(10, 100) for _ in range(10)]
-
-
-# @profile
 
 @profile
-def revers_number(number_str, i):
-    return i if number_str == 0 else revers_number(number_str // 10, i * 10 + number_str % 10)
+def revers_all(usr_number):
+    def revers_number(number_str, i=0):
+        return i if number_str == 0 else revers_number(number_str // 10, i * 10 + number_str % 10)
+    print(f'{revers_number(usr_number)}')
 
 
 @profile
@@ -38,8 +37,8 @@ def revers_number_2(number_str):
 
 
 if __name__ == '__main__':
-    usr_number = 232323 ** 23
-    print(f'Перевернутое число 1: {revers_number(usr_number, 0)}')
+
+    {revers_all(usr_number)}
     print(f'Перевернутое число 2: {revers_number_2(str(usr_number))}')
 
 # print(timeit("revers_number()", setup="from __main__ import revers_number", number=1))
@@ -48,16 +47,15 @@ if __name__ == '__main__':
 """
 Сделал реверс числа двумя способами
 1. Рекурсивно.
-Получили 125 вхождений 
 Line #    Mem usage    Increment  Occurences   Line Contents
 ============================================================
-    30     17.0 MiB     17.0 MiB         125   @profile
-    31                                         def revers_number(number_str, i):
-    32     17.0 MiB      0.0 MiB         125       return i if number_str == 0 else revers_number(number_str // 10, i * 10 + number_str % 10)
+    27     15.7 MiB     15.7 MiB           1   @profile
+    28                                         def revers_all(usr_number):
+    29     15.7 MiB      0.0 MiB          16       def revers_number(number_str, i=0):
+    30     15.7 MiB      0.0 MiB          15           return i if number_str == 0 else revers_number(number_str // 10, i * 10 + number_str % 10)
+    31     15.7 MiB      0.0 MiB           1       print(f'{revers_number(usr_number)}')
 
 
-Перевернутое число 1: 7664311565374818870731874848654098143686662301019698768930101496910239232969553949786698340384765900897293523990989849990362
-Filename: D:/GitHub/python_algos_gb/Урок 6. Практическое задание/task_1.py
 
 =============================================================
 
@@ -65,11 +63,12 @@ Filename: D:/GitHub/python_algos_gb/Урок 6. Практическое зад�
 2. Через срез
 Line #    Mem usage    Increment  Occurences   Line Contents
 ============================================================
-    35     17.0 MiB     17.0 MiB           1   @profile
-    36                                         def revers_number_2(number_str):
-    37     17.0 MiB      0.0 MiB           1       return number_str[::-1]
+    34     15.7 MiB     15.7 MiB           1   @profile
+    35                                         def revers_number_2(number_str):
+    36     15.7 MiB      0.0 MiB           1       return number_str[::-1]
 
 
-Рекурсивно явно менее эффективный метод, т.к было 125 вхождений и для каждого вхождения использовалось по 17 MB памяти. 
+Рекурсивно явно менее эффективный метод, т.к в 29 строке получилось 16 вхождений, в 30 строке 15  вхождений
+ и для каждого вхождения использовалось по 17 MB памяти. 
 
 """
