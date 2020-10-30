@@ -19,14 +19,11 @@ import timeit
 
 
 # @profile
-def classic_bubble_sort(arr_len: int):
-    N = arr_len
-    a = []
-    for i in range(N):
-        a.append(randint(-100, 100))
+def classic_bubble_sort(arr: list):
+    a = arr
     # print("Before sorting: {}".format(a))
-    for i in range(N - 1):
-        for j in range(N - i - 1):
+    for i in range(len(a) - 1):
+        for j in range(len(a) - i - 1):
             if a[j] > a[j + 1]:
                 a[j], a[j + 1] = a[j + 1], a[j]
 
@@ -34,16 +31,13 @@ def classic_bubble_sort(arr_len: int):
 
 
 # @profile()
-def bubble_sort_by_desc(arr_len: int):
-    N = arr_len
-    a = []
+def bubble_sort_by_desc(arr: list):
+    a = arr
     # counter1 = 0
     # counter2 = 0
-    for i in range(N):
-        a.append(randint(-100, 100))
     # print("Before sorting: {}".format(a))
-    for i in range(N - 1):
-        for j in range(N - i - 1):
+    for i in range(len(a) - 1):
+        for j in range(len(a) - i - 1):
             if a[j] < a[j + 1]:
                 a[j], a[j + 1] = a[j + 1], a[j]
                 # counter2 += 1
@@ -57,12 +51,13 @@ def bubble_sort_by_desc(arr_len: int):
 
 if __name__ == '__main__':
     arr_len = 10
-    classic_bubble_sort(arr_len)
-    print(timeit.timeit("classic_bubble_sort(arr_len)", setup="from __main__ import classic_bubble_sort, arr_len",
-                        number=10000))
+    my_arr = [randint(-100, 100) for i in range(10)]
+
+    classic_bubble_sort(my_arr[:])
+    print(timeit.timeit("classic_bubble_sort(my_arr[:])", setup="from __main__ import classic_bubble_sort, my_arr", number=10000))
     print("- " * 50)
-    bubble_sort_by_desc(arr_len)
-    print(timeit.timeit("bubble_sort_by_desc(arr_len)", setup="from __main__ import bubble_sort_by_desc, arr_len",
+    bubble_sort_by_desc(my_arr[:])
+    print(timeit.timeit("bubble_sort_by_desc(my_arr[:])", setup="from __main__ import bubble_sort_by_desc, my_arr",
                         number=10000))
 
 """
