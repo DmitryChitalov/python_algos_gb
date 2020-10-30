@@ -50,7 +50,6 @@ def bubble_sort_by_desc(arr: list):
 
 
 if __name__ == '__main__':
-    arr_len = 10
     my_arr = [randint(-100, 100) for i in range(10)]
 
     classic_bubble_sort(my_arr[:])
