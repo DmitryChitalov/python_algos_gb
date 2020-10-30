@@ -9,3 +9,34 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+class OutOfRange(Exception):
+    pass
+
+def GuessNumber(answer, n = 10):
+    try:
+        userAnswer = int(input("Введите число от 0 до 100: "))
+        if userAnswer not in range(101):
+            raise OutOfRange
+    except ValueError:
+        print("Необходимо ввести число!")
+    except OutOfRange:
+        print("Необходимо ввести число в диапазоне от 0 до 100!")
+    else:
+        n -= 1
+        if (userAnswer == answer):
+            print("Поздравляем, вы угадали!")
+            return
+        elif n < 1:
+            print(f"Вы проиграли, правильный ответ: {answer}")
+            return
+        elif (userAnswer > answer):
+            print(f"Вы ввели слишком большое число, попробуйте еще раз. Введите число от 0 до 100. Осталось попыток:{n}")
+        elif (userAnswer < answer):
+            print(f"Вы ввели слишком маленькое число, попробуйте еще раз. Введите число от 0 до 100. Осталось попыток:{n}")
+    GuessNumber(answer, n)
+
+val = randint(0,100)
+
+GuessNumber(val)

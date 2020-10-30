@@ -15,3 +15,12 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+def NumberReverse(val):
+    if val < 10:    # Базовый случай
+        return val
+    else:           # Рекурсивный случай
+        return int(str(val % 10) + str(NumberReverse(val // 10)))
+
+res = NumberReverse(123)
+print(f"Результат: {res}")

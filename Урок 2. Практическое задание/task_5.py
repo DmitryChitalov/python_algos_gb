@@ -18,3 +18,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def AsciiPrint(n = 0):
+    index = n + 32
+    if index > 127:
+        return
+    else:
+        endstr = "\n" if n % 10 == 9 else " "
+        print(f"{index} - {chr(index)}", end=endstr)
+        AsciiPrint(n + 1)
+
+AsciiPrint()
