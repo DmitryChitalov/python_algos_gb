@@ -18,3 +18,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def recur_method(from_symbol, to_symbol, output_str=''):
+    for i in range (from_symbol, to_symbol):
+        if i <= last_ascii_num:
+            output_str += f'{i} - {chr(i)}'
+    print(output_str)
+    if to_symbol < last_ascii_num:
+        return recur_method(from_symbol + step, to_symbol + step)
+
+first_ascii_num = 32
+last_ascii_num = 127
+step = 10
+
+print (recur_method(first_ascii_num, first_ascii_num + step))

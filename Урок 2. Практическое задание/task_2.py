@@ -16,3 +16,16 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def num_chet(numb, chet=0, nech=0):
+    if numb == 0:
+        return chet, nech
+    else:
+        cur_n = numb % 10
+        numb = numb // 10
+        if cur_n % 2 == 0:
+            chet += 1
+        else:
+            nech += 1
+        return num_chet(numb, chet, nech)
+
+print (f'Кол-во четных и нечетных цифр в числе: {num_chet(9845465)}')
