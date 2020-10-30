@@ -21,8 +21,10 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
+        if new_node >= self.root:
+            raise ValueError(f'Значение должно быть меньше {self.root}')
         # если у узла нет левого потомка
-        if self.left_child == None:
+        if  new_node >= self.root:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.left_child = BinaryTree(new_node)
@@ -36,6 +38,8 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        if new_node <= self.root:
+            raise ValueError(f'Значение должно быть больше {self.root}')
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -66,14 +70,19 @@ class BinaryTree:
         return self.root
 
 
+
+
+
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(4)
+r.insert_left(999)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
-r.insert_right(12)
+r.insert_right(10)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+
+##смог добавить только валидацию при инсерте левого и правого потомка
