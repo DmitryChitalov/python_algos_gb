@@ -63,8 +63,8 @@ def app():
             print('Сеанс завершен')
             exit()
         password = input('Введите пароль: ')
-        if not is_user_registered(login):
-            register_user(login, password)  # проверяем, зарегестрирован ли пользователь с таким логином
+        if not is_user_registered(login):  # проверяем, зарегестрирован ли пользователь с таким логином
+            register_user(login, password)  # регистрируем пользователя в системе
             print(f'Учетная запись для пользователя с ником {login} успешно создана. Авторизируйтесь')
         else:
             if auth_user(login, password):
