@@ -40,6 +40,7 @@ def data_to_hash(url):
     print('солим url\'ом')
     return hashlib.sha256(bytes(oDictFrom[url], 'utf-8') + b_salt)
 
+
 def validation(url):
     if url not in oDictTo and url in oDictFrom:
         return True
