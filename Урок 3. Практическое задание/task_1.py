@@ -10,3 +10,44 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+import time
+
+
+def get_time(func):
+    def decor(n):
+        start = time.time()
+        func(n)
+        finish = time.time()
+        return finish - start
+
+    return decor
+
+
+@get_time
+def fill_list(n):
+    lst = []
+    for i in range(1, n):
+        lst.append(i)
+    return lst
+
+
+@get_time
+def fill_dict(n):
+    d = {}
+    for i in range(1, n):
+        d[i] = i
+    return d
+
+
+if __name__ == "__main__":
+    print(fill_list(1000000))  # 0.15563416481018066
+    print(fill_dict(1000000))  # 0.15367698669433594
+    print(fill_list(2000000))  # 0.3251163959503174
+    print(fill_dict(2000000))  # 0.322674036026001
+    print(fill_list(3000000))  # 0.4018242359161377
+    print(fill_dict(3000000))  # 0.5162703990936279
+
+"""
+При записи в списки и словари используется константная сложность,поэтому примерно за одинаковое время происходит
+наполнение cписка и словаря.
+"""

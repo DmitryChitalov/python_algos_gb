@@ -15,3 +15,23 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+
+
+def get_hash(passwd, salt):
+    return hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
+
+
+def password_verification(passwd, salt):
+    hash_passwd = get_hash(passwd, salt)
+    print(f'В базе данных хранится строка: {hash_passwd}')
+    repeated_passwd = input('Введите пароль еще раз для проверки: ')
+    if hash_passwd == get_hash(repeated_passwd, salt):
+        return print('Вы ввели правильный пароль')
+    else:
+        return print('Ошибка! Вы ввели неправильный пароль')
+
+
+if __name__ == "__main__":
+    user_salt = "89991237788"  # номер телефона
+    password_verification(input("Введите пароль: "), user_salt)
