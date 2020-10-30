@@ -15,6 +15,7 @@ from statistics import median
 """
 from random import randint
 import statistics
+import timeit
 
 
 def arr_init(arr_length: int):
@@ -26,12 +27,12 @@ def arr_init(arr_length: int):
 
 def classic_bubble_sort(arr: list):
     a = arr
-    print("Before sorting: {}".format(arr))
+    # print("Before sorting: {}".format(arr))
     for i in range(len(arr) - 1):
         for j in range(len(arr) - i - 1):
             if a[j] > a[j + 1]:
                 a[j], a[j + 1] = a[j + 1], a[j]
-    print("*After sorting: {}".format(arr))
+    # print("*After sorting: {}".format(arr))
     if len(a) % 2 == 0:
         return sum(a) / len(a)
     else:
@@ -65,11 +66,11 @@ def gapInsertionSort(arr_list, start, gap):
 
 def find_mediana_without_sorting(arr: list) -> int:
     avg_sum = sum(arr) // len(arr)
-    print("Среднее значение = {}".format(avg_sum))
+    # print("Среднее значение = {}".format(avg_sum))
     for i in reversed(range(len(arr))):
         if arr[i] > avg_sum:
-            print("Выкидываем {}".format(arr.pop(i)))
-
+            num = arr.pop(i)
+            # print("Выкидываем {}".format(num))
     return max(arr)
 
 
@@ -82,10 +83,36 @@ if __name__ == '__main__':
     static_arr = [10, 22, 8, 23, 90, 21, 4, 55, 98, 45, 11]
     my_arr = arr_init(arr_len)
 
-    print("Медиана списка (bubble_sort): {}".format(classic_bubble_sort(static_arr[:])))
-
-    print("Медиана списка (shellSort): {}".format(shellSort(static_arr[:])))
-
-    print("Медиана списка (without_sorting): {}".format(find_mediana_without_sorting(static_arr[:])))
-
-    print("Медиана списка (get_median): {}".format(get_median(static_arr[:])))
+    # print("Медиана списка (bubble_sort): {}".format(classic_bubble_sort(static_arr[:])))
+    #
+    # print("Медиана списка (shellSort): {}".format(shellSort(static_arr[:])))
+    #
+    # print("Медиана списка (without_sorting): {}".format(find_mediana_without_sorting(static_arr[:])))
+    #
+    # print("Медиана списка (get_median): {}".format(get_median(static_arr[:])))
+    times = 10000
+    print(timeit.timeit("classic_bubble_sort(static_arr[:])",
+                        setup="from __main__ import classic_bubble_sort, static_arr", number=times))
+    print(timeit.timeit("shellSort(static_arr[:])",
+                        setup="from __main__ import shellSort, static_arr", number=times))
+    print(timeit.timeit("find_mediana_without_sorting(static_arr[:])",
+                        setup="from __main__ import find_mediana_without_sorting, static_arr", number=times))
+    print(timeit.timeit("get_median(static_arr[:])",
+                        setup="from __main__ import get_median, static_arr", number=times))
+    """
+    По результатам замера видно что пузырек здорово проседает.
+    Шелл - тоже не айс, а на больших величинах дак и всовсем просел 
+    Довольно не плохо себя показал способ без сортировки - в принципе ожидаемо
+    
+        number=100
+            0.002128724999999998
+            0.0015021409999999985
+            0.00023840800000000245
+            0.00015083800000000036
+        
+        number=10000
+            0.139103704
+            0.12195975999999997
+            0.024286175999999993
+            0.00878616900000001
+    """
