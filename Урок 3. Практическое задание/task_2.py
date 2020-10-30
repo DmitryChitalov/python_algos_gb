@@ -15,3 +15,24 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+
+user_base = {'oleg': 123}
+flag = False
+while flag == False:
+    login = input('Введите логин: ')
+    if login in user_base:
+        print('Такой логин уже существует! Введите новый.')
+        flag = False
+    else:
+        flag = True
+password = input('Введите пароль: ')
+pass_hash = hashlib.sha256(password.encode('utf-8') + login.encode('utf-8')).hexdigest()
+print(f'Хеш пароля - {pass_hash}')
+check_pass = input('Введите пароль еще раз для проверки: ')
+check_pass_hash = hashlib.sha256(check_pass.encode('utf-8') + login.encode('utf-8')).hexdigest()
+if pass_hash == check_pass_hash:
+    print('Пароли совпадат. Пользователь добавлен в базу')
+    user_base[login] = pass_hash
+else:
+    print('Пароли не совпадают. Пользователь не добавлен в базу!')
