@@ -37,3 +37,34 @@ def simple(i):
 
 i = int(input('Введите порядковый номер искомого простого числа: '))
 print(simple(i))
+
+
+"""
+Суть решето понял, не придумал как сделать диапазон для поиска, 
+в голове была мысль седалть диапозон по искомое число потом вызывать его из конца.
+"""
+
+def resheto_eratosvena():
+    i = int(input('Введите число: '))
+
+    a = []
+    for k in range(i + 1):
+        a.append(k)
+
+    a[1] = 0
+
+    n = 2
+    while n <= i:
+        if a[n] != 0:
+            x = n + n
+            while x <= i:
+                a[x] = 0
+                x = x + n
+        n += 1
+
+    a = set(a)
+    a.remove(0)
+    print(a)
+
+
+resheto_eratosvena()

@@ -11,3 +11,35 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+from collections import deque
+"""
+В этом задниие я просто реализовал обычным способом без колекции через hex.
+Затем просто добавил deque правда не получилось в плане записи он уже по базе 16 считает
+и список вносит числа из 10-тичной сисмтемы счисления. Пока что-так на уроке уже посиотрю как можно было улучишить.
+"""
+
+
+def sum_16(a, b):
+    z = a + b
+    return hex(z)
+
+
+def multiplication_16(a, b):
+    z = a * b
+    return hex(z)
+
+
+x = int(input('Ведите первое число в 16-ти ричнной системе счисления: '), 16)
+y = int(input('Ведите второе число в 16-ти ричнной системе счисления: '), 16)
+
+lst_x = str(x)
+lst_y = str(y)
+deq_x = deque(lst_x)
+deq_y = deque(lst_y)
+print(deq_x, deq_y)
+
+sum_result = sum_16(x, y)[2:].upper()
+multiplication_result = multiplication_16(x, y)[2:].upper()
+sum_deque = deque(str(sum_result))
+multi_deque = deque(str(multiplication_result))
+print(f'Сумма чисел из примера: {sum_deque}, произведение - {multi_deque}')

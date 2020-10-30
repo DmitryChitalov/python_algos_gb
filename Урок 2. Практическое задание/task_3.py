@@ -15,3 +15,17 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def inverted_num(a: str) -> None:  # Не знаю почему этот TypeHint в пайчарм нон говорит заполнить
+    return print(a[::-1])
+
+
+def rec_num(a:int) -> int:
+    if a < 10:
+        return a
+    return int(str(a % 10) + str(rec_num(a // 10)))
+
+
+inverted_num('15646')
+print(rec_num(456487))

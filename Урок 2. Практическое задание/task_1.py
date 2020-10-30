@@ -28,3 +28,60 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def sum(a: int, b: int) -> str:
+    print('Ваш результат:', a + b)
+
+
+def residual(a: int, b: int) -> str:
+    print('Ваш результат:', a - b)
+
+
+def multiplication(a: int, b: int) ->str:
+    print('Ваш результат:', a * b)
+
+
+def calc_devision(a: int, b: int) -> str:
+    try:
+        print('Ваш результат:',  a / b)
+    except ZeroDivisionError:
+        print('Делит на ноль нельзя попрбуйте ещё раз!')
+        rec_calc()
+
+
+'''
+Вроде-бы быстро написал сам калькулятор и рекурсию использовал,
+ но что-то не дошло как выйти из рекурси.
+ Приступил к следущему заданию и понял что просто нужно указать return) 
+ '''
+
+
+def rec_calc():
+    operator_choose = input('Введите операцию (+, -, *, / или 0 для выхода):')
+    if operator_choose == '0':
+        return print('Вы завершили програму!')
+    try:
+        a = int(input('Введите первое число:'))
+        b = int(input('Введите второе число:'))
+    except ValueError:
+        print('Попробуйте ещё раз, скорей всего вы выели не число=)')
+        rec_calc()
+    if operator_choose == '+':
+        sum(a, b)
+        rec_calc()
+    elif operator_choose == '-':
+        residual(a, b)
+        rec_calc()
+    elif operator_choose == '*':
+        multiplication(a, b)
+        rec_calc()
+    elif operator_choose == '/':
+        calc_devision(a, b)
+        rec_calc()
+    else:
+        print('Вы вели не существующий знак, попробуйте ещё раз')
+        rec_calc()
+
+
+rec_calc()
