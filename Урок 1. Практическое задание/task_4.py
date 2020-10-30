@@ -27,3 +27,46 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+d = {'login': ['Ivan', 'Petr', 'Semen'],
+    'password': ['123', '231', '321'],
+    'bool': [True, True, False]}
+
+# O(N) Тут сложность меньше, наверно. Всего один перебор.
+def aut():
+    log = input('login ')
+    temp = False
+    for i in range(len(d['login'])):
+        if log == d['login'][i]:
+            temp = True
+            pas = input('password ')
+            if pas == d['password'][i]:
+                if d['bool'][i] == True:
+                    print('Привет!')
+                else:
+                    print('Нужно пройти проверку')
+            else:
+                print('Не тот пароль')
+    if temp == False:
+        print('Нет доступа')
+
+
+# Если у меня 2 не вложенных друг в друга перебора, а один за другим,
+# то это значимо для сложности?
+# O(2N)?
+# В уроке число перед N обозначало запись в переменную, тогда как будет правильно записать два цикла?
+def aut_two():
+    log = input('login ')
+    if log in d['login']:
+        for i in range(len(d['login'])):
+            if log == d['login'][i]:
+                pas = input('password ')
+                if pas == d['password'][i] and d['bool'][i] == True:
+                    print('Привет!')
+                    return
+                else:
+                    print('Пройдите регистрацию')
+                    return
+            else:
+                print('Пройдите регистрацию')
+                return

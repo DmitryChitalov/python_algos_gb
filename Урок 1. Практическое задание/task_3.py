@@ -22,3 +22,47 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+d = {"one":100,
+     "two":200,
+    "three":400,
+    "sony":300,
+    "romashka":600,
+    "borsh":500,
+    "qwerty":800,
+    "qazwsx": 900}
+
+# O(N**3)
+def get_max(d):
+    dkey = []
+    dvalue = []
+    m = []
+    for k, v in d.items():
+        dkey.append(k)
+        dvalue.append(v)
+        mi = dvalue[0]
+        for ii in range(2):
+            for i in range(1, len(dvalue)):
+                if mi < dvalue[i]:
+                    mi = dvalue[i]
+                    m.append(dkey[i])
+                    if len(dkey) > 3:
+                        m.pop(0)
+    print(m)
+
+
+# O(N**2)
+# У этого решения ниже сложность
+# Как мне кажется, оно более локонично и больше подходит под тему стеков, если я всё правильно понял
+def get_max2(d):
+    mv = []
+    mk = []
+    for k, v in d.items():
+        mv.append(v)
+        mk.append(k)
+        if len(mv) > 1:
+            for i in range(len(mv)):
+                if i < len(mv)-1:
+                    if mv[i] > mv[i+1]:
+                        mv.append(mv.pop(i))
+                        mk.append(mk.pop(i))
+    print(mk[-3:])

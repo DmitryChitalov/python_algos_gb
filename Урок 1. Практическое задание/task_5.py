@@ -18,3 +18,27 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+
+class StackClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        """Предполагаем, что верхний элемент стека находится в начале списка"""
+        if len(self.elems) < 3:
+            self.elems.insert(0, el)
+        else:
+            print('Стек полон, создайте другой')
+
+    def pop_out(self):
+        return self.elems.pop(0)
+
+    def get_val(self):
+        return self.elems[0]
+
+    def stack_size(self):
+        return len(self.elems)
