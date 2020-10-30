@@ -9,3 +9,11 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def recur_method(i, numb, n_count, common_sum):
+    if i == n_count:
+        print (f'Их сумма: {common_sum}')
+    elif i < n_count:
+        return recur_method(i+1, numb / (-2), n_count, common_sum+numb)
+
+recur_method(0, 1, int(input('Кол-во эл-тов: ')), 0)
