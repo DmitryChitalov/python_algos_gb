@@ -15,3 +15,32 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import os
+from hashlib import pbkdf2_hmac
+from binascii import hexlify
+
+my_salt = os.urandom(32)
+
+
+def password_entry():
+    password = input('Введите пароль: ')
+    password_hash = pbkdf2_hmac(hash_name='sha256', password=password.encode(), salt=my_salt, iterations=100000)
+    return hexlify(password_hash)
+
+
+def password_verification(passwd):
+    password = input('Введите пароль еще раз для проверки: ')
+    password_hash = pbkdf2_hmac(hash_name='sha256', password=password.encode(), salt=my_salt, iterations=100000)
+    print(hexlify(password_hash))
+    if passwd == hexlify(password_hash):
+        print('Вы ввели правильный пароль')
+    else:
+        print('Вы ввели неправильный пароль')
+
+
+if __name__ == '__main__':
+    password_hash_all = password_entry()
+
+    print(f'hash пароля: {password_hash_all}')
+
+    password_verification(password_hash_all)
