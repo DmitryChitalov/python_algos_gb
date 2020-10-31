@@ -13,12 +13,12 @@
 
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
-        return
+        return revers_num
     else:
         num = enter_num % 10
         revers_num = (revers_num + num / 10) * 10
         enter_num //= 10
-        revers(enter_num, revers_num)
+        return revers(enter_num, revers_num)
 
 
 def revers_2(enter_num, revers_num=0):
@@ -34,3 +34,41 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+if __name__ == '__main__':
+    num = 1042546
+    import cProfile
+    from timeit import timeit
+    cProfile.run('revers(num, revers_num=0)')
+    cProfile.run('revers_2(num, revers_num=0)')
+    cProfile.run('revers_3(num)')
+
+    print('Время выполнения варианта с рекурсией: ', end='')
+    print(
+        timeit(
+            "revers(num, revers_num=0)",
+            setup='from __main__ import revers, num',
+            number=10000))
+
+    print('Время выполнения варианта с циклом: ', end='')
+    print(
+        timeit(
+            "revers_2(num, revers_num=0)",
+            setup='from __main__ import revers_2, num',
+            number=10000))
+
+    print('Время выполнения варианта со срезом: ', end='')
+    print(
+        timeit(
+            "revers_3(num)",
+            setup='from __main__ import revers_3, num',
+            number=10000))
+
+"""
+Самым эффективным вариантом является вариан с использованием среза, так как он имеет сложность О(n) и это встроенный
+механизм.
+Вариант с циклом работает медленнее, так как, имея тоже линейную сложность, он также выполняет дополнительные
+вычисления и присваивания переменным.
+Вариант с рекурсией самый медленный из-за необходимости организации стека вызовов, в котором каждая функция выполняет
+вычисления и возвращает результат предыдущему вызову в стеке.
+"""
