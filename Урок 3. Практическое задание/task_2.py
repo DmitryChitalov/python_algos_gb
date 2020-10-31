@@ -15,3 +15,15 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+import hashlib
+
+passwd = input("Введите пароль: ")
+salt = 'some salt'
+hash_base = [hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()]
+print(f'В базе данных хранится строка: {hash_base[-1]}')
+passwd = input("Введите пароль еще раз для проверки: ")
+if hashlib.sha256(salt.encode() + passwd.encode()).hexdigest() in hash_base:
+    print("Вы ввели правильный пароль")
+else:
+    print("Вы ввели неправильный пароль")
