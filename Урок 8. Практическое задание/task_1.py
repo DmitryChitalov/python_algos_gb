@@ -12,3 +12,122 @@
 ВНИМАНИЕ: примеры заданий будут размещены в последний день сдачи.
 Но постарайтесь обойтись без них.
 """
+
+from collections import Counter, deque, namedtuple
+import heapq
+
+
+'''
+Сначала немного поколдовал с представленной реализацией, что позволило понять ее чуть лучше.
+'''
+
+
+def huffman_tree(s):
+    if len(s) != 1:
+        while len(s) > 1:
+            element = s[0][1] + s[1][1]
+            comb = {0: s.popleft()[0],
+                    1: s.popleft()[0]}
+            for ch, el in enumerate(s):
+                if element > el[1]:
+                    continue
+                else:
+                    s.insert(ch, (comb, element))
+                    break
+            else:
+                s.append((comb, element))
+
+    else:
+        element = s[0][1]
+        comb = {0: s.popleft()[0], 1: None}
+        s.append((comb, element))
+    return s[0][0]
+
+
+code_dict = {}
+
+
+def huffman_code(tree, path=''):
+    if not isinstance(tree, dict):
+        code_dict[tree] = path
+    else:
+        huffman_code(tree[0], path=f'{path}0')
+        huffman_code(tree[1], path=f'{path}1')
+
+
+'''
+Далее нашел довольно интересную реализацию, адаптироввал ее под задание, думаю можно еще доработать, 
+но здесь у меня уже не хватило знаний. 
+Как мне показалось реализация сложнее чем представленная на уроке, ее фишка в декодировании закодированной строки.
+Ниже приведен код с комментариями.
+'''
+
+
+# добавим классы для хранения информации о структуре дерева, воспользуемся namedtuple для упорядочивания
+class Node(namedtuple('Node', ['left', 'right'])):
+    # класс для ветвей дерева - внутренних узлов; у них есть потомки
+
+    def walk(self, encode, acc):
+        # чтобы обойти дерево нам нужно:
+        self.left.walk(encode, acc + '0')  # пойти в левого потомка, добавив к префиксу '0'
+        self.right.walk(encode, acc + '1')  # затем пойти в правого потомка, добавив к префиксу '1'
+
+
+class Leaf(namedtuple('Leaf', ['char'])):
+    # класс для листьев дерева, у них нет потомков, но есть значение символа
+
+    def walk(self, encode, acc):
+        # потомков у листа нет, поэтому в значение мы запишем построенный код для данного символа
+        encode[self.char] = acc or '0'
+        # если строка длиной 1 то acc = '', для этого случая установим значение acc = '0'
+
+
+def huffman_encode(s):
+    heap = []  # инициализируем очередь с приоритетами
+    code_dict_1 = {}  # инициализируем словарь кодов символов
+    for ch, freq in Counter(s).items():  # постоим очередь с помощью цикла, добавив счетчик, уникальный для всех листьев
+        heap.append((freq, len(heap), Leaf(ch)))
+        # очередь представлена частотой символа, счетчиком и самим символом
+    heapq.heapify(heap)  # построим очередь с приоритетами
+    while len(heap) > 1:  # пока в очереди есть хотя бы 2 элемента
+        freq_1, counter, left = heapq.heappop(heap)  # вытащим элемент с минимальной частотой в левый узел
+        freq_2, counter, right = heapq.heappop(heap)  # вытащим следующий элемент с минимальной частотой в правый узел
+        # поместим в очередь новый элемент, у которого частота равна сумме частот вытащенных элементов
+        heapq.heappush(heap, (freq_1 + freq_2, counter, Node(left, right)))
+        # добавим новый внутренний узел у которого есть потомки left и right соответственно
+        counter += 1  # добавляем значение счетчика при получении нового элемента дерева
+    if heap:  # если строка пустая, то очередь будет пустая и обходить нечего
+        [(freq, counter, root)] = heap
+        # в очереди 1 элемент, приоритет которого не важен, а сам элемент - корень дерева
+        root.walk(code_dict_1, '')  # обойдем дерева от корня и заполним словарь для получения кодирования Хаффмана
+    return code_dict_1  # возвращаем словарь символов и соответствующих им кодов
+
+
+def huffman_decode(encoded, encode):
+    sx = []  # инициализируем массив символов раскодированной строки
+    enc_ch = ''  # инициализируем значение закодированного символа
+    for ch in encoded:  # обойдем закодированную строку по символам
+        enc_ch += ch  # добавим текущий символ к строке закодированного символа
+        for dec_ch in encode:  # постараемся найти закодированный символ в словаре кодов
+            if encode.get(dec_ch) == enc_ch:  # если закодированный символ найден,
+                sx.append(dec_ch)  # добавим значение раскодированного символа к массиву раскодированной строки
+                enc_ch = ''  # обнулим значение закодированного символа
+                break
+    return ''.join(sx)  # вернем значение раскодированной строки
+
+
+user_string = 'beep boop beer!'  # задаем строку
+code = huffman_encode(user_string)  # кодируем строку
+code_string = ''.join(code[ch] for ch in user_string)
+count = Counter(user_string)
+
+
+string = deque(sorted(count.items(), key=lambda symbol: symbol[1]))
+huffman_code(huffman_tree(string))
+for i in user_string:
+    print(code_dict[i], end=' ')
+print()
+print(f'Длина закодированной строки: {len(code_string)}, Число уникальных символов: {len(code)}')
+print(f'Закодированная строка: {code_string}')
+print(huffman_encode(user_string))
+print(f'Раскодированная строка: {huffman_decode(code_string, code)}')
