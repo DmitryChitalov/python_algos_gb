@@ -38,7 +38,8 @@ def revers_3(enter_num):
 if __name__ == '__main__':
     num = 1042546
     import cProfile
-    from timeit import timeit
+    from timeit import timeit, repeat, default_timer
+
     cProfile.run('revers(num, revers_num=0)')
     cProfile.run('revers_2(num, revers_num=0)')
     cProfile.run('revers_3(num)')
@@ -72,3 +73,15 @@ if __name__ == '__main__':
 Вариант с рекурсией самый медленный из-за необходимости организации стека вызовов, в котором каждая функция выполняет
 вычисления и возвращает результат предыдущему вызову в стеке.
 """
+#  для сравнения timeit и repeat
+setup = """
+from __main__ import revers, revers_2, revers_3, num
+"""
+statements = [
+    ['Время выполнения варианта с рекурсией: ', 'revers(num, revers_num=0)'],
+    ['Время выполнения варианта с циклом: ', 'revers_2(num, revers_num=0)'],
+    ['Время выполнения варианта со срезом: ', 'revers_3(num)']
+]
+print('-' * 120)
+for info, st in statements:
+    print(info, max(repeat(st, setup, default_timer, 3, 10000)))
