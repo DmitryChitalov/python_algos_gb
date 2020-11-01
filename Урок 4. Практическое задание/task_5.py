@@ -15,25 +15,83 @@
 """
 
 
+from timeit import timeit, default_timer
+
+
 def simple(i):
-    """Без использования «Решета Эратосфена»"""
-    count = 1
-    n = 2
-    while count <= i:
-        t = 1
-        is_simple = True
-        while t <= n:
-            if n % t == 0 and t != 1 and t != n:
-                is_simple = False
+    """Без использования «Решета Эратосфена»
+    Сложность: O(4n**2 + 5n + 2)
+    """
+    count = 1                                       # O(1)
+    n = 2                                           # O(1)
+    while count <= i:                               # O(n * (4n + 5)) = O(4n**2 + 5n)
+        t = 1                                       # O(1)
+        is_simple = True                            # O(1)
+        while t <= n:                               # O(4n)
+            if n % t == 0 and t != 1 and t != n:    # O(3)
+                is_simple = False                   # O(1)
                 break
-            t += 1
-        if is_simple:
-            if count == i:
+            t += 1                                  # O(1)
+        if is_simple:                               # O(2)
+            if count == i:                          # O(1)
                 break
-            count += 1
-        n += 1
+            count += 1                              # O(1)
+        n += 1                                      # O(1)
     return n
+
+
+def simple_eratosfen(i):
+    """Функция поиска i-го элемента в ряде простых чисел.
+    Используется алгоритм Решето Эратосфена.
+
+    Сложность: O(n**2 + 3n + 5)
+
+    :param i: порядковый номер искомого элемента в ряде
+    :return: Возвращает i-й элемент ряда простых чисел
+    """
+    simples = [2]                       # O(1)
+    n = simples[len(simples) - 1] + 1   # O(3)
+    while len(simples) < i:             # O(1 + n * (n + 3)) = O(n**2 + 3n + 1)
+        is_simple = True                # O(1)
+        for s in simples:               # O(n)
+            if n % s == 0:              # O(1)
+                is_simple = False       # O(1)
+                break
+        if is_simple:                   # O(1)
+            simples.append(n)           # O(1)
+        n += 1                          # O(1)
+    return simples[len(simples) - 1]
 
 
 i = int(input('Введите порядковый номер искомого простого числа: '))
 print(simple(i))
+
+print(simple_eratosfen(i))
+
+###################################
+# Профилировка
+stmts = ['simple({})', 'simple_eratosfen({})']
+for c in [10, 100, 1000]:
+    for stmt in stmts:
+        print(f"{stmt.format(c)}: {timeit(stmt.format(c), 'from __main__ import simple, simple_eratosfen', default_timer, 50)}")
+
+"""
+Результаты теста:
+simple(10): 0.0019911999999999708
+simple_eratosfen(10): 0.000669600000000159
+simple(100): 0.18670760000000008
+simple_eratosfen(100): 0.025317900000000115
+simple(1000): 35.008343700000005
+simple_eratosfen(1000): 2.4003033999999985
+
+Вывод:
+На малых порядковых номерах простых чисел улучшение скорости вычисления не существенно,
+но на больших порядках прирост скорости существенный!
+
+Оценка сложности кода:
+Первый вариант имеет сложность: O(4n**2 + 5n + 2)
+Второй: O(n**2 + 3n + 5)
+У обоих алгоритмов сложность квадратичная с небольшим перевесом в пользу второго варианта,
+но лучшая производительность во втором варианте достигается за счет прменения алгоритма "Решето Эратосфена",
+благодаря которому обход делителей сокращен до ряда найденных простых чисел.
+"""
