@@ -67,7 +67,7 @@ class BinaryTree:
 
 
 
-r = BinaryTree(12)
+r = BinaryTree(13)
 print(r.get_root_val())
 print(r.get_left_child())
 r.insert_left(100)

@@ -48,7 +48,7 @@ def haffman_code(tree, path=''):
         haffman_code(tree[1], path=f'{path}1')
 
 
-my_str = input('Введите слово для его хеширования: ')
+my_str = input('Введите слово для его хеширования:  ')
 
 haffman_code(func_tree(my_str))
 
