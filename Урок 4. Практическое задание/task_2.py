@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -79,3 +80,58 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Мемоизация дает прирост скорости на порядок. Так же при использовани мемоизации скорость выполнения 
+практически не зависит от длины входного числа. Соответственно мемоизация здесь нужна. 
+
+
+Замерим скорость решений без использования рекурсии:
+"""
+
+
+def reverse_num(num):
+    return int(str(num)[::-1])
+
+def reverse_num2(num):
+    reverse_num = 0
+    while num > 0:
+        digit = num % 10
+        num = num // 10
+        reverse_num = reverse_num * 10
+        reverse_num = reverse_num + digit
+    return reverse_num
+
+
+print('Классическое решение: ')
+print(timeit(
+    'reverse_num2(num_100)',
+    setup='from __main__ import reverse_num2, num_100',
+    number=10000))
+print(timeit(
+    'reverse_num2(num_1000)',
+    setup='from __main__ import reverse_num2, num_1000',
+    number=10000))
+print(timeit(
+    'reverse_num2(num_10000)',
+    setup='from __main__ import reverse_num2, num_10000',
+    number=10000))
+
+print('Решение через срез строки: ')
+print(timeit(
+    'reverse_num(num_100)',
+    setup='from __main__ import reverse_num, num_100',
+    number=10000))
+print(timeit(
+    'reverse_num(num_1000)',
+    setup='from __main__ import reverse_num, num_1000',
+    number=10000))
+print(timeit(
+    'reverse_num(num_10000)',
+    setup='from __main__ import reverse_num, num_10000',
+    number=10000))
+
+"""
+Решение через срез строки работает быстро, но почти вдвое медленее, чем решение через рекурсию 
+с использованием мемоизации
+"""
