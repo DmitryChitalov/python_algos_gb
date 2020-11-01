@@ -11,8 +11,13 @@
 """
 
 
+class BinaryTreeError(Exception):
+    def __init__(self, txt):
+        self.txt = txt
+
+
 class BinaryTree:
-    def __init__(self, root, left=None, right=None, level=1):
+    def __init__(self, root, left=0, right=0, level=1):
         self.root = root
         self.left = left
         self.right = right
@@ -34,6 +39,9 @@ class BinaryTree:
         """
         Изменяем левое значение, даже если "лево" это "дерево", то меняем корень
         """
+        if left > self.root:
+            raise BinaryTreeError('Левое значение больше корня!')
+
         if isinstance(self.left, BinaryTree):
             self.left.root = left
             print(f'На уровне {self.level} изменено левое значение на ', left)
@@ -45,6 +53,8 @@ class BinaryTree:
         """
         Изменяем правое значение, даже если "право" это "дерево", то меняем корень
         """
+        if right < self.root:
+            raise BinaryTreeError('Правое значение меньше корня!')
         if isinstance(self.right, BinaryTree):
             self.right.root = right
             print(f'На уровне {self.level} изменено правое значение на ', right)
@@ -76,7 +86,7 @@ class BinaryTree:
                 self.add_left_value(value)
 
     def __str__(self):
-        return f'level-{self.level}\n (root-{self.root} left-{self.left}|right-{self.right})'
+        return f'\nlevel-{self.level} (root-{self.root} left-{self.left}|right-{self.right})'
 
 
 if __name__ == '__main__':
@@ -92,5 +102,13 @@ if __name__ == '__main__':
     tree.add_right_value(10)    # заменяем значение заданное на 85 строчке
     tree.add_value_way(11, '110')
     tree.add_value_way(13, '111')
+    # tree.add_value_way(7, '11') > __main__.BinaryTreeError: Правое значение меньше корня!
     tree.add_value_way(55, '0101')
     print(tree)
+"""
+level-1 (root-8 left-
+level-2 (root-6 left-5|right-
+level-3 (root-7 left-
+level-4 (root-0 left-0|right-55)|right-0))|right-
+level-2 (root-10 left-9|right-
+level-3 (root-12 left-11|right-13)))"""
