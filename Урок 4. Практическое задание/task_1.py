@@ -21,3 +21,16 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+def func_2(nums):
+    new_arr = [num for num in nums if num% 2 == 0]
+    return new_arr
+
+nums = [num for num in range(10)]
+print('func_1 cycle - ', timeit("func_1(nums)", setup="from __main__ import func_1, nums"))
+print('func_2 list comprehension - ', timeit("func_2(nums)", setup="from __main__ import func_2, nums"))
+
+"""
+Вторую функцию сделал через генераторное выражение, т.к. оно выполняется быстрее, чем цикл 
+с присоединением новых элементов. Результаты замеров показывают прирост скорости в 1,5 раза.
+"""
