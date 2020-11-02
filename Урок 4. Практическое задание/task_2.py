@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -79,3 +80,42 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+В данном примере мемоизация ускоряет работу программы, так как для повторяющихся значений не производятся новые вызовы
+функции, а значения берутся из кэш, который представляет из себя словарь, и значения возвращаются за O(1).
+"""
+
+
+# мой вариант с использованием встроенных методов
+def simple_reverse(number):
+    """Выполняет преобразование с использованием встроенных методов"""
+    return ''.join(list(reversed(list(str(number)))))
+
+
+print('Вариант с использованием встроенных методов simple_reverse')
+print(
+    timeit(
+        "simple_reverse(num_100)",
+        setup='from __main__ import simple_reverse, num_100',
+        number=10000))
+print(
+    timeit(
+        "simple_reverse(num_1000)",
+        setup='from __main__ import simple_reverse, num_1000',
+        number=10000))
+print(
+    timeit(
+        "simple_reverse(num_10000)",
+        setup='from __main__ import simple_reverse, num_10000',
+        number=10000))
+
+"""
+Вариант с использованием встроенных методов работает быстрее неоптимизированного рекурсивного варианта, так как не
+тратится время на создание и опустошение стека рекурсивных вызовов, но сильно уступает варианту с мемоизацией, 
+где повторяющиеся значения берутся из кэш за О(1).
+"""
+
+print('Для проверки результатов:')
+print({recursive_reverse(num_10000)}, {recursive_reverse_mem(num_10000)}, {simple_reverse(num_10000)})
+print('Результаты работы всех трех вариантов совпадают')
