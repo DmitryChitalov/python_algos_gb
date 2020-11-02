@@ -10,3 +10,35 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+
+# -------------Словарь заполняется дольше, поскольку заложен алгоритм коллизий на предмет уникальности хеша ключа
+import time
+import random
+
+
+def time_(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        func(args[0])  # l(10000)
+        print(time.time() - start_time)
+
+    return wrapper
+
+
+@time_
+def l(n):
+    list_ = [random.randint(0, 100) for i in range(n)]
+    return list_
+
+
+@time_
+def d(n):
+    dict_ = {}
+    for j in range(n):
+        dict_[j] = random.randint(0, 100)
+    return dict_
+
+
+l(10000)
+d(10000)
+
