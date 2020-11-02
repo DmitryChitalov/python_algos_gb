@@ -14,7 +14,7 @@
 Подумайте и по возможности определите сложность каждого алгоритма
 """
 from functools import wraps  # для устранения конфликтов имен в цепочках декораторов
-from timeit import default_timer, timeit
+from timeit import default_timer
 import math
 import logging
 
@@ -91,7 +91,7 @@ def sieve_of_eratosthenes(n):
 
 
 if __name__ == '__main__':
-    nums = [10, 100, 1000, 3000]
+    nums = [10, 100, 1000, 3000]  # список значений по счету искомого простого числа
     for num in nums:
         print(simple(num))
 
