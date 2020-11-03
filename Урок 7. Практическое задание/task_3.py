@@ -13,3 +13,30 @@
 arr[m]
 from statistics import median
 """
+
+import heapq
+
+lst = [i for i in range(11)]
+lst2 = [i for i in range(13)]
+lst3 = [i for i in range(21)]
+
+
+# Нахождение в массиве медианы
+# Делю напополам и заменяю в первой части массива меньший элемент большим из второй части массива
+# В первой части массива остаются бОльшие элементы, наименьший элемент из них встаёт на нулевой индекс
+
+
+def median(l):
+    nl = []
+    heapq.heapify(nl)
+    for i in range(len(l) // 2 + 1):
+        heapq.heappush(nl, l[i])
+    for i in range(len(l) // 2 + 1, len(l)):
+        if l[i] > nl[0]:
+            heapq.heapreplace(nl, l[i])
+    return nl[0]
+
+
+print(median(lst))
+print(median(lst2))
+print(median(lst3))
