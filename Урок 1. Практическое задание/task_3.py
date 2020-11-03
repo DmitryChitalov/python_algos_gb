@@ -20,5 +20,31 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
-Выведите результат.
-"""
+Выведите результат."""
+
+"""  Алгоритм 1. Сложность О(N Log N)"""
+data_base = {"Tesla": 397, "Apple": 44, "Polus_GOLD": 160, "MTC": 10}
+def top_3(dict_obj):
+
+
+db_items = sorted(data_base.items(),
+                  key=lambda x: x[1], reverse=True)[:3]  # O(n Log n)
+profit_co = [deus[0]for deus in db_items]
+print(profit_co)  # profit)
+
+
+"""Алгоритм2. Сложность О(N Log N)"""
+data_base = {"Tesla": 397, "Apple": 44, "Polus_GOLD": 160, "MTC": 10}
+
+
+def sort_by_profit1(some_dict):
+    companies_lst = some_dict.items()  # O(n)
+    companies_three_richest = sorted(companies_lst, key=lambda x: x[1], reverse=True)[
+        :3]  # O(n*log n) + O(n)
+    most_profitable = []  # O(1)
+    for el in companies_three_richest:  # O(n)
+        most_profitable.append(el[0])  # O(1)
+    return most_profitable
+
+
+""" Несмотря на то, что у обеих функций сложность по доминации одинаковая, первая является более читаемой."""
