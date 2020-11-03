@@ -9,6 +9,8 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
+import cProfile
+from timeit import timeit
 
 
 def revers(enter_num, revers_num=0):
@@ -34,3 +36,21 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+def main():
+    revers(12345678901234567890)
+    revers_2(12345678901234567890)
+    revers_3(12345678901234567890)
+
+
+cProfile.run('main()')
+print(timeit("revers", setup="from __main__ import revers", number=10000))
+print(timeit("revers_2", setup="from __main__ import revers_2", number=10000))
+print(timeit("revers_3", setup="from __main__ import revers_3", number=10000))
+
+"""
+Функция № 3 по времени выполнения считается самой быстрой, так как вместо цикла 
+выполняется только переконвертация в строку и вывод в обратном порядке. 
+После неё идёт вторая и самая медленная - первая. 
+Самая медленная по времени выполнения это функция № 1 с рекурсией.
+"""
