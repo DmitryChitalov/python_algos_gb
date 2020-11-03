@@ -54,3 +54,4 @@ print(timeit.timeit("bubble_sort2(orig_list)", \
 print(timeit.timeit("bubble_sort(orig_list)", \
                     setup="from __main__ import bubble_sort, orig_list", number=1))
 
+#Оптимизация сработала, времени стало уходить меньше
