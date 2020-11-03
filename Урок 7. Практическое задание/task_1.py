@@ -12,3 +12,55 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+from timeit import timeit, Timer
+from random import randint
+"""
+В итоге при замере времени вышло что сортировка без флага по времени выходит 1.6- 1.8 секунд, 
+но при добавлении флага замеры показали 0.3 - 0.5 секунд, разница больше чем в половину!!!
+
+"""
+
+#####################
+def sort_buble(lst):
+	for el in range(len(arr1) - 1):
+
+		for j in range(len(arr1) - 1 - el):
+			if arr1[j] < arr1[j + 1]:
+				arr1[j], arr1[j + 1] = arr1[j + 1], arr1[j]
+	return lst
+
+
+arr1 = [randint(-100, 100) for _ in range(10)]
+print('_' * 90, '\n', f'Исходный список 1: {arr1}')
+
+print('_' * 90, '\n', f'Отсортированый сисок 1: {sort_buble(arr1)}')
+
+
+##################################
+def buble_sort(lst):
+	flag = True
+	while flag:
+		flag = False
+		for el in range(len(arr1) - 1):
+			if arr1[el] < arr1[el + 1]:
+				arr1[el], arr1[el + 1] = arr1[el + 1], arr1[el]
+				flag = True
+	return lst
+
+
+arr1 = [randint(-100, 100) for _ in range(10)]
+print('_' * 90, '\n', f'Исходный список 2: {arr1}')
+print('_' * 90, '\n', f'Отсортированый сисок 2: {buble_sort(arr1)}')
+
+##################################
+print('#' * 90)
+print('#' * 90)
+# замеры времени обеих реализаций
+
+print('функция сортировки пузырьком 1 варриант: ', timeit('sort_buble(arr1[:])',
+                                                          'from __main__ import sort_buble, arr1',
+                                                          number=100000), 'seconds')
+print('_' * 90)
+print('функция сортировки пузырьком 2 варриант: ', timeit('buble_sort(arr1[:])',
+                                                          'from __main__ import buble_sort, arr1',
+                                                          number=100000), 'seconds')

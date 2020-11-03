@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def rec_method(from_symb, to_symb, output_str=''):
+	for i in range(from_symb, to_symb):
+		if i <= LAST_ASCII_NUM:
+			output_str += f'{i} - {chr(i)}'
+	print(output_str)
+	if to_symb < LAST_ASCII_NUM:
+		return rec_method(from_symb + STEP, to_symb + STEP)
+
+
+first_ascii_num = 32
+LAST_ASCII_NUM = 127
+STEP = 10
+
+print("Вывод рекурсии: ")
+rec_method(first_ascii_num, first_ascii_num + STEP)
