@@ -63,9 +63,9 @@ def with_sort(lst_obj):
 
 
 arr1 = [randint(0, 100) for _ in range(10)]
-print(arr1)
-print('медиана списка: ', median(arr1))
-arr1 = with_sort(arr1)
+print(arr1[:])
+print('медиана списка: ', median(arr1[:]))
+arr1 = with_sort(arr1[:])
 print('Медиана: ', arr1)
 
 
