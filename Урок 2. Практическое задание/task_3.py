@@ -15,3 +15,17 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def reverse_number(my_list, rev_num=None):
+    if rev_num is None:
+        rev_num = []
+    if len(my_list) == 0:
+        new_num = ''.join(rev_num)
+        return new_num
+    else:
+        rev_num.append(my_list.pop())
+        return reverse_number(my_list, rev_num)
+
+
+print(reverse_number(list(input('Введите номер, который требуется перевернуть '))))
