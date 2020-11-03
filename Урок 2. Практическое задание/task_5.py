@@ -18,3 +18,24 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def show_ascii(first_el=32, flag=False):
+    ascii_list = []
+    for i in range(first_el, first_el + 10):
+        if first_el <= 127:
+            ascii_list.append(f'{first_el} - {chr(first_el)}')
+            first_el += 1
+        else:
+            flag = True
+    ascii_string = ' '.join(ascii_list)
+    print(ascii_string)
+    if flag:
+        return
+    return show_ascii(first_el)
+
+
+show_ascii()
+
+
+
+
