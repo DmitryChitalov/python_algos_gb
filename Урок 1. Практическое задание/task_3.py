@@ -22,3 +22,53 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+companies_dict_1 = {'AAA': 1500, 'BBB': 50, 'CCC': 600, 'Aver': 750, 'Bass': 40, 'Coss': 1660}
+companies_dict_2 = {'Aver': 750, 'Mega': 1500, 'Bq': 75, 'Kiwi': 60, 'Bass': 40, 'Cross': 160}
+
+# companies_dict_2= {'Coss': 60, 'AAA': 500}
+
+""" T(n) = 2 + 2n + n + 3 = 3n + 5    
+Общая сложность O(n)"""
+
+
+def profit(company):
+    new_dict = {}
+    i = 0
+    if len(company) <= 3:
+        new_dict = company.copy()
+    else:
+        while i < 3:
+            pop_it = (max(company, key=company.get))  # получаем ключ
+            new_dict[pop_it] = company.pop(pop_it)  # получаем значение, и передаем ключ и значение в новый словарь
+            i += 1
+    return new_dict
+
+
+print(f'Компании с наибольшей годовой прибылью: {profit(companies_dict_1)}')
+
+"""T(n) = 4 + 2n + n + 5 = 3n + 9
+Общая сложность O(n)"""
+
+"""В первом решении используется меньше присваиваний, но удаляются элементы из изначального словаря.
+Во втором значения ключа и содержимого переводим в лист, благодаря этому - сохраняем исходный словарь.
+Считаю первое решение эффективнее, т.к. мы работаем с исходным словарем и меньше риск в ошибке."""
+
+
+def profit_2(company):
+    new_list = []
+    v = list(company.values())
+    k = list(company.keys())
+    i = 0
+    if len(company) <= 3:
+        new_list = company.copy()
+    else:
+        while i < 3:
+            new_list += (k[v.index(max(v))], v[v.index(max(v))])
+            k.pop(v.index(max(v)))
+            v.pop(v.index(max(v)))
+            i += 1
+    return new_list
+
+
+print(f'Компании с наибольшей годовой прибылью: {profit_2(companies_dict_2)}')
