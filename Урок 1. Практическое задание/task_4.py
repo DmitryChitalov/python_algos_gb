@@ -27,3 +27,34 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+#-------------------first---------O(n)------------------
+# def authorization (users, user_name, user_password):
+#     for key, value in users.items():
+#         if key == user_name:
+#             if value['password'] == user_password and value['activation']:
+#                 return 'access granted'
+#             elif value['password'] == user_password and not value['activation']:
+#                 return 'account not activated'
+#             elif value['password'] != user_password :
+#                 return 'access denied'
+#     return "user's not found"
+
+#-------------------second---------O(1)------------------
+#      более эффективный т.к. отсутствует цикл
+def authorization (users, user_name, user_password):
+    if users.get(user_name):
+        if users[user_name]['password'] == user_password and users[user_name]['activation']:
+            return 'access granted'
+        elif users[user_name]['password'] == user_password and not users[user_name]['activation']:
+            return 'account not activated'
+        elif users[user_name]['password'] != user_password:
+            return 'access denied'
+    else:
+        return "user's not found"
+
+my_users = {
+    'user1' : {'password': '1111', 'activation': True},
+    'user2' : {'password': '1111', 'activation': False},
+    'user3' : {'password': '1111', 'activation': True},
+}
+print (authorization(my_users, 'user4', '1111'))

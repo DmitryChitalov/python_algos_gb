@@ -15,3 +15,18 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+<<<<<<< Updated upstream
+=======
+
+
+def num(numb, flip=0):
+    if numb == 0:
+        return flip
+    else:
+        flip = flip * 10 + numb % 10
+        numb = numb // 10
+        return num(numb, flip)
+
+
+print(f'Превертыш: {num(321)}')
+>>>>>>> Stashed changes

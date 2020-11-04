@@ -6,3 +6,16 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+<<<<<<< Updated upstream
+=======
+
+
+def recur_method(numb, l=0, r=1):
+    if l == r:
+        print(f'Равенство: {l == r}')
+    elif l < r:
+        return recur_method(numb, l + 1, numb * (numb + 1) // 2)
+
+
+recur_method(int(input('Введите число: ')))
+>>>>>>> Stashed changes

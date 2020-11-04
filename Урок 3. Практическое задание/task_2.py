@@ -15,3 +15,12 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+from uuid import uuid4
+
+salt = uuid4().hex
+pswd_1 = hashlib.sha256(salt.encode() + input('Введите пароль: ').encode()).hexdigest()
+print(pswd_1)
+pswd_2 = hashlib.sha256(salt.encode() + input('Введите пароль еще раз для проверки: ').encode()).hexdigest()
+if pswd_1 == pswd_2:
+    print('Вы ввели првильный пароль')

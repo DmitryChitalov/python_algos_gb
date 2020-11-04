@@ -28,3 +28,30 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+<<<<<<< Updated upstream
+=======
+
+
+# import re
+
+def calc():
+    num = input('Введите выражение или 0 для выхода: ')
+    if num == '0':
+        return 'Конец'
+    else:
+        # for i in num:  # list_= re.split('(\W)', num)
+        #     if not i.isdigit() and  i not in ['+', '-', '*', '/']:
+        #         print ('Выражение некорректно')
+        try:
+            print(f'Результат: {eval(num)}')
+        except ZeroDivisionError:
+            print('Делить на 0 в поле вещественных чисел нельзя!')
+        except SyntaxError:
+            print('Невыполнимое арифметическое действие')
+        except NameError:
+            print('Выражение некорректно')
+    return calc()
+
+
+calc()
+>>>>>>> Stashed changes

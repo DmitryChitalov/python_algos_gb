@@ -22,3 +22,40 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+base = {
+    'yandex': 2000,
+    'gazprom': 500,
+    'microsoft': 2500,
+    'interrao': 700,
+    'apple': 3000
+}
+#--------------first------O(n^2)------------------
+# def sorted (rnd_lst):
+#     for i in range(len(rnd_lst)-1):
+#         for j in range (len(rnd_lst)-i-1):
+#             if rnd_lst[j][1] < rnd_lst[j+1][1]:
+#                 rnd_lst[j], rnd_lst[j+1] = rnd_lst[j+1], rnd_lst[j]
+#     return rnd_lst[0:3]
+#
+# lst_from_dict = list(base.items())
+# for i in sorted (lst_from_dict):
+#     print(i[0], ':', i[1])
+
+#------------second------O(nLog(n))----------------
+lst_from_dict = list(base.items())
+lst_from_dict.sort(key=lambda i: i[1], reverse=True)
+for i in range(3):
+    print(lst_from_dict[i][0], ':', lst_from_dict[i][1])
+
+#----------------third------O(n)-------------------
+
+# def three_max(lst_in):
+#     max_in = {}
+#     lst_d = dict(lst_in)
+#     for i in range(3):
+#         maximum = max(lst_d.items(), key = lambda k_v: k_v[1])
+#         del lst_d[maximum[0]]
+#         max_in[maximum[0]] = maximum[1]
+#         return max_in
+# print (three_max(base))
