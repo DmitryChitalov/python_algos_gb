@@ -25,3 +25,52 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+import collections
+
+# первый вариант с использованием defaultdict
+n = int(input('Введите количество предприятий: '))
+comp_list1 = collections.defaultdict(list)
+
+for i in range(n):
+    name = input('Введите название предприятия: ')
+    profit = input('Через пробел введите прибыль предприятия за каждый квартал (всего 4 квартала): ')
+    comp_list1[name].extend(list(map(int, profit.split())))  # сохраняем прибыль за 4 квартала
+    comp_list1[name].append(sum(comp_list1[name]))  # добавляем в список по ключу пятым элементом суммарную прибыль
+
+profits1 = []
+for profit in comp_list1.values():  # создаем список с суммарными прибылями предприятий за год
+    profits1.append(profit[4])
+
+avg_profit1 = round(sum(profits1) / len(profits1), 2)
+print(f'Средняя годовая прибыль всех предприятий: {avg_profit1}')
+low_income1 = []  # список компаний с доходом ниже среднего
+high_income1 = []  # список компаний с доходом больше или равным среднему
+
+for k, v in comp_list1.items():
+    low_income1.append(k) if v[4] < avg_profit1 else high_income1.append(k)
+print(f'Предприятия, с прибылью выше или равной среднему значению: {high_income1}')
+print(f'Предприятия, с прибылью ниже среднего значения: {low_income1}')
+print('-' * 150)
+
+# второй вариант с использованием namedtuple
+comp_list2 = []
+Company = collections.namedtuple('Company', ['name', 'year_profit'])
+n = int(input('Введите количество предприятий: '))
+for i in range(n):
+    name = input('Введите название предприятия: ')
+    profit = input('Через пробел введите прибыль предприятия за каждый квартал (всего 4 квартала): ')
+    comp_list2.append(Company(name, sum(list(map(int, profit.split())))))
+
+profits2 = []
+for company in comp_list2:  # создаем список с суммарными прибылями предприятий за год
+    profits2.append(company.year_profit)
+avg_profit2 = round(sum(profits2) / len(profits2), 2)
+
+print(f'Средняя годовая прибыль всех предприятий: {avg_profit2}')
+low_income2 = []  # список компаний с доходом ниже среднего
+high_income2 = []  # список компаний с доходом больше или равным среднему
+
+for company in comp_list2:
+    low_income2.append(company.name) if company.year_profit < avg_profit2 else high_income2.append(company.name)
+print(f'Предприятия, с прибылью выше или равной среднему значению: {high_income2}')
+print(f'Предприятия, с прибылью ниже среднего значения: {low_income2}')
