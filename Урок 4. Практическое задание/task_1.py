@@ -13,6 +13,9 @@
 """
 
 from timeit import timeit
+from random import randint
+
+INPUT_MASSIVE_LENGTH = 1000
 
 
 def func_1(nums):
@@ -21,3 +24,30 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    new_arr = []
+    while nums:
+        if nums.pop() % 2 == 0:
+            new_arr.append(len(nums))
+    new_arr.reverse()  # не принципиальная строка, для сохранения возрастающего порядка, как в func_2
+    return new_arr
+
+
+numbers = []
+for n in range(INPUT_MASSIVE_LENGTH):  # Заполнение входного массива
+    numbers.append(randint(0, 10))
+
+print(timeit("func_1(numbers)", setup="from __main__ import func_1, numbers", number=1000))
+print(timeit("func_2(numbers)", setup="from __main__ import func_2, numbers", number=1000))
+
+"""
+Сначала мысли пошли в сторону преобразования списка в словарь, с целью быстрого извлечения элементов,
+но думаю операция преобразования поглотила бы с лихвой все выигрышы по времени.
+Потом попробовал заменить операцию деления (которая наиболее затратная) на операции побитового сдвига
+(из опыта в с++ думал будет быстрее), но стало даже чуть хуже.
+Наконец подумал совместить проверку элементов с их "выемкой" .pop()
+и, к своему удивлению, обнаружил огромное ускорение, которое, к тому же увеличивается практически 
+пропорционально размеру входного массива.
+"""
