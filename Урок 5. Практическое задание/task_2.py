@@ -22,8 +22,8 @@ hex_dec = {
 # с использованием модуля collections
 num1 = list(input('Введите первое шестнадцатеричное число: ').upper())
 num2 = list(input('Введите второе шестнадцатеричное число: ').upper())
-dec1 = collections.deque(num1)
-dec2 = collections.deque(num2)
+dec1 = collections.deque(num1)  # дек для хранения первого числа
+dec2 = collections.deque(num2)  # дек для хранения второго числа
 
 # преобразуем шестнадцатеричные значения с конца каждого дека в десятичные числа и вставляем их в начало дека
 for i in range(len(dec1)):
@@ -67,8 +67,8 @@ class Number:
         return f'Произведение чисел: {str(hex(self.x * other.x))[2:].upper()}'
 
 
-num3 = Number(list(input('Введите первое шестнадцатеричное число: ')))
-num4 = Number(list(input('Введите второе шестнадцатеричное число: ')))
+num3 = Number(collections.deque(input('Введите первое шестнадцатеричное число: ')))
+num4 = Number(collections.deque(input('Введите второе шестнадцатеричное число: ')))
 print('Результаты с использованием перегруженных методов:')
 print(num3 + num4)
 print(num3 * num4)

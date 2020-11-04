@@ -53,7 +53,7 @@ print(f'Предприятия, с прибылью ниже среднего з
 print('-' * 150)
 
 # второй вариант с использованием namedtuple
-comp_list2 = []
+comp_list2 = collections.deque()
 Company = collections.namedtuple('Company', ['name', 'year_profit'])
 n = int(input('Введите количество предприятий: '))
 for i in range(n):
@@ -61,7 +61,7 @@ for i in range(n):
     profit = input('Через пробел введите прибыль предприятия за каждый квартал (всего 4 квартала): ')
     comp_list2.append(Company(name, sum(list(map(int, profit.split())))))
 
-profits2 = []
+profits2 = collections.deque()
 for company in comp_list2:  # создаем список с суммарными прибылями предприятий за год
     profits2.append(company.year_profit)
 avg_profit2 = round(sum(profits2) / len(profits2), 2)
