@@ -15,3 +15,32 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+class QueueClass:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_front(self, el):
+        """Предполагаем, что верхний элемент стека находится в начале списка"""
+        self.elems.insert(0, el)
+
+    def push_back(self, el):
+        """Предполагаем, что верхний элемент стека находится в конце списка"""
+        self.elems.append(el)
+
+    def pop_out(self):
+        return self.elems.pop(0)
+
+    def get_val(self):
+        return self.elems[0]
+
+    def stack_size(self):
+        return len(self.elems)
+
+
+if __name__ == '__main__':
+
+    qc_obj = QueueClass()
