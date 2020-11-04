@@ -22,3 +22,27 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+# 1
+
+
+def take_top(some_dict):
+    top_list = []
+    # temp_list_val = []
+    # top_list_idx = []
+
+    # temp_list_val = [val for key, val in storage]
+    # for _ in range(0, 3):
+    #     top_list.append(temp_list_val.index(max(temp_list_val)))
+    #
+    # temp_list_val.index(temp_list_val)
+
+
+###############
+
+storage = {
+    'ООО Ромашка': 120000,
+    'ООО Семицветик': 2700000,
+    'ООО Сенокос': 4300000,
+    'ООО Карусель': 700000,
+}
