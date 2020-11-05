@@ -27,3 +27,61 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+#Решение 1 Квадратичная сложность (вложенный цикл)
+
+log_data = [('login1', 'password1', True), ('login2', 'password2', False), ('login3', 'password3', True)]
+
+
+def account_check1(user_login, user_password):
+    for el in log_data:
+        while user_login in el:
+            if user_login == el[0] and user_password == el[1] and el[2] is True:
+                print('Доступ разрешен')
+                break
+            elif user_login == el[0] and user_password == el[1] and el[2] is False:
+                print('Необходимо активировать аккаунт')
+                break
+            else:
+                print('Доступ запрещен. Неверные логин и/или пароль')
+                break
+
+account_check1('login2', 'password2')
+
+#Решение 2 Линейная сложность.(Логарифмическая?)
+
+
+class Account:
+    status = False
+
+    def __init__(self, user_pass):
+        self._user_pass = user_pass
+
+
+login1 = Account('password1')
+login1.status = True
+login2 = Account('password2')
+
+
+def account_check(user_log, user_pass):
+    if user_pass == getattr(user_log, '_user_pass') and user_log.status is True:
+        print('Доступ разрешен')
+    elif user_pass == getattr(user_log, '_user_pass') and user_log.status is False:
+        print('Необходимо активировать аккаунт')
+    else:
+        print('Доступ запрещен. Неверные логин и/или пароль')
+
+
+account_check(login1, 'password1')
+
+"""Второе решение наиболее оптимальное, тк проверка происходит максимально просто
+с использованием встроенной функции getattr и ленивой проверки 'and', то есть если первое
+условие не выполняется, второе условие уже не проверяется, поэтому я предполагаю, что сложность
+может быть и логарифмическая по аналогии с бинарным поиском."""
+
+
+
+
+
+

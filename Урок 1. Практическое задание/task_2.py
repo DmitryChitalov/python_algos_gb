@@ -17,3 +17,33 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+lst_obj = []
+
+for el in range(100):
+    el = random.randint(0, 3000)
+    lst_obj.append(el)
+print(lst_obj)
+
+def min_search(lst_obj):
+    for el in lst_obj:
+        min_num = el
+        for i in lst_obj:
+            if i < min_num:
+                min_num = i
+    return min_num           #сравнение каждого числа с каждым квадратичная сложность вложенность одного цикла в другой
+
+def min_search1(lst_obj):    #сравнение одного числа с остальными в списке с переназначением переменной линейная сложность
+    min_num = lst_obj[0]
+    for i in lst_obj:
+        if i < min_num:
+            min_num = i
+    return min_num
+
+print(min_search(lst_obj))
+print(min_search1(lst_obj))
+
+
+
+
