@@ -41,10 +41,10 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: 2n*n+2 --> O(n**2).
+    Сложность: n+n+2 --> O(2n).
     """
     for j in range(len(lst_obj)):          # n
-        if lst_obj[j] in lst_obj[j+1:]:    # 2n
+        if lst_obj[j] in lst_obj[j+1:]:    # n
             return False                   # 1
     return True                            # 1
 
