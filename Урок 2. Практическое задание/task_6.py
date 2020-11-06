@@ -9,3 +9,25 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def num_game(num, i=0):
+    if i == 11:
+        print('Игра окончена, чило = ', num)
+        return
+    else:
+        answer = int(input('Введите число от 0 до 100: '))
+        if answer == num:
+            return print('Поздравляем, вы выйграли')
+        elif answer > num:
+            print('Вы не угадали, ваше число больше загаданого')
+            return num_game(num, i+1)
+        elif answer < num:
+            print('Вы не угадали, ваше число меньше загаданого')
+            return num_game(num, i + 1)
+
+
+num_game(random.randint(0, 100))
+
