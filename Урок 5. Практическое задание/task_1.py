@@ -25,3 +25,30 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+
+
+def get_average_profit(count_enterprises):
+    dict_enterprises = {}
+    Enterprises = namedtuple("Enterprises", "profit profit_total")
+    profit_all = 0
+    for i in range(1, count_enterprises + 1):
+        name = input("Введите название компании: ")
+        str_profit = input("через пробел введите прибыль данного предприятия "
+                           "за каждый квартал(Всего 4 квартала):")
+        profit = [int(i) for i in str_profit.split()]
+        enterprise = Enterprises(profit, sum(profit))
+        profit_all = profit_all + enterprise.profit_total
+        dict_enterprises[name] = enterprise
+
+    return dict_enterprises, profit_all / count_enterprises
+
+
+if __name__ == "__main__":
+    count_enterprises = int(input("Введите количество предприятий для расчета прибыли: "))
+    dict_enterprises, average_all = get_average_profit(count_enterprises)
+    print(f'Средняя прибыль для всех компаний: {average_all}')
+    print(
+        f'Компании, у которых значение больше среднего: {[k for k, v in dict_enterprises.items() if v.profit_total >= average_all]}')
+    print(
+        f'Компании, у которых значение меньше среднего: {[k for k, v in dict_enterprises.items() if v.profit_total < average_all]}')
