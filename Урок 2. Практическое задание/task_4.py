@@ -9,3 +9,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def is_a_digit(data):
+    while not data.isdigit():
+        print('Ошибка ввода. Пожалуйста, введите одно целое натуральное число.')
+        data = input('Введите число: ')
+    return data
+
+
+def rec(a, b=1.0, c=0.0):
+    if int(a) > 0:
+        return rec((int(a) - 1), (b * -0.5), c + b)
+    else:
+        return c
+
+
+user_input = is_a_digit(input('Введите количество элементов: '))
+print(f'Количество элементов: {user_input}, их сумма: {rec(user_input)}.')
