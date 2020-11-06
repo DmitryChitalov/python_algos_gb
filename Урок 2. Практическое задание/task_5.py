@@ -18,3 +18,12 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def display_ascii(start_character, end_character, step=10, ready_string=''):
+    for i in range(start_character, start_character + step):
+        if i <= end_character:
+            ready_string += f' {i} - {chr(i)} '
+    print(ready_string)
+    if start_character < end_character:
+        return display_ascii(start_character + step, end_character)
