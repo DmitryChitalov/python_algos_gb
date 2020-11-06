@@ -25,3 +25,32 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+FP = namedtuple('firm_profit', 'quarter_1 quarter_2 quarter_3 quarter_4 total')
+enterprise_base = {}
+
+enterprises_number = int(input("Введите количество предприятий для расчета прибыли: "))
+for enterprise in range(enterprises_number):
+    brand = input("Введите название предприятия: ")
+    profit_string = input("через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ")
+    profit = profit_string.split()
+    enterprise_base[brand] = FP(quarter_1=int(profit[0]), quarter_2=int(profit[1]), quarter_3=int(profit[2]),
+                                quarter_4=int(profit[3]),
+                                total=int(profit[0]) + int(profit[1]) + int(profit[2]) + int(profit[3]))
+for el in enterprise_base:
+    print(enterprise_base[el])
+
+general_average_annual_profit = sum(enterprise_base[el].total for el in enterprise_base) / len(enterprise_base)
+print(f'Средняя годовая прибыль всех предприятий: {general_average_annual_profit}')
+
+winner, loser = '', ''
+for el in enterprise_base:
+    if enterprise_base[el].total > general_average_annual_profit:
+        winner += el + ' '
+    elif enterprise_base[el].total < general_average_annual_profit:
+        loser += el + ' '
+
+print(f'Предприятия, с прибылью выше среднего значения: {winner}')
+print(f'Предприятия, с прибылью ниже среднего значения: {loser}')
