@@ -17,3 +17,30 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import sys
+def min_1(user_list):
+    """
+    поиск минимального числа из списка путем сравнения каждого числа с каждым,
+    Сложность: O(n**2)
+    """
+    for i in user_list:
+        for j in range(0, len(user_list)):
+            if i < user_list[j]:
+                res = i
+            else:
+                res = user_list[j]
+            i = res
+    return res
+
+def min_2(x):
+    """
+    Сложность: O(n)
+    """
+    return min(x)
+
+
+
+foo = [111,2,3,4,5,6]
+
+print(min_1(foo))
+print(min_2(foo))

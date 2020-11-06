@@ -22,3 +22,55 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+import random
+from faker import Faker                     # импортруем библиотеку для создание случайных данных
+fake = Faker(['ru-RU'])                     # Определяем локализацию [Русская]
+
+
+
+def random_spisok(foo):
+    """
+    Здесь реализуем хранилище, опредлять сложность не нужно
+    Получаем что-то типо:
+    {'Евраз': 30867, 'Roust': 43382, 'ОТП Банк': 16940, 'Сибтрейд': 27574, 'Русал': 66772}
+    """
+    return {fake.large_company(): fake.random_int(min=10000, max=90000) for _ in range(foo)}
+
+def dict_1(foo):
+    """
+    Этот вариант мне нравится больше, но в О сложности он более простой
+    Сложность:  O(n log n)
+    """
+    value_list = [value for value in foo.values()]        # n
+    value_list.sort()                                     # n log n
+    value_list = value_list[-3:]                          # n
+    return_dict = {}
+    for k, v in foo.items():                              # n
+        if v in value_list:
+            return_dict.setdefault(k, v)
+    return return_dict
+
+
+def dict_2(foo):
+    """
+        Сложность:  O(n)
+    """
+    return_dict = {}
+    value_list = [x for x in foo.values()]                 # n
+    bar=[]
+    for i in range(3):                                     # 3 --> так как цикл выполняется 3 раза
+        c = max(value_list)                                # n
+        bar.append(c)
+        value_list.remove(c)
+
+    for k, v in a.items():                                 # n
+        if v in bar:
+            return_dict.setdefault(k, v)
+
+    return return_dict
+
+
+a = random_spisok(5)
+print(a)
+print(dict_1(a))
+print(dict_2(a))
