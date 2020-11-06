@@ -9,3 +9,35 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randint
+
+
+def is_a_digit(data):
+    while not data.isdigit():
+        print(f'Ошибка ввода. Пожалуйста, введите одно целое натуральное число.\n')
+        data = input('Введите число: ')
+    return data
+
+
+def rec(user_answer='0', num=0, c=10):
+    if c == 10:
+        print('Отгадайте целое число от 0 до 100: ' + '\n')
+        num = randint(0, 100)
+    else:
+        if int(user_answer) != num:
+            if c >= 1:
+                if int(user_answer) > num:
+                    print(f'\nВы ввели число БОЛЬШЕ загаданного, попробуйте ещё раз.')
+                elif int(user_answer) < num:
+                    print(f'\nВы ввели число МЕНЬШЕ загаданного, попробуйте ещё раз.')
+            elif c == 0:
+                print(f'Ваши попытки закончились!\nБыло загадано число {num}.')
+                return
+        else:
+            print('Вы угадали!')
+            return
+    return rec(is_a_digit(input('Ваш ответ: ')), num, c - 1)
+
+
+rec()

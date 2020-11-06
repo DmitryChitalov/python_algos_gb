@@ -16,3 +16,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def is_a_digit(data):
+    while not data.isdigit():
+        print('Ошибка ввода. Пожалуйста, введите одно целое натуральное число.')
+        data = input('Введите число: ')
+    return data
+
+
+def rec(even=0, odd=0, num=is_a_digit(input('Введите число: '))):
+    if len(num) > 0:
+        if int(num[0]) % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return rec(even, odd, num[1:])
+    print(f'Чётных: {even}, нечётных: {odd}')
+    return even, odd
+
+
+rec()
