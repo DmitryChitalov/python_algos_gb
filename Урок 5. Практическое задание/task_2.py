@@ -20,6 +20,7 @@ hex_dec = {
     '12': 'C', '13': 'D', '14': 'E', '15': 'F'}
 
 # с использованием модуля collections
+# отдельные переменные num1 и num2 создал для наглядности. можно было сразу передать в deque без их объявления
 num1 = list(input('Введите первое шестнадцатеричное число: ').upper())
 num2 = list(input('Введите второе шестнадцатеричное число: ').upper())
 dec1 = collections.deque(num1)  # дек для хранения первого числа
@@ -38,16 +39,16 @@ mul_dec = dec_num1 * dec_num2  # результат умножения в дес
 
 
 def get_hex(dec_number):
-    """"""
+    """Преобразует из десятичной формы в шестнадцатиричную"""
     arr = []
     while dec_number > 0:
         res = dec_number % 16
-        arr.insert(0, hex_dec[str(res)])
+        arr.insert(0, hex_dec[str(res)])  # добавляем в массив шестнадцатиричное представление
         dec_number = dec_number // 16
     return arr
 
 
-print('Результаты с использованием deque методов:')
+print('Результаты с использованием deque:')
 print(f'Сумма чисел: {"".join(get_hex(sum_dec))}')
 print(f'Произведение чисел: {"".join(get_hex(mul_dec))}')
 print('-' * 160)
