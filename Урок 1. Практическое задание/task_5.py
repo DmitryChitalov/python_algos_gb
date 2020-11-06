@@ -18,3 +18,52 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+class StackClass:
+    def __init__(self, size):
+        self.elems = [[]]   # Создаем список списков для возможности хранить несколько стеков
+        self.size = size    # Размер стопки
+
+    def __str__(self):
+        return str(self.elems)
+
+    def push_in(self, el):
+        """Предполагаем, что верхний элемент стека находится в конце списка"""
+        if len(self.elems[len(self.elems) - 1]) < self.size:
+            self.elems[len(self.elems) - 1].append(el)
+        else:
+            self.elems.append([])
+            self.elems[len(self.elems) - 1].append(el)
+
+    def pop_out(self):
+        self.elems[len(self.elems) - 1].pop()
+        if len(self.elems[len(self.elems) - 1]) == 0:   # если стек становится пустым, то удаляем его
+            self.elems.pop()
+
+    def elems_size(self):
+        return len(self.elems)
+
+    def stack_size(self):
+        sum = 0  # Общее кол-во тарелок
+        for el in self.elems:
+            sum += len(el)
+        return sum
+
+plates = StackClass(3)
+plates.push_in('_')
+plates.push_in('_')
+plates.push_in('_')
+plates.push_in('_')
+plates.push_in('_')
+plates.push_in('_')
+plates.push_in('_')
+print(plates)
+plates.pop_out()
+print(plates)
+print(f'Всего тарелок: {plates.stack_size()} \nВсего стопок: {plates.elems_size()}')
+plates.pop_out()
+print(f'Всего тарелок: {plates.stack_size()} \nВсего стопок: {plates.elems_size()}')
+plates.pop_out()
+plates.pop_out()
+print(f'Всего тарелок: {plates.stack_size()} \nВсего стопок: {plates.elems_size()}')
+plates.push_in('_')
+print(f'Всего тарелок: {plates.stack_size()} \nВсего стопок: {plates.elems_size()}')
