@@ -27,3 +27,38 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+# Второй вариант гораздо лучше, т.к. сложность меньше
+# Первый вариант: O(n) - присутствует цикл
+def auth_1(usr, usr_name, passwd):
+    for key, value in usr.items():
+        if key == usr_name:
+            if value['password'] == passwd and value['status']:
+                return 'Успешная авторизация!'
+            elif value['password'] == passwd and not value['status']:
+                return 'Активируйте учетную запись!'
+            else:
+                return 'Неверный пароль!'
+    return 'Пользователя не существует!'
+
+# Второй вариант: O(1) - выполняется только один проход по функции, нет циклов
+def auth_2(usr, usr_name, passwd):
+    if usr.get(usr_name):
+        if usr[usr_name]['password'] == passwd and usr[usr_name]['status']:
+            return 'Успешная авторизация!'
+        elif usr[usr_name]['password'] == passwd and not usr[usr_name]['status']:
+            return 'Активируйте учетную запись!'
+        else:
+            return 'Неверный пароль!'
+    else:
+        return 'Пользователя не существует!'
+
+
+users = {'ivan': {'password': '123456q', 'status': True},
+         'pasha': {'password': '123QWEasd', 'status': True},
+         'ded': {'password': 'qwerty', 'status': False}
+         }
+
+username = input('Введите логин: ')
+password = input('Введите пароль: ')
+print(auth_1(users, username, password))
+print(auth_2(users, username, password))
