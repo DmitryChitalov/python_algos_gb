@@ -15,3 +15,15 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def change_number(my_list, num=[]):
+    if len(my_list) == 0:
+        print(''.join(num))
+        return
+    else:
+        num.insert(0, my_list[0])
+    change_number(my_list[1:], num)
+
+
+change_number(list(input('Введите число ')))
