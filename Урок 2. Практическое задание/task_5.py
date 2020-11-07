@@ -18,3 +18,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def encoding_ascii(num=32, number_of_pairs=0):
+    separator = ''
+    if number_of_pairs == 10:
+        separator = '\n'
+        number_of_pairs = 0
+    if num == 128:
+        return ''
+    return separator + str(num) + ' - ' + chr(num) + ' ' + encoding_ascii(num + 1, number_of_pairs + 1)
+
+
+print(encoding_ascii())

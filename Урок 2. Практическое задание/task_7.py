@@ -6,3 +6,18 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def equality(n):
+    def left_part(n):
+        if n == 1:
+            return n
+        return left_part(n - 1) + n
+
+    def right_part(n):
+        return n * (n + 1) / 2
+
+    return left_part(n) == right_part(n)
+
+
+print(equality(5))
