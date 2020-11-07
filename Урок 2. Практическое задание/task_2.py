@@ -15,4 +15,25 @@
 Пример:
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
-"""
+# """
+
+
+def even_odd(num=None, even=0, odd=0):
+    if num is None:
+        try:
+            num = int(input('Введите число: '))
+        except ValueError:
+            return 'Необходимо вводить число'
+    if len(str(num)) == 1 and even == 0 and odd == 0:
+        return 'Вы ввели 0 - это одно четное число'
+    if num == 0:
+        return f'Количество четных и нечетных цифр в числе равно: {even}, {odd}'
+    next_num = num % 10
+    if next_num % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    return even_odd((num // 10), even=even, odd=odd)
+
+
+print(even_odd())

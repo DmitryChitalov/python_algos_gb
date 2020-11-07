@@ -15,3 +15,17 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def inverse_number(number=None):
+    if number is None:
+        number = int(input('Введите число, которое требуется перевернуть: '))
+    if len(str(number)) == 1:
+        print('Перевернутое число: ', end='')
+        return number
+    return int(str(number % 10) + str(inverse_number(number // 10)))
+
+
+""" если оставить int, то нули вначале перевернутого числа исчезают. Если их нужно оставить - убираем int"""
+
+print(inverse_number())
