@@ -14,9 +14,11 @@
 Подумайте и по возможности определите сложность каждого алгоритма
 """
 
+import timeit
+
 
 def simple(i):
-    """Без использования «Решета Эратосфена»"""
+    """O(n^2) Без использования «Решета Эратосфена»"""
     count = 1
     n = 2
     while count <= i:
@@ -35,5 +37,23 @@ def simple(i):
     return n
 
 
+def eratosfen(i):
+    # O(n Log(Log n)), используя "Решето Эратосфена"
+    n = 2
+    l = 10000
+    sieve = [x for x in range(l)]
+    sieve[1] = 0
+    while n < l:
+        if sieve[n] != 0:
+            m = n * 2
+            while m < l:
+                sieve[m] = 0
+                m += n
+        n += 1
+    return [p for p in sieve if p != 0][i - 1]
+
+
 i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+print(simple(i),
+      timeit.timeit("simple(i)", setup='from __main__ import simple, i', number=100))  # время работы алгоритма 100 раз
+print(eratosfen(i), timeit.timeit("eratosfen(i)", setup='from __main__ import eratosfen, i', number=100))

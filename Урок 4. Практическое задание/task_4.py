@@ -10,7 +10,10 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+import random
+from timeit import timeit
+
+array = [random.randint(0, 10) for el in range(10)]
 
 
 def func_1():
@@ -37,5 +40,12 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3():
+    numb = max(array, key=array.count)
+    return f'чаще всего встречается число {numb}, оно появлялось в массиве {array.count(numb)} раз(а)'
+
+
+print(array)
+print(func_1(), timeit('func_1()', setup='from __main__ import func_1'))
+print(func_2(), timeit('func_2()', setup='from __main__ import func_2'))
+print(func_3(), timeit('func_3()', setup='from __main__ import func_3'))
