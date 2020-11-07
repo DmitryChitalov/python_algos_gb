@@ -9,6 +9,8 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
+from timeit import timeit
+import cProfile
 
 
 def revers(enter_num, revers_num=0):
@@ -34,3 +36,16 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+input_val = int(input("Введите целое число: "))
+
+setup = f'from __main__ import revers, revers_2, revers_3, input_val'
+print(f'Время работы функции revers: {timeit("revers(input_val)", setup, number=10000)}')
+print(f'Время работы функции revers_2: {timeit("revers_2(input_val)", setup, number=10000)}')
+print(f'Время работы функции revers_3: {timeit("revers_3(input_val)", setup, number=10000)}')
+
+cProfile.run(f'revers({input_val})')
+cProfile.run(f'revers_2({input_val})')
+cProfile.run(f'revers_3({input_val})')
+
+"Функция, которая работает на срезах работает значительно быстрее"
