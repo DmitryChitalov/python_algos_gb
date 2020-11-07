@@ -27,3 +27,45 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+#### 1 ####
+
+users = {'Phill12': 'qwerty0022', 'Anna848': '123pass456', 'Ivan8989': 'gusigaga', 'Andrew1122': 'flowerpower', 'PetrFirst': 'firstpetr', 'Maria60': 'mariaMARIA', 'ArthurPirozhkov': 'PirizhokArthurov', 'Helen86': '19911991'}
+
+def check_registration(login):
+    for i in users.keys():
+        if login == i:
+            return True
+    return False                        # - O(n^2)
+
+def check_password(pswd, login):
+    if pswd == users.get(login):
+        return True
+    return False                        # - O(n)
+
+user_login = input('Введите логин ')
+
+if check_registration(user_login):
+    if check_password(input('Введите пароль '), user_login):
+        print('Поздравляю! Вы в системе!')
+    else:
+        print('Ошибка! Неправильный пароль')
+else:   
+    print('Ошибка! Вы не зарегистрированы в системе!')                # - O(n^2)
+
+                                                                      # - Общая сложность O(n^2)
+
+#### 2 ####
+
+users = {'Phill12': 'qwerty0022', 'Anna848': '123pass456', 'Ivan8989': 'gusigaga', 'Andrew1122': 'flowerpower', 'PetrFirst': 'firstpetr', 'Maria60': 'mariaMARIA', 'ArthurPirozhkov': 'PirizhokArthurov', 'Helen86': '19911991'}
+
+def check_pswd(login):
+    if users.get(login) != None:
+        if input('Введите пароль ') == users.get(login):
+            print('Поздравляю! Вы в системе!')
+        else:
+            print('Ошибка! Неправильный пароль')
+    else:   
+        print('Ошибка! Вы не зарегистрированы в системе!')
+
+check_pswd(input('Введите логин '))                                    # - Общая сложность O(n^2)
