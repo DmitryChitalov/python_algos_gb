@@ -9,3 +9,24 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def guess_the_number(number=random.randint(1, 101), try_count=10):
+    guess = int(input('Введи число: '))
+    if guess == number:
+        return print(f'Ты победил, загаданное число: {number}')
+    elif try_count == 1:
+        return print(f'Попытки закончились, правильное число: {number}')
+    elif guess > number:
+        try_count -= 1
+        print(f'Твоё число больше загаданного, осталось {try_count} попыток, попробуй ещё раз!')
+        return guess_the_number(number, try_count)
+    elif guess < number:
+        try_count -= 1
+        print(f'Твоё число меньше загаданного, осталось {try_count} попыток, попробуй ещё раз!')
+        return guess_the_number(number, try_count)
+
+
+guess_the_number()
