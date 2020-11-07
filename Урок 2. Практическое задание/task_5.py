@@ -17,4 +17,26 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+
+Допускается исп-е встроенных ф-ций
 """
+
+# for i in range(32, 128):
+#     print("%4d-%s" % (i, chr(i)), end='')
+#     if i % 10 == 0:
+#         print()
+#
+# chr(num)
+
+
+def num_to_uni(i=32, count=1):
+    if i == 127:
+        return chr(i)
+    if count % 10 == 0:
+        count += 1
+        return f'{i} - {chr(i)}\n{num_to_uni(i+1, count)}'
+    count += 1
+    return f'{i} - {chr(i)} {num_to_uni(i+1, count)}'
+
+
+print(num_to_uni())
