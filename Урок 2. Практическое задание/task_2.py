@@ -16,3 +16,49 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+# Цикл
+try:
+    num = int(input('Введите число: '))
+    even = 0
+    odd = 0
+    while num > 0:
+        if (num % 10) % 2 == 0:
+            even += 1
+            num = num // 10
+        else:
+            odd += 1
+            num = num // 10
+    print(f'Кол-во четных и нечетных цифр в числе равно: ({even}, {odd})')
+except ValueError:
+    print(f'Вы ввели не число!')
+
+
+#
+# num = input('Введите число: ')
+# even = 0
+# odd = 0
+# for i in num:
+#     if i in ('0', '2', '4', '6', '8'):
+#         even += 1
+#     else:
+#         odd += 1
+#
+# print(f'({even}, {odd})')
+#
+#
+# def funk_even_2(num, even, odd):
+#     if num == 0:
+#         return 1
+#     elif (int(num) % 10) in ('0', '2', '4', '6', '8'):
+#         if :
+#             even += 1
+#             return funk_even_2(num // 10, even, odd), even, odd
+#         else:
+#             odd += 1
+#             return funk_even_2(num // 10, even, odd), even, odd
+#     print(f'{even}, {odd}')
+#
+#
+# num = int(input('Введите число: '))
+# funk_even_2(num, 0, 0)
