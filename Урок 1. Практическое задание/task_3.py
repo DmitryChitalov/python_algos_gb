@@ -22,3 +22,36 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+db_company_income = {'bmw': 1100,'audi': 1200,'lexus': 2100,'chevrolet': 3100}
+
+
+# Сложность O(N^2)
+def find_best_three(db):
+    for el in range(len(db)):
+        low_index = el
+        for el2 in range(el + 1, len(db)):
+            if db[el2][1] > db[low_index][1]:
+                low_index = el2
+        db[el], db[low_index] = db[low_index], db[el]
+    return db[0:3]
+
+
+list_db = list(db_company_income.items())
+for el in find_best_three(list_db):
+    print(f'{el[0]}:{el[1]}')
+
+# Сложность O(N)
+def find_best_three2(db):
+    dict_db = dict(db)
+    max_list = {}
+    for el in range(3):
+        max_final = max(dict_db.items(), key=lambda x: x[1])
+        del dict_db[max_final[0]]
+        max_list[max_final[0]] = max_final[1]
+    return max_list
+
+
+print(find_best_three2(db_company_income))
+
+# Вывод второе решение оптимальнее, т.к. сложность O(N) - линейная
