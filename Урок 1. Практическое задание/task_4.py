@@ -27,3 +27,43 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# Итовая сложность O (N)
+def auth_1(all_users, user, passwd):
+    for key, value in all_users.items():
+        if key == user:
+            if value['password'] == passwd and value['status']:
+                return 'Authorization successfull!'
+            elif value['password'] == passwd and not value['status']:
+                return 'Please activate account!'
+            else:
+                return 'Wrong password!'
+    return 'account does not exists or wrong password! Check creditinals or sing up'
+
+
+# Итовая сложность O (1).
+# этот вариант более эффективный.
+def auth_2(all_users, user, passwd):
+    if all_users.get(user):
+        if all_users[user]['password'] == passwd and all_users[user]['status']:
+            return 'Authorization successfull!'
+        elif all_users[user]['password'] == passwd and not all_users[user]['status']:
+            return 'Please activate account!'
+        else:
+            return 'Wrong password!'
+    else:
+        return 'account does not exists or wrong password! Check creditinals or sing up'
+
+
+users = {'user1': {'password': '123', 'status': True},
+         'user2': {'password': '123', 'status': True},
+         'user3': {'password': '123', 'status': False}
+         }
+
+username = input('Введите логин: ')
+password = input('Введите пароль: ')
+print("var1")
+print(auth_1(users, username, password))
+print("var2")
+print(auth_2(users, username, password))
