@@ -13,6 +13,7 @@
 """
 
 from timeit import timeit
+from random import randint
 
 
 def func_1(nums):
@@ -21,3 +22,21 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+
+
+sum = [randint(-1000, 1000) for _ in range(1000)]
+setup = f'from __main__ import func_1, func_2, sum'
+
+print(timeit('func_1(sum)', setup, number=10000))
+print(timeit('func_2(sum)', setup, number=10000))
+
+"""
+func_1 = 1.6493223000000001
+func_2 = 1.0511811999999998
+
+генераторы работают быстрее
+"""
