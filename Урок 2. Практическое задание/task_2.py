@@ -17,48 +17,24 @@
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
 
-# Цикл
-try:
-    num = int(input('Введите число: '))
-    even = 0
-    odd = 0
-    while num > 0:
-        if (num % 10) % 2 == 0:
-            even += 1
-            num = num // 10
+class EvenOdd:
+
+    def __init__(self):
+        self.num_lst = list(input('Введите число: '))
+        self.even = 0
+        self.odd = 0
+
+    def funk_even(self):
+        if len(self.num_lst) == 0:
+            print(f'Четных - {self.even}, нечетных - {self.odd}')
         else:
-            odd += 1
-            num = num // 10
-    print(f'Кол-во четных и нечетных цифр в числе равно: ({even}, {odd})')
-except ValueError:
-    print(f'Вы ввели не число!')
+            if int(self.num_lst.pop()) % 2 == 0:
+                self.even += 1
+                self.funk_even()
+            else:
+                self.odd += 1
+                self.funk_even()
 
 
-#
-# num = input('Введите число: ')
-# even = 0
-# odd = 0
-# for i in num:
-#     if i in ('0', '2', '4', '6', '8'):
-#         even += 1
-#     else:
-#         odd += 1
-#
-# print(f'({even}, {odd})')
-#
-#
-# def funk_even_2(num, even, odd):
-#     if num == 0:
-#         return 1
-#     elif (int(num) % 10) in ('0', '2', '4', '6', '8'):
-#         if :
-#             even += 1
-#             return funk_even_2(num // 10, even, odd), even, odd
-#         else:
-#             odd += 1
-#             return funk_even_2(num // 10, even, odd), even, odd
-#     print(f'{even}, {odd}')
-#
-#
-# num = int(input('Введите число: '))
-# funk_even_2(num, 0, 0)
+number = EvenOdd()
+number.funk_even()

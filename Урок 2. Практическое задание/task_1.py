@@ -74,4 +74,3 @@ def calc():
 
 
 print(calc())
-
