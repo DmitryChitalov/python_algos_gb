@@ -6,3 +6,19 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import sys
+
+sys.setrecursionlimit(10000)
+
+def RowSum(n, sum = 1):
+    if n-1 < 1:    # Базовый случай
+        return sum
+    else:           # Рекурсивный случай
+        return sum + RowSum(n-1, sum + 1)
+
+def calc(n):
+    return int(n * (n + 1) / 2)
+
+
+n = 1000
+print(f"Сумма ряда: {RowSum(n)}, результат по формуле: {calc(n)}")

@@ -16,3 +16,14 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def OddEvenCalc(val):
+    val1 = (val + 1) % 2, val % 2
+    if val < 10:
+        return val1
+    else:
+        val2 = OddEvenCalc(val // 10)
+        return val1[0] + val2[0], val1[1] + val2[1]
+
+res = OddEvenCalc(123)
+print(f"Количество четных чисел: {res[0]}\r\nКоличество нечетных чисел: {res[1]}")
