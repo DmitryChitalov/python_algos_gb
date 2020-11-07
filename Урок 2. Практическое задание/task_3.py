@@ -15,3 +15,21 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+class ReverseNum:
+
+    def __init__(self):
+        self.num_lst = list(input('Введите число: '))
+        self.reversed_num_list = []
+
+    def reverse(self):
+        if len(self.num_lst):
+            self.reversed_num_list.append(self.num_lst.pop())
+            self.reverse()
+        else:
+            print(f'Обратный порядок цифр - {"".join(self.reversed_num_list)}')
+
+
+reverse_num = ReverseNum()
+reverse_num.reverse()

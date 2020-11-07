@@ -16,3 +16,28 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+class CheckNum:
+
+    def __init__(self):
+        self.num_lst = list(input('Введите число: '))
+        self.even_counter = 0
+        self.not_even_counter = 0
+
+    def check(self):
+        if len(self.num_lst):
+            last_num = int(self.num_lst.pop())
+            if last_num % 2 == 0:
+                self.even_counter += 1
+                self.check()
+            elif last_num % 2 != 0:
+                self.not_even_counter += 1
+                self.check()
+        else:
+            print(f'Четных чисел - {self.even_counter}, \
+             \nнечетных - {self.not_even_counter}')
+
+
+check_num = CheckNum()
+check_num.check()

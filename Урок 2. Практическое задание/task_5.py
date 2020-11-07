@@ -18,3 +18,35 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+class GetTable:
+
+    def __init__(self, start_code):
+        self.table = ''
+        self.line = ''
+        self.code = start_code - 1
+        self.width = 10
+
+    def get_line(self):
+        if self.code < 127:
+            if self.width > 0:
+                self.code += 1
+                self.line += f' {self.get_one(self.code)}'
+                self.width -= 1
+                self.get_line()
+            else:
+                self.table += f'{self.line}\n'
+                self.line = ''
+                self.width = 10
+                self.get_line()
+        else:
+            self.table += f'{self.line}'
+            print(self.table)
+
+    def get_one(self, code):
+        return f'{code} - {chr(code)}'
+
+
+table = GetTable(32)
+table.get_line()
