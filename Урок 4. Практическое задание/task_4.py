@@ -10,6 +10,8 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -37,5 +39,25 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    max_3 = max([array.count(i) for i in array])
+    elem = array[([array.count(i) for i in array]).index(max_3)]
+
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_3} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print('Измерение функции func_1():')
+print(timeit("func_1()", setup="from __main__ import func_1", number=10000))
+print('Измерение функции func_2():')
+print(timeit("func_2()", setup="from __main__ import func_2", number=10000))
+print('Измерение функции func_3():')
+print(timeit("func_3()", setup="from __main__ import func_3", number=10000))
+
+
+""" В третьем варианте применил генератор списка, но общее время выполнения функции не улучшилось по сравнению с предыдущими вариантами.
+Самый быстрый - первый вариант"""

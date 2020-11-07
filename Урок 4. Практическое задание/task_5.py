@@ -15,7 +15,7 @@
 """
 
 
-def simple(i):
+def simple_1(i):
     """Без использования «Решета Эратосфена»"""
     count = 1
     n = 2
@@ -34,6 +34,27 @@ def simple(i):
         n += 1
     return n
 
+def simple_2(n):
+    """«Решето Эратосфена»"""
+    a = []
+    for i in range(n + 1):
+        a.append(i)
+    a[1] = 0
+    i = 2
+    while i <= n:
+        if a[i] != 0:
+            j = i + i
+            while j <= n:
+                a[j] = 0
+                j = j + i
+        i += 1
+    a = set(a)
+    a.remove(0)
+    return a
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+
+
+
+
+print(simple_1(20))
+print(simple_2(20))
