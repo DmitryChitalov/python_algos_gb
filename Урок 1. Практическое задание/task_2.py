@@ -17,3 +17,32 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+# первый
+def one(lst):
+    m = 0
+    mm = 0
+    for i in lst:
+        for ii in lst:
+            if i < ii:
+                m = i
+        if m < mm:
+            mm = m
+    return(mm)
+
+# два варианта второго. Не уверен, можно ли пользоваться pop()
+def twoOne(lst):
+    m = lst[0]
+    for i in range(1, len(lst)):
+        if m > lst[i]:
+            m = lst[i]
+    return m
+
+def twoTwo(lst):
+    m = lst.pop(0)
+    for i in lst:
+        if m > i:
+            m = i
+    return m
+
+
