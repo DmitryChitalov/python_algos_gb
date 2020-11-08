@@ -22,7 +22,7 @@ def mem_usage_decorator(some_func):
     def wrapper(*args, **kwargs):
         nonlocal count
         result = some_func(*args, **kwargs)
-        print(f'Задействованная память после рекурсивного вызова {count} раз: {str(memory_usage())} MB')
+        print(f'Задействованная память после рекурсивного вызова {count}-й раз: {str(memory_usage())} MB')
         count -= 1
         return result
 
