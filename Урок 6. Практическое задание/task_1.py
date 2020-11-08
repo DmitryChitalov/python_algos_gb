@@ -13,7 +13,6 @@
 ВНИМАНИЕ: ЗАДАНИЯ, В КОТОРЫХ БУДУТ ГОЛЫЕ ЦИФРЫ ЗАМЕРОВ (БЕЗ АНАЛИТИКИ)
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 """
-from functools import wraps  # для устранения конфликтов имен в цепочках декораторов
 from pympler import asizeof
 import struct
 from timeit import default_timer
@@ -92,7 +91,6 @@ def time_decorator(some_func):
     вариантов
     """
 
-    @wraps(some_func)
     def wrapper(*args, **kwargs):
         start = default_timer()
         result = some_func(*args, **kwargs)
