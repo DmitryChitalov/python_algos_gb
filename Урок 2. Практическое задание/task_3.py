@@ -17,6 +17,7 @@
 """
 
 
+# Рекурсия
 def rev_num(num):
     """
     Функция возвращает реверс числа
@@ -30,3 +31,25 @@ def rev_num(num):
 
 
 print(f'Перевернутое число: {rev_num(int(input("Введите число: ")))}')
+
+
+# Рекурсия ООП
+class ReversNumber:
+    def __init__(self):
+        self.number = list(input('Введите число: '))
+        self.number_reverse = []
+
+    def revers(self):
+        """
+        Метод возвращает реверс числа
+
+        num: число, которое требуется перевернуть
+        """
+        if len(self.number) == 0:
+            return print(f"Перевернутое число: {''.join(self.number_reverse)}")
+        else:
+            return self.number_reverse.append(self.number.pop()), self.revers()
+
+
+item = ReversNumber()
+item.revers()
