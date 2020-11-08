@@ -3,38 +3,40 @@
 Сделать профилировку для скриптов с рекурсией и сделать,
 можно так профилировать и есть ли 'подводные камни'
 """
-from pympler import asizeof
-from sys import getsizeof
+from memory_profiler import memory_usage
+"""
+Задекорировал рекурсивную функцию так, чтобы при каждом ее вызове показывалось текущее состояние памяти. Для того, чтобы
+было явно видно изменение в памяти при каждом вызове, добавил вычисление [el for el in range(10 ** 6)] при каждом
+вызове. Таким образом можно отследить расход памяти на каждый вызов без отдельной таблицы по каждому вызову. Решение не
+очень красивое, но рабочее. Придумал его сам, в гугле найти не смог ничего явно подходящего для этой задачи.
+
+"""
+
+user_number = int(input('Введите целое положительное число: '))
 
 
-class BasicClass:
-    """
-    В обычной ситуации в Python в объекты можно добавлять
-    новые атрибуты вне описания класса
-    """
-    def __init__(self, param_x, param_y):
-        self.param_x = param_x
-        self.param_y = param_y
+def mem_usage_decorator(some_func):
+    """Вычисляет память, выделяемую под выполнение декорируемой функции"""
+    count = user_number
+
+    def wrapper(*args, **kwargs):
+        nonlocal count
+        result = some_func(*args, **kwargs)
+        print(f'Задействованная память после рекурсивного вызова {count} раз: {str(memory_usage())} MB')
+        count -= 1
+        return result
+
+    return wrapper
 
 
-BC_OBJ = BasicClass(5, 6)
-print(BC_OBJ.__dict__)
-print(asizeof.asizeof((BC_OBJ)))
-BC_OBJ.param_z = 7
-print(BC_OBJ.__dict__)
-print(asizeof.asizeof((BC_OBJ)))
+@mem_usage_decorator
+def fact(number):
+    if number == 1:
+        return 1
+    else:
+        _ = [el for el in range(10 ** 6)]  # добавляем затратные для памяти вычисления для тестирования
+        return number * fact(number - 1)
 
 
-
-class BasicClass:
-    __slots__ = ['param_x', 'param_y']
-    def __init__(self, param_x, param_y):
-        self.param_x = param_x
-        self.param_y = param_y
-
-BC_OBJ = BasicClass(5, 6)
-print(BC_OBJ.__slots__)
-print(asizeof.asizeof(BC_OBJ))
-# BC_OBJ.param_z = 7
-print(BC_OBJ.__slots__)
-
+print(f'Задействованная память до запуска функции: {str(memory_usage())} MB')
+print(f'Факториал числа: {fact(user_number)}')
