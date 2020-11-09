@@ -15,3 +15,28 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+from hashlib import pbkdf2_hmac
+from binascii import hexlify
+
+
+def coding_pass(user, pwd):
+    obj = pbkdf2_hmac(hash_name='sha256',
+                      password=pwd.encode('utf8'),
+                      salt=user.encode('utf8'),
+                      iterations=100000)
+    print(hexlify(obj))
+    return hexlify(obj)
+
+
+user_name = input('Введите логин: ')
+pwd = input('Введите пароль: ')
+storage = [{'login': user_name, 'passwd': coding_pass(user_name, pwd)}]
+
+pwd_check = input('Введите пароль повторно: ')
+
+if coding_pass(user_name, pwd_check) == storage[0].get('passwd'):
+    print('Вы ввели правильный пароль!')
+else:
+    print('Вы ввели ошибочный пароль!')
+
+
