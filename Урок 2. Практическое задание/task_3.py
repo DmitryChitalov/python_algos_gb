@@ -15,3 +15,10 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+def mirror(n):
+    if n // 10 < 1:
+        return str(n % 10)
+    else:
+        return str(n % 10) + mirror(n // 10)
+
+print(mirror(6843))
