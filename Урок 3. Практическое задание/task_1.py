@@ -10,3 +10,36 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+import time
+
+
+def t(func):
+    def wrapper(*args, **kwargs):  # ф-ия обёртка
+        start_time = time.time()
+        func(args[0])
+        print(time.time() - start_time)
+    return wrapper
+
+
+@t
+def test_l(n):
+    obj = []
+    for i in range(n):
+        obj.append(i)
+    return obj
+
+
+@t
+def test_d(n):
+    obj = dict()
+    for i in range(n):
+        obj[i] = i
+    return
+
+
+test_l(10000)
+test_d(10000)
+
+# Список будет заполняться быстрее, тк не требудет вычисления хешей как в словаре при заполнении
+
+
