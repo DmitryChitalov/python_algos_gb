@@ -18,3 +18,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def give_me_symbols(code='32'):
+    if isinstance(code, str):  # проверка типа переменной, чтобы не переводить в str или int по несколько раз
+        code = int(code)
+    if code > 127:
+        return
+    if str(code)[-1] == '2':  # условие переноса строки
+        print()
+    print(f'{code} - {chr(code)}', end=' ')
+    return give_me_symbols(code + 1)
+
+
+give_me_symbols()

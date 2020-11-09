@@ -15,3 +15,21 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def is_a_digit(data):
+    while not data.isdigit():
+        print('Ошибка ввода. Пожалуйста, введите одно целое натуральное число.')
+        data = input('Введите число: ')
+    return data
+
+
+def rec(user_input, num=''):
+    if len(user_input) != 0:
+        num += (user_input[-1])
+        return rec(user_input[:-1], num)
+    else:
+        return num
+
+
+print(f'Перевернутое число: {rec(is_a_digit(input("Введите число, которое требуется перевернуть: ")))}')

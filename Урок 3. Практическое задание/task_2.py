@@ -15,3 +15,16 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+from hashlib import sha256
+
+while True:
+    user_login = input('Введите логин: ')
+    pass_hash = sha256(user_login.encode("utf-8") + input('Введите пароль: ').encode("utf-8")).hexdigest()
+    print(f'В базе данных хранится строка: {pass_hash}')
+    if sha256(user_login.encode("utf-8") +
+              input('Введите пароль еще раз для проверки: ').encode("utf-8")).hexdigest() == pass_hash:
+        print('Вы ввели правильный пароль.')
+        break
+    else:
+        print(f'Вы ввели неправильный пароль. Попробуйте ещё раз.\n')
