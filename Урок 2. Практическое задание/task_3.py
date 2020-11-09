@@ -21,4 +21,6 @@ def mirror(n):
     else:
         return str(n % 10) + mirror(n // 10)
 
-print(mirror(6843))
+
+num = int(input('Введите число, которое требуется перевернуть: '))
+print('Перевернутое число: ', mirror(num))
