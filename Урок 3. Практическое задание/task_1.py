@@ -10,3 +10,39 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+
+from datetime import datetime
+
+
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = datetime.now()
+        result = func()
+        print(datetime.now() - start)
+        return result
+    return wrapper()
+
+
+num = int(input("Введите число"))
+
+
+@timer
+def my_list():
+    my_lst = [x for x in range(num)]
+    return my_lst
+
+#
+
+
+@timer
+def my_dict():
+    my_dct = {x: x for x in range(num)}
+    return my_dct
+
+
+my_dict
+my_list
+
+""" На число 45555 результаты следующие\:0:00:00.002009 and  0:00:00.014995
+При заполнение списка происходит быстрее.Однако в создании словаря, проиcходят дополнительные действия с переменной
+и под них требуется больше места для коллизий,что  возможно нагружает программу. Сложность операции O(n) одинаковая в обоих случаях"""
