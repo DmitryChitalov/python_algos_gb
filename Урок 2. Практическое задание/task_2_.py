@@ -16,3 +16,43 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def even_or_odd(num, even=0, odd=0):
+
+    if num == 0:
+        return even, odd
+    else:
+        num_in_line = num % 10
+        num = num // 10
+        if num_in_line % 2 == 0:
+            even += 1
+            return even_or_odd(num, even, odd)
+        else:
+            odd += 1
+            return even_or_odd(num, even, odd)
+
+
+try:
+    user_number = int(input("Enter your integer: "))
+    print(f"Total number of evens end odds is: {even_or_odd(user_number)}")
+except ValueError:
+    print("Try an integer instead!")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
