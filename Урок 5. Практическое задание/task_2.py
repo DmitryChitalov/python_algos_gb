@@ -11,3 +11,27 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+from collections import deque
+
+
+def num_converter(number, in_count_sys, out_count_sys):
+    DIGITS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    result = ''
+    acc = 0
+    for a in number:
+        acc = acc * in_count_sys + DIGITS.find(a)
+    while acc > 0:
+        k = acc % out_count_sys
+        result += DIGITS[k]
+        acc = acc // out_count_sys
+    return result[::-1]
+
+
+first_num = deque((input('Введите первое шестнадцатеричное число: ')).upper())
+second_num = deque((input('Введите второе шестнадцатеричное число: ')).upper())
+
+hex_sum = int(num_converter(first_num, 16, 10)) + int(num_converter(second_num, 16, 10))
+hex_multi = int(num_converter(first_num, 16, 10)) * int(num_converter(second_num, 16, 10))
+
+print(f'Результат сложения чисел - {deque(num_converter(str(hex_sum), 10, 16))}')
+print(f'Результат сложения чисел - {deque(num_converter(str(hex_multi), 10, 16))}')
