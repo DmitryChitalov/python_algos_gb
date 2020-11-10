@@ -17,4 +17,28 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+
+Допускается исп-е встроенных ф-ций
 """
+
+
+def show_ascii_elements(start_el, end_el, result_str = ''):
+    for el in range(start_el, end_el):
+        if el <= end_ascii:
+            result_str += f'{el} : {chr(el)} \n'
+    #print(result_str)
+    print(f'Result string is: {result_str}')
+    if end_el < end_ascii:
+        return show_ascii_elements(start_el + i, end_el + i)
+
+start_ascii = 32
+end_ascii = 127
+i = 10
+
+print('Welcome to program "Show ASCII elements with usage recursion function"')
+try:
+    show_ascii_elements(start_ascii, end_ascii + i)
+except:
+    print('Unknow Error! Try again.')
+finally:
+    print('Exit program.')

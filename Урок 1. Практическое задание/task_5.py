@@ -18,3 +18,53 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+
+class PlateStack:
+    def __init__(self, size_value):
+        self.el = [[]]
+        self.size_value = size_value
+
+    def empty(self):
+        return self.el == [[]]
+
+    def push(self, el):
+        if len(self.el[len(self.el) - 1]) < self.size_value:
+            self.el[len(self.el) - 1].append(el)
+        else:
+            self.el.append([])
+            self.el[len(self.el) - 1].append(el)
+
+    def pop(self):
+        res = self.el[len(self.el) - 1].pop()
+        if len(self.el[len(self.el) - 1]) == 0:
+            self.el.pop()
+        return res
+
+    def get_value(self):
+        return self.el[len(self.el) - 1][len(self.el[len(self.el) - 1]) - 1]
+
+    def size_of_stack(self):
+        el_sum = 0
+        for el in self.el:
+            el_sum += len(el)
+        return el_sum
+
+    def values_stack(self):
+        return len(self.el)
+
+    def __str__(self):
+        return str(self.el)
+
+
+if __name__ == '__main__':
+    plate = PlateStack(4)
+    plate.push('Plate one')
+    plate.push('Plate two')
+    plate.push('Plate three')
+    print(plate)
+    print(plate.pop())
+    print(plate.get_value())
+    print(plate.size_of_stack())
+    print(plate.values_stack())
+    print(plate)

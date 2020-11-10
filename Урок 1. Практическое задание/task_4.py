@@ -27,3 +27,39 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# Cложность  O(1) - константа
+
+def auth_user(users_db, usr_name, usr_pass):
+    if users_db.get(usr_name):
+        if users_db[usr_name]['pass'] == usr_pass and users_db[usr_name]['activation']:
+            return print(f'Welcome {usr_name}')
+        elif users_db[usr_name]['pass'] == usr_pass and not users_db[usr_name]['activation']:
+            return print(f'{usr_name} your account is not active!')
+        elif users_db[usr_name]['pass'] != usr_pass:
+            return print(f'{usr_name} your password is wrong')
+    else:
+        return print(f"Can't find user")
+
+# Cложность  O(n) - линейная
+
+def auth_user2(users_db, usr_name, usr_pass):
+    for key, value in users_db.items():
+        if key == usr_name:
+            if value['pass'] == usr_pass and value['activation']:
+                return print(f'Welcome {usr_name}')
+            elif value['pass'] == usr_pass and not value['activation']:
+                return print(f'{usr_name} your account is not active!')
+            elif value['pass'] != usr_pass:
+                return print(f'{usr_name} your password is wrong')
+
+    return print(f"Can't find user")
+
+
+users_db = {'michael': {'pass': '1', 'activation': True},
+            'bob': {'pass': '2', 'activation': True},
+            'tom': {'pass': '3', 'activation': False},
+            }
+auth_user(users_db, 'tom', '3')
+auth_user2(users_db, 'tom', '3')
