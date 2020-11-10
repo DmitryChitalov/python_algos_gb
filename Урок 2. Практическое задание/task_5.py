@@ -18,3 +18,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def symbols(i):
+    if i == 32:
+        return f'{i} - {chr(i)} '
+    else:
+        if i % 10 != 2:
+            return f'{symbols(i - 1)}{i} - {chr(i)} '
+        else:
+            return f'{symbols(i - 1)}{i} - {chr(i)}\n'
+
+
+print(symbols(127))
