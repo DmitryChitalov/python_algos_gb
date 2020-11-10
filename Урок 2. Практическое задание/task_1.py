@@ -28,3 +28,38 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def operation_rec():
+    sign = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if sign == '0':
+        return "Выход"
+
+    else:
+        if sign in '+-/*':
+            try:
+                num_1 = int(input('Введите первое число: '))
+                num_2 = int(input('Введите второе число: '))
+                if sign == '+':
+                    print(f'{num_1 + num_2}')
+                    return operation_rec()
+                if sign == '-':
+                    print(f'{num_1 - num_2}')
+                    return operation_rec()
+                if sign == '*':
+                    print(f'{num_1 * num_2}')
+                    return operation_rec()
+                if sign == '/':
+                    try:
+                        print(f'{num_1 / num_2}')
+                    except ZeroDivisionError:
+                        print(f'Делить на ноль нельзя (((. Исправьтесь')
+                    return operation_rec()
+            except ValueError:
+                print(f'Вы вместо трехзначного числа ввели строку (((. Исправьтесь)')
+                return operation_rec()
+
+        else:
+            print('ошибочный символ! попробуйте еще раз')
+            return operation_rec()
+
+my_fun_rec = operation_rec()
+

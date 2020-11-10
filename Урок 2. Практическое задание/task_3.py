@@ -15,3 +15,12 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+def changeling(num, i):
+    if i < len(num) * (-1):
+        print(' - новое число')
+        return
+    else:
+        print(num[i], end='')
+        return changeling(num, i - 1)
+
+new_num = changeling(input("Введите число, которое требуется перевернуть: "), -1)

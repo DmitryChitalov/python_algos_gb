@@ -16,3 +16,16 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def counter(num, even_count, odd_count):
+    if num == '':
+        return even_count, odd_count
+    else:
+        for i in range(0, len(num)):
+            if int(num[i]) % 2 == 0:
+                even_count = even_count + 1
+                return counter(num[i + 1:], even_count, odd_count)
+            else:
+                odd_count = odd_count + 1
+                return counter(num[i + 1:], even_count, odd_count)
+
+print(counter('448623', 0, 0))
