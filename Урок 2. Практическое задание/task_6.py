@@ -9,3 +9,18 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+def guess_the_number(num, i):
+    if i == 11:
+        return f'Как жалко! Вы проиграли :('
+    enter = int(input('Введите число от 0 до 100: '))
+    if enter == num:
+        return f'Отлично, вы угадали, это число {enter}'
+    else:
+        if enter > num:
+            print(f'Вы не угадали с {i} попытки, загаданное число меньше чем {enter}')
+        else:
+            print(f'Вы не угадали с {i} попытки, загаданное число больше чем {enter}')
+        return guess_the_number(num, i + 1)
+
+print(guess_the_number(randint(0, 100), 1))
