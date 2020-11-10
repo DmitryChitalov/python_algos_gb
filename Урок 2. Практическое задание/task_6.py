@@ -9,3 +9,22 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+def try_numb(numb, i):
+    print('Попыток: ', i)
+    your_numb = int(input('Ваше число: '))
+    if numb == your_numb:
+        print('Вы отгадали!')
+    elif numb < your_numb and i > 1:
+        print('Ваше число больше загаданного, попробуйте ещё.')
+        try_numb(numb, i - 1)
+    elif numb > your_numb and i > 1:
+        print('Ваше число меньше загаданного, попробуйте ещё.')
+        try_numb(numb, i - 1)
+    elif i == 1:
+        print('Попытки закончились. Это было число ', numb)
+
+
+print('Отгадайте число от 0 до 100.')
+try_numb(randint(0, 100), 10)

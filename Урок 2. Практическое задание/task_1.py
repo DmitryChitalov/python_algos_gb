@@ -28,3 +28,65 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def operations():
+    do = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if do == '0':
+        exit()
+    elif do == '+' or do == '-' or do == '*' or do == '/':
+        a = int(input('Введите первое число: '))
+        b = int(input('Введите второе число: '))
+        if do == '+':
+            print('Ваш результат: ', a + b)
+            return operations()
+        if do == '-':
+            print('Ваш результат: ', a - b)
+            return operations()
+        if do == '*':
+            print('Ваш результат: ', a * b)
+            return operations()
+        if do == '/':
+            if b == 0:
+                print('На нуль делить нельзя!')
+                return operations()
+            else:
+                print('Ваш результат: ', a / b)
+                return operations()
+    else:
+        print('Введена неверная операция!')
+        return operations()
+
+
+operations()
+
+
+
+
+# while True:
+#     a = int(input('Введите первое число: '))
+#     b = int(input('Введите второе число: '))
+#     k = True
+#     do = input('Выберите действие: "+", "-", "*", "/" или "0" для выхода. ')
+#     if do == '0' or do == '+' or do == '-' or do == '*' or do == '/':
+#         k = False
+#     while k == True:
+#         print('Введена неверная операция!')
+#         do = str(input('Выберите действие: "+", "-", "*", "/" или "0" для выхода. '))
+#         if do == '0' or do == '+' or do == '-' or do == '*' or do == '/':
+#             k = False
+#     if do == '0':
+#         break
+#     elif do == '+':
+#         res = a + b
+#         print(f'Результат операции: {res}')
+#     elif do == '-':
+#         res = a - b
+#         print(f'Результат операции: {res}')
+#     elif do == '*':
+#         res = a * b
+#         print(f'Результат операции: {res}')
+#     elif do == '/':
+#         if b == 0:
+#             print('Делить на ноль нельзя!')
+#         else:
+#             res = a / b
+#             print(f'Результат операции: {res}')
