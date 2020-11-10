@@ -59,7 +59,7 @@ def memoize(f):
 @memoize
 def recursive_reverse_mem(number):
     if number == 0:
-        return str(number % 10)
+        return ''
     return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
 
 
@@ -79,7 +79,3 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
-
-
-# с кэшированием быстрее в 100 раз, примерно.
-# как сделать функцию лучше - не знаю, на мой взгляд она максимально простая

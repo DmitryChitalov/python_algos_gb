@@ -39,19 +39,3 @@ def func_2():
 
 print(func_1())
 print(func_2())
-
-def func_3():
-    dict_ = dict()
-    for i in array:
-        dict_[i] = dict_.get(i, 0) + 1
-    return f'Чаще всего встречается число {max(dict_.items(), key=lambda item: item[1])[0]},' \
-            f'оно появилось в массиве {max(dict_.items(), key=lambda item: item[1])[1]} раз(а)'
-
-print(func_3())
-
-from timeit import timeit
-print(timeit("func_1()", setup="from __main__ import func_1"))
-print(timeit("func_2()", setup="from __main__ import func_2"))
-print(timeit("func_3()", setup="from __main__ import func_3"))
-
-# мой вариант и исполняется дольше всего, и выглядит страшно)
