@@ -31,6 +31,7 @@
 
 
 def ask_number(message, invalid_number=[], invalid_number_message=""):
+    pass
     invalid_number = list(invalid_number)
     res = input(message).strip()
     if not res.isdigit():
