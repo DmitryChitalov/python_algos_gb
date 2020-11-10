@@ -18,3 +18,49 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def print_el(char):
+    pass
+    print(f"| {char} - {chr(char)} ", end="")
+
+
+def print_row(min_chr, max_chr):
+    pass
+    if min_chr > max_chr:
+        print("|")
+        return
+    cur_chr = min_chr
+    print_el(cur_chr)
+    cur_chr += 1
+    print_row(cur_chr, max_chr)
+
+
+def print_table(min_chr, max_chr, el_in_row):
+    pass
+    if min_chr > max_chr:
+        return
+
+    cur_chr = min_chr
+    max_chr_in_row = min_chr + el_in_row
+    if max_chr_in_row > max_chr:
+        max_chr_in_row = max_chr_in_row + (max_chr - max_chr_in_row)
+
+    print_row(cur_chr, max_chr_in_row)
+    cur_chr += el_in_row
+    print_table(cur_chr, max_chr, el_in_row)
+
+
+def main():
+    pass
+    try:
+        min_chr = 32
+        max_chr = 127
+        el_in_row = 10
+        print_table(min_chr, max_chr, el_in_row)
+    except Exception as ex:
+        print(f"Fatal error: {ex}")
+
+
+if __name__ == "__main__":
+    main()
