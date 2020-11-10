@@ -25,3 +25,35 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+import collections
+from numpy import mean
+
+company = collections.namedtuple('profit', 'company one two three four')
+
+def go_():
+    nCompany = input('Введите кол-во предприятий: ')
+    all_company = []
+    for i in range(int(nCompany)):
+        temp_str = input('Через пробел введите: название и квартальные прибыли для каждой: ')
+        return_company = company(company = temp_str.split(' ')[0],
+                                one=temp_str.split(' ')[1],
+                                two=temp_str.split(' ')[2],
+                                three=temp_str.split(' ')[3],
+                                four=temp_str.split(' ')[4])
+        all_company.append(return_company)
+    return all_company
+
+def out_():
+    list_company = go_()
+    profit = []
+    for i in list_company:
+        for ii in i[1:]:
+            profit.append(int(ii))
+    return_str = f'средняя годовая прибыль всех компаний = {mean(profit)}; \
+    \n меньше годовой: {min(list_company)[0]}; \
+    \n больше годовой: {max(list_company)[0]};'
+    return return_str
+
+###
+print(out_())
