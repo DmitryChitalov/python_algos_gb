@@ -35,16 +35,19 @@ def input_number(message):
     res = input(message).strip()
     if not res.isdigit():
         print("Недопустимый ввод!")
-        res = input_number()
+        res = input_number(message)
 
     return res
 
 
 def main():
     pass
-    number = input_number("Введите число, которое требуется перевернуть: ")
-    res = reverse_number(number, len(number)).strip()
-    print(f"Перевернутое число: {res}")
+    try:
+        number = input_number("Введите число, которое требуется перевернуть: ")
+        res = reverse_number(number, len(number)).strip()
+        print(f"Перевернутое число: {res}")
+    except Exception as ex:
+        print(f"Fatal error: {ex}")
 
 
 if __name__ == "__main__":

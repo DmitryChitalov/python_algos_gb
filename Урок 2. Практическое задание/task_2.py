@@ -42,7 +42,7 @@ def input_number(message):
     res = input(message).strip()
     if not res.isdigit():
         print("Недопустимый ввод!")
-        res = input_number()
+        res = input_number(message)
 
     return res
 
