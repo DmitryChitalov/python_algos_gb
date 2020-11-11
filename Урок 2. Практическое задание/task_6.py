@@ -9,3 +9,26 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randrange
+
+def guess_num(rand_num, answer, i=1):
+    if i < 10:
+        if rand_num == answer:
+            print('Поздравляю, Вы угадали!!')
+            return
+        else:
+            print(f'Попробуйте снова. Осталось попыток: {10 - i} ')
+            answer = int(input('Какое число мы Вам загадали? '))
+            i += 1
+            return guess_num(rand_num, answer, i)
+    else:
+        print('К сожалению, Вы не справились. Правильный ответ - ', rand_num)
+        return
+
+
+rand_num = randrange(0, 100, 1)
+
+answer = int(input('Какое число мы Вам загадали? У Вас есть 10 попыток '))
+
+guess_num(rand_num, answer, i=1)

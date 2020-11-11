@@ -22,3 +22,54 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+#### 1 ####
+
+cp_info = {'megaoil': 5000000, 'megafm': 350000, 'superstar': 6500000, 'gauss': 100000, 'electro': 800000, 'studio': 900000, 'profile': 5500000, 'art-museum': 5500000}
+
+best_cp = {}
+
+i = 0
+while i < 3:
+    cp_names = cp_info.keys()
+    max_profit = 0    
+    for j in cp_names:
+        if cp_info.get(j) > max_profit:
+            max_profit = cp_info.get(j)
+            max_profit_cp = j
+    best_cp[max_profit_cp] = max_profit
+    del cp_info[max_profit_cp]
+    i += 1
+       
+print(best_cp)
+
+# - Общая сложность O(3n^2)
+
+#### 2 ####
+
+cp_info = {'megaoil': 5000000, 'megafm': 350000, 'superstar': 6500000, 'gauss': 100000, 'electro': 800000, 'studio': 900000, 'profile': 5500000, 'art-museum': 5500000}
+
+best_cp = {}
+sort_list = sorted(cp_info, key=cp_info.get, reverse=True)[:3]
+
+for i in sort_list:
+    best_cp[i] = cp_info[i]
+
+print(best_cp)
+
+# - Общая сложность O(N)
+
+#### 3 ####
+
+from collections import OrderedDict
+from operator import itemgetter
+
+cp_info = {'megaoil': 5000000, 'megafm': 350000, 'superstar': 6500000, 'gauss': 100000, 'electro': 800000, 'studio': 900000, 'profile': 5500000, 'art-museum': 5500000}
+
+print(OrderedDict(sorted(cp_info.items(), key=itemgetter(1), reverse=True)[:3]))
+
+# - Общая сложность O(N log N)
+
+#### Выводы ####
+
+# Самое эффективное решение - вариант № 3. Так увеличение количества входных данных не влияет на рост О - нотации. Также, такой код проще поддерживать, все наглядно
