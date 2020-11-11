@@ -12,19 +12,22 @@
 (в частности по перегрузке методов)
 """
 
-from collections import deque
+
+class Number:
+    def __init__(self, number):
+        self.number = ''.join(number)
+
+    def __add__(self, other):
+        return (hex(int(float.fromhex(self.number)) + int(float.fromhex(other.number))))[2:].upper()
+
+    def __mul__(self, other):
+        return (hex(int(float.fromhex(self.number)) * int(float.fromhex(other.number))))[2:].upper()
 
 
-def sum_mult_16(a, b):
-    a = ''.join(a)
-    b = ''.join(b)
-    sum_16 = (hex(int(float.fromhex(a)) + int(float.fromhex(b))))[2:].upper()
-    mult_16 = (hex(int(float.fromhex(a)) * int(float.fromhex(b))))[2:].upper()
-    print(f'Сумма введенных чисел - {sum_16}')
-    print(f'Произведение введенных чисел - {mult_16}')
+first_num = list(input('Введите первое число '))
+second_num = list(input('Введите второе число '))
 
-
-first_num = deque(input('Введите первое число '))
-second_num = deque(input('Введите второе число '))
-
-sum_mult_16(first_num, second_num)
+sum_16 = Number(first_num) + Number(second_num)
+mult_16 = Number(first_num) * Number(second_num)
+print(f'Сумма введенных чисел - {sum_16}')
+print(f'Произведение введенных чисел - {mult_16}')
