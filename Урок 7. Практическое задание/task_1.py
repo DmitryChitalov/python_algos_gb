@@ -13,7 +13,7 @@
 а по убыванию
 """
 from random import randint
-from timeit import default_timer
+from timeit import default_timer, repeat, timeit
 
 
 def time_decorator(some_func):
@@ -22,7 +22,7 @@ def time_decorator(some_func):
     def wrapper(*args, **kwargs):
         start = default_timer()
         result = some_func(*args, **kwargs)
-        print(f'Время выполнения функции {some_func.__name__} составило {default_timer() - start}.')
+        print(f'Время выполнения функции {some_func.__name__} замеренное декоратором: {default_timer() - start}.')
         return result
 
     return wrapper
@@ -94,3 +94,23 @@ print('-' * 160)
 Второй вариант вариант (когда используем только маркер), не дает выигрыша существенного выигрыша в скорости по сравению 
 с первым (18.1884085 против 19.1428449).
 """
+
+# Протестируем на меньшей длине списка (1000 элементов) и сравним замеры, сделанные самодельным декоратором и timeit
+small_lst = [randint(-100, 100) for _ in range(1000)]
+
+# делаем три одинаковые копии, чтобы все три функции работали с одинковыми по наполнению списками
+lst4 = small_lst.copy()
+lst5 = small_lst.copy()
+lst6 = small_lst.copy()
+
+setup = """
+from __main__ import bubble_sort_unoptimized, bubble_sort_optimized1, bubble_sort_optimized2, lst4, lst5, lst6
+"""
+statements = [
+    ['Время выполнения bubble_sort_unoptimized, замеренное timeit: ', 'bubble_sort_unoptimized(lst4)'],
+    ['Время выполнения bubble_sort_unoptimized1, замеренное timeit: ', 'bubble_sort_optimized1(lst5)'],
+    ['Время выполнения bubble_sort_unoptimized2, замеренное timeit: ', 'bubble_sort_optimized2(lst6)']
+]
+
+for info, st in statements:
+    print(info, max(repeat(st, setup, default_timer, 1, 1)))

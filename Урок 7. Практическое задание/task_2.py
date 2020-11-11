@@ -9,6 +9,7 @@
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
 from random import uniform
+from timeit import timeit
 
 n = int(input('Введите число элементов: '))
 lst = [uniform(0, 50) for _ in range(n)]
@@ -42,7 +43,6 @@ def merge(left_lst, right_lst):
         elif right_lst_index == right_lst_length:
             sorted_lst.append(left_lst[left_lst_index])
             left_lst_index += 1
-
     return sorted_lst
 
 
@@ -61,3 +61,35 @@ def merge_sort(nums):
 
 
 print(f'Отсортированный - {merge_sort(lst)}')
+print('-' * 160)
+
+# сделаем замеры на массивах разной длины
+lst1 = [uniform(0, 50) for _ in range(100)]
+print('Время выполнения merge_sort() при длине массива 100: ', timeit(
+    'merge_sort(lst1[:])',
+    setup='from __main__ import merge_sort, merge, lst1',
+    number=1
+))
+print('-' * 160)
+lst2 = [uniform(0, 50) for _ in range(1000)]
+print('Время выполнения merge_sort() при длине массива 1000: ', timeit(
+    'merge_sort(lst2[:])',
+    setup='from __main__ import merge_sort, merge, lst2',
+    number=1
+))
+
+print('-' * 160)
+lst3 = [uniform(0, 50) for _ in range(10000)]
+print('Время выполнения merge_sort() при длине массива 10000: ', timeit(
+    'merge_sort(lst3[:])',
+    setup='from __main__ import merge_sort, merge, lst3',
+    number=1
+))
+
+print('-' * 160)
+lst4 = [uniform(0, 50) for _ in range(100000)]
+print('Время выполнения merge_sort() при длине массива 100000: ', timeit(
+    'merge_sort(lst4[:])',
+    setup='from __main__ import merge_sort, merge, lst4',
+    number=1
+))

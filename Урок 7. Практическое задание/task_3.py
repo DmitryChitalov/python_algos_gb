@@ -15,14 +15,25 @@ from statistics import median
 """
 from random import randint, randrange
 from statistics import median
+from timeit import timeit
 
 m = int(input('Введите натуральное число: '))
+
+# в массиве user_lst ищем медиану без сортировки, затем с сортировкой Шелла
 user_lst = [randint(-10, 10) for _ in range(2 * m + 1)]
+
+# делаем копию user_lst, чтобы работать с неизмененной после сортировки Шелла версией. Будем сортировать его HeapSort
+user_lst1 = user_lst.copy()
+
+# для тестирования времени при поиске медианы через алгоритмы сортировки
+user_lst_test1 = user_lst.copy()
+user_lst_test2 = user_lst.copy()
+
 print(user_lst)
 print(f'Медиана для данного массива: {median(user_lst)} (проверка from statistics import median)')
 
 
-# вариант с поиском медианы без сортировки (честно нагуглил и немного переделал)
+# Вариант с поиском медианы без сортировки (честно нагуглил и немного переделал)
 def Partition(arr, l, r):
     """Возвращает позицию осевого элемента"""
     lst = arr[r]
@@ -103,7 +114,7 @@ def findMedian(arr, n):
 findMedian(user_lst, len(user_lst))
 
 
-# вариант с поиском медианы c сортировкой Шелла
+# Вариант с поиском медианы c сортировкой Шелла
 def shellSort(some_list):
     sublist_count = len(some_list) // 2
     while sublist_count > 0:
@@ -128,4 +139,58 @@ def gapInsertionSort(some_list, start, gap):
 
 
 shellSort(user_lst)
-print(f'Медиана для данного массива: {user_lst[len(user_lst) // 2]} (с сортировкой Шелла)')
+print(f'Медиана для данного массива: {user_lst[m]} (с сортировкой Шелла)')
+
+
+# Вариант с поиском медианы c сортировкой кучей
+def heapify(some_list, n, i):
+    # Find largest among root and children
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+
+    if l < n and some_list[i] < some_list[l]:
+        largest = l
+
+    if r < n and some_list[largest] < some_list[r]:
+        largest = r
+
+    # If root is not largest, swap with largest and continue heapifying
+    if largest != i:
+        some_list[i], some_list[largest] = some_list[largest], some_list[i]
+        heapify(some_list, n, largest)
+
+
+def heapSort(some_list):
+    n = len(some_list)
+
+    # Build max heap
+    for i in range(n // 2, -1, -1):
+        heapify(some_list, n, i)
+
+    for i in range(n - 1, 0, -1):
+        # Swap
+        some_list[i], some_list[0] = some_list[0], some_list[i]
+
+        # Heapify root element
+        heapify(some_list, i, 0)
+
+
+heapSort(user_lst1)
+
+print(f'Медиана для данного массива: {user_lst1[m]} (с сортировкой HeapSort)')
+print('-' * 160)
+
+print('Время поиска медианы с помощью сортировки Шелла: ', timeit(
+    'shellSort(user_lst_test1)',
+    setup='from __main__ import gapInsertionSort, shellSort, user_lst_test1',
+    number=1
+))
+print('-' * 160)
+print('Время поиска медианы с помощью сортировки HeapSort: ', timeit(
+    'heapSort(user_lst_test2)',
+    setup='from __main__ import heapSort, heapify, user_lst_test2',
+    number=1
+))
+
+"""Сортировка Шелла отрабатывет быстрее сортировки кучей"""
