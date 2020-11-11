@@ -15,3 +15,47 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+from hashlib import pbkdf2_hmac
+from binascii import hexlify
+from uuid import uuid4
+
+#Вариант1
+
+
+user_login = input('Введите логин: ')
+user_password = input('Введите пароль: ')
+user_login = user_login.encode('utf8')
+user_password = user_password.encode('utf8')
+
+obj = pbkdf2_hmac(hash_name='sha256',
+                  password=bytes(user_password),
+                  salt=bytes(user_login),
+                  iterations=1000)
+
+user_login1 = input('Введите логин: ')
+user_password1 = input('Введите пароль: ')
+user_login1 = user_login1.encode('utf8')
+user_password1 = user_password1.encode('utf8')
+
+obj1 = pbkdf2_hmac(hash_name='sha256',
+                  password=bytes(user_password1),
+                  salt=bytes(user_login1),
+                  iterations=1000)
+
+print(obj == obj1)
+
+#Вариант2
+import hashlib
+
+salt = uuid4().hex
+
+us_password = input('Введите пароль: ')
+result = hashlib.sha256(salt.encode() + us_password.encode()).hexdigest()
+us_password1 = input('Введите пароль еще раз для проверки: ')
+result1 = hashlib.sha256(salt.encode() + us_password1.encode()).hexdigest()
+print(f'В базе данных хранится строка: {result}')
+if result == result1:
+    print('Пароли совпадают')
+else:
+    print('Пароли не совпадают')
+
