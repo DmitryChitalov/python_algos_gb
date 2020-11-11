@@ -11,3 +11,24 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+import collections
+import functools
+
+
+def calc():
+    nums = collections.defaultdict(list)
+    # defaultdict(<class 'list'>, {'1-A2': ['A', '2'], '2-CF4': ['C', '4', 'F']})
+    for d in range(2):
+        n = input(f'Введите {d + 1}-e натуральное 16 яичное число')
+        nums[f'{d + 1}-{n}'] = list(n)
+    print(nums)
+
+    summ = sum([int(''.join(i), 16) for i in nums.values()])
+    # '%X' число в 16 си (буквы в верхнем регистре)
+    print('Сумма ', list('%X' % summ))
+    # reduce - применение функции к каждому эл коллекции
+    mult = functools.reduce(lambda a, b: a * b, [int(''.join(i), 16) for i in nums.values()])
+    print('Произведение ', list('%X' % mult))
+
+
+calc()
