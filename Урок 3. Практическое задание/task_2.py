@@ -15,3 +15,18 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+
+def pass_to_sha256(pswd):
+    salt = pswd + pswd[::-1]
+    return hashlib.sha256(password.encode() + salt.encode()).hexdigest()
+
+
+password = input('Введите пароль: ')
+print('В базе данных хранится строка: ', pass_to_sha256(password))
+password2 = input('Введите пароль еще раз для проверки: ')
+
+if pass_to_sha256(password) == pass_to_sha256(password2):
+    print('Вы ввели правильный пароль!')
+else:
+    print('Пароли не совпадают')
