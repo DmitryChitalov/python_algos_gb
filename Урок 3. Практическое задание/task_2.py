@@ -15,3 +15,23 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib as hl
+
+
+def pswd_hash(pswd):
+    obj = hl.pbkdf2_hmac(
+        hash_name='sha256',
+        password=pswd.encode(),
+        salt=b'secret',
+        iterations=100000
+    )
+    return obj
+
+
+user_pswd1 = input('Введите пароль: ')
+user_pswd2 = input('Подтвердите пароль: ')
+
+print('Пароли совпадают') \
+    if pswd_hash(user_pswd1) == pswd_hash(user_pswd2) \
+    else print('Пароли не совпадают')
+

@@ -27,3 +27,63 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+def authorize1():
+    user_input_login = input('Введите логин: ')
+    user_input_pass = input('Введите пароль: ')
+    for note in storage:
+        if user_input_login == note['login']:
+            if user_input_pass == note['pass']:
+                if not note['is_active']:
+                    print('Ваша учетная запись неактивна, активируйте ее через email')
+                    return
+                else:
+                    print('Вы попали в систему')
+                    return
+    else:
+        print('Вы ввели неверный логин или пароль!')
+        authorize1()
+
+# Вычислительная сложность authorize1 = O(n), так как линейную сложность дает цикл
+# for,а вложенные операции - константны и не увеличивают сложность
+
+
+def authorize2():
+    user_input_login = input('Введите логин: ')
+    user_input_pass = input('Введите пароль: ')
+    logins = [note['login'] for note in storage]
+    passwds = [note['pass'] for note in storage]
+    activate = [note['is_active'] for note in storage]
+    try:
+        idx = logins.index(user_input_login)
+    except ValueError:
+        print('Вы ввели неверный логин или пароль!')
+        authorize2()
+    if user_input_pass == passwds[idx]:
+        if not activate[idx]:
+            print('Ваша учетная запись неактивна, активируйте ее через email')
+            return
+        else:
+            print('Вы попали в систему')
+            return
+    else:
+        print('Вы ввели неверный логин или пароль!')
+        authorize2()
+
+# Второй способ небезопасный и сложный. Вычислительная сложность = O(4n), поскольку
+# последовательно идут 3 генератора списка и list.index. Константные операции опустил
+
+
+storage = [{
+    'login': 'admin',
+    'pass': '123',
+    'is_active': True
+}, {
+    'login': 'user',
+    'pass': '456',
+    'is_active': False
+}]
+
+# authorize1()
+authorize2()
