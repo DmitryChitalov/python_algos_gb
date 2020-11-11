@@ -10,86 +10,47 @@
 """
 from uuid import uuid4
 import hashlib
-import time
 from functools import wraps
 
 
-# def stopwatch(func):
-#     @wraps(func)
-#     def wrapper(*args):
-#         start_val = time.time()
-#         result = func(*args)
-#         end_val = time.time()
-#         print(f'Операция заняла: {end_val - start_val:.10f} сек')
-#         return result
-#     return wrapper
-#
-#
-# def memorize(func):
-#     @stopwatch
-#     def g(url, memory={}):
-#         r = memory.get(url)
-#         if r is None:
-#             r = func(url)
-#             memory[url] = r
-#             # print(memory)
-#         return r
-#     return g
-#
-#
-# @memorize
-# def hash_url(url):
-#     salt = uuid4().hex
-#     res = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
-#     return res
-#
-#
-# url = 'http://stackoverflow.com'
-# hash_url(url)
-#
-# url = 'http://facebook.com'
-# hash_url(url)
-#
-# url = 'http://python.org'
-# hash_url(url)
-#
-# url = 'http://instagram.com'
-# hash_url(url)
-#
-# url = 'http://twitter.com'
-# hash_url(url)
-#
-# url = 'http://stackoverflow.com'
-# hash_url(url)
-
-
 class CachingUrl:
-    def __init__(self):
-        self.url = []
-        self.salt = uuid4().hex
-        self.result = []
+    def __init__(self, url):
+        self.url = url
 
     def _memorize(func):
+        """
+        Декоратор, который проверяет есть ли страница в кэш, если нет, то кэширует хэш страницы.
+        """
+        @wraps(func)
         def wrap(self, memory={}):
             r = memory.get(self.url)
             if r is None:
-                r = func(self.url)
+                r = func(self)
                 memory[self.url] = r
+                print(f'Страница внесена в кэш!')
+            else:
+                print(f'Достали страницу из кэша!')
             return r
         return wrap
 
     @_memorize
-    def hash_url(self, url):
-        self.result = hashlib.sha256(self.salt.encode('utf-8') + url.encode('utf-8')).hexdigest()
-        print(type(self.result))
-        return self.result
+    def caching(self):
+        result = hashlib.sha256(self.url.encode('utf-8') + uuid4().hex.encode('utf-8')).hexdigest()
+        return result
 
 
-url_1 = CachingUrl()
-url_1.hash_url('http://stackoverflow.com')
+url_1 = CachingUrl('http://stackoverflow.com')
+url_1.caching()
 
-url_2 = CachingUrl()
-url_2.hash_url('http://facebook.com')
+url_2 = CachingUrl('http://facebook.com')
+url_2.caching()
 
-url_1 = CachingUrl()
-url_1.hash_url('http://stackoverflow.com')
+url_3 = CachingUrl('http://stackoverflow.com')
+url_3.caching()
+
+url_4 = CachingUrl('http://twitter.com')
+url_4.caching()
+
+url_5 = CachingUrl('http://facebook.com')
+url_5.caching()
+

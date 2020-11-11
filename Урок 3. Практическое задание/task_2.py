@@ -19,24 +19,35 @@ from hashlib import pbkdf2_hmac
 from binascii import hexlify
 
 
-def coding_pass(user, pwd):
-    obj = pbkdf2_hmac(hash_name='sha256',
-                      password=pwd.encode('utf8'),
-                      salt=user.encode('utf8'),
-                      iterations=100000)
-    print(hexlify(obj))
-    return hexlify(obj)
+class UserLogin:
+    def __init__(self):
+        self.user = str()
+        self.pwd = str()
+
+    @staticmethod
+    def _check_in_user(user, pwd):
+        """
+        Метод осуществляет соленое хэширование пароля
+        """
+        obj = pbkdf2_hmac(hash_name='sha256',
+                          password=pwd.encode('utf8'),
+                          salt=user.encode('utf8'),
+                          iterations=100000)
+        return hexlify(obj)
+
+    def check_pwd(self):
+        """
+        Метод запрашивает данные юзера, записывает их в бд, при этом вместо пароля в бд записывается хзш.
+        Далее идет повторная проверка пароля сравниванием хэш-ей.
+        """
+        self.user = input('Введите логин: ')
+        self.pwd = input('Введите пароль: ')
+        storage = {'login': self.user, 'pwd': self._check_in_user(self.user, self.pwd)}
+        if self._check_in_user(self.user, input('Введите пароль повторно: ')) == storage.get('pwd'):
+            print('Вы ввели правильный пароль!')
+        else:
+            print('Вы ввели ошибочный пароль!')
 
 
-user_name = input('Введите логин: ')
-pwd = input('Введите пароль: ')
-storage = [{'login': user_name, 'passwd': coding_pass(user_name, pwd)}]
-
-pwd_check = input('Введите пароль повторно: ')
-
-if coding_pass(user_name, pwd_check) == storage[0].get('passwd'):
-    print('Вы ввели правильный пароль!')
-else:
-    print('Вы ввели ошибочный пароль!')
-
-
+user = UserLogin()
+user.check_pwd()
