@@ -22,7 +22,7 @@ def time_decorator(some_func):
     def wrapper(*args, **kwargs):
         start = default_timer()
         result = some_func(*args, **kwargs)
-        print(f'Время выполнения функции {some_func.__name__} замеренное декоратором: {default_timer() - start}.')
+        print(f'Время выполнения функции {some_func.__name__}, замеренное декоратором: {default_timer() - start}.')
         return result
 
     return wrapper
@@ -114,3 +114,5 @@ statements = [
 
 for info, st in statements:
     print(info, max(repeat(st, setup, default_timer, 1, 1)))
+
+"""Результаты измерения timeit и @time_decorator совпадают"""

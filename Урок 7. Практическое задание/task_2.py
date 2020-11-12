@@ -66,14 +66,14 @@ print('-' * 160)
 # сделаем замеры на массивах разной длины
 lst1 = [uniform(0, 50) for _ in range(100)]
 print('Время выполнения merge_sort() при длине массива 100: ', timeit(
-    'merge_sort(lst1[:])',
+    'merge_sort(lst1)',
     setup='from __main__ import merge_sort, merge, lst1',
     number=1
 ))
 print('-' * 160)
 lst2 = [uniform(0, 50) for _ in range(1000)]
 print('Время выполнения merge_sort() при длине массива 1000: ', timeit(
-    'merge_sort(lst2[:])',
+    'merge_sort(lst2)',
     setup='from __main__ import merge_sort, merge, lst2',
     number=1
 ))
@@ -81,7 +81,7 @@ print('Время выполнения merge_sort() при длине масси
 print('-' * 160)
 lst3 = [uniform(0, 50) for _ in range(10000)]
 print('Время выполнения merge_sort() при длине массива 10000: ', timeit(
-    'merge_sort(lst3[:])',
+    'merge_sort(lst3)',
     setup='from __main__ import merge_sort, merge, lst3',
     number=1
 ))
@@ -89,7 +89,7 @@ print('Время выполнения merge_sort() при длине масси
 print('-' * 160)
 lst4 = [uniform(0, 50) for _ in range(100000)]
 print('Время выполнения merge_sort() при длине массива 100000: ', timeit(
-    'merge_sort(lst4[:])',
+    'merge_sort(lst4)',
     setup='from __main__ import merge_sort, merge, lst4',
     number=1
 ))

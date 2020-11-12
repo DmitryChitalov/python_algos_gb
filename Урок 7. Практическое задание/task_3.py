@@ -29,7 +29,7 @@ user_lst1 = user_lst.copy()
 user_lst_test1 = user_lst.copy()
 user_lst_test2 = user_lst.copy()
 
-print(user_lst)
+print(user_lst)  # исходный массив до сортировки
 print(f'Медиана для данного массива: {median(user_lst)} (проверка from statistics import median)')
 
 
