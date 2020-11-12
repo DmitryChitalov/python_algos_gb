@@ -113,6 +113,6 @@ statements = [
 ]
 
 for info, st in statements:
-    print(info, max(repeat(st, setup, default_timer, 1, 1)))
+    print(info, max(repeat(st, setup, default_timer, 1, 1)), '\n')
 
 """Результаты измерения timeit и @time_decorator совпадают"""
