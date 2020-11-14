@@ -12,3 +12,53 @@
 ВНИМАНИЕ: примеры заданий будут размещены в последний день сдачи.
 Но постарайтесь обойтись без них.
 """
+# первый вариант
+import heapq  # для импорта очереди с приоритетом
+from collections import Counter, namedtuple
+
+
+class Node(namedtuple('Node', ['left', 'right'])):  # класс Node с атрибутами левый и правый потомок
+    def walk(self, code, acc):  # acc - префикс когда, накапливается при спуске до данного узла или листа
+        self.left.walk(code, acc + '0')  # обходим левого потомка, добавляя к префиксу 0
+        self.right.walk(code, acc + '1')  # обходим правого потомка, добавляя к префиксу 1
+
+
+class Leaf(namedtuple('Leaf', ['char'])):  # класс Leaf с атрибутом символа, который записан в этом листе
+    def walk(self, code, acc):
+        code[self.char] = acc or '0'  # записываем в словарь code построенный код данногоо символа (листа дерева)
+
+
+def huffman_encode(some_str):
+    """Реализует кодирование строки "по Хаффману"""
+    h = []  # будущая очередь с приоритетом
+    for ch, freq in Counter(some_str).items():
+        h.append((freq, len(h), Leaf(ch)))
+
+    heapq.heapify(h)  # строим очередб с приоритетом с помощью функции heapify
+    count = len(h)
+    while len(h) > 1:  # до тех пор пока в очереди есть хотя бы 2 элемента
+        freq1, _count1, left = heapq.heappop(h)  # извлекаем элемент с минимальной частотой
+        freq2, _count2, right = heapq.heappop(h)  # извлекаем следующий элемент с минимальной чатсотой
+        heapq.heappush(h, (freq1 + freq2, count, Node(left, right)))  # добавляем узел с freq = freq1 + freq2
+        count += 1
+    code = {}
+
+    if h:  # обходим очередь при условии, что она не пустая (таким образом учитываем пустую строку)
+        [(_freq, count, root)] = h  # после цикла while получим корневой элемент построенного дерева
+        root.walk(code, "")  # обходим дерево и заполняем словарь
+
+    return code
+
+
+def main():
+    some_str = input('Введите строку для последующего кодирования: ')
+    code = huffman_encode(some_str)
+    encoded_string = ''.join(code[ch] for ch in some_str)
+    print(f'Размер словаря: {len(code)}. Длина закодированной строки: {len(encoded_string)}')
+    for ch in sorted(code):
+        print(f'{ch}: {code[ch]}')
+    print(f'Закодированная строка: {encoded_string}')
+
+
+if __name__ == '__main__':
+    main()
