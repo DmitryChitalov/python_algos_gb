@@ -15,3 +15,18 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+import hashlib
+
+
+SALT = 'Hello World'
+password_new = input('Введите пароль: ')
+res = hashlib.sha256(SALT.encode() + password_new.encode()).hexdigest()
+print(res)
+password_1 = input('Введите пароль еще раз для проверки: ')
+check_password = hashlib.sha256(SALT.encode() + password_1.encode()).hexdigest()
+print(check_password)
+if res == check_password:
+    print('Вы ввели правильный пароль')
+else:
+    print('Вы ввели не правильный пароль')
