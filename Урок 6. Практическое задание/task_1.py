@@ -13,3 +13,35 @@
 ВНИМАНИЕ: ЗАДАНИЯ, В КОТОРЫХ БУДУТ ГОЛЫЕ ЦИФРЫ ЗАМЕРОВ (БЕЗ АНАЛИТИКИ)
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 """
+
+from functools import reduce
+from memory_profiler import profile
+
+
+@profile
+def function_1(max_value):
+    # возвращаем сумму квадратов четных чисел от 0 до max_value
+    gen = [x ** 2 for x in range(1, max_value) if x % 2 == 0]
+    print(type(gen))
+    value = reduce(lambda x, y: x + y, gen)
+    return value
+
+
+print(function_1(9999))
+
+"""
+Результат:
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    20     18.6 MiB     18.6 MiB           1   @profile
+    21                                         def function_1(max_value):
+    22                                             # возвращаем сумму квадратов четных чисел от 0 до max_value
+    23     18.8 MiB      0.2 MiB       10001       gen = [x**2 for x in range(1, max_value) if x%2 == 0]
+    24     18.8 MiB      0.0 MiB        9997       value = reduce(lambda x, y: x+y, gen)
+    25     18.8 MiB      0.0 MiB           1       return value
+
+166616670000
+
+В строке 23 прирост памяти 0.2MiB. Объем использованной памяти изменился с 18.6 до 18.8
+Данные на первый взгляд корректны. Версия интерпритатора 3.8
+"""
