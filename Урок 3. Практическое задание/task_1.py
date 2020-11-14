@@ -10,3 +10,33 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+import time
+
+def timer_func(func):
+    def my_time(*arg, **kwargs):
+        start = time.time()
+        func(*arg, **kwargs)
+        end = time.time()
+        print(end - start)
+    return my_time
+
+@timer_func
+def my_list(bar):
+    foo = [element for element in range(bar)]
+    return foo
+
+@timer_func
+def my_dist(bar):
+    foo = {k: k*2 for k in range(bar)}
+    return foo
+
+my_list(10000)
+
+my_dist(10000)
+'''
+Заполнение списка происходит быстрее чем словаря. Потому что словарь это хэш-таблица, и ключи хэшируются
+
+Но поиск  в словаре происходит существенно быстрее за счет механизма хеш-таблиц, и происходит он по ключу
+и имеют O(1) сложность.
+
+'''
