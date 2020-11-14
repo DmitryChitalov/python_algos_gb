@@ -11,7 +11,7 @@
 Если у вас есть идеи, предложите вариант оптимизации.
 """
 
-from timeit import timeit
+import timeit
 from random import randint
 
 
@@ -27,17 +27,17 @@ num_10000 = randint(100000000, 10000000000000)
 
 print('Не оптимизированная функция recursive_reverse')
 print(
-    timeit(
+    timeit.timeit(
         "recursive_reverse(num_100)",
         setup='from __main__ import recursive_reverse, num_100',
         number=10000))
 print(
-    timeit(
+    timeit.timeit(
         "recursive_reverse(num_1000)",
         setup='from __main__ import recursive_reverse, num_1000',
         number=10000))
 print(
-    timeit(
+    timeit.timeit(
         "recursive_reverse(num_10000)",
         setup='from __main__ import recursive_reverse, num_10000',
         number=10000))
@@ -65,17 +65,31 @@ def recursive_reverse_mem(number):
 
 print('Оптимизированная функция recursive_reverse_mem')
 print(
-    timeit(
+    timeit.timeit(
         'recursive_reverse_mem(num_100)',
         setup='from __main__ import recursive_reverse_mem, num_100',
         number=10000))
 print(
-    timeit(
+    timeit.timeit(
         'recursive_reverse_mem(num_1000)',
         setup='from __main__ import recursive_reverse_mem, num_1000',
         number=10000))
 print(
-    timeit(
+    timeit.timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Не оптимизированная функция recursive_reverse
+0.040437299999999995
+0.0491587
+0.08995539999999999
+Оптимизированная функция recursive_reverse_mem
+0.0030606999999999995
+0.0032353000000000243
+0.002991700000000014
+ Мемоизация дала прирост в скорости. Чем больше число, тем быстрее происходит выполнение функции.
+ В неоптимизированной версии обратная ситуация. 
+"""
+#
