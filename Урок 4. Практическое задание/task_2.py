@@ -79,3 +79,38 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+'''
+Оптимизация рекурсии в данном случае работает отлично, причем 
+зависимость экономия времени возрастает в прогрессии в зависимости 
+от количества цифр в числе.
+
+Естественно, проще и быстрее решить через встроенный reverse (ниже). 
+Так мне казалось до пробы:) Оказывается, оптимизированная рекурсия 
+быстрее!
+'''
+
+
+def string_reverse(number):
+    res = str(number)[::-1]
+    return res
+
+
+print('Решение через reverse')
+print(
+    timeit(
+        "string_reverse(num_100)",
+        setup='from __main__ import string_reverse, num_100',
+        number=10000))
+print(
+    timeit(
+        "string_reverse(num_1000)",
+        setup='from __main__ import string_reverse, num_1000',
+        number=10000))
+print(
+    timeit(
+        "string_reverse(num_10000)",
+        setup='from __main__ import string_reverse, num_10000',
+        number=10000))
+
