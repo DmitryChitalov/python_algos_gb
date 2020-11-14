@@ -27,3 +27,61 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+log_pass = {'nichaotomita': 'april', ' tvcomrade': 'raven',
+            'boxman': 'velma', 'narucho-dou': 'tsuna'}
+
+"""Алгоритм 1. Сложность квадратическая """
+log_pass_aut = [(log, passw) for (log, passw) in log_pass.items()]
+
+
+def patreon(*x):
+    message = "authorizate please"
+    log = (input('введите логин'),
+           input('введите пароль'))
+    while log not in log_pass_aut:  # O(n)
+        if log in log_pass_aut:  # O(n)
+            message = "access granted"
+        else:
+            print("Registrate please")
+            log = (input('введите логин'),
+                   input('введите пароль'))
+            log_pass_aut.append(log)
+
+    return(print(message))
+
+
+patreon()
+
+
+""" Алгоритм 2. Сложность квадратическая. """
+
+
+def check_registration(login):
+    for i in log_pass.keys():
+        if login == i:
+            return True
+    return False                        # - O(n^2)
+
+
+def check_password(pswd, login):
+    if pswd == log_pass.get(login):
+        return True
+    return False                        # - O(n)
+
+
+user_login = input('Enter login ')
+
+if check_registration(user_login):
+    if check_password(input('Enter password '), user_login):
+        print('congratulation! you are in system!')
+    else:
+        print('Error! Wrong password')
+else:
+    print('Error! You  are not registered yet.')                # - O(n^2)
+
+# В первом решении логин и пароль берутся кортежем, проверка происходит удвух значений.
+# Второе решение подразумевает послдеовательные проверки, с заранее созданными функциями .
+# Первый вариант заносит новые данные пользователя в систему, и сразу позволяет зарегистрироватьсяБ в отличие от алгоритма 2.
+# На основании этого, я считаю его более удачным.
