@@ -9,6 +9,8 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from timeit import timeit
+
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,3 +41,29 @@ def func_2():
 
 print(func_1())
 print(func_2())
+
+
+print(timeit('func_1()', setup='from __main__ import func_1', number=10000))
+print(timeit('func_2()', setup='from __main__ import func_2', number=10000))
+
+# my solution:
+
+'''
+func_1 выполняется быстрее всего, func_2 на втором месте по скорости. Мое решение сработало, но, к сожалению, медленее
+данных изначально - списки и правда быстрее словарей, с одной стороны, а с другой - нет решения из коробки для поиска 
+ключа по значению, потому пришлось идти через ген. выражение, что замедлило выполнение.
+'''
+
+from collections import Counter
+
+def func_3(array):
+    count3 = Counter(array)
+    val_res = max(count3.values())
+    key_res = [key for key, val in count3.items() if val == val_res]
+    return f'Чаще всего встречается число {key_res}' \
+           f'Оно появилось {val_res} раз(а).'
+
+print(func_3(array))
+
+
+print(timeit('func_3(array)', setup='from __main__ import func_3, array', number=10000))

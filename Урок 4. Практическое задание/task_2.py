@@ -79,3 +79,39 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+
+# my way of optimisation:
+
+def num_rev(num):
+    num = str(num)
+    result = num[::-1]
+    return result
+
+
+print('Оптимизированная функция num_rev()')
+print(
+    timeit(
+        'num_rev(num_100)',
+        'from __main__ import num_rev, num_100',
+        number=10000))
+print(
+    timeit(
+        'num_rev(num_1000)',
+        'from __main__ import num_rev, num_1000',
+        number=10000))
+print(
+    timeit(
+        'num_rev(num_10000)',
+        'from __main__ import num_rev, num_10000',
+        number=10000))
+
+"""
+Мой способ, основанный на конвертации числа в строку и ее последующей обратной прокрутки по индексу, оказался быстрее
+по сравнению с рекурсией (что и следовало ожидать, пожалуй), но немного проигрывает в скорости мемоизации (что, опять же, 
+ожидаемо). Выходит, что мемоизация дает существенный прирост в скорости выполнения решений за счет сохраненных кэшей - 
+и ей действительно есть смысл пользоваться. 
+"""
+
+
