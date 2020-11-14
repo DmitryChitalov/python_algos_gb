@@ -38,41 +38,44 @@ def func_2():
     return f'Чаще всего встречается число {elem}, ' \
            f'оно появилось в массиве {max_2} раз(а)'
 
+
 def func_3():
     new_array = {}
     k = 0
     res = ""
     for el in array:
         if new_array.get(el):
-            new_array[el] = int(new_array.get(el))+1
-            if new_array.get(el)>k:
+            new_array[el] = int(new_array.get(el)) + 1
+            if new_array.get(el) > k:
                 k = new_array.get(el)
                 res = el
         else:
             new_array[el] = 1
 
-
-#   k = 0
-#    res = ""
-#    for el in new_array:
-#        if new_array.get(el)>k:
-#            k = new_array.get(el)
-#            res = el
+    #   k = 0
+    #    res = ""
+    #    for el in new_array:
+    #        if new_array.get(el)>k:
+    #            k = new_array.get(el)
+    #            res = el
 
     return f'Чаще всего встречается число {res}, ' \
            f'оно появилось в массиве {k} раз(а)'
 
+
 def func_4():
-    res = max(array, key = array.count)
+    res = max(array, key=array.count)
     k = array.count(res)
 
     return f'Чаще всего встречается число {res}, ' \
            f'оно появилось в массиве {k} раз(а)'
 
+
 def func_5():
     res = max(array, key=array.count)
     return f'Чаще всего встречается число {res}, ' \
            f'оно появилось в массиве {array.count(res)} раз(а)'
+
 
 print(func_1())
 print(func_2())
@@ -110,11 +113,11 @@ print(
         setup='from __main__ import func_5',
         number=100000))
 
-#0.40592439999999996
-#0.5877918
-#0.5486405000000001
-#0.4217312999999998
-#0.4122962000000001
+# 0.40592439999999996
+# 0.5877918
+# 0.5486405000000001
+# 0.4217312999999998
+# 0.4122962000000001
 
-#Используя встроенные функции, в версии 4 позволили незначительно ускорить работу. Вариант через словарь потерпел неудачу, хотя он оказался быстрее
-#ВАриант в 5й функции без временной переменной, при расчете сразу в return оказался также незначительно быстрее.
+# Используя встроенные функции, в версии 4 позволили незначительно ускорить работу. Вариант через словарь потерпел неудачу, хотя он оказался быстрее
+# ВАриант в 5й функции без временной переменной, при расчете сразу в return оказался также незначительно быстрее.

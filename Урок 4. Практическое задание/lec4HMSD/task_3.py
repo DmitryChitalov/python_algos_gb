@@ -12,6 +12,7 @@
 from timeit import timeit
 import cProfile
 
+
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
         return
@@ -35,7 +36,8 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
-enter_num=1234567899876543211244645457457257275242458452
+
+enter_num = 1234567899876543211244645457457257275242458452
 
 print(
     timeit(
@@ -59,5 +61,5 @@ cProfile.run('revers(enter_num,0)')
 cProfile.run('revers_2(enter_num,0)')
 cProfile.run('revers_3(enter_num)')
 
-#Функция работающая через встроенные функции в 10ки раз боллее эффективная.
-#CProfile выдает всегда 0. Написал в чат.. Странно.
+# Функция работающая через встроенные функции в 10ки раз боллее эффективная.
+# CProfile выдает всегда 0. Написал в чат.. Странно.
