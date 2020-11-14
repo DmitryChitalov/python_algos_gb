@@ -34,7 +34,7 @@ def huffman_encode(some_str):
     for ch, freq in Counter(some_str).items():
         h.append((freq, len(h), Leaf(ch)))
 
-    heapq.heapify(h)  # строим очередб с приоритетом с помощью функции heapify
+    heapq.heapify(h)  # строим очередь с приоритетом с помощью функции heapify
     count = len(h)
     while len(h) > 1:  # до тех пор пока в очереди есть хотя бы 2 элемента
         freq1, _count1, left = heapq.heappop(h)  # извлекаем элемент с минимальной частотой
