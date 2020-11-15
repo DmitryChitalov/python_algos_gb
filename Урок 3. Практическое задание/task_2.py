@@ -15,3 +15,23 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+from uuid import uuid4
+import hashlib
+
+def passwd_to_hash(pswd):
+    return hashlib.sha256(salt.encode() + pswd.encode()).hexdigest()
+
+
+salt = uuid4().hex
+password = input('Введите пароль: ')
+pswd_hash = passwd_to_hash(password)
+print('Hash - ', pswd_hash)
+password_confirmation = input('Введите пароль еще раз: ')
+pswd_conf_hash = passwd_to_hash(password_confirmation)
+print('Hash - ', pswd_conf_hash)
+
+if pswd_hash == pswd_conf_hash:
+    print('Пароль успешно подтвержден')
+else:
+    print('Пароли не совпадают')
