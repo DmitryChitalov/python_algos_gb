@@ -65,6 +65,50 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
+    # функция для вычисления высоты дерева
+    def height(self, node):
+        if node == None:
+            return 0
+        else:
+            lheight = self.height(node.left_child)
+            rheight = self.height(node.right_child)
+
+            if lheight > rheight:
+                return (lheight + 1)
+            else:
+                return (rheight + 1)
+
+    # функция для распечатки элементов на определенном уровне дерева
+    def printGivenLevel(self, root, level, direct):
+        if root == None:
+            return
+        if level == 1:
+            print(f" {direct} : {root.root}")
+        elif level > 1:
+            self.printGivenLevel(root.left_child, level - 1, "лево");
+            self.printGivenLevel(root.right_child, level - 1, "право");
+
+    # функция для распечатки дерева
+    def printLevelOrder(self):
+        h = self.height(self)
+        i = 1
+        while (i <= h):
+            self.printGivenLevel(self, i, "начало")
+            i += 1
+
+    # функция для проверки наличия узла
+    def lookup(self, node, target):
+        if node == None:
+            return 'Нет'
+        else:
+            if target == node.root:
+                return 'Есть'
+            else:
+                if target < node.root:
+                    return self.lookup(node.left_child, target)
+                else:
+                    return self.lookup(node.right_child, target)
+
 
 r = BinaryTree(8)
 print(r.get_root_val())
@@ -73,7 +117,18 @@ r.insert_left(4)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
 r.insert_right(12)
+print("Отображение:")
+r.printLevelOrder()
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+r.insert_right(7)
+print(r.get_right_child().insert_right(32))
+
+print("Проверка наличия узла:", r.lookup(r, 7))
+print("Проверка наличия узла:", r.lookup(r, 8))
+print("Высота:", r.height(r))
+print("Отображение:")
+r.printLevelOrder()
+
