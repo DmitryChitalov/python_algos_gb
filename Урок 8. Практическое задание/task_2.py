@@ -9,7 +9,7 @@
 
 Поработайте с доработанной структурой, позапускайте на реальных данных.
 """
-import traceback
+"""Добавил функцию для валидации требований к структуре бинарного дерева и функцию для определения высоты дерева"""
 
 
 class NodeValueError(Exception):
@@ -95,6 +95,15 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
+    # вычислить высоту дерева
+    def height(self, node):
+        if node is None:
+            return 0
+        else:
+            left_height = self.height(node.get_left_child())
+            right_height = self.height(node.get_right_child())
+            return 1 + max(left_height, right_height)
+
 
 try:
     r = BinaryTree(8)
@@ -108,6 +117,7 @@ try:
     #  пробуем вставить правого потомка со значением меньше значения родителя, получаем исключение
     #  r.insert_right(7)
     r.insert_right(12)
+    print(f'Высота бинарного дерева: {r.height(r)}')
     print(r.get_right_child())
     print(r.get_right_child().get_root_val())
     r.get_right_child().set_root_val(16)
@@ -120,5 +130,8 @@ try:
     print(r.get_right_child().get_root_val())
     #  пробуем вставить правого потомка со значением меньше значения родителя, получаем исключение
     #  r.insert_right(15)
+    print(f'Высота бинарного дерева: {r.height(r)}')
+    r.insert_left(1)
+    print(f'Высота бинарного дерева: {r.height(r)}')
 except NodeValueError as error:
     print(error)
