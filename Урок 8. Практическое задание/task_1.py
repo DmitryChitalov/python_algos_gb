@@ -12,3 +12,30 @@
 ВНИМАНИЕ: примеры заданий будут размещены в последний день сдачи.
 Но постарайтесь обойтись без них.
 """
+import collections
+
+
+def popmin(tree, codes, num):
+    el = tree.pop(tree.index(min(tree)))  # Извлекаем крайний минимум по количеству встречаемых слов
+    for s in el[1]:  # Берем букву из слова
+        codes[s] = num + codes[s]  # Ищем букву по ключу и соединяем с значение из словаря
+    return el[0], el[1]  # частота буквы и буква
+
+
+def haffman_code():
+    sss = input().strip()  # Преобразовали в массив
+    count = collections.Counter(sss)  # Узнали частоту букв в слове, сортируем по увеличению
+    codes = dict.fromkeys(count, '0' if len(count) == 1 else '')  # Создали словарь
+    tree = [[count[key], key] for key in count]  # Создаем массив в массиве
+    while len(tree) > 1:  # Пока длина дерева не сократится до 1
+        val1, s1 = popmin(tree, codes, '0')  # частота буквы и буква
+        val2, s2 = popmin(tree, codes, '1')  # частота буквы и буква
+        tree.append([val1 + val2, s1 + s2])  # добавляем сумму частот и соединяем буквы
+    word = ''.join(codes[s] for s in sss)  # сцепляем массив из значений словаря
+    print(len(count), len(word))
+    [print('{}: {}'.format(k, codes[k])) for k in sorted(codes)]
+    print(word)
+
+
+if __name__ == '__main__':
+    haffman_code()
