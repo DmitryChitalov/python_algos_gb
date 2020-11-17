@@ -29,7 +29,6 @@ class BinaryTree:
 
     def validate_left(self, new_node):
         if self.left_child == None and self.get_root_val() > new_node:
-            print('hi')
             return True
         elif self.left_child == None and self.get_root_val() < new_node:
             print('hi')
@@ -98,7 +97,7 @@ class BinaryTree:
     # вычислить высоту дерева
     def height(self, node):
         if node is None:
-            return 0
+            return -1
         else:
             left_height = self.height(node.get_left_child())
             right_height = self.height(node.get_right_child())
@@ -107,17 +106,18 @@ class BinaryTree:
 
 try:
     r = BinaryTree(8)
+    print(f'Высота бинарного дерева: {r.height(r)}')  # если дерево имеет только корень (потомков нет), его высота = 0
     print(r.get_root_val())
     print(r.get_left_child())
     #  пробуем вставить левого потомка со значением больше значения родителя, получаем исключение
     #  r.insert_left(9)
     r.insert_left(4)
+    print(f'Высота бинарного дерева: {r.height(r)}')  # корень имеет одного потомка, высота = 1
     print(r.get_left_child())
     print(r.get_left_child().get_root_val())
     #  пробуем вставить правого потомка со значением меньше значения родителя, получаем исключение
     #  r.insert_right(7)
     r.insert_right(12)
-    print(f'Высота бинарного дерева: {r.height(r)}')
     print(r.get_right_child())
     print(r.get_right_child().get_root_val())
     r.get_right_child().set_root_val(16)
@@ -129,7 +129,7 @@ try:
     # r.insert_left(5)
     print(r.get_right_child().get_root_val())
     #  пробуем вставить правого потомка со значением меньше значения родителя, получаем исключение
-    #  r.insert_right(15)
+    # r.insert_right(15)
     print(f'Высота бинарного дерева: {r.height(r)}')
     r.insert_left(1)
     print(f'Высота бинарного дерева: {r.height(r)}')

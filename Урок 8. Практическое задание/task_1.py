@@ -35,12 +35,12 @@ class Leaf(namedtuple('Leaf', ['char'])):  # класс Leaf с атрибуто
 def huffman_encode(some_str):
     """Реализует кодирование строки "по Хаффману"""
     h = []  # будущая очередь с приоритетом
-    for ch, freq in Counter(some_str).items():  # Counter(some_str).items() convert to a list of (elem, cnt) pairs
+    for ch, freq in Counter(some_str).items():  # Counter(some_str).items() конвертирует в список из пар (elem, cnt)
         h.append((freq, len(h), Leaf(ch)))  # len(h) уникальный счетчик для листьев, чтобы проводить сравнения
-    print(h)
+    print(h)  # распечатаем для наглядности
 
     heapq.heapify(h)  # строим очередь с приоритетом с помощью функции heapify (превращаем список в кучу)
-    print(h)
+    print(h)  # распечатаем для наглядности
     count = len(h)
     while len(h) > 1:  # до тех пор пока в очереди есть хотя бы 2 элемента
         freq1, _count1, left = heapq.heappop(h)  # извлекаем элемент с минимальной частотой
@@ -48,7 +48,7 @@ def huffman_encode(some_str):
         heapq.heappush(h, (freq1 + freq2, count, Node(left, right)))  # добавляем в очередь узел с freq = freq1 + freq2
         count += 1
 
-    code = {}  # словарь для хранения соответствий симфол - его код
+    code = {}  # словарь для хранения соответствий символ - его код
 
     if h:  # обходим очередь при условии, что она не пустая (таким образом учитываем пустую строку)
         [(_freq, count, root)] = h  # после цикла while получим корневой элемент построенного дерева
