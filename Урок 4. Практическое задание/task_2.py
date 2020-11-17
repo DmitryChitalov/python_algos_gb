@@ -79,3 +79,31 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+""" Также первый вариант кода можно оптимизировать через обратный срез, но этот метод будет 
+уступать рекурсии с меморизацией, но всё же немного выигрывать у обычной рекурсии. Однако рекурсия с меморизацией 
+занимает большое количество строк, функция среза же всего 2е строки.
+"""
+
+
+def recursive_reverse_another(number):
+    return str(number)[::-1]
+
+
+print('Оптимизированная функция через обратный срез')
+print(
+    timeit(
+        'recursive_reverse_another(num_100)',
+        setup='from __main__ import recursive_reverse_another, num_100',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_another(num_1000)',
+        setup='from __main__ import recursive_reverse_another, num_1000',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_another(num_10000)',
+        setup='from __main__ import recursive_reverse_another, num_10000',
+        number=10000))
