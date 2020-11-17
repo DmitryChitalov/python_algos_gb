@@ -15,3 +15,21 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+from uuid import uuid4
+
+salt = uuid4().hex
+
+
+def hash_passwwd(p):
+    return hashlib.sha256(salt.encode() + p.encode()).hexdigest()
+
+
+def check_passwd(passwd, hash_passwd):
+    return print('Вы ввели правильный пароль') if passwd == hash_passwd else print('Вы ввели не правильный пароль')
+
+
+user_passwd = str(input('Введите ваш пароль:'))
+hash_obj = hash_passwwd(user_passwd)
+print(f'В базе хранится строка: {hash_obj}')
+check_passwd(hash_passwwd(str(input('Введите ваш пароль для проверки: '))), hash_obj)

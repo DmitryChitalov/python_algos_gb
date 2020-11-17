@@ -12,7 +12,8 @@
 Добавьте аналитику: что вы сделали и почему
 """
 
-from timeit import timeit
+import timeit
+n = (1, 2, 3, 4, 5, 6)
 
 
 def func_1(nums):
@@ -21,3 +22,13 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for i, el in enumerate(nums) if el % 2 == 0]
+
+
+print(f'Время исходного кода: {timeit.timeit("func_1(n)", setup="from __main__ import func_1, n", number=1000)}')
+print('Для снижения скорости выполнения кода я воспользовалась генераторным выражением, тк он выполняется быстрее '
+      'чем цикл')
+print(f'Время измененного кода: {timeit.timeit("func_2(n)", setup="from __main__ import func_2, n", number=1000)}')

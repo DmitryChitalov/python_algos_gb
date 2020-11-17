@@ -9,7 +9,7 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
-
+from timeit import timeit
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,3 +39,18 @@ def func_2():
 
 print(func_1())
 print(func_2())
+
+print(f"Время 1й: {timeit('func_1()', setup='from __main__ import func_1')}")
+print(f"Время 2й: {timeit('func_2()', setup='from __main__ import func_2')}")
+
+# Из выше перечисленных способов наиболее быстрым оказаллся первый вариант, тк там использовано менешее количество ф-ий
+
+# 3й вариант (оптимальный):
+
+
+def func_3():
+    return f'Чаще всего встречается число {max(array, key=array.count)}, ' \
+           f'оно появилось в массиве {array.count} раз(а)'
+
+
+print(f"Время 3й: {timeit('func_3()', setup='from __main__ import func_3')}")
