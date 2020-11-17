@@ -13,3 +13,37 @@
 ВНИМАНИЕ: ЗАДАНИЯ, В КОТОРЫХ БУДУТ ГОЛЫЕ ЦИФРЫ ЗАМЕРОВ (БЕЗ АНАЛИТИКИ)
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 """
+
+''' Поиск суммы списка при помощи функции reduce'''
+
+from memory_profiler import profile
+from functools import reduce
+
+
+@profile
+def sum_list1(n):
+    my_list = [i for i in range(1, n)]
+    sum_list = reduce(lambda a, b: a if (a > b) else b, my_list)
+    print(f'Сумма списка - {sum_list}')
+    del my_list
+
+
+sum_list1(100000)
+
+'''
+Для выполнения программы выделено 18.9 Мебибайт.
+При выполнении генераторного выражения прирост памяти составил - 4.0 Мебибайт
+После выполнения функции удаляем сгенерированный список и освобождаем 3.7 Мебибайт
+Версия Python - 3.9
+ОС - Windows 10, x64
+
+
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    22     18.9 MiB     18.9 MiB           1   @profile
+    23                                         def sum_list1(n):
+    24     22.8 MiB      4.0 MiB      100002       my_list = [i for i in range(1, n)]
+    25     22.8 MiB      0.0 MiB      199997       sum_list = reduce(lambda a, b: a if (a > b) else b, my_list)
+    26     22.9 MiB      0.0 MiB           1       print(f'Сумма списка - {sum_list}')
+    27     19.2 MiB     -3.7 MiB           1       del my_list
+'''

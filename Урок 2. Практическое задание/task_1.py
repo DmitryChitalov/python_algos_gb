@@ -28,3 +28,34 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+    a = input('Введите операцию +, -, *, / или 0 для выхода ')
+    if a == '0':
+        print('До скорых встреч!')
+        return
+    elif a in ['+', '-', '/', '*']:
+        b = input('Введите первое число ')
+        if not b.isdigit():
+            print('Некорректный ввод!')
+            calculator()
+        c = input('Введите второе число ')
+        if not c.isdigit():
+            print('Некорректный ввод!')
+            calculator()
+        if a == '+':
+            result = int(b) + int(c)
+        if a == '-':
+            result = int(b) - int(c)
+        if a == '*':
+            result = int(b) * int(c)
+        if a == '/':
+            result = int(b) / int(c)
+        print('Результат - ', result)
+    else:
+        print('Введите предложенный вариант')                  
+    calculator()        
+
+
+calculator()
