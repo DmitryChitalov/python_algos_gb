@@ -62,3 +62,4 @@ print(timeit("func_4(my_list)", setup="from __main__ import func_4, my_list", nu
 # Срез -                   0.03618969999999955
 # больше вариантов не придумал.
 
+
