@@ -12,6 +12,7 @@
 """
 from random import randint, random
 import time
+from timeit import timeit
 
 # 1 вариант: работает, но без декоратора
 def filling_list(n, my_list):
@@ -23,7 +24,7 @@ def filling_list(n, my_list):
 
 def check_1():
     start_val = time.time()
-    print(filling_list(500, []))
+    filling_list(500, [])
     end_val = time.time()
     return f'Операция заняла {round((end_val - start_val), 10)} сек.'
 
@@ -37,12 +38,12 @@ def filling_dict(n, my_dict):
 
 def check_2():
     start_val = time.time()
-    print(filling_dict(500, {}))
+    filling_dict(500, {})
     end_val = time.time()
     return f'Операция заняла {round((end_val - start_val), 10)} сек.'
 
-print(check_1())
-print(check_2())
+# print(check_1())
+# print(check_2())
 # Выводы: словарь выполняется немного дольше.
 
 # вариант 2 с декоратором, не работает, не могу понять ошибки
@@ -76,4 +77,17 @@ print(check_2())
 # filling_list(50, [])
 # filling_dict(50, [])
 
+print(
+    timeit(
+        "check_1()",
+        setup='from __main__ import check_1',
+        number=10000))
+# время выполнения 5.918, 6.001, 6.0341
 
+print(
+    timeit(
+        "check_2()",
+        setup='from __main__ import check_2',
+        number=10000))
+
+#  время выполнения 9.4725, 9.6399, 9.5152
