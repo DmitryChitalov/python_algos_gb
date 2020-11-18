@@ -21,3 +21,44 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for i in nums if i % 2 == 0]
+
+
+def func_3(nums):
+    return [i for i, elem in enumerate(nums) if i % 2 == 0]
+
+
+def func_4(nums):
+    foo = nums.copy()
+    return foo[::2]
+
+
+my_list = list(range(1000))
+
+print(func_1(my_list))
+print(func_2(my_list))
+print(func_3(my_list))
+print(timeit("func_1(my_list)", setup="from __main__ import func_1, my_list", number=10000))
+print(timeit("func_2(my_list)", setup="from __main__ import func_2, my_list", number=10000))
+print(timeit("func_3(my_list)", setup="from __main__ import func_3, my_list", number=10000))
+print(timeit("func_4(my_list)", setup="from __main__ import func_4, my_list", number=10000))
+
+# В изночальном коде идет перебор всех элементов с помощью цикла и формированием нового списка.
+# Для оптимизации заменил цикл на генераторное выражение,оно быстрее.
+
+# C enumerate чтото не особо быстрее, добавил его в довесок. Тут enumerate нужен был бы если мы хотели бы получить еще и
+# индексы ведь функция позволяет перебирать коллекцию элементов, отслеживая индекс текущего элемента
+
+# Теперь про срез, скорее всего этот вариант не является решением этой задачи, потому что мы берем каждый второй элемент
+# этого же списка, поэтому я сделал его копию) но по результатам этот вариант самый быстрый(понятное дело, ведь мы не
+# не делаем никаких манипуляций со списком) (Если я не прав, обьясните пожалуйста)
+
+# Изначальный код -        1.9526713999999998
+# Генераторное выражение - 0.740883
+# Итератор enumerate -     1.2875322000000002
+# Срез -                   0.03618969999999955
+# больше вариантов не придумал.
+
