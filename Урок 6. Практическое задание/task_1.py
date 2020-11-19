@@ -86,7 +86,7 @@ def check_num(lst, even_n=0, odd_n=0):
 check_num(list(input("Введите число")))
 
 
-# Вариант с циклом
+# Вариант с циклом#
 @profile
 def check_num2(number, even_n=0, odd_n=0):
     digits = "02468"
