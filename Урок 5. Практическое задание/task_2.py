@@ -16,12 +16,6 @@ from collections import deque
 
 # вариант с деком, с переворотом вводимых данных по ходу выполнения программы, по сути просто так
 def variant_1():
-    def is_it_int(data):
-        while not data.isdigit():
-            print('Ошибка ввода. Пожалуйста, введите одно целое натуральное число.')
-            data = input('Введите число: ')
-        return int(data)
-
     input_list, output_list = deque(), deque()
 
     def check_symbol(data):
