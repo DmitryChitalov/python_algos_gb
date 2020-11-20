@@ -33,3 +33,4 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
