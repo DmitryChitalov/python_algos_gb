@@ -46,4 +46,4 @@ test_func_list(1000000)
 print(f' 2. Filling random DICTIONARY with {fill_max_el} elements')
 test_func_dict(1000000)
 
-# Вывод заполнение списков происходит быстрее, чем словарей.
+# Вывод: заполнение списков происходит быстрее, чем словарей.
