@@ -25,3 +25,39 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+def aver_profit_company():
+    name_company = 'Company'
+    numbers_company = int(input('Please enter number of firm: '))
+    company = namedtuple(
+        name_company,
+        "company_name first_quarter second_quarter third_quarter fourth_quarter")
+    profit_average = {}
+
+    for el in range(numbers_company):
+        all_company = company(
+            company_name = input('Please enter a name of company: '),
+            first_quarter  = int(input('Please enter first quarter profit ')),
+            second_quarter = int(input('Please enter second quarter profit ')),
+            third_quarter = int(input('Please enter third quarter profit ')),
+            fourth_quarter= int(input('Please enter fourth quarter profit ')))
+
+        profit_aver[all_company.company_name] = (all_company.first_quarter + all_company.second_quarter + all_company.third_quarter + all_company.fourth_quarter) / 4
+
+    total_average = 0
+    for value in profit_aver.values():
+        total_aver += value
+    total_aver = total_aver / numbers_company
+
+    for key, value in profit_average.items():
+        if value < total_average:
+            print(f'Company "{key}" below average profit ')
+        elif value < total_average:
+            print(f'Company "{key}"above average profit')
+        elif value == total_average:
+            print(f'Company "{key}" average profit')
+
+print('Program "Count average profit of all companies"')
+aver_profit_company()
