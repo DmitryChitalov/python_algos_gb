@@ -26,9 +26,9 @@ def check_1(lst_obj):
     Алгоритм 3:
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: O(len(lst_obj))
     """
-    lst_to_set = set(lst_obj)  # !!!
+    lst_to_set = set(lst_obj)  # O(len(lst_obj))
     return lst_to_set
 
 
@@ -41,12 +41,12 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: O(2n + 2)
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):  # линейный цикл O(n)
+        if lst_obj[j] in lst_obj[j + 1:]:  # поиск в списке O(n)
+            return False  # вернуть знаение O(1)
+    return True  # вернуть знаение O(1)
 
 
 #############################################################################################
@@ -57,16 +57,16 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: 2n * log n + 1
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)  # O(N) lst.copy
+    lst_copy.sort()  # O(N LOG N) lst.sort
+    for i in range(len(lst_obj) - 1):  # O(1 + N)
+        if lst_copy[i] == lst_copy[i + 1]:  # O(1) копирование 1 элемента
+            return False  # вернуть знаение O(1)
+    return True  # вернуть знаение O(1)
 
-#############################################################################################
+    #############################################################################################
 
 
 for j in (50, 500, 1000, 5000, 1000):
@@ -75,5 +75,3 @@ for j in (50, 500, 1000, 5000, 1000):
     lst = random.sample(range(-100000, 100000), j)
 
 print(check_1(lst))
-print(check_2(lst))
-print(check_3(lst))
