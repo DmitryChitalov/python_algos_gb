@@ -34,7 +34,7 @@ def aver_profit_company():
     company = namedtuple(
         name_company,
         "company_name first_quarter second_quarter third_quarter fourth_quarter")
-    profit_aver = {}
+    profit_average = {}
 
     for el in range(numbers_company):
         all_company = company(
@@ -46,17 +46,17 @@ def aver_profit_company():
 
         profit_aver[all_company.company_name] = (all_company.first_quarter + all_company.second_quarter + all_company.third_quarter + all_company.fourth_quarter) / 4
 
-    total_aver = 0
+    total_average = 0
     for value in profit_aver.values():
         total_aver += value
     total_aver = total_aver / numbers_company
 
-    for key, value in profit_aver.items():
-        if value < total_aver:
+    for key, value in profit_average.items():
+        if value < total_average:
             print(f'Company "{key}" below average profit ')
-        elif value < total_aver:
+        elif value < total_average:
             print(f'Company "{key}"above average profit')
-        elif value == total_aver:
+        elif value == total_average:
             print(f'Company "{key}" average profit')
 
 print('Program "Count average profit of all companies"')
