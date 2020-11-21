@@ -22,3 +22,31 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+from operator import itemgetter
+
+directory_company = {'Apple': 1000,
+                     'Windows': 500,
+                     'Linux': 200,
+                     'Morgan': 450,
+                     'Freeman': 60,
+                     'Google': 900,
+                     'Mail': 950,
+                     'Yandex': 300}
+
+# O(n) - сложность. Сортировка с использованием временной функции.
+print('Вариант 1:')
+dict_sort_1 = sorted(directory_company.items(), key=lambda item: item[1], reverse=True)[:3]
+for k, v in dict_sort_1:
+    print(f'{k} -> {v}')
+
+# O(n) - сложность. При помощи метода стандартной библиотеки
+print('Вариант 2:')
+dict_sort_2 = sorted(directory_company.items(), key=itemgetter(1), reverse=True)[:3]
+for k, v in dict_sort_2:
+    print(f'{k} -> {v}')
+
+# Оба варианта по сложности одинаковы, из-за использования for, но использовал немного разные пути
+# с использованием внешнего модуля и без.
+
+
