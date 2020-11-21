@@ -11,3 +11,20 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+# применим коллекцию defaultdict, несколько решений уже не успела, планирую позже сделать
+import collections, functools
+
+def calcul(numbers):
+    summ = sum([int(''.join(i), 16) for i in numbers.values()])
+    print("Сумма: ", list('%X' % summ))
+
+    composition = functools.reduce(lambda x, y: x * y, [int(''.join(i), 16) for i in numbers.values()])
+    print("Произведение: ", list('%X' % composition))
+
+numbers = collections.defaultdict(list)
+for i in range(2):
+    el = input(f"Введите {i+1}-е натуральное шестнадцатиричное число: ")
+    numbers[f"{i+1}-{el}"] = list(el)
+
+res = calcul(numbers)
+
