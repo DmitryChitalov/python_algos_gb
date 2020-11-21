@@ -15,3 +15,26 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+from uuid import uuid4
+
+salt = uuid4().hex
+
+def get_hash(pass_obj):
+    return hashlib.sha256(salt.encode() + pass_obj.encode()).hexdigest()
+
+def check_hash(pass_hash, user_pass):
+    return pass_hash == hashlib.sha256(salt.encode() + user_pass.encode()).hexdigest()
+
+print('Program "Check hash"')
+input_pass = input('Please enter a password: ')
+hash_obj = get_hash(input_pass)
+print(f'Hash for pass is : {hash_obj}')
+
+check_pass = input('Please enter a early password: ')
+
+if check_hash(hash_obj, check_pass):
+    print('Passwords is match')
+else:
+    print('Passwords is NOT match')
+
