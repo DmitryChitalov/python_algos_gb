@@ -13,6 +13,7 @@
 Опишите результаты, сделайте выводы, где и какой алгоритм эффективнее
 Подумайте и по возможности определите сложность каждого алгоритма
 """
+from timeit import timeit
 
 
 def simple(i):
@@ -34,6 +35,27 @@ def simple(i):
         n += 1
     return n
 
+def eratosfen(number, l=100000):
+    a = [el for el in range(l+1)]
+    a[1] = 0
+    i = 2
+    while i <= l:
+        if a[i] != 0:
+            j = i + i
+            while j <= l:
+                a[j] = 0
+                j += i
+        i += 1
+    # a = set(a)
+    # a.remove(0)
+    return [el for el in a if el!=0][number-1]
 
 i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+print(f'Искомое число равно {simple(i)}')
+print(f'Затраты врени составили: '
+      f'{timeit("simple(i)", setup="from __main__ import simple, i", number=10)}')
+print(f'Искомое число равно {eratosfen(i)}')
+print(f'Затраты врени составили: '
+      f'{timeit("eratosfen(i)", setup="from __main__ import eratosfen, i", number=10)}')
+
+# При работе алгоритма Эратосфена, после 300 числе эратосфен уже становистя на много выгоднее по времени
