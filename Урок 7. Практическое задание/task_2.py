@@ -8,3 +8,50 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+import numpy as np
+import timeit
+import random
+
+
+def merge_sort(lst_obj):
+    if len(lst_obj) > 1:
+        center = len(lst_obj) // 2
+        left = lst_obj[:center]
+        right = lst_obj[center:]
+
+        merge_sort(left)
+        merge_sort(right)
+
+        # перестали делить
+        # выполняем слияние
+        i, j, k = 0, 0, 0
+
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                lst_obj[k] = left[i]
+                i += 1
+            else:
+                lst_obj[k] = right[j]
+                j += 1
+            k += 1
+
+        while i < len(left):
+            lst_obj[k] = left[i]
+            i += 1
+            k += 1
+
+        while j < len(right):
+            lst_obj[k] = right[j]
+            j += 1
+            k += 1
+        return lst_obj
+
+
+num_len = int(input('Введите число элементов: '))
+numbers = np.array([random.random() for i in range(num_len)])
+
+print(f'Исходный список: {numbers}')
+print(f'Отсортированный: {merge_sort(numbers)}')
+
+# замеры
+print(timeit.timeit("merge_sort(numbers)", setup="from __main__ import merge_sort, numbers", number=10))

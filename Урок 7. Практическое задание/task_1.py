@@ -12,3 +12,71 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+
+import numpy as np
+import timeit
+
+
+def bubble_sort_1(obj):  # измененная пузырьковая сортировка
+    n = 1
+    flag = 0
+    while n < len(obj):
+        for i in range(len(obj)-n):
+            if obj[i] < obj[i+1]:
+                obj[i], obj[i+1] = obj[i+1], obj[i]
+                flag = 1
+        n += 1
+        if flag == 0:
+            break
+    del n, flag
+    return obj
+
+
+def bubble_sort_2(obj):  # пузырьковая сортировка данная на уроке
+    n = 1
+    while n < len(obj):
+        for i in range(len(obj)-n):
+            if obj[i] < obj[i+1]:
+                obj[i], obj[i+1] = obj[i+1], obj[i]
+        n += 1
+    del n
+    return obj
+
+
+'''1) Проверяем работу нашей сортировки и выводим результаты'''
+
+numbers_1 = np.random.randint(-100, 100, 20)  # сортировка не отсортированного массива
+numbers_2 = sorted(numbers_1, reverse=True)  # сортировка уже сортированного массива
+
+print(bubble_sort_1(numbers_1))
+print(bubble_sort_1(numbers_2))
+
+
+'''2) Делаем сравнение двух сортировкок: 
+      - с зарешнением если не происходит изменение ни одного объекта
+      - без зашершения(данный на уроке пример).
+      
+    Вычисления представленные ниже показали, что при при сортировке списков изначальной 
+    пузырьковой сортировкой дали большие результаты времени нежели таже сортировка но с зарешнением если 
+    элементы не надо менять местами. Т.е. лучше пользоваться измененной сортировкой если вдруг случится такая ситуация
+    при которой мы будем сортировать отсортированный список, но вероятность такого крайне мала'''
+
+print('Резльтаты времени сортировки неотсортированного списка:')
+print(timeit.timeit('bubble_sort_1(numbers_1)',  # ф-ия с флагом
+                    setup='from __main__ import bubble_sort_1, numbers_1',
+                    number=10000))
+print(timeit.timeit('bubble_sort_2(numbers_1)',  # ф-ия без флага
+                    setup='from __main__ import bubble_sort_2, numbers_1',
+                    number=10000))
+
+print('Резльтаты времени сортировки отсортированного списка:')
+print(timeit.timeit('bubble_sort_1(numbers_2)',  # ф-ия с флагом
+                    setup='from __main__ import bubble_sort_1, numbers_2',
+                    number=10000))
+print(timeit.timeit('bubble_sort_2(numbers_2)',  # ф-ия без флага
+                    setup='from __main__ import bubble_sort_2, numbers_2',
+                    number=10000))
+
+
+
+
