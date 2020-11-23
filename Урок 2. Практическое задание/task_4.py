@@ -9,3 +9,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def decay(n, cnt=0, num=1.0, total=0.0):
+    if cnt == n:
+        print(f'Количество элементов : {n} их сумма : {total}')
+    elif cnt < n:
+        print(f' n = {n}, cnt = {cnt}, num = {num}, total = {total}')
+        return decay(n, cnt + 1, num / 2 * -1, total+num)
+
+
+decay(int(input('Введите количество элементов: ')))
