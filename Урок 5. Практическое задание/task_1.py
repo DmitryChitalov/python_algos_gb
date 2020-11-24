@@ -14,36 +14,14 @@
 Введите количество предприятий для расчета прибыли: 2
 Введите название предприятия: Рога
 через пробел введите прибыль данного предприятия
-за каждый квартал(Всего 4 квартала): 235 345634 55 235    346159
+за каждый квартал(Всего 4 квартала): 235 345634 55 235
 
 Введите название предприятия: Копыта
 через пробел введите прибыль данного предприятия
-за каждый квартал(Всего 4 квартала): 345 34 543 34    956
+за каждый квартал(Всего 4 квартала): 345 34 543 34
 
 Средняя годовая прибыль всех предприятий: 173557.5
 Предприятия, с прибылью выше среднего значения: Рога
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
-from collections import namedtuple
-
-tuple_company_info = namedtuple('Company', 'name profit')
-comp_num = int(input('Введите количество предприятий для расчета прибыли: '))
-list_of_companies = []
-profit = []
-for i in range(comp_num):
-    company_info = tuple_company_info(
-        name=input('Введите название предприятия: '),
-        profit=sum([int(i) for i in input('Через пробел введите прибыль данного предприятия за 4 квартала: ').split()])
-    )
-    list_of_companies.append(company_info)
-    profit.append(company_info.profit)
-
-
-average_profit = sum(profit) / comp_num
-max_profit = [i for i in list_of_companies if i.profit > average_profit]
-min_profit = [i for i in list_of_companies if i.profit < average_profit]
-
-print(f'Средняя годовая прибыль всех предприятий: {average_profit}')
-print(f'Предприятия, с прибылью выше среднего значения: {max_profit}')
-print(f'Предприятия, с прибылью ниже среднего значения: {min_profit}')
