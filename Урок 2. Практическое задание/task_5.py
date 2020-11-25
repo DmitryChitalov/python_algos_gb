@@ -18,3 +18,60 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def append_el(char):
+    pass
+    if char > 99:
+        char_field = f'| {char}- {chr(char)} '
+    else:
+        char_field = f'| {char} - {chr(char)} '
+    return char_field
+
+
+def print_row(min_chr, max_chr, first_line=False, row_str=""):
+    pass
+    if min_chr > max_chr:
+        row_str += "|"
+        tbl_line = "-" * (len(row_str))
+        if first_line:
+            print(tbl_line)
+        print(row_str)
+        print(tbl_line)
+        return
+    cur_chr = min_chr
+    row_str += append_el(cur_chr)
+    cur_chr += 1
+    print_row(cur_chr, max_chr, first_line, row_str)
+
+
+def print_table(min_chr, max_chr, el_in_row, first_line):
+    pass
+
+    if min_chr > max_chr:
+        return
+
+    cur_chr = min_chr
+    max_chr_in_row = min_chr + el_in_row
+    if max_chr_in_row > max_chr:
+        max_chr_in_row = max_chr_in_row + (max_chr - max_chr_in_row)
+
+    print_row(cur_chr, max_chr_in_row, first_line)
+    first_line = False
+    cur_chr += el_in_row
+    print_table(cur_chr, max_chr, el_in_row, first_line)
+
+
+def main():
+    pass
+    try:
+        min_chr = 32
+        max_chr = 127
+        el_in_row = 10
+        print_table(min_chr, max_chr, el_in_row - 1, True)
+    except Exception as ex:
+        print(f"Fatal error: {ex}")
+
+
+if __name__ == "__main__":
+    main()
