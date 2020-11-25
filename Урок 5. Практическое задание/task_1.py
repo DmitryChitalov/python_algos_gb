@@ -25,3 +25,37 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+
+def class_nametuple(id):
+    name = input('Введите название предприятия: ')
+    profit = input('Через пробел введите прибыль данного предприятия за каждый квартал '
+                '(Всего 4 квартала): ')
+    aver = sum([int(el) for el in profit.split()]) / len([int(el) for el in profit.split()])
+    Company = namedtuple('Company', 'id name_company profit_company aver_company')
+    COMPANY = Company(id, name, profit, aver)
+    return COMPANY
+
+num = int(input('Введите количество предприятий для расчета прибыли: '))
+
+# Формируем словарь из компаний
+sum_profit = 0
+company_dict = {}
+for i in range(1, num+1):
+    company = class_nametuple(i)
+    company_dict[i] = company
+    sum_profit += company.aver_company
+
+#  Определяем компании с прибылью выше /ниже среднего
+high_aver = []
+low_aver = []
+for i in range(1, num+1):
+    if company_dict[i].aver_company > sum_profit / num:
+        high_aver.append(company_dict[i].name_company)
+    else:
+        low_aver.append(company_dict[i].name_company)
+
+print(f'Средняя годовая прибыль всех предприятий: {sum_profit / num}')
+print(f'Предприятия, с прибылью выше среднего значения: {high_aver}')
+print(f'Предприятия, с прибылью ниже среднего значения: {low_aver}')
+
