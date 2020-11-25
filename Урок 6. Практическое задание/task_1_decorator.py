@@ -18,7 +18,7 @@ def memory_check(func):
 
             mem_usage_dict.append(memory_stop[0] - memory_start[0])
 
-        print(f'{sum(mem_usage_dict)/10} Mib')
+        print(f'After 10 operation, average using memory is: {sum(mem_usage_dict)/10} Mib')
     return wrap()
 
 @memory_check
