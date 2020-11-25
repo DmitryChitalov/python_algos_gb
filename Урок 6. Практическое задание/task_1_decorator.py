@@ -7,7 +7,6 @@ def memory_check(func):
             memory_start = memory_usage()
             print(f'Memory start: {memory_start}')
 
-            #func(args[0])
             func(args[0])
 
             memory_stop = memory_usage()
