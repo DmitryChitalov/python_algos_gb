@@ -16,3 +16,25 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+class EvenOdd:
+
+    def __init__(self):
+        self.num_lst = list(input('Введите число: '))
+        self.even = 0
+        self.odd = 0
+
+    def funk_even(self):
+        if len(self.num_lst) == 0:
+            print(f'Четных - {self.even}, нечетных - {self.odd}')
+        else:
+            if int(self.num_lst.pop()) % 2 == 0:
+                self.even += 1
+                self.funk_even()
+            else:
+                self.odd += 1
+                self.funk_even()
+
+
+number = EvenOdd()
+number.funk_even()
