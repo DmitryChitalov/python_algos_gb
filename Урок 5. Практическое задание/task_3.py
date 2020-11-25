@@ -11,7 +11,6 @@ deque – это обобщение стеков и очередей.
 соответствует дейстивтельности.
 """
 from timeit import timeit
-import random
 
 setup = """
 import collections as coll
