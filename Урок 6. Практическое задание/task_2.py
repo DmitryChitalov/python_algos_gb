@@ -5,6 +5,7 @@
 
 Например, один из вариантов, использование генераторов
 """
+
 import sys
 from functools import reduce
 from recordclass import recordclass, make_dataclass
@@ -152,6 +153,7 @@ Line #    Mem usage    Increment  Occurences   Line Contents
 В связи с отсутсвием времени замерю пример из примеров ДЗ выполненный разными способами:
 """
 """Функция возвращает сумму квадатов четных чисел от 0 до max_value"""
+
 @profile
 def function_3():
     max_value = 9999
