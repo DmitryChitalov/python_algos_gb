@@ -16,3 +16,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def check_num(lst, even_n=0, odd_n=0):
+    if len(lst) == 0:
+        print(
+            f'Количество четных символов равно: {even_n}', f'Количество нечетных равнo:{odd_n}')
+        return
+    elif (int(lst[0]) % 2) == 0:
+        even_n += 1
+    elif (int(lst[0]) % 2) == 1:
+        odd_n += 1
+    check_num(lst[1:], even_n, odd_n)
+
+
+check_num(list(input("Введите число")))

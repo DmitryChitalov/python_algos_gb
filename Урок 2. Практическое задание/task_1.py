@@ -28,3 +28,36 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def canculator():
+    res = 0
+    a = int(input("Введите первое число"))
+    if type(a) != int:
+        print("Вы ввели число. Исправьтесь")
+    b = int(input("Введите второе число"))
+    if type(b) != int:
+        print("Вы ввели число.Исправьтесь")
+    oper = input("Введите операцию (+, -, *, / или 0 для выхода)")
+    if oper == "0":
+        print("Вы вышли из программы")
+    elif oper not in ('0', '+', '-', '*', '/'):
+        print('неверный знак')
+        return canculator()
+    elif oper == '/' and b == 0:
+        print('Division by ZERO')
+        return canculator()
+    else:
+        if oper == "+":
+            res = a + b
+        if oper == "-":
+            res = (a-b)
+        if oper == "*":
+            res = a * b
+        if oper == "/":
+            res = (a/b)
+        print(f'Текущий результат равен :{res}')
+    return(canculator())
+
+
+canculator()
