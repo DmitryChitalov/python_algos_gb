@@ -12,3 +12,60 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+import timeit
+import random
+
+""" Пузырьковая сортировка по убыванию"""
+def puz_rize(b):
+    num = len(b)
+    for i in range(num - 1):
+        for j in range(num - 1 - i):
+            if b[j] < b[j + 1]:
+                b[j], b[j + 1] = b[j + 1], b[j]
+    return b
+
+""" Пузырьковая сортировка по убыванию с оптимизацией"""
+def puz_rize_s(b):
+    num = len(b)
+    n = 1
+    while n !=0:
+        for i in range(num - 1):
+            n = 0
+            for j in range(num - 1 - i):
+
+                if b[j] < b[j + 1]:
+
+                    b[j], b[j + 1] = b[j + 1], b[j]
+                    n += 1
+    return b
+
+start_list = [random.randint(-100, 100) for _ in range(10)]
+start_list_1 = [98, 85 ,80, 55, 48, 31, 18, 10, 9, 5]
+print(f'Массив - случайные числа {start_list}')
+print(f'Массив - упорядоченные числа{start_list_1}')
+
+"""Неоптимизированная функция"""
+print(f'Отсортированный массив из случайных чисел {puz_rize(start_list)}')
+print(f'Отсортированный массив из упорядоченных чисел{puz_rize(start_list_1)}')
+
+"""Оптимизированнаяфункция"""
+print(f'Отсортированный массив из случайных чисел{puz_rize_s(start_list)}')
+print(f'Отсортированный массив из упорядоченных чисел{puz_rize_s(start_list_1)}')
+
+"""Неоптимизированная функция - время сортировки массива случайных чисел 1.9889999999998104"""
+print(timeit.timeit("puz_rize(start_list)", \
+    setup="from __main__ import puz_rize, start_list", number=1))
+
+"""Неоптимизированная функция - время сортировки массива упорядоченных чисел 1.4756999999997189"""
+print(timeit.timeit("puz_rize(start_list_1)", \
+    setup="from __main__ import puz_rize, start_list_1", number=1))
+
+"""Оптимизированная функция - время сортировки массива случайных чисел 1.5077999999998232 """
+print(timeit.timeit("puz_rize_s(start_list)", \
+    setup="from __main__ import puz_rize_s, start_list", number=1))
+
+"""Оптимизированная функция - время сортировки массива упорядоченных чисел 1.4435999999999616e """
+print(timeit.timeit("puz_rize_s(start_list_1)", \
+    setup="from __main__ import puz_rize_s, start_list_1", number=1))
+
+"""Результат: Если массив отсортирован, неоптимизированная функция работает быстрее ( по крайней мере, на данном интервале чисел)"""
