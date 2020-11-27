@@ -19,35 +19,21 @@ class BinaryTree:
         # правый потомок
         self.right_child = None
 
-    # добавить левого потомка
-    def insert_left(self, new_node):
-        # если у узла нет левого потомка
-        if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
+    def insert_node(self, data):
+        # принимает данные и сразу раскидывает их вправо-влево в зависимости от их значения по отношению к корню
+        if self.root:
+            if data < self.root:
+                if self.left_child is None:
+                    self.left_child = BinaryTree(data)
+                else:
+                    self.left_child.insert_node(data)
+            elif data > self.root:
+                if self.right_child is None:
+                    self.right_child = BinaryTree(data)
+                else:
+                    self.right_child.insert_node(data)
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.left_child = self.left_child
-            self.left_child = tree_obj
-
-    # добавить правого потомка
-    def insert_right(self, new_node):
-        # если у узла нет правого потомка
-        if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.right_child = BinaryTree(new_node)
-        # если у узла есть правый потомок
-        else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.right_child = self.right_child
-            self.right_child = tree_obj
+            self.root = data
 
     # метод доступа к правому потомку
     def get_right_child(self):
@@ -65,15 +51,23 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
+    def PrintTree(self):
+        if self.left_child:
+            self.left_child.PrintTree()
+        print( self.root),
+        if self.right_child:
+            self.right_child.PrintTree()
+
 
 r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
-r.insert_left(4)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+r.insert_node(14)
+r.insert_node(65)
+r.insert_node(31)
+r.insert_node(3)
+r.insert_node(19)
+
+r.PrintTree()
+
+
+
+
