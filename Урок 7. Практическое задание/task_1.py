@@ -12,3 +12,69 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+from timeit import timeit
+from random import randint
+
+
+'''
+Список list_1 состоит из 11 введённых мной чисел. Список не отсортирован. Он введён в тесты
+для замеров времени работы с одинаковыми массивами чисел.
+
+Список list_2 составляется случайным образом из чисел от 1 до 100. 
+
+Список list_3 состоит из 11 введённых мной чисел и он почти отсортирован, за исключением последних
+двух элементов - они переставлены местами. 
+'''
+
+
+list_1 = [0, 3, 4, 6, 8, 8, 5, 3, 0, 10, 5]
+list_2 = [randint(-100, 99) for i in range(10)]
+list_3 = [10, 9, 8, 8, 7, 6, 6, 5, 4, 0, 3]
+
+
+# обычная сортировка "пузырьком":
+def bubble_sort_var_1(array):
+    for i in range(len(array) - 1):
+        for j in range(len(array) - 1):
+            if array[j] < array[j + 1]:
+                array[j + 1], array[j] = array[j], array[j + 1]
+    return array
+
+
+# оптимизированная сортировка "пузырьком":
+def bubble_sort_var_2(array):
+    for i in range(len(array) - 1):
+        already_sorted = True  # выставление флага досрочного окончания цикла, если сортировать больше нечего
+        for j in range(len(array) - 1):
+            if array[j] < array[j + 1]:  # если есть что сортировать,
+                already_sorted = False   # то флаг выставляется на False
+                array[j + 1], array[j] = array[j], array[j + 1]
+        if already_sorted:  # если событие перестановки не наступило,
+            break           # то сортировка закончена
+    return array
+
+
+print('Замер времени сортировки методом "пузырька" с массивом list_1:')
+print(timeit('bubble_sort_var_1(list_1[:])', setup='from __main__ import bubble_sort_var_1, list_1', number=10000))
+print('Замер времени оптимизированной сортировки методом "пузырька" с массивом list_1:')
+print(timeit('bubble_sort_var_2(list_1[:])', setup='from __main__ import bubble_sort_var_2, list_1', number=10000))
+print('Замер времени сортировки методом "пузырька" с массивом list_2:')
+print(timeit('bubble_sort_var_1(list_2[:])', setup='from __main__ import bubble_sort_var_1, list_2', number=10000))
+print('Замер времени оптимизированной сортировки методом "пузырька" с массивом list_2:')
+print(timeit('bubble_sort_var_2(list_2[:])', setup='from __main__ import bubble_sort_var_2, list_2', number=10000))
+print('Замер времени сортировки методом "пузырька" с массивом list_3:')
+print(timeit('bubble_sort_var_1(list_3[:])', setup='from __main__ import bubble_sort_var_1, list_3', number=10000))
+print('Замер времени оптимизированной сортировки методом "пузырька" с массивом list_3:')
+print(timeit('bubble_sort_var_2(list_3[:])', setup='from __main__ import bubble_sort_var_2, list_3', number=10000))
+
+'''
+Наблюдения и выводы:
+
+При обработке массивов, где нужны все обходы (как пример с list_1), классическая функция работает
+быстрее, так как не тратит время на другие подзадачи, вроде конструкций if-else.
+Если отсортировать массив удаётся за величину количества обходов меньшую, чем длинна массива, то
+доработанная функция выполняется быстрее, и чем меньше нужно делать соседних перестановок, тем
+быстрее скорость.
+
+В среднем - время работы функции немного увеличилось.
+'''
