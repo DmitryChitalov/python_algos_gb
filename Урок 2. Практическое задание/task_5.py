@@ -18,3 +18,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_reference(start, stop):
+    """
+    Функция выводит по 10 в ряду пар код - символ таблицы ASCII.
+
+    start: начало диапазона
+    stop: конец диапазона
+    """
+    if start == stop:
+        return stop
+    elif start % 10 == 1:
+        return print(f'{start} - {chr(start)}'), ascii_reference(start + 1, stop)
+    else:
+        return print(f'{start} - {chr(start)}  ', end=''), ascii_reference(start + 1, stop)
+
+
+ascii_reference(32, 128)
