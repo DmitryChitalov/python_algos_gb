@@ -10,6 +10,7 @@
 """
 import random
 
+
 def merge_sort(lst_obj):
     if len(lst_obj) > 1:
         center = len(lst_obj) // 2

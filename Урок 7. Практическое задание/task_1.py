@@ -15,6 +15,7 @@
 import timeit
 import random
 
+
 print("Исходная функция:")
 def bubble_sort(lst_obj):
     n = 1
