@@ -47,6 +47,7 @@ def bench_buble_sort(in_list):
     number = 10000
     return timeit(action, setup, number=number, globals=globals())
 
+
 def bench_buble_sort_2(in_list):
     action = f"bubble_sort_2({in_list})"
     setup = "from __main__ import bubble_sort_2"
@@ -82,7 +83,10 @@ if __name__ == "__main__":
     main()
 
 """
-/home/nek/projects/GeekBrains/python_algos_gb/venv/bin/python "/home/nek/projects/GeekBrains/python_algos_gb/Урок 7. Практическое задание/task_1.py"
+Оптимизация сработала в обратную сторону. Дополнительная проверка на каждом проходе цикла срабатывала редко, 
+а выполнялась каждый раз. 
+Как результат - оптимизированный вариант хуже.
+#############################################
 gen list
 sort list
 first 10 unsorted 		[56, -89, 57, -54, 67, -18, 57, -91, 68, -44]
