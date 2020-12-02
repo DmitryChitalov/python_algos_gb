@@ -10,6 +10,7 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных.
 """
 
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -20,7 +21,7 @@ class BinaryTree:
         self.right_child = None
 
     # добавить левого потомка
-    def insert_left(self, new_node):
+    def _insert_left(self, new_node):
         # если у узла нет левого потомка
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
@@ -35,7 +36,7 @@ class BinaryTree:
             self.left_child = tree_obj
 
     # добавить правого потомка
-    def insert_right(self, new_node):
+    def _insert_right(self, new_node):
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -49,13 +50,32 @@ class BinaryTree:
             tree_obj.right_child = self.right_child
             self.right_child = tree_obj
 
+    '''автоматическая вставка в левую или правую ветвь, в зависимости от значения:'''
+    def insert_node(self, new_node):
+        if new_node < self.root:
+            self._insert_left(new_node)
+        elif new_node > self.root:
+            self._insert_right(new_node)
+        else:
+            print('Элемент равен корню, выберите другой элемент')
+
     # метод доступа к правому потомку
     def get_right_child(self):
-        return self.right_child
+        '''способ обработки ошибки при отсутствии значения:
+        '''
+        if self.right_child is not None:
+            return self.right_child
+        else:
+            return BinaryTree(None)
 
     # метод доступа к левому потомку
     def get_left_child(self):
-        return self.left_child
+        '''способ обработки ошибки при отсутствии значения:
+        '''
+        if self.left_child is not None:
+            return self.left_child
+        else:
+            return BinaryTree(None)
 
     # метод установки корня
     def set_root_val(self, obj):
@@ -67,13 +87,15 @@ class BinaryTree:
 
 
 r = BinaryTree(8)
-print(r.get_root_val())
+r.insert_node(7)
+r.insert_node(9)
+r.insert_node(6)
+r.insert_node(3)
+r.insert_node(10)
+r.insert_node(20)
+r.insert_node(25)
 print(r.get_left_child())
-r.insert_left(4)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
 print(r.get_right_child())
+print(r.get_left_child().get_root_val())
 print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+print(r.get_root_val())
