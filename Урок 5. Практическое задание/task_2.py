@@ -11,3 +11,19 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+from collections import defaultdict
+
+
+def calc_numbs():
+    numbs = defaultdict(list)
+    for i in range(2):
+        numb = input(f'Введите {i + 1} число: ')
+        numbs[i + 1] = list(numb.upper())
+    print(numbs)
+    summ = int(''.join(numbs[1]), 16) + int(''.join(numbs[2]), 16)
+    mult = int(''.join(numbs[1]), 16) * int(''.join(numbs[2]), 16)
+    print(f'Сумма чисел равна {hex(summ)[2:]}')
+    print(f'Произведение равно {hex(mult)[2:]}')
+
+
+calc_numbs()
