@@ -28,3 +28,49 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def math_res(symbol, number_one, number_two):
+    """
+    Функция вычисляет результат операции над двумя числами.
+
+    symbol: знак операции (+, -, *, /)
+    number_one: Первое число
+    number_two: Второе число
+    """
+    if symbol == '+':
+        res = number_one + number_two
+    elif symbol == '-':
+        res = number_one - number_two
+    elif symbol == '/':
+        res = number_one / number_two
+    else:
+        res = number_one * number_two
+    return res
+
+
+def calc():
+    """
+    Функция описывает работу простейшего калькулятора.
+    """
+    symbol = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    i = 0
+    if symbol == '0':
+        return 'До свидания!'
+    elif symbol in ('+', '-', '*', '/'):
+        try:
+            number_one = int(input('Введите первое число: '))
+            number_two = int(input('Введите второе число: '))
+            if number_two != 0:
+                print(f'Ваш результат = {math_res(symbol, number_one, number_two)}')
+            else:
+                print('На ноль делить нельзя!')
+        except ValueError:
+            print('Вы ввели не число!')
+        return calc()
+    else:
+        print('Вы ввели неизвестный символ!')
+        return calc()
+
+
+print(calc())
