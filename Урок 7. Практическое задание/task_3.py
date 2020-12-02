@@ -13,3 +13,11 @@
 arr[m]
 from statistics import median
 """
+from statistics import median
+import random
+
+m = int(input('Введите m: '))
+list1 = [random.choice(range(100)) for _ in range(2 * m + 1)]
+
+print(list1)
+print(median(list1))

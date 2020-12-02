@@ -28,8 +28,14 @@ def check_1(lst_obj):
 
     Сложность: !!!.
     """
+<<<<<<< Updated upstream
     lst_to_set = set(lst_obj)  # !!!
     return lst_to_set
+=======
+    lst_to_set = set(lst_obj)  # O(len(lst_obj))
+    return lst_to_set          # O(1). Итоговая сложность O(len(lst_obj))
+
+>>>>>>> Stashed changes
 
 
 #############################################################################################
@@ -43,10 +49,17 @@ def check_2(lst_obj):
 
     Сложность: !!!.
     """
+<<<<<<< Updated upstream
     for j in range(len(lst_obj)):          # !!!
         if lst_obj[j] in lst_obj[j+1:]:    # !!!
             return False                   # !!!
     return True                            # !!!
+=======
+    for j in range(len(lst_obj)):          # O(n)
+        if lst_obj[j] in lst_obj[j+1:]:    # O(n)
+            return False                   # O(1)
+    return True                            # O(1). Итоговая сложность O(n**2)
+>>>>>>> Stashed changes
 
 
 #############################################################################################
@@ -59,12 +72,22 @@ def check_3(lst_obj):
 
     Сложность: !!!
     """
+<<<<<<< Updated upstream
     lst_copy = list(lst_obj)                 # !!!
     lst_copy.sort()                          # !!!
     for i in range(len(lst_obj) - 1):        # !!!
         if lst_copy[i] == lst_copy[i+1]:     # !!!
             return False                     # !!!
     return True                              # !!!
+=======
+    lst_copy = list(lst_obj)                 # O(1)
+    lst_copy.sort()                          # O(n log n)
+    for i in range(len(lst_obj) - 1):        # O(n)
+        if lst_copy[i] == lst_copy[i+1]:     # O(1)
+            return False                     # O(1)
+    return True                              # O(1). Итоговая сложность O(n log n).
+    
+>>>>>>> Stashed changes
 
 #############################################################################################
 

@@ -9,6 +9,7 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -37,5 +38,51 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def memoize(f):
+    cache = {}
+
+    def decorate(*args):
+
+        if args in cache:
+            return cache[args]
+        else:
+            cache[args] = f(*args)
+            return cache[args]
+    return decorate
+
+
+# def func_3(arr):
+#     max_count = 0
+#     el = 0
+#     j = 0
+#
+#     @memoize
+#     def recur(j):
+#         if j == len(arr):
+#             return
+#         else:
+#             if arr[j] > recur(j + 1):
+#                 max_count += 1
+#                 el = arr[j]
+#             return recur(j)
+#
+#     recur(j)
+#     return f'Чаще всего встречается число {el}, ' \
+#            f'оно появилось в массиве {max_count} раз(а)'
+
+
 print(func_1())
 print(func_2())
+# print(func_3(array))
+
+print('Результат первой функции - ',
+      timeit(
+          "func_1()",
+          setup='from __main__ import func_1, array',
+          number=10000))
+
+print('Результат второй функции - ',
+      timeit(
+          "func_2()",
+          setup='from __main__ import func_2, array',
+          number=10000))

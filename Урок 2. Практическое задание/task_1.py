@@ -28,3 +28,69 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+class Calc:
+
+    def __init__(self):
+        self.num1 = 0
+        self.num2 = 0
+        self.operator = 0
+        self.result = 0
+
+    def start(self):
+        user_input = input('Введите через пробел оператор и 2 числа\n(например: * 2 2)' \
+                           ' или 0 для выхода: ')
+        if user_input != '0':
+            try:
+                self.operator, self.num1, self.num2 = user_input.split()
+                self.num1 = int(self.num1)
+                self.num2 = int(self.num2)
+            except:
+                self.wrong()
+            if self.operator == '+':
+                self.result = self.sum(self.num1, self.num2)
+                self.clean()
+            elif self.operator == '-':
+                self.result = self.sub(self.num1, self.num2)
+                self.clean()
+            elif self.operator == '*':
+                self.result = self.mult(self.num1, self.num2)
+                self.clean()
+            elif self.operator == '/':
+                self.result = self.div(self.num1, self.num2)
+                self.clean()
+            else:
+                self.wrong()
+            print(f'результат - {self.result}')
+            self.start()
+        else:
+            return
+
+    def wrong(self):
+        print('Неверный ввод')
+        self.start()
+
+    def clean(self):
+        self.num1 = 0
+        self.num2 = 0
+        self.operator = 0
+
+    def sum(self, num1, num2):
+        return num1 + num2
+
+    def sub(self, num1, num2):
+        return num1 - num2
+
+    def mult(self, num1, num2):
+        return num1 * num2
+
+    def div(self, num1, num2):
+        try:
+            return round(num1 / num2, 2)
+        except ZeroDivisionError:
+            return 'Деление на ноль!'
+
+
+calc = Calc()
+calc.start()

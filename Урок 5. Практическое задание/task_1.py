@@ -25,3 +25,37 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+import collections as coll
+base = coll.defaultdict(int)
+
+
+def user_input():
+    firm = input('Введите название фирмы или exit для выхода: ')
+    if not base[firm]:
+        if firm == 'exit':
+            del base['exit']
+            analyze()
+        else:
+            firm_val_str = input('Введите показатели прибыли через пробел: ').split()
+            try:
+                base[firm] = sum([int(x) for x in firm_val_str])
+            except TypeError:
+                print('Ошибка ввода!')
+                user_input()
+            user_input()
+    else:
+        print('Такая фирма уже занесена!')
+        user_input()
+
+
+def analyze():
+    temp_list = [val for key, val in base.items()]
+    avg_income = sum(temp_list) / len(temp_list)
+    print(f'Средняя прибыль - {avg_income}')
+    winners = [key for key, val in base.items() if val >= avg_income]
+    losers = [key for key, val in base.items() if val < avg_income]
+    print(f'Прибыль выше средней у {winners}')
+    print(f'Прибыль ниже средней у {losers}')
+
+
+user_input()
