@@ -22,3 +22,28 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+base = {
+    'mail': 521423,
+    'sberbank': 23423,
+    'microsoft': 234234,
+    'magnit': 7643,
+    'SASCO': 6322,
+    'aser': 73453,
+    'sony': 54234,
+    'toyota': 63435,
+    'audi': 7456,
+    'bmw': 546544
+}
+top_company = dict()
+
+list_unsorted = list(base.items())
+list_unsorted.sort(key=lambda el: el[1], reverse=True)
+for i in range(3):
+    top_company[list_unsorted[i][0]] = list_unsorted[i][1]
+
+print(top_company)
+'''
+Не смог вспомнить почему здесь сдела только один вариант,
+но сейчас не стал доделывать для честности! 
+'''

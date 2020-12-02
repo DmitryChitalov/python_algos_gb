@@ -27,3 +27,49 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+def metod_1(users: dict, name, password):
+    if users.get(name):
+        if users[name]['password'] == password and users[name]['activ']:
+            return f'Добро пожаловать! {name}'
+        elif users[name]['password'] == password and not users[name]['activ']:
+            return 'Ваша учетная запись не активирована! Пройдите активацию!'
+        elif users[name]['password'] != password:
+            return 'Пароль неверный! Проверьте раскладку клавиатуры!'
+    else:
+        return 'Этот пользователь не зарегистрирован! Пройдите регистрацию!'
+
+
+def metod_2(users: dict, name, password):
+    for key, value in users.items():
+        if key == name:
+            if value['password'] == password and value['activ']:
+                return f'Добро пожаловать! {name}'
+            elif value['password'] == password and not value['activ']:
+                return 'Ваша учетная запись не активирована! Пройдите активацию!'
+            elif value['password'] != password:
+                return 'Пароль неверный! Проверьте раскладку клавиатуры!'
+    return 'Этот пользователь не зарегистрирован! Пройдите регистрацию!'
+
+
+users = {
+    'user_1': {'password': '123123', 'activ': True},
+    'user_2': {'password': '321321', 'activ': False},
+    'user_3': {'password': '543543', 'activ': False},
+    'user_4': {'password': '345345', 'activ': True},
+    'user_5': {'password': '978978', 'activ': True}
+}
+
+print(metod_1(users, 'user_1', '123123'))
+print(metod_2(users, 'user_1', '123123'))
+print(metod_1(users, 'user_3', '543543'))
+print(metod_2(users, 'user_3', '543543'))
+print(metod_1(users, 'user_4', '543543'))
+print(metod_2(users, 'user_4', '543543'))
+print(metod_1(users, 'user_7', '123123'))
+print(metod_2(users, 'user_7', '123123'))
+
+'''
+подобный пример показывали на основах поэтому я знал решение с get!
+'''
