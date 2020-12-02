@@ -17,3 +17,31 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+from random import randint
+
+
+def min_list(a: list):
+    for i in a:
+        flag = True
+        for j in a:
+            if i > j:
+                flag = False
+        if flag:
+            return i
+
+
+def min_list_2(a: list):
+    min_el = a[0]
+    for i in a:
+        if i < min_el:
+            min_el = i
+    return min_el
+
+
+test_list = [randint(0, 1000) for i in range(100)]
+print(min_list(test_list))
+print(min_list_2(test_list))
+
+'''
+В результате получилось O(n^2) у первого метода, и O(n) у второго!
+'''
