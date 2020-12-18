@@ -50,6 +50,7 @@ class User:
     def __init__(self):
         self.login = input('Введите логин: ')
         self.password = input('Введите пароль: ')
+        self.authentication()
 
     def authentication(self):
         """O (N), самая сложная операция not in"""
@@ -68,10 +69,5 @@ class User:
 
 
 new_user = User()
-start = time.time()
-new_user.authentication()
-stop = time.time()
-print(stop - start)  # Проверка на соответствие пользователю 0,
-# среди миллионов записей
 ##############################################################################
 # Не придумал другой способ, отличающийся от описанного выше :(
