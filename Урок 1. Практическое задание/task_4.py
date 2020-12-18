@@ -27,3 +27,85 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+
+# Решение №1
+# Сложность решения: O(n)
+
+
+def authorization(auth_dict):
+    while True:
+        i = 0
+        login = input()
+        password = input()
+        if login in auth_dict['login']:
+            i = auth_dict['login'].index(login)
+        if password != auth['password'][i]:
+            print('Не верный логин или пароль')
+        else:
+            if auth_dict['activation'][i]:
+                print('Вход выполнен')
+                break
+            else:
+                print('Пользователь не активирован, активировать сейчас? ')
+                answer = input().lower()
+                if answer == 'да' or answer == 'lf':
+                    auth_dict['activation'][i] = True
+                    print('Пользователь активирован, повторите попытку входа')
+
+
+auth = {
+    'login': ('sergey123', 'geek456', 'brains789'),
+    'password': ['qwerty123', 'Zxcvb321', 'qazWsx456'],
+    'activation': [True, False, True]
+}
+
+# authorization(auth) # для проверки
+
+# Решение №2
+# Сложность решения: O(n**2)
+
+def authorization_2(auth_dict):
+    i = 0
+    n = 0
+    while True:
+        if n < 2:
+            login = input('Введите логин: ')
+            password = input('Введите пароль: ')
+        while n != 2:
+            if login in auth_dict['login']:
+                i = auth_dict['login'].index(login)
+                n += 1
+            if password == auth['password'][i]:
+                n += 1
+            else:
+                print('Не верный логин или пароль')
+                n = 0
+                break
+        if n == 2:
+            if auth_dict['activation'][i]:
+                print('Вход выполнен')
+                break
+            else:
+                answer = input('Пользователь не активирован, активировать сейчас?').lower()
+                if answer == 'да' or answer == 'lf':
+                    auth_dict['activation'][i] = True
+                    print('Пользователь активирован, повторите вход')
+                    n = 0
+
+
+auth2 = {
+    'login': ('sergey123', 'geek456', 'brains789'),
+    'password': ['qwerty123', 'Zxcvb321', 'qazWsx456'],
+    'activation': [True, False, True]
+}
+# authorization_2(auth2) # для проверки
+
+"""
+Вывод: решение №1 эфективнее, так его сложность O(n), нет лишнего вложеного цикла как в решении №2
+"""
+
+
+
+
