@@ -27,3 +27,51 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+import time
+
+# logins = {  # 'login': [pass, activation_status]
+#     'name1': ['123', True],
+#     'name2': ['456', False],
+#     'name3': ['789', True],
+#     'name4': ['741', False],
+#     'name5': ['852', True],
+#     'name6': ['963', True]
+# }
+start = time.time()
+logins = {
+    'name' + str(x): ['123', x % 3 == 0] for x in range(9999999)
+}  # каждый третий не активирован
+stop = time.time()
+print(stop - start)  # Генерация 10 миллионов записей за 10 секунд
+
+
+##############################################################################
+class User:
+    def __init__(self):
+        self.login = input('Введите логин: ')
+        self.password = input('Введите пароль: ')
+
+    def authentication(self):
+        """O (N), самая сложная операция not in"""
+        if self.login not in logins.keys():
+            print('Вы не зарегистрированы в системе')
+            return
+        elif self.password != logins[self.login][0]:
+            print('Неверный пароль')
+            return
+        elif not logins[self.login][1]:
+            print('Ваша учетная запись не активирована, ссылка для активации '
+                  'направлена на email')
+            return
+        else:
+            print('Добро пожаловать!')
+
+
+new_user = User()
+start = time.time()
+new_user.authentication()
+stop = time.time()
+print(stop - start)  # Проверка на соответствие пользователю 0,
+# среди миллионов записей
+##############################################################################
+# Не придумал другой способ, отличающийся от описанного выше :(
