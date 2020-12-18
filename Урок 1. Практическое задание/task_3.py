@@ -22,3 +22,57 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+company = {'Mtc': 45000000, 'Magnit': 60000000, 'Lukoil': 80000000, 'Rosneft': 85000000, 'Gazprom': 90000000}
+
+"""
+Имеет квадратичную сложность, скорость средняя, 
+однако благодаря своей лаконичности легко читается. 
+"""
+# Сложность: O(n ** 2)
+
+
+number_one = company.copy()
+for i in range(3):
+    profit = max(number_one.values())
+    firm = ''.join(([i for i in number_one if number_one[i] == profit]))
+    print(f'{firm}: {profit}')
+    del number_one[firm]
+
+##############################################################################################################
+    """
+    Как и предыдущая, сложность - квадратичная, скорость средняя, 
+    в отличии от предыдущей, имеет более громоздкую структуру,
+    что в свою очередь усложняет понимание кода. 
+    """
+# Сложность: O(n ** 2)
+
+
+number_two = company.copy()
+idx = 3
+while idx != 0:
+    profit = []
+    for p in number_two.values():
+        profit.append(p)
+    for f in number_two.keys():
+        if number_two[f] == max(profit):
+            print(f'{f}: {number_two[f]}')
+            break
+    del number_two[f]
+    idx -= 1
+
+################################################################################################################
+    """
+    Относительно быстрый и лаконичный способ выполнения задачи. 
+    Минимальная нагрузка из всех предоставленных решений.
+    """
+# Сложность: O(n * log * n)
+
+
+number_tree = company.copy()
+profit = list(number_tree.items())
+profit.sort(key=lambda b: b[1])
+profit.reverse()
+for i in profit[:3]:
+    print(f'{i[0]}: {i[1]}')
