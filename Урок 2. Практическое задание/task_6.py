@@ -9,3 +9,23 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+num = 12
+def guess(num,iter = 0):
+    user_num = int(input('Введите число'))
+    if user_num == num:
+        return print( "Вы угадали")
+    if iter == 9:
+        return print("У вас закончились попытки")
+    if user_num > num:
+        print( "Вы ввели слишком большое число")
+        iter += 1
+        return guess(num, iter)
+    if user_num < num:
+        print ('Вы ввели слишком маленько число')
+        iter += 1
+        return guess(num,iter)
+
+
+guess(12)

@@ -16,3 +16,20 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def even_cnt(number, cnt_even=0, cnt_odd=0):
+
+    if number //10 == 0:
+        if number % 2 == 0:
+            cnt_even += 1
+        else: cnt_odd += 1
+        return print(f'Четных цифр - {cnt_even},нечетных - {cnt_odd}')
+    if number % 2 == 0:
+        cnt_even += 1
+    else:
+        cnt_odd += 1
+    even_cnt(number//10, cnt_even,cnt_odd)
+
+even_cnt(12345)
+
+
