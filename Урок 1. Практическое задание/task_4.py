@@ -27,3 +27,56 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+users = {'Gold': ['345654fr', 'active'], 'Valencia': [6453632, 'active'],
+         'Rasmerus': ['gfhdn354' 'not active'], 'Jolerno': ['gfhe876', 'active']}
+
+"""
+Функция имеет сложность n^3, тратит много времени на реализацию.
+"""
+
+
+# Сложность: O(n ** 3)
+
+
+def security_one(user):
+    login = input('Введите логин: ')
+    password = input('Введите пароль: ')
+    for i in user.items():
+        if login in i and password == str(i[1][0]):
+            if i[1][1] == 'active':
+                print("Вход разрешён.")
+            else:
+                print("Активируйте учетную запись.")
+
+
+security_one(users)
+
+########################################################################################################################
+
+users = [['Gold', '345654fr', 'active'], ['Valencia', '6453632', 'active'],
+         ['Rasmerus', 'gfhdn354', 'not active'], ['Jolerno', 'gfhe876', 'active']]
+
+"""
+Имеет ту же степень сложности, что и предыдущая функция.
+Изменён способ хранения данных. Код более прост в понимании,
+но особо не отличается. 
+"""
+
+
+# Сложность: O(n ** 3)
+
+
+def security_two(user):
+    login = input('Введите логин: ')
+    password = input('Введите пароль: ')
+    for i in user:
+        if login in i and password in i:
+            if 'active' in i:
+                print("Вход разрешён.")
+            else:
+                print("Активируйте учётную запись.")
+
+
+security_two(users)

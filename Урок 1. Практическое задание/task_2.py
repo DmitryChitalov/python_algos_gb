@@ -17,3 +17,22 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+numbers = [i for i in range(50, -45, -3)]
+
+
+def min_number(some_list):  # Сложность: O(n ** 2)
+    min_n = some_list[0]
+    for i in some_list:
+        if i < min_n:
+            min_n = i
+    return min_n
+
+print(min_number(numbers))
+
+
+
+def min_number_again(some_list): # Сложность O(n)
+    return min(some_list)
+
+print(min_number_again(numbers))
