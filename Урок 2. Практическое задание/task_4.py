@@ -9,3 +9,11 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def sequence_sum(n, num = 1):
+    if n == 1:
+        return num
+    return num + sequence_sum(n-1, num/-2)
+
+print (sequence_sum(2))
+

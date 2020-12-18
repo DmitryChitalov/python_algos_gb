@@ -18,3 +18,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def symbol_ASCII(n, i = 0):
+    if n == 127:
+        return f'{n} - {chr(n)}'
+    i +=1
+    if i % 10 == 0:
+        return f'{n} - {chr(n)} \n' + symbol_ASCII(n+1,i)
+    return f'{n} - {chr(n)} ' + symbol_ASCII(n+1,i)
+
+print(symbol_ASCII(32))
