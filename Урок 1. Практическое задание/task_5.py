@@ -18,3 +18,51 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+class Stack:
+    def __init__(self):
+        self.elems = []
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, elem):
+        self.elems.append(elem)
+
+    def pop_out(self):
+        return self.elems.pop()
+
+    def peek(self):
+        return self.elems[len(self.elems)-1]
+
+    def size(self):
+        return len(self.elems)
+
+    def __str__(self):
+        return self.elems
+
+
+if __name__=='__main__':
+
+    def stacks_plates(num_p, max_p):
+        stack_obj = Stack()
+        stacks = []
+        for p in range(num_p):
+            if stack_obj.size() >= max_p:
+                stacks.append(stack_obj)
+                stack_obj = Stack()
+            stack_obj.push_in(p)
+        stacks.append(stack_obj)
+        return stacks
+
+
+s = stacks_plates(250, 10)
+print(len(s))
+
+
+
+
+
+
+
+
+
