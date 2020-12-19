@@ -27,3 +27,50 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {
+    'user_1': {'login': 'one', 'password': 'one_pass', 'activation': True},
+    'user_2': {'login': 'two', 'password': 'two_pass', 'activation': False}
+}
+
+
+def verify_authentication_1(dict_obj, log, passw):
+    list_items = list(dict_obj.items())
+    for item in list_items:
+        tmp_dict = item[1]
+        if tmp_dict.get('login') == log:
+            if tmp_dict.get('password') == passw and tmp_dict.get('activation') is True:
+                return 'Добро пожаловать'
+            elif tmp_dict.get('password') == passw and tmp_dict.get('activation') is False:
+                return 'Учётная запись не активирована'
+            elif tmp_dict.get('password') != passw:
+                return 'неправильный пароль'
+    return 'Такого пользователя не существует'
+
+
+def verify_authentication_2(dict_obj, log, passw):
+    list_items = list(dict_obj.items())
+    for item in list_items:
+        values_list = list(item[1].values())
+        if log in values_list:
+            if passw in values_list and True in values_list:
+                return 'Добро пожаловать'
+            elif passw in values_list and False in values_list:
+                return 'Активируйте учётную запись'
+            else:
+                'Неправильный пароль'
+    return 'Такого пользователя не существует'
+
+"""
+Функция verify_authentication_1 имеет сложность O(n) за счёт использования только одного цикла.
+Функция verify_authentication_2 имеет сложность O(n**2) за счёт вложенного цикла в условии.
+Из этих двух реализаций verify_authentication_1 является лучшей.
+"""
+
+if __name__ == '__main__':
+    print(verify_authentication_1(users, 'one', 'one_pass'))
+    print(verify_authentication_1(users, 'two', 'two_pass'))
+    print(verify_authentication_1(users, 'three', 'three_pass'))
+    print(verify_authentication_2(users, 'one', 'one_pass'))
+    print(verify_authentication_2(users, 'two', 'two_pass'))
+    print(verify_authentication_2(users, 'three', 'three_pass'))
