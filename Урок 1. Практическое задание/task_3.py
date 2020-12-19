@@ -22,3 +22,51 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+companies_income = {
+    'HP': 120000,
+    'LG': 200000,
+    'Sony': 150000,
+    'Microsoft': 300000,
+    'Yandex': 180000,
+    'Google': 350000,
+    'ASUS': 130000
+}
+
+"""Первое решение"""
+
+
+# O(nlog(n)) Этот вариант лучше т.к. сложность меньше
+def max_income_1(income_dict):
+    my_list = list(income_dict.items())  # O(n)
+    my_list.sort(key=lambda i: i[1], reverse=True)  # O(nlog(n))
+    result = my_list[0:3]  # 3*O(1)
+    return result  # O(1)
+
+
+'''Второе решение'''
+
+
+# O(n**2)
+def max_income_2(income_dict):
+    my_list = []  # 0(1)
+    max_list = []  # 0(1)
+    max_el = 0  # 0(1)
+    result = {}  # 0(1)
+    n = 0  # 0(1)
+    for val in income_dict.values():  # O(n)
+        my_list.append(val)  # O(1)
+    while n < 3:  # O(1)
+        max_el = max(my_list)  # O(1)
+        max_list.append(max_el)  # O(1)
+        my_list.pop(my_list.index(max_el))  # O(1)
+        n += 1  # O(1)
+    for key, value in income_dict.items():  # O(n)
+        if value in max_list:  # O(n)
+            result[key] = value  # O(1)
+
+    return result
+
+
+print(max_income_1(companies_income))
+print(max_income_2(companies_income))
