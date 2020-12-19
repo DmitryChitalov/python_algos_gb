@@ -27,3 +27,47 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users_dict = {
+    'Андрей': {'password': '123456', 'activation': True},
+    'Иван': {'password': '12346', 'activation': False},
+    'Николай': {'password': '122346', 'activation': True}
+}
+
+'''Решение № 1'''
+
+
+# Итоговая сложность О(n)
+def check_activation_1(users, user_name, password):
+    for key, value in users.items():  # O(n)
+        if key == user_name:  # O(1)
+            if value['password'] == password and value['activation'] == True:  # O(1)
+                return 'Добро пожаловать'
+            elif value['password'] != password:  # O(1)
+                return 'Вы ввлели не правильный пароль'
+            else:
+                return 'Ваша учетная запись не активирована. Пожалуйста, активируйте учетную запись'
+        else:
+            return 'Такого имени не существует'
+
+
+'''Решение № 2'''
+
+
+# Итоговая сложность О(1), т.к. нет прохода по циклу. Данное решение более оптимальное
+def check_activation_2(users, user_name, password):
+    if users.get(user_name):  # O(1)
+        if password == users[user_name]['password'] and users[user_name]['activation'] == True:  # O(1)
+            return 'Добро пожаловать'
+        elif password != users[user_name]['password']:  # O(1)
+            return 'Вы ввлели не правильный пароль'
+        else:
+            return 'Ваша учетная запись не активирована. Пожалуйста, активируйте учетную запись'
+    else:
+        return 'Такого имени не существует'
+
+
+name = input('Введите имя: ')
+user_password = input('Введите пароль: ')
+# print(check_activation_1(users_dict, name, user_password))
+print(check_activation_2(users_dict, name, user_password))
