@@ -17,3 +17,36 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+# O(n^2) - квадратичная
+
+
+def min_sq(lst):
+    for i in lst:
+        lst_min = True
+        for j in lst:
+            if i > j:
+                lst_min = False
+        if lst_min:
+            return i
+
+
+# O(n) - линейная
+
+
+def min_lin(lst):
+    lst_min = lst[0]
+    for i in lst:
+        if i < lst_min:
+            lst_min = i
+
+    return lst_min
+
+
+lst_obj = []
+for i in range(1, 10):
+    lst_obj.append(i)
+
+print(lst_obj)
+print(min_sq(lst_obj))
+print(min_lin(lst_obj))
