@@ -22,3 +22,49 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+# search_1 T(n) = n + n*log n; O(n log n)
+def search_1(dictionary):
+    lst = list(dictionary.items())              # n
+    lst.sort(key=lambda i: i[1])                # n log n
+    return f'{lst[-1][0]}: {lst[-1][1]}\n' \
+           f'{lst[-2][0]}: {lst[-2][1]}\n' \
+           f'{lst[-3][0]}: {lst[-3][1]}'        # 1
+
+
+# search_2 T(n) = 1 + 1 + n * n * n * n * n + 1 + 1 = n**5 + 4; O(n**5)
+def search_2(dictionary):
+    top_3 = {}                                                                  # 1
+    i = 0                                                                       # 1
+
+    while i < 3:                                                                # n
+        max_val = max(dictionary.values())                                      # n
+        top_3.update({k:v for k, v in dictionary.items() if v == max_val})      # n * 1
+
+        for el in top_3.keys():                                                 # n
+            if el in dictionary.keys():                                         # n
+                dictionary.pop(el)                                              # 1
+
+        i += 1                                                                  # 1
+
+    return top_3                                                                # 1
+
+
+companys = {
+    'gazprom': 150000000,
+    'sberbank': 200000000,
+    'tmk': 95000000,
+    'gmk': 130000000,
+    'lukoil': 100000000
+}
+
+print(search_1(companys))
+print(search_2(companys))
+
+'''
+ВЫВОД:
+Решение search_1 более эффективно из-за меньшего количества вложенных циклов и экономии памяти 
+search_1 - создаётся один дополнительный список,
+search_2 - создаётся переменная и новый словарь.
+'''
