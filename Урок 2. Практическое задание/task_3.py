@@ -15,3 +15,19 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+def natural_input():
+    __natural = input('Введите число натуральное число: ')
+    try:
+        int(__natural)
+        return __natural
+    except:
+        print('Вы ввели не число')
+        return natural_input()
+
+def reverse_number(number, reverse=''):
+    if len(number) == 0:
+        print(f'Перевернутое число: {reverse}')
+    else:
+        reverse_number(number[:(len(number)-1)],reverse+(number[len(number)-1]))
+
+reverse_number(natural_input())
