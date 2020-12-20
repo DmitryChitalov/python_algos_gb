@@ -18,3 +18,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_chr(n=32, result=''):
+    if n == 128:
+        return print(result)
+    if str(n)[-1] == '1':
+        result += f'{n} - {chr(n)} \n'
+        return ascii_chr(n+1, result)
+    else:
+        result += f'{n} - {chr(n)} '
+        return ascii_chr(n+1, result)
+
+
+ascii_chr()
