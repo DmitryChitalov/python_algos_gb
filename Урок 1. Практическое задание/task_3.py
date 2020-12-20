@@ -22,3 +22,46 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+def first_one(x_data):
+    counter = 0  # O(1)
+    result_data = []  # O(1)
+    for el in x_data.keys():  # O(n)
+        for i in x_data.keys():  # O(n)
+            if el != i:
+                if x_data.get(i) > x_data.get(el) and counter < 3 and i not in result_data:
+                    result_data.append(i)  # O(1)
+                    counter += 1  # O(1)
+    print(result_data)  # O(1)
+# в целом тут цикл в цикле и сразу понятно что квадратичная - O(n**2)
+
+def second_one(x_data):
+    result_data = {}
+    result_list = []
+    for el in x_data.keys():  # O(n)
+        b = x_data.get(el)  # O(1)
+        el, b = b, el  # O(1) - тут не уверен потому что он вроде через кортежи их меняет,
+        # но по идее там тоже константа
+        result_data.update([(el, b)])  # O(1)
+    for i in range(3):  # O(1) - потому что от количества данных не зависит, мы все равно берем только 3
+        now_max = max(result_data.keys())  # O(n)
+        result_list.append(result_data.get(now_max))  # O(1)
+        result_data.pop(now_max)  # O(1)
+    print(result_list)  # O(1)
+# итого тут линейная сложность, O(n)
+
+def third_one(x_data):
+    pass
+
+
+
+
+info_storage = {'Geekbrains': 10000000, 'RiK': 1000000, 'Tander': 9560000, 'X5': 7000000, 'ip pupkin': 5000,
+                'pepsi': 99999999}
+first_one(info_storage)
+second_one(info_storage)
+
+# пока вторая функция лучше первой тк имеет линейную сложность в то время как у первой - квадратичная.
+# Третий кардинально отличный от первых двух я пока не придумал.
+

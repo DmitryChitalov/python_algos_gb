@@ -27,3 +27,87 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+import copy
+
+
+def auth_first(user_list):
+    while True:
+        login = input('введите логин: ')
+        get_passw = input('введите пароль: ')
+        if login == '':
+            print('введены не верные данные, процесс прерван')
+            break
+        elif login in user_list.keys():
+            stored_passw = user_list.get(login)[0]
+            is_active = user_list.get(login)[1]
+            if stored_passw == get_passw:
+                if is_active == True:
+                    print('Аутентификация пройдена, добро пожаловать')
+                else:
+                    input('учетная запись не активирована, активировать? y/n: ')
+            else:
+                print('введены не верные данные, в доступе отказано')
+        else:
+            print('введены не верные данные, в доступе отказано')
+# навскидку сложность O(1)
+
+def auth_second(user_list):
+    while True:
+        login = input('введите логин: ')
+        get_passw = input('введите пароль: ')
+        if login == '':
+            print('введены не верные данные, процесс прерван')
+            break
+        else:
+            for stored_login, login_list in user_list.items():
+                if stored_login == login:
+                    if login_list[0] == get_passw and login_list[1] == True:
+                        print('Аутентификация пройдена, добро пожаловать')
+                    elif login_list[1] != True:
+                        input('учетная запись не активирована, активировать? y/n: ')
+                else:
+                    print('введены не верные данные, в доступе отказано')
+# тут будет линейная сложность  от размера базы пользователей - O(n)
+
+def auth_third(user_list):
+    while True:
+        my = copy.deepcopy(user_list) # на нашел сложность для copy но логика подсказывает что она скорее
+        # всего O(n)
+        login = input('введите логин: ')
+        get_passw = input('введите пароль: ')
+        if login != '':
+            while my != {}: #  цикл на for но O(n) будет
+                temp = my.popitem() # O(1)
+                if login != temp[0]:
+                    continue
+                elif login == temp[0]:
+                    if temp[1][0] == get_passw and temp[1][1] == True:
+                        print('Аутентификация пройдена, добро пожаловать')
+                        continue
+                    elif temp[1][1] != True:
+                        input('учетная запись не активирована, активировать? y/n: ')
+                else:
+                    print('введены не верные данные, в доступе отказано')
+
+        else:
+            print('введены не верные данные, процесс прерван')
+            break
+# итоговая сложность будет линейная  O(n) из-за циклического перебора, и скорее всего даже O(2n)
+# из-за копирования словаря
+
+users = {
+    'vasya': ['1234', True],
+    'gvido': ['python', True],
+    'dima': ['pass', False],
+    'xaker': ['*', False],
+    'user': ['', True ]
+}
+
+auth_first(users)
+auth_second(users)
+auth_third(users)
+
+###################
+# Выводы: первый вариант самый быстрый из полученых потому что у него меньше сложность
+# и не копирует словарь при каждой проверке. Честно говоря варианты 2 и 3  уже не знал как извернуться,
+# потому что они не естественные

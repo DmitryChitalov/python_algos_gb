@@ -20,7 +20,7 @@
 import random as r
 
 
-def find_min_n2(x_list):
+def find_min_n2(x_list):  # O(n**2)
     my_min = x_list[1]
     for el in x_list:
         for i in x_list:
@@ -30,7 +30,7 @@ def find_min_n2(x_list):
     # в первом приближении как-то так
 
 
-def find_min_lin(x_list):
+def find_min_lin(x_list): # O(n)
     my_min = x_list[1]
     for el in x_list:
         if el < my_min:
