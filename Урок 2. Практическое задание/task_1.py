@@ -28,3 +28,55 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+class Calculator:
+    def __init__(self, number_1, number_2, signal):
+        self.number_1 = number_1
+        self.number_2 = number_2
+        self.signal = signal
+
+    def recursive_calc(self):
+        if self.signal == '0':
+            return
+        elif self.signal == '*':
+            self.number_1 = self.number_1 * self.number_2
+        elif self.signal == '/':
+            try:
+                self.number_1 = self.number_1 / self.number_2
+            except ZeroDivisionError:
+                print('Деление на 0 запрещено')
+                self.number_2 = input_number('корректное')
+                return self.recursive_calc()
+        elif self.signal == '-':
+            self.number_1 = self.number_1 - self.number_2
+        elif self.signal == '+':
+            self.number_1 = self.number_1 + self.number_2
+        print(f'Ваш результат: {self.number_1}')
+        self.number_2 = input_number('следующее')
+        self.signal = input_signal()
+        return self.recursive_calc()
+
+
+def input_signal():
+    signals = ['/', '*', '-', '+', '0']
+    signal = input('Введите действие *, /, -, +, или 0 для выхода: ')
+    if signal not in signals:
+        return input_signal()
+    return signal
+
+
+def input_number(n):
+    try:
+        number = float(input(f'Введите {n} число: '))
+    except ValueError:
+        print('Введено недопустимое значение')
+        return input_number(n)
+    return number
+
+
+number_1 = input_number('первое')
+number_2 = input_number('второе')
+signal = input_signal()
+calc = Calculator(number_1, number_2, signal)
+calc.recursive_calc()
