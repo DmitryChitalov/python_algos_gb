@@ -16,3 +16,26 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def natural_input():
+    __natural = input('Введите число натуральное число: ')
+    try:
+        int(__natural)
+        return __natural
+    except:
+        print('Вы ввели не число')
+        return natural_input()
+"""
+odd_even_calc(число,нечетное,четное)
+"""
+def odd_even_calc(number,odd=0, even=0):
+    if len(number) == 0:
+        print(f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})')
+    else:
+        __char = number[0]
+        if(int(__char)%2 == 1):
+            odd_even_calc(number[1:],odd+1,even)
+        else:
+            odd_even_calc(number[1:],odd, even+1)
+
+odd_even_calc(natural_input())
