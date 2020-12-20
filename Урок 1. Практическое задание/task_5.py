@@ -18,3 +18,44 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+class PlateStack:
+    def __init__(self,maxstacksize):
+        self.elems = [[]]
+        self.maxstacksize = maxstacksize
+
+    def is_empty(self):
+        return self.elems == [[]]
+
+    def push_in(self, elem):
+        if (len(self.elems[len(self.elems)-1])) <= self.maxstacksize:
+            self.elems[len(self.elems)-1].append(elem)
+        else:
+            self.elems.append([elem])
+
+    def pop_out(self):
+        tempplate =self.elems[len(self.elems)-1].pop()
+        if(len(self.elems[len(self.elems)-1]) == 0):
+            self.elems.pop()
+        return tempplate
+
+
+    def size(self):
+        return len(self.elems[len(self.elems)-1]) + (len(self.elems)-1) * self.maxstacksize
+
+    def __str__(self):
+        return str(self.elems)
+
+platesSatack = PlateStack(2)
+platesSatack.push_in('1')
+platesSatack.push_in('1')
+print(platesSatack.size())
+platesSatack.push_in('1')
+platesSatack.push_in('1')
+platesSatack.push_in('1')
+platesSatack.push_in('1')
+platesSatack.push_in('1')
+platesSatack.push_in('1')
+platesSatack.push_in('1')
+platesSatack.pop_out()
+platesSatack.pop_out()
+print(platesSatack)
