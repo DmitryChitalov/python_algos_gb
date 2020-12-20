@@ -17,3 +17,27 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random as r
+
+
+def find_min_n2(x_list):
+    my_min = x_list[1]
+    for el in x_list:
+        for i in x_list:
+            if el < my_min and el < i:
+                my_min = el
+    return my_min, x_list
+    # в первом приближении как-то так
+
+
+def find_min_lin(x_list):
+    my_min = x_list[1]
+    for el in x_list:
+        if el < my_min:
+            my_min = el
+    return my_min, x_list
+
+
+test_list = [r.randint(0, 100) for i in range(1, 15)]
+print(find_min_n2(test_list))
+print(find_min_lin(test_list))
