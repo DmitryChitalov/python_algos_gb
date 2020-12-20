@@ -16,3 +16,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def get_count_even_and_odd_nums(num, count_even=0, count_odd=0):
+    str_num = str(num)
+    item_in_num = str_num[len(str_num) - 1]
+    if int(item_in_num) % 2 == 0:
+        count_even += 1
+    else:
+        count_odd += 1
+    if len(str_num) == 1:
+        print(f'Количество чётных и нечётных чисел во введённом вами числе равно: {count_even} и {count_odd}')
+        return
+    else:
+        get_count_even_and_odd_nums(num // 10, count_even, count_odd)
+
+
+if __name__ == "__main__":
+    get_count_even_and_odd_nums(6785760)
+
+
