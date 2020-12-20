@@ -28,3 +28,39 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc_func():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    operation = operation.replace(' ', '')
+    if operation not in ("+", "-", "*", "/", "0"):
+        print('Вы ввлели недопустимую операцию, ознакомьтесь с инструкцией и исправьтесь')
+        return calc_func()
+    elif operation == "0":
+        return print('Пользователь вышел из программы')
+    else:
+        try:
+            a = float(input('Введите первое число: '))
+            b = float(input('Введите второе число: '))
+        except ValueError:
+            print('Вы вместо числа ввели строку. Исправьтесь')
+            return calc_func()
+    if operation == "+":
+        print(f'Ваш результат: {a+b}')
+        return calc_func()
+    elif operation == "-":
+        print(f'Ваш результат: {a-b}')
+        return calc_func()
+    elif operation == "*":
+        print(f'Ваш результат: {a-b}')
+        return calc_func()
+    elif operation == "/":
+        try:
+            print(f'Ваш результат: {a/b}')
+        except ZeroDivisionError:
+            print('Вы хотите делить на ноль! Исправьтесь')
+            return calc_func()
+        return calc_func()
+
+
+calc_func()
