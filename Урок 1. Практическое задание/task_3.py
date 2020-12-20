@@ -22,3 +22,39 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+org_dict = {
+    'ПАО "РОК"': 91003,
+    'ОАО "ПРЫГ"': 683085,
+    'ООО "СКОК"': 465929,
+    'Фирма "ТРЕСК"': 952579,
+    'АйтиКорпорейшн': 860223,
+    'ЗАО "ВЕНИК"': 466458,
+    'ТК "СУСАНИН"': 249509
+}
+
+# V-1
+income_list = []
+for key, value in org_dict.items():  # O(n)
+    income_list.append(value)        # O(1)
+
+a = max(income_list)                 # O(n)
+income_list.remove(a)                # O(n)
+b = max(income_list)                 # O(n)
+income_list.remove(b)                # O(n)
+c = max(income_list)                 # O(n)
+
+three_max_org = {}
+for key, value in org_dict.items():  # O(n)
+    if value == a or value == b or value == c:  # O(n)
+        three_max_org[key] = value   # O(n)
+
+print(three_max_org)
+"""Сложность O(n**2).
+Решение нельзя назвать оптимальным.
+"""
+
+# V-2
+
+
+
