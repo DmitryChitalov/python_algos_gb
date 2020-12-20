@@ -18,3 +18,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def printfunc(start_symbol,end_symbol=127, len = 10, print_string = ''):
+    __len = len
+    __ch = chr(start_symbol)
+    print_string = print_string + f'{start_symbol} - {__ch}'
+    __len = __len - 1
+    if(__len == 0):
+        print(print_string)
+        print_string = ''
+        __len = 10
+    else:
+        print_string = print_string + ' '
+
+    if start_symbol >= end_symbol:
+        print(print_string)
+        return 0
+    else:
+        return printfunc(start_symbol+1,end_symbol, __len,print_string)
+
+printfunc(32)
