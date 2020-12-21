@@ -18,3 +18,27 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+
+class StackOfPlates:
+    def __init__(self, size_of_steck):
+        self.elems = [[]]
+        self.size_of_stack = size_of_steck
+
+    def is_empty(self):
+        return self.elems == [[]]
+
+    def into(self, plate):  # добавляем тарлку в конец стопки, если стопка заполнена создаем новую и кладём в новую
+        if len(self.elems[len(self.elems)-1]) < self.size_of_stack:
+            self.elems[len(self.elems)-1].append(plate)
+        else:
+            self.elems.append([])
+            self.elems[len(self.elems) - 1].append(plate)
+
+    def out_one_plate(self):  # берем тарелку, удаляем стопку, если пустая
+        result = self.elems[len(self.elems) - 1].pop()
+        if len(self.elems[len(self.elems) - 1]) == 0:
+            self.elems.pop()
+        return result
+
+

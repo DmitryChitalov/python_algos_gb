@@ -79,6 +79,9 @@ def authorisation2(us_dict, name, pas):   # O(1) -- общая сложност�
 print(authorisation2(user_dict, name='user_1', pas=psw.hexdigest()))
 print(authorisation2(user_dict, name='user_9', pas=psw.hexdigest()))
 print(authorisation2(user_dict, name='user_1', pas=psw1.hexdigest()))
+"""Сложность константная, второе решение более оптимальное, 
+т.к. O(n) имеет более высокую сложность, чем O(1).
+"""
 print('-' * 79)
 
 
