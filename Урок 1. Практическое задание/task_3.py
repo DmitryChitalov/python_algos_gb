@@ -22,3 +22,39 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+companies_profit = {'Альфа': 5000, 'Люкс': 2000, 'Элит Профит': 3000, 'Премиум-Престиж': 4000, 'Приоритет-Премиум': 1000}
+
+""" Решение 1. Сложность O(n*log(n)) за счет функции sort."""
+
+profit_values = list(companies_profit.values())
+profit_values.sort(reverse=True)
+max_profits = list()
+i = 0
+j = 0
+while j < 3:
+    max_profits.append(profit_values[i])
+    i += 1
+    j += 1
+
+best_companies = list()
+for i in companies_profit.items():
+    for j in max_profits:
+        if i[1] == j:
+            best_companies.append(i[0])
+print(best_companies)
+
+""" Решение 2. Сложность O(n*log(n)). При одинаковой сложности O, второе решение лучше, т.к. легче читается """
+
+profit_values = list(companies_profit.values())
+profit_values.sort(reverse=True)
+max_profits = list()
+i = 0
+j = 0
+while j < 3:
+    max_profits.append(profit_values[i])
+    i += 1
+    j += 1
+
+best_companies2 = {key:value for (key,value) in companies_profit.items() if value in max_profits}
+print(best_companies2)
