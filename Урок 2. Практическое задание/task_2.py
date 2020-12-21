@@ -20,16 +20,15 @@
 
 def even_count(numbers, even=0, not_even=0):
     try:
-        if len(numbers) == 0:
+        if len(str(numbers)) == 0:
             return f'Количество четных {even}, нечетных {not_even}'
         else:
-            if int(numbers[0]) % 2 == 0:
-                return even_count(numbers[1:], even + 1, not_even)
+            if int(str(numbers)[0]) % 2 == 0:
+                return even_count(str(numbers)[1:], even + 1, not_even)
             else:
-                return even_count(numbers[1:], even, not_even + 1)
+                return even_count(str(numbers)[1:], even, not_even + 1)
     except ValueError:
         print('Ошибка, вы ввели не число')
 
 
-a = input('Введите число: ')
-print(even_count(a))
+print(even_count(4432423432))
