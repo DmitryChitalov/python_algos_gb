@@ -18,3 +18,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def symbol(n, k, line=0):
+    if n == k:
+        return f'{n} - {chr(n)}'
+    if line >= 9:
+        return f'{n} - {chr(n)}\n{symbol(n+1, k, line=0)}'
+    else:
+        return f'{n} - {chr(n)} {symbol(n+1, k, line+1)}'
+
+
+print(symbol(32, 127))
