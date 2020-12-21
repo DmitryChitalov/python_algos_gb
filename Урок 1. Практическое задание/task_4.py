@@ -27,3 +27,42 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {('aslan', 'klsdmalkmvnorieeiq'): True, ('fil', 'lkdvurnv'): False,
+         ('kayl', 'sadvbtbcc'): True, ('super_lina', 'sdfvvvxxw3'): True,
+         ('geo3', 'eeedca5'): True, ('niko', 'sdcvgjtr'): True,
+         ('john5', 'wfsssx345'): False, ('will', 'fjgsy6de'): False,
+         ('kolya', 'dfvccvres'): True, ('poll', 'sdcafr43eee'): True,
+         ('will04', 'rrdfvcxz56'): True, ('nadya', 'fdsfgwe'): True}
+
+# Наиболее эффективное решение, т.к не зависит от количество входящих параметров, сложность О(1)
+def check_user_o_1(name, password):
+    user_key = (name, password)
+
+    if user_key not in users:
+        print('Доступ запрещен')
+        return
+
+    if users[user_key]:
+        print('Доступ разрешен')
+    else:
+        print('Вам необходимо активировать учетную запись')
+
+# Сложность О(n)
+def check_user_o_n(name, password):
+    user_key = (name, password)
+
+    for user, is_active in users.items():
+        if user == user_key:
+            if is_active:
+                print('Доступ разрешен')
+            else:
+                print('Вам необходимо активировать учетную запись')
+            return
+
+    print('Доступ запрещен')
+
+
+u, p = input('Введите ваш логин: '), input('Введите пароль: ')
+check_user_o_1(u, p)
+check_user_o_n(u, p)
