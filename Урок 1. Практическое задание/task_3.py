@@ -33,28 +33,64 @@ org_dict = {
     'ТК "СУСАНИН"': 249509
 }
 
+
 # V-1
-income_list = []
-for key, value in org_dict.items():  # O(n)
-    income_list.append(value)        # O(1)
+def three_firms(firms_dict):
+    income_list = []
+    for key, value in firms_dict.items():  # O(n)
+        income_list.append(value)        # O(1)
 
-a = max(income_list)                 # O(n)
-income_list.remove(a)                # O(n)
-b = max(income_list)                 # O(n)
-income_list.remove(b)                # O(n)
-c = max(income_list)                 # O(n)
+    a = max(income_list)                 # O(n) -- по таблице
+    income_list.remove(a)                # O(n)
+    b = max(income_list)                 # O(n)
+    income_list.remove(b)                # O(n)
+    c = max(income_list)                 # O(n)
 
-three_max_org = {}
-for key, value in org_dict.items():  # O(n)
-    if value == a or value == b or value == c:  # O(n)
-        three_max_org[key] = value   # O(n)
+    three_max_org = {}
+    for key, value in firms_dict.items():  # O(n)
+        if value == a or value == b or value == c:  # O(1)
+            three_max_org[key] = value   # O(n)
+    return three_max_org
 
-print(three_max_org)
-"""Сложность O(n**2).
-Решение нельзя назвать оптимальным.
+
+print(three_firms(org_dict))
+"""Сложность O(n).
+Решение нельзя назвать оптимальным. Много строчек кода. Много переменных.
+Нужно избавиться от лишних переменных.
 """
 
+
 # V-2
+def three_firms_v2(firms_dict):                                      # общая сложность O(n*log n)
+    func_dict = {}                                                   # O(1)
+    func_list = sorted(list(firms_dict.values()))                    # предполагаю, что по аналогии с sort() O(n*log n)
+    for key, value in firms_dict.items():                            # O(n)
+        if value == func_list[len(func_list) - 1] \
+                or value == func_list[len(func_list) - 2]\
+                or value == func_list[len(func_list) - 3]:           # O(1)?
+            func_dict[key] = value                                   # O(1)
+    return func_dict                                                 # O(1)
 
 
+print(three_firms_v2(org_dict))
+"""Сложность O(n*log n). 
+Код стал короче примерно вдвое. Избавилиь от лишних переменных.
+Но при этом повысилась сложностьт из-за функции sorted, если я конечно прав и её сложность составляет O(n log n),
+тогда можно сказать, что код более читабельный, чем предыдущий, однако имеет более высокую сложность"""
 
+
+# V-3
+def three_firms_v3(firms_dict):      # общая сложность O(n)
+    three_dict = {}                                                  # O(1)
+    func_dict = dict(firms_dict)                                     # O(1)
+    for i in range(3):                                               # O(n)
+        income_max = max(func_dict.items(), key=lambda k: k[1])      # O(1)?
+        del func_dict[income_max[0]]
+        three_dict[income_max[0]] = income_max[1]
+    return three_dict
+
+
+print(three_firms_v3(org_dict))
+"""Сложность O(n).
+Наиболее оптимальное решение.
+"""

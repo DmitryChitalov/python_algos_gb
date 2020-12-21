@@ -27,3 +27,58 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+import hashlib
+
+# p = hashlib.md5(bytes(input('Create password:\n'), 'cp1251')) -- как вариант
+p = hashlib.md5(b'superpuperpassword')
+p = p.hexdigest()
+
+user_dict = {
+    'user_1': {'password': p, 'activation': True},
+    'user_2': {'password': p, 'activation': False},
+    'user_3': {'password': p, 'activation': True},
+    'user_4': {'password': p, 'activation': False}
+}
+
+
+def authorisation1(us_dict, name, pas):                  # O(n) -- общая сложность
+    for key, value in us_dict.items():                                               # O(n)
+        if key == name:
+            if value['password'] == pas and value['activation'] is True:             # O(1)?
+                return 'Welcome!'
+            elif value['password'] == pas and value['activation'] is False:
+                return 'Complete the activation process'
+            elif value['password'] != pas:
+                return 'Password is not correct'
+    return 'A user with this name was not found'
+
+
+# psw = hashlib.md5(bytes(input('Enter password:\n'), 'cp1251')) -- как вариант
+psw = hashlib.md5(b'superpuperpassword')
+psw1 = hashlib.md5(b'superrrpuperpassword')
+print(authorisation1(user_dict, name='user_1', pas=psw.hexdigest()))
+print(authorisation1(user_dict, name='user_9', pas=psw.hexdigest()))
+print(authorisation1(user_dict, name='user_1', pas=psw1.hexdigest()))
+"""Сложность O(n)"""
+print('-' * 79)
+
+
+def authorisation2(us_dict, name, pas):   # O(1) -- общая сложность, т.к. далее в функции везде константы
+    if us_dict.get(name):
+        if us_dict[name]['password'] == pas and us_dict[name]['activation'] is True:
+            return 'Welcome!'
+        elif us_dict[name]['password'] == pas and us_dict[name]['activation'] is not True:
+            return 'Complete the activation process'
+        elif us_dict[name]['password'] != pas:
+            return 'Password is not correct'
+    else:
+        return "Who are you? You'd better go!"
+
+
+print(authorisation2(user_dict, name='user_1', pas=psw.hexdigest()))
+print(authorisation2(user_dict, name='user_9', pas=psw.hexdigest()))
+print(authorisation2(user_dict, name='user_1', pas=psw1.hexdigest()))
+print('-' * 79)
+
+
