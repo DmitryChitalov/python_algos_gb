@@ -27,3 +27,22 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# Решение
+system_user_1 = {'login': 'u1', 'password': 123, 'act': 1}
+system_user_2 = {'login': 'u2', 'password': 456, 'act': 0}
+
+user_1 = {'login': 'u1', 'password': 123}
+user_2 = {'login': 'u2', 'password': 456}
+
+#1
+def authentication_1(user, system_user):  # O(1), встраивать цикл нет смысла, будет O(n)
+    if system_user['act'] != 1:
+        print('Ваша учетная запись не активирована')
+    else:
+        if user['login'] == system_user['login'] and user['password'] == system_user['password']:
+            print('Авторизация прошла успешно')
+        else:
+            print('Неверный логин или пароль')
+
+authentication_1(user_1, system_user_1)
