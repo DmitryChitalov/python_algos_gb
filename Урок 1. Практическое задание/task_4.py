@@ -27,3 +27,39 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+def authentication_1(users, user_name, user_pass):
+    for key, value in users.items():
+        if key == user_name:
+            if value['password'] == user_pass and value['activation']:
+                return 'Welcome'
+            elif value['password'] == user_pass and not value['activation']:
+                return 'Declined'
+            elif value['password'] != user_pass:
+                return 'Password is incorrect'
+    return 'No such user'
+
+
+# Сложность: O(1)
+def authentication_2(users, user_name, user_pass):
+    if users.get(user_name):
+        if users[user_name]['password'] == user_pass and users[user_name]['activation']:
+            return 'Welcome'
+        elif users[user_name]['password'] == user_pass and not users[user_name]['activation']:
+            return 'Declined'
+        elif users[user_name]['password'] != user_pass:
+            return 'Password is incorrect'
+    else:
+        return 'No such user'
+
+
+users = {'user_1': {'password': '123', 'activation': True},
+         'user_2': {'password': '213', 'activation': True},
+         'user_3': {'password': '321', 'activation': False}
+}
+
+print(authentication_1(users, 'user_1', '123'))
+print(authentication_1(users, 'user_4', '123'))
+print(authentication_2(users, 'user_2', '123'))
+print(authentication_2(users, 'user_3', '321'))
+
+# Второй вариант лучше, так как сложность - константная, в первой варианте сложность - линейная.
