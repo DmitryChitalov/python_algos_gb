@@ -15,3 +15,13 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def reversion(number, reversed_number=''):
+    if len(str(number)) == 0:
+        return reversed_number
+    else:
+        return reversion(str(number)[:-1], reversed_number + str(number)[-1])
+
+
+print(reversion('12345'))
