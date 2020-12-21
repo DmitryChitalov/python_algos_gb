@@ -21,4 +21,45 @@
 который вы придумаете, например, реализовать словарь.
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
+
+Вывод:
+Второй вариант решения более эффективный по времени, поскольку обладает
+наименьшей сложностью.
 """
+
+import random
+
+
+def search_3_max1(dict_obj: dict) -> dict:
+    """Реализует поиск трех компаний с наибольшей годовой прибылью.
+    Вариант 1.
+
+    Сложность алгоритма: O(n log n) - линейно-логарифмическое время,
+    т.к. функция sorted() обладает наибольшей сложностью - O(n log n).
+    """
+    return dict(sorted(dict_obj.items(), key=lambda item: -item[1])[:3])
+
+
+def search_3_max2(dict_obj: dict) -> dict:
+    """Реализует поиск трех компаний с наибольшей годовой прибылью.
+    Вариант 2.
+
+    Сложность алгоритма: O(n) - линейное время, т.к. наибольшей
+    сложностью обладает dict_obj.copy() - O(n).
+    """
+    max3 = {}
+    dict_obj_copy = dict_obj.copy()
+    try:
+        for _ in range(3):
+            max1 = max(dict_obj_copy.items(), key=lambda item: item[1])
+            max3.update([max1])
+            dict_obj_copy.pop(max1[0])
+    except ValueError:
+        return max3
+    return max3
+
+
+if __name__ == '__main__':
+    a = {f'Компания{i+1}': random.randrange(200000, 1000000) for i in range(10)}
+    print(search_3_max1(a))
+    print(search_3_max2(a))
