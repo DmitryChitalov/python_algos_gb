@@ -40,7 +40,7 @@ def check_2(lst_obj):
     Проходимся по списку и для каждого элемента проверяем,
     что такой элемент отсутствует в оставшихся справа элементах
 
-    Сложность: O(2N).
+    Сложность: O(N).
     """
     for j in range(len(lst_obj)):          # O(N)
         if lst_obj[j] in lst_obj[j+1:]:    # O(N) + O(N)
@@ -61,7 +61,7 @@ def check_3(lst_obj):
     lst_copy = list(lst_obj)                 # O(N)
     lst_copy.sort()                          # O(NlogN)
     for i in range(len(lst_obj) - 1):        # O(N) + O(1)
-        if lst_copy[i] == lst_copy[i+1]:     # O(N)
+        if lst_copy[i] == lst_copy[i+1]:     # O(1)
             return False                     # O(1)
     return True                              # O(1)
 
