@@ -27,3 +27,28 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+users = {"user0": {"pass": 55555, "active": False},
+        "user1": {"pass": 11111, "active": False},
+        "user2": {"pass": 22222, "active": False},
+        "user3": {"pass": 33333, "active": True},
+        "user4": {"pass": 44444, "active": True}}
+
+
+def first_sol(user_dict, u_login, u_pass):
+    """
+    Данная функция будет иметь итоговую сложность O(1), так как все операции сравнения, вхождения в словарь
+    или поиск по ключу имеют сложность O(1).
+    """
+    if u_login in user_dict:
+        if user_dict[u_login]["pass"] != u_pass:
+            return "Wrong pass!"
+        elif user_dict[u_login]["active"]:
+            return "Welcome!!"
+        else:
+            return "Looks like your account is inactive, please activate it!"
+    else:
+        return "Wrong user name!!"
+
+print(first_sol(users,"user0", 55555))
