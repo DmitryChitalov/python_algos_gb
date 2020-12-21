@@ -22,3 +22,26 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+company = {
+    'Roga&Kopyta': 1000,
+    'Romashka': 1150,
+    'Solnyshko': 2000,
+    'OOO': 1500,
+    'Popov&Co': 1780,
+    'Sova': 1250,
+    'Tiger': 1850,
+}
+
+
+# Сложность: O(N)
+def max_income_1(lst):
+    max_company = {}
+    lst_dict = dict(lst)
+    for i in range(3):
+        max_inc_comp = max(lst_dict.items(), key=lambda inc: inc[1])
+        del lst_dict[max_inc_comp[0]]
+        max_company[max_inc_comp[0]] = max_inc_comp[1]
+    return max_company
+
+
+print(max_income_1(company))
