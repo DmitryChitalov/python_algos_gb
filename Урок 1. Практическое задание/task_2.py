@@ -17,3 +17,40 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+import random
+
+
+def search_min1(lst_obj: list) -> int:
+    """Возвращает элемент с наименьшим значением из переданных в функцию.
+    Вариант 1.
+
+    Сложность алгоритма: O(n^2) - квадратичное время.
+    """
+    min_number = 0
+    for i in lst_obj:
+        for j in lst_obj[min_number:]:
+            if j < i:
+                min_number = a.index(j)
+                break
+    return lst_obj[min_number]
+
+
+def search_min2(lst_obj: list) -> int:
+    """Возвращает элемент с наименьшим значением из переданных в функцию.
+    Вариант 2.
+
+    Сложность алгоритма: O(n) - линейное время.
+    """
+    min_number = lst_obj[0]
+    for i in lst_obj[1:]:
+        if i < min_number:
+            min_number = i
+    return min_number
+
+
+if __name__ == '__main__':
+    a = random.sample(range(-100000, 100000), 50)
+    print(search_min1(a))
+    print(search_min2(a))
+    print(min(a))
