@@ -25,6 +25,9 @@ class StackOfPlates:
         self.elems = [[]]
         self.size_of_stack = size_of_steck
 
+    def __str__(self):
+        return str(self.elems)
+
     def is_empty(self):
         return self.elems == [[]]
 
@@ -41,4 +44,33 @@ class StackOfPlates:
             self.elems.pop()
         return result
 
+    def get_val(self):  # Верхняя тарелка в стопке
+        return self.elems[len(self.elems) - 1][len(self.elems[len(self.elems) - 1]) - 1]
 
+    def amount_of_plates(self):  # общее количество тарелок
+        amount = 0
+        for stack in self.elems:
+            amount += len(stack)
+        return amount
+
+    def amount_of_stack(self):  # Количество стопок
+        return len(self.elems)
+
+
+pl = StackOfPlates(3)
+print(f'В каждой стопке у нас по {pl.size_of_stack} тарелки')
+pl.into('Тарелка1')
+pl.into('Тарелка2')
+pl.into('Тарелка3')
+pl.into('Тарелка4')
+pl.into('Тарелка5')
+
+n = 0
+for i in pl.elems:
+    n += 1
+    print(f'Стопка {n}: {i}')
+
+print(f'Тарелок всего {pl.amount_of_plates()} шт.')
+print(f'Тарелки лежат в {pl.amount_of_stack()} стопках')
+print(f'{pl.out_one_plate()} улетела')
+print(f'В последней стопке сверху лежит {pl.get_val()}')
