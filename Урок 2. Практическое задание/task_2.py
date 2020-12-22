@@ -16,3 +16,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def parity(number, even  = 0, odd = 0):
+    number = str(number)
+    even = even
+    odd = odd
+    c = int(number[0])
+    if c % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    if len(number) == 1:
+        return f'Количество четных и нечетных цифр в числе равно: ({even}, {odd})'
+    else:
+        return parity(number[1:], even, odd)
+
+print(parity(12345))
