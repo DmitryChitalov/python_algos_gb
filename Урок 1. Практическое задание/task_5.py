@@ -99,5 +99,5 @@ if __name__ == '__main__':
     print(washing_up.all_size())
     print(washing_up.is_empty())
     # print(washing_up.return_all())
-    washing_up.push_in("tarelka12")
+    washing_up.push_in("tarelka22")
     print(washing_up.all_size())
