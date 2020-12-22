@@ -9,3 +9,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_elements(number, lst=[]):
+    if number == 0:
+        print(f'Количество элементов - {len(lst)}, их сумма - {sum(lst)}')
+        return
+    if len(lst) == 0:
+        lst.append(1)
+    else:
+        lst.append(lst[-1:][0] / (-2))
+    number -= 1
+
+    return sum_elements(number, lst)
+
+
+n = int(input("Введите количество элементов: "))
+sum_elements(n)
