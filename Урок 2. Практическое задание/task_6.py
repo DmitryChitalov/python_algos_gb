@@ -9,3 +9,20 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+def game(answer = random.randint(0, 100), n=10):
+    c = int(input('Попробуйте угадать число от 0 до 100: '))
+    if c > answer:
+        print('Введенное число больше загаданного')
+    if c < answer:
+        print('Введенное число меньше загаданного')
+    if c == answer:
+        return 'Вы угадали'
+    else:
+        if n > 1:
+            return game(answer, n-1)
+        else:
+            return print('Вы проиграли, правильный ответ -', answer)
+
+print(game())
+
