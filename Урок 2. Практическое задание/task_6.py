@@ -9,3 +9,24 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randint
+
+
+def guess_the_number(number, n=10):
+    if n == 0:
+        print('Лимит поыток исчерпан')
+    else:
+        user_number = int(input('Угадай число:\n'))
+        if user_number == number:
+            print('Победа!!!Уррра!!!!')
+        elif user_number > number:
+            print('Нужно число поменьше')
+            return guess_the_number(number + 0, n - 1)
+        else:
+            print('Нужно число побольше')
+            return guess_the_number(number + 0, n - 1)
+
+
+m = randint(0, 100)
+guess_the_number(m)
