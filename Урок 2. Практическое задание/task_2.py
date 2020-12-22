@@ -18,20 +18,21 @@
 """
 
 
-def even_odd(number=int(input('Введите число:\n')), n_even = [], n_odd = []):
-    a = int(str(number)[0]) % 2
-    e = n_even
-    o = n_odd
-    if number * 1 == 0:
-        return e, o
+def even_odd1(number, n_even=0, n_odd=0):
+    if number == 0:
+        return f'Количество четных цифр: {n_even},\n' \
+               f'Количество нечетных цифр: {n_odd}'
     else:
-        if a == 0:
-            n_even.append(str(number)[0])
+        if number % 2 == 0:
+            return even_odd1(number//10, n_even + 1, n_odd + 0)
         else:
-            n_odd.append(str(number)[0])
-        even_odd(number - (10 ** (len(str(number)) - 1) * int(str(number)[0])))
+            return even_odd1(number//10, n_even + 0, n_odd + 1)
 
 
-print(even_odd())
+try:
+    print(even_odd1(int(input('Введите число:\n'))))
+except ValueError:
+    print('Нужно было ввести число!')
+
 # even_odd(number - (10**(len(str(number)) - 1) * int(str(number)[0])))
 # a = int(str(number)[0]) % 2

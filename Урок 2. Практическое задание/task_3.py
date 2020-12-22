@@ -15,3 +15,17 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def rev(number, n_rev=''):
+    if number == 0:
+        return n_rev
+    else:
+        n = str(number % 10)
+        return rev(number//10, n_rev + n)
+
+
+try:
+    print(rev(int(input('Введите число, которое требуется перевернуть:\n'))))
+except ValueError:
+    print('Небходимо указать число!')
