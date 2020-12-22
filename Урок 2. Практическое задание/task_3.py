@@ -15,3 +15,18 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def reverse(result='', raw=input('Введите число, которое требуется перевернуть: ')):
+    try:
+        if len(raw) == 1:
+            result += raw[-1]
+            return print(result)
+        else:
+            result += raw[-1]
+            return reverse(result, raw[:-1])
+    except IndexError:
+        print('Вы ввели пустую строку, переворачивать нечего')
+
+
+reverse()

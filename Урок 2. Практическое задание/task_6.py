@@ -9,3 +9,25 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+
+def quiz(result=input('Какое число мы загадали? в диапазоне от О до 100: '), n=1, number=randint(0, 100)):
+    if n == 10:
+        return print(f'Вы не угадали даже с 10 раз ! Ответ - {number}')
+    try:
+        result = int(result)
+        if number == result:
+            return print('Ура, вы угадали !! ')
+        elif number > result:
+            print('Наше число больше введенного Вами!')
+            return quiz(input(f'Осталось {10-n} попыток ! Какое число мы загадали?: '), n + 1, number)
+        else:
+            print('Наше число меньше введенного Вами!')
+            return quiz(input(f'Осталось {10-n} попыток ! Какое число мы загадали?: '), n + 1, number)
+    except ValueError:
+        print('Постарайтесь вводить число, а не ерунду!')
+        return quiz(input(f'Осталось {10-n} попыток ! Какое число мы загадали?: '), n + 1, number)
+
+
+quiz()

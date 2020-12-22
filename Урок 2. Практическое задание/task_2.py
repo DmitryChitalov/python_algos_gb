@@ -16,3 +16,28 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def evod_count(counts={'even': 0, 'odd': 0}, number=input('Введите натуральное число: ')):
+    try:
+        if int(number) < 0:
+            print('Вы ввели не натуральное число')
+            return evod_count(counts={'even': 0, 'odd': 0}, number=input('Введите натуральное число: '))
+    except ValueError:
+        print('Вы ввели не натуральное число')
+        return evod_count(counts={'even': 0, 'odd': 0}, number=input('Введите натуральное число: '))
+    if len(number) == 1:
+            if int(number[0]) % 2 == 0:
+                counts['even'] += 1
+            else:
+                counts['odd'] += 1
+            return print(f' Even: {counts["even"]}, Odd: {counts["odd"]} ')
+    else:
+        if int(number[0]) % 2 == 0:
+            counts['even'] += 1
+        else:
+            counts['odd'] += 1
+        return evod_count(counts, number[1:])
+
+
+evod_count()
