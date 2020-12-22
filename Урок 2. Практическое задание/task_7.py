@@ -6,3 +6,13 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def equality_of_numbers(n):
+    if n == 0:
+        return 0
+    else:
+        return n + equality_of_numbers(n - 1)
+
+
+number = 6
+print(f'{equality_of_numbers(number)} = {number * (number + 1) / 2:.0f}')

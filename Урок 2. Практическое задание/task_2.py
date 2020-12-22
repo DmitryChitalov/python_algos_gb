@@ -16,3 +16,20 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def even_not_even(number_list, count_even=0, count_not_even=0):
+    if len(number_list) == 0:
+        print(f'Количество четных и нечетных цифр в числе равно: ({count_even}, {count_not_even})')
+        return
+
+    last = number_list.pop()
+    if last % 2 == 0:
+        count_even += 1
+    else:
+        count_not_even += 1
+
+    return even_not_even(number_list, count_even, count_not_even)
+
+
+number_list_data = [int(i) for i in input("Введите число: ")]
+even_not_even(number_list_data)
