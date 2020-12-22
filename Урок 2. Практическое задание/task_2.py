@@ -17,3 +17,21 @@
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
 
+
+def even_odd(number=int(input('Введите число:\n')), n_even = [], n_odd = []):
+    a = int(str(number)[0]) % 2
+    e = n_even
+    o = n_odd
+    if number * 1 == 0:
+        return e, o
+    else:
+        if a == 0:
+            n_even.append(str(number)[0])
+        else:
+            n_odd.append(str(number)[0])
+        even_odd(number - (10 ** (len(str(number)) - 1) * int(str(number)[0])))
+
+
+print(even_odd())
+# even_odd(number - (10**(len(str(number)) - 1) * int(str(number)[0])))
+# a = int(str(number)[0]) % 2
