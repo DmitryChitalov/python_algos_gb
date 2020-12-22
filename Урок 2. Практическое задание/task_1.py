@@ -28,3 +28,38 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    opr = input('Введите операцию (+, -, *, / или 0 для выхода):\n')
+    if opr == '0':
+        print('Exit')
+    elif opr == '+' or opr == '-' or opr == '*' or opr == '/':
+        try:
+            number_1 = int(input('Введите первое число:\n'))
+        except ValueError:
+            print('Необходимо число, начнем сначала.')
+            calc()
+        try:
+            number_2 = int(input('Введите первое число:\n'))
+        except ValueError:
+            print('Необходимо число, начнем сначала.')
+            calc()
+        if opr == '+':
+            print(number_1 + number_2)
+            calc()
+        elif opr == '-':
+            print(number_1 - number_2)
+            calc()
+        elif opr == '*':
+            print(number_1 * number_2)
+            calc()
+        else:
+            print(f'{number_1/number_2:.2f}')
+            calc()
+    else:
+        print('Dangerous operation!!!')
+        calc()
+
+
+calc()

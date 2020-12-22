@@ -16,3 +16,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd1(number, n_even=0, n_odd=0):
+    if number == 0:
+        return f'Количество четных цифр: {n_even},\n' \
+               f'Количество нечетных цифр: {n_odd}'
+    else:
+        if number % 2 == 0:
+            return even_odd1(number//10, n_even + 1, n_odd + 0)
+        else:
+            return even_odd1(number//10, n_even + 0, n_odd + 1)
+
+
+try:
+    print(even_odd1(int(input('Введите число:\n'))))
+except ValueError:
+    print('Нужно было ввести число!')
+
+# even_odd(number - (10**(len(str(number)) - 1) * int(str(number)[0])))
+# a = int(str(number)[0]) % 2
