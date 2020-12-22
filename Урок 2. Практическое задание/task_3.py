@@ -15,3 +15,21 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+from functools import reduce
+
+
+def turn_over1(num: int):
+    if not num // 10:
+        return str(num % 10)
+    a = num // 10
+    return int(str(num % 10) + str(turn_over1(a)))
+
+
+def turn_over2(num: int):
+    return int(reduce(lambda full, b: full + str(b), [str(num % 10), '' if not (a := num // 10) else turn_over2(a)]))
+
+
+if __name__ == '__main__':
+    print(turn_over1(123))
+    print(turn_over2(123))
