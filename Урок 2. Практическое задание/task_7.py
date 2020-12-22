@@ -13,16 +13,16 @@ def prof(n=input('Введите число для проверки: '), result=
         n = int(n)
         if n == 0:
             print('Введите натуральное число')
-            return prof(n=input('Введите число для проверки: '), result=1, step='1')
+            return prof(input('Введите число для проверки: '), 1, '1')
         if result == n*(n+1)/2:
             return print(f'Проверка выполнена для {step} = {n}({n}+1)/2 \n {result} = {result}')
         result = result + 1
         if result <= n:
             step += f'+{result}'
-        return prof(result=result, step=step)
+        return prof(n, result=result, step=step)
     except ValueError:
         print('Введите натуральное число')
-        return prof(n=input('Введите число для проверки: '), result=1, step='1')
+        return prof(input('Введите число для проверки: '), 1, '1')
 
 
 prof()
