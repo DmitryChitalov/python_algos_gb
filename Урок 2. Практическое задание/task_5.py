@@ -18,3 +18,12 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def chr_output(num=32) -> str:
+    return (f'{num} - {chr(num)}  {chr_output(num+1)}' if ((num - 22) % 10) != 0 else
+            f'\n{num} - {chr(num)}  {chr_output(num+1)}') if num < 128 else ''
+
+
+if __name__ == '__main__':
+    print(chr_output())

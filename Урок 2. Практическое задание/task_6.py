@@ -9,3 +9,19 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def guess(num=random.randint(0, 100), count=1) -> str:
+    user_number = int(input(f'Попытка номер {count}. Введите число: '))
+    if user_number > num:
+        print('Ваше число больше загаданного!')
+    if user_number < num:
+        print('Ваше число меньше загаданного!')
+    count += 1
+    return (guess(num, count) if count <= 10 else 'Попытки закончились!') if user_number != num else 'Вы угадали!'
+
+
+if __name__ == '__main__':
+    print(guess())

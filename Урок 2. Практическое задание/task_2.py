@@ -16,3 +16,11 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_numbers(num: int):
+    return tuple(map(sum, zip([num % 2 != 1, num % 2 != 0], (0, 0) if not (a := num // 10) else count_numbers(a))))
+
+
+if __name__ == '__main__':
+    print('Количество четных и нечетных цифр в числе равно:', count_numbers(int(input('Введите число: '))))
