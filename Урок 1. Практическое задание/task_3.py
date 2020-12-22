@@ -22,3 +22,23 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+info = {'Alcon': 1200000, 'Gazprom': 500000, 'Fenix': 20000, 'Ajax': 340000, 'Monro': 6700000}
+
+ #1) 
+def max_costs(dict_i):
+    dict_ii = sorted(dict_i.items(), key=lambda costs: costs[1], reverse=True)[:3] # n log n
+    return dict_ii
+
+#2)
+def max_costs_2(dict_i):
+    i = 1
+    for item in sorted(dict_i, key=dict_i.get, reverse=True): # O(n)
+        print(item, dict_i[item])
+        i += 1
+        if i > 3:
+            return i
+
+print(max_costs(info))
+print(max_costs_2(info))
+
+""" Первый вариант решения лучше, так как его сложность логарифмическая. Данная функция работает быстрее, чем простой поиск, который перебирает все значения. """
