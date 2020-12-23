@@ -17,3 +17,37 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+# Создаем список из случайных чисел
+
+from random import randint
+
+numbers = []
+for i in range(10):
+    numbers.append(randint(-5, 5))
+print(numbers)
+
+# первый способ выведения минимального числа в списке. Здесь сложность алгоритма O(N).
+
+def minimum(numbers):
+    min_res = numbers[0]
+    for i in numbers:
+        if i < min_res:
+            min_res = i
+    return min_res
+
+print(minimum(numbers))
+
+
+# Второй способ выведения минимального значения. Здесь используем два цикла. Сложность алгоритма O(N^2).
+def minimum2(numbers):
+    for k in numbers:
+        is_min = True
+        for l in numbers:
+            if k > l:
+                is_min = False
+        if is_min:
+            return k
+
+print(minimum2(numbers))
+
