@@ -17,3 +17,33 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+from random import randint
+
+
+# Первый алгоритм
+
+def min_from_lst(input_lst):
+    for i in range(len(input_lst) - 1):
+        low = i
+        j = i + 1
+        while j < len(input_lst):
+            if input_lst[j] < input_lst[low]:
+                low = j
+            j += 1
+        input_lst[i], input_lst[low] = input_lst[low], input_lst[i]
+    return input_lst, input_lst[0]
+
+
+array = [randint(1, 100) for el in range(10)]  # генераторное выражение для создания списка
+
+print(f'Исходный список: {array}')
+print(f'Кортеж вида (отсортированный список, минимальный элемент): {min_from_lst(array)}')
+
+
+# Второй алгоритм
+
+def low_from_lst(input_lst):
+    return min(input_lst)
+
+
+print(f'Минимальный элемент, возвращенный по второму алгоритму: {low_from_lst(array)}')
