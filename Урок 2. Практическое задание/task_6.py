@@ -33,5 +33,5 @@ def guess_num(vector, counter):
 
 if __name__ == '__main__':
     a = random.randint(0, 100)
-    print(a)
-    guess_num(a, counter=3)
+    # print(a)
+    guess_num(a, counter=10)
