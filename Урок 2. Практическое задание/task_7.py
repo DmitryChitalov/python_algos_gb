@@ -12,7 +12,7 @@ import sys
 sys.setrecursionlimit(10000)
 
 
-# Переменная i нужна для того, чтобы значение left result оставалось постоянным
+# Переменную i использую для того, чтобы значение left result оставалось постоянным
 # Не могу понять, за счет чего у меня переполняется стек
 def check_equality(n, right_result=0, left_result=1, i=0):
     i += 1
