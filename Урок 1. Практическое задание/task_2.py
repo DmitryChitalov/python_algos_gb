@@ -17,3 +17,26 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+def min_value_On2(lst):
+    min_v = 0
+    for i in range(len(lst)-1):
+        i_min = i
+        j = i + 1
+        for j in range(len(lst)):
+            if lst[j] < lst[i_min]:
+                i_min = j
+                min_v = lst[i]
+                lst[i] = lst[i_min]
+                lst[i_min] = min_v
+    return min_v
+
+
+def min_value_On(lst):
+    return min(lst)
+
+
+lst_ = [10, -10, 3, -2, -100, 15]
+print(min_value_On(lst_))
+print(min_value_On2(lst_))

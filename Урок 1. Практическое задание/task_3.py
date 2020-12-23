@@ -22,3 +22,26 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+# O(n log n)
+def top3(cmpn):
+    sort_cmpn = sorted(cmpn.items(), key=lambda item: item[1], reverse=True)
+    return sort_cmpn[:3]
+
+
+# O(n)
+def top3_2(cmpn):
+    input_top3 = {}
+    for i in range(3):
+        val = max(cmpn.items(), key=lambda item: item[1])
+        input_top3[val[0]] = val[1]
+        del cmpn[val[0]]
+    return input_top3
+
+
+company = {'sber': 10010, 'vtb': 1200, 'tinkoff': 3000, 'alfa': 10400, 'bcs': 500}
+print(top3(company))
+print(top3_2(company))
+
+# Второй вариант легче по сложности и без необходимости сортировки исходного словаря
