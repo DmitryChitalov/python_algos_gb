@@ -27,3 +27,54 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# var.1 сложность получилась O(1) поскольку применяются только конструкции if else в решении
+# Вложенность if в if не услодняет само решение. Работа функции происходит только по поиску в словаре ключа O(1)
+
+
+def autorization_if(data_users, login, password):
+    if data_users.get(login):
+        if data_users[login]['pass'] == password and data_users[login]['active']:
+            return 'Welcome! Your account is active'
+        elif data_users[login]['pass'] != password:
+            return 'Incorrect password'
+        elif data_users[login]['pass'] == password and not data_users[login]['active']:
+            return 'Your account is not active!'
+    else:
+        return 'The user does not exist'
+
+
+# var.2 усложненный вариант var.1 - за счет цикла - общая сложность будет O(n)
+
+
+def autorization_for_if(data_users, user_login, user_password):
+    for login, value in data_users.items():
+        if login == user_login:
+            if value['pass'] == user_password and value['active']:
+                return 'Welcome! Your account is active'
+            elif value['pass'] == user_password and not value['active']:
+                return 'Your account is not active!'
+            elif value['pass'] != user_password:
+                return 'Incorrect password'
+
+    return 'The user does not exist'
+
+
+users = {'login1': {'pass': '12345', 'active': True},
+         'login2': {'pass': '12345', 'active': True},
+         'login3': {'pass': '12345', 'active': True},
+         'login4': {'pass': '12345', 'active': False},
+         'login5': {'pass': '12345', 'active': False},
+         'login6': {'pass': '12345', 'active': False}
+         }
+
+print(autorization_if(users, 'login1', '12345'))
+print(autorization_if(users, 'login4', '12345'))
+print(autorization_if(users, 'login7', '12345'))
+
+print(autorization_for_if(users, 'login1', '12345'))
+print(autorization_for_if(users, 'login4', '12345'))
+print(autorization_for_if(users, 'login7', '12345'))
+
+# вывод - var.1 с функцией autorization_if очевидно более оптимальное решение - O(1) лучше, чем с O(n)
