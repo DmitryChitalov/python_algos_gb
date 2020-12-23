@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_table(num=128, count=3):
+    if num < 33:
+        return str(f'{num} - {chr(num)} ')
+    else:
+        num -= 1
+        count += 1
+        if count % 10 == 0:
+            return ascii_table(num, count) + str(f'{num} - {chr(num)}\n')
+        else:
+            return ascii_table(num, count) + str(f'{num} - {chr(num)} ')
+
+
+print(ascii_table())
