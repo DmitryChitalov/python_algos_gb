@@ -17,3 +17,28 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+import random
+
+lst1 = [random.randint(0, 100) for i in range(10)]
+print(lst1)
+
+def list_min_n2(lst):
+    for i in lst:
+        min = True
+        for j in lst:
+            if i > j:
+                min = False
+        if min:
+            return i
+
+def list_min_n(lst):
+    min = lst[0]
+    for i in lst:
+        if i < min:
+            min = i
+    return min
+
+
+print(list_min_n2(lst1))
+print(list_min_n(lst1))
