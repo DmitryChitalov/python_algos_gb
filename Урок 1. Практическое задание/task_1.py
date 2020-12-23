@@ -28,8 +28,8 @@ def check_1(lst_obj):
 
     Сложность: !!!.
     """
-    lst_to_set = set(lst_obj)  # !!!
-    return lst_to_set
+    lst_to_set = set(lst_obj)  # O(n) - простой поиск
+    return lst_to_set # O(1) - это константа
 
 
 #############################################################################################
@@ -43,10 +43,10 @@ def check_2(lst_obj):
 
     Сложность: !!!.
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # for - O(n), len() - O(1) и range O(n)
+        if lst_obj[j] in lst_obj[j+1:]:    # O(n) - также простой поиск
+            return False                   # O(1) - return
+    return True                            # O(1) - return
 
 
 #############################################################################################
@@ -59,20 +59,20 @@ def check_3(lst_obj):
 
     Сложность: !!!
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # O(n) - но зависит от длины агрумента
+    lst_copy.sort()                          # O(n log n) - сортировка
+    for i in range(len(lst_obj) - 1):        # O(n)
+        if lst_copy[i] == lst_copy[i+1]:     # O(1) - операция сравнения
+            return False                     # O(1) - return
+    return True                              # O(1) - return
 
 #############################################################################################
 
 
-for j in (50, 500, 1000, 5000, 1000):
+for j in (50, 500, 1000, 5000, 1000): # O(n) - это простой перебор
     # Из 100000 чисел возьмем 'j' случайно выбранных
     # Всего 10 тыс. чисел
-    lst = random.sample(range(-100000, 100000), j)
+    lst = random.sample(range(-100000, 100000), j) # O(n log n) модуль рандом использует sample
 
 print(check_1(lst))
 print(check_2(lst))
