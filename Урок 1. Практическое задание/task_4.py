@@ -27,3 +27,43 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+# 1 вариант сложность O(1)
+# Информацию о пользователе храним в словаре, на вход функции отправляем конкретного юзера
+user_1 = {
+    'login': 'Max',
+    'password': 'Qwerty',
+    "is_active": False
+}
+
+
+def check_user(user):
+    password = input('Введите пароль: ')
+    if password == user['password']:
+        if user['is_active']:
+            print("Вход разрешен")
+        else:
+            print("Ваша учетная запись не активна")
+    else:
+        print('Вы ввели неправильный пароль')
+
+
+check_user(user_1)
+
+# 2 вариант Сложность O(1)
+users = {"login_1": {'password': "123", 'is_active': True},
+         "login_2": {'password': "123", 'is_active': False}
+         }
+
+
+def check_user_2(users, user, password):
+    check_user = users.get(user)
+    if check_user['password'] == password:
+        if check_user["is_active"]:
+            print("Все ок")
+        else:
+            print("Учетная запись не активна")
+    else:
+        print("Неправильный пароль")
+
+
+check_user_2(users, "login_2", "123")

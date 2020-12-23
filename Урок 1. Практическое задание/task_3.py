@@ -22,3 +22,34 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+companies = {"company_1": 1000,
+             "company_2": 2000,
+             "company_3": 3000,
+             "company_5": 500,
+             "company_6": 6000,
+             "company_7": 5500,
+             "company_8": 550,
+             }
+
+
+# 1 вариант  Сложность - О(n*log n)
+list_comp = list(companies.items())
+
+list_comp.sort(key=lambda i: i[1], reverse=True)
+
+for i in range(3):
+    print(f'Выручка компании {list_comp[i][0]} составляет {list_comp[i][1]}')
+
+
+# 2-й вариант Сложность О(n)
+dict_comp = companies
+for i in range(3):
+    maxim = max (dict_comp.items(), key = lambda k_v: k_v[1])
+    del dict_comp[maxim[0]]
+    print(f"Выручка компании {maxim[0]} составляет -  {maxim[1]} ")
+
+
+# Второй вариант лучше так как у него меньше сложность
+
