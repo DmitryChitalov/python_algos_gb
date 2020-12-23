@@ -22,3 +22,41 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+company_profit = {
+    'comp1': 1000,
+    'comp2': 1200,
+    'comp3': 2000,
+    'comp4': 200,
+    'comp5': 1300,
+    'comp6': 1700,
+    'comp7': 600,
+    'comp8': 1200,
+}
+
+# var.1 O(n logn)
+
+dict_to_list = list(company_profit.items())
+dict_to_list.sort(key=lambda _: _[1])
+for j in range(1, 4):
+    print(dict_to_list[-j][0], 'доход -', dict_to_list[-j][1])
+
+# сложноватое решение
+# поскольку O(n logn) - (изза сортировки появляется log n плюс проход по листу дает сложность n)
+# данное решение не самое оптимальное в сравнении с решением
+# с линейной сложность, однако оно не квадратичной/кубической сложности
+
+
+# var.2 O(n)
+
+search_max = {}
+for j in range(3):
+    max_val = max(company_profit.items(), key=lambda _: _[1])
+    del company_profit[max_val[0]]
+    search_max[max_val[0]] = max_val[1]
+
+print(search_max)
+
+# из двух решений наиболее оптимальное
+# поскольку O(n) - сложность линейная, при переборе элементов for
+# и аналогично сложность O(n) - на функции max
