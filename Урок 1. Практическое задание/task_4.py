@@ -27,3 +27,59 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+dict_obj = {
+    'name': ['password', 'yes'],
+    'fname': ['fpassword', 'no']
+}
+
+def autentification(dict):
+    dict_obj = dict
+    name = input('Введите логин')
+    name_check = 0
+    autorization = list(dict_obj.keys())
+    for i in range(len(autorization)):
+        if autorization[i] != name:
+            i+=1
+        else:
+            name_check = 1
+            break
+    if name_check != 1:
+        return 'Пользователя не существует'
+    else:
+        password = input('Введите пароль')
+        checker = dict_obj.get(autorization[i])
+        if checker[0] == password and checker[1] == 'yes':
+            return 'Авторизация прошла успешно'
+
+        elif checker[0] == password and checker[1] != 'yes':
+            return 'Необходимо активировать аккаунт'
+        else:
+            return 'Введен неверный пароль' # 2 O(n^2)
+
+
+def autentification2(dict):
+    dict_obj = dict
+    name = input('Введите логин')
+    names = dict_obj.keys()
+    auto_check = 0
+    us_values = dict_obj.values()
+    for i in range(len(names)):
+        if names[i] != name:
+            i+=1
+        else:
+            name_check = 1
+            password = input('Введите пароль')
+            for j in range(len(names)):
+                password_check = us_values[j]
+                if password_check[0] == password:
+                    auto_check = 1
+                    if password_check[1] == 'yes':
+                        return 'Авторизация прошла успешно'
+                    else:
+                        return 'Необходимо активировать аккаунт'
+    if auto_check != 1:
+        return 'Введен неверный пароль'
+    if name_check != 1:
+        return 'Пользователя не существует'
+ #2 O(n^2)
+ # Более эффективного решения не представлено так, как сложнось обоих алгоритмов одинакова, но первый алгоритм проще в прочтении
