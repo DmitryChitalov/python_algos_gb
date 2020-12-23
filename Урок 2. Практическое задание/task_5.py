@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def symbols(start=32, finish=42, result=''):
+    if start > 127:
+        return 'Конец'
+    else:
+        for i in range(start, finish):
+            if i <= 127:
+                result += f'{i} - {chr(i)} '
+        print(result)
+        symbols(start+10, finish+10, result='')
+
+
+
+symbols()
+
+
