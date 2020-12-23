@@ -16,3 +16,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def chet_nechet(x, cht =0, ncht=0):
+    '''
+    :param x: переворачиваемое число int
+    :param cht: счетчик четных цифр
+    :param ncht: счетчик нечетных цифр
+    '''
+    i = 0
+    try:
+        x = str(x)
+    except:
+        x = x
+    if int(x[i]) % 2 == 0:
+        cht += 1
+    else:
+        ncht += 1
+    if len(x) == 1:
+        print(f'В введеном вами числе {cht} четные и {ncht} нечетных цифры')
+        return 12
+    else:
+        chet_nechet(int(x[i + 1:]), cht, ncht)
+
+
+print(chet_nechet(1115222))
