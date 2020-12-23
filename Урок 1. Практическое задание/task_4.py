@@ -27,3 +27,37 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# O(1)
+def auth(lst_users, name, pswd):
+    if lst_users.get(name):
+        if lst_users[name]['password'] != pswd:
+            return "Указан неверный пароль!"
+        return "Добро пожаловать!" if lst_users[name]['active'] else "Необходимо пройти активацию учетной записи!"
+    else:
+        return "Данной учетной записи не существует!"
+
+
+# O(n)
+def auth_user(lst_users, name, pswd):
+    for key, value in lst_users.items():
+        if key == name:
+            if value['password'] != pswd:
+                return "Указан неверный пароль!"
+            return "Добро пожаловать!" if value['active'] else "Необходимо пройти активацию учетной записи!"
+
+    return "Данной учетной записи не существует!"
+
+
+users = {'user_1': {'password': '123456', 'active': True}, 'user_2': {'password': '098765', 'active': False}}
+print(auth(users, 'user_1', '123456'))
+print(auth(users, 'user_1', '1234567'))
+print(auth(users, 'user_2', '098765'))
+
+print(auth_user(users, 'user_1', '123456'))
+print(auth_user(users, 'user_1', '1234567'))
+print(auth_user(users, 'user_2', '098765'))
+
+# Первая функция со сложностью O(1) будет быстрее и эффективнее для данной задачи,
+# т.к реализован поиск по ключу в словаре и без использования перебора последовательности
