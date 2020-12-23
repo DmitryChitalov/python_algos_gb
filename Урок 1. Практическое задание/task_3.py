@@ -22,3 +22,27 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+company_dic = {}
+values_list = []
+
+company_dic['compA'] = 1000000
+company_dic['compB'] = 50000
+company_dic['compC'] = 500000
+company_dic['compD'] = 200000
+company_dic['compF'] = 100000
+company_dic['compG'] = 10000
+
+print(company_dic)
+print(len(company_dic))
+
+sorted_values = sorted(company_dic.values()) # Sort the values
+sorted_dict = {}
+
+for i in sorted_values:
+    for k in company_dic.keys():
+        if company_dic[k] == i:
+            sorted_dict[k] = company_dic[k]
+            break
+
+print(sorted_dict)
+
