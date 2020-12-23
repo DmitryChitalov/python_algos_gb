@@ -9,3 +9,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def summarize(getted,n, summ):
+    if getted>0:
+        summ= summ + n
+        n = n/(-2)
+        getted -= 1
+        summarize(getted,n, summ)
+    else:
+        return print(summ)
+
+
+
+if __name__ == '__main__':
+    getted = input("введите целое число : ")
+    try:
+        getted = int(getted)
+    except ValueError:
+        print('Нужно челое число!')
+    else:
+        summarize(getted, n=1, summ=0 ) # счетчик,  инициируюющее число ряда и сумма

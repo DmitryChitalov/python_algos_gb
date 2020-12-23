@@ -15,3 +15,23 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+def reverse(getted, resul):
+    if getted > 0:
+        resul+=(str(getted % 10))
+        getted= getted //10
+        reverse(getted, resul)
+    else:
+        return print(int(resul))
+
+
+
+
+
+if __name__ == '__main__':
+    getted = input("введите целое число : ")
+    try:
+        getted= int(getted)
+    except ValueError:
+        print('Нужно челое число!')
+    else:
+        reverse(getted, resul= '')

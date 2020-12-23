@@ -16,3 +16,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def even(getted, evens, odds):
+    if getted > 0:
+        this_try = getted%10
+        getted= getted //10
+        if this_try%2 == 0:
+            evens+=1
+            even(getted, evens, odds)
+        else:
+            odds += 1
+            even(getted, evens, odds)
+    else:
+        return print(f'Четных - {evens}, нечетных - {odds}')
+
+
+
+
+
+if __name__ == '__main__':
+    getted = input("введите число: ")
+    try:
+        getted= int(getted)
+    except ValueError:
+        print('Нужно число!')
+    even(getted, evens=0, odds= 0)

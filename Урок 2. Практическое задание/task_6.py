@@ -9,3 +9,29 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def guess_num(vector, counter):
+    if counter > 0:
+        try:
+            this_try = int(input('Введите целое положительное число от 0 до 100: '))
+            counter -= 1
+            if this_try > vector:
+                print('мое число меньше')
+                guess_num(vector, counter)
+            elif this_try < vector:
+                print('мое число больше')
+                guess_num(vector, counter)
+            else:
+                return print(f'Угадали! Мое число - {vector}')
+        except ValueError:
+            print('Введите строку')
+    else:
+        return print(f'попытки закончились, было загадано {vector}')
+
+
+if __name__ == '__main__':
+    a = random.randint(0, 100)
+    # print(a)
+    guess_num(a, counter=10)

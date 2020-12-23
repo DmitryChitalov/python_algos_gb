@@ -18,3 +18,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def symbls(start, stop):
+    if start < stop:
+        restop = start + 10 if stop - 10 >= start else stop+1 # костыль
+        my_print(start, restop, my_string='')
+        start = restop
+        symbls(start, stop)
+    else:
+        return
+
+
+def my_print(start, stop, my_string):
+    if start < stop:
+        my_string = my_string + f'{start}-{chr(start)}\t '
+        start += 1
+        my_print(start, stop, my_string)
+    else:
+        return print(my_string + '\n')
+
+
+if __name__ == '__main__':
+    symbls(32, 127)
