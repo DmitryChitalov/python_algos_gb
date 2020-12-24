@@ -15,3 +15,24 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+
+# print(hashlib.algorithms_available)
+# print(hashlib.algorithms_guaranteed)
+
+
+def get_hash(phrase, salt):
+    # print( phrase, salt)
+    hash_obj= hashlib.sha256(salt.encode() + phrase.encode()).hexdigest();
+    return hash_obj
+
+if __name__ == "__main__":
+    login = input('Введите логин: ')
+    passwd = input('Введите пароль: ')
+    stored_digest = get_hash(passwd, login)
+    print(f"{stored_digest} сохранено")
+    confirm = input('Подтвердите повторным вводом пароля: ')
+    if stored_digest == get_hash(confirm, login):
+        print('Пароли совпадают, учетная запись создана')
+    else:
+        print('Введенные пароли  не совпадают!')
