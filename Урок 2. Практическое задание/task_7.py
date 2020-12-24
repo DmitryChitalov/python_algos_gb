@@ -6,3 +6,14 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def theorem(n):
+    if n <= 1:
+        return n
+    else:
+        return n + theorem(n-1)
+
+
+n = int(input('Please enter a positive integer: '))
+print(theorem(n) == n * (n + 1) / 2)

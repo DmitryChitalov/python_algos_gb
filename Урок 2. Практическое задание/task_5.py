@@ -17,4 +17,19 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+
+Допускается исп-е встроенных ф-ций
 """
+
+
+def tab_ascii(symbol=32, in_string=0):
+    if in_string % 10 == 0:
+        print()
+    if symbol > 127:
+        return f'{symbol} - {chr(symbol)}'
+    else:
+        print(f'{symbol} - {chr(symbol)} ', end='')
+        return tab_ascii(symbol+1, in_string+1)
+
+
+tab_ascii()
