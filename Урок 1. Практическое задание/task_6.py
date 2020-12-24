@@ -15,3 +15,19 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+from collections import deque
+
+intQueue = deque()
+intQueue.append(1)
+intQueue.append(2)
+intQueue.append(3)
+intQueue.append(4)
+intQueue.append(5)
+
+first = intQueue.popleft()
+second = intQueue.popleft()
+third= intQueue.popleft()
+
+print(first)
+print(second)
+print(third)
