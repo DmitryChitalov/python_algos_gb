@@ -19,7 +19,6 @@
 from collections import Counter
 
 def count_digits(num):
-    return Counter('odd' if int(d) % 2 else 'even' for d in str(num))
+    return Counter('нечетных чисел' if int(d) % 2 else 'четных чисел' for d in str(num))
 
 print (count_digits(int(input("Введите любое целое число : "))))
-print (count_digits((int(input("Введите любое целое число : ")))))
