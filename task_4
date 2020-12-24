@@ -1,0 +1,65 @@
+"""
+Задание 4.
+
+Для этой задачи:
+1) придумайте 1-3 решения (желательно хотя бы два)
+2) оцените сложность каждого решения в нотации О-большое
+3) сделайте вывод, какое решение эффективнее и почему
+
+Примечание:
+Без выполнения пунктов 2 и 3 задание считается нерешенным. Пункты 2 и 3 можно выполнить
+через строки документации в самом коде.
+Если у вас возникают сложности, постарайтесь подумать как можно решить задачу,
+а не писать "мы это не проходили)".
+Алгоритмизатор должен развивать мышление, а это прежде всего практика.
+А без столкновения со сложностями его не развить.
+
+
+Сама задача:
+Пользователи веб-ресурса проходят аутентификацию.
+В системе хранятся логин, пароль и отметка об активации учетной записи.
+
+Нужно реализовать проверку, может ли пользователь быть допущен к ресурсу.
+При этом его учетка должна быть активирована.
+А если нет, то польз-лю нужно предложить ее пройти.
+
+Приложение должно давать ответы на эти вопросы и быть реализовано в виде функции.
+Для реализации хранилища можно применить любой подход,
+который вы придумаете, например, реализовать словарь.
+"""
+users = {'Victor': {'password': '54545', 'activation': False},
+         'Oleg': {'password': '52888', 'activation': False},
+         'Marina': {'password': '99773', 'activation': True},
+         'Nadya': {'password': '89933', 'activation': True}
+         }
+
+
+# Сложность О(n)
+def authentication1(users, users_name, users_password):
+    for key, value in users.items():
+        if key == users_name:
+            if value['password'] == users_password and value['activation']:
+                return 'Пароль верный, доступ разрешен.'
+            elif value['password'] == users_password and not value['activation']:
+                return 'Учетная запись не активирована, необходимо пройти активацию.'
+            elif value['password'] != users_password:
+                return 'Пароль не верный.'
+
+    return 'Пользователь не зарегистрирован'
+
+
+# Сложность О(1)
+def authentication2(users, users_name, users_password):
+    if users.get(users_name):
+        if users[users_name]['password'] == users_password and users[users_name]['activation']:
+            return 'Пароль верный, доступ разрешен.'
+        elif users[users_name]['password'] == users_password and not users[users_name]['activation']:
+            return 'Учетная запись не активирована, необходимо пройти активацию.'
+        elif users[users_name]['password'] != users_password:
+            return 'Пароль не верный.'
+    else:
+        return 'Пользователь не зарегистрирован'
+
+
+print(authentication1(users, 'Dmitry', '88888'))
+print(authentication2(users, 'Nadya', '89933'))
