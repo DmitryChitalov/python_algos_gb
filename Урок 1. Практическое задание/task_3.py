@@ -22,3 +22,53 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+company = {
+    "vk": 4000,
+    "google": 10000,
+    "yandex": 8000,
+    "xiaomi": 3000,
+    "samsung": 5000,
+    "apple": 6000,
+}
+
+
+# 1-й алгоритм
+
+def max_1(indict: dict):
+    """
+    Принимает в качестве входного аргумента словарь.
+    Возвращает словарь, в котором 3 компании с наибольшей годовой прибылью из входного словаря.
+
+    Сложность O(n log n)
+    """
+    list_from_dict = list(indict.items()) # O(N)
+    list_from_dict.sort(key=lambda i: i[1], reverse=True)  # O(n log n)
+
+    return dict(list_from_dict[:3]) # O(N)
+
+
+# 2-й алгоритм
+def max_2(indict: list):
+    """
+    Принимает в качестве входного аргумента список.
+    Возвращает словарь, в котором 3 компании с наибольшей годовой прибылью из входного словаря.
+
+    Сложность O(n ** 2)
+    """
+    for i in range(len(indict)):
+        temp_idx = i
+
+        for j in range(i + 1, len(indict)):
+            if indict[j][1] > indict[temp_idx][1]:
+                temp_idx = j
+        indict[i], indict[temp_idx] = indict[temp_idx], indict[i]
+    return dict(indict[:3])
+
+
+"""
+Эффективней 1-й алгоритм., т.к. самая низкая сложность из 2-х алгоритмов и используется встроенная в Python функция 
+сортировки
+"""
+print(max_1(company))
+print(max_2(list(company.items())))
