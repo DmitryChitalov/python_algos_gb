@@ -6,3 +6,23 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+n = int(input("любое натуральное число"))
+x = n
+
+
+def fun(x, n, sum):
+    if n == 0:
+
+        if sum == int(x * (x + 1) / 2):
+            return True, "sum is=", sum
+        else:
+            return False, sum
+
+    else:
+
+        return fun(x, n - 1, sum + n)
+
+
+print(fun(x, n, sum=0))
+

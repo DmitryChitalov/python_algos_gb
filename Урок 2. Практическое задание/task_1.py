@@ -28,3 +28,35 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calc():
+    s = input("Знак (+,-,*,/): ")
+    if s == '0':
+        return
+    elif s in ('+', '-', '*', '/'):
+        x = float(input("x="))
+        y = float(input("y="))
+        if s == '+':
+            print("%.2f" % (x + y))
+            return calc()
+        elif s == '-':
+            print("%.2f" % (x - y))
+            return calc()
+        elif s == '*':
+            print("%.2f" % (x * y))
+            return calc()
+
+        elif s == '/':
+            if y != 0:
+                print("%.2f" % (x / y))
+
+            else:
+                print("Деление на ноль!")
+            return calc()
+
+        else:
+            print("Неверный знак операции!")
+            return calc()
+
+
+print(calc())
