@@ -17,6 +17,17 @@
 """
 
 
+def reversion_2(numb, reversed_numb=0):
+    try:
+        if numb == 0:
+            return reversed_numb
+        else:
+            return reversion_2(numb // 10, reversed_numb * 10 + numb % 10)
+    except TypeError:
+        print('Вы ввели не строку')
+
+
+# Решение через строку
 def reversion(number, reversed_number=''):
     if len(str(number)) == 0:
         return reversed_number
@@ -24,4 +35,5 @@ def reversion(number, reversed_number=''):
         return reversion(str(number)[:-1], reversed_number + str(number)[-1])
 
 
-print(reversion('12345'))
+print(reversion(12345))
+print(reversion_2(12345))
