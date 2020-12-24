@@ -35,8 +35,9 @@ system_user_2 = {'login': 'u2', 'password': 456, 'act': 0}
 user_1 = {'login': 'u1', 'password': 123}
 user_2 = {'login': 'u2', 'password': 456}
 
+
 #1
-def authentication_1(user, system_user):  # O(1), встраивать цикл нет смысла, будет O(n)
+def authentication_1(user, system_user):  # Общая сложность O(1)
     if system_user['act'] != 1:
         print('Ваша учетная запись не активирована')
     else:
@@ -45,4 +46,24 @@ def authentication_1(user, system_user):  # O(1), встраивать цикл 
         else:
             print('Неверный логин или пароль')
 
-authentication_1(user_1, system_user_1)
+
+#authentication_1(user_1, system_user_1)
+
+#2
+def authentication_2(user, system_user):    # Общая сложность O(n)
+    for key, value in user.items():         # O(n)
+        if key == 'login':
+            if value != system_user['login']:
+                return 'Данного пользователя не существует'
+        if key == 'password':
+            if value == system_user['password'] and system_user['act'] == 1:
+                return('Авторизация прошла успешно')
+            elif value == system_user['password'] and system_user['act'] == 0:
+                return('Ваша учетная запись не активирована')
+            elif value != system_user['password']:
+                return 'Пароль не верный'
+
+
+print(authentication_2(user_2, system_user_2))
+
+# Решение №1 эффективнее, т.к. не используется цикл, поиск по словарю имеет сложность O(1).
