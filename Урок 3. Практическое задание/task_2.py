@@ -15,3 +15,48 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import os
+
+salt = os.urandom(32)
+
+import hashlib
+import os
+
+     #salt = os.urandom(32)  # Запомните это
+     #password = 'password123'
+     #100000,  # Рекомендуется использоваться по крайней мере 100000 итераций SHA-256
+     # dklen=128  # Получает ключ в 128 байтов
+
+#import os
+#import hashlib
+
+# Пример генерации
+salt = os.urandom(32)
+key = hashlib.pbkdf2_hmac('sha256', 'mypassword'.encode('utf-8'), salt, 100000)
+
+# Хранение как
+storage = salt + key
+
+# Получение значений обратно
+salt_from_storage = storage[:32]  # 32 является длиной соли
+key_from_storage = storage[32:]
+
+import hashlib
+
+salt = b''  # Получение соли, сохраненной для *этого* пользователя
+key = b''  # Получение рассчитанного ключа пользователя
+
+password_to_check = 'password246'  # Пароль, предоставленный пользователем, проверяется
+
+# Используется та же настройка для генерации ключа, только на этот раз вставляется для проверки настоящий пароль
+new_key = hashlib.pbkdf2_hmac(
+    'sha256',
+    password_to_check.encode('utf-8'),  # Конвертирование пароля в байты
+    salt,
+    100000
+)
+
+if new_key == key:
+    print('Пароль правильный')
+else:
+    print('Пароль неправильный')
