@@ -27,3 +27,49 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {
+    "Nik": {
+        "password": "abc123",
+        "is_active": True
+    },
+    "Gleb": {
+        "password": "abc122",
+        "is_active": True
+    },
+    "Jeb": {
+        "password": "abc123",
+        "is_active": False
+    },
+}
+
+
+def auth_1(user_name, password):
+    if users.get(user_name):
+        if password == users[user_name]["password"]:
+            if users[user_name]["is_active"]:
+                return f"{user_name}, доступ разрешен!"
+            else:
+                return f"{user_name}, ваш аккаунт не активен! Хотите пройти активацию?"
+        else:
+            return "Пароль неверный!"
+    else:
+        return f"Пользователя {user_name} не существует!"
+
+
+def auth_2(user_name, password):
+    for uname, attr in users.items():
+        if uname == user_name:
+            if password == attr["password"]:
+                if attr["is_active"]:
+                    return f"{user_name}, доступ разрешен!"
+                else:
+                    return f"{user_name}, ваш аккаунт не активен! Хотите пройти активацию?"
+            else:
+                return "Пароль неверный!"
+
+    return f"Пользователя {user_name} не существует!"
+
+
+print(auth_1("Jeb", "abc123"))  # сложность O(1)
+print(auth_2("Jeb", "abc123"))  # сложность O(N)
