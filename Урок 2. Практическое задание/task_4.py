@@ -9,3 +9,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def row_sum(n, elements_sum=0, start_elem=1):
+    try:
+        if n == 0:
+            return elements_sum
+        else:
+            return row_sum(n - 1, elements_sum + start_elem, start_elem / -2)
+    except RecursionError:
+        print('Вы ввели некорректное число, введите целое число')
+
+
+print(row_sum(3))
