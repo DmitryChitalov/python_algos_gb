@@ -9,3 +9,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def li(x, list, y):
+    if x == 0:
+        return list
+    else:
+
+        list.append(y)
+        y = y / (-2)
+        return li(x - 1, list, y)
+
+
+x = int(input('Введите количество элементов:'))
+list = []
+print(li(x, list, y=1))
+
+
+def sum(list):
+    if len(list) == 1:
+        return list[0]
+    else:
+        return list[0] + sum(list[1:])
+
+
+print(sum(list))

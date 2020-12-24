@@ -16,3 +16,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def even_odd(x, even, odd):
+    print(x)
+    if x == 0:
+        return even, odd
+    else:
+        n = x % 10;
+        if (n % 2 == 0):
+            even = even + 1
+        else:
+            odd += 1;
+        return even_odd(x // 10, even, odd)
+
+
+even = 0
+odd = 0
+x = int(input("ведите число"))
+print(even_odd(x, even, odd))
