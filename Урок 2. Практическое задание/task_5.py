@@ -18,3 +18,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def programm(start, stop):
+    start += 1
+    if start > stop:
+        return ""
+
+    if start % 10 == 0:
+        return f"{start} - {chr(start)}\n {str(programm(start, stop))}"
+    else:
+        return f"{start} - {chr(start)} {str(programm(start, stop))}"
+
+
+print(programm(31, 127))

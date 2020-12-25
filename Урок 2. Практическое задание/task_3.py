@@ -15,3 +15,16 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def programm(number):
+    last_num = number % 10
+    number //= 10
+
+    if number == 0:
+        return last_num
+
+    return int(str(last_num) + str(programm(number)))
+
+
+print(programm(123))
