@@ -28,3 +28,39 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def rec_calc():
+    request = input("Enter '+', '-', '*', '/' to calculate. Or enter '0' to exit: \n")
+    operation = '+-*/'
+    if request == '0':  # условие завершения
+        print('The program is stopped')
+    else:  # иначе делаем и опять запускаем
+        if request in operation:
+            val_1 = int(input('Enter first value: '))
+            val_2 = int(input('Enter second value: '))
+
+            if request == '+':
+                print(f'Result: {val_1 + val_2}')
+                rec_calc()
+            elif request == '-':
+                print(f'Result: {val_1 - val_2}')
+                rec_calc()
+            elif request == '*':
+                print(f'Result: {val_1 * val_2}')
+                rec_calc()
+            elif request == '/':
+                if val_2 != 0:
+                    print(f'Result: {val_1 / val_2}')
+                    rec_calc()
+                else:
+                    print('Division by zero is not possible. Try again')
+                    rec_calc()
+            else:
+                print('Error. Check the entered value')
+                return rec_calc()
+        else:
+            print('Error. Check the entered operation')
+            return rec_calc()
+
+rec_calc()

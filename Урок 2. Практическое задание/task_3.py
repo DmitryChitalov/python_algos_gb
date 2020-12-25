@@ -15,3 +15,19 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def rec_turn(user_input, turn):
+    if user_input == 0:  # условие завершения
+        return turn
+    else:  # иначе делаем и опять запускаем
+        turn = turn * 10 + user_input % 10
+        user_input = user_input // 10
+        return rec_turn(user_input, turn)
+
+
+u_input = input('Enter a number: \n')
+if u_input.isnumeric():
+    print('Result:', rec_turn(int(u_input), 0))
+else:
+    print('You must enter a number')
