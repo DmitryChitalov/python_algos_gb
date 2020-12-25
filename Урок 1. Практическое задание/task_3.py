@@ -22,3 +22,21 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+base_company = {
+    'yandex': 3000,
+    'apple': 2000,
+    'gazprom': 4000,
+    'rosnano': 6000,
+    'adidas': 1500
+}
+
+lst_from_dict = list(base_company.items())
+lst_from_dict.sort(key=lambda i: i[1], reverse=True)
+for i in range(4):
+    print(lst_from_dict[i][0], ':', lst_from_dict[i][1])
+
+
+
+# 0(n log n)
+#не самый предпочтительный вариант - самый быстрый был бы  0(n)

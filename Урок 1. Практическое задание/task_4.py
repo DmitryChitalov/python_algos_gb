@@ -27,3 +27,16 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+def authorization(user, user_name, user_password):
+    for key, value in user.items():
+        if key == user_name:
+            if value['password'] == user_password and value['activation']:
+                return 'Добро пожаловать! Доступ предоставлен!'
+            elif value['password'] == user_password and not value['activation']:
+                return 'Учетная запись не активна! Пройдите активацию!'
+            elif value['password'] != user_password:
+                return 'Пароль не верный!'
+    return "Пользователя не существует!"
+
+# сложность 0(n). Быстрее было бы использовать функцию поиска по словарю, тогда бы сложность была 0(1)
