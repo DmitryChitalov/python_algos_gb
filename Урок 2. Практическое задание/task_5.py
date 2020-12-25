@@ -17,4 +17,19 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+Допускается исп-е встроенных ф-ций
 """
+
+
+def int_to_char(start, end, output=''):
+    for i in range(start, end):
+        output += f'{i} - {chr(i)} ' if i <= END else ''
+    print(output)
+    if end < END:
+        return int_to_char(start + STEP, end + STEP)
+
+
+START = 32
+END = 127
+STEP = 10
+int_to_char(START, START + STEP)
