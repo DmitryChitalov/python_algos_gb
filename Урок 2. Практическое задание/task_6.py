@@ -9,3 +9,24 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import random
+
+def find_number(i, number):
+    print(f'{i}-я попытка')
+    u = int(input('Компьютер загадал число. Отгадайте его.  Введите число: '))
+    if i == 10 or u == number:
+        if u == number:
+            print('Вы угадали')
+        else:
+            print('Кончились попытки')
+    else:
+        if u < number:
+            print('Заданное число больше')
+        else:
+            print('Заданное число меньше')
+        return find_number(i + 1, number)
+
+
+number = round(random() * 100)
+
+find_number(1, number)
