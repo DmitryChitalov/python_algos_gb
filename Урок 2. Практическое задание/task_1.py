@@ -28,3 +28,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def rec_calc(operation):
+    if operation == '0':
+        print('Работа завершена')
+        return
+    if operation in '+-*/':
+        try:
+            num1 = float(input('Введите число первое число: '))
+            num2 = float(input('Введите число второе число: '))
+            if operation == '/' and num2 == 0:
+                raise ZeroDivisionError
+        except ValueError:
+            print('Ошибка ввода.')
+            rec_calc(operation)
+            return
+        except ZeroDivisionError:
+            print('Ошибка ввода. На ноль делить нельзя.')
+            rec_calc(operation)
+            return
+        else:
+            if operation == '+':
+                print(f'{num1} + {num2} = {num1 + num2}')
+            elif operation == '-':
+                print(f'{num1} - {num2} = {num1 - num2}')
+            elif operation == '*':
+                print(f'{num1} * {num2} = {num1 * num2}')
+            elif operation == '/':
+                print(f'{num1} / {num2} = {num1 / num2}')
+
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation not in '+-*/0':
+        print('Ошибка ввода')
+    rec_calc(operation)
+
+
+rec_calc('start')
