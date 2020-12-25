@@ -9,3 +9,12 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def sum_elements(number, i, el_sum, total_sum):
+    if i == el_sum:
+        print(f'Количество элементов - {el_sum}, их сумма - {total_sum}')
+    else:
+        return sum_elements(number / (-2), i + 1, el_sum, total_sum + number)
+
+
+el_sum = int(input('Введите количество элементов: '))
+sum_elements(1, 0, el_sum, 0)
