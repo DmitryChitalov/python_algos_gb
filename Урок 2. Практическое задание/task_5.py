@@ -18,3 +18,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def ascii_table(symbol, count=0):
+    if symbol < 32 or symbol > 127:
+        return f'End'
+    elif symbol == 127:
+        return f'{symbol} - {chr(symbol)}'
+    else:
+        if count < 10:
+            return f'{symbol} - {chr(symbol)} {ascii_table(symbol+1, count+1)}'
+
+print(ascii_table(35))

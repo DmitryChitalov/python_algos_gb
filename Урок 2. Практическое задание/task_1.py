@@ -28,3 +28,33 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calcula_tor():
+    sign = input('Enter sign *, /, +, - or 0 to exit: ')
+    if sign == '0':
+        print(f'exit')
+        return calcula_tor()
+    elif sign not in ("+", "-", "*", "/", "0"):
+        print('Wrong value. Please, enter correct value')
+        return calcula_tor()
+    else:
+        try:
+            numb1 = float(input('Enter 1-st number: '))
+            numb2 = float(input('Enter 2-nd number: '))
+        except ValueError:
+            print('Вы вместо числа ввели строку (((. Исправьтесь')
+            return calcula_tor()
+    if sign == '*':
+        print(f'Result: {numb1 * numb2}')
+        return calcula_tor()
+    elif sign == '/':
+        print(f'Result: {numb1 / numb2}')
+        return calcula_tor() 
+    elif sign == '+':
+        print(f'Result: {numb1 + numb2}')
+        return calcula_tor()
+    elif sign == '-':
+        print(f'Result: {numb1 - numb2}')
+        return calcula_tor()
+    
+print(calcula_tor())
