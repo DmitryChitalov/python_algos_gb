@@ -28,3 +28,42 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calculator():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation == 0:
+        return 'Выход'
+
+    else:
+        if operation in ('+', '-', '*', '/'):
+            try:
+                a = float(input('Введите первое число: '))
+                b = float(input('Введите второе число: '))
+                if operation == '+':
+                    result = a + b
+                    print(f'Ваш результат: {result}')
+                    return calculator()
+                elif operation == '-':
+                    result = a - b
+                    print(f'Ваш результат: {result}')
+                    return calculator()
+                elif operation == '*':
+                    result = a * b
+                    print(f'Ваш результат: {result}')
+                    return calculator()
+                elif operation == '/':
+                    if b != 0:
+                        result = a / b
+                        print(f'Ваш результат: {result}')
+                    else:
+                        print('На ноль делить нельзя!')
+                    return calculator()
+            except ValueError:
+                print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+                return calculator()
+
+        else:
+            print('Неверный знак операции!')
+
+
+calculator()
