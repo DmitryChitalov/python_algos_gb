@@ -27,3 +27,65 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {'user1': ['qwerty', True],
+         'user2': ['123456', False],
+         'user3': ['654321', True]}
+
+user_list = [['user1', 'qwerty', True], ['user2', '123456', False], ['user3', '654321', True]]
+
+
+# Вариант 1. Для хранения данных пользователей используется словарь.
+# Сложность O(1). благодаря использованию словаря нет необходимости перебирать пользователей в цикле.
+# Цикл при вводе пользователем ответа на сложность в данном случае не влияет.
+def check_user(user_name, password):
+    if users[user_name][0] == password:
+        if users[user_name][1]:
+            return True
+        else:
+            user_ans = ''
+            while user_ans not in ['y', 'n']:
+                user_ans = input('Учетная запись не активирована. Активировать? y/n: ')
+                if user_ans not in ['y', 'n']:
+                    print('Ошибка ввода. Попробуйте ещё раз.')
+            if user_ans == 'y':
+                users[user_name][1] = True
+                return True
+    return False
+
+
+# Вариант 2. Для хранения данных пользователей используется список.
+# Сложность O(N). Сложность стала линейной из-за перебора записей циклом for.
+# Цикл при вводе пользователем ответа на сложность в данном случае не влияет.
+def check_user2(user_name, password):
+    for us in user_list:
+        if us[0] == user_name and us[1] == password:
+            if us[2]:
+                return True
+            else:
+                user_ans = ''
+                while user_ans not in ['y', 'n']:
+                    user_ans = input('Учетная запись не активирована. Активировать? y/n: ')
+                    if user_ans not in ['y', 'n']:
+                        print('Ошибка ввода. Попробуйте ещё раз.')
+                if user_ans == 'y':
+                    us[2] = True
+                    return True
+    return False
+
+
+# Вариант 1 предпочительнее, тк обладает меньшей сложностью и будет работать быстрее.
+name = input('Введите имя полязователя: ')
+pas = input('Введите пароль: ')
+if check_user(name, pas):
+    print('Добро пожаловать!')
+else:
+    print('Неверное имя пользователя или пароль')
+
+name = input('Введите имя полязователя: ')
+pas = input('Введите пароль: ')
+if check_user2(name, pas):
+    print('Добро пожаловать!')
+else:
+    print('Неверное имя пользователя или пароль')
+

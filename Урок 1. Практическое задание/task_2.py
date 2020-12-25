@@ -17,3 +17,30 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+import random
+
+
+# Вариант 1. Алгоритм с 2 вложенными циклами. Сложность: О(N^2)
+def min1(lst):
+    for i in range(0, len(lst)):
+        is_min = True
+        for j in range(0, len(lst)):
+            if lst[j] < lst[i]:
+                is_min = False
+        if is_min:
+            return lst[i]
+
+
+# Вариант 2. Алгоритм с 1 циклом. Сложность: O(N)
+def min2(lst):
+    min_el = lst[0]
+    for i in range(1, len(lst)):
+        if lst[i] < min_el:
+            min_el = lst[i]
+    return min_el
+
+
+int_lst = [random.randint(0, 100) for i in range(0, 20)]
+print(int_lst)
+print(f'Вариант 1: {min1(int_lst)} Вариант 2: {min2(int_lst)}')
