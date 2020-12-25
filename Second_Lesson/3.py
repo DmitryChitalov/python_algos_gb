@@ -17,7 +17,7 @@
 Перевернутое число: 321
 """
 def reverse_number(numb : int):
-    if (numb < 10):
+    if numb < 10:
         return numb
     else:
         #while ((numb // i) >= 10):  Т.к в задании было сказано делать без цикла, я сдлелал ещё одну рекурсивную функцию
@@ -29,7 +29,7 @@ def reverse_number(numb : int):
 
 def digits_in_num(num : int, i: int): # Данная функция возвращает число, ВСЕГДА катное 10 (т.е 10, 100, 1000 и т.д
     # (в зависимости от кол-ва разрядов исходного числа))
-    if (num >= 10):
+    if num >= 10:
         return digits_in_num(num//10, i * 10)
     else:
         return i

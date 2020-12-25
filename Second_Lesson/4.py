@@ -15,7 +15,7 @@
 Элемент в 2 раза меньше предыд и имеет противопол знак
 """
 def sum_of_row(n : int, numb : int = 1):
-    if (n == 1):
+    if n == 1:
         return numb
     else:
         return numb + sum_of_row(n-1, numb/(-2))

@@ -15,12 +15,12 @@ numb = random.randint(0, 100)
 def take_number(numb : int, try_count : int = 1):
     print(f"Попытка номер {try_count}")
     user_input = int(input("Введите число: "))
-    if (try_count == 10):
+    if try_count == 10:
         print(f"Использовано маклсимальное число попыток. Загаданное число было {numb}")
     else:
-        if (user_input == numb):
+        if user_input == numb:
             print(f"Вы угадали число {numb}!")
-        elif (user_input > numb):
+        elif user_input > numb:
             print(f"Введённое число больше загаданного, введите число поменьше")
             take_number(numb, try_count+1)
         else:

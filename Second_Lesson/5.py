@@ -21,12 +21,12 @@
 Допускается исп-е встроенных ф-ций
 """
 def output_table(n: int, count : int = 1):
-        if(n == 127):
-            return f'{n} - {chr(n)}'
-        if (n  < 127 and count < 10):
-           return f'{n} - {chr(n)} {output_table(n+1,count+1)}'
-        elif (count == 10):
-           return f'{n} - {chr(n)}\n{output_table(n+1)}'
+    if n == 127:
+        return f'{n} - {chr(n)}'
+    if n  < 127 and count < 10:
+        return f'{n} - {chr(n)} {output_table(n+1,count+1)}'
+    elif count == 10:
+        return f'{n} - {chr(n)}\n{output_table(n+1)}'
 
 print(output_table(32))
 

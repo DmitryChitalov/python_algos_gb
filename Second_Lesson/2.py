@@ -19,15 +19,15 @@
 """
 
 def even_or_odd_numbers(numb : int, even_count=0, odd_count=0):
-    if (numb < 10):
-        if (numb % 2):
+    if numb < 10:
+        if numb % 2:
             print(f"Количество четных и нечетных цифр в числе равно: ({even_count}, {odd_count+1})")
         else:
             print(f"Количество четных и нечетных цифр в числе равно: ({even_count+1}, {odd_count})")
     else:
         remainder = numb % 10 # вычисляем остаток
         numb //= 10
-        if (remainder % 2):
+        if remainder % 2:
             even_or_odd_numbers(numb, even_count, odd_count + 1)
         else:
             even_or_odd_numbers(numb, even_count+1, odd_count)

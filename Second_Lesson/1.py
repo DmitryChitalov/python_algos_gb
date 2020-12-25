@@ -29,33 +29,33 @@
 Введите операцию (+, -, *, / или 0 для выхода):
 """
 """Т.к данная функция ничего не возвращает, а выводит на экран, то return не используем"""
-def First_Recursion():
+def first_recursion():  # изменил название функции
     operation = input("Введите операцию (+, -, *, / или 0 для выхода): ")
-    if (operation == '0'):
+    if operation == '0':
         print("Конец функции, а соответственно и рекурсии")
-    elif (operation in ['+', '-', '*', '/']):
+    elif operation in ['+', '-', '*', '/']:
         try:
             first_operand = int(input("Введите первое число: "))
             second_operand = int(input("Введите второе число: "))
         except ValueError:
             print("Вместо числа вы ввели строку. Исправьтесь...")
-            First_Recursion()
-        if (operation == '+'):
+            first_recursion()
+        if operation == '+':
             print("Ваш результат: ", first_operand + second_operand)
-        elif (operation == '-'):
+        elif operation == '-':
             print("Ваш результат: ", first_operand - second_operand)
-        elif (operation == '*'):
+        elif operation == '*':
             print("Ваш результат: ", first_operand * second_operand)
-        elif (operation == '/'):
+        elif operation == '/':
             try:
                 first_operand / second_operand
             except ZeroDivisionError:
                 print("На 0 делить нельзя.")
             else:
                 print("Ваш результат: ", first_operand / second_operand)
-        First_Recursion()
+        first_recursion()
     else:
         print("Неверный знак операции.")
-        First_Recursion()
+        first_recursion()
 
-First_Recursion()
+first_recursion()
