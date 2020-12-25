@@ -9,3 +9,19 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def guess(random_number, count=10):
+    count -= 1
+    ans = int(input('Введите целое число от 0 до 100: '))
+    if ans == random_number:
+        print('Вы отгадали!')
+    elif count == 0:
+        print(f'Попытки закончились! Загаданное число - {random_number}')
+    else:
+        print('Загаданное число меньше!') if ans > random_number else print('Загаданное число больше!')
+        guess(random_number, count)
+
+
+guess(random.randint(0, 100))
