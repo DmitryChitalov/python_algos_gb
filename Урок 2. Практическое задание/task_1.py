@@ -28,3 +28,24 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def task():
+    operator, num_1, num_2 = input('Введите операцию (+, -, *, / или 0 для выхода) и числа через пробел:\n').split()
+    num_1 = int(num_1)
+    num_2 = int(num_2)
+    if operator == '0':
+        return('Вы вышли из программы!')
+    else:
+        if operator == '+':
+            print(num_1 + num_2)
+        elif operator == '-':
+            print(num_1 - num_2)
+        elif operator == '*':
+            print(num_1 * num_2)
+        elif operator == '/':
+            print(num_1 / num_2)
+        else:
+            print('Error: ошибка при вводе!')
+        return task()
+
+task()

@@ -9,3 +9,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+el_list_for_sum = []
+
+
+def row(el_cnt, el=1):
+    if el_cnt == 0:
+        print('Сумма элементов равна: ' + str(sum(el_list_for_sum)))
+    else:
+        el_list_for_sum.append(el)
+        el /= 2 * -1
+        return row(el_cnt - 1, el)
+
+
+row(3)
+print(el_list_for_sum)
