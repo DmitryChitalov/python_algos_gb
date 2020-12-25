@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def print_chars(num_start, num_finish, line):
+    if num_start > num_finish:
+        return
+    if line < 9:
+        print(f'{num_start} - {chr(num_start)}', end='\t')
+        line += 1
+    else:
+        print(f'{num_start} - {chr(num_start)}')
+        line = 0
+    return print_chars(num_start + 1, num_finish, line)
+
+
+print_chars(32, 127, 0)
