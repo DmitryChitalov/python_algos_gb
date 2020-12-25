@@ -27,3 +27,61 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {'vasya': ['123', 0], 'petya': ['123', 0], 'artem': ['123', 1]}
+
+
+def web_access(dictionary):  # Сложность O(n)
+	while True:
+		message = input("Hello, if you want to log in, press 'y' or 'q' for exit: ")
+		if message == 'q':
+			return print('End of programm')
+		else:
+			login = input('Enter login: ')
+			password = input('Enter password: ')
+			if dictionary.get(login) != None:
+				if dictionary[login][0] == password:
+					if dictionary[login][1] == 1:
+						return print('Access grant')
+					else:
+						print('Access denied, please activate account')
+				else:
+					print('Password incorrect, try again')
+			else:
+				print('Login incorrect, please try again')
+
+
+def web_access2(dictionary): # Сложность O(n^2)
+	while True:
+		message = input("Hello, if you want to log in, press 'y' or 'q' for exit: ")
+		if message == 'q':
+			return print('End of programm')
+		else:
+			login = input('Enter login: ')
+			password = input('Enter password: ')
+			error_pass = 0
+			error_login = 0
+			for key in dictionary.keys():
+				if login == key:
+					if dictionary[login][0] == password:
+						if dictionary[login][1] == 1:
+							return print('Access grant')
+						else:
+							return print('Access denied, please activate account')
+					else:
+						error_pass += 1
+				else:
+					error_login +=1
+			if error_login > len(dictionary):
+				print('Login incorrect, please try again')
+			elif error_pass > 0:
+				print('Password incorrect, try again')
+			elif error_login > len(dictionary) and error_pass > 0:
+				print('Login and password incorrect')
+				
+			
+
+
+web_access2(users)
+web_access(users)
+# Эффективнее использовать функцию web_access т.к. она имееет линейную сложность. Функция web_access2 имеет квадратичную сложность за счет использования вложенных циклов
