@@ -16,3 +16,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def get_num(number, even = 0, odd = 0):
+    if number == 0:
+        return even, odd
+    else:
+        n = number % 10
+        number = number // 10
+        if n % 2 == 1:
+            odd += 1
+        else:
+            even += 1
+        return get_num(number, even, odd)
+
+
+number = int(input('Введите число: '))
+print(f'Количество четных и нечетных цифр в числе равно: ({get_num(number)})')
