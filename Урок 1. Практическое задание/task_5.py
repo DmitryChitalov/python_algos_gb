@@ -18,3 +18,55 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+class PilePlates:
+	def __init__(self, size):
+		self.elems = [[]]
+		self.size = size
+		
+	def is_empty(self):
+		return self.elems == [[]]
+
+	def push_in(self, el):
+		count = len(self.elems) - 1
+		if len(self.elems[count]) < self.size:
+			self.elems[count].append(el)
+		else:
+			self.elems.append([])
+			self.elems[count + 1].append(el)
+			
+	def pop_out(self):
+		count = len(self.elems) - 1
+		last_el = self.elems[count].pop()
+		if len(self.elems[count]) == 0:
+			self.elems.pop()
+		return last_el
+
+	def get_val(self):
+		return self.elems[len(self.elems) - 1]
+
+	def stack_size(self):
+		return len(self.elems)	
+		
+		
+first = PilePlates(7)
+first.push_in(3)
+first.push_in(4)
+first.push_in(5)
+first.push_in(7)
+first.push_in(9)
+first.push_in(10)
+first.push_in(11)
+first.push_in(12)
+first.push_in(13)
+
+print(first.elems)
+print(first.pop_out())
+print(first.pop_out())
+print(first.pop_out())
+print(first.pop_out())
+print(first.pop_out())
+print(first.pop_out())
+print(first.elems)
+print(first.stack_size())
+print(first.is_empty())
