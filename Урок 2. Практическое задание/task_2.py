@@ -16,3 +16,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def recur_m(numb, count=0, odd=0):
+
+    if numb == 0:
+        return count, odd
+    else:
+        cur_n = numb % 10
+        numb = numb // 10
+        if cur_n % 2 == 0:
+            count += 1
+            return recur_m(numb, count, odd)
+        else:
+            odd += 1
+            return recur_m(numb, count, odd)
+
+
+try:
+    NUMB = int(input("Введите натуральное число: "))
+    print(f"Количество четных и нечетных цифр в числе равно: {recur_m(NUMB)}")
+except ValueError:
+    print("Вы ввели строку вместо числа.")
