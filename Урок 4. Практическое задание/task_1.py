@@ -12,7 +12,7 @@
 Добавьте аналитику: что вы сделали и почему
 """
 
-from timeit import timeit
+from timeit import timeit, default_timer
 
 
 def func_1(nums):
@@ -21,3 +21,19 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for i in range(len(nums)) if nums[i]%2==0]
+
+
+n = range(1000)
+
+
+print(timeit('func_1(n)','from __main__ import func_1,n', default_timer,10000))
+#  Результат - 1.57013608
+
+print(timeit('func_2(n)','from __main__ import func_2,n', default_timer,10000))
+# Результат - 1.32634116
+
+# Вторая функция выполняется немного быстрее за счет использования генераторного выражения
