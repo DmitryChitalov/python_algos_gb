@@ -9,3 +9,23 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+rand_num = random.randint(1, 100)
+print(rand_num)
+try_count = 10
+
+
+def task_6(guess_num, try_cnt):
+    user_num = int(input('Введите число, чтобы угадать загаданное!'))
+    if user_num == guess_num:
+        print('Вы отгадали число! Победа!')
+    elif try_cnt == 0:
+        print('К сожалению количество попыток закончилось. Вы проиграли!')
+    else:
+        print('Это число меньше!') if user_num > guess_num else print('Это число больше!')
+        task_6(guess_num, try_cnt - 1) # вызов рекурсии
+
+
+task_6(rand_num, try_count)
