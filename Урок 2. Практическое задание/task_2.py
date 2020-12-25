@@ -16,3 +16,16 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def programm(number):
+    last_num = number % 10
+    number //= 10
+
+    if number == 0:
+        return (1, 0) if last_num % 2 == 0 else (0, 1)
+
+    return tuple(x + y for x, y in zip((1, 0) if last_num % 2 == 0 else (0, 1), programm(number)))
+
+
+print(programm(1234))
