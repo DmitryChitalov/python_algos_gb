@@ -16,3 +16,25 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def parsing(digit):
+    if digit == 0:
+        return len(even), len(uneven)
+    else:
+        if digit % 10 % 2 == 0:
+            even.append(digit % 10)
+        else:
+            uneven.append(digit % 10)
+    return parsing(digit // 10)
+
+
+try:
+    number = int(input('Введите число: '))
+    even, uneven = [], []
+    if number not in range(1000001):  # ограничил условным миллионом, чтобы производить проверку ввода пользователем
+        raise ValueError
+
+    print(f'Количество четных и нечетных цифр в числе равно: {parsing(number)}')
+except ValueError:
+    print('Должно быть введено число, которое должно лежать в диапазоне от 1 до 1000000')

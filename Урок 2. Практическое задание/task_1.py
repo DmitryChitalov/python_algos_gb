@@ -28,3 +28,50 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calc():
+    def summation(frst_num, scnd_num):
+        return frst_num + scnd_num
+
+    def subtraction(frst_num, scnd_num):
+        return frst_num - scnd_num
+
+    def increase(frst_num, scnd_num):
+        return frst_num * scnd_num
+
+    def division(frst_num, scnd_num):
+        if scnd_num == 0:
+            return f'деление на ноль невозможно'
+        else:
+            return frst_num / scnd_num
+
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+
+    if operation == '0':
+        return print('выход')
+    else:
+        frst_num = input('Введите первое число: ')
+        scnd_num = input('Введите второе число: ')
+
+        if frst_num.isdigit() is not True or scnd_num.isdigit() is not True:
+            print('ввод должен содержать числовые значения')
+            return calc()
+
+        frst_num, scnd_num = int(frst_num), int(scnd_num)
+
+        if operation == '+':
+            print(summation(frst_num, scnd_num))
+        elif operation == '-':
+            print(subtraction(frst_num, scnd_num))
+        elif operation == '*':
+            print(increase(frst_num, scnd_num))
+        elif operation == '/':
+            print(division(frst_num, scnd_num))
+        else:
+            print('неверный ввод символа операции')
+
+        return calc()
+
+
+calc()

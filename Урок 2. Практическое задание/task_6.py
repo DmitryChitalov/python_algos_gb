@@ -9,3 +9,31 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+numb = randint(0, 101)
+n = 1
+
+
+def guess_numb(param):
+    global n
+    if n == 11:
+        return f'число не отгадано, загаданное число {param}'
+
+    else:
+        enter = int(input(f'попытка {n}, введите число: '))
+        n += 1
+
+        if enter < param:
+            print('введенное число меньше загаданного')
+            return guess_numb(param)
+
+        elif enter > param:
+            print('введенное число больше загаданного')
+            return guess_numb(param)
+
+        else:
+            return f'вы угадали'
+
+
+print(guess_numb(numb))

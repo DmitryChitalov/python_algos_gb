@@ -9,3 +9,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+n = int(input('Введите количество элементов: '))
+box = []
+
+
+def find_sum_array(param, el=1.0):
+    if param == 0:
+        return sum(box)
+    box.append(el)
+    el = -(el / 2)
+    param -= 1
+    return find_sum_array(param, el)
+
+
+print(f'Количество элементов: {n}, их сумма: {find_sum_array(n)}')

@@ -18,3 +18,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+string = str()
+
+
+def ascii_convert(num):
+    try:
+        global string
+        if num not in range(32, 129):
+            raise ValueError
+
+        if num == 128:
+            return string
+
+        if num != 32 and num % 10 == 2:
+            string += '\n'
+
+        string += f'{num} - {chr(num)}   '
+        return ascii_convert(num + 1)
+
+    except ValueError:
+        print(f'Ошибка: передаваемый параметр должен лежать в диапазоне от 28 до 127')
+
+
+print(ascii_convert(32))
