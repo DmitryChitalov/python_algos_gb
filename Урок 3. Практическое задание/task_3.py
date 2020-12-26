@@ -23,7 +23,7 @@ def substring(string):
         for j in range(len(string)-1 if i == 0 else len(string), i, -1):
             # print(string[i], string[j])
             # print(string[i:j])
-            substring_set.add(hashlib.sha256(bytes(string[i:j], 'cp1251')))
+            substring_set.add(hashlib.sha256(bytes(string[i:j], 'cp1251')).hexdigest())
     return substring_set
 
 
