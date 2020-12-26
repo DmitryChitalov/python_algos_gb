@@ -10,3 +10,38 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+
+from time import time
+
+
+def time_meassure(func):
+    def g(*args):
+        start = time()
+        func(*args)
+        finish = time()
+        return finish - start
+
+    return g
+
+
+@time_meassure
+def list_add(n, new_list):
+    for i in range(n):
+        new_list.append(i)
+
+
+@time_meassure
+def dict_add(n, new_dict):
+    for i in range(n):
+        new_dict[i] = i
+
+
+my_list = []
+print(list_add(60000000, my_list))
+
+my_dict = {}
+print(dict_add(60000000, my_dict))
+
+# На формирование списка ушло 5.926732063293457
+# Словарь не сформировался, появилась ошибка MemoryError. Из-за того, что словарь создает хэши, на него не хватает памяти
+# P.S. Но при меньших значениях словарь почему-то формируется быстрее
