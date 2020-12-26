@@ -15,3 +15,19 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+import hashlib
+
+
+def check_password():
+    user_pass = input('Введите пароль: ')
+    salt = 'salt'
+    pass_hash = hashlib.sha256(user_pass.encode() + salt.encode()).hexdigest()
+    check_pass = input('Введите пароль еще раз: ')
+    if pass_hash == hashlib.sha256(check_pass.encode() + salt.encode()).hexdigest():
+        print('Вы ввели правильный пароль')
+    else:
+        print('Вы ввели неправильный пароль')
+
+
+check_password()
