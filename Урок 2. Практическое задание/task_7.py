@@ -6,3 +6,23 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_true(n):
+    if n == 1:
+        return 1
+    else:
+        n -= 1
+        return (n + 1) + (sum_true(n))
+
+
+def sum_true2(n):
+    if n == 1:
+        return 1
+    else:
+        return n * (n+1)/2
+
+
+n = 3
+result = sum_true(n) == sum_true2(n)
+print(result)

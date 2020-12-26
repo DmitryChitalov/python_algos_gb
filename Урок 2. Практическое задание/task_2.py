@@ -16,3 +16,29 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def ev_od(a):
+    if a <= 2:
+        n = (a % 10)
+        if n % 2 == 0:
+            even.append(n)
+        else:
+            odd.append(n)
+        l_ev = len(even)
+        l_od = len(odd)
+        return f'Ваше число содержит {l_ev} четных чисел и {l_od} нечетных цифры'
+    n = (a % 10)
+    if n % 2 == 0:
+        even.append(n)
+        a = a // 10
+        return ev_od(a)
+    else:
+        odd.append(n)
+    a = a // 10
+    return ev_od(a)
+
+
+a = int(input('Введите любое натуральное число: _'))
+even = []
+odd = []
+print(ev_od(a))
