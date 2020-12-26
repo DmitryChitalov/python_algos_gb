@@ -9,3 +9,25 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randint
+
+
+def guess(number = randint(0,100), count=10):
+	if count == 0:
+		print(f"Вы не угадали число {number}")
+		return 
+	answer = int(input("Введите ваше число от 0 до 100: "))
+	if answer == number:
+		print(f"Поздравляем, вы угадали число {number}")
+		return
+	else:
+		if answer > number:
+			print(f'Ваше число больше, осталось {count - 1}\n ')
+			return guess(number, count - 1)
+		else:
+			print(f'Ваше число меньше, осталось {count - 1}\n ')
+			return guess(number, count - 1)
+			
+		
+guess()

@@ -6,3 +6,14 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def func(number, number2=0):
+	if number2 == 0:
+		number2 = int((number * (number + 1) / 2))
+	if number == 0:
+		print(f"n(n+1)/2 = {number2}")
+		return number
+	else:
+		return number + func(number - 1, number2)
+		
+print(func(5))
