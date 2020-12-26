@@ -23,19 +23,18 @@
 
 
 def recur(lst_obj):
-    a = int(lst_obj[0]) % 2
-    if a == 0:
-        chet.append(lst_obj[0])
-    if a == 1:
-        nechet.append(lst_obj[0])
+    if int(lst_obj[0]) % 2 == 0:
+        even.append(lst_obj[0])
+    if int(lst_obj[0]) % 2 == 1:
+        odd.append(lst_obj[0])
     if len(lst_obj) == 1:
-        return chet, nechet
+        return even, odd
 
     return recur(lst_obj[1:])
 
 
-chet = []
-nechet = []
+even = []
+odd = []
 print("Сейчас мы посчитаем количество четных и нечетных цифр введенного натурального числа")
 
 # Я надеюсь за то что я использовал цикл while это не считается что я нарушил требования
