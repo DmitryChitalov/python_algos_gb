@@ -10,3 +10,66 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+
+
+import time
+
+
+def time_of_function(function):
+    """
+Функция - декоратор, принимает на входе функцию, время работы которой измеряет.
+Печатает время работы обрабатываемой фунции.
+    """
+    def wrapped(*args):
+        start_time = time.perf_counter()
+        res = function(*args)
+        res_time = start_time - time.perf_counter()
+        print(f'Функция работает {res_time} c.')
+        return res
+
+    return wrapped
+
+
+@time_of_function
+def gen_list(x):
+    '''
+    Функция принимае x, размер списка, проверяет есть такое значение или нет и еслин, то добавляет уникальное значение.
+    Здесь они все уникальные,с просто чтобы проверить работу списка и в поиске тоже.
+    :return: возвращает сгенерированный список
+    '''
+    my_list = []
+    for el in range(x):
+        if el in my_list:
+            continue
+        else:
+            my_list.append(el)
+    print('Работа по созданию списка.')
+    return my_list
+
+
+@time_of_function
+def gen_dict(x):
+    '''
+       Функция принимае x, размер словаря и значение ключа, проверяет есть такое значение или нет и еслин,
+       то добавляет уникальное значение.
+       Здесь они все уникальные,с просто чтобы проверить работу списка и в поиске тоже.
+       :return: возвращает сгенерированный словарь.
+       '''
+    my_dict = {}
+    for key in range(x):
+        if key in my_dict:
+            continue
+        else:
+            my_dict = {str(x): x + 12 }
+    print('Работа по созданию словаря.')
+    return my_dict
+
+
+
+
+
+gen_dict(9999)
+
+print()
+
+gen_list(9999)
