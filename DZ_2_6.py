@@ -8,25 +8,25 @@
 import random
 
 
-def recurs(popytka, chislo):
-    print(f"Попытка №{popytka}")
-    if popytka == 10:
+def recurs(user_try, num):
+    print(f"Попытка №{user_try}")
+    if num == 10:
         print("Это последняя попытка! ")
     user_input = input("Введите число ")
     while not user_input.isdigit():
         user_input = input("Нужно ввести число! Введите число ")
-    if int(user_input) == chislo:
-        print(f"Молодец! Ты угадал с {popytka} попытки!")
-    elif popytka == 10:
+    if int(user_input) == num:
+        print(f"Молодец! Ты угадал с {user_try} попытки!")
+    elif user_try == 10:
         return print(f"---------YOU LOSE------------\n"
-                     f"Вот загаданное число {chislo}")
+                     f"Вот загаданное число {num}")
     else:
-        if chislo < int(user_input):
+        if num < int(user_input):
             print("Загаданное число меньше\n----------------")
-            recurs(popytka + 1, chislo)
-        if chislo > int(user_input):
+            recurs(user_try + 1, num)
+        if num > int(user_input):
             print("Загаданное число больше\n----------------")
-            recurs(popytka + 1, chislo)
+            recurs(user_try + 1, num)
 
 
 recurs(1, random.randint(0, 100))
