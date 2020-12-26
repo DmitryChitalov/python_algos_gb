@@ -15,3 +15,23 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+
+import hashlib
+
+
+def identification():
+    pasw_create = hashlib.pbkdf2_hmac('sha256', bytes(input('Придумайте пароль:\n'), 'cp1251'),
+                                      b'saltsaltsaltsalt', 100000)
+    pasw_control = hashlib.pbkdf2_hmac('sha256', bytes(input('Повторите пароль:\n'), 'cp1251'),
+                                       b'saltsaltsaltsalt', 100000)
+    if pasw_control == pasw_create:
+        print('Поздравляем! Вы успешно прошли регистрацию на нашем сайте')
+    else:
+        print('Пароли не совпадают, попробуйте еще раз.')
+        identification()
+
+
+identification()
+
+
