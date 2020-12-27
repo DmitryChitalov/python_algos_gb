@@ -16,19 +16,23 @@
 Вы ввели правильный пароль
 """
 import hashlib
+from uuid import uuid4
 
 
 def hash_password(password):
-    return hashlib.sha256(password.encode())
+    salt = uuid4().hex
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':' + salt
 
 
 def check_hash_password(password, hash):
-    return hashlib.sha256(password.encode()).hexdigest() == hash.hexdigest()
+    arr = hash.split(":")
+    salt = str(arr[1])
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':' + salt == hash
 
 
 password = input('Введите пароль:')
 hash = hash_password(password)
-print(hash.hexdigest())
+print(hash)
 password_repeat = input('Введите пароль еще раз для проверки:')
 if check_hash_password(password_repeat, hash):
     print('Вы ввели правильный пароль')
