@@ -28,3 +28,33 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def recursive():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода):')
+    if operation in "+-*/":
+        try:
+            num1 = int(input('Введите первое число:'))
+            num2 = int(input('Введите второе число:'))
+            if operation == "+":
+                print('Ваш результат', num1 + num2)
+            elif operation == "-":
+                print('Ваш результат', num1 - num2)
+            elif operation == "*":
+                print('Ваш результат', num1 * num2)
+            elif operation == "/":
+                try:
+                    print('Ваш результат', num1 / num2)
+                except ZeroDivisionError:
+                    print('Делить на ноль нельзя!')
+        except ValueError:
+            print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь')
+        recursive()
+    elif operation == '0':
+        print('Exit')
+    else:
+        print('Неправильный ввод')
+        recursive()
+
+
+recursive()
