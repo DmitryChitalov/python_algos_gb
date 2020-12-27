@@ -15,3 +15,20 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def recursive_num(num, string):
+    if num > 0:
+        number = num % 10
+        string += str(number)
+        recursive_num(num // 10, string)
+    else:
+        print(string)
+        return
+
+
+try:
+    number_from_input = int(input('Введите число, которое требуется перевернуть:'))
+    recursive_num(number_from_input, '')
+except ValueError:
+    print('Вы ввели не число!')
