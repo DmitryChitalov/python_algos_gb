@@ -15,3 +15,22 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+
+
+def hash_password(password):
+    return hashlib.sha256(password.encode())
+
+
+def check_hash_password(password, hash):
+    return hashlib.sha256(password.encode()).hexdigest() == hash.hexdigest()
+
+
+password = input('Введите пароль:')
+hash = hash_password(password)
+print(hash.hexdigest())
+password_repeat = input('Введите пароль еще раз для проверки:')
+if check_hash_password(password_repeat, hash):
+    print('Вы ввели правильный пароль')
+else:
+    print('Вы ввели неправильный пароль')
