@@ -22,3 +22,32 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+companies = {
+    'COMP1': 1500,
+    'COMP2': 650,
+    'COMP3': 1200,
+    'COMP4': 1230
+}
+
+# 1 способ сложность O(log n)
+
+dict_to_list = list(companies.items())
+dict_to_list.sort(key=lambda a: a[1], reverse=True)
+for a in range(3):
+    print(dict_to_list[a][0], ':', dict_to_list[a][1])
+
+
+# 2 способ сложность O(n) лучше первого, нет манипуляций со списком
+
+def big_ones(comps):
+    max_from_list = {}
+    list_c = dict(comps)
+    for a in range(2):
+        maximum = max(list_c.items(), key=lambda a: a[1])
+        del list_c[maximum[0]]
+        max_from_list[maximum[0]] = maximum[1]
+    return max_from_list
+
+print(big_ones(companies))
+
