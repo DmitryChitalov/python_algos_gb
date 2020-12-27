@@ -22,3 +22,17 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+dict = {
+	'Apple': 2000000,
+	'Google': 1000000,
+	'Amazon': 1950000,
+	'Microsoft': 1500000,
+	'Netflix': 1350000 
+
+}
+
+
+list = list(dict.items())
+list.sort(key=lambda i: i[1], reverse=True)
+for i in range(3):
+	print(list[i][0], ':', list[i][1]) #Здесь алгоритм средней сложности O(n*log n), проще будет O(n), O(log n) и О(1)
