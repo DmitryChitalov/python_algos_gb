@@ -17,3 +17,28 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+def search_min_on2(lst):
+    m = lst[0]
+    for i in range(0, len(lst)):
+        cur = lst[i]
+        for j in range(0, len(lst)):
+            if (lst[i] < lst[j]) and (i != j):
+                cur = lst[i]
+        if m > cur:
+            m = cur
+    return m
+
+
+def search_min_on(lst):
+    m = lst[0]
+    for i in range(0, len(lst)):
+        if m > lst[i]:
+            m = lst[i]
+    return m
+
+
+test_lst = [54, 3, -4, 23, 8, 432, 1, 54, 6]
+print(search_min_on2(test_lst))
+print(search_min_on(test_lst))

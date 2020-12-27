@@ -27,3 +27,50 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# O(1)
+def method1(u, login, password):
+    if u.get(login, 0):
+        if u.get(login)[1]:
+            if u.get(login)[0] == password:
+                return 'Добро пожаловать.'
+            else:
+                return 'Пароль неверный.'
+        else:
+            return 'Учетная запись не активирована.'
+    else:
+        return 'Пользователя не существует.'
+
+
+# O(n)
+def method2(u, login, password):
+    for i in u.items():         # O(n)
+        if i[0] == login:
+            if i[1][1]:
+                if i[1][0] == password:
+                    return 'Добро пожаловать.'
+                else:
+                    return 'Пароль неверный.'
+            else:
+                return 'Учетная запись не активирована.'
+    return 'Пользователя не существует'
+
+
+users = {'U1': ['P1', 0],
+         'U2': ['P2', 1],
+         'U3': ['P3', 1],
+         'U4': ['P4', 0],
+         'U5': ['P5', 0]}
+print(method1(users, 'U1', 'P2'))
+print(method1(users, 'U2', 'P2'))
+print(method1(users, 'U3', 'P2'))
+print(method1(users, 'U10', 'P2'))
+
+print(method2(users, 'U1', 'P2'))
+print(method2(users, 'U2', 'P2'))
+print(method2(users, 'U3', 'P2'))
+print(method2(users, 'U10', 'P2'))
+
+# из предложенных самый эффективный первый метод, его сложность O(1) против O(n) у второго
+# да и переберать словарь, когда можно сразу получить нужное значение - так себе идея
