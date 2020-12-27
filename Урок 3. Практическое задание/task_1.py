@@ -10,3 +10,19 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+import time
+
+
+start = time.time()
+lst = []
+for i in range(1000):
+    lst.append(i)
+end = time.time()
+print('list test =>>>', end-start)
+
+start = time.time()
+dict = {}
+for i in range(1000):
+    dict[i] = i
+end = time.time()
+print('dict test =>>>', end - start)
