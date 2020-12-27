@@ -18,3 +18,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def print_symbols(start, end, n, string):
+    if start > end:
+        print(string)
+        return
+    else:
+        string += str(start) + ' - ' + chr(start) + '\t'
+        if n % 10 == 0:
+            print(string)
+            return print_symbols(start, end, n + 1, '')
+        else:
+            return print_symbols(start + 1, end, n + 1, string)
+
+
+print_symbols(32, 127, 1, '')
