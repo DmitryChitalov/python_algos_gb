@@ -1,3 +1,4 @@
+import random
 """
 Задание 3.
 
@@ -22,3 +23,48 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+def search_1(data_dict):                            # Сложность: O(N^2) - квадратичная
+    top_3 = {}                                      # O(1) - создание пустого словаря
+    while len(top_3) < 3:                           # O(N) - цикл
+        max_cash = max(data_dict.values())          # O(N) - поиск максимума и присваивание константы
+        for company, cash in data_dict.items():     # O(N) - цикл, перебор всех элементов словаря
+            if cash == max_cash:                    # O(len(...)) - сравнение значений
+                top_3[company] = cash               # O(1) - присваивание константы
+                data_dict[company] = 0              # O(1) -присваивание константы(обнуляем,чтобы исключить из топ)
+
+    for company, cash in top_3.items():             # O(N) - цикл, перебор всех элементов словаря
+        data_dict[company] = cash                   # возвращаем в словарь компании, прибыль которых обнулили
+
+    return top_3                                    # O(1) - возвращение константы
+
+
+def search_2(data_dict):                        # Сложность: O(N log N) - линейно-логарифмическая
+    top_cash = []                               # O(1) - создание пустого списка
+    for values in data_dict.values():           # O(N) - цикл, перебор всех значений словаря
+        top_cash.append(values)                 # O(1) - добавлние константы
+    top_cash.sort(reverse=True)                 # O(N log N) - сортировка списка
+    del top_cash[3:]                            # O(N) - удаление элементов из списка
+
+    top_company = []                            # O(1) - создание пустого списка
+    for company, cash in data_dict.items():     # O(N) - цикл, перебор всех элементов словаря
+        if cash in top_cash:                    # O(len(...)) - сравнение значений
+            top_company.append(company)         # O(1) - добавление константы
+    return top_company                          # O(1) - возвращение константы
+
+
+"""Создание хранилища с информацией о компаниях"""
+data = {}
+for i in [random.randint(1, 100) for x in range(1, 10)]:
+    company = 'Компания ' + str(i)
+    cash = 10000 * random.randint(1, 100)
+    data[company] = cash
+
+"""Вызов функций"""
+print(search_1(data))
+print(search_2(data))
+
+
+"""Вывод: 2й алгоритм более быстр, плюс в нем не происходит изменения значений исходного словаря.
+Его сложность составляет O(N log N) - линейно-логарифмическая. Тогда как у первого алгоритма сложность O(N^2)"""

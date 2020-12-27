@@ -1,3 +1,4 @@
+import random
 """
 Задание 4.
 
@@ -27,3 +28,43 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+def registration(login, password, status='no'):     # регистрация пользователя
+    data[login] = [password, status]                # O(1) - присваивание константы
+
+
+def activation(login, password):                    # Сложность функции: O(len(...))
+    if login in data:                               # O(len(...)) - сравнение значений
+        if password == data[login][0]:              # O(len(...)) - сравнение значений
+            data[login][1] = 'yes'                  # O(1) - присваивание константы
+
+
+def authentication(login, password):
+    if login in data and password == data[login][0] and data[login][1] == 'yes':   #O(len(...))-сравнение значений
+        print('Вы прошли авторизацию')                      # O(1) - вывод
+
+    if login in data and password != data[login][0]:        # O(len(...)) - сравнение значений
+        raise SyntaxError('Вы ввели неверный пароль')       # O(1) - вывод
+
+    if login in data and password == data[login][0] and data[login][1] == 'no': # O(len(...)) - сравнение значений
+        print('Вам нужно подтвердить свою учетную запись. Для подтверждения нажмите "Y": ')     # O(1) - вывод
+        answer = input()                                    # O(1) - ввод
+        if answer == 'Y' or answer == 'y':                  # O(len(...)) - сравнение значений
+            activation(login, password)                     # Вызов ф-ии со сложностью O(len(...))
+        else:
+            raise SyntaxError('Вы отказались от подтверждения. Попробуйте еще.')    # O(1) - вывод
+
+    if login not in data:                                                       # O(len(...)) - сравнение значений
+        raise SyntaxError('Пользователь не найден')                             # O(1) - вывод
+
+    """Вывод: Данный алгоритм хорош тем, что в нем не используется цикл. Сложность данного алгоритма составляет:
+    O(len(...))^2, что в итоге является O(1) - константной функцией"""
+
+
+data = {}
+registration('shavrinbs', 'qwerty')     # регистрируем пользователя
+print(data)
+
+authentication('shavrinbs', 'qwerty')   # проходим аутентификацию с подтверждением активации
+print(data)
