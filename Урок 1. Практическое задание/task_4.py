@@ -27,3 +27,23 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {
+	'user1': {'password': '123', 'activation': True},
+	'user2': {'password': '123', 'activation': True},
+	'user3': {'password': '123', 'activation': False},
+	'user4': {'password': '123', 'activation': False},
+}
+# Сложность O(n) простой алгоритм
+def authoriation(users, user_name, user_password): 
+	for key, value in users.items():
+		if key == user_name:
+			if value['password'] == user_password and value['activation']:
+				return 'Добро пожаловать.'
+			elif value['password'] == user_password and not value['activation']:
+				return 'Учетная запись не активированна. Вам необходимо пройти активацию.'
+			elif value['password'] != user_password:
+				return 'Некорректный пароль.'
+	return 'Такого пользователя нет.'
+
+print(authoriation(users, 'user3', '123'))
