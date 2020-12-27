@@ -17,3 +17,24 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+
+def search_for_min(lst):  # O(n^2)
+    result = lst[0]
+    for i in range(len(lst) - 1):  # O(n)
+        for a in lst[i + 1:]:  # O(n)
+            if a < result:
+                result = a
+    return result
+
+
+def search_for_min_1(lst):  # O(n) простой и быстрый в сравнении с первым, использует стандартную функцию(min)
+    result = min(lst)
+    return result
+
+
+lst_1 = [random.randint(1, 30) for b in range(1, 10)]
+print(search_for_min(lst_1))
+print(search_for_min_1(lst_1))
+print(lst_1)
