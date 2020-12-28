@@ -18,3 +18,30 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_chr(start=32, stop=127):
+    if start >= stop - stop % 10:  # хвост
+        for i in range(start, stop + 1):
+            print(f'{start} - {chr(start)}', end=' ')
+            start += 1
+        print('\n')
+        return
+    else:
+        for i in range(start, start + 10):
+            print(f'{start} - {chr(start)}', end=' ')
+            start += 1
+        print('\n')
+        return get_chr(start, stop)
+
+
+
+get_chr(1, 10)
+
+get_chr(20, 45)
+
+get_chr(47, 59)
+
+get_chr(99, 123)
+
+get_chr()

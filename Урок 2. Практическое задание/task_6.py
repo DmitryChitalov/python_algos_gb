@@ -9,3 +9,33 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+number = randint(0, 100)
+
+
+def game(number, answer=None, tries=10):
+    if tries == 0:
+        print(f'Попытки закончились, Вы проиграли. Загадано число: {number}')
+        return
+    try:
+        answer = int(input(f'Ведите загаданное число, осталось '
+                           f'{tries} попыток: '))
+    except ValueError:
+        tries -= 1
+        print(f'Введено некорректное число, введите целое число от 0 до 100: ')
+        return game(number, tries=tries)
+    if answer == number:
+        print('Победа!')
+        return
+    elif answer > number:
+        tries -= 1
+        print(f'Введенное число больше загаданного, '
+              f'у вас осталось {tries} попыток')
+        return game(number, tries=tries)
+    elif answer < number:
+        tries -= 1
+        print(f'Введенное число меньше загаданного, '
+              f'у вас осталось {tries} попыток')
+        return game(number, tries=tries)
+
+game(number)

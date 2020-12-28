@@ -9,3 +9,13 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def find_sum(number, start=1):
+    if number == 1:
+        return start
+    else:
+        return start + find_sum(number - 1, start / -2)
+
+
+print(find_sum(3))
