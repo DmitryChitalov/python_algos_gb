@@ -18,3 +18,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+# for i in range(32, 128):
+#     print("%4d-%s" % (i, chr(i)), end='')
+#     if i % 10 == 0:
+#         print()
+#
+# print()
+
+
+def table(i = 32, z = 0):
+    if i == 128:
+        print()
+    else:
+        print("%4d-%s" % (i, chr(i)), end='')
+        i += 1
+        z += 1
+        if z % 10 == 0:
+             print(f'\n')
+             return table(i, z)
+        else:
+            return table(i, z)
+
+
+print(table())
