@@ -18,3 +18,43 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+
+class Teller:
+    def __init__(self, teller_size):
+        self.teller_size = teller_size
+        self.elems = []
+
+    def __str__(self):
+        return str(self.elems)
+
+    def stack_clear(self):
+        return self.elems == [[]]
+
+    def insert_teller(self, plate):
+        plate_count = 0
+        try:
+            if len(self.elems[-1]) == self.teller_size:
+                self.elems.append([])
+            for elem in self.elems:
+                if len(elem) < self.teller_size:
+                    self.elems[plate_count].append(plate)
+                else:
+                    plate_count += 1
+                    continue
+        except IndexError:
+            self.elems.append([])
+            self.elems[plate_count].append(plate)
+
+    def stack_count(self):
+        return len(self.elems)
+
+x = Teller(3)
+
+x.insert_teller('plate')
+x.insert_teller('plate2')
+x.insert_teller('plate3')
+x.insert_teller('plate4')
+x.insert_teller('plate5')
+print(x)
+print('Кол-во стоек: ' + str(x.stack_count()))
