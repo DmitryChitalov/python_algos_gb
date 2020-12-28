@@ -10,3 +10,45 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+import time
+
+
+def time_dec(func):
+    def wrapper():
+        start = time.time()
+        func()
+        return print(f'Time is: {time.time() - start}')
+    return wrapper
+
+
+@time_dec
+def list_creation():
+    return [i for i in range(0, 1000000)]
+
+
+@time_dec
+def dict_creation():
+    result = {}
+    for i in range(0, 1000000):
+        result[i] = i
+    return result
+
+
+@time_dec
+def dict_long_creation():
+    return dict(zip([i for i in range(0, 1000000)], [i for i in range(0, 1000000)]))
+
+
+"""
+Ниже будут вриведены результаты замера функций создания списка и двух словарей
+Time is: 0.07813572883605957 
+Time is: 0.10936665534973145 
+Time is: 0.23435711860656738
+1) Создание списка с помощью выражения, сложность O(n)
+2) Создание словаря путем присваиваивания ключу его же в качестве значения, сложность так же O(n)
+3) Создание словаря при помощи функции zip, сложность остается той же O(n) (вложенные циклы отсуствуют), однако время 
+выполнения в 2 раза дольше чем предыщий вариант - так фактически мы генерируем 2 списка равной длины
+"""
+list_creation()
+dict_creation()
+dict_long_creation()
