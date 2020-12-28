@@ -17,3 +17,27 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+# Вар 1 O(n**2)
+import random
+list = [random.randint(0, 100) for i in range(1,20)]
+print(list)
+
+def search_min(list):
+    min = list[0]
+    for i in list:
+        if i < min:
+            min = i
+    return min
+print(search_min(list))
+
+# Вар 2 O(n)
+import random
+list = [random.randint(0, 100) for i in range(1,20)]
+print(list)
+
+def search_min(list):
+    min_digit = min(list)
+    return min_digit
+
+print(search_min(list))

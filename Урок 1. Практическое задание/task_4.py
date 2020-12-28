@@ -27,3 +27,64 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {
+    'Ivan': 'qwerty',
+    'Gena': 'abc',
+    'Masha': 'faq',
+    'Ann': 'fifa'
+}
+
+active_users = {
+    'Ivan': True,
+    'Gena': True,
+    'Masha': False,
+    'Ann': False
+}
+
+input_name = input('Введите имя:  ')
+input_keyword = input('Введите пароль:  ')
+
+# Вариант 1 Сложность O(1)
+def auth():
+    keyword = users.get(input_name)
+    if keyword != input_keyword:
+        print('Неверный пароль')
+    else:
+        print('Вы авторизованы')
+        active = active_users.get(input_name)
+        if active == True:
+            print('Учетная запись активирована!')
+        else:
+            print('Активируйе учетную запись!')
+
+auth()
+
+# Вар 2 Сложность O(n)
+def auth_var2():
+    names = users.keys()
+    for name in names:
+        if name == input_name:
+            print('Имя найдено')
+            break
+        else:
+            continue
+
+    keywords = users.values()
+    for keyword in keywords:
+        if keyword == input_keyword:
+            print('Пароль верный')
+            break
+        else:
+            continue
+
+    active = active_users.get(input_name)
+    if active == True:
+        print('Учетная запись активирована!')
+    else:
+        print('Активируйе учетную запись!')
+
+
+auth_var2()
+
+# Вариант 1 более эффективен поскольку имеет меньшую сложность

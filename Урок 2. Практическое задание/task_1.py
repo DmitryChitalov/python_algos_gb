@@ -28,3 +28,36 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def func():
+    digit_1 = int(input('Введите первое число:  '))
+    digit_2 = int(input('Введите второе число:  '))
+    sign = input('Введите +, -, * или / - если хотите провести математические опреации с числами \n'
+                 'Или цифру 0 для выхода: ')
+    if sign == '0':
+        print('Программа завершена!')
+    elif sign == '+':
+        res = digit_1+digit_2
+        print(res)
+        func()
+    elif sign == '-':
+        res = digit_1-digit_2
+        print(res)
+        func()
+    elif sign == '*':
+        res = digit_1*digit_2
+        print(res)
+        func()
+    elif sign == '/' and digit_2 == 0:
+        print('На ноль делить нельзя!\n'
+              'Введите команды заново!')
+        func()
+    elif sign == '/' and digit_2 != 0:
+        res = digit_1/digit_2
+        print(res)
+        func()
+
+
+
+func()
