@@ -10,6 +10,8 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -37,5 +39,26 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+
+# Самая быстрая функция. Она быстрее всех остальных потому что используется встроенная функция set
+# и из-за того что это множество, убираются дубликаты и мы проходим циклом только по уникальным значениям
+
+
+def func_3():
+    my_dict = set(array)
+    max_num = 0
+    for i in my_dict:
+        if array.count(i) > max_num:
+            max_num = i
+    return f'Чаще всего встречается число {max_num}, ' \
+           f'оно появилось в массиве {array.count(max_num)} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit(stmt='func_1()', setup='from __main__ import func_1,array', number=100000))
+print(timeit(stmt='func_2()', setup='from __main__ import func_2,array', number=100000))
+print(timeit(stmt='func_3()', setup='from __main__ import func_3,array', number=100000))
+
