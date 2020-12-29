@@ -13,34 +13,35 @@
 И примените ее к двум своим функциям.
 """
 
+
 import time
 
 
-def time_it(func):
-    def wrapper(*args, **kwargs):
-        start_time = time.time()
-        func(args[0])
-        print(time.time() - start_time)
-    return wrapper
+def check_time(func):
+	def wrapper(n):
+		start_time = time.time()
+		func(n)
+		end_time = time.time()
+		print(f'{func.__name__} time is {end_time - start_time}')
+	return wrapper	
 
 
-@time_it
-def test_list(n):
-    list_obj = []
-    for i in range(n):
-        list_obj.append(i)
-        list_obj.index(i)
-    return list_obj
+@check_time
+def func_list(n):
+	a = []
+	for i in range(n):
+		a.append(i*i)
+	return a	
+	
+@check_time
+def func_dict(n):
+	a = {}
+	for i in range(n):
+		a[i] = i*i
+	return a
+	
+
+func_list(5)
+func_dict(5)
 
 
-@time_it
-def test_dict(n):
-    dict_obj = dict()
-    for i in range(n):
-        dict_obj[i] = i
-        dict_obj.get(i)
-    return dict_obj
-
-
-test_list(10000)
-test_dict(10000)
