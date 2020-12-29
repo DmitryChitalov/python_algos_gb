@@ -6,3 +6,23 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import sys
+
+
+def task7(num, i=1):
+    if i > num:
+        return 0
+    return i + task7(num, i+1)
+
+
+sys.setrecursionlimit(2000)
+n = 1
+while True:
+    left = task7(n)
+    right = n*(n+1)/2
+
+    if left == right:
+        print(f'Для n={n} - верно ({left} = {right}).')
+    else:
+        print(f'Для n={n} - не верно ({left} <> {right}).')
+    n += 1

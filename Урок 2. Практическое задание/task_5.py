@@ -18,3 +18,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def task5(cur_code, cur_pos=1):
+    if cur_code > 127:
+        return
+    if cur_pos == 10:
+        print(f'{cur_code} - {chr(cur_code)}')
+        task5(cur_code + 1)
+    else:
+        print(f'{cur_code} - {chr(cur_code)}', end=' ')
+        task5(cur_code+1, cur_pos+1)
+
+
+task5(32)

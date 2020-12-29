@@ -9,3 +9,25 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint, seed
+
+
+def task6(n, i=1):
+    if i > 10:
+        return f'Вы не справились! Загаданное число - {n}'
+
+    cur_n = int(input(f'Попытка №{i}. Введите число: '))
+    if cur_n < n:
+        print('Не верно, загаданное число больше!')
+        # return task6(n, i + 1)
+    elif cur_n > n:
+        print('Не верно, загаданное число меньше!')
+        # return task6(n, i+1)
+    else:
+        return f'Вы угадали за {i} ходов!'
+    return task6(n, i+1)
+
+
+seed()
+r = randint(0, 100)
+print(task6(r))
