@@ -9,3 +9,24 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+def guess_the_number(attempt, number):
+
+    print(f'Attempt {attempt}')
+    answer = int(input('Please, input the number in range from 0 to 100: '))
+    if attempt == 10 or answer == number:
+        if answer == number:
+            print('Right! You won!')
+        print(f'The number is: {number}')
+
+    else:
+        if answer > number:
+            print(f'The number to be divined is less')
+        else:
+            print(f'The number to be divined is more')
+        guess_the_number(attempt + 1, number)
+
+
+guess_the_number(1, random.randint(0, 100))

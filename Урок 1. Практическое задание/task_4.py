@@ -27,3 +27,42 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# Первое решение. Здесь сложность алгоритма реализации за счет цикла - O(N)
+def authentification1(users, login, user_password):
+    for key, value in users.items():
+        if key == login:
+            if value['password'] == user_password and value['verification']:
+                return 'Welcome, your data is correct!'
+            elif value['password'] == user_password and not value['verification']:
+                return 'Sorry but your data is not correct! Please pass a verification!'
+            elif value['password'] != user_password:
+                return 'Password is not valid'
+    return 'This login does not exist!'
+
+
+# Второе решение. Здесь сложность алгоритма реализации - константная О(1). Функция get дает константную сложность, как и
+# все остальное.
+def authentification2(users, login, user_password):
+    if users.get(login):
+        if users[login]['password'] == user_password and users[login]['verification']:
+            return 'Welcome, your data is correct!'
+        elif users[login]['password'] == user_password and not users[login]['verification']:
+            return 'Sorry but your data is not correct! Please pass a verification!'
+        elif users[login]['password'] != user_password:
+            return 'Password is not valid'
+    else:
+        return 'This login does not exist!'
+
+# Второе решение лучше первого: реализация быстрее, т.к. проще сложность алгоритма - О(1) против О(N).
+
+
+users_dict = {'user1': {'password': 'qwerty', 'verification': True},
+            'user2': {'password': 'ytrewq', 'verification': True},
+            'user3': {'password': 'abcde', 'verification': True},
+            'user4': {'password': '12345', 'verification': False}
+            }
+
+print(authentification1(users_dict, 'user2', 'ytrewq'))
+
+print(authentification2(users_dict, 'user4', '12345'))
