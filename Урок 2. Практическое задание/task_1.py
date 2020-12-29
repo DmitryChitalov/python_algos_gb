@@ -28,3 +28,46 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def task1(st=''):
+    if (st == '') | (st is None):
+        st = input('Введите знак (+, -, *, /). 0 - для выхода: ')
+        if st == '0':
+            return st
+    if st == '+':
+        st1 = task1(input('Введите первое число: '))
+        st2 = task1(input('Введите второе число: '))
+        print(f'Результат сложения: {st1 + st2}')
+        return task1()
+    elif st == '-':
+        st1 = task1(input('Введите первое число: '))
+        st2 = task1(input('Введите второе число: '))
+        print(f'Результат сложения: {st1 - st2}')
+        return task1()
+    elif st == '*':
+        st1 = task1(input('Введите первое число: '))
+        st2 = task1(input('Введите второе число: '))
+        print(f'Результат сложения: {st1 * st2}')
+        return task1()
+    elif st == '/':
+        st1 = task1(input('Введите первое число: '))
+        st2 = task1(input('Введите второе число: '))
+        if st2 == 0:
+            print('Делить на 0 нельзя.')
+        else:
+            print(f'Результат сложения: {st1 / st2}')
+        return task1()
+    else:
+        try:
+            st = float(st)
+            print(f'Введено число {st}')
+            return st
+        except ValueError:
+            if st != '0':
+                print('Введено не число')
+                return task1(input('Введите число: '))
+    return task1()
+
+
+task1()
