@@ -18,3 +18,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def asii(symbols, count=1):                                 # счетчик с изначальным значением в нуле
+    number = symbols[0]                                     # первый номер из списка
+    if len(symbols) == 1:                                   # условие завершения рекурсии
+        return f'{number} - {chr(number)}'                  # вывод пары "код-символ"
+    else:
+        if count == 10:                                     # если уже 10 символов в строке
+            print(f'{number} - {chr(number)}')              # выводим следующий с переводом строки
+            count = 1                                       # возвращаем счетчик
+        else:
+            count += 1                                      # пополняем счетчик
+            print(f'{number} - {chr(number)} ', end='')     # вывод значений в одну строку
+        return asii(symbols[1:], count)                     # рекурсивный вызов ф-ии с увеличением левой границы
+
+
+def print_symbols_from_asii(left, right):
+    symbols_lst = [i for i in range(left, right+2)]         # создание списка номеров
+    return asii(symbols_lst)                                # вызов функции вывода символов
+
+
+print_symbols_from_asii(32, 127)                            # вызов функции с переданными ей границами поиска

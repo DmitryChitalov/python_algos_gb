@@ -16,3 +16,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def input_str():                                                # ф-ия ввода числа
+    numbers = input('Введите число: ')
+    return count_numbers(numbers)
+
+
+def count_numbers(numbers, count_even=0, count_uneven=0):           # функция подсчета чисел
+    if len(numbers) == 0:                                           # условие завершения рекурсии
+        return f'Количество четных и нечетных цифр в числе равно: {count_even, count_uneven}'
+    if int(numbers[0]) % 2 == 0:                                    # четные числа
+        count_even += 1                                             # пополнение счетчика четных чисел
+        return count_numbers(numbers[1:], count_even, count_uneven)
+    if int(numbers[0]) % 2 == 1:                                    # нечетные числа
+        count_uneven += 1                                           # пополнение счетчика нечетных чисел
+        return count_numbers(numbers[1:], count_even, count_uneven)
+
+
+print(input_str())

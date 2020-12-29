@@ -15,3 +15,21 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def input_str():
+    reverse_str = ''
+    numbers = input('Введите число, которое требуется перевернуть: ')
+    return reverse(numbers, reverse_str)
+
+
+def reverse(numbers, reverse_str):
+    if len(numbers) == 0:                               # условие завершения рекурсии
+        return f'Перевернутое число: {reverse_str}'     # вывод перевернутой строки
+    else:
+        reverse_str += numbers[-1]                      # запись символа в конец новой строки
+        return reverse(numbers[:-1], reverse_str)       # рекурсивный вызов ф-ии (не включая правую границу
+                                                        # исходной строки)
+
+
+print(input_str())

@@ -28,3 +28,55 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+operations = '+-*/'
+
+
+def finish(res):                        # ф-ия вывода результата с последующим рекурсивным вызовом калькулятора
+    print(f'Ваш результат {res}')
+    return calculator()
+
+
+def check(number):                      # ф-ия проверки чистоты введенного числа (без символов, букв)
+    numbers = '0123456789'
+    for el in number:
+        if el not in numbers:
+            print(f'В ваше число попала буква или другой символ(((. Исправьтесь. ')
+            return calculator()         # с последующим рекурсивным вызовом калькулятора
+
+
+def action(operation, number_1, number_2):          # ф-ия выполнения операции над полученными числами
+    result = 0
+    if operation == operations[0]:                  # сложение
+        result = int(number_1) + int(number_2)
+    elif operation == operations[1]:                # вычитание
+        result = int(number_1) - int(number_2)
+    elif operation == operations[2]:                # умножение
+        result = int(number_1) * int(number_2)
+    elif operation == operations[3]:                # деление с проверкой знаменателя (не равен 0)
+        if number_2 == '0':
+            print('Деление на 0 недопустимо!!')
+            number_2 = input('Введите второе число: ')
+            check(number_2)
+        result = int(number_1) / int(number_2)
+    return result                                   # возвращение результата (ф-ия вызыватся из калькулятора)
+
+
+def calculator():                                   # ф-ия калькулятора
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation == '0':                            # условие завершения рекурсии
+        return 'Завершение работы программы'
+
+    if operation not in operations:                 # проверка операции на входимость в список доступных операций
+        print('Неверный символ. Повторите ввод')
+        return calculator()                         # рекурсивный вызов функции калькулятора
+
+    number_1 = input('Введите первое число: ')
+    check(number_1)                                 # проверка 1го числа
+    number_2 = input('Введите второе число: ')
+    check(number_2)                                 # проверка 2го числа
+
+    finish(action(operation, number_1, number_2))   # вызов ф-ии выполнения операции с подстановкой полученного
+                                                    # результата в ф-ию вывода результата
+
+
+print(calculator())
