@@ -53,7 +53,7 @@ def func_4():
                 count += 1
         except ValueError:
             continue
-        finally: # Вот когда бы пригодилось, однако без этого на массиве из одинаковых элементов
+        finally: # Вот когда бы пригодилось finally, однако без него на массиве из одинаковых элементов
             # был не корректный результат
             if max_count == 0 or count >= max_count :
                 max_count = count
