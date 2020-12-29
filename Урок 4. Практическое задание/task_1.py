@@ -13,6 +13,7 @@
 """
 
 from timeit import timeit
+from random import randint
 
 
 def func_1(nums):
@@ -21,3 +22,16 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for i in range(len(nums)) if nums[i] % 2 == 0]
+
+
+nums = [randint(1, 1000) for i in range(200)]
+print(timeit("func_1(nums)", "from __main__ import func_1, nums"))
+print(timeit("func_2(nums)", "from __main__ import func_2, nums"))
+# Сделал создание массива через list comprehension
+# получилось быстрее по времени
+# не создается дополнительный массив, в который затем добавляются значения
+# значения проверяются сразу, если подходят - добавляются
