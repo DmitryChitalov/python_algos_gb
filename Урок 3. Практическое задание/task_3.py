@@ -14,3 +14,19 @@
 р
 а
 """
+
+my_string = 'papa'
+my_dict = {}
+i = 1
+j = 0
+k = 0
+while k <= len(my_string):
+    while i <= len(my_string):
+        if k < i:
+            my_dict[j] = my_string[k:i]
+        i += 1
+        j += 1
+    i = 1
+    k += 1
+
+print(my_dict)
