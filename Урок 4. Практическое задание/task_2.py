@@ -4,10 +4,10 @@
 Приведен код, который формирует из введенного числа
 обратное по порядку входящих в него цифр.
 Задача решена через рекурсию
-Выполнена попытка оптимизировать решение через мемоизацию.
+Выполнена попытка оптимизировать решение через меморизацию.
 Сделаны замеры обеих реализаций.
 
-Сделайте аналитику, нужна ли здесь мемоизация или нет и почему?
+Сделайте аналитику, нужна ли здесь меморизация или нет и почему?
 Если у вас есть идеи, предложите вариант оптимизации.
 """
 
@@ -17,7 +17,7 @@ from random import randint
 
 def recursive_reverse(number):
     if number == 0:
-        return str(number % 10)
+        return ''
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
@@ -43,20 +43,20 @@ print(
         number=10000))
 
 
-def memoize(f):
+def memorize(f):
     cache = {}
 
-    def decorate(*args):
+    def decorate(num):
 
-        if args in cache:
-            return cache[args]
+        if num in cache.keys():
+            return cache[num]
         else:
-            cache[args] = f(*args)
-            return cache[args]
+            cache[num] = f(num)
+            return cache[num]
     return decorate
 
 
-@memoize
+@memorize
 def recursive_reverse_mem(number):
     if number == 0:
         return ''
@@ -79,3 +79,27 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+# При вызове функций для одного числа, вариант без меморизации выполняется
+# быстрее, так как не тратит время на составление хэш таблицы
+# При многократном вызове функции (для одного и того же число),
+# вариант с меморизацией выполняется быстрее
+# Нет необходимости применять меморизацию в данном случае
+print('Выполнение функции для одного числа, один раз, время умножено на 1000 '
+      'для наглядности результата')
+print('Без оптимизации')
+print(
+    timeit(
+        'recursive_reverse(123456789987654321)',
+        setup='from __main__ import recursive_reverse, num_100',
+        number=1) * 1000)
+print('С оптимизацией')
+print(
+    timeit(
+        'recursive_reverse_mem(123456789987654321)',
+        setup='from __main__ import recursive_reverse_mem, num_100',
+        number=1) * 1000)
+# В связи с чем у меня возник вопрос - каким образом timeit для повторного
+# вычисления значений, не составляет кэш заново, а берет данные из прошлого
+# кэша? После вызова функции, кэш не удаляется? Почему за 10 000 вызовов
+# формируется только один кэш?
