@@ -12,8 +12,8 @@
 
 Подсказка:
 Вариант исполнения:
-- условие рекурсивного вызова - введена операция +, -, *, /
-- условие завершения рекурсии - введена операция 0
+- условие рекурсивного вызова - введена операция +, -, *, / - ШАГ РЕКУРСИИ
+- условие завершения рекурсии - введена операция 0 - БАЗОВЫЙ СЛУЧАЙ
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
@@ -28,3 +28,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+import operator
+ops = {"+": operator.add, "-": operator.sub, "/": operator.truediv, "*": operator.mul}
+
+
+def prompt_for_number(prompt, check_for_0):
+    user_number = input(prompt)
+    if user_number == '0' and check_for_0:
+        print('На ноль делить нельзя!')
+    else:
+        try:
+            user_number = int(user_number)
+            return user_number
+        except ValueError:
+            print("Пожалуйста, введите число: ")
+    return prompt_for_number(prompt, check_for_0)
+
+
+def calc():
+    user_operator = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if user_operator == '0':
+        exit(0)
+    elif user_operator not in ops.keys():
+        print('Ошибка! Вы ввели не арифметический оператор.')
+        return calc()
+    else:
+        user_number1 = prompt_for_number('Введите первое число: ', False)
+        user_number2 = prompt_for_number('Введите второе число: ', user_operator == '/')
+        res = ops[user_operator](user_number1, user_number2)
+        print(res)
+        return calc()
+
+
+calc()

@@ -15,3 +15,22 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+import hashlib
+
+user_email = input('Введите адрес электронной почты: ')
+user_password = input('Придумайте пароль: ')
+salt = user_email
+stored_pass = hashlib.sha256(salt.encode() + user_password.encode()).hexdigest()
+
+
+def check_password():
+    enter_email = input('Введите ваш адрес электронной почты: ')
+    enter_password = input("Введите ваш пароль: ")
+    try_pass = hashlib.sha256(enter_email.encode() + enter_password.encode()).hexdigest()
+    if try_pass == stored_pass:
+        print('Пароль верный')
+    else:
+        print('Неверный пароль')
+
+check_password()
