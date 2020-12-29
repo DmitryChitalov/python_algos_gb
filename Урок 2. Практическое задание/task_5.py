@@ -17,4 +17,28 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+
+Допускается исп-е встроенных ф-ций
 """
+
+
+def ab_s(n, m, s=''):
+    """ Функция создания строки     print(ab_s(32, 42))     =>
+    32 -   33 - ! 34 - " 35 - # 36 - $ 37 - % 38 - & 39 - ' 40 - ( 41 - )
+    , рекурсия"""
+    if n == m:
+        return s
+    char_n = chr(n)
+    # if n == 127: char_n = '[DEL]'
+    s = f"{n} - {char_n} "
+    return s + ab_s(n+1, m)
+
+
+def print_ascii(n, finish):
+    if n+10 >= finish+1:
+        return print(ab_s(n, finish+1))
+    print(ab_s(n, n+10))
+    return print_ascii(n+10, finish)
+
+
+print_ascii(32, 127)

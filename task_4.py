@@ -29,7 +29,7 @@
 """
 
 
-def processing1(dict_test):                     # Общее O! 3*n*log(n) + 3
+def processing1(dict_test):         # O!(n*log(n))
     login, pas = input('Введите логин: '), input('Введите пароль: ')    # O +(1)
     if login in dict_test:                              # O n*log(n)
         if pas == dict_test.get(login)[0]:              # O n*log(n)
@@ -41,7 +41,7 @@ def processing1(dict_test):                     # Общее O! 3*n*log(n) + 3
     return
 
 
-def processing2(dict_test):                     # Общее O! 3*n*log(n) + 4
+def processing2(dict_test):         # O!(n*log(n))
     login = input('Введите логин: ')                    # O +(1)
     test_list = (input('Введите пароль: '), 1)          # O +(1)
     err_list = ('Не верный логин или пароль', 'Активируйте аккаунт')    # O +(1)
