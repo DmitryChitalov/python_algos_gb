@@ -9,7 +9,8 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
-
+import cProfile
+from timeit import timeit
 
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
@@ -33,4 +34,16 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+cProfile.run('revers(123456789987654321)')
+cProfile.run('revers_2(123456789987654321)')
+cProfile.run('revers_3(123456789987654321)')
+print(timeit('revers(123456789987654321)', 'from __main__ import revers'))
+print(timeit('revers_2(123456789987654321)', 'from __main__ import revers_2'))
+print(timeit('revers_3(123456789987654321)', 'from __main__ import revers_3'))
+# Версия номер 3 самая эффективная, так как делает обратное число за 1 проход
+# Рекурсия вызывается 19 раз, данные по времени:
+# 1 - 6.271982
+# 2 - 4.4030461999999995
+# 3 - 0.41121319999999884
 
