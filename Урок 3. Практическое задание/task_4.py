@@ -23,6 +23,8 @@ salt = 'sh9tothestars'
 def url_find_cash(url_address):
     if url_cash.get(url_address) == None:
         url_cash[url_address] = hashlib.sha256(salt.encode() + url_address.encode()).hexdigest()
+    else:
+        print('Страница найдена! Ее хэш: ', url_cash.get(url_address))
 
 
 url_find_cash('https://vk.com/')
