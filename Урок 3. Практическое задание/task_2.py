@@ -15,3 +15,21 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+from hashlib import sha256
+
+
+salt = 'Machpella'
+hash_obj = sha256(input('Введите пароль: ').encode('utf-8') + salt.encode('utf-8'))
+result_hash = hash_obj.hexdigest()
+print(f'В базе данных хранится строка: {result_hash}')
+
+while True:
+    enter = input('Введите пароль еще раз для проверки: ')
+    enter_obj = sha256(enter.encode('utf-8') + salt.encode('utf-8'))
+    result_enter = enter_obj.hexdigest()
+
+    if result_hash == result_enter:
+        print('Вы ввели верный пароль!')
+        break
+    else:
+        print('Пароль неверный, повторите ввод')
