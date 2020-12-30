@@ -1,29 +1,52 @@
-from timeit import timeit,repeat ,default_timer
+"""
+Задание 1.
 
-def memorize(func):
-    cache = {}
-    def wrapper(num):
-        if cache.get(num):
-           return cache[num]
-        else:
-            cache[num]=func(num)
-            return cache[num]
-    return wrapper
+Докажите, что словари обрабатываются быстрее, чем списки.
 
-num = 900
+Реализуйте две функции, в первой нужно заполнить элементами список, во второй-словарь
+Сделайте замеры времени выполнения каждой из функций
 
-@memorize
-def fib(n):
-    if n < 2:
-        return n
-    return fib(n-2) + fib(n-1)
+Подсказка: для замеров воспользуйтесь модулем time (см. примеры урока 1)
 
-def fib_t(n):
-    if n < 2:
-        return n
-    return fib_t(n-2) + fib_t(n-1)
+Примечание: eсли вы уже знаете, что такое декоратор и как его реализовать,
+то реализуйте ф-цию-декоратор и пусть она считает время
+И примените ее к двум своим функциям.
+"""
+""" Сделал декоратор, каторый обернул функцию, в которой замеряется время начала испытания,
+затем выполняется наша целевая функция - по заполнению(списка или словаря), и, затем вычисяется 
+время окончания замера (Для объективности, я заполнил оба контейнера 10 миллионами элементов)"""
+import time
 
-#print(timeit("fib(num)",setup= "from __main__ import fib, num",number=1))
-#print(timeit("fib_t(num)",setup= "from __main__ import fib_t, num",number=1))
-fib(20)
-fib(20)
+first_dict = {}
+first_list = []
+
+
+def decorator_function(func):
+    def check_time(*args):
+        start_val = time.time()
+        func(*args)
+        end_val = time.time()
+        return end_val - start_val
+
+    return check_time
+
+
+@decorator_function
+def dict_fill(my_dict: dict):
+    for i in range(1, 10000000):
+        my_dict[i] = i
+
+
+@decorator_function
+def list_fill(my_list: list):
+    for i in range(1, 10000000):
+        my_list.append(i)
+
+
+print("Время заполнения словаря: ", dict_fill(first_dict))
+print("Время заполнения списка: ", list_fill(first_list))
+"""
+Время заполнения словаря:  1.3930795192718506
+Время заполнения списка:  1.3440771102905273
+Словари зопалняются дольше, т.к затрачивается определённое время для генерации хэш-значений для ключей словаря
+"""
