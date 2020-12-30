@@ -9,3 +9,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_line(n, count=0, sum=0, begin_num=1):
+
+    if n == 0:
+        return print(f'Количество элементов = {count}, их сумма = {sum}')
+    else:
+        sum += begin_num
+        begin_num = begin_num / (-2)
+        n -= 1
+        count += 1
+        sum_line(n, count, sum, begin_num)
+
+
+try:
+    user_n = int(input("Введите количество элементов: "))
+    sum_line(user_n)
+except ValueError:
+    print('Ошибка ввода!')

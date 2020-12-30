@@ -9,3 +9,33 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def game(secret, score=1, user_num=101):
+
+    if user_num == secret:
+        return print('Вы Выиграли!')
+    elif score == 11:
+        return print('Вы проиграли! Секретное число было =', secret)
+    else:
+        print('Попытка', score)
+        score += 1
+
+        try:
+            user_num = int(input("Угадай число от 0 до 100! Попробуй: "))
+        except ValueError:
+            print('Ошибка ввода!')
+            game()
+
+        if user_num > secret:
+            print('Многовато!')
+        if user_num < secret:
+            print('Маловато!')
+
+        game(secret, score, user_num)
+
+
+secret = random.randint(1, 100)
+print(game(secret))

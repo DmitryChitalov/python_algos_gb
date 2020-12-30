@@ -16,12 +16,15 @@
 Перевернутое число: 321
 """
 
-def revers(num, new_num = ''):
 
-    if len(str(num)) == 0 :
-        return new_num
+def revers(num, new_num=0):
+    if num == 0:
+        return print(new_num)
     else:
-        new_num += str(num))[-1]
+        new_num = new_num * 10 + (num % 10)
+        num = num//10
+        return revers(num, new_num)
 
 
-"""ААаааа, если вы не будете проверять еще пару часов хотя бы, я догружу остальное..."""
+revers(1234)
+revers(987654)
