@@ -9,6 +9,9 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
+from timeit import timeit
+from random import randint
+import cProfile
 
 
 def revers(enter_num, revers_num=0):
@@ -33,4 +36,35 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+test_num = randint(100000, 10000000)
+
+
+def main():
+    num = randint(1000, 10000)
+    revers(num)
+    revers_2(num)
+    revers_3(num)
+
+
+print("Оценка скорости работы функций с помощью модуля timeit")
+
+print(timeit("revers(test_num)", setup="from __main__ import revers, test_num", number=1000))
+print(timeit("revers_2(test_num)", setup="from __main__ import revers_2, test_num", number=1000))
+print(timeit("revers_3(test_num)", setup="from __main__ import revers_3, test_num", number=1000))
+
+print('Оценка скорости работы функций с помощью модуля cProfile')
+
+cProfile.run("main()")
+
+"""
+Анализ скорости выполнения приведённых алгоритмов показал, что функция revers_3, использующая срез, наиболее эффективна 
+для решения данной задачи. Рекурсивная функция revers показала самые плохие результаты по времени. 
+Модуль timeit в данном случае более информативен, чем модуль cProfile и позволяет оценить скорость работы по 
+конкретным значениям временных замеров, тогда как cProfile 
+демонстрирует общую картину эффективности всех трёх алгоритмов. 
+"""
+
+
 
