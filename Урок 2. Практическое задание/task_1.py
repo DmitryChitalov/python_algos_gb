@@ -28,3 +28,41 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator():
+
+    oper = input('Введите операцию или 0 для выхода')
+
+    if oper == '0':
+        return 'До свидания!'
+
+    else:
+        if oper not in '+-*/':
+            print('Неверный ввод!')
+            return calculator()
+        else:
+            try:
+                num_1 = int(input('Введите целое число '))
+                num_2 = int(input('Введите целое число '))
+                if oper == '+':
+                    print('Cумма = ', num_1 + num_2)
+                    return calculator()
+                elif oper == '-':
+                    print('Разность = ', num_1 - num_2)
+                    return calculator()
+                elif oper == '*':
+                    print('Произведение = ', num_1 * num_2)
+                    return calculator()
+                else:
+                    try:
+                        print('Частное = ', num_1 / num_2)
+                        return calculator()
+                    except ZeroDivisionError:
+                        print('Делить на 0 нельзя!')
+                        return calculator()
+            except ValueError:
+                print('Ошибка ввода!')
+                return calculator()
+
+print(calculator())
