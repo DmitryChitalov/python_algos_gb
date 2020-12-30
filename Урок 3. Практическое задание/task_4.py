@@ -16,9 +16,11 @@ cache = {}
 
 
 def add_to_cache(url):
-    hash = hashlib.sha256(url.encode() + salt.encode()).hexdigest()
-    if hash not in cache:
-        cache[hash] = url
+    if url not in cache:
+        cache[url] = hashlib.sha256(url.encode() + salt.encode()).hexdigest()
+        print(f'url {url} добавлен в кеш')
+    else:
+        print(f'url {url} есть в кеше')
 
 
 urls = [
