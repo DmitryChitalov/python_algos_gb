@@ -16,3 +16,42 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+# решение церез цикл
+
+def is_even(n):
+    if n % 2 == 0:
+        return True
+    else:
+        return False
+
+
+def even_digits(a):
+    """ считает четные циar"""   
+    dl = list(str(a))
+    cnt = [] # счетчик
+
+    while dl != [] :
+        val = int(dl.pop(0))
+        if is_even(val):
+            cnt.append(val)
+
+    return cnt
+# рекурсия
+
+def even_rec(a, vl = []):
+    """ получаем число в виде массива"""
+    if a != [] :
+        if is_even(int(a[0])):
+            vl.append(a.pop(0))
+            return  even_rec(a,vl)
+        else:
+            a.pop(0)
+            return even_rec(a,vl)
+    return vl
+
+
+if __name__ == '__main__':
+
+    #print('Четные цифры',even_digits(input("ВВедите натуральное число \n")))
+    print(" Четные цифры ", even_rec(list(str(input("Введите число \n")))))
