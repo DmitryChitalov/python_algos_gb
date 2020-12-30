@@ -15,3 +15,19 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+def flip_over(number, flip=0):
+
+    if number == 0:
+        return flip
+    else:
+        flip = (flip * 10) + (number % 10)
+        number = number // 10
+        return flip_over(number, flip)
+
+
+try:
+    shifter = int(input("Введите число: "))
+    print(f"Перевернутое число: {flip_over(shifter)}")
+except ValueError:
+    print("Вместо числа вы ввели строку")
