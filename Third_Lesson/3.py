@@ -19,8 +19,10 @@ import hashlib
 def unique_substrings(s : str):
     unique_set = set()
     for i in range(len(s)):
-        unique_set.add(hashlib.sha256(s[:i].encode()).hexdigest())
-        unique_set.add(hashlib.sha256(s[-i:].encode()).hexdigest())
+        #unique_set.add(hashlib.sha256(s[:i].encode()).hexdigest())
+        #unique_set.add(hashlib.sha256(s[-i:].encode()).hexdigest())
+        unique_set.add(s[:i])
+        unique_set.add(s[-i:])
     return unique_set, len(unique_set)
 
 print(unique_substrings("рара"))
