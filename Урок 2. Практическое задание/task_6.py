@@ -9,3 +9,24 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def guess_1(count, number):
+    """Рекурсия"""
+    print(f"Попытка №{count}")
+    answer = int(input("Введите число от 0 до 100: "))
+    if count == 10 or answer == number:
+        if answer == number:
+            print("Вы угадали!")
+        print(f"Загаданное число: {number}")
+    else:
+        if answer > number:
+            print(f"Загаданное число меньше чем {number}")
+        else:
+            print(f"Загаданное число больше чем {number}")
+        guess_1(count + 1, number)
+
+
+guess_1(1, random.randint(0, 100))
