@@ -38,13 +38,34 @@ def fill_dict(num):
         completed_dict[i] = i
     return completed_dict
 
-@bench
-def from_list_by_key(list,key):
-    return list[key]
 
 @bench
-def from_dict_by_key(dict,key):
-    return dict[key]
+def iterate_list_by_for_loop(_list):
+    __elem = 0
+    for key in _list:
+        __elem = key
+
+
+@bench
+def iterate_dict_by_for_loop(_dict):
+    __elem = 0
+    for key in _dict:
+        __elem = _dict[key]
+
+
+@bench
+def iterate_list_by_for_loop_with_range(_list, size):
+    __elem = 0
+    for i in range(size):
+        __elem = _list[i]
+
+
+@bench
+def iterate_dict_by_for_loop_with_range(_dict, size):
+    __elem = 0
+    for i in range(size):
+        __elem = _dict[i]
+
 @bench
 def forloop_dict(dict):
     __count = 0
@@ -58,17 +79,25 @@ def forloop_list(list):
         __count += 1
     return __count
 
+
+print('=====заполнение===')
 print('Заполнение словаря')
-filled_dict = fill_dict(1000000)
+filled_dict = fill_dict(50000000)
+print('========================')
 print('Заполнение списка')
-filled_list = fill_list(1000000)
-
-from_dict_by_key(filled_dict,102300)
-from_list_by_key(filled_list,102300)
-
-forloop_dict(filled_dict)
-forloop_list(filled_list)
-
+filled_list = fill_list(50000000)
+print('=====чтение контрукцией for in=======')
+print('чтение из словаря')
+iterate_dict_by_for_loop(filled_dict)
+print('========================')
+print('чтение из списка')
+iterate_list_by_for_loop(filled_list)
+print('==== чтение через range======')
+print('чтение из словаря')
+iterate_dict_by_for_loop_with_range(filled_dict, 50000000)
+print('========================')
+print('чтение из списка')
+iterate_list_by_for_loop_with_range(filled_list, 50000000)
 '''
 Заполнение словаря
 Время исполнения: 0.1775226593017578
@@ -84,5 +113,26 @@ forloop_list(filled_list)
 
 Доступ к элементам словаря и списка происходят одинаково по времени
 
+=====заполнение===
+Заполнение словаря
+Время исполнения: 6.419315576553345
+========================
+Заполнение списка
+Время исполнения: 5.259367227554321
 
+
+=====чтение контрукцией for in=======
+чтение из словаря
+Время исполнения: 3.0200047492980957
+========================
+чтение из списка
+Время исполнения: 1.188683271408081
+
+
+==== чтение через range======
+чтение из словаря
+Время исполнения: 4.2646050453186035
+========================
+чтение из списка
+Время исполнения: 3.136624336242676
 '''
