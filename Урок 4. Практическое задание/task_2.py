@@ -17,7 +17,7 @@ from random import randint
 
 def recursive_reverse(number):
     if number == 0:
-        return str(number % 10)
+        return ''  # str(number % 10)
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
@@ -26,6 +26,9 @@ num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
 
 print('Не оптимизированная функция recursive_reverse')
+print(num_100, recursive_reverse(num_100))
+print(num_1000, recursive_reverse(num_1000))
+print(num_10000, recursive_reverse(num_10000))
 print(
     timeit(
         "recursive_reverse(num_100)",
@@ -47,12 +50,12 @@ def memoize(f):
     cache = {}
 
     def decorate(*args):
-
         if args in cache:
             return cache[args]
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -64,6 +67,9 @@ def recursive_reverse_mem(number):
 
 
 print('Оптимизированная функция recursive_reverse_mem')
+print(num_100, recursive_reverse_mem(num_100))
+print(num_1000, recursive_reverse_mem(num_1000))
+print(num_10000, recursive_reverse_mem(num_10000))
 print(
     timeit(
         'recursive_reverse_mem(num_100)',
@@ -79,3 +85,9 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Оптимизация нужна. Декоратор создает хеш-таблицу, которая увеличивае скорость работы рекурсивной функции, за счет
+того, что значения считаются один раз, а потом вносятся и извлекаются из хеш-таблицы.
+P.S. в функции recursive_reverse была ошибка, она ноль выводила всегда в конце числа.
+"""

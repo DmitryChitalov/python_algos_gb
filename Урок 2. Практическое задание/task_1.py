@@ -28,3 +28,38 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def get_number():
+    while True:
+        try:
+            number_1 = int(input('Введите первое число: '))
+            number_2 = int(input('Введите второе число: '))
+            return number_1, number_2
+        except ValueError:
+            print('Вы ввели не число. Исправтесь.')
+
+
+def calculator():
+    action = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if action == '0':
+        return print('Программа завершена.')
+    elif action == '+' or action == '-' or action == '*' or action == '/':
+        number_1, number_2 = get_number()
+        if action == '+':
+            print(f'Ваш результат {number_1 + number_2}')
+        if action == '-':
+            print(f'Ваш результат {number_1 - number_2}')
+        if action == '*':
+            print(f'Ваш результат {number_1 * number_2}')
+        if action == '/':
+            try:
+                print(f'Ваш результат {number_1 / number_2}')
+            except ZeroDivisionError:
+                print('Делитель не может быть равен нулю. Исправтесь.')
+        return calculator()
+    else:
+        print('Вы ввели не верный символ. Исправтесь.')
+        return calculator()
+
+calculator()
