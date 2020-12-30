@@ -15,3 +15,26 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import random
+import hashlib
+
+
+def salt_gen(len = 10):
+    return "".join(random.choice("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") for i in  range(len))
+
+SALT = salt_gen(16)
+
+passwd = input("Введите пароль ")
+res = hashlib.sha256(SALT.encode() + passwd.encode()).hexdigest()
+print(f"Созданный хэш {res}")
+user_input = input("Введите пароль для проверки ")
+user_input = hashlib.sha256(SALT.encode() + user_input.encode()).hexdigest()
+print(f"Сверяемся с созданным хэшэм {user_input}")
+if res == user_input:
+    print("Вы ввели правильный пароль!")
+else:
+    print("Вы ввели неправильный пароль!")
+
+
+
+
