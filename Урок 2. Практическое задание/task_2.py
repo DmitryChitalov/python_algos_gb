@@ -16,3 +16,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def even_odd(number, even=0, odd=0):
+
+    if number == 0:
+        return even, odd
+    else:
+        quantity = number % 10
+        number = number // 10
+        if quantity % 2 == 0:
+            even += 1
+            return even_odd(number, even, odd)
+        else:
+            odd += 1
+            return even_odd(number, even, odd)
+
+
+try:
+    counting = int(input("Введите натуральное число: "))
+    print(f"Количество четных и нечетных цифр в числе равно: {even_odd(counting)}")
+except ValueError:
+    print("Вы ввели строку вместо натурального числа")
