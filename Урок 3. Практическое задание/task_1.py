@@ -10,3 +10,44 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+import time
+
+
+def decor_time(func):
+    def time_measurement(*args, **kwargs):
+        start_time = time.time()
+        func(args[0])
+        end_time = time.time()
+        return end_time - start_time
+    return time_measurement
+
+
+@decor_time
+def filling_list(n):
+    fil_list = []
+    for i in range(n):
+        fil_list.append(i)
+
+
+@decor_time
+def filling_dict(n):
+    fil_dict = {}
+    for i in range(n):
+        fil_dict[i] = i
+
+
+n = 1000
+print(f'время генерации списка {filling_list(n)}')
+print(f'время генерации словаря {filling_dict(n)}')
+
+"""
+для n = 10000000
+время генерации списка 1.5598185062408447
+время генерации словаря 1.1972882747650146 
+по каким-то причинам генерация словаря занимает времени меньше.
+Возможер есть ошибка в коде или какие-то проблемы с моим компьютером
+для n = 100000
+время генерации списка 0.011938333511352539
+время генерации словаря 0.01199650764465332
+тут время генерации фактически равное
+"""
