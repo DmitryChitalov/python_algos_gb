@@ -27,3 +27,39 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+user_info = {'login':'olya', 'pass':'123', 'activated': True}
+
+def test_1(my_login, my_pass, my_activated):
+    if my_activated == True:
+        if my_login != user_info.get('login') or my_pass != user_info.get('pass'):
+            print('Невнрный логин или пароль!')
+        else:
+            print('Вы вошли в систему!')
+    else:
+        print('Активируйте профиль!')
+
+
+# test_1('olya', '123', True)
+# test_1('olyaO', '123', True)
+# test_1('olya', '1234', True)
+# test_1('olya', '1234', False)
+
+
+def test_2(my_info):
+    if my_info == user_info and my_info.get('activated') is not False:
+        print('Вы вошли в систему!')
+    elif my_info.get('activated') is False:
+        print('Активируйте профиль!')
+    else:
+        print('Невнрный логин или пароль!')
+
+
+# my_info = {'login': 'olya', 'pass': '123', 'activated': True}
+# test_2(my_info)
+# my_info = {'login': 'olya0', 'pass': '123', 'activated': True}
+# test_2(my_info)
+# my_info = {'login': 'olya', 'pass': '1234', 'activated': True}
+# test_2(my_info)
+# my_info = {'login': 'olya', 'pass': '123', 'activated': False}
+# test_2(my_info)
