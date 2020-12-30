@@ -28,3 +28,54 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calc():
+    adding_machine = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+
+    if adding_machine == '0':
+        print("Вычисления завершены!")
+        return "Выход"
+
+    else:
+        if adding_machine in "+-*/":
+            try:
+                number_1 = int(input("Введите первое число: "))
+                number_2 = int(input("Введите второе число: "))
+
+                if number_2 == 0:
+                    print("На 0 делить нельзя")
+                    number_2 = int(input("Введите второе число: "))
+
+                else:
+                    if adding_machine == '+':
+                        res = number_1 + number_2
+                        print(f"Ваш результат {res}")
+                        return calc()
+
+                    elif adding_machine == '-':
+                        res = number_1 - number_2
+                        print(f"Ваш результат {res}")
+                        return calc()
+
+                    elif adding_machine == '*':
+                        res = number_1 * number_2
+                        print(f"Ваш результат {res}")
+                        return calc()
+
+                    elif adding_machine == '/':
+
+                        res = number_1 / number_2
+                        print(f"Ваш результат {res}")
+                    return calc()
+
+            except ValueError:
+                print(
+                    "Вы вместо трехзначного числа ввели строку (((. Исправьтесь")
+                return calc()
+
+        else:
+            print("Введен неверный символ, попробуйте еще раз")
+            return calc()
+
+
+calc()
