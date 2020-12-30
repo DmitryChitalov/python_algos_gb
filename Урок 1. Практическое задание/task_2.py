@@ -17,3 +17,32 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+
+test_list = [random.randint(-10, 10) for i in range(10)]
+print(test_list)
+
+
+def find_min_1(my_list):  # Сложность O(n^2).
+    for i in my_list:
+        for j in my_list:
+            if i > j:
+                break
+            num = i
+    return num
+
+
+print(find_min_1(test_list))
+# Почему-то функция работает правильно не каждый раз, не понимаю, почему...(
+
+
+def find_min_2(my_list):  # Сложность O(n)
+    num = 11
+    for i in my_list:
+        if i < num:
+            num = i
+    return num
+
+
+print(find_min_2(test_list))

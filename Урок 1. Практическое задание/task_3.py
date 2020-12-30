@@ -22,3 +22,59 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+companies_revenue = {'Royal Dutch Shell': 311600, 'State Grid': 387000, 'Walmart': 524000,  'Toyota': 280500,
+                      'Sinopec Group': 369200, 'BR': 278400, 'China National Petroleum': 364100, 'Volkswagen': 275200,
+                      'Saudi Aramco': 329800, 'Exxon Mobil': 265700}
+
+# 1
+
+names = tuple(companies_revenue.keys())
+money = list(companies_revenue.values())
+money_save = money.copy() # О(n)
+
+max_money = list()
+
+for i in range(3):  # Сложность О(3)
+    max_money.append(max(money))  # O(1)
+    money.remove(max(money))  # О(n) у удаления и О(n) мах, получается О(n**2)?
+
+for i in max_money:  # С одной стороны, О(n), но мы знаем, что тут будет 3 значения, поэтому получается О(3)
+    index_name = money_save.index(i)  # О(n)
+    print(names[index_name])  # O(1)
+# Общая сложность О(n**2), если я правильно подумала на счет 41 строки
+
+
+# 2 Так и не добилась, чтобы он работал как надо, но примерно сложность оценить все равно можно
+
+names = list(companies_revenue.keys())
+max = 0
+top = list()
+
+while len(top) < 3:  # То же самое, всего 3 повторения, поэтому О(3)
+    for i in names:  # О(n)
+        if companies_revenue.get(i) > max:  # O(1)
+            max = companies_revenue.get(i)  # O(1)
+            if top.count(i) == 0:  # О(n)
+                max_name = i  # O(1)
+    top.append(max_name)  # O(1)
+    max = 0  # O(1)
+
+print(top)
+# Общая сложность О(n)
+
+
+# 3 Не совсем мое, вспомнила, что в кусе основ был похожий пример
+
+sort_names = (sorted(companies_revenue, key=companies_revenue.get, reverse=True))  # так, тут companies_revenue - О(n),
+# а в ключе используется get который O(1), должно быть O(n log n)
+
+print(sort_names[0:3])
+
+
+# Общая сложность O(n log n)
+
+# Итак, у меня получилось, что 2 способ самый оптимальный из-за самой низкой сложности, но он не работатет..
+# На втором месте способ 3, а еще он более емкий. на третьем месте способ 1. Если бы удалось добработать способ 2 без
+# повышения ложности, было бы хорошо. А так я бы выбрала способ 3 для работы из-за сложности и емкости кода.
