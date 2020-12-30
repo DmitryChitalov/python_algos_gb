@@ -11,6 +11,8 @@
 """
 
 
+import cProfile
+import timeit
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
         return
@@ -28,9 +30,19 @@ def revers_2(enter_num, revers_num=0):
         enter_num //= 10
     return revers_num
 
-
+0
 def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+cProfile.run("revers")
+cProfile.run("revers_2")
+cProfile.run("revers_3")
+print(timeit.timeit('revers',setup='from __main__  import revers'))
+print(timeit.timeit('revers_2',setup='from __main__  import revers_2'))
+print(timeit.timeit('revers_3',setup='from __main__  import revers_3'))
+"""
+ в данном примере разница не такая большая ну в общем случаи здесь эффективнее 3 тий вариант рекурсия и цыкл работает медленнее
 

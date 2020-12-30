@@ -21,3 +21,27 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+
+
+nums = [2, 3, 4, 5, 6, 4, 5, 7]
+
+
+def func_2(nums):
+    new_arr = [i for i in nums if i % 2 == 0]
+
+    return new_arr
+
+
+def func_3(nums):
+    new_arr1 = list(i for i in nums if i % 2 == 0)
+    return new_arr1
+
+
+print(timeit.timeit("func_1(nums)", setup="from __main__ import func_1, nums"))
+print(timeit.timeit("func_2(nums)", setup="from __main__ import func_2, nums"))
+print(timeit.timeit("func_3(nums)", setup="from __main__ import func_3, nums"))
+"""
+я добавила лист ранге и  comprehension  потому что они быстрее чем аппенд, ну у меня comprehension  быстрее чем лист увас было наабарод
+"""
