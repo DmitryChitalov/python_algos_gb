@@ -17,7 +17,7 @@ from random import randint
 
 def recursive_reverse(number):
     if number == 0:
-        return str(number % 10)
+        return ''
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
@@ -79,3 +79,48 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+def str_reverse(number):
+    return int(str(number)[::-1])
+
+
+print('Функция str_reverse')
+print(
+    timeit(
+        'str_reverse(num_100)',
+        setup='from __main__ import str_reverse, num_100',
+        number=10000))
+print(
+    timeit(
+        'str_reverse(num_1000)',
+        setup='from __main__ import str_reverse, num_1000',
+        number=10000))
+print(
+    timeit(
+        'str_reverse(num_10000)',
+        setup='from __main__ import str_reverse, num_10000',
+        number=10000))
+
+"""
+Не оптимизированная функция recursive_reverse
+0.027714262999999996
+0.03772677399999999
+0.05752717800000001
+
+Оптимизированная функция recursive_reverse_mem
+0.0017684829999999874
+0.0017372900000000024
+0.0018576030000000132
+
+Функция str_reverse
+0.0045268019999999964
+0.004473069999999996
+0.004809002000000007
+"""
+# Мемоизация для решения данной задачи оправдана, особенно при многократном повторении
+# и на больших числах, т.к. это повышает вероятность нахождения ответа в кеше. Данный вывод подтверждают и замеры.
+#
+# В качестве варианта оптимизации в функции str_reverse предложено решение с помощью среза строки.
+# Данное решение не смогло обогнать мемоизацию (обгоняет, только если количество запусков поставить 10)),
+# но работает быстрее обычной рекурсивной функции, полагаю, за счет отсутствия арифметических операций.
