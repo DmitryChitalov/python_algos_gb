@@ -28,3 +28,42 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def recur_calc(sign):
+    global res
+    if sign != '0' and sign != '+' and sign != '-' and sign != '*' and sign != '/':
+            recur_calc(input('Введите операцию для входа: '))
+    elif sign == '0' or sign == 0:
+        print('Операция завершена')
+    else:
+        first_numb = input('Введите первое число: ')
+        while True:
+            if not first_numb.isnumeric():
+                first_numb = input('Вы ввели не число, попробуйсте снова!')
+            else:
+                break
+
+        second_numb = input('Введите второе число: ')
+        while True:
+            if not second_numb.isnumeric():
+                second_numb = input('Вы ввели не число, попробуйсте снова!')
+            elif sign == '/' and second_numb == '0':
+                second_numb = input('Делить на 0 нельзя, попробуйсте снова!')
+            else:
+                break
+
+        if sign == '+':
+            res = int(first_numb) + int(second_numb)
+        elif sign == '-':
+            res = int(first_numb) - int(second_numb)
+        elif sign == '*':
+            res = int(first_numb) * int(second_numb)
+        elif sign == '/':
+            res = int(first_numb) / int(second_numb)
+
+        print(int(res))
+        recur_calc(input('Введите операцию для входа: '))
+
+
+recur_calc(input('Введите операцию для входа: '))
