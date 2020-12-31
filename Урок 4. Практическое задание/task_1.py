@@ -21,3 +21,22 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    new_arr = [j for i, j in enumerate(nums) if not i % 2]
+    return new_arr
+
+
+nums = [i for i in range(1000000)]
+print(timeit("func_1(nums)", "from __main__ import func_1, nums", number=1000))
+print(timeit("func_2(nums)", "from __main__ import func_2, nums", number=1000))
+"""
+Я получил следующие результаты замеров для кода выше: 
+105.1191414
+81.03380650000001
+В первой функции (func_1) мы имеем сложность O(n), так как всё что находится внутри цикла выполняется за O(1).
+Во второй функции я использовал стандартную функцию enumerate() для того что бы сразу полчуть связку - значение индекс
+в добавление к этому результирующий список формируется при помощи list comprehensions, что дает нам небольшую прибавку
+в скорости. В итоге сложность обеих функций - O(n) однако вторая функция работает быстрее 
+"""
