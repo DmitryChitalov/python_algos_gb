@@ -13,6 +13,8 @@
 Опишите результаты, сделайте выводы, где и какой алгоритм эффективнее
 Подумайте и по возможности определите сложность каждого алгоритма
 """
+from timeit import timeit
+max_num = 100
 
 
 def simple(i):
@@ -35,5 +37,34 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+def simple_er(num):
+    arr = [i for i in range(max_num)]
+    arr[1] = 0
+    for el in arr:
+        if el > 1:
+            for multiple in range(el + el, max_num, el):
+                arr[multiple] = 0
+    simple_arr = [el for el in arr if el != 0]
+    return simple_arr[num-1]
+
+
+number1 = 100
+number2 = 1000
+
+print(f"Функция simple 100: {timeit('simple(number1)', 'from __main__ import simple, number1', number=1000)}")
+print(f"Функция simple_er 100: {timeit('simple_er(number1)', 'from __main__ import simple_er, number1', number=1000)}")
+print(f"Функция simple 1000: {timeit('simple(number2)', 'from __main__ import simple, number2', number=1000)}")
+print(f"Функция simple_er 1000: {timeit('simple_er(number2)', 'from __main__ import simple_er, number2', number=1000)}")
+
+# По результатам замеров алгоритм с решетом заметно выйгрывает на на больших числах.
+# Но при этом он ограничен (в данном случае max_num = 10000), что не всегда удобно:
+# нужно либо отслеживать как-то, чтобы запрашиваемый элемент попадал в диапазон рассматриваемых чисел,
+# и расширять его по необходимости, либо ограничивать пользователя.
+# На больших простых числах в заранее известном диапазоне лучше алгоритм с решетом Эратосфена.
+# На малых числах алгоритм без решета быстрее.
+"""
+Функция simple 100: 1.6866692360000002
+Функция simple_er 100: 1.9815407189999998
+Функция simple 1000: 315.06458363499996
+Функция simple_er 1000: 2.099473922999948
+"""
