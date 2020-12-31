@@ -35,3 +35,8 @@ def filling_dict(n):
 
 print(filling_list(1000))
 print(filling_dict(1000))
+'''
+filling_list   # 0.0001239776611328125   список
+filling_dict   # 0.00014328956604003906  словарь
+Вывод: создание списка происходит быстрее, чем в словаре,
+'''
