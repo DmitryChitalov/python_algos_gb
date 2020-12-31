@@ -18,3 +18,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+symbols = []
+
+
+def task_5(start_elem, stop):
+    symbols.append(f'{start_elem} - {chr(start_elem)}')
+    if start_elem == stop:
+        print(symbols)
+    else:
+        task_5(start_elem + 1, stop)  # выхов рекурсии
+
+
+task_5(32, 127)

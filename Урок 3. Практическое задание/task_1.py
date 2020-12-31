@@ -10,3 +10,32 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+
+import time
+
+lst = []
+dic = {}
+
+
+def wrapper(func):  # функция декоратор
+    def des_time():
+        start_time = time.time()
+        func()
+        end_time = time.time()
+        print(end_time - start_time)
+
+    return des_time()
+
+
+@wrapper
+def lst_app():
+    for i in range(10 ** 6):
+        lst.append('1')
+    print('Список')
+
+
+@wrapper
+def dic_app():
+    for i in range(10 ** 6):
+        dic.update({'a': 1})
+    print('Словарь')
