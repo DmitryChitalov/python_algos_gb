@@ -15,12 +15,12 @@ from timeit import timeit
 
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
-        return
+        return revers_num
     else:
         num = enter_num % 10
         revers_num = (revers_num + num / 10) * 10
         enter_num //= 10
-        revers(enter_num, revers_num)
+        return revers(enter_num, revers_num)
 
 
 def revers_2(enter_num, revers_num=0):
