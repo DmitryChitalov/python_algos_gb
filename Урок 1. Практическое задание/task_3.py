@@ -22,3 +22,39 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+companies = {
+    'Company 1': 500,
+    'Company 2': 100,
+    'Company 3': 20,
+    'Company 4': 35,
+    'Company 5': 16,
+    'Company 6': 1000,
+    'Company 7': 1200,
+    'Company 8': 15,
+    'Company 9': 1,
+    'Company 10': -8
+}
+
+
+def search_1(dct): # The complexity is O(n^2)
+    max_dict = list(dct.items())
+    for i in range(0, len(max_dict) - 1):  # O(n)
+        for j in range(i + 1, len(max_dict)):  # O(n)
+            if max_dict[i][1] < max_dict[j][1]:  # O(1)
+                buf = max_dict[i]
+                max_dict[i] = max_dict[j]
+                max_dict[j] = buf
+    return max_dict[:3]
+
+
+def search_2(dct):  # O(n * logN)
+    max_dict = list(dct.items())
+    max_dict.sort(key=lambda el: el[1]) # O(n * logN)
+    return max_dict[-3:]
+
+
+print(search_1(companies))
+print(search_2(companies))
+
+# Better to use the second option with O(N * logN) complexity
