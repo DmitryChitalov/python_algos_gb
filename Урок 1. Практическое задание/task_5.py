@@ -18,3 +18,33 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+class Stack_of_plates:
+    def __init__(self, max_size=10):
+        self.elems = []
+        self.max_size = max_size
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        if self.stack_size() == self.max_size:
+            print('Стопка уже полная, создайте новую.')
+        else:
+            self.elems.append(el)
+
+    def pop_out(self):
+        return self.elems.pop()
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1]
+
+    def stack_size(self):
+        return len(self.elems)
+
+
+my_stack = Stack_of_plates()
+for i in range(0, 11):
+    my_stack.push_in(i)
+
+#print(my_stack.elems)

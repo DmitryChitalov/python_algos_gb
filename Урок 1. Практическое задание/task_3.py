@@ -22,3 +22,32 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+# Решение
+
+sample = {'ford': 50, 'audi': 500, 'bmw': 300, 'mercedes': 400, 'kia': 80}
+
+# 1
+sorted_income = sorted(sample.values())      #1
+sorted_sample_1 = {}                         #1
+
+for i in sorted_income:                      #n**2
+    for k in sample.keys():
+        if sample[k] == i:
+            sorted_sample_1[k] = sample[k]
+
+print(list(sorted_sample_1.items())[-1])     #1
+print(list(sorted_sample_1.items())[-2])     #1
+print(list(sorted_sample_1.items())[-3])     #1
+
+#2
+sorted_sample_2 = {}                           #1
+sorted_keys = sorted(sample, key=sample.get)   #1
+
+for k in sorted_keys:                          #n
+    sorted_sample_2[k] = sample[k]
+
+for i in range(-1, -4, -1):                    #n
+    print(list(sorted_sample_2.items())[i])
+
+# Решение №2 эффективнее, т.к. сложность n < n**2.
