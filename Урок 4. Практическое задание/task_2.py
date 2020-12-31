@@ -4,15 +4,34 @@
 Приведен код, который формирует из введенного числа
 обратное по порядку входящих в него цифр.
 Задача решена через рекурсию
-Выполнена попытка оптимизировать решение через мемоизацию.
-Сделаны замеры обеих реализаций.
 
-Сделайте аналитику, нужна ли здесь мемоизация или нет и почему?
-Если у вас есть идеи, предложите вариант оптимизации.
+Сделайте замеры времени выполнения кода с помощью модуля timeit
+
+Попробуйте оптимизировать код, чтобы снизить время выполнения
+Проведите повторные замеры
+
+Подсказка: примените мемоизацию
+
+Добавьте аналитику: что вы сделали и почему
 """
+import timeit
 
-from timeit import timeit
-from random import randint
+
+def memorize(func):
+    def memo(n, memory={}):
+        rec = memory.get(n)
+        if rec is None:
+            rec = func(n)
+            memory[n] = rec
+        return memory[n]
+    return memo
+
+
+@memorize
+def recursive_reverse1(number):
+    if number == 0:
+        return str(number % 10)
+    return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
 def recursive_reverse(number):
@@ -21,61 +40,13 @@ def recursive_reverse(number):
     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
-num_100 = randint(10000, 1000000)
-num_1000 = randint(1000000, 10000000)
-num_10000 = randint(100000000, 10000000000000)
-
-print('Не оптимизированная функция recursive_reverse')
-print(
-    timeit(
-        "recursive_reverse(num_100)",
-        setup='from __main__ import recursive_reverse, num_100',
-        number=10000))
-print(
-    timeit(
-        "recursive_reverse(num_1000)",
-        setup='from __main__ import recursive_reverse, num_1000',
-        number=10000))
-print(
-    timeit(
-        "recursive_reverse(num_10000)",
-        setup='from __main__ import recursive_reverse, num_10000',
-        number=10000))
+number = int(input("Введите число "))
+print(recursive_reverse1(number))
+# В комментариях время исполнения:
+print(timeit.timeit("recursive_reverse(number)", setup="from __main__ import recursive_reverse, number"))       # 2.27
+print(timeit.timeit("recursive_reverse1(number)", setup="from __main__ import recursive_reverse1, number"))     # 0.23
 
 
-def memoize(f):
-    cache = {}
-
-    def decorate(*args):
-
-        if args in cache:
-            return cache[args]
-        else:
-            cache[args] = f(*args)
-            return cache[args]
-    return decorate
-
-
-@memoize
-def recursive_reverse_mem(number):
-    if number == 0:
-        return ''
-    return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
-
-
-print('Оптимизированная функция recursive_reverse_mem')
-print(
-    timeit(
-        'recursive_reverse_mem(num_100)',
-        setup='from __main__ import recursive_reverse_mem, num_100',
-        number=10000))
-print(
-    timeit(
-        'recursive_reverse_mem(num_1000)',
-        setup='from __main__ import recursive_reverse_mem, num_1000',
-        number=10000))
-print(
-    timeit(
-        'recursive_reverse_mem(num_10000)',
-        setup='from __main__ import recursive_reverse_mem, num_10000',
-        number=10000))
+""" Замеры времени показывают: Использование 'мемоизации' сокращает время исполнения программы
+Результаты работы рекурсивной функции сохраняются в хэш-таблице
+обработка данных в таблице происходит быстрее работы рекурсии """

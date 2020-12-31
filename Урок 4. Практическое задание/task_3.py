@@ -9,6 +9,8 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
+import timeit
+import cProfile
 
 
 def revers(enter_num, revers_num=0):
@@ -34,3 +36,29 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+def main():
+    # number = 456789987654321
+    revers(number)
+    revers_2(number)
+    revers_3(number)
+
+
+# number = int(input("Введите число "))
+number = 23456
+# print(revers(number))
+# print(revers_2(number))
+# print(revers_3(number))
+
+# В комментариях время исполнения:
+print(timeit.timeit("revers(number)", setup="from __main__ import revers, number"))         # 1.88
+print(timeit.timeit("revers_2(number)", setup="from __main__ import revers_2, number"))     # 1.22
+print(timeit.timeit("revers_3(number)", setup="from __main__ import revers_3, number"))     # 0.56
+
+
+cProfile.run('main()')
+""" 
+1. Самая эффективная функция 'revers_3' По сложности самая простая - берется срез строки, встроенная функция
+2. По замерам функция 'revers_3' меньше всех затрачивает времени
+3. Вызовов рекурсивной функции 6 раз (ncalls; number = 23456)
+"""
