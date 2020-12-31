@@ -28,8 +28,8 @@ def check_1(lst_obj):
 
     Сложность: Зависит от длины аргумента, т.е. O(N).
     """
-    lst_to_set = set(lst_obj)  # O(len(lst_obj))
-    return lst_to_set
+    lst_to_set = set(lst_obj)  # O(N)
+    return lst_to_set  # O(1)
 
 
 #############################################################################################
@@ -40,10 +40,10 @@ def check_2(lst_obj):
     Проходимся по списку и для каждого элемента проверяем,
     что такой элемент отсутствует в оставшихся справа элементах
 
-    Сложность: O(N).
+    Сложность: O(N^2).
     """
     for j in range(len(lst_obj)):          # O(N)
-        if lst_obj[j] in lst_obj[j+1:]:    # O(N) + O(N)
+        if lst_obj[j] in lst_obj[j+1:]:    # O(N) + O(N) = O(N)
             return False                   # O(1)
     return True                            # O(1)
 
