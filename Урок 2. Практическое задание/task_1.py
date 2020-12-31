@@ -37,24 +37,18 @@ def calc(command):
             return 0
 
         elif command in ("+-*/"):
+            num1 = int(input("Введите первое число: "))
+            num2 = int(input("Введите второе число: "))
             if command == "+":
-                num1 = int(input("Введите первое число: "))
-                num2 = int(input("Введите второе число: "))
                 print(f"Операция {command}: {num1 + num2}")
                 return calc(input("Введите операцию (+, -, *, / или 0 для выхода): "))
             if command == "-":
-                num1 = int(input("Введите первое число: "))
-                num2 = int(input("Введите второе число: "))
                 print(f"Операция {command}: {num1 - num2}")
                 return calc(input("Введите операцию (+, -, *, / или 0 для выхода): "))
             if command == "*":
-                num1 = int(input("Введите первое число: "))
-                num2 = int(input("Введите второе число: "))
                 print(f"Операция {command}: {num1 * num2}")
                 return calc(input("Введите операцию (+, -, *, / или 0 для выхода): "))
             if command == "/":
-                num1 = int(input("Введите первое число: "))
-                num2 = int(input("Введите второе число: "))
                 print(f"Операция {command}: {num1 / num2}")
                 return calc(input("Введите операцию (+, -, *, / или 0 для выхода): "))
         else:
