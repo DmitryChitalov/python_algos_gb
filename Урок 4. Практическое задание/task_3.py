@@ -64,8 +64,6 @@ print(
         setup='from __main__ import revers_3, num_100',
         number=10000))
 
-print('Замеры модулем timeit')
-print('Рекурсия')
 cProfile.run('revers(num_100)')
 print('Цикл')
 cProfile.run('revers_2(num_100)')
