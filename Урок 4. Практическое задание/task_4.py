@@ -8,9 +8,20 @@
 
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
+
+Ответ: нет смылса перебирать весь массив, где для одного числа проверять
+количество вхождений по несколько раз, поэтому оставляем только
+по одному элементу используя set.
+
+Кстати, у всех функций есть один недостаток, поэтому задание необхлдимо
+переформулировать, а функции исправить.
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+from timeit import timeit
+from random import randint
+
+# Возьмем список размером побольше
+array = [randint(1, 11) for _ in range(100)]
 
 
 def func_1():
@@ -37,5 +48,20 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def func_3(obj: list) -> str:
+    max_count = 0
+    num = 0
+    for i in set(obj):
+        if (cnt := obj.count(i)) > max_count:
+            num = i
+            max_count = cnt
+    return f'Чаще всего встречается число {num}, 'f'оно появилось в массиве {max_count} раз(а)'
+
+
+if __name__ == '__main__':
+    print(func_1())
+    print(func_2())
+    print(func_3(array))
+    print(timeit('func_1()', number=10000, globals=globals()))
+    print(timeit('func_2()', number=10000, globals=globals()))
+    print(timeit('func_3(array)', number=10000, globals=globals()))

@@ -12,7 +12,12 @@
 10, 100, 1000
 Опишите результаты, сделайте выводы, где и какой алгоритм эффективнее
 Подумайте и по возможности определите сложность каждого алгоритма
+
+Ответ: Эффективность второго алгоритма будет тем выше, чем большее по порядку число мы попытаемся найти.
+Третья функция более верная относительно задания (не имеет верхнего предела для решета), но не оптимизированна.
 """
+
+from timeit import timeit
 
 
 def simple(i):
@@ -35,5 +40,49 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+def eratosthenes_sieve(num):
+    n = 10000
+    primes = []
+    s = list(range(n))
+    s[0] = s[1] = 0
+    for i in s:
+        if s[i] != 0:
+            primes.append(i)
+            for j in range(i ** 2, n, (2 * i if i != 2 else i)):
+                s[j] = 0
+    return primes[num-1]
+
+
+# Очень ресурсозатратная реализация реализация без верхнего предела, но результат времени интересный получается
+def func(num):
+    n = 3
+    primes = []
+    s = list(range(n))
+    s[0] = s[1] = 0
+    while 1:
+        for i in s:
+            if s[i] != 0:
+                if i not in primes:
+                    primes.append(i)
+                for j in range(i ** 2, n, (2 * i if i != 2 else i)):
+                    s[j] = 0
+        if num > len(primes):
+            s = s + list(range(len(s), n**2+1))
+            n = len(s)
+        else:
+            return primes[num-1]
+
+
+if __name__ == '__main__':
+    print('Для 10го простого числа:')
+    print(timeit('simple(10)', number=10, globals=globals()))
+    print(timeit('eratosthenes_sieve(10)', number=10, globals=globals()))
+    print(timeit('func(10)', number=10, globals=globals()))
+    print('\nДля 100го простого числа:')
+    print(timeit('simple(100)', number=10, globals=globals()))
+    print(timeit('eratosthenes_sieve(100)', number=10, globals=globals()))
+    print(timeit('func(100)', number=10, globals=globals()))
+    print('\nДля 1000го простого числа:')
+    print(timeit('simple(1000)', number=10, globals=globals()))
+    print(timeit('eratosthenes_sieve(1000)', number=10, globals=globals()))
+    print(timeit('func(1000)', number=10, globals=globals()))
