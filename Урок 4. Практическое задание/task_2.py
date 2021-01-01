@@ -1,50 +1,63 @@
 """
-Задание 1.
+Задание 2.
 
-Приведен код, который позволяет сохранить в
-массиве индексы четных элементов другого массива
+Приведен код, который формирует из введенного числа
+обратное по порядку входящих в него цифр.
+Задача решена через рекурсию
 
 Сделайте замеры времени выполнения кода с помощью модуля timeit
 
 Попробуйте оптимизировать код, чтобы снизить время выполнения
 Проведите повторные замеры
 
+Подсказка: примените мемоизацию
+
 Добавьте аналитику: что вы сделали и почему
 """
-
 from timeit import timeit
 
 
-def func_1(nums):
-    new_arr = []
-    for i in range(len(nums)):
-        if nums[i] % 2 == 0:
-            new_arr.append(i)
-    return new_arr
+# def recursive_reverse(number):
+#     if number == 0:
+#          return str(number % 10)
+#     return f'{str(number % 10)}{recursive_reverse(number // 10)}'
+
+def recursive_reverse(number):
+    if number == 0:
+        return str(number % 10)
+    return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
-def func_2(nums):
-    new_arr = []
-    for i in nums:
-        if i % 2 == 0:
-            new_arr.append(i)
-    return new_arr
+def memoize(func):
+    memo_dict = {}
+
+    def wrapper(*args):
+        if args not in memo_dict:
+            memo_dict[args] = func(*args)
+        return memo_dict[args]
+
+    return wrapper
 
 
-nums = range(1000)
+@memoize
+def recursive_reverse_1(number):
+    if number == 0:
+        return str(number % 10)
+    return f'{str(number % 10)}{recursive_reverse(number // 10)}'
 
 
-print(timeit("func_1(nums)", setup="from __main__ import func_1, nums", number=1000))
-print(timeit("func_2(nums)", setup="from __main__ import func_2, nums", number=1000))
+number = 123456789
+
+
+print(timeit("recursive_reverse(number)", setup="from __main__ import recursive_reverse, number", number=1000))
+print(timeit("recursive_reverse_1(number)", setup="from __main__ import recursive_reverse_1, number", number=1000))
 
 
 '''
-
 Время выполнения функций (1000 повторений):
-
-func_1:     0.0015 сек
-func_2:     0.0007 сек
-
-В func_2 доступ к элементу по индексу заменен итерированием, что привело к ускорению.
-
+recursive_reverse:      0.00391 сек
+recursive_reverse1:     0.00016 сек
+ 
+Добавленный декоратор @memoize позволил кэшировать результаты промежуточных вычислений и избежать повторного вычисления 
+в ходе рекурсии.
 '''
