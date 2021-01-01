@@ -34,25 +34,29 @@ def revers_2(enter_num, revers_num=0):
     return revers_num
 
 
-# Срез
 def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
 
 
-num = randint(100000, 100000000)
+num = randint(100000000, 1000000000)
 
-print(timeit.timeit("reverse(num)", setup="from __main__ import reverse, num", number=1000))
-print(timeit.timeit("reverse_2(num)", setup="from __main__ import reverse_2, num", number=1000))
-print(timeit.timeit("reverse_3(num)", setup="from __main__ import reverse_3, num", number=1000))
+print(timeit.timeit("revers(num)", setup="from __main__ import revers, num", number=1000))
+print(timeit.timeit("revers_2(num)", setup="from __main__ import revers_2, num", number=1000))
+print(timeit.timeit("revers_3(num)", setup="from __main__ import revers_3, num", number=1000))
+
+def main():
+    revers(num)
+    revers_2(num)
+    revers_3(num)
+
+cProfile.run('main()')
 
 
-cProfile.run('revers(num)')
-cProfile.run('revers_2(num)')
-cProfile.run('revers_3(num)')
 
-
-'''Не могу определить, в чем проблема - PyCharm выводит ошибку, посчитать время не смог. По логике первая функция должна
- быть самая долгая, т.к. это рекурсия. Функция revers_2 использует циклы, это не оптимальный вариант, но быстрее 
- рекурсии. Третья функция использует встроенные функции: срез (должен быть самым быстрым)'''
+'''Первая функция -  самая долгая, т.к. это рекурсия. Функция revers_2 использует циклы, это не оптимальный вариант, но 
+быстрее рекурсии. Первая и вторая функции используют в своем теле матемачиеские вычисления, что требует определенного 
+времени Третья функция самая быстрая: использует встроенные функции - срез, соответственно лучше использовать его
+для решения задачи. сProfile показывает, что все функции по времени отрабатывают одинаково по нулям. Но и модуль timeit,
+ если считать до сотых, выводит одни и те же значения'''
