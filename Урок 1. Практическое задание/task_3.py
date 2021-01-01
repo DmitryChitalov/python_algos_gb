@@ -22,3 +22,36 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+company_dict = {
+    'comp1':2000,
+    'comp2':300,
+    'comp3':4000,
+    'comp5':800,
+    'comp6':900,
+    'comp7':1000,
+    'comp8':1500,
+    'comp9':1600,
+    'comp10':2000
+}
+
+def sortcompanies_nlogn(company_dict):
+    listfromdict = list(company_dict.items())
+    listfromdict.sort(key=lambda x: x[1],reverse=True)
+    print(f"I - {listfromdict[0][0]}:{listfromdict[0][1]}; II - {listfromdict[1][0]}:{listfromdict[1][1]}; III - {listfromdict[2][0]}:{listfromdict[2][1]}")
+
+#   Сложность алгоритма равна сложности сортировки - O(n log n)
+sortcompanies_nlogn(company_dict)
+
+
+def sortcompanies_n(company_dict):
+    listfromdict = list(company_dict.items())
+    three_cmps = []
+    for pos in range(3):
+        max_val = max(listfromdict,key=lambda x: x[1])
+        three_cmps.append(max_val)
+        listfromdict.remove(max_val)
+    return three_cmps
+# Сложность алгоритма равна сложности поиска максимума - O(n)
+print(sortcompanies_n(company_dict))
+
+#Эффективней использовать функции основанную на поиске максимума так как сложность O(n)
