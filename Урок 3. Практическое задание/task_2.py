@@ -15,3 +15,33 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+from uuid import uuid4
+import hashlib
+
+
+def show_hash(func):
+    def wrapper(*args, **kwargs):
+        res = func(*args, **kwargs)
+        print(f'{args[0]} - {res}')
+        return res
+    return wrapper
+
+
+@show_hash
+def hash_password(pwd, slt):
+    return hashlib.sha256(pwd.encode() + slt.encode()).hexdigest()
+
+
+def check_password(new_pwd, slt, old_pwd_hash):
+    return hash_password(new_pwd, slt) == old_pwd_hash
+
+
+if __name__ == '__main__':
+    salt = uuid4().hex
+    password = input('Введите пароль: ')
+    hashed_password = hash_password(password, salt)
+    password = input('Повторите пароль: ')
+    if check_password(password, salt, hashed_password):
+        print('Пароль верный')
+    else:
+        print('Пароль не верный')

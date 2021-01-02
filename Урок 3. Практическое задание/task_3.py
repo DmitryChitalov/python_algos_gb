@@ -14,3 +14,14 @@
 р
 а
 """
+import hashlib
+
+
+if __name__ == '__main__':
+    s = input('Введите строку: ')
+    my_set = set()
+    for i in range(len(s)):
+        for j in range(len(s)-(i == 0), i, -1):
+            hash_s = hashlib.sha256(s[i:j].encode()).hexdigest()
+            my_set.add(hash_s)
+    print(f'Количество уникальных подстрок в строке {s} = {len(my_set)}')
