@@ -47,6 +47,5 @@ def calc():
         print(f'Ваш результат: {result}')
         calc()
 
+
 calc()
-
-
