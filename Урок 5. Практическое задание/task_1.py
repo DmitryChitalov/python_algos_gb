@@ -25,3 +25,38 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+
+def companies_quarter_income():
+    company = namedtuple('companies', 'name first_quarter second_quarter third_quarter fourth_quarter')
+    n = int(input('Введите количество компаний: '))
+    companies_dict = {}
+    for i in range(n):
+        companies = company(
+            name=input('Введите название: '),
+            first_quarter=float(input('Введите прибыль за первый квартал: ')),
+            second_quarter=float(input('Введите прибыль за второй квартал: ')),
+            third_quarter=float(input('Введите прибыль за третий квартал: ')),
+            fourth_quarter=float(input('Введите прибыль за четвертый квартал: '))
+        )
+        companies_dict[companies.name] = (companies.first_quarter + companies.second_quarter +
+                                          companies.third_quarter + companies.fourth_quarter)
+    sum_inc = 0
+    for val in companies_dict.values():
+        sum_inc += val
+    avg_income = sum_inc / n
+    print(f'Средняя прибыль {avg_income}')
+    above_avg = []
+    below_avh = []
+    for key, val in companies_dict.items():
+        if val > avg_income:
+            above_avg.append(key)
+        elif val < avg_income:
+            below_avh.append(key)
+    print(f'Компании с прибылью ниже среднего: {", ".join(below_avh)}')
+    print(f'Компании с прибылью выше среднего: {", ".join(above_avg)}')
+
+
+companies_quarter_income()
