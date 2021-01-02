@@ -11,6 +11,8 @@
 
 Добавьте аналитику: что вы сделали и почему
 """
+# Если честно, у меня есть сомнения по поводу правильности работы данной в условиях функции, но это не мешает
+# анализировать время работы, так что заданию не повредит
 
 from timeit import timeit
 
@@ -21,3 +23,36 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+print(timeit('''def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+'''))
+# Получилось 0.071
+
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+
+
+print(timeit('''def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]
+    return new_arr
+'''))
+# Оно дает результат 0.068
+
+# Подумалось мне, что генераторное выражение будет быстрее, но разница незначительная, но, думаю, при бОльших объемах
+# данных эта разница уже будет иметь значение. Ведь генераторное выражение всегда должно быть быстрее, как минимум мы
+# ушли от append, который занимает время
+
+
+my_list = [5, 2, 76, 12, 7, 0, 4, 78, 22, 7, 9, 1, 55]
+print(func_1(my_list))
+print(func_2(my_list))
+
+
