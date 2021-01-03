@@ -25,3 +25,49 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+import statistics
+
+all = namedtuple('all_dict', ['q1', 'q2', 'q3', 'q4'])
+all_dict = {}
+
+factory_count = int(input('Введите количество предприятий для расчета прибыли: '))
+
+for elem in range(factory_count):
+    factory = input('Введите название предприятия: ')
+    income_q1 = int(input('Через пробел введите прибыль данного предприятия '
+                          'за каждый квартал(Всего 4 квартала).\n'
+                          'Введите прибыль за первый квартал: '))
+    income_q2 = int(input('Введите прибыль за второй квартал: '))
+    income_q3 = int(input('Введите прибыль за третий квартал: '))
+    income_q4 = int(input('Введите прибыль за четвертый квартал: '))
+    all_dict[factory] = all(
+        q1=income_q1,
+        q2=income_q2,
+        q3=income_q3,
+        q4=income_q4
+    )
+
+total_income = ()
+
+for fact, inc in all_dict.items():
+    print(f'Предприятие: {fact} прибыль: {sum(inc)}')
+    total_income += inc
+
+avarage = statistics.mean(total_income)
+
+print(f'Средняя годовая прибыль всех предприятий: {avarage}')
+
+upper = []
+lower = []
+
+for fact, inc in all_dict.items():
+    if statistics.mean(inc) > avarage:
+        upper.append(fact)
+    elif statistics.mean(inc) < avarage:
+        lower.append(fact)
+    else:
+        continue  # вообще здесь условие что равно средней, но задача этого не требует
+
+print(f'Предприятия, с прибылью выше среднего значения: {upper}')
+print(f'Предприятия, с прибылью ниже среднего значения: {lower}')
