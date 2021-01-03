@@ -9,6 +9,11 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
+from random import randint
+from timeit import timeit
+import cProfile
+
+num_100 = 99 ** 99
 
 
 def revers(enter_num, revers_num=0):
@@ -34,3 +39,35 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+print("Время выполнения 1-го варианта: ")
+print(timeit(
+    'revers(num_100)',
+    setup='from __main__ import revers, num_100',
+    number=10000))
+
+print("Время выполнения 2-го варианта: ")
+print(timeit(
+    'revers_2(num_100)',
+    setup='from __main__ import revers_2, num_100',
+    number=10000))
+
+print("Время выполнения 3-го варианта: ")
+print(timeit(
+    'revers_3(num_100)',
+    setup='from __main__ import revers_3, num_100',
+    number=10000))
+
+
+def main():
+    revers(num_100),
+    revers_2(num_100),
+    revers_3(num_100)
+
+
+cProfile.run('main()')
+
+"""
+Эффективней 3-й алгоритм, т.к используется встроенная функция - python. 
+В 1м и 2м алгоритме используется рекурсия и цикл, что не эффективно, нужна оптимизация
+"""
