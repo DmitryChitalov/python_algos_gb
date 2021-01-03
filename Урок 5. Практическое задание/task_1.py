@@ -25,3 +25,42 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import  deque, namedtuple
+
+def enterprises():
+    d = deque()
+    count_enterprises = int(input("Введите количество предприятий для расчета прибыли: "))
+    for i in range(count_enterprises):
+        enterprise_name = input("Введите название предприятия: ")
+        enterprise_profit = input("Через пробел введите прибыль данного предприятия\n"
+            "за каждый квартал(Всего 4 квартала): ").split()
+        pseudo_class = namedtuple('Enterprise', 'name first_quater second_quater third_quater fourth_quater total_profit')
+        obj = pseudo_class(
+            name=enterprise_name,
+            first_quater = int(enterprise_profit[0]),
+            second_quater = int(enterprise_profit[1]),
+            third_quater = int(enterprise_profit[2]) ,
+            fourth_quater = int(enterprise_profit[3]),
+            total_profit = int(enterprise_profit[0]) + int(enterprise_profit[1])
+                + int(enterprise_profit[2]) + int(enterprise_profit[3])
+        )
+        d.appendleft(obj)
+    average_profit = 0
+    for i in range(len(d)):
+        average_profit += d[i].total_profit
+    average_profit /= len(d)
+    less_than_average = []
+    more_than_average = []
+    for i in range(len(d)):
+        if d[i].total_profit > average_profit:
+            more_than_average.append(d[i].name)
+        else:
+            less_than_average.append(d[i].name)
+    print("Средняя годовая прибыль всех предприятий: ", average_profit)
+    print("Предприятия, с прибылью выше среднего значения: ", more_than_average)
+    print("Предприятия, с прибылью ниже среднего значения: ", less_than_average)
+
+enterprises()
+
+
+
