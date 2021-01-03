@@ -16,3 +16,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+# Решил сделать задание с использованием списка. Надеюсь это не снизит оценку)
+def counter(list, even=0, odd=0):
+    if len(list) ==0:
+        return even, odd
+    else:
+        a = list.pop(0)
+        if a % 2 == 0:
+            even += 1
+            return counter(list, even,odd)
+        else:
+            if a % 2 == 1:
+                odd += 1
+                return counter(list, even, odd)
+
+list = [5,6,7,5,9,7]
+print(counter(list))
+
+

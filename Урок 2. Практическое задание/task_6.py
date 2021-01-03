@@ -9,3 +9,22 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+def game(number, count = 0):
+    guess = int(input('угадайте число от 0 до 100: '))
+
+    if guess == number:
+        return print('УРРРАААА!!!! ВЫ УГАДАЛИ!!! загаданное число: ' , number)
+    else:
+        count +=1
+        if guess < number:
+            print('Ваше число меньше загаданного')
+        else:
+            print('Ваше число больше загаданного')
+        if count == 10:
+            return print('загаданное число: ',number)
+
+    game(number, count)
+
+game(random.randint(0,100))
