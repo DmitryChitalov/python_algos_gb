@@ -6,3 +6,20 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def analytic(number, cur_number=1, sum=0):
+    try:
+        number = int(number)
+        if sum == number * (number + 1) / 2:
+            return sum
+        else:
+            sum += cur_number
+            return analytic(number, cur_number + 1, sum)
+    except ValueError:
+        return analytic(input("Пожалуйста введите целое положительное число!: "))
+
+
+print(f'Итоговая сумма n чисел равна n(n+1)/2, для Вашего числа это будет: '
+      f'{analytic(input("Пожалуйста введите целое положительное число: "))}')
+

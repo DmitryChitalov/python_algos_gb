@@ -15,3 +15,24 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+
+from uuid import uuid4
+import hashlib
+
+
+salt = uuid4().hex
+
+
+def get_hash(passwd):
+    return hashlib.sha256(passwd.encode('utf-8') + salt.encode('utf-8')).hexdigest()
+
+
+passwd_hash_stored = get_hash(input('Введите строку пароля: '))
+print(f'Хеш вашего пароля: {[passwd_hash_stored]}')
+passwd_check = get_hash(input('Введите строку пароля для доступа: '))
+
+if passwd_hash_stored == passwd_check:
+    print('Доступ предоставлен')
+else:
+    print('Пароль неверный!')

@@ -18,3 +18,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def imaging(start, stop, row_len, row='', pos=1):
+    if start > stop:
+        return row
+    else:
+        if pos < row_len:
+            row += f'{start} - {chr(start)} '
+            return imaging(start + 1, stop, row_len, row, pos + 1)
+        else:
+            row += f'{start} - {chr(start)}  \n'
+            return imaging(start + 1, stop, row_len, row, pos=1)
+
+
+STR_SMB = 32
+LST_SMB = 127
+ROW_LEN = 10
+
+print(imaging(STR_SMB, LST_SMB, ROW_LEN))
+
