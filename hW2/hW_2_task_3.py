@@ -28,6 +28,11 @@ def relocate(n):
 
 
 
+    # return len(n), l, n_list
+    # if l > 0:
+    #     return relocate(n)
+    # return n_list
+
 
 n = int(input('Введите любое натуральное число: _'))
 n_list = []

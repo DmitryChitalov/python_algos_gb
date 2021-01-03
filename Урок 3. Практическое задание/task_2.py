@@ -15,3 +15,24 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+import hashlib
+
+
+passw = input('Введите пароль не менее 8 знаков (буквы и цифры): _')
+if len(passw) < 8:
+    passw = input(f'Вы ввели слишком короткий пароль. Нужно не менее 8 знаков, а Вы ввели {len(passw)}. Попробуйте снова: _')
+salt = 'december'
+hash_passw = hashlib.sha256(salt.encode() + passw.encode()).hexdigest()
+print(hash_passw)
+
+passw2 = input('Для подтверждения введите пароль повторно: _')
+salt = 'december'
+hash_passw2 = hashlib.sha256(salt.encode() + passw2.encode()).hexdigest()
+print(hash_passw2)
+while hash_passw2 != hash_passw:
+        passw2 = input('Вы ошиблись при вводе, попробуйте снова: _')
+        hash_passw2 = hashlib.sha256(salt.encode() + passw2.encode()).hexdigest()
+        print(hash_passw2)
+else:
+        print('Пароль введен корректно')
