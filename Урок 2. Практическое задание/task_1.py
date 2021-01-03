@@ -28,3 +28,57 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculation():
+    action = input('ведите тип операции (+, -, *, /), для выхода введите "0": ')
+    if action == '+':
+        try:
+            a = int(input('Введите первое число: '))
+            b = int(input('Введите второе число: '))
+            result = a + b
+            print(result)
+            return calculation()
+        except ValueError:
+            print("Требуется ввести чило")
+            return calculation()
+
+    elif action == '-':
+        try:
+            a = int(input('Введите первое число: '))
+            b = int(input('Введите второе число: '))
+            result = a - b
+            print(result)
+            return calculation()
+        except ValueError:
+            print("Требуется ввести чило")
+            return calculation()
+
+    elif action == '*':
+        try:
+            a = int(input('Введите первое число: '))
+            b = int(input('Введите второе число: '))
+            result = a * b
+            print(result)
+            return calculation()
+        except ValueError:
+            print("Требуется ввести чило")
+            return calculation()
+
+    elif action == '/':
+        try:
+            a = int(input('Введите первое число: '))
+            b = int(input('Введите второе число: '))
+            result = a / b
+            print(result)
+            return calculation()
+        except ValueError:
+            print("Требуется ввести чило")
+            return calculation()
+
+    elif action == '0':
+        print('Выход')
+
+
+
+calculation()

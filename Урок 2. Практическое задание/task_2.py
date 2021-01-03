@@ -16,3 +16,15 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def rec_even_odd(i, even=0, odd=0):
+    if i == 0:
+        return f'Количество четных и нечетных цифр в числе равно: {even, odd}'
+    elif (i % 10) % 2 == 0:
+        return rec_even_odd(i // 10, even + 1, odd)
+    elif (i % 10) % 2 != 0:
+        return rec_even_odd(i // 10, even, odd + 1)
+
+
+print(rec_even_odd(int(input('Введите натуральное число: '))))

@@ -9,3 +9,24 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def rec_guesser(numb, total, tries=1):
+    if tries > total:
+        return f'Не угадал, загаданное число: {numb}'
+    else:
+        guess = int(input('Введите целое число от 0 до 100: '))
+        if guess == numb:
+            return f'Вы угадали!'
+        else:
+            if guess < numb:
+                print('Загаданное число больше')
+                return rec_guesser(numb, total, tries + 1)
+            else:
+                print('Загаданное число меньше')
+                return rec_guesser(numb, total, tries + 1)
+
+
+print(rec_guesser(random.randint(0, 100), 10))

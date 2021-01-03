@@ -10,3 +10,32 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+
+import time
+
+
+def timer(f):   # придумал не сам, нашел на хабре
+    def tmp(*args, **kwargs):
+        t = time.time()
+        res = f(*args, **kwargs)
+        print("Время выполнения функции: %f" % (time.time() - t))
+        return res
+
+    return tmp
+
+
+@timer
+def timing_list():
+    list_n = [n for n in range(1, 11111111) if n % 2 == 0]
+    return list_n
+
+
+@timer
+def timing_dict():
+    dict_n = {n: n for n in range(1, 11111111) if n % 2 == 0}
+    return dict_n
+
+
+timing_list()
+timing_dict() # значение выше и чем больше диапазон в range() тем существеннее разница во времени
+
