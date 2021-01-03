@@ -9,6 +9,8 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
+from timeit import timeit
+import cProfile
 
 
 def revers(enter_num, revers_num=0):
@@ -34,3 +36,37 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+print(
+    timeit(
+        'revers(123456789)',
+        setup='from __main__ import revers',
+        number=10000
+    )
+)
+
+print(
+    timeit(
+        'revers_2(123456789)',
+        setup='from __main__ import revers_2',
+        number=10000
+    )
+)
+
+print(
+    timeit(
+        'revers_3(123456789)',
+        setup='from __main__ import revers_3',
+        number=10000
+    )
+)
+
+cProfile.run('revers(123456789)')
+cProfile.run('revers_2(123456789)')
+cProfile.run('revers_3(123456789)')
+
+
+'''
+Проведенные замеры показали, что наиболее эффективен с точки зрения затраченного времени на выполнение программы
+третий вариант с применением функции revers_3. Это связано с тем, что функция revers_3 имеет наименьшую временную
+сложность против сложностей (O(N)) рекурсивной функции revers и функции revers_2 с циклом.'''

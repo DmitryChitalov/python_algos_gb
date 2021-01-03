@@ -79,3 +79,37 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+'''
+Из результатов работы функции timeit видно, что работа рекурсивной функции с использованием мемоизации занимает меньше
+времени, чем работа той же функции без мемоизации, что доказывает обоснованность ее использования. Однако, используя
+нижеприведенный вариант оптимизированной функции reverse_mem_str без рекурсии с мемоизацией, можно добиться
+приблизительно одинакового времени выполнения программы по сравнению с оптимизированной функцией recursive_reverse_mem
+(а на большом количестве прогонов время выполнения программы с использованием оптимизированной функции reverse_mem_str
+и вовсе становится меньше времени выполнения программы с использованием оптимизированной функции recursive_reverse_mem).
+'''
+
+
+@memoize
+def reverse_mem_str(number):
+    number = str(number)
+    return int(number[::-1])
+
+
+print('Оптимизированная функция reverse_mem_str')
+print(
+    timeit(
+        "reverse_mem_str(num_100)",
+        setup='from __main__ import reverse_mem_str, num_100',
+        number=10000))
+print(
+    timeit(
+        "reverse_mem_str(num_1000)",
+        setup='from __main__ import reverse_mem_str, num_1000',
+        number=10000))
+print(
+    timeit(
+        "reverse_mem_str(num_10000)",
+        setup='from __main__ import reverse_mem_str, num_10000',
+        number=10000))
