@@ -9,6 +9,7 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,3 +40,32 @@ def func_2():
 
 print(func_1())
 print(func_2())
+
+print("ВРемя выполнения 1-й функции")
+print(
+    timeit(
+        'func_1()',
+        setup='from __main__ import func_1',
+        number=10000))
+
+print("ВРемя выполнения 2-й функции")
+print(
+    timeit(
+        'func_2()',
+        setup='from __main__ import func_2',
+        number=10000))
+
+
+def func_3():
+    elem_2 = max(array, key=array.count)
+    return f'Чаще всего встречается число {elem_2}, ' \
+           f'оно появилось в массиве {array.count(elem_2)} раз(а)'
+
+
+print(func_3())
+print("ВРемя выполнения 3-й функции")
+print(
+    timeit(
+        'func_3()',
+        setup='from __main__ import func_3',
+        number=10000))

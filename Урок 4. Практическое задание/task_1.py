@@ -21,3 +21,16 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for i in nums if i % 2 == 0]
+
+
+print(timeit('func_1(range(10000))', setup='from __main__ import func_1', number=1000))
+print(timeit('func_2(range(10000))', setup='from __main__ import func_2', number=1000))
+
+"""
+В своём варианте оптимизации я использовал list comprehension вместо цикла и добавления элементов в массив.
+Это сократило время выполнения кода.
+"""

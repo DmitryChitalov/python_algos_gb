@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -79,3 +80,23 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+def revers(num):
+    num = str(num)
+    revers_num = num[::-1]
+    return revers_num
+
+
+print("My func")
+print(
+    timeit(
+        'revers(num_10000)',
+        setup='from __main__ import revers, num_10000',
+        number=10000))
+
+"""
+Меморизация нужна, т.к. это рекурсия, на что тратится много времени ны выполнение.
+Меморизация позволяет сократить это время,за счет извлечения из памяти результата, если функция с такими входными данными
+уже когда-то запускалась
+"""
