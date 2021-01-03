@@ -22,3 +22,41 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+base_company = {
+    'yandex': 2000,
+    'gazprom': 500,
+    'microsoft': 2300,
+    'perecrestok': 5400,
+    'rosnano': 10,
+    'appel': 2000,
+    'biocad': 4030,
+    'apteka': 299,
+    'hiomi': 569,
+    'wacom': 8901,
+    'adidsa': 4313,
+    'acron': 6703
+}
+
+# Решение один, самое на мой взгляд оптимальное, со сложностью O(n log n)
+# В задаче используется только простой цикл и механизм простой сортировки и генератора
+def search(company_list):
+    company_list_invert = {value: key for key, value in company_list.items()}
+    income = sorted(list(company_list_invert.keys()))[::-1][0:3]
+    for elem in income:
+        yield company_list_invert[elem]
+
+print(list(search(base_company)))
+
+# поиск со сложностью O(n), но я не считаю его оптимальным. Не совсем красивое решение,
+# плюс создание новой переменной. 
+def search_2(company_list):
+    company = {}
+    for elem in range(3):
+        maximum = max(company_list.items(), key=lambda k: k[1])
+        del company_list[maximum[0]]
+        company[maximum[0]] = maximum[1]
+    return company
+
+
+print(search_2(base_company))

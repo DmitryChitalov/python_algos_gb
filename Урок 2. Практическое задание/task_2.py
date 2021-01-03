@@ -16,3 +16,34 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+# понимаю, что можно сделать проще, но пока так, зато сложность не выше O(n)
+counter = []
+
+
+def even_odd_check(num):
+    num = int(num)
+    if num % 2 == 0 or num == 0:
+        counter.append(True)
+    else:
+        counter.append(False)
+
+
+def task_2(nums):
+    nums = str(nums)
+    if len(nums) == 1:
+        even_odd_check(nums)
+        return 'Числа кончились!'
+    else:
+        even_odd_check(nums[0])
+        num = nums.replace(nums[0], '')
+        return task_2(num)  # вызов рекурсии
+
+
+def tell_odd_even(cntr):
+    a = sum(cntr)
+    return 'Количество четных равно: ' + str(a) + \
+           '\nКол-во нечетных равно: ' + str(len(cntr) - a)
+
+
+print(task_2(123))
+print(tell_odd_even(counter))
