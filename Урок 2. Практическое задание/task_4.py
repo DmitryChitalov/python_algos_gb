@@ -9,3 +9,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def sumelem(n, nextelem = 1, res = 1):
+    if n == 1:
+        return res
+    else:
+        nextelem = nextelem / -2
+        n = n -1
+        res = res + nextelem
+        return sumelem(n, nextelem, res)
+
+n = int(input('Введите количество элементов: '))
+print(sumelem(n))

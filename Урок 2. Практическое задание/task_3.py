@@ -15,3 +15,14 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+def mirror(number, res = ''):
+    if number == 0:
+        return  res
+    else:
+        res += str(number % 10)
+        number = number // 10
+        return mirror(number, res)
+
+number = int(input('Введите число, которое требуется перевернуть: '))
+
+print('Перевернутое число: ', mirror(number))
