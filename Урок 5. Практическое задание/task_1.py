@@ -25,3 +25,37 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+# У меня ничего не получилось.. Вы во время урока говорили, что надо делать через именованные кортежи, но я не понимаю,
+# как создавать такой кортеж (имя, сумма), если у нас даже количество таких пар не известно...
+# Все, что я смогла придумать это список из именнованных кортежей...
+
+from collections import namedtuple
+
+
+Profit = namedtuple('Profit', 'Name Money')
+count = int(input('Введите количество предприятий для расчета прибыли: '))
+marks = list()
+all_money = 0
+for i in range(count):
+    name = input('Введите название предприятия: ')
+    input_money = input('через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ')
+    money = (sum(int(num) for num in input_money.split(' ')))
+    all_money += money
+    marks.append(Profit(name, money))
+
+
+average_money = all_money / count
+print('Средняя годовая прибыль всех предприятий: ', average_money)
+
+# А вот вывод предприятий я вообще не смогла сделать, потому что как-то не так вызываю значение...
+# Я запуталась. :( Жду разбор ДЗ
+
+print('Предприятия, с прибылью выше среднего значения: ')
+for i in marks:
+    if Profit.Money > average_money:
+        print(Profit.Name)
+
+print('Предприятия, с прибылью ниже среднего значения: ')
+for i in marks:
+    if Profit.Money < average_money:
+        print(Profit.Name)
