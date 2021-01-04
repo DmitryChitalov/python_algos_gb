@@ -59,7 +59,7 @@ def memoize(f):
 @memoize
 def recursive_reverse_mem(number):
     if number == 0:
-        return ''
+        return str(number % 10)
     return f'{str(number % 10)}{recursive_reverse_mem(number // 10)}'
 
 
@@ -79,3 +79,18 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+Не оптимизированная функция recursive_reverse
+0.0198093
+0.02045480000000001
+0.0371148
+Оптимизированная функция recursive_reverse_mem
+0.0014204000000000022
+0.0015464999999999923
+0.0016965000000000036
+
+Очевидное преимущество реализации с мемоизацией
+Оптимизированная функция значительно быстрее, мемоизация позволяет извлекать результаты 
+функции в случае совпаденеия входных данных.
+"""
