@@ -79,3 +79,62 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+def reverse(n):
+    return int(''.join(reversed(str(n))))
+
+
+@memoize
+def reverse_mem(n):
+    return int(''.join(reversed(str(n))))
+
+
+def reverse_1(n):
+    r_n = str(n)[::-1]
+    return int(r_n)
+
+
+@memoize
+def reverse_1_mem(n):
+    r_n = str(n)[::-1]
+    return int(r_n)
+
+
+num_10000 = randint(100000000, 10000000000000)
+print('Функция reverse')
+print(
+    timeit(
+        'reverse(num_10000)',
+        setup='from __main__ import reverse, num_10000',
+        number=10000))
+num_10000 = randint(100000000, 10000000000000)
+print('Функция reverse_mem')
+print(
+    timeit(
+        'reverse_mem(num_10000)',
+        setup='from __main__ import reverse_mem, num_10000',
+        number=10000))
+num_10000 = randint(100000000, 10000000000000)
+print('Функция reverse_1')
+print(
+    timeit(
+        'reverse_1(num_10000)',
+        setup='from __main__ import reverse_1, num_10000',
+        number=10000))
+num_10000 = randint(100000000, 10000000000000)
+print('Функция reverse_1_mem')
+print(
+    timeit(
+        'reverse_1_mem(num_10000)',
+        setup='from __main__ import reverse_1_mem, num_10000',
+        number=10000))
+
+"""
+Как мы видим из замеров мемоизация значительно увеличивает скорость выполнения как функции написанной 
+при помощи рекурсии, так и обычной функции.
+Однако если обычные функции без мемоизации значительно выигрывают по скорости у функций с рекурсией без мемоизации, 
+то в функциях с мемоизацией скорость выполнения различается на десятитысячные доли.
+
+Мемоизация нужна, посколько скорость выполнения с ее использованием значительно превосходит скорость выполнения без.
+"""
