@@ -25,3 +25,51 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+
+def get_sum_elems_list(list_obj):
+    sum_elems = 0
+    for elem in list_obj:
+        sum_elems += int(elem)
+    return sum_elems
+
+
+try:
+    num_companies = int(input("Пожалуйста введите количество предприятий для расчёта прибыли: "))
+    list_companies = []
+    total_profit = 0
+    for num in range(num_companies):
+        name_company = input("Пожалуйста введите название предприятия: ")
+        company_profits = input("Введите через пробел прибыль данного предприятия за каждый квартал: ").split(' ')
+        sum_profit = get_sum_elems_list(company_profits)
+        total_profit += sum_profit
+        company_tuple = namedtuple(
+            name_company,
+            'name first_quarter second_quarter third_quarter fourth_quarter annual_profit'
+        )
+        company_tuple_parts = company_tuple(
+            name=name_company,
+            first_quarter=int(company_profits[0]),
+            second_quarter=int(company_profits[1]),
+            third_quarter=int(company_profits[2]),
+            fourth_quarter=int(company_profits[3]),
+            annual_profit=sum_profit
+        )
+        list_companies.append(company_tuple_parts)
+
+    average_profit = total_profit / num_companies
+    print(f'Средняя годовая прибыль всех предприятий: {average_profit}')
+    companies_below_average = ''
+    companies_above_average = ''
+    for company in list_companies:
+        if company.annual_profit > average_profit:
+            companies_above_average += company.name + ', '
+        else:
+            companies_below_average += company.name + ', '
+
+    print(f'Предприятия с прибылью выше среднего: {companies_above_average}')
+    print(f'Предприятия с прибылью ниже среднего: {companies_below_average}')
+except ValueError:
+    print('Неправильный тип введённых данных. Возможно вы ввели строку вместо числа')
