@@ -12,12 +12,22 @@
 Добавьте аналитику: что вы сделали и почему
 """
 
-from timeit import timeit
+import timeit
 
 
 def func_1(nums):
-    new_arr = []
-    for i in range(len(nums)):
-        if nums[i] % 2 == 0:
-            new_arr.append(i)
-    return new_arr
+  new_arr = [i for i in range(len(nums)) if i % 2 == 0]
+  return new_arr
+
+
+a = [i * i for i in range(10)]
+
+print(
+  timeit.timeit("func_1(a)", "from __main__ import func_1, a", number=1000))
+"""
+Время работы кода до оптимизации: 0.001920082955621183
+Вместо прохода по циклу использовался метод list comprehension.
+За счет сокращения количества действий в коде, время сократилось
+Время после оптимизации: 0.001586916041560471
+"""
+
