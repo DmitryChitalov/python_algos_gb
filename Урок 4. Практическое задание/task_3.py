@@ -14,46 +14,48 @@ import timeit
 
 
 def revers(enter_num, revers_num=0):
-	if enter_num == 0:
-		return
-	else:
-		num = enter_num % 10
-		revers_num = (revers_num + num / 10) * 10
-		enter_num //= 10
-		revers(enter_num, revers_num)
+  if enter_num == 0:
+    return
+  else:
+    num = enter_num % 10
+    revers_num = (revers_num + num / 10) * 10
+    enter_num //= 10
+    revers(enter_num, revers_num)
 
 
 def revers_2(enter_num, revers_num=0):
-	while enter_num != 0:
-		num = enter_num % 10
-		revers_num = (revers_num + num / 10) * 10
-		enter_num //= 10
-	return revers_num
+  while enter_num != 0:
+    num = enter_num % 10
+    revers_num = (revers_num + num / 10) * 10
+    enter_num //= 10
+  return revers_num
 
 
 def revers_3(enter_num):
-	enter_num = str(enter_num)
-	revers_num = enter_num[::-1]
-	return revers_num
+  enter_num = str(enter_num)
+  revers_num = enter_num[::-1]
+  return revers_num
 
 
 a = 123456789
 
 
 def main():
-	revers(a)
-	revers_2(a)
-	revers_3(a)
+  revers(a)
+  revers_2(a)
+  revers_3(a)
 
 
 cProfile.run('main()')
 
 print(
-	timeit.timeit('revers(a)', 'from __main__ import revers, a', number=1000))
+  timeit.timeit('revers(a)', 'from __main__ import revers, a', number=1000))
 print(
-	timeit.timeit('revers_2(a)', 'from __main__ import revers_2, a', number=1000))
+  timeit.timeit(
+    'revers_2(a)', 'from __main__ import revers_2, a', number=1000))
 print(
-	timeit.timeit('revers_3(a)', 'from __main__ import revers_3, a', number=1000))
+  timeit.timeit(
+    'revers_3(a)', 'from __main__ import revers_3, a', number=1000))
 '''
 Время работы reverse: 0.003436166967730969
 Время работы reverse_2: 0.002174832974560559

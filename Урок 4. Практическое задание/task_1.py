@@ -16,14 +16,14 @@ import timeit
 
 
 def func_1(nums):
-	new_arr = [i for i in range(len(nums)) if i % 2 == 0]
-	return new_arr
+  new_arr = [i for i in range(len(nums)) if i % 2 == 0]
+  return new_arr
 
 
 a = [i * i for i in range(10)]
 
 print(
-	timeit.timeit("func_1(a)", "from __main__ import func_1, a", number=1000))
+  timeit.timeit("func_1(a)", "from __main__ import func_1, a", number=1000))
 """
 Время работы кода до оптимизации: 0.001920082955621183
 Вместо прохода по циклу использовался метод list comprehension.
