@@ -25,3 +25,41 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+
+QUARTERS = 4
+companies = namedtuple('company', ['name', 'quarters', 'profit'])
+all_companies = set()
+
+qty_comp = int(input('Введите количество предприятий для расчета прибыли: '))
+total_profit = 0
+
+for i in range(1, qty_comp + 1):
+    profit = 0
+    quarters = []
+    name = input(f'Введите название предприятия {i}: ')
+
+    for j in range(QUARTERS):
+        quarters.append(int(input(f'введите прибыль данного предприятия за {j + 1} квартал: ')))
+        profit += quarters[j]
+
+    plants = companies(name=name, quarters=tuple(quarters), profit=profit)
+
+    all_companies.add(plants)
+    total_profit += profit
+
+average = total_profit / qty_comp
+
+print(f'Средняя годовая прибыль всех предприятий: {average}')
+
+
+print(f'\nПредприятия с прибылью выше среднего:')
+for plants in all_companies:
+    if plants.profit > average:
+        print(f'{plants.name} заработала {plants.profit}')
+
+print(f'\nПредприятия с прибылью ниже среднего:')
+for plants in all_companies:
+    if plants.profit < average:
+        print(f'{plants.name} заработала {plants.profit}')
+

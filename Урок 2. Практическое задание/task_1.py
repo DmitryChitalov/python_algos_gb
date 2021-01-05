@@ -12,8 +12,8 @@
 
 Подсказка:
 Вариант исполнения:
-- условие рекурсивного вызова - введена операция +, -, *, /
-- условие завершения рекурсии - введена операция 0
+- условие рекурсивного вызова - введена операция +, -, *, / - ШАГ РЕКУРСИИ
+- условие завершения рекурсии - введена операция 0 - БАЗОВЫЙ СЛУЧАЙ
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
@@ -28,3 +28,50 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calculator():
+    for_access = input('Введите операцию (+, -, *, / или 0 для выхода) : ')
+
+    if for_access == '0':
+        return 'Exit'
+
+    else:
+        if for_access in '+-*/':
+            try:
+                number_1 = int(input('Введите первое число: '))
+                number_2 = int(input('Введите второе число: '))
+
+                if for_access == '+':
+                    result = number_1 + number_2
+                    print(f'Сумма введенных чисел равна {result}')
+                    return calculator()
+
+                elif for_access == '-':
+                    result = number_1 - number_2
+                    print(f'Вычитание введенных чисел равно {result}')
+                    return calculator()
+
+                elif for_access == '*':
+                    result = number_1 * number_2
+                    print(f'Произведение введенных чисел равно {result}')
+                    return calculator()
+
+                elif for_access == '/':
+                    result = number_1 / number_2
+                    print(f'Деление введенных чисел равно {result}')
+                    return calculator()
+
+            except ValueError:
+                print('Введите число')
+                return calculator()
+
+            except ZeroDivisionError:
+                print('Нельзя делить на ноль!')
+                return calculator()
+
+        else:
+            print('Введите оговоренный символ!')
+            return calculator()
+
+
+calculator()
