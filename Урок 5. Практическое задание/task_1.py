@@ -25,3 +25,60 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple, Counter
+from statistics import mean
+from random import randint
+
+com_lst = []
+
+
+def add_company():
+    com = namedtuple('company', 'name, profit_list')
+    while True:
+        com.name = input('Введите название компании:')
+        try:
+            cmp = list(map(float, input('Введите через пробел прибыли за 4 квартала: ').strip().split(' ')))
+            if len(cmp) == 4:
+                com.profit_list = cmp
+                break
+        except ValueError:
+            print('Ошибка ввода! Попробуйте ещё раз!')
+    com_lst.append(com)
+
+
+def get_averages():
+    profits = [sum(el.profit_list) for el in com_lst]
+    avg = mean(profits)
+    result = namedtuple('result', 'avg, below_avg_list above_avg_list')
+    result.avg = avg
+    result.above_avg_list = [el for el in com_lst if sum(el.profit_list) >= avg]
+    result.below_avg_list = [el for el in com_lst if sum(el.profit_list) < avg]
+    return result
+
+
+for i in range(10):
+    com = namedtuple('company', 'name, profit_list')
+    com.name = 'company' + str(i)
+    com.profit_list = [randint(0, 1000) for i in range(4)]
+    com_lst.append(com)
+
+while True:
+    user_ans = input('Введите: 1 - Добавить компанию, 2 - Вычислить результат, 3 - Вывести компании, 0 - Выход:')
+    if user_ans == '0':
+        break
+    if user_ans == '1':
+        add_company()
+    elif user_ans == '2':
+        res = get_averages()
+        print(f'Средняя годовая прибыль: {res.avg}')
+        print('Прибыль выше среднего:')
+        for el in res.above_avg_list:
+            print(f'{el.name}: {el.profit_list}')
+        print('Прибыль ниже среднего:')
+        for el in res.below_avg_list:
+            print(f'{el.name}: {el.profit_list}')
+    elif user_ans == '3':
+        for el in com_lst:
+            print(f'{el.name}: {el.profit_list}')
+    else:
+        print('Ошибка. Попробуйте ещё раз')
