@@ -30,11 +30,27 @@ def check_hash_password(password, hash):
     return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':' + salt == hash
 
 
+def save_to_file(hash, path):
+    pass_file = open(path, 'w')
+    pass_file.write(hash)
+    pass_file.close()
+
+
+def get_from_file(path):
+    pass_file = open(path, 'r')
+    stored_hash = pass_file.read()
+    pass_file.close()
+    return stored_hash
+
+
+path = './pass.txt'
+
 password = input('Введите пароль:')
 hash = hash_password(password)
-print(hash)
+save_to_file(hash, path)
 password_repeat = input('Введите пароль еще раз для проверки:')
-if check_hash_password(password_repeat, hash):
+stored_hash = get_from_file(path)
+if check_hash_password(password_repeat, stored_hash):
     print('Вы ввели правильный пароль')
 else:
     print('Вы ввели неправильный пароль')
