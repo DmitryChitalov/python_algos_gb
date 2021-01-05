@@ -69,7 +69,8 @@ def get_avg(quantity):
            f'Предприятия, с прибылью выше среднего: {", ".join([key for key in res_dict if res_dict[key] > main_avg])}\n' \
            f'Предприятия, с прибылью меньше среднего:{", ".join([key for key in res_dict if res_dict[key] < main_avg])}'
 
-
+'''
+второй вариант использования namedtuple, навернео зря
 def create_data2(quantity):
     Firm = namedtuple('tuple_for_firm', 'firm_name, v_1st v_2nd v_3rd v_4th')
     for quant in range(quantity):
@@ -78,7 +79,7 @@ def create_data2(quantity):
         new_data = list(map(int, input(f'Введите через пробел квартальные прибыли фирмы {firm_name}: ').split()))
         new_obj = Firm(v_1st=new_data[0], v_2nd=new_data[1], v_3rd=new_data[2], v_4th=new_data[3])
         return new_obj.v_2nd
-
+'''
 
 if __name__ == '__main__':
     try:
@@ -86,7 +87,8 @@ if __name__ == '__main__':
 
     except ValueError:
         print("Серьезно?")
-    print(get_avg(quantity))  # вариант 1, если ввести 0 пойдет в вариант 2
-    quantity = int(input(f'Введите количество компаний цифрами: '))
-    print(create_data2(quantity))
+        exit(1)
+    # print(get_avg(quantity))  # вариант 1, если ввести 0 пойдет в вариант 2
+    # quantity = int(input(f'Введите количество компаний цифрами: '))
+    # print(create_data2(quantity))
 
