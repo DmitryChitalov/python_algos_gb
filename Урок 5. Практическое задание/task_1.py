@@ -5,23 +5,41 @@
 и вывести наименования предприятий, чья прибыль выше среднего и отдельно
 вывести наименования предприятий, чья прибыль ниже среднего.
 
-Подсказка:
-Для решения задачи обязательно примените какую-нибудь коллекцию из модуля collections
-Для лучшее освоения материала можете даже сделать несколько решений этого задания,
-применив несколько коллекций из модуля collections
-
-Пример:
-Введите количество предприятий для расчета прибыли: 2
-Введите название предприятия: Рога
-через пробел введите прибыль данного предприятия
-за каждый квартал(Всего 4 квартала): 235 345634 55 235
-
-Введите название предприятия: Копыта
-через пробел введите прибыль данного предприятия
-за каждый квартал(Всего 4 квартала): 345 34 543 34
-
-Средняя годовая прибыль всех предприятий: 173557.5
-Предприятия, с прибылью выше среднего значения: Рога
-
-Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+Enterprise = namedtuple('Enterprise', ['name', 'quarters', 'profit'])
+all_companies = set()
+
+ent_num = int(input("Введите количество предприятий для расчета прибыли: "))
+total_profit = 0
+for i in range(1, ent_num + 1):
+    profit = 0
+    quarters = []
+
+    name = input(f'Название {i}-го предприятия: ')
+
+    quarters = list(map(int, input(f'Через пробел введите прибыль предприятия {name} за каждый квартал '
+                                   f'(всего 4 квартала): ').split()))
+    for j in range(len(quarters)):
+        profit += quarters[j]
+
+    company = Enterprise(name=name, quarters=tuple(quarters), profit=profit)
+
+    all_companies.add(company)
+    total_profit += profit
+
+average = total_profit / ent_num
+
+print(f'\nСредняя годовая прибыль всех предприятий: {average}')
+
+print(f'\nПредприятия с прибылью >= среднего:')
+for company in all_companies:
+    if company.profit >= average:
+        print(f'Предприятие {company.name} заработало {company.profit}')
+
+print(f'\nПредприятия с прибылью < среднего:')
+for company in all_companies:
+    if company.profit < average:
+        print(f'Предприятие {company.name} заработало {company.profit}')
