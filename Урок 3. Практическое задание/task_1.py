@@ -10,3 +10,37 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+
+import time
+
+def my_timer(f):
+    def tmp(*args, **kwargs):
+        start_time=time.time()
+        result=f(*args, **kwargs)
+        delta_time=time.time() - start_time
+        print ('Время выполнения функции {}' .format(delta_time))
+        return result
+
+    return tmp
+
+n = int(input('Введите число n '))
+@my_timer
+def dict_fill(count):
+    dict = {a: a ** 2 for a in range(count)}
+    return dict
+
+dict_fill(n)
+
+@my_timer
+def list_fill(count):
+    list = [ i ** 2 for i in range(count)]
+    return list
+list_fill(n)
+#Введите число n 10000
+#Время выполнения функции 0.0040018558502197266
+#Время выполнения функции 0.003999471664428711
+
+#Введите число n 1000000
+#Время выполнения функции 0.3521852493286133
+#Время выполнения функции 0.32002711296081543
+# Заполнения словаря незначительно быстрее, на 0,05%

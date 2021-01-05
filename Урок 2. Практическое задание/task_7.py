@@ -6,3 +6,10 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def proof(number, n = 1, summ = 0):
+    summ = summ + n
+    if n == number:
+        return f'1+2+...+{number} = {summ} {number}({number}+1)/2 = {int(number*(number+1)/2)}'
+    else:
+        return proof(number, n+1, summ)
+print(proof(7))
