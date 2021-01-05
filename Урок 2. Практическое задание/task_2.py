@@ -16,3 +16,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def recur_calc(num, even, odd):
+    last = num % 10
+    if last == 0:
+        print('Количество четных и нечетных цифр равно:', even, odd)
+    elif last % 2 == 0:
+        even += 1
+        recur_calc(num // 10, even, odd)
+    elif last % 2 != 0:
+        odd += 1
+        recur_calc(num // 10, even, odd)
+
+
+recur_calc(int(input('Введите число: ')), 0, 0)
