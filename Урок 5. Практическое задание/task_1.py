@@ -25,3 +25,36 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+def calc_company():
+
+    firms = namedtuple('name_comp', 'name period_1 period_2 period_3 period_4')
+    quantity = int(input('Введите количество предприятий для расчета прибыли: '))
+    my_dict = {}
+    for i in range(quantity):
+        name_company = input('Название предприятия для расчета прибыли: ')
+        profit_company = input('Через пробел введите прибыль данного предприятия\nза каждый квартал(Всего 4 квартала): ').split(' ')
+        if len(profit_company) == 4:
+            company = firms(name=name_company,
+                         period_1=int(profit_company[0]), period_2=int(profit_company[1]),
+                         period_3=int(profit_company[2]), period_4=int(profit_company[3])
+                         )
+            my_dict[company.name] = (company.period_1 + company.period_2 + company.period_3 + company.period_4) / 4
+        else:
+            print('Данная фирма не будет внесена в отчет, так как не верно указан доход за кварталы')
+    total_profit = 0
+    for value in my_dict.values():
+        total_profit += value
+    total_profit = total_profit / quantity
+    print(f'Средняя годовая прибыль всех предприятий равна {total_profit}')
+    for key, value in my_dict.items():
+        if value > total_profit:
+            print(f'Предприятие {key} приносит прибыли больше среднего')
+        elif value < total_profit:
+            print(f'Предприятие {key} приносит прибыли меньше среднего')
+        else:
+            print(f'Предприятие {key} приносит среднию прибыль')
+
+calc_company()
