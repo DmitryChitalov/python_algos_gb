@@ -22,3 +22,52 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+company_dict = {"Tesla": 100, "Gazprom": 103, "Google": 105, "Amazon": 98, "Yandex": 78, "Microsoft": 101}
+
+company_list = company_dict.values()
+
+top_3 = []
+
+for company in company_list:
+    count = 0
+    for x in company_list:
+        if x > company:
+            count += 1
+    if count < 3:
+        top_3.append(company)
+
+top_3_name = []
+
+for key, value in company_dict.items():
+    for income in top_3:
+        if value == income:
+            top_3_name.append(key)
+
+print(top_3_name)
+
+# Общая сложность алгоритма квадратичная из-за вложенных циклов for
+
+
+'''_________________________________________________________________'''
+
+company_dict = {"Tesla": 100, "Gazprom": 99, "Google": 105, "Amazon": 98, "Yandex": 78, "Microsoft": 101}
+
+top_3 = []
+top_3_name = []
+
+for company, income in company_dict.items():
+    top_3.append([income, company])
+
+top_3.sort()
+top_3 = top_3[-1:-4:-1]
+
+for company in top_3:
+    top_3_name.append(company[1])
+
+print(top_3_name)
+
+#Сложность алгоритма O(n log n) из-за применения метода sort()
+
+
+"""Выберу вариант с со сложностью O(n log n)"""

@@ -27,3 +27,61 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+users_list = [["user"+str(x), "parole"+str(x), activate == True] for x in range(5) for activate in range(1)]
+
+for i in range(0, 5, 2):
+    users_list[i][2] = True
+
+
+def log_in():
+    login = input("Введите логин: ")
+    parole = input("Введите пароль: ")
+    count = 0
+    for user in users_list:
+        if user[0] == login and user[1] == parole:
+            if user[2]:
+                print("Вы залогинились")
+            else:
+                print("Ваша учетная запись должна быть активирована")
+        else:
+            count += 1
+    if count == len(users_list):
+        print("Такого пользователя не существует")
+
+
+log_in()
+
+'''_________________________________________________________________'''
+
+
+users_dict = {"user0": ['parole0', 'activated'], "user1": ['parole1', 'notactivated'],
+              "user2": ['parole2', 'activated'], "user3": ['parole3', 'notactivated'],
+              "user4": ['parole4', 'activated'], "user5": ['parole5', 'notactivated']}
+
+
+def log_in():
+    login = input("Введите логин: ")
+    parole = input("Введите пароль: ")
+    count = 0
+    for user in users_dict.keys():
+        if user == login:
+            inner_parole, status = users_dict.get(login)
+            if inner_parole == parole:
+                if status == 'activated':
+                    print("Вы залогинились")
+                else:
+                    print("Ваша учетная запись должна быть активирована")
+            else:
+                print("Вы ввели неправильный пароль")
+        else:
+            count += 1
+    if count == len(users_dict):
+        print("Такого пользователя не существует")
+
+
+log_in()
+
+
+"""В обоих решениях сложность составляет O(n)"""
