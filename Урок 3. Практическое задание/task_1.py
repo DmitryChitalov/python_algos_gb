@@ -10,3 +10,25 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+
+import time
+def fill_list(n):
+    start = time.time()
+    list = [i for i in range(1, n)]
+    spent_time = time.time() - start
+    return spent_time
+
+
+def fill_dict(n):
+    start = time.time()
+    dict = {x: x for x in range(n)}
+    spent_time = time.time() - start
+    return spent_time
+
+
+
+print(fill_list(1000000))
+print(fill_dict(1000000))
+
+# Списки заполняются медленнее, чем словари. Так происходит из-за того, что сложность операции со словарями константная,
+# а для списков линейная O(n)
