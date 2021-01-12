@@ -25,6 +25,7 @@ num_100 = randint(10000, 1000000)
 num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
 
+
 print('Не оптимизированная функция recursive_reverse')
 print(
     timeit(
@@ -79,3 +80,34 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+def reverse_str(number):
+    return str(number)[::-1]
+
+
+print('Новая функция reverse_str')
+print(
+    timeit(
+        'reverse_str(num_100)',
+        setup='from __main__ import reverse_str, num_100',
+        number=10000))
+print(
+    timeit(
+        'reverse_str(num_1000)',
+        setup='from __main__ import reverse_str, num_1000',
+        number=10000))
+print(
+    timeit(
+        'reverse_str(num_10000)',
+        setup='from __main__ import reverse_str, num_10000',
+        number=10000))
+
+
+
+"""Была добавлена новая функция reverse_str, которая обращает число в str и выводит как перевернутую строку.
+   Данный алгоритм значительно быстрее, чем алгоритм первой функции recursive_reverse, а также занимает всего
+   одну строку, но все равно он немного уступает по скорости алгоритму функции recursive_reverse_mem, которая 
+   использует мемоизацию. Данный алгоритм еще раз доказывает, как важно использовать мемоизацию при работе с 
+   рекурсиями: если значение уже содержится в кеше, то повторное его вычисление проводиться не будет, вместо
+   этого будет возвращено имеющееся значение. """
