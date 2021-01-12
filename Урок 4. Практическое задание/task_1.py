@@ -14,10 +14,45 @@
 
 from timeit import timeit
 
+"""Первая функция использует цикл, перебирающий все индексы от начала до конца списка.
+    В цикле используются 2 стандартные функции, условие и добавление элемента в список."""
 
-def func_1(nums):
-    new_arr = []
-    for i in range(len(nums)):
-        if nums[i] % 2 == 0:
-            new_arr.append(i)
+
+def func_1(nums):                   # Сложность O(N). Используется 3 стандартные функции и цикл
+    new_arr = []                    # O(1)
+    for i in range(len(nums)):      # O(N)
+        if nums[i] % 2 == 0:        # O(1)
+            new_arr.append(i)       # O(1)
+    return new_arr                  # O(1)
+
+
+"""Вторая функция использует List Comprehension, который использует те же стандартные функции range и len.
+   Но замеры времени показывают, что данный способ быстрее примерно на 10%. 
+   Возможно из-за того, что не вызывается дополнительная стандартная функция append."""
+
+
+def func_2(nums):
+    new_arr = [i for i in range(len(nums)) if nums[i] % 2 == 0]         # 2 стандартные функции
     return new_arr
+
+
+"""Третья функция также использует List Comprehension, но вместо 2х стандартных функций range и len
+   используется стандартная функция enumerate. И замеры чаще всего показывают, что это
+   самый быстрый алгоритм."""
+
+
+def func_3(nums):
+    new_arr = [i for i, el in enumerate(nums) if el % 2 == 0]       # 1 стандартная функция
+    return new_arr
+
+
+elem = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]          # создаем список
+elem *= 10000                                   # увеличиваем его
+
+time_1 = timeit('func_1(elem)', setup='from __main__ import func_1, elem', number=100)
+time_2 = timeit('func_2(elem)', setup='from __main__ import func_2, elem', number=100)
+time_3 = timeit('func_3(elem)', setup='from __main__ import func_3, elem', number=100)
+
+print(f'Время выполнения первой функции: {time_1}')
+print(f'Время выполнения первой функции: {time_2}')
+print(f'Время выполнения второй функции: {time_3}')
