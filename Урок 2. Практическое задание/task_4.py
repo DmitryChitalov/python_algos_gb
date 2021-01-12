@@ -9,3 +9,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum(amount, n):
+    if amount == 1:
+        return amount
+    elif amount % 2 == True:
+        return sum(amount-1, n / 2) + ((n / 2) * (-1))
+    elif amount % 2 == False:
+        return sum(amount - 1, n / 2) + n / 2
+
+
+x = sum(3, 1)
+print(x)
