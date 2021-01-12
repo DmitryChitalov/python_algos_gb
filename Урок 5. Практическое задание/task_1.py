@@ -25,3 +25,30 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+import collections
+
+sum_profit = 0
+info = collections.namedtuple('info', 'corp profit')
+list_corp = []
+corp_high_profit = []
+corp_low_profit = []
+count_corp = int(input('Введите количество предприятий для расчета прибыли: '))
+while count_corp != 0:
+    info_corp = info(
+        corp=input('Введите название предприятия: '),
+        profit=list(map(int, input('Через пробел введите прибыль данного предприятия '
+                                   'за каждый квартал(Всего 4 квартала): ').split()))
+    )
+    list_corp.append(info_corp)
+    count_corp -= 1
+for i in list_corp:
+    sum_profit += sum(i.profit)
+average_profit = sum_profit/len(list_corp)
+print(f'Средняя годовая прибыль всех предприятий: {average_profit}')
+for i in list_corp:
+    if sum(i.profit) >= average_profit:
+        corp_high_profit.append(i.corp)
+    else:
+        corp_low_profit.append(i.corp)
+print(f'Предприятия, с прибылью выше среднего значения: {", ".join(corp_high_profit)}')
+print(f'Предприятия, с прибылью ниже среднего значения: {", ".join(corp_low_profit)}')
