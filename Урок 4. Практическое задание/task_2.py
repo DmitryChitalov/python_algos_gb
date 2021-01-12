@@ -13,6 +13,7 @@
 
 from timeit import timeit
 from random import randint
+import sys
 
 
 def recursive_reverse(number):
@@ -25,6 +26,7 @@ num_100 = randint(10000, 1000000)
 num_1000 = randint(1000000, 10000000)
 num_10000 = randint(100000000, 10000000000000)
 
+sys.setrecursionlimit(10000)
 print('Не оптимизированная функция recursive_reverse')
 print(
     timeit(
@@ -79,3 +81,46 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+def reverse_cycle(number):
+    rev_num = ''
+    while number != 0:
+        rev_num += str(number % 10)
+        number //= 10
+    return rev_num
+
+
+print('Работа функции reverse_cycle')
+print(
+    timeit(
+        'reverse_cycle(num_100)',
+        setup='from __main__ import reverse_cycle, num_100',
+        number=10000))
+print(
+    timeit(
+        'reverse_cycle(num_1000)',
+        setup='from __main__ import reverse_cycle, num_1000',
+        number=10000))
+print(
+    timeit(
+        'reverse_cycle(num_10000)',
+        setup='from __main__ import reverse_cycle, num_10000',
+        number=10000))
+
+
+def main():
+    recursive_reverse(num_10000)
+    recursive_reverse_mem(num_10000)
+    reverse_cycle(num_10000)
+
+
+"""
+Сделал свой вариант через цикл
+Через цикл выполняется в 1.5 раза быстрее, чем через рекурсию,
+И через мемоизацию время выполнения фактически не зависит от кол-ва элементов, это понятно, потому что она уже расчитана
+ранее.
+Вывод: мемоизация здесь нужна
+
+P.S. надеюсь я правильно понял мемоизацию, было очень много эксперементов)
+"""
