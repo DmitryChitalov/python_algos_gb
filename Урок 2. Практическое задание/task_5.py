@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_chr(number, count):
+    if number == 128:
+        return 128
+    else:
+        print(f'{number} - {chr(number)}', end=' ')
+        count += 1
+        if count == 10:
+            print('\n')
+            count = 0
+        return get_chr(number + 1, count) - 1
+
+
+get_chr(32, 0)

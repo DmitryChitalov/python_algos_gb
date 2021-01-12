@@ -16,3 +16,28 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+even = 0
+odd = 0
+even_list = []
+odd_list = []
+
+def counting(number):
+    global even, odd
+    if len(number) == 0:
+        return 0
+    elif int(number[0]) % 2 == 0:
+        even += 1
+        even_list.append(int(number[0]))
+        return counting(number[1:])
+    else:
+        odd += 1
+        odd_list.append(int(number[0]))
+        return counting(number[1:])
+
+
+user_number = input("Введите число не меньше трехзначного: ")
+counting(user_number)
+
+print(f'Четных чисел: {even}, {even_list}')
+print(f'Нечетных чисел: {odd}, {odd_list}')

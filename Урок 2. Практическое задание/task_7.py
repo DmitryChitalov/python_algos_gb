@@ -6,3 +6,13 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check(number, left = 0, right = 1):
+    if left == right:
+        print(left, right)
+        return True
+    else:
+        return check(number, left + 1, number * (number + 1) / 2)
+
+print(check(5))
