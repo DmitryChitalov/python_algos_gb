@@ -14,26 +14,29 @@
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
 
-def rec(number, i = 0, j = 0):
-  if number == 0:
-    return f'Количество четных и нечетных цифр в числе равно: {i, j}'
-  elif (number % 10) % 2 == 0:
-    return rec(number // 10, i + 1, j)
-  elif (number % 10) % 2 != 0:
-    return rec(number // 10, i, j + 1)
+
+def rec(number, i=0, j=0):
+    if number == 0:
+        return f'Количество четных и нечетных цифр в числе равно: {i, j}'
+    elif (number % 10) % 2 == 0:
+        return rec(number // 10, i + 1, j)
+    elif (number % 10) % 2 != 0:
+        return rec(number // 10, i, j + 1)
+
 
 print(rec(int(input('Введите число: '))))
 
 
 def cicle(number):
-  i = 0
-  j = 0
-  while number > 0:
-    if (number % 10) % 2 == 0:
-      i += 1
-    elif (number % 10) % 2 != 0:
-      j += 1
-    number //= 10
-  return f'Количество четных и нечетных цифр в числе равно: {i, j}'
+    i = 0
+    j = 0
+    while number > 0:
+        if (number % 10) % 2 == 0:
+            i += 1
+        elif (number % 10) % 2 != 0:
+            j += 1
+        number //= 10
+    return f'Количество четных и нечетных цифр в числе равно: {i, j}'
+
 
 #print(cicle(int(input('Введите число: '))))

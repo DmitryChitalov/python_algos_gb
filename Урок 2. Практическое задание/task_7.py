@@ -6,9 +6,11 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
-def rec(n,sum_1 = 0, sum_2 = 1):
-  if sum_1 == sum_2:
-    return f'{sum_1} = {sum_2}'
-  return rec(n,sum_1 + 1, n*(n+1)//2)
+
+def rec(n, sum_1=0, sum_2=1):
+    if sum_1 == sum_2:
+        return f'{sum_1} = {sum_2}'
+    return rec(n, sum_1 + 1, n * (n + 1) // 2)
+
 
 print(rec(int(input('Введите число: '))))

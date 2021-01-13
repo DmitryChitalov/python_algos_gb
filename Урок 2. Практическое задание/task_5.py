@@ -18,25 +18,27 @@
 """
 #1 цикл
 count = 0
-for i in range(32,128):
-  if count < 10:
-    print(f'{i} - {chr(i)}', end=' ')
-    count += 1
-  if count == 10:
-    count = 0
-    print(f'{i} - {chr(i)}', end='\n')
+for i in range(32, 128):
+    if count < 10:
+        print(f'{i} - {chr(i)}', end=' ')
+        count += 1
+    if count == 10:
+        count = 0
+        print(f'{i} - {chr(i)}', end='\n')
 
 #2 рекурсия
 
-def rec(count=1, i = 32):
-  if i == 128:
-    return
-  elif count == 10:
-    count = 1
-    print(f'{i} - {chr(i)}', end='\n')
-  elif count < 10:
-    count += 1
-    print(f'{i} - {chr(i)}', end=' ')
-  return rec(count, i + 1)
+
+def rec(count=1, i=32):
+    if i == 128:
+        return
+    elif count == 10:
+        count = 1
+        print(f'{i} - {chr(i)}', end='\n')
+    elif count < 10:
+        count += 1
+        print(f'{i} - {chr(i)}', end=' ')
+    return rec(count, i + 1)
+
 
 rec()

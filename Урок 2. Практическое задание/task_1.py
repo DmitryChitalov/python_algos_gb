@@ -25,50 +25,56 @@
 Введите операцию (+, -, *, / или 0 для выхода):
 """
 
-## можно было и лучше написать конечно...
+## думал, что сами операции вычисления тоже нужно делать через рекурсию..
 
-def my_func(val = input('Введите операцию (+, -, *, / или 0 для выхода): ')):
-  if val == '0':
-    return f'Завершение работы'
-  elif val == '+' or val == '-' or val == '*' or val == '/':
-    if val == '+':
-      def get_sum(number_1 = int(input('Введите первое число: ')), number_2 = int(input('Введите второе число: '))):
-        if number_2 == 0:
-          return f'Ваш результат {number_1}'
-        return get_sum(number_1 + 1, number_2 - 1)
-      print(get_sum())
-      return my_func(val = input('Введите операцию (+, -, *, / или 0 для выхода): '))
-    elif val == '-':
-      def get_sub(number_1 = int(input('Введите первое число: ')), number_2 = int(input('Введите второе число: '))):
-        if number_2 == 0:
-          return f'Ваш результат {number_1}'
-        return get_sub(number_1 - 1, number_2 - 1)
-      print(get_sub())
-      return my_func(val = input('Введите операцию (+, -, *, / или 0 для выхода): '))
-    elif val == '*':
-      def get_mul(number_1 = int(input('Введите первое число: ')), number_2 = int(input('Введите второе число: '))):
-        if number_1 == 1:
-          return f'Ваш результат {number_2}'
-        return get_mul(number_1 // number_1 , number_2 * number_1)
-      print(get_mul())
-      return my_func(val = input('Введите операцию (+, -, *, / или 0 для выхода): '))
-    elif val == '/':
-      def get_div(number_1 = int(input('Введите первое число: ')), number_2 = int(input('Введите второе число: '))):
-        if number_2 == 1:
-          return f'Ваш результат {number_1}'
-        return get_div(number_1 / number_2 , number_2 // number_2)
-      try:
-        print(get_div())
-      except ZeroDivisionError:
-        print('Деление на 0')
-      return my_func(val = input('Введите операцию (+, -, *, / или 0 для выхода): '))
-  else:
-    print(f'Вы вместо числа ввели строку. Исправьтесь.')
-    try:
-      return my_func(val = input('Введите операцию (+, -, *, / или 0 для выхода): '))
-    except ValueError:
-      print(f'Вы вместо числа ввели строку. Исправьтесь.')
-      return my_func(val = input('Введите операцию (+, -, *, / или 0 для выхода): '))
+def my_func():
+    val = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if val == '0':
+        return f'Завершение работы'
+    elif val == '+' or val == '-' or val == '*' or val == '/':
+        try:
+            number_1 = int(input('Введите первое число: '))
+            number_2 = int(input('Введите второе число: '))
+            if val == '+':
+
+                def get_sum(number_1=number_1, number_2=number_2):
+                    if number_2 == 0:
+                        return f'Ваш результат {number_1}'
+                    return get_sum(number_1 + 1, number_2 - 1)
+
+                print(get_sum())
+            elif val == '-':
+
+                def get_sub(number_1=number_1, number_2=number_2):
+                    if number_2 == 0:
+                        return f'Ваш результат {number_1}'
+                    return get_sub(number_1 - 1, number_2 - 1)
+
+                print(get_sub())
+            elif val == '*':
+
+                def get_mul(number_1=number_1, number_2=number_2):
+                    if number_1 == 1:
+                        return f'Ваш результат {number_2}'
+                    return get_mul(number_1 // number_1, number_2 * number_1)
+
+                print(get_mul())
+            elif val == '/':
+
+                def get_div(number_1=number_1, number_2=number_2):
+                    if number_2 == 1:
+                        return f'Ваш результат {number_1}'
+                    return get_div(number_1 / number_2, number_2 // number_2)
+
+                try:
+                    print(get_div())
+                except ZeroDivisionError:
+                    print('Деление на 0')
+        except ValueError:
+            print(f'Вы вместо числа ввели строку. Исправьтесь.')
+    else:
+        print(f'Вы вместо числа ввели строку. Исправьтесь.')
+    return my_func()
 
 
 print(my_func())

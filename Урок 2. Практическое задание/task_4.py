@@ -8,10 +8,12 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
-def rec(number, sum = 0, q = -0.5, count = 0):
-  if number == 0:
-    return f'Количество элементов - {count}, их сумма - {sum}'
-  else:
-    return rec(number - 1, sum + q ** (number - 1), q, count + 1)
+
+def rec(number, sum=0, q=-0.5, count=0):
+    if number == 0:
+        return f'Количество элементов - {count}, их сумма - {sum}'
+    else:
+        return rec(number - 1, sum + q**(number - 1), q, count + 1)
+
 
 print(rec(int(input('Введите количество элементов: '))))

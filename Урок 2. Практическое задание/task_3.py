@@ -13,10 +13,12 @@
 Перевернутое число: 321
 """
 
-def rec(number, new_number = 0):
-  if number == 0:
-    return f'Перевернутое число: {new_number//10}'
-  else:
-    return rec(number // 10, (new_number + number % 10)*10)
 
-print(rec(int(input('Введите число, которое требуется перевернуть: '))))
+def rec(number, new_number=0):
+    if number == 0:
+        return f'Перевернутое число: {new_number//10}'
+    else:
+        return rec(number // 10, (new_number + number % 10) * 10)
+
+
+print(rec(int(input('Введите число, которое требуется перевернуть: '))))))
