@@ -39,3 +39,37 @@ def func_2():
 
 print(func_1())
 print(func_2())
+
+
+def func_3():
+    from collections import Counter
+    count = Counter(array).most_common()
+    return f'Самое часто втречающееся число в массиве - {count[0][0]}, оно появилось в массиве {count[0][1]} раз'
+
+
+print(func_3())
+
+
+def func_4():
+    res = max(array, key=array.count)
+    return f'Самое часто втречающееся число в массиве - {res}, оно появилось в массиве {array.count(res)} раз'
+
+
+print(func_4())
+
+from timeit import timeit
+
+print(timeit('func_1()', setup='from __main__ import func_1', number = 100000))
+print(timeit('func_2()', setup='from __main__ import func_2', number = 100000))
+print(timeit('func_3()', setup='from __main__ import func_3', number = 100000))
+print(timeit('func_4()', setup='from __main__ import func_4', number = 100000))
+
+'''
+0.24944091599999998
+0.279151134
+0.532375144
+0.22307405199999986
+
+Функция func_4 самая быстрая
+функция func_3 катастрофически медленная
+'''
