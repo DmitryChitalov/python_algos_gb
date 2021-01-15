@@ -9,3 +9,23 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_elem(number, res=1, summ=1):
+    if number < 2:
+        return summ
+    else:
+        number -= 1
+        res = res / -2
+        summ = summ + res
+        return sum_elem(number, res, summ)
+
+
+try:
+    numbers = int(input('Введите количество элементов: '))
+    if numbers == 0:
+        print('Сколько элементов такая и сумма)))')
+    else:
+        print(f'Количество элементов - {numbers}, их сумма - {sum_elem(numbers)}')
+except ValueError:
+    print('Вы ввели не число. Исправтесь')

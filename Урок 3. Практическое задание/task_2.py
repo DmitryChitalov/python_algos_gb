@@ -15,3 +15,34 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+
+
+def make_hash(salt, password):
+    hash_obj_salt = hashlib.sha3_256(salt.encode())
+    hex_result_salt = hash_obj_salt.hexdigest()
+    hash_obj_psw = hashlib.sha3_256(password.encode())
+    hex_result_psw = hash_obj_psw.hexdigest()
+    hex_result = hex_result_salt + hex_result_psw
+    return hex_result
+
+
+user_name = input('Введите login: ')
+user_password = input('Введите пароль: ')
+result = make_hash(user_name, user_password)
+print(f'В базе данных хранится строка: {result}')
+
+with open('file_hash.txt', 'w', encoding='utf8') as f:
+    f.write(result)
+
+user_name = input('Введите еще раз login: ')
+user_password = input('Введите еще раз пароль: ')
+result = make_hash(user_name, user_password)
+
+with open('file_hash.txt', 'r', encoding='utf8') as f:
+    pswd = f.read()
+
+if result == pswd:
+    print('Доступ разрешен')
+else:
+    print('Что-то пошло не так')
