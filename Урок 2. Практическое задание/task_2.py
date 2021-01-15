@@ -16,3 +16,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def recurs_counter(num):
+    if not num:
+        return [0, 0]
+    else:
+        new_num = num // 10
+        com = num % 10
+        if com % 2:
+            md, nmd = 0, 1
+        else:
+            md, nmd = 1, 0
+        return [x + y for x, y in zip([md, nmd], recurs_counter(new_num))]
+
+
+if __name__ == '__main__':
+    lst = recurs_counter(123)
+    print(f'Количество четных: {lst[0]}')
+    print(f'Количество нечетных: {lst[1]}')
+
+

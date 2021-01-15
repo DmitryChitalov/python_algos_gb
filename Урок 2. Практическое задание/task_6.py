@@ -9,3 +9,42 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+
+def guess():
+    """
+    Использованы "глобальные" переменные, которые видны всем рукурсивно вызываемым функциям
+    """
+    num = randint(0, 100)
+    cnt = 10
+
+    def rec_guess():
+        nonlocal num, cnt
+        if not cnt:
+            print(f"Число не отгадано, число было: {num}")
+            return
+
+        try:
+            x = int(input('Введите число от 0 до 100: '))
+        except ValueError:
+            print('Введите число правильно!')
+            rec_guess()
+            return
+
+        if x < num:
+            print('Введенное число меньше отгадываемого')
+            cnt -= 1
+        elif x > num:
+            print('Введенное число больше отгадываемого')
+            cnt -= 1
+        else:
+            print('Число отгадано, поздравляем!')
+            return
+        rec_guess()
+
+    rec_guess()
+
+
+if __name__ == '__main__':
+    guess()
