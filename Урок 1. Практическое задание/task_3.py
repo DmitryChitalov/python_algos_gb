@@ -2,7 +2,7 @@
 Задание 3.
 
 Для этой задачи:
-1) придумайте 1-3 решения (желательно хотя бы два)
+1) придумайте 2-3 решения (желательно хотя бы два)
 2) оцените сложность каждого решения в нотации О-большое
 3) сделайте вывод, какое решение эффективнее и почему
 
@@ -14,7 +14,6 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 
-
 Сама задача:
 Имеется хранилище с информацией о компаниях: название и годовая прибыль.
 Для реализации хранилища можно применить любой подход,
@@ -22,3 +21,55 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+from random import randint
+
+
+def three_max1(in_dict):  # Решение 1 O(n^2)
+    res = {}  # O(1)
+    d = in_dict.copy()  # O(n)
+    while len(res) < 3:  # O(1)
+        m = None  # O(1)
+        for key, val in d.items():  # O(n)
+            if m is None:  # O(1)
+                m = key  # O(1)
+            for key1, val1 in d.items():  # O(n)
+                if val > val1 and val > d[m]:  # O(1)
+                    m = key  # O(1)
+        res[m] = d.pop(m)  # O(1)
+    return res  # O(1)
+
+
+def three_max2(in_dict):  # Решение 2 O(n log n)
+    res = {}  # O(1)
+    d = in_dict.copy()  # O(n)
+    res = {k: v for k, v in sorted(d.items(), key=lambda item: item[1])[-3:]}  # O(n log n)
+    return res  # O(1)
+
+
+def three_max3(in_dict):  # Решение 3 O(n)
+    res = {}  # O(1)
+    d = in_dict.copy()  # O(n)
+    while len(res) < 3:  # O(1)
+        m = None  # O(1)
+        for key, val in d.items():  # O(n)
+            if m is None:  # O(1)
+                m = key  # O(1)
+            if val > d[m]:  # O(1)
+                m = key  # O(1)
+        res[m] = d.pop(m)  # O(1)
+    return res  # O(1)
+
+
+"""
+Вывод: 3-е решение three_max3 лучшее из трех, т.к. при увеличении количества компаний (входные данные) сложность
+алгоритма возрастает линейно, а не квадратично или логарифмично, как в первом и втором варианте.
+С другой стороны, второй вариант короче, компактнее, но сложность, в данный момент, имеет больший приоритет, т.ч.
+однозначно вариант три.
+"""
+
+
+companies = {f'company_{n}': yp for n, yp in enumerate([randint(-1000, 100000000) for i in range(100)])}
+print(three_max1(companies))
+print(three_max2(companies))
+print(three_max3(companies))
