@@ -26,6 +26,7 @@ from random import randint
 from math import log
 
 
+
 @profile
 def simple(i):
     """Без использования «Решета Эратосфена»"""
