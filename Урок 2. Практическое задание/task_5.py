@@ -18,3 +18,29 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def print_chr(begin=32, end=127):
+    """
+    Функция рекурсивно выводит коды символов от стартового значения begin до конечного значения end
+    Каждая рекурсивно вызываемая функция имеет доступ к "глобальному" счетчику
+    """
+    cnt = begin
+    shift = cnt % 10
+
+    def print_char():
+        nonlocal cnt, shift
+        print(f'{cnt} - {chr(cnt)}', end=' ')
+        if cnt == end:
+            return
+        else:
+            cnt += 1
+        if not (cnt - shift) % 10 and cnt != begin:
+            print()
+        return print_char()
+
+    print_char()
+
+
+if __name__ == '__main__':
+    print_chr()

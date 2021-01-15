@@ -6,3 +6,26 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def main_check(n):
+    """
+    Сравнение левой и правой части
+    """
+    def rec_check(n_par):
+        """
+        Рекурсивное вычисление левой части
+        """
+        if not n_par:
+            return 0
+        else:
+            return n_par + rec_check(n_par-1)
+
+    if rec_check(n) == n*(n+1)/2:
+        return True
+    else:
+        return False
+
+
+if __name__ == '__main__':
+    print(main_check(100))
