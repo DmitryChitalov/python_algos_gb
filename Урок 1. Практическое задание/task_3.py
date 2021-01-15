@@ -22,3 +22,45 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+import operator
+
+"""
+Задача, к сожалению не доделана в силу дефецита времени, 
+но так мне понравилось элеганное первое решение, что не смог не запостить.
+"""
+
+company_dict = {'Kopor': 1033,
+                'Kirish': 800,
+                'SZt': 870,
+                'PskG': 0,
+                'Kal_TES': 900,
+                'Kilingi-Nim': 640}
+
+"""
+Хороший вариант, чёткий, по питоновски.
+Сложность, за счёт sorted, O(n log n)
+"""
+
+
+def top_comp_1(company_dict):  # O(n log n)
+    return sorted(company_dict.items(), key=operator.itemgetter(1), reverse=True)[:3]
+
+
+"""
+Плохой вариант, не доделаный потому что.
+А недоделанный, потому что плохой.
+"""
+
+
+def top_comp_2(company_dict):
+    values = company_dict.values()
+    top_company = []
+    top_list = sorted(company_dict.values(), reverse=True)
+    top_list_3 = top_list[:3]
+    for el in top_list_3:
+        return 'aaaaa, my brain'
+
+
+print(top_comp_1(company_dict))
+# print(top_comp_2(company_dict))
