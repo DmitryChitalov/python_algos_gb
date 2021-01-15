@@ -76,4 +76,6 @@ Line #    Mem usage    Increment  Occurences   Line Contents
 
 еще была мысль сделать  рекурсивный счетчик на базе getsizeof, но там простого решения явно не получалось.
 
+
+Win10x64, Python 3.9.0
 """
