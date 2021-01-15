@@ -62,7 +62,12 @@ def check_3(lst_obj):
     lst_copy = list(lst_obj)                 # O(n)
     lst_copy.sort()                          # O(n log n)
     for i in range(len(lst_obj) - 1):        # O(n)
-        if lst_copy[i] == lst_copy[i+1]:     # O(n)
+        if lst_copy[i] == lst_copy[i+1]:     # O(1)
+            """
+            Дмитрий, я исправил свою ошибку в строке выше (для if), установил константную сложность, вместо линейной.
+            Однако, чтобы уточнить суть, в Алгоритме 1 (выше) для конструкции if у нас получилась линейная сложность
+            за счет обхода in?
+            """
             return False                     # O(1)
     return True                              # O(1)
 

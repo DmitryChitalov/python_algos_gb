@@ -47,20 +47,43 @@ def top_comp_1(company_dict):  # O(n log n)
     return sorted(company_dict.items(), key=operator.itemgetter(1), reverse=True)[:3]
 
 
-"""
-Плохой вариант, не доделаный потому что.
-А недоделанный, потому что плохой.
-"""
-
-
-def top_comp_2(company_dict):
-    values = company_dict.values()
-    top_company = []
-    top_list = sorted(company_dict.values(), reverse=True)
-    top_list_3 = top_list[:3]
-    for el in top_list_3:
-        return 'aaaaa, my brain'
-
-
 print(top_comp_1(company_dict))
-# print(top_comp_2(company_dict))
+
+"""
+Вариант — O(N^2) — квадратичная сложность
+"""
+
+def top_comp_2(comp_dict):
+    for i in range(len(comp_dict)):
+        lowest_value_index = i
+        for j in range(i + 1, len(comp_dict)):
+            if comp_dict[j][1] > comp_dict[lowest_value_index][1]:
+                lowest_value_index = j
+        comp_dict[i], comp_dict[lowest_value_index] = comp_dict[lowest_value_index], comp_dict[i]
+    return comp_dict[0:3]
+
+
+list_from_comp_dict = list(company_dict.items())
+highest_value = {}
+for i in top_comp_2(list_from_comp_dict):
+    print(i[0], ':', i[1], end='; ')
+
+print()
+
+
+"""
+Вариант — O(N) — линейная сложность
+The winner is — top_comp_3 func!
+"""
+
+def top_comp_3(comp_dict):
+    highest_value = {}
+    list_comp = dict(comp_dict)
+    for i in range (3):
+        find_highest = max(list_comp.items(), key=lambda value: value[1])
+        del list_comp[find_highest[0]]
+        highest_value[find_highest[0]] = find_highest[1]
+    return highest_value
+
+
+print(top_comp_3(company_dict))
