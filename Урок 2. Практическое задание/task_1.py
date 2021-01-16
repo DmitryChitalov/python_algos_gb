@@ -28,3 +28,38 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def calc():
+    operation = str(input('Введите операцию (+, -, *, / или 0 для выхода): '))
+    if operation == '0':
+        return "Вы вышли из программы"
+    if not (operation == '+' or operation == '-' or operation == '*' or operation == '/' or operation == '0') == True:
+        while not (operation == '+' or operation == '-' or operation == '*' or operation == '/' or operation == '0') == True:
+            operation = input('Ошибка. Введите операцию (+, -, *, / или 0 для выхода): ')
+    a = input('Введите первое число: ')
+    a_check = a.isdigit()
+    if a_check != True:
+        while a_check != True:
+            a = input('Вместо числа вы ввели строку. Введите первое число: ')
+            a_check = a.isdigit()
+    a = int(a)
+    b = input('Введите второе число: ')
+    b_check = b.isdigit()
+    if b_check != True:
+        while b_check != True:
+            b = input('Вместо числа вы ввели строку. Введите второе число: ')
+            b_check = b.isdigit()
+    b = int(b)
+    if operation == '+':
+        print(a + b)
+        return calc()
+    if operation == '*':
+        print(a * b)
+        return calc()
+    if operation == '-':
+        print(a - b)
+        return calc()
+    if operation == '/':
+        print(a / b)
+        return calc()
+
+calc()
