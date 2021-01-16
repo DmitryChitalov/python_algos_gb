@@ -13,3 +13,119 @@
 ВНИМАНИЕ: ЗАДАНИЯ, В КОТОРЫХ БУДУТ ГОЛЫЕ ЦИФРЫ ЗАМЕРОВ (БЕЗ АНАЛИТИКИ)
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 """
+
+from memory_profiler import profile, memory_usage
+
+"""Сравним функции наполнения списка и словаря элементами"""
+
+
+@profile
+def list_add(n, new_list):
+    for i in range(n):
+        new_list.append(i)
+
+
+"""
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    22     16.0 MiB     16.0 MiB           1   @profile
+    23                                         def list_add(n, new_list):
+    24     17.0 MiB      0.0 MiB       50001       for i in range(n):
+    25     17.0 MiB      1.0 MiB       50000           new_list.append(i)"""
+
+
+@profile
+def dict_add(n, new_dict):
+    for i in range(n):
+        new_dict[i] = i
+
+
+"""Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    37     17.0 MiB     17.0 MiB           1   @profile
+    38                                         def dict_add(n, new_dict):
+    39     19.3 MiB      0.0 MiB       50001       for i in range(n):
+    40     19.3 MiB      2.2 MiB       50000           new_dict[i] = i"""
+
+"""Инкримент при наполнении списка 1 Mib, а при наполнении словаря 2.2 Mib
+Соответственно для экономии памяти эффективнее использовать список, чем словарь"""
+"""Попробуем воспользоваться генераторным выражением для списка"""
+
+
+@profile
+def list_add_2(n):
+    return [i for i in range(n)]
+
+
+"""Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    55     19.3 MiB     19.3 MiB           1   @profile
+    56                                         def list_add_2(n):
+    57     20.3 MiB      1.0 MiB       50003       return [i for i in range(n)]
+    
+    Инкримент не изменился, значит генераторное выражение не экономит память
+    Вывод: списки более экономные для памяти, чем словари. Для экономии памяти 
+    можно использовать генераторы. Сравним. При заполнении через цикл потратилось 1.06640625
+    При заполнении через генератор 0. Память не использовалась т.к. массив генерируется только по вызову. Возможно
+    в этом нет смысла в данной задаче, но при других задачах это может быть выгодно. Например, если необходимо 
+    сгенерировать список из чисел кратных 5, памяти затратится меньше, чем при простом цикле"""
+
+
+def list_add_3(n):
+    yield [i for i in range(n)]
+
+
+my_list = []
+my_dict = {}
+my_list_2 = []
+list_add(50000, my_list)
+dict_add(50000, my_dict)
+a = list_add_2(50000)
+
+m1 = memory_usage()
+list_add(50000, my_list_2)
+m2 = memory_usage()
+print(m2[0] - m1[0])
+
+m3 = memory_usage()
+my_list_3 = list_add_3(50000)
+m4 = memory_usage()
+print(m4[0] - m3[0])
+
+"""Потренерумся на другой задаче из старых домашних заданий."""
+"""3. Реализовать функцию my_func(),
+ которая принимает три позиционных аргумента, и возвращает сумму наибольших двух аргументов."""
+
+
+@profile
+def my_func(x, y):
+    degree = 1
+    result = 1 / x
+    while degree < abs(y):
+        result = result * (1 / x)
+        degree += 1
+    return result
+
+
+"""Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+   100     21.3 MiB     21.3 MiB           1   @profile
+   101                                         def my_func(x, y):
+   102     21.3 MiB      0.0 MiB           1       degree = 1
+   103     21.3 MiB      0.0 MiB           1       result = 1 / x
+   104     21.3 MiB      0.0 MiB           3       while degree < abs(y):
+   105     21.3 MiB      0.0 MiB           2           result = result * (1 / x)
+   106     21.3 MiB      0.0 MiB           2           degree += 1
+   107     21.3 MiB      0.0 MiB           1       return result
+"""
+"""Как мы видим инкрименты равно нулю, что и было ожидаемо в таком маленьком скрипте без массивов
+Вывод: для экономии памяти данный скрипт не требует оптимизации"""
+print(my_func(12, -3))
+
+
+
+
+
+
+
+
