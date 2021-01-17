@@ -27,3 +27,108 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+def authentication_func(login:str, password:str, base:list) -> bool:
+    '''
+    Вариант 1 - Сложность O(N)
+
+    Функция принимает на вход 3 параметра:
+    - логин пользователя
+    - пароль пользователя
+    список словарей, содержащих информацию о пользователе
+    Алгоритм работы функции:
+    1) Проверка словарей с информацией о пользователе на соответствие
+    параметра login значению словаря с ключом 'login'.
+    2) Если нужное значение найдено, в словаре, содержащем это значение,
+    функция проверяет соответствие параметра password значению поля по ключу
+    'password'. Если значение не верное, функция возвращает False
+    3) Если пароль правильный, функция проверяет значение по ключу
+    'is_active', и если оно == False, предлагает активировать учетную запись,
+    - в случае согласия меняет значение по ключу 'is_active' на True и
+    возвращает True,
+    - в случае отказа возвращает False
+    4) Если значение по ключу 'is_active' = True, функция возвращает True
+    5) Если в списке словарей не найден словарь, у которого значение по
+    ключу login == параметру login, функция возвращает False
+    '''
+    for user_dict in base:                                              # O(N)
+        if user_dict['login'] == login.lower():                         # O(1)
+            if user_dict['password'] != password:                       # O(1)
+                print('Неверный пароль')                                # O(1)
+                return False                                            # O(1)
+            is_active = user_dict['is_active']                          # O(1)
+            if not is_active:                                           # O(1)
+                print('Необходимо активировать аккаунт')                # O(1)
+                activation = input('Введите "Y" чтобы активировать: ')  # O(1)
+                if activation.upper() != 'Y':                           # O(1)
+                    print('Аккаунт не активирован')                     # O(1)
+                    return False                                        # O(1)
+                user_dict['is_active'] = True                           # O(1)
+                print('Аккаунт активирован')                            # O(1)
+            print('Аутентификация пройдена')
+            return True                                                 # O(1)
+
+    print('Неверное имя пользователя')
+    return False                                                        # O(1)
+
+
+def authentication_func_2(login: str, password: str, base: list) -> bool:
+    '''
+    Вариант 1 - Сложность O(N)
+
+    Функция принимает на вход 3 параметра:
+    - логин пользователя
+    - пароль пользователя
+    список словарей, содержащих информацию о пользователе
+    Алгоритм работы функции:
+    1) Проверка словарей с информацией о пользователе на соответствие
+    параметра login значению словаря с ключом 'login'.
+    2) Если нужное значение найдено, в словаре, содержащем это значение,
+    функция проверяет соответствие параметра password значению поля по ключу
+    'password'. Если значение не верное, функция возвращает False
+    3) Если пароль правильный, функция проверяет значение по ключу
+    'is_active', и если оно == False, предлагает активировать учетную запись,
+    - в случае согласия меняет значение по ключу 'is_active' на True и
+    возвращает True,
+    - в случае отказа возвращает False
+    4) Если значение по ключу 'is_active' = True, функция возвращает True
+    5) Если в списке словарей не найден словарь, у которого значение по
+    ключу login == параметру login, функция возвращает False
+    '''
+    for user_dict in base:  # O(N)
+        if user_dict['login'] == login.lower():  # O(1)
+            if user_dict['password'] != password:  # O(1)
+                print('Неверный пароль')  # O(1)
+                return False  # O(1)
+            is_active = user_dict['is_active']  # O(1)
+            if not is_active:  # O(1)
+                print('Необходимо активировать аккаунт')  # O(1)
+                activation = input('Введите "Y" чтобы активировать: ')  # O(1)
+                if activation.upper() != 'Y':  # O(1)
+                    print('Аккаунт не активирован')  # O(1)
+                    return False  # O(1)
+                user_dict['is_active'] = True  # O(1)
+                print('Аккаунт активирован')  # O(1)
+            print('Аутентификация пройдена')
+            return True  # O(1)
+
+    print('Неверное имя пользователя')
+    return False  # O(1)
+
+
+users_list = [
+    {'login': 'anna', 'password': 'key', 'is_active': True},
+    {'login': 'second', 'password': 'qwertY', 'is_active': False},
+    {'login': 'japan', 'password': 'tokyo', 'is_active': True},
+    {'login': 'xiaomi', 'password': 'redmi note IV', 'is_active': False}
+]
+
+# login_input = input('Имя пользователя: ')
+# password_input = input('Пароль: ')
+# authentication_func(login_input, password_input, users_list)
+
+authentication_func('anna', 'wrong', users_list)
+authentication_func('japan', 'tokyo', users_list)
+authentication_func('second', 'qwertY', users_list)
+
