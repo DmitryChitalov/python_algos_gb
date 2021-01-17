@@ -17,3 +17,26 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+import random
+
+
+# Первый алгоритм
+def min1(lst):
+    minimum = lst[0]
+
+    for i in lst:
+        if i < minimum:
+            minimum = i
+    return minimum
+
+
+# Второй алгоритм
+def min2(lst):
+    return min(lst)
+
+
+my_list = [random.randint(-1000, 1000) for a in range(random.randint(10, 100))]
+
+min1(my_list)
+min2(my_list)
