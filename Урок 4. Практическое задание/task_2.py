@@ -11,6 +11,11 @@
 Если у вас есть идеи, предложите вариант оптимизации.
 """
 
+#  проводила замеры много раз, получается, что решение через мемоизацию наиболее оптимальное по времени
+#  также я привела решение, которое оптимальней чем первый вариант, но не оптимальней мемоизации,
+#  однако решение самое компактное по количеству строк кода
+
+
 from timeit import timeit
 from random import randint
 
@@ -78,4 +83,26 @@ print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
+        number=10000))
+
+
+def revers_num(num):
+    return int(str(num)[::-1])
+
+
+print('Оптимизированная функция revers_num')
+print(
+    timeit(
+        'revers_num(num_100)',
+        setup='from __main__ import revers_num, num_100',
+        number=10000))
+print(
+    timeit(
+        'revers_num(num_1000)',
+        setup='from __main__ import revers_num, num_1000',
+        number=10000))
+print(
+    timeit(
+        'revers_num(num_10000)',
+        setup='from __main__ import revers_num, num_10000',
         number=10000))

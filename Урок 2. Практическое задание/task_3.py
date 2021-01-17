@@ -15,3 +15,15 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def change_num(num, lst):
+    last = num % 10
+    if last == 0:
+        print('Перевернутое число:', lst)
+    else:
+        lst = str(lst) + str(last)
+        change_num(num // 10, lst)
+
+
+change_num(int(input('Введите число, которое хотите перевернуть: ')), '')
