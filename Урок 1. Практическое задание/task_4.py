@@ -6,6 +6,7 @@ users = {'Vasya': {'password': '45umaU', 'active': True},
 
 """ Решение1, линейная сложность"""
 
+
 def authentication_1(name, password):
     for key, value in users.items():
         if key == name:
