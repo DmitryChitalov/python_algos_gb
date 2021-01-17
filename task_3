@@ -1,0 +1,85 @@
+"""
+Задача 3.
+В соответствии с документацией Python,
+deque – это обобщение стеков и очередей.
+Вот основное правило: если вам нужно что-то быстро дописать или вытащить, используйте deque.
+Если вам нужен быстрый случайный доступ, используйте list.
+
+Задача: создайте простой список (list) и очередь (deque).
+Выполните различные операции с каждым из объектов.
+Сделайте замеры и оцените, насколько информация в документации
+соответствует дейстивтельности.
+"""
+from random import randint
+from collections import deque
+from timeit import timeit
+
+test_list = [randint(1, 100) for i in range(1, 20)]
+test_deque = deque(test_list)
+
+
+def list_func_1(lst):
+    list_1 = []
+    for i in range(len(lst)):
+        list_1.append(lst[i] ** 2)
+    return list_1
+
+
+def list_func_2(lst):
+    list_2 = []
+    for i in range(len(lst)):
+        list_2.remove(lst[0])
+        return list_2
+
+
+def list_func_3(lst):
+    list_3 = []
+    for i in range(len(lst)):
+        list_3.insert(1, lst[i])
+        return list_3
+
+
+print('Замер по list:')
+print(timeit("list_func_1", setup="from __main__ import list_func_1", number=10000000))
+print(timeit("list_func_2", setup="from __main__ import list_func_2", number=10000000))
+print(timeit("list_func_3", setup="from __main__ import list_func_3", number=10000000))
+
+
+def deque_func_1(deq):
+    deque_1 = []
+    for i in range(len(deq)):
+        deque_1.append(deq[i] ** 2)
+    return deque_1
+
+
+def deque_func_2(deq):
+    deque_2 = []
+    for i in range(len(deq)):
+        deque_2.remove(deq[0])
+        return deque_2
+
+
+def deque_func_3(deq):
+    deque_3 = []
+    for i in range(len(deq)):
+        deque_3.appendleft(1, deq[i])
+        return deque_3
+
+
+print('Замер по deque:')
+print(timeit("deque_func_1", setup="from __main__ import deque_func_1", number=10000000))
+print(timeit("deque_func_2", setup="from __main__ import deque_func_2", number=10000000))
+print(timeit("deque_func_3", setup="from __main__ import deque_func_3", number=10000000))
+'''
+Документация соотвествует действительности
+Замер по list:
+0.1192976
+0.11881860000000002
+0.1308937
+Замер по deque:
+0.11775230000000003
+0.11467519999999998
+0.11493150000000008
+
+Производительность deque постоянна O(1),  в то время как списки имеют производительность O(n)
+'''

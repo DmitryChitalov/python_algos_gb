@@ -1,0 +1,80 @@
+"""
+Задача 4.
+Поработайте с обычным словарем и OrderedDict.
+Выполните различные операции с каждым из объектов и сделайте замеры.
+Опишите полученные результаты, сделайте выводы.
+"""
+from timeit import timeit
+from collections import OrderedDict
+
+test_dict = {str(i): i for i in range(100)}
+test_ord_dict = OrderedDict({str(i): i for i in range(100)})
+
+
+def func_dict_1(el):
+    dict_1 = dict()
+    for i in range(el):
+        dict_1[str(i)] = i
+    return dict_1
+
+
+def func_dict_2(current_dict):
+    return sorted(current_dict.items(), key=lambda item: item[1])
+
+
+def func_dict_3(current_dict):
+    return current_dict.values()
+
+
+def func_dict_4(current_dict):
+    list_keys = list(current_dict.keys())
+    list_keys.sort(key='6'.__eq__)
+
+
+print('Замер по обычному словарю:')
+print(timeit("func_dict_1", setup="from __main__ import func_dict_1", number=10000000))
+print(timeit("func_dict_2", setup="from __main__ import func_dict_2", number=10000000))
+print(timeit("func_dict_3", setup="from __main__ import func_dict_3", number=10000000))
+print(timeit("func_dict_4", setup="from __main__ import func_dict_4", number=10000000))
+
+
+def func_ord_dict_1(el):
+    dict_1 = OrderedDict()
+    for i in range(el):
+        dict_1[str(i)] = i
+    return dict_1
+
+
+def func_ord_dict_2(current_ord_dict):
+    return sorted(current_ord_dict.items(), key=lambda item: item[1])
+
+
+def func_ord_dict_3(current_ord_dict):
+    return current_ord_dict.values()
+
+
+def func_ord_dict_4(current_ord_dict):
+    return current_ord_dict.move_to_end(key='6')
+
+
+print('Замер по OrderedDict:')
+print(timeit("func_ord_dict_1", setup="from __main__ import func_ord_dict_1", number=10000000))
+print(timeit("func_ord_dict_2", setup="from __main__ import func_ord_dict_2", number=10000000))
+print(timeit("func_ord_dict_3", setup="from __main__ import func_ord_dict_3", number=10000000))
+print(timeit("func_ord_dict_4", setup="from __main__ import func_ord_dict_4", number=10000000))
+
+'''
+Замер по обычному словарю:
+0.1240809
+0.11442499999999997
+0.11339389999999999
+0.12608290000000005
+Замер по OrderedDict:
+0.1267108
+0.12068599999999996
+0.12221729999999997
+0.1202447000000001
+
+OrderedDict работает медленнее, поэтому лучше использовать обычный словарь. Но в каких-то задачах может применятся OrderedDict, например, при перемещении элемента в конец,
+функция move_to_end() работает быстрее, а данный метод предусмотрен только в OrderedDict
+'''

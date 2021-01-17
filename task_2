@@ -1,0 +1,60 @@
+"""
+2.	Написать программу сложения и умножения двух шестнадцатеричных чисел.
+При этом каждое число представляется как массив, элементы которого это цифры числа.
+Например, пользователь ввёл A2 и C4F. Сохранить их как [‘A’, ‘2’] и [‘C’, ‘4’, ‘F’] соответственно.
+Сумма чисел из примера: [‘C’, ‘F’, ‘1’], произведение - [‘7’, ‘C’, ‘9’, ‘F’, ‘E’].
+
+Подсказка:
+Для решения задачи обязательно примените какую-нибудь коллекцию из модуля collections
+Для лучшее освоения материала можете даже сделать несколько решений этого задания,
+применив несколько коллекций из модуля collections
+Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
+(в частности по перегрузке методов)
+"""
+from collections import defaultdict
+
+
+def get_number():
+    dict_hex = defaultdict(list)
+    dict_hex['num_1'] = list(input("Введите первое число: "))
+    dict_hex['num_2'] = list(input("Введите второе число: "))
+    return dict_hex
+
+
+def sum_hex_func(h_dict_in):
+    sum_hex = hex(int(''.join(h_dict_in['num_1']), 16) + \
+                  int(''.join(h_dict_in['num_2']), 16)).upper()
+    return list(sum_hex[2:])
+
+
+def mult_hex_func(h_dict_in):
+    mult_hex = hex(int(''.join(h_dict_in['num_1']), 16) * \
+                   int(''.join(h_dict_in['num_2']), 16)).upper()
+    return list(mult_hex[2:])
+
+
+num_hex = get_number()
+print(f'Сумма двух шестнадцатеричных чисел: {sum_hex_func(num_hex)}')
+print(f'Произведение двух шестнадцатеричных чисел: {mult_hex_func(num_hex)}')
+
+
+# ОПП
+
+class HexNumber:
+    def __init__(self, num_1, num_2):
+        self.num_1 = int(''.join(num_1), 16)
+        self.num_2 = int(''.join(num_2), 16)
+
+    def sum_hex_func(self):
+        return list(str(hex(self.num_1 + self.num_2)[2:]).upper())
+
+    def mult_hex_func(self):
+        return list(str(hex(self.num_1 * self.num_2)[2:]).upper())
+
+
+number = HexNumber(
+    num_1=input("Введите первое число: "),
+    num_2=input("Введите второе число: ")
+)
+print(f'Сумма двух шестнадцатеричных чисел: {number.sum_hex_func()}')
+print(f'Произведение двух шестнадцатеричных чисел: {number.mult_hex_func()}')
