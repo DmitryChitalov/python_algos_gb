@@ -13,3 +13,26 @@
 arr[m]
 from statistics import median
 """
+
+from random import randint
+
+m = 5
+arr = [randint(0, 100) for _ in range(2 * m + 1)]
+print(f'Неотсортированный массив: {arr}')
+
+
+def gnome(array):
+    data = array
+    i = 1
+    while i < len(data):
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return data
+
+
+print(f'Отсортированный массив: {gnome(arr)}')
+print(f'Медиана: {arr[m]}')
