@@ -2,6 +2,7 @@
 
 
 def get_key(company_income, value):
+    
     for k, v in company_income.items():
         if v == value:
             return k
