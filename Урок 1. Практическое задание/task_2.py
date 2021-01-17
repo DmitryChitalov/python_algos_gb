@@ -31,6 +31,7 @@ def search_min_var_2(input_list):
     min_number = min(input_list)
     return min_number
 
+
 my_list = [4, 8, 15, 16, 23, 42]
 print(search_min(my_list))
 print(search_min_var_2(my_list))
