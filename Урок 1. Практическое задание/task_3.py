@@ -22,3 +22,34 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+import random
+
+companies = {f'Company {i}': random.randrange(- 100000, 100000) for i in range(10)}
+print(companies)
+
+# Вариант 1
+
+sort_companies = sorted(companies, key=companies.get, reverse=True)[:3] # O(n log n)
+for i, el in enumerate(sort_companies): # O(n)
+    print(f'{i+1}) {el} прибыль: {companies.get(el)}') # O(1) + O(1) + O(1)
+
+
+# Вариант 2
+
+top3_list = [] #O(1)
+copy_companies = companies #O(1)
+for i in range(3): #O(n)
+    get_max = max(copy_companies, key=copy_companies.get) #O(n)
+    top3_list.append([get_max, copy_companies.get(get_max)]) #O(1)
+    copy_companies.pop(get_max) #O(1)
+
+print(top3_list)
+
+"""
+Вывод: 
+Сложность варианта 1: O(n log n)
+Сложность варианта 2: O(n)
+Судя по общей сложности вариант 1 менее эффективен, чем вариант 2. 
+Но по решению он мне нравится больше =)
+
+"""
