@@ -8,4 +8,21 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+
+Ряд строить программно - в самой же рекурсивной ф-ции
+или даже обойтисть без создания ряда
+
+Элемент в 2 раза меньше предыд и имеет противопол знак
 """
+
+def sum_count(i, number, numbers_qty, sum_of_numbers):
+    if i == numbers_qty:
+        print(f'Количество чисел - {numbers_qty}, сумма чисел - {sum_of_numbers}')
+    elif i < numbers_qty:
+        return sum_count(i + 1, number / 2 * -1, numbers_qty, sum_of_numbers + number)
+
+try:
+    qty = int(input('Введите количество чисел в ряду: '))
+    sum_count(0, 1, qty, 0)
+except ValueError:
+    print('Введите число')
