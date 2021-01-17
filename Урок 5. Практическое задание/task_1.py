@@ -49,5 +49,6 @@ for key, value in profit.items():
         upavg_profit += key + ' '
     else:
         lowavg_profit += key + ' '
+print(f'Средняя годовая прибыль всех предприятий: {avgprofit}')
 print(f'Предприятия, с прибылью выше среднего значения: {upavg_profit}')
 print(f'Предприятия, с прибылью ниже среднего значения: {lowavg_profit}')
