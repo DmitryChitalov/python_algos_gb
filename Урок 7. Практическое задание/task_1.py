@@ -12,3 +12,60 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+import random
+from timeit import timeit
+my_list = [random.randint(-100,100) for _ in range(10)]
+print("Исходный массив: ", my_list)
+
+def bubble_sort_original(lst : list):
+    length = len(lst) - 1
+    for i in range(length):
+        for j in range(length - i):
+            if lst[j] < lst[j+1]:
+                lst[j+1], lst[j] = lst[j] , lst[j+1]
+    return lst
+
+def bubble_sort_advanced(lst : list):
+    l = len(lst) - 1
+    start = 0
+    end = l
+    is_sorted = True
+    while is_sorted == True:
+        is_sorted = False
+        for j in range(start, end):
+            if lst[j] < lst[j+1]:
+                lst[j+1], lst[j] = lst[j] , lst[j+1]
+                is_sorted = True
+        if is_sorted == False:
+            break
+        end = end - 1
+        for j in range(end - 1, start - 1 , -1):
+            if lst[j] < lst[j+1]:
+                lst[j+1], lst[j] = lst[j] , lst[j+1]
+                is_sorted = True
+        start = start + 1
+    return lst
+
+print("Отсортированный массив(по умолчанию): ", bubble_sort_original(my_list[:]))
+print("Отсортированный массив(улучшеный): ", bubble_sort_advanced(my_list[:]))
+
+print("Сортировка пузырьком по умолчанию: ", timeit("bubble_sort_original(my_list[:])",
+setup = "from __main__ import bubble_sort_original, my_list",number = 10000))
+
+print("Сортировка шейкерная: ", timeit("bubble_sort_advanced(my_list[:])",
+setup = "from __main__ import bubble_sort_advanced, my_list",number = 10000))
+
+"""Результат работы программы:
+Исходный массив:  [-67, 42, 79, 100, 66, 72, -66, 44, 22, -41]
+Отсортированный массив(по умолчанию):  [100, 79, 72, 66, 44, 42, 22, -41, -66, -67]
+Отсортированный массив(улучшеный):  [100, 79, 72, 66, 44, 42, 22, -41, -66, -67]
+Сортировка пузырьком по умолчанию:  0.16990260399999998
+Сортировка шейкерная:  0.13433141399999998
+
+Вывод: мной была реализована сортировка пузырьком(по умолчанию),
+и сортировка шейкерная. Насколько я понимаю суть шейкерной сортировки в том, что мы делаем два прохода:
+от начала в конец, и из конца в начало. Благодаря этому мы сдвигаем минимальный элемент в конец(при проходе из начала в конец)
+, а максимальный элемент - в начало (при проходе из конца в начало) (Если сортируем по убыванию). После этого мы сужаем
+рабочий диапазон сортировки(т.к минимальный элемент уже в конце, а максимальный - в начале). 
+В итоге шейкерная сортировка оказалась немного быстрее.
+"""
