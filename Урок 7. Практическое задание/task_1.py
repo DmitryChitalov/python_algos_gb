@@ -50,13 +50,15 @@ print(bubble_sort_2(numbers))
 print(timeit('bubble_sort(numbers[:])', setup='from __main__ import bubble_sort, numbers', number=10000))
 print(timeit('bubble_sort_2(numbers[:])', setup='from __main__ import bubble_sort_2, numbers', number=10000))
 
-
 sorted_arr = bubble_sort(numbers)
 
 print(timeit('bubble_sort(sorted_arr[:])', setup='from __main__ import bubble_sort, sorted_arr', number=10000))
 print(timeit('bubble_sort_2(sorted_arr[:])', setup='from __main__ import bubble_sort_2, sorted_arr', number=10000))
 
-""" Проведем замеры на неотсортированном массиве:
+""" Улучшили функцию сортировки. Теперь (как в совете сверху) если за проход по списку не совершается ни одной сортировки,
+то происходит завершение.
+
+Проведем замеры на неотсортированном массиве:
 Первый запуск:
 Исходный массив: [49, 94, 95, 18, -27, -70, 48, -12, 94, 21, -57, 6, 8, 80, 75, 65, 47, 5, -61, 68]
 Отсортированный массив: [95, 94, 94, 80, 75, 68, 65, 49, 48, 47, 21, 18, 8, 6, 5, -12, -27, -57, -61, -70]
