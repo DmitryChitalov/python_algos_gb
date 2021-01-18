@@ -22,3 +22,30 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+# O(N), не самое эффективное решение потому что создается новый словарь и используется сортирование.
+company_info = {'Microsoft': 1250000,
+                'Apple': 1034000,
+                'Boeing': 120000,
+                'BOA': 42000,
+                'Toyota': 133000,
+                'Camry': 220000,
+                'HP': 55000,
+                'Dell': 138000,
+                'Asos': 146000,
+                'ViewSonic': 11000
+                }
+
+sorted_values = sorted(company_info.values())
+sorted_dict = {}
+
+for i in sorted_values:
+    for k in company_info.keys():
+        if company_info[k] == i:
+            sorted_dict[k] = company_info[k]
+            break
+
+new_list = list(sorted_dict.keys())[-3:]
+new_list.reverse()
+print(new_list)
+

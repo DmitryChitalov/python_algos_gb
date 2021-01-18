@@ -10,3 +10,16 @@
 Вам нужно доработать программу так, чтобы она могла выполнить проверку на палиндром
 и в таких строках (включающих пробелы)
 """
+
+# Palindrome
+def val1(str1):
+    str_new = str1.replace(' ', '')
+    print(str_new)
+    if str_new[:] == str_new[::-1]:
+        print("This is palindrome")
+    else:
+        print("Not palindrome")
+
+
+val1('молоко делили ледоколом')
+
