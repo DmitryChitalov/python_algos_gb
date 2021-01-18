@@ -27,3 +27,73 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# 1
+def auth_check1(lis, login, password):
+    exists = False
+    for i in range(len(lis)):  # O(N) далее так как аккаунты не повторяются у всех строк сложность O(1)
+        if lis[i]['login'] == login and lis[i]['password'] == password:
+            exists = True
+
+            if lis[i]['auth']:
+                print('Вход успешен.')
+
+            else:
+                answer = input('Хотите ли пройти аутентификацию? д/н ')
+
+                if answer == 'д' or answer == 'да':
+                    lis[i]['auth'] = True
+                    print('Аутентификация успешна, можете зайти в аккаунт.')
+
+                elif answer == 'н' or answer == 'нет':
+                    print('Вы не сможете зайти в аккаунт без аутентификации.')
+
+                else:
+                    print('Нет такого варианта ответа.')
+
+    if not exists:
+        print('Указаны неверные данные.')
+
+
+accounts = [
+    {'login': 'asd', 'password': 'asf', 'auth': False},
+    {'login': 'qwe', 'password': 'qwr', 'auth': True}
+]
+
+# auth_check1(accounts, input('Введите имя пользователя: '), input('Введите пароль: '))
+
+'''Общая сложность O(N), пойдёт'''
+
+
+# 2, отличается способом хранения данных
+
+def auth_check2(dct, login, password):
+    try:
+        checker = login + ' ' + password
+        if dct[checker]:  # O(1) далее O(1)
+            print('Вход успешен.')
+
+        else:
+            answer = input('Хотите ли пройти аутентификацию? д/н ')
+            if answer == 'д' or answer == 'да':
+                dct[checker] = True
+                print('Аутентификация успешна, можете зайти в аккаунт.')
+
+            elif answer == 'н' or answer == 'нет':
+                print('Вы не сможете зайти в аккаунт без аутентификации.')
+
+            else:
+                print('Нет такого варианта ответа.')
+
+    except KeyError:
+        print('Указаны неверные данные.')
+
+
+accounts_dict = {'asd asf': False, 'qwe qwr': True}  # логин и пароль разделяются пробелом при хранении
+
+auth_check1(accounts, input('Введите имя пользователя: '), input('Введите пароль: '))
+auth_check2(accounts_dict, input('Введите имя пользователя: '), input('Введите пароль: '))
+
+'''Второй способ использует другую систему хранения, проще (О(1)), выглядит более компактно, всё это засчёт словаря, 
+а не списка словарей я бы использовал его.'''
