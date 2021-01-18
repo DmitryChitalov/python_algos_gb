@@ -13,6 +13,7 @@ deque – это обобщение стеков и очередей.
 import timeit
 from collections import deque
 
+
 int_list = list(range(100))
 int_deque = deque(range(100))
 
