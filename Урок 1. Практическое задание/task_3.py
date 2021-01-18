@@ -36,15 +36,15 @@ base_company = {
     'honda': 46883
 }
 
-# O(N)
+# O(N), получается O(n^2) 43строка * 44строку???
 def max_1(list_input):
-    input_max = {}
-    list_d = dict(list_input)
-    for i in range(3):
-        maximum = max(list_d.items(), key=lambda k_v: k_v[1])
-        del list_d[maximum[0]]
-        input_max[maximum[0]] = maximum[1]
-    return input_max
+    input_max = {} # O(1)
+    list_d = dict(list_input) # O(1)
+    for i in range(3): # O(n)
+        maximum = max(list_d.items(), key=lambda k_v: k_v[1]) # O(n)
+            del list_d[maximum[0]] # O(1)
+        input_max[maximum[0]] = maximum[1] # O(1)
+    return input_max # O(1)
 
 
 print(max_1(base_сompany))
