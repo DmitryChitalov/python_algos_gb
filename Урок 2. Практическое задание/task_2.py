@@ -16,3 +16,35 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+even = []
+even_count, not_even_count = 0, 0
+not_even = []
+try:
+    user_number = int(input('Enter your number: '))
+
+
+    def task_2(number):
+        """
+            Works only with integers (int).
+        """
+        global even, not_even, even_count, not_even_count
+        if len(range(number)) == 0:
+            print(
+                f'Even numbers - {even}. Even cout - {even_count}\nNot even numbers - {not_even}. Even count - {not_even_count}')
+        else:
+            a = number % 10
+            number = number // 10
+            if a % 2 == 0:
+                even.append(a)
+                even_count += 1
+                return task_2(number)
+            else:
+                not_even.append(a)
+                not_even_count += 1
+                return task_2(number)
+except ValueError:
+    print('Data error!')
+
+
+task_2(user_number)

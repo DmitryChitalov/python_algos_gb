@@ -15,3 +15,26 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+# Дмитрий, я понимаю, что отклонился от задания, но зацените, по-моему очень элегантно получилось.
+
+def task_3():
+    """
+        Функция производит "разворот" целочисленного занчения.
+        q - exit
+    """
+    us_num = input('Your number (or "q" to exit): ')
+    if us_num.lower() == "q":
+        return 'Fin.'
+    else:
+        us_num_copy = us_num[::-1]
+        try:
+            us_num_copy_int = int(us_num_copy)
+            print(f'Your reversed number: {us_num_copy_int}')
+            return task_3()
+        except ValueError:
+            print('Data error!')
+            return task_3()
+
+
+print(task_3())
