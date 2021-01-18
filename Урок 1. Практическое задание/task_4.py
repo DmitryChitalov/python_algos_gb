@@ -2,7 +2,7 @@
 Задание 4.
 
 Для этой задачи:
-1) придумайте 1-3 решения (желательно хотя бы два)
+1) придумайте 2-3 решения (желательно хотя бы два)
 2) оцените сложность каждого решения в нотации О-большое
 3) сделайте вывод, какое решение эффективнее и почему
 
@@ -27,3 +27,50 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+accounts = {
+    'vasiliy': ['1', True],
+    'sergey': ['2', False]
+}
+
+
+# O(1)
+def authorization_1(user_name, user_password):
+    if user_name in accounts:
+        print('Пользователь найден')
+        if user_password in accounts[user_name][0] == user_password:
+            if accounts[user_name][1] is True:
+                print('Аккаунт активирован')
+            else:
+                print('Активируйте учётную запись')
+                while accounts[user_name][1] is False:
+                    a = int(input('Введите 1 для активации: '))
+                    if a == 1:
+                        accounts[user_name][1] = True
+                        print('Аккаунт активирован')
+                    else:
+                        print('Неверный код активации')
+        else:
+            print('Введён неверный пароль')
+    else:
+        print('Пользователя нет')
+
+
+# O(N) Лучше, т.к быстрее и по графику роста линия плавно и медленно поднимается вверх в отличии от O(1)
+def authorization_2(user_name, user_password):
+    for key, value in accounts.items():
+        if key == user_name:
+            if value[0] == user_password and value[True]:
+                return 'Добро пожаловать'
+            elif value[0] == user_password and value[False]:
+                return 'Активируйте учётную запись'
+            elif value[0] != user_password:
+                return 'Введён неверный пароль'
+    return 'Пользователя нет'
+
+
+user_name = input('Введите логин: ')
+user_password = input('Введите пароль: ')
+
+authorization_1(user_name, user_password)
+print(authorization_2(user_name, user_password))
