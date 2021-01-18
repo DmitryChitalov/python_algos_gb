@@ -22,3 +22,25 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+companies = {"gazprom": 100, "novatec": 50, "rosseti": 75, "lukoil": 80, "rosneft": 99, "vaz": 25, "mailru": 49, "shell": 110}
+
+
+def max_by_sort_and_del(dct):
+    dict_of_3max = {}
+    for i in range(3):
+        max_res = 0
+        keys_sample = ""
+        for key, values in dct.items():
+            if values > max_res:
+                max_res = values
+                keys_sample = key
+        dict_of_3max[i] = dct.fromkeys(keys_sample, max_res)
+        del dct[keys_sample]
+    return dict_of_3max
+
+
+dict_to_res = max_by_sort_and_del(companies)
+for key, values in dict_to_res.items():
+    print(key, values)
+

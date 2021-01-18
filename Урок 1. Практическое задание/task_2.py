@@ -17,3 +17,26 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+from random import randint
+
+
+def min_by_allcheck(lst):
+    res_min = lst[0]
+    for i in range(len(lst)):
+        for j in range(len(lst)):
+            if (lst[i] < lst[j]) and (lst[i] < res_min):
+                res_min = lst[i]
+    return res_min
+
+
+def min_by_sort(lst):
+    res_min = lst[0]
+    for i in lst:
+        if i < res_min:
+            res_min = i
+    return res_min
+
+
+lst = [i for i in range(randint(-200, -100), randint(100, 200))]
+print(min_by_allcheck(lst))
+print(min_by_sort(lst))
