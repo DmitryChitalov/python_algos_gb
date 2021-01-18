@@ -12,3 +12,42 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+from random import randint
+from timeit import timeit
+
+
+def bubble_sort():
+    """Сортировка списка методом пузырька"""
+    A = [randint(-100, 100) for i in range(15)]
+    N = len(A)
+    for bypass in range(1, N):  # не доходя до последнего элемента,
+        for k in range(0,
+                       N - bypass):  # уменьшаем количество проходов на bypass,
+            # так как элементы справа с каждым проходом становятся
+            # отсортированными (после первого прохода 1 элемент,
+            # после второго - 2 элемента и т.д.)
+            if A[k] < A[k + 1]:
+                A[k], A[k + 1] = A[k + 1], A[k]
+
+
+def bubble_sort_v2():
+    """Сортировка списка методом пузырька"""
+    A = [randint(-100, 100) for i in range(15)]
+    N = len(A)
+    for bypass in range(1, N):
+        sorts = False
+        for k in range(0, N - bypass):
+            if A[k] < A[k + 1]:
+                A[k], A[k + 1] = A[k + 1], A[k]
+                sorts = True
+        else:
+            if not sorts:  # Если сортировок не было - выход
+                return
+
+
+bubble_sort_v2()
+
+print(timeit('bubble_sort()',
+             'from __main__ import bubble_sort'))  # 27.070713899999998
+print(timeit('bubble_sort_v2()',
+             'from __main__ import bubble_sort_v2'))  # 26.0715025
