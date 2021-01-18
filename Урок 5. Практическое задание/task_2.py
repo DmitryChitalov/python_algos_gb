@@ -23,10 +23,10 @@ for i in number1:
 for i in number2:
     result[2].append(i)
 
-summ = hex(int(''.join(str(x) for x in result[1]), 16) + int(''.join(str(x) for x in result[2]), 16))
+summ = hex(int(''.join(x for x in result[1]), 16) + int(''.join(x for x in result[2]), 16))
 result['summ'] = list(str(summ)[2:].upper())
 
-mul = hex(int(''.join(str(x) for x in result[1]), 16) * int(''.join(str(x) for x in result[2]), 16))
+mul = hex(int(''.join(x for x in result[1]), 16) * int(''.join(x for x in result[2]), 16))
 result['mul'] = list(str(mul)[2:].upper())
 print(
     f'Первое число - {result[1]}\n'
