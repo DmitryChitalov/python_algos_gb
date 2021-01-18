@@ -11,9 +11,32 @@
 Сложность такого алгоритма: O(n) - линейная.
 
 Примечание:
-Построить список можно через генератор списка.
+Построить список можно через списковое включение.
 Если у вас возникают сложности, постарайтесь подумать как можно решить задачу,
 а не писать "мы это не проходили)".
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+def min_search1(lst):
+    min_number = lst[0]
+    for i in lst:
+        for n in lst:
+            if n < i and n < min_number:
+                min_number = n
+    return min_number
+
+
+def min_search2(lst):
+    min_number = lst[0]
+    for i in lst:
+        if i < min_number:
+            min_number = i
+    return min_number
+
+a = [x for x in range(-3, 3)]
+
+print(min_search1(a))
+print(min_search2(a))
+
+
