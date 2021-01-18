@@ -22,3 +22,34 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+companys = {
+    'google': 15000,
+    'rosseti': 10000,
+    'nornikel': 40000,
+    'apple': 100000,
+    'severstal': 25000,
+    'amazon': 250000,
+    'netflix': 150000,
+    'okko': 100000 
+}
+
+#O(n) - лучший вариант, т.к. нет лишних сортировок
+def max_profit(list):
+    new_list = {}
+    list1 = dict(list)
+    for x in range(3):
+        maximum = max(list1.items(), key=lambda k_v: k_v[1])
+        del list1[maximum[0]]
+        new_list[maximum[0]] = maximum[1]
+    return new_list
+
+print (max_profit(companys))
+
+
+#O(nlogn) 
+sorted_list = list(companys.items())
+sorted_list.sort(key = lambda i: i[1], reverse = True)
+for x in range(3):
+    print(sorted_list[x][0], ':', sorted_list[x][1])
+    
