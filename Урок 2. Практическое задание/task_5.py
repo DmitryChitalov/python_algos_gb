@@ -18,17 +18,3 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
-
-
-def ascii(count):
-    if count == 128:
-        return print('\nEz')
-    else:
-        if count % 10 == 1:
-            print(f'{count} - {chr(count)}')
-        else:
-            print(f'{count} - {chr(count)}', end=' ')
-        return ascii(count + 1)
-
-
-ascii(32)

@@ -15,15 +15,3 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
-
-
-def reverse(num, reversed_num):
-    if num < 10:
-        reversed_num += str(num)
-        return print(int(reversed_num))
-    else:
-        reversed_num += str(num % 10)
-        return reverse((num // 10), reversed_num)
-
-
-reverse(int(input('Введите число, а мы его перевернём: ')), '')

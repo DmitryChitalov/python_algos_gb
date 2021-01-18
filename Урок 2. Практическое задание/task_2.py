@@ -16,21 +16,3 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
-
-
-def digit_counter(num, even, odd):
-    if num < 10:
-        if (num % 10) % 2 == 1:
-            even += 1
-        else:
-            odd += 1
-        return print(f'Всего в числе {even} нечётных цифр и {odd} чётных.')
-    else:
-        if (num % 10) % 2 == 1:
-            even += 1
-        else:
-            odd += 1
-        return digit_counter(num // 10, even, odd)
-
-
-digit_counter(int(input('Введите число: ')), 0, 0)

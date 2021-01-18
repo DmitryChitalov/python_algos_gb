@@ -9,13 +9,3 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
-
-
-def progression_sum(n, summ, count):
-    if n == 0:
-        return print(f'Сумма {count} элементов прогрессии : {summ}')
-    else:
-        return progression_sum(n - 1, summ + (- 1 / 2) ** (n - 1), count + 1)
-
-
-progression_sum(int(input('Введите количество элеметов прогрессии: ')), 0, 0)
