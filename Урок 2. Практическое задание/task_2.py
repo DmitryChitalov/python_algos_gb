@@ -16,3 +16,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def my_func(numb, even=0, odd=0):
+    if numb == '':
+        return print(f"Количество четных и нечетных цифр в числе равно: ({even}, {odd})")
+    else:
+        numb_str = str(numb)
+        search_numb = int(numb_str[0]) % 2
+        if search_numb > 0:
+            odd += 1
+            return my_func(numb_str[1:], even, odd)
+        else:
+            even += 1
+            return my_func(numb_str[1:], even, odd)
+
+
+# Проверку на нечисло вводить не стал так как в задании не написано
+
+my_func(int(input("Введите число: ")))
