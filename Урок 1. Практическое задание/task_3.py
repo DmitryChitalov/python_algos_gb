@@ -22,3 +22,52 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+array_company = {'Samsung': 3000,
+                 'Toshiba': 3200,
+                 'Sony': 2800,
+                 'LG': 4700,
+                 'Xiaomi': 4900,
+                 'Apple': 4750,
+                 'Huawei': 2830,
+                 'Bosh': 4150,
+                 'Asus': 3620,
+                 'Siemens': 4290}
+
+
+def get_max_income(array_inc):
+    """
+    Поиск трех компаний с наибольшей прибылью
+    Сложность: O(NlogN)
+    :param array_inc:
+    :return:
+    """
+    sorted_dict = {}  # O(1)
+    sorted_list = list(array_inc.items())  # O(10)
+    sorted_list.sort(key=lambda item: item[1], reverse=True)  # O(NlogN)
+    for i in sorted_list[0:3]:  # O(N)
+        sorted_dict[i[0]] = i[1]  # O(1)
+    return sorted_dict  # O(1)
+
+
+def get_income_sorted(array_inc):
+    """
+    Второй вариант поиска 3х компаний с наибольшей прибылью
+    Сложность: O(N)
+    :param array_inc:
+    :return:
+    """
+    sorted_dict = {}  # O(1)
+    sorted_keys = sorted(array_inc, key=array_inc.get, reverse=True)  # O(N)
+    for i in sorted_keys[0:3]:  # O(N)
+        sorted_dict[i] = array_inc[i]  # O(1)
+    return sorted_dict  # O(1)
+
+
+choice_1 = get_max_income(array_company)
+choice_2 = get_income_sorted(array_company)
+print(choice_1)
+print(choice_2)
+
+"""
+Второе решение эффективнее так как его сложность меньше и меньшее количество операций
+"""
