@@ -10,3 +10,34 @@
 то реализуйте ф-цию-декоратор и пусть она считает время
 И примените ее к двум своим функциям.
 """
+
+
+def benchmark(func):
+    import time
+
+    def wrapper():
+        start = time.time()
+        func()
+        end = time.time()
+        print('[*] Время выполнения: {} секунд.'.format(end - start))
+
+    return wrapper
+
+
+@benchmark
+def list_insert():
+    my_list = []
+    for i in range(1, 1001):
+        my_list.append(i)
+    return my_list
+
+
+@benchmark
+def dict_insert():
+    my_dict = {}
+    for i, j in enumerate(range(1, 1001)):
+        my_dict[i] = j
+
+
+list_insert()
+dict_insert()

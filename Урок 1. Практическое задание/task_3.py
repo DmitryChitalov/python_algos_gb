@@ -22,3 +22,21 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+firm_dict = {
+    'Telegram': 10000,
+    'Microsoft': 10000000,
+    'Sunrise': 5000,
+    'Gretchin': 9845909,
+    'Boyz': 30983876032,
+    'PapaSmurf': 10050000,
+    }
+
+
+def search_a(dict):
+    dict_sorted = {k: dict[k] for k in sorted(dict, key=dict.get, reverse=True)}
+    for i in list(dict_sorted)[:3]:
+        print(f'{i}: {dict_sorted[i]}\n')
+
+
+search_a(firm_dict)

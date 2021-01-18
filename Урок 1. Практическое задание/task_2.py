@@ -17,3 +17,21 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+lst = [15, 2, 34, -5, 4563, 23, -11, 74, 2435, 123]
+
+
+def quad_search(lst):
+    for i in range(0, len(lst) - 1):
+        min_num = lst[i]
+        for j in range(i + 1, len(lst)):
+            if lst[j] < min_num:
+                min_num = lst[j]
+        return min_num
+
+
+def simple_search(lst):
+    return min(lst)
+
+
+print(quad_search(lst))
+print(simple_search(lst))

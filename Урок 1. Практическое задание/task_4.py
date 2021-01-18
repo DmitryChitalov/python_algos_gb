@@ -27,3 +27,57 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+"""Алгоритм 1. Сложность O(N)"""
+
+users = [{'name': 'Kate', 'sign': {'password': '12345', 'activated': True}},
+         {'name': 'Max', 'sign': {'password': '54321', 'activated': False}},
+         {'name': 'Leo', 'sign': {'password': 'qwerty', 'activated': True}}
+         ]
+
+
+def login_check(usr_name, users):
+    for user in users:
+        if usr_name == user['name']:
+            return user
+
+
+def sign_in_check(passwd, user):
+    if passwd == user['sign']['password'] and user['sign']['activated'] is True:
+        print('Вход выполнен')
+    elif passwd != user['sign']['password']:
+        print('Пароль неверный')
+    elif not user['sign']['activated']:
+        print('Пожалуйста, активируйте вашу учётную запись')
+
+
+user_name, password = 'Kate', '12345'
+user = login_check(user_name, users)
+
+if not user:
+    print('Пользователь с таким именем не существует')
+else:
+    sign_in_check(password, user)
+
+
+"""Алгоритм из гита, сложность O(1)"""
+
+
+def check_usr_1(users, usr_name, usr_pass):
+    usr_check = users.get(usr_name)
+    if usr_check is not None:
+        if usr_check[0] == usr_pass and usr_check[1]:
+            return 'Welcome !'
+        elif usr_check[0] == usr_pass and not usr_check[1]:
+            return 'You are not activated yet'
+        elif usr_check[0] != usr_pass:
+            return 'Wrong password'
+    else:
+        return 'Unknown user'
+
+
+some_users = {'First': ['Pass', True], 'Second': ['addaZ', False], 'Third': ['zack54', True]}
+print(check_usr_1(some_users, 'First', 'Pass'))
+print(check_usr_1(some_users, 'Second', 'addaZ'))
+print(check_usr_1(some_users, 'Third', 'addaZ'))
+print(check_usr_1(some_users, 'Fourth', 'addaZ'))
