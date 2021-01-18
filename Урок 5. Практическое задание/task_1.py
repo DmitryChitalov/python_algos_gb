@@ -25,3 +25,46 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+ORG = namedtuple('Organization', 'name profit')
+
+
+def init_orgs():
+    orgs = []
+    count = int(input('Введите количество предприятий для расчета прибыли:'))
+    while count > 0:
+        name = input('Введите название предприятия:')
+        profits = input('через пробел введите прибыль данного предприятия\nза каждый квартал(Всего 4 квартала):')
+        profits_nums = [int(n) for n in profits.split()]
+        orgs.append(ORG(name=name, profit=sum(profits_nums)))
+        count -= 1
+    return orgs
+
+
+def get_avg_profit(orgs):
+    if len(orgs) == 0:
+        return 0
+    profit_sum = 0
+    for org in orgs:
+        profit_sum += org.profit
+    return profit_sum / len(orgs)
+
+
+def analize(orgs):
+    avg_profit = get_avg_profit(orgs)
+    print(f'Cредняя годовая прибыль всех предприятий: {avg_profit}')
+    greater = []
+    lower = []
+    for org in orgs:
+        if org.profit > avg_profit:
+            greater.append(org.name)
+        elif org.profit < avg_profit:
+            lower.append(org.name)
+    print(f'Предприятия, с прибылью выше среднего значения: {"".join(greater)}')
+    print(f'Предприятия, с прибылью ниже среднего значения: {"".join(lower)}')
+
+
+organizations = init_orgs()
+analize(organizations)
