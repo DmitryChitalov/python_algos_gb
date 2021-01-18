@@ -17,3 +17,28 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+for j in (10, 8, 10, 15, 5):
+    # Из 100000 чисел возьмем 'j' случайно выбранных
+    # Всего 10 тыс. чисел
+    lst = random.sample(range(-100000, 100000), j)
+
+
+def quadratic(lst):
+    start_value = lst[0]
+    for el in range(len(lst)):
+        for i in range(len(lst)):
+            if lst[el] < lst[i] and lst[el] < start_value:
+                start_value = lst[el]
+    return start_value
+
+
+print(min(lst)) # линейная встроенная функция min O(n)
+print(quadratic(lst))
+
+
+
+
+
+
