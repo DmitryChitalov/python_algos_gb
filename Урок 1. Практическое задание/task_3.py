@@ -22,3 +22,68 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+import operator
+
+"""
+Задача, к сожалению не доделана в силу дефецита времени, 
+но так мне понравилось элеганное первое решение, что не смог не запостить.
+"""
+
+company_dict = {'Kopor': 1033,
+                'Kirish': 800,
+                'SZt': 870,
+                'PskG': 0,
+                'Kal_TES': 900,
+                'Kilingi-Nim': 640}
+
+"""
+Хороший вариант, чёткий, по питоновски.
+Сложность, за счёт sorted, O(n log n)
+"""
+
+
+def top_comp_1(company_dict):  # O(n log n)
+    return sorted(company_dict.items(), key=operator.itemgetter(1), reverse=True)[:3]
+
+
+print(top_comp_1(company_dict))
+
+"""
+Вариант — O(N^2) — квадратичная сложность
+"""
+
+def top_comp_2(comp_dict):
+    for i in range(len(comp_dict)):
+        lowest_value_index = i
+        for j in range(i + 1, len(comp_dict)):
+            if comp_dict[j][1] > comp_dict[lowest_value_index][1]:
+                lowest_value_index = j
+        comp_dict[i], comp_dict[lowest_value_index] = comp_dict[lowest_value_index], comp_dict[i]
+    return comp_dict[0:3]
+
+
+list_from_comp_dict = list(company_dict.items())
+highest_value = {}
+for i in top_comp_2(list_from_comp_dict):
+    print(i[0], ':', i[1], end='; ')
+
+print()
+
+
+"""
+Вариант — O(N) — линейная сложность
+The winner is — top_comp_3 func!
+"""
+
+def top_comp_3(comp_dict):
+    highest_value = {}
+    list_comp = dict(comp_dict)
+    for i in range (3):
+        find_highest = max(list_comp.items(), key=lambda value: value[1])
+        del list_comp[find_highest[0]]
+        highest_value[find_highest[0]] = find_highest[1]
+    return highest_value
+
+
+print(top_comp_3(company_dict))
