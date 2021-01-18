@@ -17,3 +17,28 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+# O(n^2)
+def min_obj1(lst_1):
+    for i in lst_1:
+        min_val = True
+        for j in lst_1:
+            if i > j:
+                min_val = False
+        if min_val:
+            return i
+
+
+print("Minimum value is : ", min_obj1([1.2, 35, 77, 44, 105, 1, 44]))
+
+
+# O(N)
+def min_obj2(lst_2):
+    min_val2 = lst_2[0]
+    for i in lst_2:
+        if i < min_val2:
+            min_val2 = i
+    return min_val2
+
+
+print("Minimum value is : ", min_obj2([1, 2, 5, 3, 34, 35, 0.5]))
