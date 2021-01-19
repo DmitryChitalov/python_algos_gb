@@ -11,6 +11,7 @@
 import random
 
 
+
 def get_arr(l):
     # return [random.randint(0, 50) for i in range(l)]
     return [random.uniform(0,50) for i in range(l)]
