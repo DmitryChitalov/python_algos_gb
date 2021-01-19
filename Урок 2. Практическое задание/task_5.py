@@ -18,3 +18,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def ascii_table_output(code_num=32, cnt_column=10):
+
+    if code_num == 128:
+        return
+
+    cnt_column -= 1
+
+    if cnt_column == 0:
+        print(f'{code_num} - {chr(code_num)}\n', end='')
+        ascii_table_output(code_num + 1)
+    else:
+        print(f'{code_num} - {chr(code_num)} ', end='')
+        ascii_table_output(code_num + 1, cnt_column)
+
+
+ascii_table_output()
+
