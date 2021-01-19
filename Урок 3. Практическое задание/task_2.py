@@ -15,3 +15,21 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+from hashlib import pbkdf2_hmac
+from binascii import hexlify
+from uuid import uuid4
+
+password = input('Введите пароль: ').strip().encode('Utf-8')
+salt = uuid4().bytes
+
+mem_password = hexlify(pbkdf2_hmac(hash_name='sha256', password=password, salt=salt, iterations=100000))
+
+repeat_password = input('Введите пароль еще раз для проверки: ').strip().encode('Utf-8')
+
+mem_repeat = hexlify(pbkdf2_hmac(hash_name='sha256', password=repeat_password, salt=salt, iterations=100000))
+
+if mem_password == mem_repeat:
+    print('Вы ввели правильный пароль')
+else:
+    print('Пароли не совпадают')
