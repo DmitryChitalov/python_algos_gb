@@ -28,3 +28,36 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculate_func():
+    while True:
+        symbol = input('Enter operator +, -, *, / or enter 0 to exit: ')
+        if symbol in ('+', '-', '*', '/', '0'):
+            break
+        print('You should enter +, -, *, / or 0 to exit')
+    if symbol == '0':
+        print('Exit')
+        return
+    try:
+        num_1 = float(input('Enter first number: '))
+        num_2 = float(input('Enter second number: '))
+        if symbol == '/' and num_2 == 0:
+            raise ZeroDivisionError
+    except ValueError:
+        print('You should enter int or float')
+    except ZeroDivisionError:
+        print('Division by zero')
+    else:
+        operators = {
+            '+': num_1 + num_2,
+            '-': num_1 - num_2,
+            '*': num_1 * num_2,
+            '/': num_1 / num_2,
+        }
+        print(operators[symbol])
+    calculate_func()
+
+
+if __name__ == '__main__':
+    calculate_func()

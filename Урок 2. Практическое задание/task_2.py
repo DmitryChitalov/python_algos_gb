@@ -5,7 +5,8 @@
 
 Подсказка:
 На каждом шаге вам нужно 'доставать' из числа очередную цифру
-и смотреть является ли она четной или нечетной. При этом увеличиваем соответствующий счетчик
+и смотреть является ли она четной или нечетной.
+При этом увеличиваем соответствующий счетчик
 Пока все числа не извлечены рекурсивные вызовы продолжаем
 Условие завершения рекурсии - все числа извлечены
 
@@ -16,3 +17,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def check_even(number: int) -> tuple:
+    even_count = 0
+    uneven_count = 0
+    rest_number, numeral = divmod(number, 10)
+    if numeral % 2 == 0:
+        even_count += 1
+    else:
+        uneven_count += 1
+    if rest_number != 0:
+        even_rec, uneven_rec = check_even(rest_number)
+        even_count += even_rec
+        uneven_count += uneven_rec
+    return even_count, uneven_count
+
+
+print(check_even(123456789012345))
