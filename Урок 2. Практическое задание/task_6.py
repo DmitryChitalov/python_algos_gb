@@ -9,3 +9,33 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+ATTEMPTS = 10
+
+def game(number, attempts):
+
+    if attempts == 0:
+        print('Закончились попытки!!!')
+        return
+    try:
+        answer = int(input('Введите число от 0 до 100: '))
+
+    except ValueError:
+        print(f'Введены некорректные данные')
+    else:
+        if answer == number:
+            print('Вы выиграли!!!')
+            return
+        elif answer < number:
+            print('Ваше число меньше загаданного')
+        else:
+            print('Ваше число больше загаданного')
+    finally:
+        game(number, attempts - 1)
+
+
+hidden_number = random.randint(0, 100)
+
+game(hidden_number, ATTEMPTS)
