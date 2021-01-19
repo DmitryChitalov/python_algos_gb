@@ -16,3 +16,29 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def my_fun(n):
+    try:
+        my_fun.c += 0
+    except AttributeError:
+        my_fun.c = 0
+        my_fun.n = 0
+    if (n % 10) % 2:
+        my_fun.n += 1
+    else:
+        my_fun.c += 1
+    if n // 10:
+        return my_fun(n // 10)
+    else:
+        return my_fun.c, my_fun.n
+
+
+while True:
+    try:
+        ans = int(input('Введите число: '))
+    except ValueError:
+        ans = - 1
+    if ans >= 0:
+        break
+print(f'Количество четных и нечетных цифр в числе равно: {my_fun(ans)}')

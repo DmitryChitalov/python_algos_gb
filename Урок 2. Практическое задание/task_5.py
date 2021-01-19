@@ -18,3 +18,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def to_ascii():
+    try:
+        to_ascii.n += 1
+    except AttributeError:
+        to_ascii.n = 32
+        to_ascii.r = 0
+    to_ascii.r += 1
+    if to_ascii.r == 10:
+        e = '\n'
+        to_ascii.r = 0
+    else:
+        e = ' '
+    print(f'{to_ascii.n} - {chr(to_ascii.n)}', end=e)
+    if to_ascii.n == 127:
+        return
+    else:
+        return to_ascii()
+
+
+to_ascii()

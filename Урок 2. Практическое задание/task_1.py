@@ -28,3 +28,49 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+# Вспомогательная функция для получения данных от пользователя
+def get_data_from_user():
+    def get_num(name='первое'):
+        while True:
+            try:
+                ans = float(input(f'Введите {str(name)} число: '))
+            except ValueError:
+                print('Вы ввели не число!')
+                ans = None
+            if type(ans) == float:
+                return ans
+
+    op = None
+    while op not in ('+', '-', '*', '/', '0'):
+        op = input('Введите арифметическую операцию (+ - * /) или 0 для выхода: ')
+    if op == '0':
+        return op, None, None
+    num1 = get_num('первое')
+    while True:
+        num2 = get_num('второе')
+        if op == '/' and num2 == 0:
+            print('На 0 делить нельзя!')
+        else:
+            return op, num1, num2
+
+
+# Рекурсия
+def my_calc(op, num1, num2):
+    if op == '+':
+        print(f'Ваш результат: {num1 + num2}')
+    elif op == '-':
+        print(f'Ваш результат: {num1 - num2}')
+    elif op == '*':
+        print(f'Ваш результат: {num1 * num2}')
+    elif op == '/':
+        print(f'Ваш результат: {num1 / num2}')
+    else:
+        return
+    (a1, a2, a3) = get_data_from_user()
+    return my_calc(a1, a2, a3)
+
+
+(arg1, arg2, arg3) = get_data_from_user()
+my_calc(arg1, arg2, arg3)
