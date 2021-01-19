@@ -25,3 +25,60 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+# number = int(input('Введите количество компаний для расчета:  '))
+# companies = []
+#
+# for i in range(number):
+#     company = input('Введите название:  ')
+#     prof = input('Введите прибыль за 4 квартала через пробел:  ')
+#     prof = prof.split()
+#     template = namedtuple('companies', 'name prof_1q prof_2q prof_3q prof_4q')
+#     data = template(
+#         name=company,
+#         prof_1q=prof[0],
+#         prof_2q=prof[1],
+#         prof_3q=prof[2],
+#         prof_4q=prof[3],
+#     )
+#     companies.append(data)
+# print(companies)
+
+
+number = int(input('Введите количество компаний для расчета:  '))
+companies = {}
+
+for i in range(number):
+    company = input('Введите название:  ')
+    prof = input('Введите прибыль за 4 квартала через пробел:  ')
+    prof = prof.split()
+    template = namedtuple('companies', 'name prof_1q prof_2q prof_3q prof_4q')
+    data = template(
+        name=company,
+        prof_1q=prof[0],
+        prof_2q=prof[1],
+        prof_3q=prof[2],
+        prof_4q=prof[3],
+    )
+    companies[data.name] = int(data.prof_1q) + int(data.prof_2q) + int(data.prof_3q) + int(data.prof_4q)
+
+total_av = 0
+for i in companies.values():
+    total_av += i
+    total_av = total_av / number
+
+print(f'Средняя годовая прибыль компаний {total_av}')
+for i, y in companies.items():
+    if y > total_av:
+        print(f'Прибыль у компании "{i}" выше среднего, годовая прибыль равна {y}')
+    elif y < total_av:
+        print(f'Прибыль у компании "{i}" ниже среднего, годовая прибыль равна {y}')
+    else:
+        print(f'У компании "{i}" средняя прибыль')
+
+
+
+
+
