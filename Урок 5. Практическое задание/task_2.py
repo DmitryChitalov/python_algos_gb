@@ -11,3 +11,29 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+
+num1 = list(input('Введите первое число: ').upper())
+num2 = list(input('Введите второе число: ').upper())
+
+
+class HexDigits:
+    def __init__(self, num1, num2):
+        self.num1 = num1
+        self.num2 = num2
+
+    def __add__(self, other):
+        result = hex(int(''.join(self.num1), 16) + int(''.join(other.num2), 16))
+        return list(result)[2:]
+
+    def __mul__(self, other):
+        result = hex(int(''.join(self.num1), 16) * int(''.join(other.num2), 16))
+        return list(result)[2:]
+
+
+print(f'Вы ввели {num1} и {num2}')
+sum = HexDigits(num1, num2) + HexDigits(num1, num2)
+sum = [x.upper() for x in sum]
+mul = HexDigits(num1, num2) * HexDigits(num1, num2)
+mul = [x.upper() for x in mul]
+print(f'Сумма чисел = {sum}')
+print(f'Произведение чисел = {mul}')
