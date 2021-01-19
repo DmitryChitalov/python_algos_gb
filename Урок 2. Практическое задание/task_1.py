@@ -28,3 +28,31 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def calculator(num1, num2, calculation):
+    if calculation == '0':
+        return print('Калькулятор закрыт.')
+    elif calculation == '+' or calculation == '-' or calculation == '*' or calculation == '/':
+        try:
+            print(f'Итог {eval(str(num1) + calculation + str(num2))}')
+        except ZeroDivisionError:
+            print('На ноль делить нельзя!')
+        except SyntaxError:  # Не знаю, можно ли эти 2 ошибки совместить
+            print('В следующий раз вводите числа')
+        except NameError:
+            print('В следующий раз вводите числа')
+        return calculator(input('Введите первое число: '),
+                          input('Введите второе число: '),
+                          input(
+                              'Введите операцию (+, -, *, / или 0 для выхода): '))
+    else:
+        print('Введите верную операцию')
+        return calculator(input('Введите первое число: '),
+                          input('Введите второе число: '),
+                          input(
+                              'Введите операцию (+, -, *, / или 0 для выхода): '))
+
+
+calculator(input('Введите первое число: '), input('Введите второе число: '),
+           input('Введите операцию (+, -, *, / или 0 для выхода): '))
