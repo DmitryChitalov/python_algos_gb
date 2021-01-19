@@ -16,3 +16,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def odd_even_counter(num, odd=0, even=0):
+
+    if num == 0:
+        return odd, even
+    else:
+        digit = num % 10
+        if digit % 2:
+            even += 1
+        else:
+                odd += 1
+        return odd_even_counter(num // 10, odd, even)
+
+
+try:
+    number = int(input('Введите число: '))
+except ValueError:
+    print(f'Введены некорректные данные')
+else:
+    print(f'Количество четных и нечетных цифр в числе равно: {odd_even_counter(number)}')
