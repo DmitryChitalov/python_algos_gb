@@ -15,3 +15,17 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+
+import hashlib
+
+
+salt = 'ad93w8fu54478vb384d9'
+stored_pass_hash = hashlib.sha256((input('Введите пароль: ').encode('utf-8') + salt.encode('utf-8')))
+print(f'В базе данных хранится строка: {stored_pass_hash.hexdigest()}')
+entered_pass_hash = hashlib.sha256((input('Повторите пароль: ').encode('utf-8') + salt.encode('utf-8')))
+print(entered_pass_hash.hexdigest())
+if stored_pass_hash.hexdigest() == entered_pass_hash.hexdigest():
+    print('Введенные пароли совпадают.')
+else:
+    print('Введенные пароли не совпадают.')
