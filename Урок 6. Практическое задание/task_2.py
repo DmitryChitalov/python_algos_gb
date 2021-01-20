@@ -19,40 +19,24 @@
 
 from memory_profiler import profile
 @profile()
-def calc1(s):
+def func(x):
+    even=0
+    odd=0
+    def even_odd(x, even, odd):
 
-        return
+        if x == 0:
+            return even, odd
 
-def calc():
-    s = input("Знак (+,-,*,/): ")
-
-    if s == '0':
-        calc1(s)
-
-
-    if s in ('+', '-', '*', '/'):
-        x = float(input("x="))
-        y = float(input("y="))
-        if s == '+':
-            print("%.2f" % (x + y))
-            return calc()
-        elif s == '-':
-            print("%.2f" % (x - y))
-            return calc()
-        elif s == '*':
-            print("%.2f" % (x * y))
-            return calc()
-
-        elif s == '/':
-            if y != 0:
-                print("%.2f" % (x / y))
-
-            else:
-                print("Деление на ноль!")
-            return calc()
-
+        n = x % 10;
+        if (n % 2 == 0):
+            even = even + 1
         else:
-            print("Неверный знак операции!")
-            return calc()
+            odd += 1;
+        return even_odd(x // 10, even, odd)
+    print(even_odd(x,even,odd))
 
-print(calc())
+
+even = 0
+odd = 0
+x = int(input("ведите число"))
+print(func(x))
