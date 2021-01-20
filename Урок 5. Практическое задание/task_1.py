@@ -25,3 +25,22 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import defaultdict
+
+if __name__ == '__main__':
+    q = int(input('Введите количество предприятий: '))
+    my_dic = defaultdict(list)
+    while q > 0:
+        st_name = input('Введите наименование предприятия: ')
+        st_s = [int(el) for el in input('Через пробел введите прибыль за каждый квартал года (всего 4): ').split()]
+        my_dic[st_name] = st_s
+        q -= 1
+    my_dic_mid = defaultdict(int)
+    mid_all = 0
+    for k, v in my_dic.items():
+        my_dic_mid[k] = sum(v)
+        mid_all += sum(v)
+    mid_all = sum(my_dic_mid.values()) / len(my_dic_mid.keys())
+    print(f'Средняя годовая прибыль всех предприятий: {mid_all}')
+    print(f'Предприятия, с прибылью выше среднего значения: {" ".join([k for k, v in my_dic.items() if sum(v) > mid_all])}')
+    print(f'Предприятия, с прибылью ниже среднего значения: {" ".join([k for k, v in my_dic.items() if sum(v) < mid_all])}')
