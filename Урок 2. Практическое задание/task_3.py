@@ -17,6 +17,8 @@
 """
 
 my_num = ''
+
+
 def invertion(number):
     global my_num
     if len(str(number)) == 1:
