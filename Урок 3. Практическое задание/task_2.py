@@ -15,3 +15,30 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+def password_creater():
+    password=hashlib.sha256(input('Введите пароль: ').encode()).hexdigest()
+    print('В базе данных хранится строка:', password)
+    password_check= hashlib.sha256(input('Введите пароль еще раз для проверки: ').encode()).hexdigest()
+    if password == password_check:
+        file = open("passwords.txt", "w")
+        file.write(password)
+        file.close()
+        return 'Пароль верный, пароль записан'
+    else:
+        i = 3
+        print(f'Неверно. У вас осталось 3 попытки')
+        while password != password_check and i > 0:
+            if password == password_check:
+                file = open("passwords.txt", "w")
+                file.write(password)
+                file.close()
+                return 'Пароль верный, пароль записан'
+            else:
+                password_check = hashlib.sha256(input('Введите пароль еще раз для проверки: ').encode()).hexdigest()
+                print(f'У вас осталось {i} попыток')
+                i-=1
+        return 'Попытки закончились'
+
+
+print(password_creater())
