@@ -28,7 +28,7 @@ def check_1(lst_obj):
 
     Сложность: !!!.
     """
-    lst_to_set = set(lst_obj)  # !!!
+    lst_to_set = set(lst_obj)  # !!! Присваивание, это константная сложность = O(1)
     return lst_to_set
 
 
@@ -43,10 +43,10 @@ def check_2(lst_obj):
 
     Сложность: !!!.
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
+    for j in range(len(lst_obj)):          # !!! Одиночный цикл в n итераций даёт f( n ) = O(n).
+        if lst_obj[j] in lst_obj[j+1:]:    # !!! Думаю здесь встроеная функция переберает цыклом, сложность = О(n)
             return False                   # !!!
-    return True                            # !!!
+    return True                            # !!! Сложность всей функции О(n2) ибо здесь вложенный цикл
 
 
 #############################################################################################
@@ -59,12 +59,12 @@ def check_3(lst_obj):
 
     Сложность: !!!
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # !!! прислаивание, сложноть n
+    lst_copy.sort()                          # !!! N logN
+    for i in range(len(lst_obj) - 1):        # !!! цикл O(n)
+        if lst_copy[i] == lst_copy[i+1]:     # !!! присваивание O(1)
+            return False                     # !!! вся функция = N logN+О(т)+N(1)
+    return True                              # !!! Доминанта N logN
 
 #############################################################################################
 

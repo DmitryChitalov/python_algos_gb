@@ -1,3 +1,5 @@
+from random import randint
+
 """
 Задание 2.
 
@@ -17,3 +19,41 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+# генерируем список с возможностью задать параметры
+
+start = 1
+finish = 11
+my_list = [randint(start, finish) for i in range(start, finish)]
+print(my_list)    # если список небольшой можно визуально убедится в работоспособности функции.
+
+##############################################################
+
+
+''' Не уверен правильно ли я понял задание про первый алгоритм но вот такое чудище получилось'''
+
+
+def algorithm1(some_list):
+    q = some_list[-1]
+    for i in some_list:
+        for k in some_list:
+            if i < k and i < q:
+                q = i
+    return print(f'min element is: {q} (Slow function)')
+
+###############################################################
+
+
+def algorithm2(some_list):
+    q = some_list[-1]       # !!! присваивание О(1)
+    for i in some_list:     # !!! цикл О(п)
+        if i < q:           # !!! О(1)
+            q = i           # !!! присваивание О(1)
+    return print(f'min element is: {q} (Fast function)')
+
+###############################################################
+
+
+algorithm1(my_list)
+
+algorithm2(my_list)
