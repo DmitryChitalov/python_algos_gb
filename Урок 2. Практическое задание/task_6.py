@@ -17,7 +17,7 @@ count = 0
 
 def guess():
     global random_num, count
-    if count <10:
+    if count < 10:
         user_num = int(input(f'введите число: '))
         if user_num == random_num:
             print(f'победа!')
