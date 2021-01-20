@@ -25,3 +25,65 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+
+from collections import namedtuple
+from collections import defaultdict
+
+
+def num_company_imput():
+    while True:
+        try:
+            n = int(input("Введите количество компаний: "))
+            return n
+        except ValueError:
+            print("Вы ввели некорректное количество компаний!, попробуйте еще раз!")
+
+
+def company_statistic(num=0):
+    if num == 0:
+        return 0
+    comp_desc = namedtuple("Company", "q1 q2 q3 q4")
+    companies = defaultdict(comp_desc)
+    for i in range(num):
+        name = input(f"Введите имя {i + 1} - й компании: ")
+        qt1, qt2, qt3, qt4 = input("Введите значения оборота по кварталам через пробел: ").split(" ")
+        companies[name] = comp_desc(
+            q1=qt1,
+            q2=qt2,
+            q3=qt3,
+            q4=qt4
+        )
+    average_profit = defaultdict(float)
+    for k, v in companies.items():
+        average_profit[k] = (int(v.q1) + int(v.q2) + int(v.q3) + int(v.q4))
+
+    average_profit_total = 0
+    for v in average_profit.values():
+        average_profit_total += v
+    average_profit_total = average_profit_total / num
+    print(f"Средняя годовая прибыль всех предприятий: {average_profit_total}")
+    print("Предприятия, с прибылью выше среднего значения:")
+    for k, v in average_profit.items():
+        if v >= average_profit_total:
+            print(k)
+    print("Предприятия, с прибылью ниже среднего значения:")
+    for k, v in average_profit.items():
+        if v < average_profit_total:
+            print(k)
+
+
+company_statistic(num_company_imput())
+
+"""
+Введите количество компаний: 2
+Введите имя 1 - й компании: Рога
+Введите значения оборота по кварталам через пробел: 235 345634 55 235
+Введите имя 2 - й компании: Копыта
+Введите значения оборота по кварталам через пробел: 345 34 543 34
+Средняя годовая прибыль всех предприятий: 173557.5
+Предприятия, с прибылью выше среднего значения:
+Рога
+Предприятия, с прибылью ниже среднего значения:
+Копыта
+"""
