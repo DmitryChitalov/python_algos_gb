@@ -15,3 +15,19 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+my_num = ''
+
+
+def invertion(number):
+    global my_num
+    if len(str(number)) == 1:
+        my_num += str(number)
+        return 0
+    else:
+        my_num += str(number % 10)
+        return invertion(number // 10)
+
+
+invertion(int(input(f'введите число: ')))
+print(my_num)

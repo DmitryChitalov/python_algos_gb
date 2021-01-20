@@ -9,3 +9,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+my_sum = 0
+
+
+def two_expo(degree):
+    global my_sum
+    if (-2) ** (1 - degree) == 1:
+        my_sum += 1
+    else:
+        my_sum += (-2) ** (1 - degree)
+        two_expo(degree - 1)
+
+
+two_expo(int(input(f'введите число: ')))
+print(my_sum)

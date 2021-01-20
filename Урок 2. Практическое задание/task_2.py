@@ -16,3 +16,26 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+count_even = 0
+count_not_even = 0
+
+
+def count_parity(number):
+    global count_even, count_not_even
+    if number / 10 < 1:
+        if number % 2 == 0:
+            count_even += 1
+        else:
+            count_not_even += 1
+        return 0
+    elif number % 2 == 0:
+        count_even += 1
+        return count_parity(number // 10)
+    else:
+        count_not_even += 1
+        return count_parity(number // 10)
+
+
+count_parity(int(input(f'введите число: ')))
+print(f' количество четных чисел {count_even}, нечетных {count_not_even}')
