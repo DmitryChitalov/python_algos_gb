@@ -25,3 +25,33 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+amt = int(input('Введите количество предприятий для расчета прибыли: '))
+nmdtpl = namedtuple('companies', 'company profit')
+tpl_lst = []
+avg_profit = 0
+
+while amt > 0:
+    sum = 0
+    company = input('Введите название предприятия: ')
+    profit = input('через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ').split()
+    for el in profit:
+        sum += int(el)
+    tpl_stats = nmdtpl(company, sum)
+    tpl_lst.append(tpl_stats)
+    avg_profit += tpl_stats.profit/amt
+    amt -= 1
+
+print(f'Средняя годовая прибыль всех предприятий: {avg_profit}')
+max_profit_companies = []
+min_profit_companies = []
+for company in tpl_lst:
+    if company.profit >= avg_profit:
+        max_profit_companies.append(company.company)
+    else:
+        min_profit_companies.append(company.company)
+
+print(f"Предприятия, с прибылью выше среднего значения: {', '.join(max_profit_companies)}")
+print(f"Предприятия, с прибылью ниже среднего значения: {', '.join(min_profit_companies)}")
