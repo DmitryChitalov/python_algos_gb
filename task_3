@@ -1,0 +1,38 @@
+"""
+Задание 3 *.
+Сделать профилировку для скриптов с рекурсией и сделать описание,
+можно ли так профилировать и есть ли 'подводные камни' в профилировании?
+Придумать как это решить!
+Есть очень простое решение!
+"""
+from memory_profiler import profile
+
+@profile
+def f(m):
+    def factorial(n):
+        if n <= 0:
+            return 1
+        else:
+            return n * factorial(n - 1)
+
+    return factorial(m)
+
+
+print(f(50))
+
+"""
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    11     28.9 MiB     28.9 MiB           1   @profile
+    12                                         def f(m):
+    13     29.0 MiB      0.0 MiB          52       def factorial(n):
+    14     29.0 MiB      0.0 MiB          51           if n <= 0:
+    15     29.0 MiB      0.0 MiB           1               return 1
+    16                                                 else:
+    17     29.0 MiB      0.0 MiB          50               return n * factorial(n - 1)
+    18                                         
+    19     29.0 MiB      0.0 MiB           1       return factorial(m)
+
+
+30414093201713378043612608166064768844377641568960512000000000000
+"""

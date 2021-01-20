@@ -1,0 +1,76 @@
+"""
+Задание 2.*
+Предложить еще какие-либо варианты (механизмы, библиотеки) для оптимизации памяти и
+доказать! (наглядно, кодом) их эффективность (на примере профилировщика)
+"""
+
+from memory_profiler import profile
+
+
+#1) для генерации списка использовать i for i in range(...)
+#2) использовать встроенные функци как map(), reduce()
+
+from functools import reduce
+
+@profile
+def func_1():
+    return reduce(lambda a, b: a * b, [x for x in range(100, 1001, 2)])
+func_1()
+
+from sys import argv
+"""
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    15     28.9 MiB     28.9 MiB           1   @profile
+    16                                         def func_1():
+    17     29.6 MiB      0.7 MiB        1354       return reduce(lambda a, b: a * b, [x for x in range(100, 1001, 2)])
+"""
+@profile
+def salary():
+    try:
+        time, rate, bonus = map(float, argv[1:])
+        print(f"Salary - {time * rate + bonus}")
+    except ValueError:
+        print("Enter all 3 numbers. Not string or empty character.")
+"""
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    28     29.6 MiB     29.6 MiB           1   @profile
+    29                                         def salary():
+    30     29.6 MiB      0.0 MiB           1       try:
+    31     29.6 MiB      0.0 MiB           1           time, rate, bonus = map(float, argv[1:])
+    32                                                 print(f"Salary - {time * rate + bonus}")
+    33     29.6 MiB      0.0 MiB           1       except ValueError:
+    34     29.6 MiB      0.0 MiB           1           print("Enter all 3 numbers. Not string or empty character.")
+"""
+
+
+salary()
+#3) применение регулярных выражений
+
+import re
+@profile
+def func_1():
+    result = re.findall(r'AV', 'AV Analytics Vidhya AV')
+    return result
+
+func_1()
+"""Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    52     29.8 MiB     29.8 MiB           1   @profile
+    53                                         def func_1():
+    54     29.8 MiB      0.0 MiB           1       result = re.findall(r'AV', 'AV Analytics Vidhya AV')
+    55     29.8 MiB      0.0 MiB           1       return result"""
+
+#4) использование генератора Yield
+
+@profile
+def fact_gen():
+    for el in count(1):
+        yield factorial(el)
+
+
+fact_gen()
+
+#5) использование __slots__ в небольших словарях
+#7) Использование collections
