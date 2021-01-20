@@ -224,7 +224,7 @@ Line #    Mem usage    Increment  Occurences   Line Contents
     73                                                     my_list.insert(0, new_el)
     74                                                     break
     75                                         
-    76    207.5 MiB      0.0 MiB           1       print(my_list)
+    76    207.5 MiB      0.0 MiB           1       print(my_list).
 
 """
 
