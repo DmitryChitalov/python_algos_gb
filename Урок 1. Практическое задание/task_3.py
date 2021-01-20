@@ -1,3 +1,5 @@
+from random import randint
+
 """
 Задание 3.
 
@@ -22,3 +24,52 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+############################################
+
+companies = [
+    ['Microsoft', 7], ['ABC', 2], ['Neuralink', 3], ['Oneok', 4],
+    ['Acer', 5], ['Lyca', 6], ['Zero', 1]
+]
+
+############################################
+
+'''Первое мое решение мне кажется более продуктивным, ибо лично мне оно более понятно чем второе,
+которое идет ниже. Плюс на него требуется меньше строк кода, что в свою очередь облегчает читаемость'''
+
+
+def booble_sort(some_list):             # Total O(n2)
+    sorted_list = some_list[:]          # O(1)
+    max_item = len(sorted_list) - 1     # O(n)
+    for k in range(0, max_item):        # O(n)
+        for i in range(0, max_item):    # O(n)
+            if sorted_list[i][1] > sorted_list[i + 1][1]:  # O(1)
+                sorted_list[i], sorted_list[i + 1] = sorted_list[i + 1], sorted_list[i]  # O(1)
+    return print(sorted_list[:3:-1])
+
+#############################################
+
+
+'''Второе мое решение, мне кажется менее продуктивным, чисто со стороны человеческого восприятия.
+Так же в нем я не нашел никаких достоинств перед первым решением'''
+
+
+def select_sort(some_list):     # Total O(n2)
+    some_list = some_list[:]    # O(1)
+    sorted_list = []            # O(1)
+    while len(some_list) > 0:   # O(n)
+        n = 0                   # O(1)
+        position = 0            # O(1)
+        max_el = some_list[0]   # O(1)
+        for i in some_list:     # O(n)
+            if i[1] > max_el[1]:  # O(1)
+                max_el = i      # O(1)
+                position = n    # O(1)
+            n += 1              # O(1)
+        sorted_list.append(some_list.pop(position))  # O(1)
+    return print(sorted_list[:3])
+
+
+booble_sort(companies)
+
+select_sort(companies)
