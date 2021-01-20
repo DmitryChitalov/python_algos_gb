@@ -15,3 +15,17 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def reverse(number):
+
+    if number // 10 == 0:
+        print(number)
+        return
+    else:
+        print(number % 10, end='')
+        reverse(number // 10)
+
+
+reverse(34856)
+
