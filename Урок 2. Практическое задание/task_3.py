@@ -26,5 +26,6 @@ def reversed_number(number):
 
 
 if __name__ == '__main__':
-    r = (reversed_number(int(input('Введите число, которое требуется перевернуть: '))))
-    print(f'Перевернутое число: {r}')
+    number = int(input('Введите число, которое требуется перевернуть: '))
+    r = (reversed_number(number))
+    print(f'Перевернутое число: {r:0{round(log(number, 10)) + 1}d}')
