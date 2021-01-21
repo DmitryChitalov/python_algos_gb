@@ -12,8 +12,8 @@
 
 Подсказка:
 Вариант исполнения:
-- условие рекурсивного вызова - введена операция +, -, *, /
-- условие завершения рекурсии - введена операция 0
+- условие рекурсивного вызова - введена операция +, -, *, / - ШАГ РЕКУРСИИ
+- условие завершения рекурсии - введена операция 0 - БАЗОВЫЙ СЛУЧАЙ
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
@@ -28,3 +28,39 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calculator():
+    try:
+        operand = input('введите знак операции ')
+        number_one = int(input('введите первое число '))
+        number_two = int(input('введите второе число '))
+    except ValueError:
+        print('некорректный ввод чисел, введите данные снова')
+        calculator()
+
+    if operand not in ['*', '/', '-', '+', '0']:
+        print('некорректный ввод операции, введите данные снова ')
+        calculator()
+    elif operand == '/' and number_two == 0:
+        print('деление на ноль! введите данные снова')
+        calculator()
+    elif operand == '0':
+        return
+
+    try:
+        if operand == '*':
+            print(number_one * number_two)
+            calculator()
+        elif operand == '/':
+            print(number_one / number_two)
+            calculator()
+        elif operand == '-':
+            print(number_one - number_two)
+            calculator()
+        elif operand == '+':
+            print(number_one + number_two)
+            calculator()
+    except ZeroDivisionError:
+        return
+
+calculator()

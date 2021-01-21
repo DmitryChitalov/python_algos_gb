@@ -8,4 +8,26 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+
+Подсказка:
+Базовый случай здесь - угадали число или закончились попытки
 """
+import random
+
+def guess_number(correct_number=random.randint(0, 100), counter=1):
+    user_answer = int(input('угадайте число от 1 до 100: '))
+    if user_answer == correct_number:
+        print('мои поздравления, вы угадали')
+        return
+    elif counter == 10:
+        print('вы проиграли')
+        return
+    else:
+        if user_answer > correct_number:
+            print('выше число больше загаданного')
+            return guess_number(correct_number, counter + 1)
+        else:
+            print('ваше число меньше загаданного')
+            return guess_number(correct_number, counter + 1)
+
+guess_number()

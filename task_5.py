@@ -17,4 +17,20 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+
+Подсказка:
+Допускается исп-е встроенных ф-ций
+и допускается комб-е - цикл и рекурсия
 """
+
+def ascii_symbols(num=32, counter=0):
+    if num > 127:
+        return ''
+    else:
+        if counter == 10:
+            counter = 0
+            return f'\n  {num}-{chr(num)}' + ascii_symbols(num + 1, counter + 1)
+        else:
+            return f'  {num}-{chr(num)}' + ascii_symbols(num + 1, counter + 1)
+
+print(ascii_symbols())
