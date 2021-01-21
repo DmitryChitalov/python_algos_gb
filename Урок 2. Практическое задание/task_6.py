@@ -28,7 +28,7 @@ def guess_number(count=0):
     if hidden_n == user_answer:
         return 'You win!'
     elif count == 10:
-        return 'You lose'
+        return f'You lose. Number is {hidden_n}'
     elif user_answer < hidden_n:
         print('Your number is less than the hidden number')
         return guess_number(count)
