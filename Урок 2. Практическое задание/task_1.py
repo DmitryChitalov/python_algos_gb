@@ -28,3 +28,29 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def calculatian ():
+    sign_value = input('Введите опреацию (+, -, *, / или "0" для выхода) ')
+    while sign_value not in ('+', '-', '*', '/','0'):
+        print('Введден не верный символ операции. Попробуйте снова ')
+    if sign_value == '0':
+        print('Завершение программы')
+        return
+    else:
+        try:
+            first_value = int(input('Введите первое число: '))
+            second_value = int(input('Введите второе число: '))
+            if sign_value == '+':
+                print(f'При сумме =  {first_value + second_value}')
+            elif sign_value == '-':
+                print(f'При вычитании = {first_value - second_value}')
+            elif sign_value == '*':
+                print(f'При умножении = {first_value * second_value}')
+            elif sign_value == '/':
+                print(f'При делении = {first_value / second_value}')
+        except ValueError:
+            print('Введено не верное числовое значение')
+        except ZeroDivisionError:
+            print('Деление на 0 == невозможно')
+        calculatian()
+
+calculatian()

@@ -15,3 +15,17 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+def num_turnover (us_inp, start_empty_list):
+    list_ui = list(us_inp)
+    start_empty_list.append(list_ui[-1])
+    list_ui.pop(-1)
+    if len(list_ui) <= 0:
+        print(f"Перевернутое число: {''.join(start_empty_list)}")
+        return
+    else:
+        remains = int(us_inp) // 10
+        return num_turnover (str(remains), start_empty_list)
+
+user_input =  input('Введите число, которое требуется перевернуть: ')
+start_empty_list = []
+num_turnover(user_input, start_empty_list)
