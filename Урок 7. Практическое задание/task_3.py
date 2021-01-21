@@ -13,3 +13,25 @@
 arr[m]
 from statistics import median
 """
+import random
+
+
+def gnome_sort(orig_list):
+    i = 1
+    while i < len(orig_list):
+        if not i or orig_list[i - 1] <= orig_list[i]:
+            i += 1
+        else:
+            orig_list[i], orig_list[i - 1] = orig_list[i - 1], orig_list[i]
+    return orig_list
+
+
+def median(orig_list):
+    return gnome_sort(orig_list)[len(orig_list) // 2]
+
+
+m = int(input('Введите m: '))
+
+orig_list = [random.randint(0, 100) for i in range(2 * m + 1)]
+print(f'Исходный массив {orig_list}')
+print(f'Медиана {median(orig_list)}')
