@@ -17,12 +17,12 @@
 """
 
 
-def mirror_number(number: int) -> int:
+def mirror_number(number: int) -> str:
     rest_number, numeral = divmod(number, 10)
     if rest_number == 0:
-        return numeral
+        return str(numeral)
     else:
-        return int(str(numeral) + str(mirror_number(rest_number)))
+        return str(numeral) + str(mirror_number(rest_number))
 
 
-print(mirror_number(123456789))
+print(mirror_number(1234567890))
