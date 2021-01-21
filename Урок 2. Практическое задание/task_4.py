@@ -9,3 +9,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def summary_recurs (us_ip, start_param = 1, param_lst = []):
+    if us_ip >= 0: 
+        start_param /= 2
+        param_lst.append(start_param)
+        us_ip -= 1
+        return summary_recurs (us_ip, start_param)
+    else:
+        return float(sum(param_lst))
+
+user_input = int(input('Введите колличество элементов: '))
+print(f'Количество элементов - {user_input}, их сумма - {summary_recurs(user_input)}')
