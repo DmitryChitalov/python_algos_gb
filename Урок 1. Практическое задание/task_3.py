@@ -22,3 +22,32 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+d = {'1d':3, '2a':2, '3f':6}
+
+def maximum(dictionary):
+    list_profit = []
+    for key in dictionary:
+        list_profit.append(dictionary.get(key))
+    result = list_profit[0]
+    for i in range(len(list_profit)):
+        for j in range(len(list_profit)):
+            if list_profit[j] > list_profit[i] and list_profit[j] > result:
+                result = list_profit[j]
+    result = (list(dictionary.keys())[list(dictionary.values()).index(result)])
+    return result
+#O(n^2)
+
+def maximum2(dictionary):
+    list_profit = []
+    for key in dictionary:
+        list_profit.append(dictionary.get(key))
+    result = list_profit[0]
+    for i in range(len(list_profit)):
+        if list_profit[i] > result:
+            result = list_profit[i]
+    result = (list(dictionary.keys())[list(dictionary.values()).index(result)])
+    return result
+#O(n)
+#Эффективнее решение 2 так, как линейные операции проще квадратичных
+print(maximum(d))
+

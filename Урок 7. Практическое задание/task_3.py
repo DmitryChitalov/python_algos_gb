@@ -11,5 +11,22 @@
 который не рассматривался на уроках: Шелла, Гномья, ...
 
 arr[m]
-from statistics import median
 """
+from random import randrange
+from statistics import median
+
+m = int(input('chislo'))
+massive = [randrange(-100, 100) for i in range(2*m+1)]
+print(massive)
+
+print('Решение встроенной функцией', median(massive))
+
+#Решение моей фукнцией
+
+def mediana(array):
+    middle = len(array)/2
+    while middle > 0.5:
+        array.pop(array.index(max(array)))
+        middle-=1
+    return max(array)
+print(mediana(massive))
