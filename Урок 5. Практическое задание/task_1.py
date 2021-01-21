@@ -25,3 +25,37 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import deque
+
+company_amount = int(input("Введите кол-во компаний: "))
+company_info_deque = deque()
+average_deque = deque()
+
+while company_amount:
+    company_name = input("Введите название предприятия: ")
+    income = input("Через пробел введите прибыль данного предприятия "
+                   "за каждый квартал(Всего 4 квартала): ")
+    income = list(map(lambda x: int(x), income.split(" ")))
+    income.insert(0, company_name)
+    company_info_deque.append(income)
+    company_amount -= 1
+
+[average_deque.append([x[0], sum(x[1:])]) for x in company_info_deque]
+
+average_income = 0
+for x in average_deque:
+    average_income += x[1]
+
+average_income = average_income / len(average_deque)
+
+print(f"Средняя годовая прибыль всех предприятий: {average_income}")
+
+print("Предприятия, с прибылью выше среднего значения: ", end='')
+for x in average_deque:
+    if x[1] > average_income:
+        print(x[0], end=' ')
+
+print("\nПредприятия, с прибылью ниже среднего значения: ", end=' ')
+for x in average_deque:
+    if x[1] < average_income:
+        print(x[0], end='')
