@@ -8,4 +8,29 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+
+Подсказка:
+Базовый случай здесь - угадали число или закончились попытки
 """
+from random import randint
+
+
+def guess_game(number, count):
+    if count < 0:
+        print("Вы проиграли")
+        return 0
+    i = int(input('Введите число: '))
+    if i < number:
+        print("Число больше введенного")
+        guess_game(number, count - 1)
+    elif i > number:
+        print("Число меньше введенного")
+        guess_game(number, count - 1)
+    elif i == number:
+        print("Вы угадали!")
+        return 0
+
+
+if __name__ == '__main__':
+
+    guess_game(randint(0, 100), 10)

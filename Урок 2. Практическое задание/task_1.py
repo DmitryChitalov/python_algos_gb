@@ -28,3 +28,28 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def main():
+    sign = input('введите знак опрерации: +, -, *, / или 0 для выхода\n')
+    if sign == '0':
+        return 0
+    if sign in '+-*/':
+        first = int(input('Введите первое число: '))
+        second = int(input('Введите второе число: '))
+        if sign == '+':
+            print(f'результат операции {first} {sign} {second} = {first + second}')
+        elif sign == '-':
+            print(f'результат операции {first} {sign} {second} = {first - second}')
+        elif sign == '*':
+            print(f'результат операции {first} {sign} {second} = {first * second}')
+        elif sign == '/':
+            try:
+                print(f'результат операции {first} {sign} {second} = {first / second}')
+            except ZeroDivisionError as e:
+                print(f'ERROR: {e}')
+    main()
+
+
+if __name__ == '__main__':
+    main()
