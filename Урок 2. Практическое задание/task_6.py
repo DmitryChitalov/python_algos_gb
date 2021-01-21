@@ -9,3 +9,32 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+hidden_n = random.randint(0, 101)
+
+
+def guess_number(count=0):
+    while True:
+        try:
+            user_answer = int(input('Enter number 0-100: '))
+            if not 0 <= user_answer <= 100:
+                raise ValueError
+        except ValueError:
+            print('You should enter a number 0-100')
+        else:
+            break
+    count += 1
+    if hidden_n == user_answer:
+        return 'You win!'
+    elif count == 10:
+        return f'You lose. Number is {hidden_n}'
+    elif user_answer < hidden_n:
+        print('Your number is less than the hidden number')
+        return guess_number(count)
+    else:
+        print('Your number is greater than the hidden number')
+        return guess_number(count)
+
+
+print(guess_number())
