@@ -20,13 +20,25 @@
 Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
 С одновременным замером времени (timeit.default_timer())!
 """
-
-from memory_profiler import profile
+import time
+from memory_profiler import memory_usage
 
 extend_list = [el for el in range(100000)]
 
 
-@profile
+def benchmark(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        m_start = memory_usage()
+        res = func(*args, **kwargs)
+        m_end = memory_usage()
+        end = time.time()
+        print(f'method => {func.__name__}\n\ttime => {end - start} sec, memory => {m_end[0] - m_start[0]}')
+        return res
+
+    return wrapper
+
+@benchmark
 def init_list():
     lst = []
     for i in range(200000):
@@ -34,12 +46,12 @@ def init_list():
     return lst
 
 
-@profile
+@benchmark
 def init_list_gen():
     return [el for el in range(20000)]
 
 
-@profile
+@benchmark
 def init_dict():
     dict = {}
     for i in range(200000):
@@ -47,18 +59,18 @@ def init_dict():
     return dict
 
 
-@profile
+@benchmark
 def add_to_list(lst):
     for i in range(200000, 300000):
         lst.append(i)
 
 
-@profile
+@benchmark
 def add_to_list_extend(lst, ext_lst):
     lst.extend(ext_lst)
 
 
-@profile
+@benchmark
 def add_to_dict(dict):
     for i in range(200000, 300000):
         dict[i] = i
@@ -127,4 +139,19 @@ Line #    Mem usage    Increment  Occurences   Line Contents
     55                                         def add_to_dict(dict):
     56    105.7 MiB      0.0 MiB      100001       for i in range(200000, 300000):
     57    105.7 MiB      3.1 MiB      100000           dict[i] = i
+    
+Общие данные полученные с помощью декоратора, 
+по которым видна разница по использованию памяти при создании массива обычным способом(for + append) и генератором
+method => init_list
+	time => 0.2327899932861328 sec, memory => 7.78125
+method => init_list_gen
+	time => 0.21004915237426758 sec, memory => 0.796875
+method => init_dict
+	time => 0.23703384399414062 sec, memory => 25.03515625
+method => add_to_list
+	time => 0.22006011009216309 sec, memory => 3.12109375
+method => add_to_list_extend
+	time => 0.20840668678283691 sec, memory => 0.01171875
+method => add_to_dict
+	time => 0.22244501113891602 sec, memory => 3.1015625
 """
