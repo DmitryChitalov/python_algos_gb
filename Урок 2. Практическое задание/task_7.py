@@ -6,3 +6,16 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def sum_calc(num: int) -> int:
+    if num == 1:
+        return 1
+
+    return num + sum_calc(num - 1)
+
+
+n = int(input('Введите число: '))
+print(sum_calc(n) == n * (n + 1) / 2)
