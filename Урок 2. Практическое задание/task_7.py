@@ -15,6 +15,7 @@ def sum_natural(number: int) -> int:
         return sum_natural(number - 1) + number
 
 
-n = 100
-print(f' Сумма ряда натуральных чисел от 1 до {n} = {n}*({n}+1)/2: ',
-      sum_natural(n) == n * (n + 1) / 2)
+n = 99
+print(f'Сумма ряда натуральных чисел от 1 до {n} = {sum_natural(n)}\n'
+      f'Выражение: {n}*({n}+1)/2 = {n * (n + 1) / 2}\n'
+      f'Равенство верно: ', sum_natural(n) == n * (n + 1) / 2)
