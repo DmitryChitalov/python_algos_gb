@@ -29,6 +29,7 @@ def bubble_sort(lst_obj):
     return lst_obj
 
 
+# Постараемся доработать фунцию ---- 4
 def bubble_sort_opt(lst_obj):
     n = 1
     m = 0  # введем еще один счетчик присвоив ему значение ноль
@@ -59,7 +60,7 @@ print(f'Исходный список {origin_list}')
 print(f'Список отсортированный функцией без доработки {bubble_sort(origin_list[:])}')
 print(f'Список отсартированный функцией с доработкой {bubble_sort_opt(origin_list[:])}')
 
-# сделаем замеры
+# сделаем замеры ---- 5
 print('Время функции без доработки', end=': ')
 print(timeit("bubble_sort(origin_list[:])", setup="from __main__ import bubble_sort, origin_list", number=1000))
 print('Время функции с доработкой', end=': ')
