@@ -50,3 +50,21 @@ def task_6(trys_count=10):
 
 
 task_6()
+
+
+# attempt 2 (GB method)
+def recur_method(count, numb):
+    print(f'Attempt {count}')
+    answer = int(input('Enter your number in range [1: 100]: '))
+    if count == 10 or answer == numb:
+        if answer == numb:
+            print('Correct!')
+        print(f'The number is {numb}')
+    else:
+        if answer > numb:
+            print(f'No, you need a smaller (<{answer}) number.')
+        else:
+            print(f'No, you need a bigger (>{answer}) number.')
+        recur_method(count + 1, numb)
+
+recur_method(1, randint(0, 100))

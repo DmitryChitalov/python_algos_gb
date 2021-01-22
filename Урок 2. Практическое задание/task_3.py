@@ -38,3 +38,14 @@ def task_3():
 
 
 print(task_3())
+
+
+# attempt 2 (GB method)
+def revers_number(numb):
+    if len(numb) == 1:
+        return numb
+    else:
+        return str(int(numb) % 10) + revers_number(str(int(numb) // 10))
+
+user_number = input('Enter your number: ')
+print(f'Your reversed number: {revers_number(user_number)}')

@@ -36,26 +36,26 @@ def task_1():
         # есть недоработки, исключаются try / exept ValueError
     """
     symbols = ['+', '-', '*', '/', 'o']
-    znak = input('enter operator from list [+, -, /, *], or "o" for finish - ')
-    if znak not in symbols:
+    sign = input('enter operator from list [+, -, /, *], or "o" for finish - ')
+    if sign not in symbols:
         print(f'data error!')
         task_1()
-    elif znak.lower() == 'o':
+    elif sign.lower() == 'o':
         print('finish')
     else:
         a = int(input('chislo 1 - '))
         b = int(input('chislo 2 - '))
-        if znak == '+':
-            print(f'{a}{znak}{b}={a + b}')
-        elif znak == '-':
-            print(f'{a}{znak}{b}={a - b}')
-        elif znak == '*':
-            print(f'{a}{znak}{b}={a * b}')
-        elif znak == '/':
+        if sign == '+':
+            print(f'{a}{sign}{b}={a + b}')
+        elif sign == '-':
+            print(f'{a}{sign}{b}={a - b}')
+        elif sign == '*':
+            print(f'{a}{sign}{b}={a * b}')
+        elif sign == '/':
             if b == 0:
                 print(f'Data error, devision by zero!')
             else:
-                print(f'{a}{znak}{b}={a / b}')
+                print(f'{a}{sign}{b}={a / b}')
         task_1()
 
 
