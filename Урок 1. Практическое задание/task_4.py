@@ -2,7 +2,7 @@
 Задание 4.
 
 Для этой задачи:
-1) придумайте 1-3 решения (желательно хотя бы два)
+1) придумайте 2-3 решения (желательно хотя бы два)
 2) оцените сложность каждого решения в нотации О-большое
 3) сделайте вывод, какое решение эффективнее и почему
 
@@ -27,3 +27,52 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users_data = {
+    'Vova': ['123', True],
+    'Vlad': ['aaa', False],
+    'Vitalya': ['ccc', False],
+    'Viktor': ['nnn', False],
+    'Vika': ['lll', True],
+}
+
+
+def get_access_1(login, password):
+    if login in users_data:
+        if password == users_data[login][0]:  # 1
+            if users_data[login][1]:          # 2
+                print(f'Welcome {login}')
+            else:
+                print('You need to activate your account')
+        else:
+            print('Incorrect Password')
+    else:
+        print('Incorrect login')
+
+
+def get_access_2(login, password):
+    if login in users_data:
+        if password in users_data[login]:  # 3
+            if True in users_data[login]:  # 4
+                print(f'Welcome {login}')
+            else:
+                print('You need to activate your account')
+        else:
+            print('Incorrect Password')
+    else:
+        print('Incorrect login')
+
+
+""" казалось бы, решение особо не отличается, но вот сложность второго примера будет больше,
+т.к. в первый раз мы делали проверки 1 и 2 по индексу и сложность была O(1), 
+а во втором случае, мы делали проверки 3 и 4 через итерацию по всему списку, а это уже сложность O(n)
+Конечная сложность алгоритмов:
+O(n) + O(1) + O(1) =    O(n) + 2   = O(n) 
+O(n) + O(n) + O(n) =    3 * O(n)   = O(n) 
+И пусть итоговая сложность алгоритма одинаковая, у первой больше линейных, чем у второй
+"""
+
+check_list = [['Vova', '123'], ['Vlad', 'aa'], ['Vlad', 'aaa'], ['Yan', 'aaa']]
+
+for log, pas in check_list:
+    print(get_access_1(log, pas) == get_access_2(log, pas), '\n')
