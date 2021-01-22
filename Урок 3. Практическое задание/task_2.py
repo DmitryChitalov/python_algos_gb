@@ -15,3 +15,21 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+from uuid import uuid4
+
+def gen_passw():
+
+    salt = uuid4().hex  
+
+    passw_1 = input('Введите пароль: ')
+    get_hex_passwd = hashlib.sha256(salt.encode() + passw_1.encode()).hexdigest() # 6c128439ba90b01c9e836d7de37fd239fdeaf755ad880c15cc87c50eb81f7813
+
+    passw_2 = input('Введите пароль повторно: ')
+    get_hex_2 = hashlib.sha256(salt.encode() + passw_2.encode()).hexdigest() #6c128439ba90b01c9e836d7de37fd239fdeaf755ad880c15cc87c50eb81f7813
+
+    if get_hex_passwd == get_hex_2:
+        return f'Вы ввели правильный пароль'
+    return 'Вы ввели неправильный пароль'
+
+print(gen_passw())

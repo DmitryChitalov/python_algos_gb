@@ -27,3 +27,47 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# 1) Сложность О(1)
+class Auth:
+    def __init__(self, login, passwd, authoriz=True):
+        self.login = login
+        self.passwd = passwd
+        self.authoriz = authoriz
+    def __check__(self):
+        if self.authoriz == True:
+            return f'Passed'
+        else:
+            return f'You`ll need to activate your acc'
+
+
+first = Auth('john', 'Abaas', True)
+second = Auth('jane', 'Bas123', True)
+third = Auth('dave', 'Bopo123', False)
+
+print(first.__check__())
+print(second.__check__())
+print(third.__check__())
+
+# 2) Сложность О(1)
+
+users_dict = {'user1': { 'passwd': 'ffA', 'authorized': True}, 
+'user2': { 'passwd': 'ddaffA', 'authorized': True}, 
+'user3': {'passwd': 'dddaB', 'authorized': False}}
+
+def check_auth(login, passwd, authorized):
+    if login in users_dict:
+        if users_dict[login]['passwd'] == passwd:
+            if authorized == True:
+                return f'Passed'
+            else:
+                return f'You`ll need to activate your acc'
+    else:
+        return f'Wrong login name'
+
+
+print(check_auth('user3', 'dddaB', False))
+print(check_auth('user2', 'ddaffA', True))
+print(check_auth('user4', 'ddaffA', True))
+
+""" Оба варианта имеют константную сложность, оба варианта оптимальны """
