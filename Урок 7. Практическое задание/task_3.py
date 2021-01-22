@@ -44,8 +44,6 @@ while True:
     else:
         arr = [randint(1, 100) for _ in range(2 * m + 1)]
         print(f'Исходный массив:\n{arr}')
-        med = median(arr)
-        med2 = quick_select(arr, m)
         print(f'Медиана statistics: {median(arr)}')
-        print(f'Медиана quick_search: {quick_select(arr, m)}')
+        print(f'Медиана quick_select: {quick_select(arr, m)}')
         break
