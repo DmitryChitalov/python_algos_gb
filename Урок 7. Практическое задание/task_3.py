@@ -13,3 +13,33 @@
 arr[m]
 from statistics import median
 """
+from random import randint
+from statistics import median
+
+m = 3
+test_list = [randint(0,10) for _ in range(2*m+1)]
+print(test_list)
+
+def gnome(data):
+    i, size = 1, len(data)
+    while i < size:
+        if data[i - 1] <= data[i]:
+            i += 1
+        else:
+            data[i - 1], data[i] = data[i], data[i - 1]
+            if i > 1:
+                i -= 1
+    return data
+
+
+print(gnome(test_list))
+print(f'Медиана списка - {test_list[m]}')
+print(f'Проверка - {median(test_list)}')
+
+"""
+Результаты:
+    [4, 10, 5, 7, 6, 1, 4]
+    [1, 4, 4, 5, 6, 7, 10]
+    Медиана списка - 5
+    Проверка - 5
+"""
