@@ -13,8 +13,24 @@
 arr[m]
 from statistics import median
 """
+"""
+3. Массив размером 2m + 1, где m – натуральное число, заполнен случайным образом.
+Найдите в массиве медиану. Медианой называется элемент ряда, делящий его на
+две равные части: в одной находятся элементы, которые не меньше медианы,
+в другой – не больше медианы.
 
+Задачу можно решить без сортировки исходного
+массива.
+
+Но если это слишком сложно, то используйте метод сортировки,
+который не рассматривался на уроках: Шелла, Гномья, ...
+
+arr[m]
+from statistics import median
+"""
 import random
+
+import timeit
 
 
 def median(list1, n):
@@ -49,6 +65,14 @@ n = 3
 array = [random.randint(-100, 100) for _ in range(2 * n + 1)]
 print(f'Исходный массив {array}')
 print(f'Медиана {median(array, n)}')
+print(timeit.timeit("median(array,n)", \
+    setup="from __main__ import median, array,n", number=1))
+
+""" здесь на первом алгоритме сортировка не использовалась  а во втаром алгоритме использовалось 
+ и время выпольнение первого  2.1800000000002373e-05
+ а второго  6.499999999576289e-06
+ второй быстрее чем первый"""
+
 """ решение с гномьей"""
 import numpy
 
@@ -68,3 +92,6 @@ def gnome(data):
 n=int(input("vvedite n"))
 array = [random.randint(-100, 100) for _ in range(2 * n + 1)]
 print(gnome(array))
+
+print(timeit.timeit("gnome(array)", \
+    setup="from __main__ import gnome, array", number=1))
