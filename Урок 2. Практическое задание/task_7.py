@@ -6,3 +6,18 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def test_theory(n, i=1, res=0):
+    if i - n:
+        res += i
+        print(res, "   ", end="")
+        print((i * (i + 1)) / 2)
+        return test_theory(n, i + 1, res)
+    else:
+        print(res + i, "   ", end="")
+        print((i * (i + 1)) / 2)
+        exit()
+
+
+x = input("введите число ")
+test_theory(int(x))

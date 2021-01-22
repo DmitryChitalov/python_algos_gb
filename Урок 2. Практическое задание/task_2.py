@@ -16,3 +16,19 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd_score(int_string, score=0):
+    if len(int_string) > 1:
+        i = int(int_string[0]) % 2
+        score += i
+        return even_odd_score(int_string[1:], score)
+    else:
+        i = int(int_string[0]) % 2
+        score += i
+        return score
+
+
+x = input("введите число: ")
+res_odd = even_odd_score(x)
+print(f'нечётных: {res_odd}, чётных: {len(x) - res_odd}')

@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def print_ascii(i=1):
+    if i < (128 - 31):
+        if i % 10:
+            print(f'{31 + i} - {chr(31 + i)} ', end='')
+            i += 1
+            return print_ascii(i)
+        else:
+            print(f'{31 + i} - {chr(31+i)}')
+            i += 1
+            return print_ascii(i)
+    else:
+        exit()
+
+
+print(print_ascii())
