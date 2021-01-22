@@ -16,3 +16,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def even_odd(num, even=0, odd=0):
+    if num == 0:
+        return even, odd
+    else:
+        n = num % 10
+        num = num // 10
+        if n % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        return even_odd(num, even, odd)
+
+
+print(even_odd(325543))
