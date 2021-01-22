@@ -13,3 +13,28 @@
 arr[m]
 from statistics import median
 """
+
+import random
+from statistics import median
+
+
+def gnome_sort(sample):
+    i = 1
+    while i < len(sample):
+        if not i or sample[i - 1] <= sample[i]:
+            i += 1
+        else:
+            sample[i], sample[i - 1] = sample[i - 1], sample[i]
+            i -= 1
+    return sample
+
+
+def my_median(sample):
+    return gnome_sort(sample)[len(sample) // 2]
+
+
+m = int(input('Введите m - '))
+my_sample = [random.randint(-100, 100) for _ in range(2*m + 1)]
+
+print('Медиана с сортировкой массива -', my_median(list.copy(my_sample)))
+print('Медиана через statistics-', median(list.copy(my_sample)))
