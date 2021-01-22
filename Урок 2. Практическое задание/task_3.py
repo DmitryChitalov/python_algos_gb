@@ -15,3 +15,15 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+def reverse(numb):
+    if len(numb) == 1:
+        return numb
+    else:
+        last_number = str(int(numb) % 10)
+        numb = str(int(numb) // 10)
+        return last_number + reverse(numb)
+
+
+number = input('Введите число:')
+print(f'Результат переворачивания: {reverse(number)}')
