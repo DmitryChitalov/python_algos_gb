@@ -28,3 +28,36 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def calc_recurse():
+    operation = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+
+    if operation == '0':
+        return "Работа завершена!"
+    else:
+        if operation in '+-/*':
+            try:
+                num_1 = int(input("Введите первое число "))
+                num_2 = int(input("Введите второе число "))
+                if operation == '+':
+                    print(f'Результат: {num_1 + num_2}')
+                    return calc_recurse()
+                elif operation == '-':
+                    print(f'Результат: {num_1 - num_2}')
+                    return calc_recurse()
+                elif operation == '*':
+                    print(f'Результат: {num_1 * num_2}')
+                    return calc_recurse()
+                elif operation == '/':
+                    if operation != 0:
+                        print(f'Результат: {num_1 / num_2}')
+                    else:
+                        print("Делить на 0 нельзя")
+                    return calc_recurse()
+            except ValueError:
+                print("Введите трехзначное число")
+                calc_recurse()
+        else:
+            print("Введен неверный символ, попробуйте еще раз")
+            return calc_recurse()
+
+calc_recurse()
