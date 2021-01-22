@@ -28,3 +28,35 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def task_1():
+    """
+        Функция производит математическое действие, выбранное пользователем.
+        o - exit.
+        # есть недоработки, исключаются try / exept ValueError
+    """
+    symbols = ['+', '-', '*', '/', 'o']
+    znak = input('enter operator from list [+, -, /, *], or "o" for finish - ')
+    if znak not in symbols:
+        print(f'data error!')
+        task_1()
+    elif znak.lower() == 'o':
+        print('finish')
+    else:
+        a = int(input('chislo 1 - '))
+        b = int(input('chislo 2 - '))
+        if znak == '+':
+            print(f'{a}{znak}{b}={a + b}')
+        elif znak == '-':
+            print(f'{a}{znak}{b}={a - b}')
+        elif znak == '*':
+            print(f'{a}{znak}{b}={a * b}')
+        elif znak == '/':
+            if b == 0:
+                print(f'Data error, devision by zero!')
+            else:
+                print(f'{a}{znak}{b}={a / b}')
+        task_1()
+
+
+task_1()
