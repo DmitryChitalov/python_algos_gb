@@ -9,3 +9,24 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+def game(secret, i=0):
+    if i < 10:
+        x = input("введите число: ")
+        if secret == int(x):
+            print("вы угадали")
+            exit()
+        elif int(x) < secret:
+            print("загаданное число больше вашего варианта")
+            return game(secret, i + 1)
+        else:
+            print("загаданное число меньше вашего варианта")
+            return game(secret, i + 1)
+    else:
+        print("было загадано ", secret)
+        exit()
+
+
+secret = randint(0, 100)
+game(secret)

@@ -9,3 +9,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_of_elems(score, next_from_set=1, res=0):
+    if score:
+        res += next_from_set
+        next_from_set = -(next_from_set / 2)
+        return sum_of_elems(score-1, next_from_set, res)
+    else:
+        return res
+
+
+x = input("Введите количество элементов: ")
+print(f'Количество элементов - {x}, их сумма - {sum_of_elems(int(x))}')
