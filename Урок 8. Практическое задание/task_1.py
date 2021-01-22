@@ -24,8 +24,8 @@ from collections import Counter, namedtuple
 
 class Node(namedtuple('Node', ['left', 'right'])):
     def way(self, code, a):
-        self.left.walk(code, a + '0')
-        self.right.walk(code, a + '1')
+        self.left.way(code, a + '0')
+        self.right.way(code, a + '1')
     """
     Задаем структуру для нашего дерева
     """
@@ -54,7 +54,7 @@ def huffman_coder(str_obj):
     code = {}
     if h:
         [(freq, count, root)] = h
-        root.walk(code, '')
+        root.way(code, '')
     return code
 
 
