@@ -16,3 +16,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_evn(number, count_even=0, count_uneven=0):
+    """
+    Функция считает четные и нечетные цифры в натуральном числе
+    :param number:
+    :param count_even:
+    :param count_uneven:
+    :return:
+    """
+
+    if not number:
+        return print(f'Количество четных и нечетных цифр в числе равно: ({count_even}, {count_uneven})')
+    # n = number % 10
+    n, d = divmod(number, 10)
+    if d % 2 != 0:
+        count_even += 1
+    else:
+        count_uneven += 1
+    return count_evn(n, count_even, count_uneven)
+
+
+num = int(input('Введите натуральное число: '))
+count_evn(num)

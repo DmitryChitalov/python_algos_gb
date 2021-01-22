@@ -28,3 +28,39 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def get_calc():
+    """
+    Функция выполняет складывание, вычитание, деление и умноедние двух чисел
+    :return:
+    """
+    get_val = 0
+    operation = input('Введите операция (+, -, *, / или 0 для выхода): ')
+    if operation == '0':
+        return print('Вы завершили программу')
+    else:
+        number_1 = input('Введите первое число: ')
+        number_2 = input('Введите второе число: ')
+
+        if number_2 == '0' and operation == '/':
+            print('Деление на 0 невозможно')
+            number_2 = input('Введите второе число: ')
+        try:
+            number_1 = int(number_1)
+            number_2 = int(number_2)
+            if operation == '+':
+                get_val = number_1 + number_2
+            elif operation == '-':
+                get_val = number_1 - number_1
+            elif operation == '*':
+                get_val = number_1 * number_2
+            elif operation == '/':
+                get_val = number_1 / number_2
+            print(get_val)
+        except ValueError:
+            print('Вы вместо числа ввели буквы. Исправтесь!')
+    return get_calc()
+
+
+get_calc()

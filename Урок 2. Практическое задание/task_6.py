@@ -9,3 +9,23 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def game_ugadaika(num, n=9):
+    user_answer = int(input('Попробуйте отгадать число: '))
+    if n == 0:
+        return f'Вы проиграли. У вас не осталось попыток. Правильный отве: {num}'
+    elif user_answer == num:
+        return f'Поздравляю вы отгадали!'
+    else:
+        if user_answer > num:
+            print('Загаданное число меньше')
+        else:
+            print('Загаданное число больше')
+        return game_ugadaika(num, n - 1)
+
+
+number = random.randint(0, 100)
+# print(number)
+print(game_ugadaika(number))

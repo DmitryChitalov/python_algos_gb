@@ -15,3 +15,19 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def reverse_num(number):
+    """
+    Функция переворачивает число
+    :param number:
+    :return:
+    """
+    if len(number) == 1:
+        return number
+    else:
+        return str(int(number) % 10) + reverse_num(str(int(number) // 10))
+
+
+num = input('Введите число: ')
+print(f'Перевернутое число: {reverse_num(num)}')
