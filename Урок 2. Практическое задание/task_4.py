@@ -9,3 +9,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def summ_func(count, numb, numb_count, numb_summ):
+    if count == numb_count:
+        print(f'Количество элементов {numb_count}, сумма элементов: {numb_summ}')
+
+    if count < numb_count:
+        count += 1
+        numb = (numb/2) * (-1)
+        numb_summ += numb
+        return summ_func(count, numb, numb_count, numb_summ)
+
+
+numbers_count = int(input('Введите количество элементов:'))
+first_number = 1
+counter = 0
+numb_summ = 0
+
+
+summ_func(counter, first_number, numbers_count, numb_summ)

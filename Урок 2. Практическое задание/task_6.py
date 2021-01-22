@@ -9,3 +9,28 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def guess(count, numb):
+    user_numb = int(input(f'Попытка № {count}. Введите число от 0 до 100:'))
+    if count == 10 or user_numb == numb:
+        if user_numb == numb:
+            print('Вы угадали число! Поздравляем!')
+        else:
+            print(f'К сожалению вы проиграли. Загданное число: {numb}')
+        return 'Exit'
+    else:
+        if user_numb > numb:
+            print('Вы загадали слишком большое число')
+        else:
+            print('Вы загадали слишком маленькое число')
+        count += 1
+        return guess(count, numb)
+
+
+number = random.randint(0, 100)
+counts = 1
+
+guess(counts, number)

@@ -16,3 +16,20 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def numbers(numb, even=0, not_even=0):
+    if numb == 0:
+        return even, not_even
+    else:
+        last_number = numb % 10
+        numb = numb // 10
+        if last_number % 2 == 0:
+            even += 1
+            return numbers(numb, even, not_even)
+        else:
+            not_even += 1
+        return numbers(numb, even, not_even)
+
+
+number = int(input('Введите натруальное число:'))
+print(f'Количество четных и нечетных цифр: {numbers(number)}')
