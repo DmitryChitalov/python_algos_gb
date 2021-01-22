@@ -22,3 +22,15 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+#  В реализации ниже алгоритм сложности O(N logN) из-за sorted, lambda и срез имеют сложность O(N). В данном случае
+#  сложность определяется O(N logN).
+companies_profit = {
+    ('VPK-Oil', 8554117),
+    ('GAZPROMNEFT-ONPZ', 66562248),
+    ('Total-Oil', 6554323),
+    ('Sibneft', 745423),
+    ('Tatneft', 87656452),
+    ('Schekino-Azot', 655421),
+    ('VNZM', -135454)}
+
+print(sorted(companies_profit, key= lambda x: x[1], reverse=True)[:3])
