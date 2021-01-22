@@ -9,3 +9,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def summ_num(i, num, count, summ):
+    if i == count:
+        print(f"Количество элементов {count}, сумма элеметов {summ}")
+    if i < count:
+        return summ_num(i + 1, num /2 * -1, count, summ+num)
+
+try:
+    count = int(input("Ввведите количество элементов: "))
+    summ_num(0, 1, count, 0)
+except ValueError:
+    print("Введите число еще раз!")
