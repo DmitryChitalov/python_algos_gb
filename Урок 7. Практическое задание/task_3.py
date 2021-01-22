@@ -13,3 +13,47 @@
 arr[m]
 from statistics import median
 """
+
+from statistics import median
+import random
+import timeit
+
+
+def gnome_sort(our_list):
+    k = 1
+    while k < len(our_list):
+        if not k or our_list[k] >= our_list[k - 1]:
+            k += 1
+        else:
+            our_list[k], our_list[k - 1] = our_list[k - 1], our_list[k]
+            k -= 1
+    return our_list
+
+
+def gnome_median(our_list):
+    return gnome_sort(our_list)[len(our_list) // 2]
+
+
+m = int(input('Введите m: '))
+list_sort = [random.randint(0, 100) for _ in range(2 * m + 1)]
+print(f'Исходный массив: {list_sort}')
+
+print(f'Через встроенную - {median(list_sort)}')
+print(f'Через сортировку Гномья - {gnome_median(list_sort)}')
+
+print(timeit.timeit('median(list_sort[:])',
+                    setup='from __main__ import list_sort, median',
+                    number=1000))
+
+print(timeit.timeit('gnome_median(list_sort[:])',
+                    setup='from __main__ import list_sort, gnome_median',
+                    number=1000))
+
+
+"""
+Исходный массив: [52, 77, 7, 0, 11, 54, 8, 2, 87, 11, 71, 64, 97, 97, 4, 77, 11, 85, 6, 69, 86, 90, 67, 87, 13, 25, 45, 85, 11, 23, 81, 34, 31, 6, 69, 95, 32, 3, 78, 49, 52, 73, 83, 93, 28, 99, 83, 30, 28, 73, 50, 40, 67, 62, 20, 35, 27, 5, 15, 2, 1, 39, 68, 61, 76, 7, 35, 34, 77, 66, 67, 89, 5, 85, 32, 51, 51, 70, 85, 92, 74, 68, 19, 97, 71, 88, 98, 0, 14, 94, 8, 87, 25, 95, 3, 25, 28, 8, 17, 74, 25, 42, 8, 52, 94, 68, 90, 0, 58, 9, 42, 78, 79, 41, 39, 99, 30, 88, 79, 56, 72, 96, 57, 81, 59, 19, 39, 90, 51, 46, 16, 55, 72, 66, 70, 100, 73, 79, 63, 99, 66, 16, 46, 55, 80, 68, 10, 54, 37, 65, 82, 57, 71, 85, 11, 67, 98, 93, 65, 41, 44, 27, 17, 73, 82, 8, 30, 60, 38, 78, 67, 93, 41, 94, 50, 0, 38, 11, 31, 6, 34, 48, 63, 25, 100, 17, 84, 81, 32, 71, 57, 4, 74, 8, 84, 24, 79, 53, 88, 72, 30]
+Через встроенную - 56
+Через сортировку Гномья - 56
+0.0026269869999997475
+0.04270941100000014
+"""
