@@ -22,3 +22,37 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+data_firm = {'firm_1': 5000, 'firm_2': 7000, 'firm_3': 8500, 'firm_4': 2000, 'firm_5': 3500}
+
+# первое решение сложность O(nlog n) - линейно-логарифмическая
+
+one_top3 = sorted(data_firm.items(), key=lambda value: value[1], reverse=True)
+print(one_top3[:3])
+
+# второе решение O(n**2) квадратичная сложность "пузырьковый алгоритм"
+
+
+def find_max(lst):
+    flag = True
+    while flag:
+        flag = False
+        for i in range(len(lst) - 1):
+            if lst[i][1] < lst[i + 1][1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+                flag = True
+    return lst[:3]
+
+
+two_top3 = list(data_firm.items())
+print(find_max(two_top3))
+
+
+
+
+
+
+
+
+
+

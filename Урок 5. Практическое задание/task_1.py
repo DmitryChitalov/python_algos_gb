@@ -25,3 +25,68 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+
+count = 0
+firms = []
+sum_profit = 0
+
+while True:
+    try:
+        total_firm = int(input('Введите количество предприятий для расчета прибыли: '))
+        break
+    except ValueError:
+        print('Вы ввели не число. Попробуйте еще раз.')
+
+while count < total_firm:
+    count += 1
+    name = input('Введите название предприятия: ')
+    quarter = input('Через пробел введите прибыль данного предприятия\nза каждый квартал(4 квартала): ').split(' ')
+    quarters = []
+    for i in quarter:
+        if len(quarter) != 4:
+            print('Вы ошиблись и ввели не правильные данные прибыли предприятия. Попробуйте заново.')
+            raise SystemExit(1)
+        try:
+            quarters.append(int(i))
+        except ValueError:
+            print('Вы ошиблись и ввели не правильные данные прибыли предприятия. Попробуйте заново.')
+            raise SystemExit(1)
+    sum_quarters = sum(quarters)
+    result = namedtuple('firm', 'name quarter_1 quarter_2 quarter_3 quarter_4 sum_quarters')
+    try:
+        firm = result(
+            name=name,
+            quarter_1=quarters[0],
+            quarter_2=quarters[1],
+            quarter_3=quarters[2],
+            quarter_4=quarters[3],
+            sum_quarters=sum_quarters
+        )
+    except IndexError:
+        break
+    firms.append(firm)
+
+for i in range(len(firms)):
+    print(firms[i])
+    sum_profit += firms[i].sum_quarters
+
+try:
+    average_profit = sum_profit / len(firms)
+    print(f'Средняя годовая прибыль всех предприятий: {round(average_profit, 2)}')
+    more_avarage = ''
+    less_avarage = ''
+    for i in range(len(firms)):
+        if firms[i].sum_quarters > average_profit:
+            more_avarage += firms[i].name + ' '
+        else:
+            less_avarage += firms[i].name + ' '
+    print(f'Предприятия, с прибылью выше среднего значения: {more_avarage}')
+    print(f'Предприятия, с прибылью ниже среднего значения: {less_avarage}')
+except ZeroDivisionError:
+    print('Вы ошиблись и ввели не правильные данные. Попробуйте заново.')
+    
+"""
+Получилось очень много кода, пытался обработь максимум исключений, которые возникали. 
+Как лучше решать такие задачи, так как написал или лучше функциями?
+"""

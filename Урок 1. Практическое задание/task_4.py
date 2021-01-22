@@ -27,3 +27,36 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+# первое решение. Сложность линейная O(n), так как перебираем все элементы словаря:
+data_users = {'user': {'password': '123', 'activ': True}, 'user2': {'password': '456', 'activ': False}}
+
+login = input('login: ')
+password = input('password: ')
+
+
+def access(users, name, pswd):
+    for key, val in users.items():
+        if key == name:
+            if val['password'] == pswd and val['activ']:
+                return print('Доступ разрешен')
+            elif val['password'] == pswd and not val['activ']:
+                return print('Пройдите активацию')
+    return print("В доступе отказано")
+
+
+access(data_users, login, password)
+
+# второе решение Сложность константная, т.к. мы непосредственно обращаемся к ключу, без перебора.
+
+
+def access2(users, name, pswd):
+    if users.get(name):
+        val = users[name]
+        if val['password'] == pswd and val['activ']:
+            return print('Доступ разрешен')
+        elif val['password'] == pswd and not val['activ']:
+            return print('Пройдите активацию')
+    return print("В доступе отказано")
+
+
+access2(data_users, login, password)
