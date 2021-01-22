@@ -12,3 +12,71 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+import timeit
+from random import randint
+
+lst = [randint(-100, 100) for i in range(30)]
+
+
+# Исходный вариант алгоритма, сортировка по убыванию
+def bubble_sort1(num_lst):
+    for i in range(1, len(num_lst)):
+        for j in range(len(num_lst)-i):
+            if num_lst[j] < num_lst[j+1]:
+                num_lst[j], num_lst[j+1] = num_lst[j+1], num_lst[j]
+    return num_lst
+
+
+# Вариант оптимизации с прекращением сортировки после итерации без перемещений
+def bubble_sort2(num_lst):
+    for i in range(1, len(num_lst)):
+        exchanged = False
+        for j in range(len(num_lst)-i):
+            if num_lst[j] < num_lst[j+1]:
+                num_lst[j], num_lst[j+1] = num_lst[j+1], num_lst[j]
+                exchanged = True
+        if not exchanged:
+            break
+    return num_lst
+
+
+# В попытке придумать оптимизацию пузырька, у меня получилась реализация сортировки выбором:
+# на каждой итерации ищется максимальный элемент справа от текущей позиции и ставится на своё место.
+def bubble_sort3(num_lst):
+    for i in range(len(num_lst) - 1):
+        for j in range(i + 1, len(num_lst)):
+            if num_lst[i] < num_lst[j]:
+                num_lst[i], num_lst[j] = num_lst[j], num_lst[i]
+    return num_lst
+
+
+lst1 = lst.copy()
+print(lst)
+print(f'Сортировка пузырьком:\n{bubble_sort1(lst1)}')
+print(timeit.timeit("bubble_sort1(lst1)", setup="from __main__ import bubble_sort1, lst1", number=100))
+
+lst2 = lst.copy()
+print(f'Сортировка пузырьком с флагом:\n{bubble_sort2(lst2)}')
+print(timeit.timeit("bubble_sort2(lst2)", setup="from __main__ import bubble_sort2, lst2", number=100))
+
+lst3 = lst.copy()
+print(f'Вариант 3:\n{bubble_sort3(lst3)}')
+print(timeit.timeit("bubble_sort3(lst3)", setup="from __main__ import bubble_sort3, lst3", number=100))
+
+'''
+[-20, -34, 87, -18, -26, -36, 5, 89, 83, 9, -6, -53, -79, 65, -22, 67, -47, 83, -3, -68, 71, -6, -54, 10, -61, -42, 58, -8, 77, -24]
+Сортировка пузырьком:
+[89, 87, 83, 83, 77, 71, 67, 65, 58, 10, 9, 5, -3, -6, -6, -8, -18, -20, -22, -24, -26, -34, -36, -42, -47, -53, -54, -61, -68, -79]
+0.00786564
+Сортировка пузырьком с флагом:
+[89, 87, 83, 83, 77, 71, 67, 65, 58, 10, 9, 5, -3, -6, -6, -8, -18, -20, -22, -24, -26, -34, -36, -42, -47, -53, -54, -61, -68, -79]
+0.0006923989999999963
+Вариант 3:
+[89, 87, 83, 83, 77, 71, 67, 65, 58, 10, 9, 5, -3, -6, -6, -8, -18, -20, -22, -24, -26, -34, -36, -42, -47, -53, -54, -61, -68, -79]
+0.006129409999999995
+'''
+# По результатам замеров оптимизация алгоритма пузырька с помощью флага дала ускорение.
+# И чем более упорядоченным массив был до сортировки, тем больший прирост скорости должна давать такая оптимизация.
+# Однако в худшем случае, когда ни один элемент на своем месте не стоит, смысла в этой оптимизации нет.
+
+
