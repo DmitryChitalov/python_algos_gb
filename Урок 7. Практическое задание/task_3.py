@@ -17,7 +17,6 @@ from statistics import median
 from random import randint, choice
 from statistics import median
 from collections import deque
-from timeit import timeit
 
 
 def median_cust_1(m, arr):
@@ -30,7 +29,7 @@ def median_cust_1(m, arr):
 
 def median_cust_2(arr, k=0):
     """
-    На много быстрее чем первый вариант реализации
+    Намного быстрее чем первый вариант реализации c возрастанием длины массива
     """
     if len(arr) == 1:
         return arr[0]
