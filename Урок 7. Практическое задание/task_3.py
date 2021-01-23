@@ -29,6 +29,9 @@ def median_cust_1(m, arr):
 
 
 def median_cust_2(arr, k=0):
+    """
+    На много быстрее чем первый вариант реализации
+    """
     if len(arr) == 1:
         return arr[0]
     if isinstance(arr, list):
@@ -53,10 +56,9 @@ def median_cust_2(arr, k=0):
 
 
 m = int(input('Введите m: '))
-arr = [randint(-10, 10) for _ in range(2 * m + 1)]
+arr = [randint(-50, 50) for _ in range(2 * m + 1)]
 
 print(f'Standart median : {median(arr)}')
 print(f'Custom median first : {median_cust_1(m, arr)}')
-print(timeit("median_cust_1(m, arr)", "from __main__ import median_cust_1, arr, m", number=100))
 print(f'Custom median second : {median_cust_2(arr)}')
-print(timeit("median_cust_2(arr)", "from __main__ import median_cust_2, arr", number=100))
+
