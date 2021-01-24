@@ -14,3 +14,9 @@
 р
 а
 """
+
+
+test_str = 'papa'
+l = len(test_str)
+print(f'Количество подстрок в строке "{test_str}": '
+      f'{len(set([test_str[b:b + a] for a in range(1, l) for b in range(l + 1 - a)]))}')
