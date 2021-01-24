@@ -33,3 +33,5 @@ def the_dict(elems):
 
 print(the_list(10))
 print(the_dict(10))
+
+# при заполнении словаря - время меньше
