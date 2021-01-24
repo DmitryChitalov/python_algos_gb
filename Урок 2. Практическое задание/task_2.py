@@ -16,3 +16,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def recur(number, even=0, odd=0):
+    try:
+        number = int(number)
+        if number == 0:
+            return print(even, odd)
+        my_num = number % 10
+        if my_num % 2 == 0:
+            even += 1
+            return recur(number // 10, even, odd)
+        else:
+            odd += 1
+            return recur(number // 10, even, odd)
+    except ValueError:
+        return recur(input("Пожалуйста введите целое положительное число!: "))
+
+
+
+recur(input("Пожалуйста введите целое положительное число: "))
+
