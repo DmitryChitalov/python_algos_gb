@@ -10,6 +10,7 @@
 """
 
 import random
+import timeit
 
 
 def merge_sort(sample):
@@ -48,3 +49,20 @@ el = int(input('Введите число элементов: '))
 sample = [random.uniform(0, 50) for _ in range(el)]
 print('Исходный- ', sample)
 print('Отсортированный- ', merge_sort(sample))
+
+sample = [random.randint(-100, 100) for _ in range(10)]
+print('10 elements: ',
+      timeit.timeit("merge_sort(sample[:])", setup="from __main__ import merge_sort, sample", number=100))
+
+sample = [random.randint(-100, 100) for _ in range(100)]
+print('100 elements: ',
+      timeit.timeit("merge_sort(sample[:])", setup="from __main__ import merge_sort, sample", number=100))
+
+sample = [random.randint(-100, 100) for _ in range(1000)]
+print('1000 elements: ',
+      timeit.timeit("merge_sort(sample[:])", setup="from __main__ import merge_sort, sample", number=100))
+
+# Очень быстрый алгоритм сортировки, пузырьковая сортировка сильно отстает с ростом числа элементов.
+# 10 elements:  0.004257899999999815
+# 100 elements:  0.06355449999999996
+# 1000 elements:  0.9406594999999998

@@ -17,6 +17,7 @@ import timeit
 import random
 
 
+
 def bubble_sort_revers(lst_obj):
     n = 1
     while n < len(lst_obj):
@@ -44,32 +45,32 @@ def bubble_sort_revers_upd(lst_obj):
 sample = [random.randint(-100, 100) for _ in range(10)]
 # замеры 10
 print('10 elements: ',
-      timeit.timeit("bubble_sort_revers(sample)", setup="from __main__ import bubble_sort_revers, sample", number=100))
+      timeit.timeit("bubble_sort_revers(sample[:])", setup="from __main__ import bubble_sort_revers, sample", number=100))
 print('10 elements(upd): ',
-      timeit.timeit("bubble_sort_revers_upd(sample)", setup="from __main__ import bubble_sort_revers_upd, sample", number=100))
+      timeit.timeit("bubble_sort_revers_upd(sample[:])", setup="from __main__ import bubble_sort_revers_upd, sample", number=100))
 
 sample = [random.randint(-100, 100) for _ in range(100)]
 # замеры 100
 print('100 elements: ',
-      timeit.timeit("bubble_sort_revers(sample)", setup="from __main__ import bubble_sort_revers, sample", number=100))
+      timeit.timeit("bubble_sort_revers(sample[:])", setup="from __main__ import bubble_sort_revers, sample", number=100))
 print('100 elements(upd): ',
-      timeit.timeit("bubble_sort_revers_upd(sample)", setup="from __main__ import bubble_sort_revers_upd, sample", number=100))
+      timeit.timeit("bubble_sort_revers_upd(sample[:])", setup="from __main__ import bubble_sort_revers_upd, sample", number=100))
 
 sample = [random.randint(-100, 100) for _ in range(1000)]
 # замеры 1000
 print('1000 elements: ',
-      timeit.timeit("bubble_sort_revers(sample)", setup="from __main__ import bubble_sort_revers, sample", number=100))
+      timeit.timeit("bubble_sort_revers(sample[:])", setup="from __main__ import bubble_sort_revers, sample", number=100))
 print('1000 elements(upd): ',
-      timeit.timeit("bubble_sort_revers_upd(sample)", setup="from __main__ import bubble_sort_revers_upd, sample", number=100))
+      timeit.timeit("bubble_sort_revers_upd(sample[:])", setup="from __main__ import bubble_sort_revers_upd, sample", number=100))
 
 '''
 Доработка алгоритма заключается в выходе из цикла, если за проход по массиву не сделана ни одна перестановка.
-Разница по времени очень заметна на массиве из 1000 элементов.
+На 10 и 100 элементах новый алгоритм быстрее, но на 1000 уже отстает.
 
-10 elements:  0.001326600000000011
-10 elements(upd):  0.00022369999999999335
-100 elements:  0.13967859999999999
-100 elements(upd):  0.0015913000000000177
-1000 elements:  13.8331978
-1000 elements(upd):  0.0170735999999998
+10 elements:       0.004643300000000003
+10 elements(upd):  0.0043138999999999955
+100 elements:       0.3178398
+100 elements(upd):  0.27572969999999997
+1000 elements:       24.895659600000002
+1000 elements(upd):  25.1038543
 '''
