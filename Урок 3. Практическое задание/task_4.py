@@ -12,20 +12,20 @@
 import hashlib
 url1 = 'https://yandex.ru'
 url2 = 'https://google.com'
-url_cash = []
+url_cash = {}
 salt = "salt"
 
 
-def url_casher(url):
+def url_hasher(url):
     return hashlib.sha256(salt.encode() + url.encode()).hexdigest()
 
 
 def url_check(url):
-    if url_casher(url) in url_cash:
-        print(f'{url} уже в списке')
+    if url_hasher(url) in url_cash.values():
+        print(f'{url} уже в кэше')
     else:
-        url_cash.append(url_casher(url))
-        print(f'{url} записан в кеш')
+        url_cash[url] = url_hasher(url)
+        print(f'{url} записан в кэш')
 
 
 url_check(url1)
