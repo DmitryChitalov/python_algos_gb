@@ -15,3 +15,12 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+salt = "users_login"
+users_password = "password"
+saved_hash = hashlib.sha256(salt.encode() + users_password.encode()).hexdigest()
+input_password = input(f'введите пароль: ')
+if saved_hash == hashlib.sha256(salt.encode() + input_password.encode()).hexdigest():
+    print("access allowed")
+else:
+    print("access denied")
