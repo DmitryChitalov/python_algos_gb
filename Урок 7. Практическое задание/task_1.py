@@ -12,3 +12,45 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+import random
+from timeit import timeit
+
+
+def bubble_sort(lst_obj):
+    flag = False
+
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+                flag = True
+        if not flag:
+            break
+        n += 1
+    return lst_obj
+
+
+orig_list = [random.randint(-100, 100) for _ in range(10)]
+
+print(f"Оригинальный список: {orig_list}")
+print(f"Отсортированный в порядке убывания список: {bubble_sort(orig_list[:])}")
+
+""" Результаты замеров после оптимизации """
+
+o_list = [random.randint(-100, 100) for _ in range(10)]
+
+print(f"Время сортировки неотсорированного массиива "
+      f"{timeit('bubble_sort(o_list)', setup='from __main__ import bubble_sort, o_list', number=1)}")
+
+# так как в 1-м измерении был передан массив, то он уже отсортирован.
+print(f"Время сортировки отсорированного массиива "
+      f"{timeit('bubble_sort(o_list)', setup='from __main__ import bubble_sort, o_list', number=1)}")
+
+"""
+Время сортировки неотсорированного массиива 8.100000000000468e-06
+Время сортировки отсорированного массиива 1.9999999999985307e-06
+
+Так как в оптимизированном алгоритме, если за 1-й проход по списку не было сортировки, то сортировка завершается. 
+Благодаря этому не тратится время на полный проход списка(так как это уже бесполезно).
+"""
