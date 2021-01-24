@@ -21,33 +21,29 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
-        # если у узла нет левого потомка
+        if new_node > self.root:
+            self.insert_right(new_node)
+            return
         if self.left_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.left_child = BinaryTree(new_node)
-        # если у узла есть левый потомок
+                self.left_child = BinaryTree(new_node)
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.left_child = self.left_child
-            self.left_child = tree_obj
+            if new_node > self.left_child.root:
+                self.left_child.insert_right(new_node)
+            else:
+                self.left_child.insert_left(new_node)
 
     # добавить правого потомка
     def insert_right(self, new_node):
-        # если у узла нет правого потомка
+        if new_node < self.root:
+            self.insert_left(new_node)
+            return
         if self.right_child == None:
-            # тогда узел просто вставляется в дерево
-            # формируется новое поддерево
-            self.right_child = BinaryTree(new_node)
-        # если у узла есть правый потомок
+                self.right_child = BinaryTree(new_node)
         else:
-            # тогда вставляем новый узел
-            tree_obj = BinaryTree(new_node)
-            # и спускаем имеющегося потомка на один уровень ниже
-            tree_obj.right_child = self.right_child
-            self.right_child = tree_obj
+            if new_node > self.right_child.root:
+                self.right_child.insert_right(new_node)
+            else:
+                self.right_child.insert_left(new_node)
 
     # метод доступа к правому потомку
     def get_right_child(self):
@@ -67,13 +63,56 @@ class BinaryTree:
 
 
 r = BinaryTree(8)
-print(r.get_root_val())
-print(r.get_left_child())
 r.insert_left(4)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
-print(r.get_right_child())
-print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
-print(r.get_right_child().get_root_val())
+r.insert_left(1)
+r.insert_right(6)  # Некорректная вставка (Значение меньше корневого)
+r.insert_right(25)
+r.insert_left(12)   # Некорректная вставка (Значение больше корневого)
+r.insert_right(14)
+r.insert_right(20)
+r.insert_right(13)
+r.insert_left(7)
+r.insert_left(5)
+
+print("Корень: ")
+print(r.get_root_val())
+
+print("Левая ветвь: ")
+print(r.get_left_child().root)
+print(r.get_left_child().get_left_child().root)
+print(r.get_left_child().get_right_child().root)
+print(r.get_left_child().get_right_child().get_right_child().root)
+print(r.get_left_child().get_right_child().get_left_child().root)
+
+print("Правая ветвь: ")
+print(r.get_right_child().root)
+print(r.get_right_child().get_left_child().root)
+print(r.get_right_child().get_left_child().get_right_child().root)
+print(r.get_right_child().get_left_child().get_right_child().get_right_child().root)
+print(r.get_right_child().get_left_child().get_right_child().get_left_child().root)
+
+"""
+Доработал реализацию вставки узлов для элементов бинарного дерева:
+1) Теперь, при попытке вставки элемента со значением меньше корневого в правую ветвь, он будет перенаправлен в левую ветвь,
+. Точно такое же поведение сделал для элемента со значением больше корневого.
+2) Доработал методы insert_left и insert_right, посредством  последователных и вложенных конструкций if ... else ...
+Вывод: ПОлучилось автоматизировать вставку любых элементовв бинарное дерево, даже если мы заносим некорректные значения,
+то элемент будет перенаправлен в противоположную ветвь.
+
+Результат работы программы:
+
+Корень: 
+8
+Левая ветвь: 
+4
+1
+6
+7
+5
+Правая ветвь: 
+25
+12
+14
+20
+13
+"""
