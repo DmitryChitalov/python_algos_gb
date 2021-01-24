@@ -11,3 +11,23 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+
+from collections import defaultdict
+import functools
+
+
+def hexnum(num1=list(), num2=list()):
+    lcl_nums = defaultdict(list)
+    lcl_nums[f'{num1}'] = num1
+    lcl_nums[f'{num2}'] = num2
+
+    lcl_sum = sum([int(''.join(el), 16) for el in lcl_nums.values()])
+    lcl_mul = functools.reduce(lambda a, b: a * b, [int(''.join(i), 16) for i in lcl_nums.values()])
+
+    return f"Сумма: {list('%X' % lcl_sum)}", f"Произведение: {list('%X' % lcl_mul)}"
+
+
+num1 = list(input(f"Введите 1-е натуральное шестнадцатиричное число: ").upper())
+num2 = list(input(f"Введите 2-е натуральное шестнадцатиричное число: ").upper())
+
+print(f"Операции с числами {num1} и {num2}: {hexnum(num1, num2)}")
