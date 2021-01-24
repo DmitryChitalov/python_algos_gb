@@ -15,3 +15,22 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import hashlib
+
+
+def authentication():
+    login = input('Введите логин: ')
+    password = input('Введите пароль: ')
+    password_hash = hashlib.sha256(login.encode('utf-8') + password.encode('utf-8')).hexdigest()
+    with open('hash_password.txt', 'w', encoding='utf-8') as f1:
+        f1.write(password_hash)
+    repeat_password = input('Пожалуйста введите пароль ещё раз: ')
+    repeat_password_hash = hashlib.sha256(login.encode('utf-8') + repeat_password.encode('utf-8')).hexdigest()
+    with open('hash_password.txt', 'r', encoding='utf-8') as f2:
+        if f2.read() == repeat_password_hash:
+            return 'Доступ предоставлен'
+        else:
+            return 'В доступе отказано'
+
+
+print(authentication())
