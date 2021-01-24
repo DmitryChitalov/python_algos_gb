@@ -23,7 +23,7 @@ def main():
     for i in range(len(source)+1):
         for j in range(i+1, len(source)+1):
             if source[i:j] and not (i == 0 and j == len(source)):
-                substrings.add(source[i:j])
+                substrings.add(hash(source[i:j]))
     print(substrings)
     print(f'Уникальных подстрок: {len(substrings)}')
 
