@@ -38,3 +38,20 @@ def user_str_count(user_input):
 
 
 user_str()
+
+# GB method
+# видимо, не понял задания
+
+s = input('Enter your string: ')
+r = set()
+
+N = len(s)
+for i in range(N):
+    if i == 0:
+        N = len(s) - 1
+    else:
+        N = len(s)
+    for j in range (N, i , -1):
+        print(s[i:j])
+        r.add(hashlib.sha1(s[i:j].encode('utf-8')).hexdigest())
+print(r)
