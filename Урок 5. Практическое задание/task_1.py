@@ -25,3 +25,25 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+card = namedtuple('card', 'name profit1 profit2 profit3 profit4')
+
+companies = [card('Рога', 235, 345634, 55, 235), card('Копыта', 345, 34, 543, 34)]
+
+average_list = []
+for company in companies:
+    average_list.append((company.profit1 + company.profit2 + company.profit3 + company.profit4)/4)
+
+total_average = sum(average_list) / len(average_list)
+profit_list = []
+looser_list = []
+
+for company in companies:
+    if (company.profit1 + company.profit2 + company.profit3 + company.profit4)/4 > total_average:
+        profit_list.append(company.name)
+    else:
+        looser_list.append(company.name)
+
+print(f'Компании, имеющие прибыль ниже среднего: {looser_list}')
+print(f'Компании, имеющие прибыль выше среднего: {profit_list}')
