@@ -34,3 +34,33 @@ def authentication():
 
 
 print(authentication())
+
+# дополнено 25.01.21:
+user_pass = input('Введите свой пароль: ')
+
+
+def authentication(user_input, sys_paswd='123'):
+    hash_user_input = hashlib.sha256(user_input.encode('utf-8')).hexdigest()
+    if user_input == sys_paswd:
+        user_input = input(f'1-ая проверка успешна. \
+        \nВ базе данных записана строка:\
+        \n{hash_user_input}\nДля завершения проверки\
+        \nВведите ваш пароль повторно: ')
+        hash_checkout_user_input = \
+            hashlib.sha256(user_input.encode('utf-8')).hexdigest()
+        if hash_checkout_user_input == hash_user_input:
+            print('Вы ввели верный пароль. Доступ предоставлен')
+        else:
+            u_inp = input('Пароли не совпадают. В доступе отказано\
+            \nПроцедура проверки начнется заново.\
+            \nВведите свой пароль ')
+            return authentication(u_inp, sys_paswd)
+        return
+    else:
+        u_inp = input('Пароли не совпадают. В доступе отказано\
+        \nПроцедура проверки начнется заново.\
+        \nВведите свой пароль ')
+        return authentication(u_inp, sys_paswd)
+
+
+authentication(user_pass)
