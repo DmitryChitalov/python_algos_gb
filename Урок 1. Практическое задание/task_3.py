@@ -22,3 +22,66 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+import copy
+
+def find_max_1(n, i_firm_stor):
+    if not i_firm_stor:
+        return
+    if n >= len(i_firm_stor):
+        return i_firm_stor
+
+    res = []
+    for k in range(n):
+        for i in i_firm_stor:
+            if i not in res:
+                res.append(i)
+                break
+
+        for i in i_firm_stor:
+            if i[1] > res[k][1] and (i not in res):
+                res[k] = i
+    return res
+
+def find_max_2(n, i_firm_stor):
+    if not i_firm_stor:
+        return
+    if n >= len(i_firm_stor):
+        return i_firm_stor
+
+    buf_lst = copy.deepcopy(i_firm_stor)
+
+    for i in range(0, len(buf_lst)):
+        for j in range(i + 1, len(buf_lst)):
+            if buf_lst[i][1] < buf_lst[j][1]:
+                l_buf = buf_lst[i]
+                buf_lst[i] = buf_lst[j]
+                buf_lst[j] = l_buf
+    return buf_lst[:n]
+
+##################################################
+g_firm_stor = []
+g_firm_stor.append(['Mersedes', 900])
+g_firm_stor.append(['Apple', 1200])
+g_firm_stor.append(['Nissan', 9300])
+g_firm_stor.append(['Lexus', 700])
+g_firm_stor.append(['Oracle', 5500])
+print(g_firm_stor)
+
+print(find_max_1(3, g_firm_stor))
+print(find_max_2(3, g_firm_stor))
+##################################################
+# Решение 1 - функция find_max_1.
+# Сложность алгоритма: O(n) - линейная.
+# В первом решении осуществляется три прохода по списку компаний.
+#
+# Решение 2 - функция find_max_2.
+# Сложность алгоритма: O(n^2) - квадратичная.
+# Во втором решении список сначала сортируется методом "пузырка"(bubble sort),
+# а затем выполняется срез первых трех элементов.
+#
+# Вывод: первое решение эффективней, потому, что:
+# 1. линейная сложность эффективней квадратичной.
+# 2. нет лишней сортировки, при этом на больших данных сортировка
+#    покажет намного большее время выполнения.
+##################################################
+
