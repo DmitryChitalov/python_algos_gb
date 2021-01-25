@@ -22,3 +22,57 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+import random
+
+company_data = {}
+for i in range(1, 80000):
+    company_name = f'Компания{i}'
+    company_cost = random.randint(-1000, 1000)
+    company_data.update({company_name: company_cost})
+
+print(company_data)
+
+
+def method_1():
+    """
+    Для начала пишем цикл котопый проверяет количество элементов в массиве,
+    после этого находим ключ к которому принадлежит макс значение, удаляем его из
+    ассоциативного массива(заранее делаем копию чтобы работать не с глобальной перемененной)
+    после удаления .pop возвращает значение ключа и записываем комбинацию в массив .append
+
+    Сложность - O(n)
+    Общая формула = 1+1+1+n+1+1 = 5+n
+    """
+    company_list = [] # O(1)
+    local_copy = company_data.copy() # O(1)
+    while len(company_list) < 3: # O(1)
+        cm_n = max(local_copy, key=local_copy.get)  # O(n)
+        cm_v = local_copy.pop(cm_n)  # O(1)
+        company_list.append({cm_n: cm_v}) # O(1)
+    return company_list
+
+
+def method_2():
+    """
+    Для начала пишем цикл котопый проверяет количество элементов в массиве,
+    собираем списки ключей и массивов. Порядок соответствует и keys и values
+    после этого находим ключ к которому принадлежит макс значение, удаляем его из
+    ассоциативного массива(заранее делаем копию чтобы работать не с глобальной перемененной)
+    после удаления .pop возвращает значение ключа и записываем комбинацию в массив .append
+
+    Сложность: O(n)
+    Общая формула = 1+1+1+1+1+n+1+1 = 7+n
+    """
+    company_list = [] # O(1)
+    local_copy = company_data.copy() # O(1)
+    while len(company_list) < 3: # O(1)
+        keys_list = list(local_copy.keys())  # O(1)
+        values_list = list(local_copy.values())  # O(1)
+        cm_n = keys_list[values_list.index(max(values_list))]   # O(n)
+        cm_v = local_copy.pop(cm_n) # O(1)
+        company_list.append({cm_n: cm_v}) # O(1)
+    return company_list
+
+
+print(method_1())
+print(method_2())

@@ -28,3 +28,30 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def operation(user_oper):
+    if user_oper in ('+', '-', '/', '*', '0'):
+        if user_oper == '0':
+            return 'Stop program'
+        try:
+            user_inp1 = int(input('Inp 1:'))
+            user_inp2 = int(input('Inp 2:'))
+            data = {
+                '*': user_inp1 * user_inp2,
+                '+': user_inp1 + user_inp2,
+                '/': user_inp1 / user_inp2,
+                '-': user_inp1 - user_inp2
+            }
+            print(data[user_oper])
+        except ZeroDivisionError:
+            print('Error Zero Division, try again')
+        except ValueError:
+            print('Need int! Try again!')
+    else:
+        print('Not in range')
+
+    return operation(input('Oper:'))
+
+
+print(operation(input('Oper:')))
