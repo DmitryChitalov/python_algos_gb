@@ -14,4 +14,25 @@
 В базе данных хранится строка: 555a3581d37993843efd4eba1921f1dcaeeafeb855965535d77c55782349444b
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
+
+Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
+
+import hashlib
+
+
+def password():
+    user_password = input('введите пароль ')
+    hash_obj = hashlib.sha256(user_password.encode() + b'user_login')
+    hash_obj = hash_obj.hexdigest()
+    print(hash_obj)
+    user_confirmation = input('повторите пароль ')
+    hash_obj_confirmation = hashlib.sha256(user_confirmation.encode() + b'user_login')
+    hash_obj_confirmation = hash_obj_confirmation.hexdigest()
+    if hash_obj_confirmation == hash_obj:
+        print('пароли совпадают')
+    else:
+        print('пароли не совпадают')
+password()
+
+
