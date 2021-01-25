@@ -9,3 +9,22 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def game(number=random.randint(0, 100), moves=10):
+    if moves == 0:
+        return print(f'Вы проиграли, загаданное число {number}')
+    user_num = int(input('Введите ваше число: '))
+    if user_num < number:
+        print('Ваше число меньше')
+    if user_num > number:
+        print('Ваше число больше')
+    if user_num == number:
+        print('Вы победили')
+        exit()
+    game(number, moves-1)
+
+
+game()
