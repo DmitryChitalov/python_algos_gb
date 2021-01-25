@@ -1,3 +1,4 @@
+import hashlib
 """
 Задание 2.
 Ваша программа должна запрашивать пароль
@@ -15,3 +16,25 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+#############################################
+
+'''Я не делаю проверку на корректность ввода или повтор вопросов если пользователь ввел что-тио не так
+    Думаю задаие в другм, потому реализовал конкретно сам процес хеширования и проверки пароля'''
+def hesh_password():
+    password = input('Введите пароль')
+    salt = input('Введите сид фразу')
+    my_hesh = hashlib.sha256(password.encode()+salt.encode())
+    print(f'Хеш вашего паролья: {my_hesh.hexdigest()}')
+
+    check_pass = input('Введите пароль еще раз для проверки:')
+    check_salt = input('Введите сид фразу')
+    my_hesh_checker = hashlib.sha256(check_pass.encode() + check_salt.encode())
+
+    if my_hesh.hexdigest() == my_hesh_checker.hexdigest():
+        print('Вы ввели правильный пароль!')
+    else:
+        print('Пароли не совпадают')
+
+
+hesh_password()

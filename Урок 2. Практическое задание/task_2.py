@@ -16,3 +16,31 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+#########################################################################
+
+def parity(some_list):
+    x = 0  # Четные цифры
+    y = 0  # Нечетные цифры
+
+    if len(some_list) == 0:
+        return x, y
+    if float(some_list[-1]) % 2 == 0:
+        some_list.pop()
+        x, y = parity(some_list)
+        x += 1
+    else:
+        some_list.pop()
+        x, y = parity(some_list)
+        y += 1
+    return x, y
+
+
+def checking(some_numbers):
+    some_list = list(str(some_numbers))
+    even, odd = parity(some_list)
+    print(f'Четных: {even}, Нечетных: {odd}')
+
+
+checking(101007653)
