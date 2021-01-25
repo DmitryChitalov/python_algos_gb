@@ -1,3 +1,5 @@
+import hashlib
+import os
 """
 Задание 4.
 Реализуйте скрипт "Кэширование веб-страниц"
@@ -8,3 +10,21 @@
 Подсказка: задачу решите обязательно с применением 'соленого' хеширования
 Можете условжнить задачу, реализовав ее через ООП
 """
+
+###################################################
+
+def url_checker(url):
+    salt = os.getlogin()    # в качестве соли пользователь системы
+    url_dict = {        # ключь храним как кеш
+        '6f2fbe6dcab0ebd3979833e3a595400f560ad164a4fa922c02c0f80935f01f42': 'google.com'
+    }     # Добавил элемент для проверки, на самом деле в значении должен хранится объект хеша
+
+    if url_dict.get((hashlib.sha256(url.encode()+salt.encode())).hexdigest()):
+        print('Страница уже была добавленна в кеш ранее')
+        return
+
+    url_dict[(hashlib.sha256(url.encode()+salt.encode())).hexdigest()] = hashlib.sha256(url.encode()+salt.encode())
+    print('Вы только что добавили страцу в кеш')
+
+
+url_checker('google.com')
