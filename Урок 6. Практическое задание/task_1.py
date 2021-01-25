@@ -39,32 +39,23 @@ def performance_dec(func):
 
 
 @performance_dec
-def min_value_1():
-    list_1 = [el for el in range(1000000)]
-    lst_obj = [random.randint(0, 1000) for _ in range(1000)]
-    min_el = lst_obj[0]
+def summ_list_1():
+    lst_obj = [random.randint(0, 100) for _ in range(10000)]
+    total_summ = 0
     for el in lst_obj:
-        for i in lst_obj:
-            if el < i and el < min_el:
-                min_el = el
-    return min_el
+        total_summ = total_summ + el
+    return total_summ
 
 
 @performance_dec
-def min_value_2():
-    list_2 = [el for el in range(1000000)]
-    lst_obj_2 = [random.randint(0, 1000) for _ in range(1000)]
-    min_el = lst_obj_2[0]
-    for el in lst_obj_2:
-        if el < min_el:
-            min_el = el
-    return min_el
+def summ_list_2():
+    lst_obj = [random.randint(0, 100) for _ in range(10000)]
+    return sum(lst_obj)
 
 
 @performance_dec
 def number_repeat_1():
-    list_3 = [el for el in range(1000000)]
-    array = [random.randint(0, 1000) for _ in range(1000)]
+    array = [random.randint(0, 100) for _ in range(10000)]
     new_array = []
     for el in array:
         count2 = array.count(el)
@@ -78,8 +69,7 @@ def number_repeat_1():
 
 @performance_dec
 def number_repeat_2():
-    list_4 = [el for el in range(1000000)]
-    array = [random.randint(0, 1000) for _ in range(1000)]
+    array = [random.randint(0, 100) for _ in range(10000)]
     array_count = [array.count(el) for el in array]
     max_count = max(array_count)
     max_count_elem = array[array_count.index(max_count)]
@@ -87,15 +77,19 @@ def number_repeat_2():
            f'оно появилось в массиве {max_count} раз(а)'
 
 
-min_value_1()
-min_value_2()
+summ_list_1()
+summ_list_2()
 
 number_repeat_1()
 number_repeat_2()
 
-# Время выполнения <function min_value_1 at 0x0184CE80> - 0.4245247 секунд, использованная память 0.0 Mib
-# Время выполнения <function min_value_2 at 0x0184CF58> - 0.4285787 секунд, использованная память 0.4140625 Mib
-# Время выполнения <function number_repeat_1 at 0x03A308E0> - 0.4470157 секунд, использованная память -0.40234375 Mib
-# Время выполнения <function number_repeat_2 at 0x03A30A48> - 0.3988780 секунд, использованная память 0.9609375 Mib
+# Функция summ_list_2 быстрее summ_list_1 за счет использования встроенной функции sum(),
+# при этом у обоих не наблюдается инкремента по памяти. Имеет место только оптимизация по времени.
 
-# Функции min_value_1 и number_repeat_2 более эффективные
+# Функция number_repeat_1 имеет инкремент по памяти в 0.125 Mib и большее время относительно number_repeat_2, которая
+# оптимизирована за счет генераторного выражения.
+
+# Время выполнения <function summ_list_1 at 0x0152CE80> - 0.23940430000000001 секунд, использованная память 0.0 Mib
+# Время выполнения <function summ_list_2 at 0x0152CF58> - 0.21701939999999997 секунд, использованная память 0.0 Mib
+# Время выполнения <function number_repeat_1 at 0x038508E0> - 2.7446499 секунд, использованная память 0.125 Mib
+# Время выполнения <function number_repeat_2 at 0x03850A48> - 2.7066743000000004 секунд, использованная память 0.0 Mib
