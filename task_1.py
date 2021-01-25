@@ -21,6 +21,7 @@
 С одновременным замером времени (timeit.default_timer())!
 """
 
+
 import random
 import timeit
 import memory_profiler
@@ -29,33 +30,37 @@ import memory_profiler
 def performance_dec(func):
     def wrapper(*args):
         start = timeit.default_timer()
-        m_1 = memory_profiler.memory_usage()
         func(*args)
-        m_2 = memory_profiler.memory_usage()
         end = timeit.default_timer()
-        print(f'Время выполнения {func} - {end - start} секунд, использованная память {m_2[0] - m_1[0]} Mib')
-
+        m = memory_profiler.memory_usage()
+        print(f'Время выполнения: {func} {end - start} секунд, использованная память {m[0]} Mib')
     return wrapper
 
 
 @performance_dec
-def summ_list_1():
-    lst_obj = [random.randint(0, 100) for _ in range(10000)]
-    total_summ = 0
+def min_value_1():
+    lst_obj = [random.randint(0, 1000) for _ in range(1000)]
+    min_el = lst_obj[0]
     for el in lst_obj:
-        total_summ = total_summ + el
-    return total_summ
+        for i in lst_obj:
+            if el < i and el < min_el:
+                min_el = el
+    return min_el
 
 
 @performance_dec
-def summ_list_2():
-    lst_obj = [random.randint(0, 100) for _ in range(10000)]
-    return sum(lst_obj)
+def min_value_2():
+    lst_obj_2 = [random.randint(0, 1000) for _ in range(1000)]
+    min_el = lst_obj_2[0]
+    for el in lst_obj_2:
+        if el < min_el:
+            min_el = el
+    return min_el
 
 
 @performance_dec
 def number_repeat_1():
-    array = [random.randint(0, 100) for _ in range(10000)]
+    array = [random.randint(0, 1000) for _ in range(1000)]
     new_array = []
     for el in array:
         count2 = array.count(el)
@@ -69,7 +74,7 @@ def number_repeat_1():
 
 @performance_dec
 def number_repeat_2():
-    array = [random.randint(0, 100) for _ in range(10000)]
+    array = [random.randint(0, 1000) for _ in range(1000)]
     array_count = [array.count(el) for el in array]
     max_count = max(array_count)
     max_count_elem = array[array_count.index(max_count)]
@@ -77,19 +82,15 @@ def number_repeat_2():
            f'оно появилось в массиве {max_count} раз(а)'
 
 
-summ_list_1()
-summ_list_2()
+min_value_1()
+min_value_2()
 
 number_repeat_1()
 number_repeat_2()
 
-# Функция summ_list_2 быстрее summ_list_1 за счет использования встроенной функции sum(),
-# при этом у обоих не наблюдается инкремента по памяти. Имеет место только оптимизация по времени.
+# Время выполнения: <function min_value_1 at 0x0288CE80> 0.12094400000000005 секунд, использованная память 15.76171875 Mib
+# Время выполнения: <function min_value_2 at 0x0288CF58> 0.0040168000000000426 секунд, использованная память 15.78515625 Mib
+# Время выполнения: <function number_repeat_1 at 0x02D608E0> 0.057901699999999945 секунд, использованная память 15.78515625 Mib
+# Время выполнения: <function number_repeat_2 at 0x02D60A48> 0.05960040000000011 секунд, использованная память 15.78515625 Mib
 
-# Функция number_repeat_1 имеет инкремент по памяти в 0.125 Mib и большее время относительно number_repeat_2, которая
-# оптимизирована за счет генераторного выражения.
-
-# Время выполнения <function summ_list_1 at 0x0152CE80> - 0.23940430000000001 секунд, использованная память 0.0 Mib
-# Время выполнения <function summ_list_2 at 0x0152CF58> - 0.21701939999999997 секунд, использованная память 0.0 Mib
-# Время выполнения <function number_repeat_1 at 0x038508E0> - 2.7446499 секунд, использованная память 0.125 Mib
-# Время выполнения <function number_repeat_2 at 0x03850A48> - 2.7066743000000004 секунд, использованная память 0.0 Mib
+# Первая функция потребляет меньше памяти, Python 3.8.5, Win 64 bit
