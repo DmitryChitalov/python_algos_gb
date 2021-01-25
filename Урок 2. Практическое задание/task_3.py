@@ -15,3 +15,17 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def expand(numb, expand_numb=''):
+    if numb == '':
+        return print(f"Перевернутое число:: ({expand_numb})")
+    else:
+        numb_str = str(numb)
+        expand_numb = expand_numb + numb_str[-1]
+        return expand(numb_str[:-1], expand_numb)
+
+
+# Так же не стал делать проверку на число так как в задании нет такого требования
+
+expand(int(input("Введите число, которое требуется перевернуть: ")))
