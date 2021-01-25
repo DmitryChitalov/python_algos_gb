@@ -18,3 +18,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_chr(ascii_number=32):
+
+    if ascii_number == 128:
+        return
+    print(f' {ascii_number} - {chr(ascii_number)}', end=' ')
+    if (ascii_number - 31) % 10 == 0:
+        print('\n')
+    get_chr(ascii_number + 1)
+
+
+get_chr()

@@ -9,3 +9,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def my_rec_method(i, numb, n_count, sum_n):
+    if i == n_count:
+        print(f'Количество элементов : {n_count}, сумма : {sum_n}')
+    elif i < n_count:
+        return my_rec_method(i + 1, numb / 2 * -1, n_count, sum_n + numb)
+
+
+try:
+    n = int(input('Введите количество элементов последовательности: '))
+    my_rec_method(0, 1, n, 0 )
+except ValueError:
+    print('Данные введены некорректно')

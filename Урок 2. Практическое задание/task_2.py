@@ -16,3 +16,30 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+y = 0
+x = 0
+
+
+def count_nums(number):
+    global x, y
+
+    if (number // 10) == 0:
+        if number % 2 == 0:
+            x += 1
+        else:
+            y += 1
+        print(f'Количество четных цифр в числе: {x}, нечетных: {y}')
+        return
+    else:
+        if (number % 10) % 2 == 0:
+            x += 1
+        else:
+            y += 1
+    return count_nums(number // 10)
+
+
+try:
+    number = int(input('Введите натуральное число: '))
+    count_nums(number)
+except ValueError:
+    print('Данные введены некорректно')
