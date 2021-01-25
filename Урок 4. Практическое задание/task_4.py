@@ -9,8 +9,10 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from timeit import repeat
+from random import randint
 
-array = [1, 3, 1, 3, 4, 5, 1]
+array = [randint(1, 150) for i in range(1000)]
 
 
 def func_1():
@@ -37,5 +39,42 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    dict_for_count = {}
+    for el in array:
+        if el in dict_for_count:
+            dict_for_count[el] += 1
+        else:
+            dict_for_count[el] = 1
+    num_count = max(dict_for_count.values())
+    max_num = max(dict_for_count, key=dict_for_count.get)
+    return f'Чаще всего встречается число {max_num}, ' \
+           f'оно появилось в массиве {num_count} раз(а)'
+
+
 print(func_1())
+print(
+    min(repeat(
+        "func_1()",
+        globals=globals(),
+        repeat=3,
+        number=100)))
+
 print(func_2())
+print(
+    min(repeat(
+        "func_2()",
+        globals=globals(),
+        repeat=3,
+        number=100)))
+
+print(func_3())
+print(
+    min(repeat(
+        "func_3()",
+        globals=globals(),
+        repeat=3,
+        number=100)))
+
+"""Добавлена func_3, но она хорошо работает или для массивов, больших по размеру, на том массиве, что был в примере,
+ она хуже первой. Быстрее она потому, что пробегает по массиву всего 1 раз"""
