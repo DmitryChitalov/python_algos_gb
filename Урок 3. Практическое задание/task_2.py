@@ -15,3 +15,26 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+from hashlib import sha256
+from uuid import uuid4
+
+def passwd():
+    salt = uuid4().hex
+    passwd = input('Введите пароль: ')
+    return hash_passwd(salt, passwd)
+
+
+def hash_passwd(salt, passwd_1):
+    res_1 = sha256(salt.encode() + passwd_1.encode()).hexdigest()
+    print(f'В базе данных хранится строка: {res_1}')
+    passwd = input('Введите пароль еще раз для проверки: ')
+    res_2 = sha256(salt.encode() + passwd.encode()).hexdigest()
+    print(f'В базе данных хранится строка: {res_2}')
+    if res_1 == res_2:
+        print('Вы ввели правильный пароль')
+    else:
+        print('Вы ввели НЕВЕРНЫЙ пароль')
+
+
+passwd()
