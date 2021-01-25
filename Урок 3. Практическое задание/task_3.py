@@ -14,3 +14,24 @@
 р
 а
 """
+import hashlib
+
+s = input('Введите строку из латинских букв: ')
+s = s.lower()
+m = set()
+
+n = len(s)
+for i in range(n):
+    if i == 0:
+        n = len(s) - 1
+    else:
+        n = len(s)
+    for j in range(n, i, - 1):
+        print(s[i:j])
+
+        # m.add(s[i:j])
+        m.add(hashlib.sha256(s[i:j].encode('utf-8')).hexdigest())
+
+print(m)
+
+print(f'Количество уникальных подстрок в стоке {s} составила {len(m)}')
