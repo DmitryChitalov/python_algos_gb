@@ -15,3 +15,19 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+# на самом деле [::-1], но пусть будет как в задании)
+repl_list = []
+
+def repl(nums):
+    nums = str(nums)
+    if len(nums) == 1:
+        repl_list.insert(0, nums)
+        return "Числа закончились"
+    else:
+        repl_list.insert(0, nums[0])
+        rep = nums.replace(nums[0], '')
+        return repl(rep)
+
+repl(123)
+print(''.join(repl_list))
