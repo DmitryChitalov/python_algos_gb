@@ -9,7 +9,11 @@
 
 Поработайте с доработанной структурой, позапускайте на реальных данных.
 """
-
+"""
+Здесь в виду отсутствия времени не сделал как положено,
+надо было реализовать построение дерева исходя из структуры бинарного дерева, сделать функции вывода
+самого дерева, высоты, ширины и т д
+"""
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -27,6 +31,8 @@ class BinaryTree:
             # формируется новое поддерево
             self.left_child = BinaryTree(new_node)
         # если у узла есть левый потомок
+        if new_node > self.root:
+            raise Exception('Некорректные данные! Левый потомок не может быть больше корня')
         else:
             # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
@@ -42,6 +48,8 @@ class BinaryTree:
             # формируется новое поддерево
             self.right_child = BinaryTree(new_node)
         # если у узла есть правый потомок
+        if new_node < self.root:
+            raise Exception('Правый потомок не может быть меньше корня')
         else:
             # тогда вставляем новый узел
             tree_obj = BinaryTree(new_node)
@@ -69,7 +77,7 @@ class BinaryTree:
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(4)
+r.insert_left(9)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
 r.insert_right(12)
