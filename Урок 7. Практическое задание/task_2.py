@@ -70,38 +70,38 @@ def merge_sort_custom(orig_list):
 
 
 count = int(input('Введите число элементов: '))
-orig_list1 = [random.randint(0, 50) for _ in range(count)]
+orig_list1 = [random.uniform(0, 50) for _ in range(count)]
 print(f'Исходный: {orig_list1}\nОтсортированный: {merge_sort(orig_list1)}')
 
-orig_list2 = [random.randint(0, 50) for _ in range(count)]
+orig_list2 = [random.uniform(0, 50) for _ in range(count)]
 print(f'Исходный: {orig_list2}\nОтсортированный: {merge_sort_custom(orig_list2)}')
 
 # замеры 10
-orig_list = [random.randint(0, 50) for _ in range(10)]
+orig_list = [random.uniform(0, 50) for _ in range(10)]
 print("Начальный вариант: 10 эл => ", timeit.timeit("merge_sort(orig_list[:])", \
                                                     setup="from __main__ import merge_sort, orig_list",
                                                     number=100))
-orig_list = [random.randint(0, 50) for _ in range(10)]
+orig_list = [random.uniform(0, 50) for _ in range(10)]
 print("Другой вариант: 10 эл => ", timeit.timeit("merge_sort_custom(orig_list[:])", \
                                                  setup="from __main__ import merge_sort_custom, orig_list",
                                                  number=100))
 
 # замеры 100
-orig_list = [random.randint(0, 50) for _ in range(100)]
+orig_list = [random.uniform(0, 50) for _ in range(100)]
 print("Начальный вариант: 100 эл => ", timeit.timeit("merge_sort(orig_list[:])", \
                                                      setup="from __main__ import merge_sort, orig_list",
                                                      number=100))
-orig_list = [random.randint(0, 50) for _ in range(100)]
+orig_list = [random.uniform(0, 50) for _ in range(100)]
 print("Другой вариант: 100 эл => ", timeit.timeit("merge_sort_custom(orig_list[:])", \
                                                   setup="from __main__ import merge_sort_custom, orig_list",
                                                   number=100))
 
 # замеры 1000
-orig_list = [random.randint(0, 50) for _ in range(1000)]
+orig_list = [random.uniform(0, 50) for _ in range(1000)]
 print("Начальный вариант: 1000 эл => ", timeit.timeit("merge_sort(orig_list[:])", \
                                                       setup="from __main__ import merge_sort, orig_list",
                                                       number=100))
-orig_list = [random.randint(0, 50) for _ in range(1000)]
+orig_list = [random.uniform(0, 50) for _ in range(1000)]
 print("Другой вариант: 1000 эл => ", timeit.timeit("merge_sort_custom(orig_list[:])", \
                                                    setup="from __main__ import merge_sort_custom, orig_list",
                                                    number=100))
