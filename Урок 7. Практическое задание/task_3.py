@@ -27,8 +27,10 @@ copy_my_lst_2 = copy.copy(my_lst)
 print(my_lst)
 
 # использование встроенной функции
-print(median(my_lst))
+def my_median(lst_obj):
+    return median(lst_obj)
 
+print(my_median(my_lst))
 
 # с сортировкой
 def my_sort(lst_obj):
@@ -66,7 +68,7 @@ print(my_sort_2(my_lst))
 
 
 ## Время:
-print(timeit.timeit("median(my_lst)", setup = "from __main__ import median, my_lst", number = 10000))
+print(timeit.timeit("my_median(my_lst)", setup = "from __main__ import my_median, my_lst", number = 10000))
 
 print(timeit.timeit("my_sort(copy_my_lst)", setup = "from __main__ import my_sort, copy_my_lst", number = 10000))
 
@@ -76,7 +78,7 @@ print(timeit.timeit("my_sort_2(copy_my_lst_2)", setup = "from __main__ import my
 """
 Результаты:
 
-median = 0.015181212998868432
+median = 0.008379881999644567
 my_sort = 0.5306191989984654
 my_sort_2 = 0.061818566000511055
 
