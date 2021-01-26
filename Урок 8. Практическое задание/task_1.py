@@ -26,8 +26,16 @@ class HaffCoder:
         enc_line = "".join(map(lambda el: code_table[el], line))
         return tree, enc_line
 
+    def decode(self, enc_line, tree):
+        lst = list()
+        while len(enc_line) > 0:
+            depth = self.__decode_str(lst, enc_line, tree)
+            enc_line = enc_line[depth:]
+        line = "".join(lst)
+        return line
+
     @staticmethod
-    def __built_haff_tree(self, line):
+    def __built_haff_tree(line):
         chars = deque(sorted(Counter(line).items(), key=lambda item: item[1]))
         if len(chars) != 1:
             while len(chars) > 1:
@@ -52,7 +60,20 @@ class HaffCoder:
             self.__fill_code_table(code_table, haff_tree[0], path=f'{path}0')
             self.__fill_code_table(code_table, haff_tree[1], path=f'{path}1')
 
+    def __decode_str(self, lst, enc_line, haff_tree, depth=0):
+        if not isinstance(haff_tree, dict):
+            lst.append(haff_tree)
+            return depth
+        else:
+            if enc_line[0] == '0':
+                return self.__decode_str(lst, enc_line[1:], haff_tree[0], depth + 1)
+            else:
+                return self.__decode_str(lst, enc_line[1:], haff_tree[1], depth + 1)
+
 
 c = HaffCoder()
-tree, line = c.encode("beep boop beer!")
-print(line)
+tr, ln = c.encode("beep boop beer!")
+print(ln)
+dec_line = c.decode(ln, tr)
+print(dec_line)
+
