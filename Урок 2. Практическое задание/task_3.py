@@ -17,12 +17,13 @@
 Перевернутое число: 321
 """
 
+
 def reverse(number, string=''):
-	if number == 0:
-		return string
-	else:
-		string += str(number % 10)
-		return reverse(number // 10, string)
-		
+    if number == 0:
+        return string
+    else:
+        string += str(number % 10)
+        return reverse(number // 10, string)
+
 
 print(reverse(3486))

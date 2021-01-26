@@ -18,6 +18,7 @@
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
 
+
 def check_number(number, chet=0, nechet=0):
 	if number == 0:
 		return f"Четные числа {chet}\nНе четные числа {nechet}" 

@@ -15,13 +15,15 @@
 Элемент в 2 раза меньше предыд и имеет противопол знак
 """
 
+
 def func(count, summ=0, start=1, size=0):
-		if size == 0:
-			size = count
-		if count == 0:
-			return f'Количество элементов - {size}, их сумма -  {summ}'
-		else:
-			summ += start
-			return func(count - 1, summ, start / 2 * (-1), size)
-				
+    if size == 0:
+        size = count
+    if count == 0:
+        return f'Количество элементов - {size}, их сумма -  {summ}'
+    else:
+        summ += start
+        return func(count - 1, summ, start / 2 * (-1), size)
+
+
 print(func(int(input('Введите количество элементов: '))))

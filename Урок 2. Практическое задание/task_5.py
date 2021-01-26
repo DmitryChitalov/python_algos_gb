@@ -20,16 +20,18 @@
 
 Допускается исп-е встроенных ф-ций
 """
+
+
 def table(start=32, count=0):
-	if start == 128:
-		return 
-	else:
-		if count == 10:
-			print(f"\n{start} - {chr(start)}", end=' ')
-			return table(start + 1, count = 1)
-		else:
-			print(f"{start} - {chr(start)}", end=' ')
-			return table(start + 1, count + 1)
-			
-		
+    if start == 128:
+        return
+    else:
+        if count == 10:
+            print(f"\n{start} - {chr(start)}", end=' ')
+            return table(start + 1, count=1)
+        else:
+            print(f"{start} - {chr(start)}", end=' ')
+            return table(start + 1, count + 1)
+
+
 table()

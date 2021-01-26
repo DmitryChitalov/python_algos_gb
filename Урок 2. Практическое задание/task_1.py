@@ -29,37 +29,38 @@
 Введите операцию (+, -, *, / или 0 для выхода):
 """
 
+
 def calc():
-	try:
-		a = float(input('Введите первое число: '))
-		b = float(input('Введите второе число: '))
-		sign = input('Введите операцию или 0 для выхода: ')	
-	except ValueError:
-		print('Необходимо ввести число \n')
-		return calc()
-		
-	if sign == '0':
-		return
-	else: 			
-		if sign == '+':
-			print(f"Ваш результат {a + b}")
-			return calc() 
-		elif sign == '-':
-			print(f"Ваш результат {a - b}")
-			return calc()
-		elif sign == '*':
-			print(f"Ваш результат {a * b}")
-			return calc()		
-		elif sign == '/':
-			if b == 0:
-				print('Деление на ноль запрещено')
-				return calc()
-			else:
-				print(f"Ваш результат {a / b}")
-				return calc()
-		else:
-			print("Допускаются операции + - * / или 0 для выхода")
-			return calc()
-		
-		
-calc()	
+    try:
+        a = float(input('Введите первое число: '))
+        b = float(input('Введите второе число: '))
+        sign = input('Введите операцию или 0 для выхода: ')
+    except ValueError:
+        print('Необходимо ввести число \n')
+        return calc()
+
+    if sign == '0':
+        return
+    else:
+        if sign == '+':
+            print(f"Ваш результат {a + b}")
+            return calc()
+        elif sign == '-':
+            print(f"Ваш результат {a - b}")
+            return calc()
+        elif sign == '*':
+            print(f"Ваш результат {a * b}")
+            return calc()
+        elif sign == '/':
+            if b == 0:
+                print('Деление на ноль запрещено')
+                return calc()
+            else:
+                print(f"Ваш результат {a / b}")
+                return calc()
+        else:
+            print("Допускаются операции + - * / или 0 для выхода")
+            return calc()
+
+
+calc()

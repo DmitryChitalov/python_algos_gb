@@ -13,7 +13,7 @@
 from random import randint
 
 
-def guess(number = randint(0,100), count=10):
+def guess(number=randint(0, 100), count=10):
 	if count == 0:
 		print(f"Вы не угадали число {number}")
 		return 
@@ -28,6 +28,6 @@ def guess(number = randint(0,100), count=10):
 		else:
 			print(f'Ваше число меньше, осталось {count - 1}\n ')
 			return guess(number, count - 1)
-			
-		
+
+
 guess()
