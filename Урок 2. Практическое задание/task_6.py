@@ -9,3 +9,23 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+
+def riddle(n, i=10):
+    if i == 0:
+        return
+    answer = int((input(f"Отгадайте число. У вас {i} попыток: ")))
+    if answer > n:
+        print(f"Ваше число {answer} больше")
+    elif answer < n:
+        print(f"Ваше число {answer} меньше")
+    else:
+        print(f"Вы отгадали. Это число {answer}.")
+        return
+    if i == 1:
+        print(f"Вы не угадали. Игра окончена. \nЗагаданное число {n}")
+    riddle(n, i-1)
+
+
+riddle(randint(1, 100))
