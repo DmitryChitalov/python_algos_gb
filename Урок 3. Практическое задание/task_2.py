@@ -18,7 +18,6 @@
 
 import hashlib
 
-
 password = input('Ввведите пароль: ')
 salt = b'super password'
 res = hashlib.sha256(password.encode('utf-8') + salt).hexdigest()
@@ -26,7 +25,7 @@ print(f'В базе данных храниться строка: {res}')
 check_password = input('Введите пароль еще раз для проверки: ')
 check_res = hashlib.sha256(check_password.encode('utf-8') + salt).hexdigest()
 if check_password == password:
-	print('Вы ввели верный пароль')
-	print(check_res)
+    print('Вы ввели верный пароль')
+    print(check_res)
 else:
-	print('Вы ввели неправильный пароль')
+    print('Вы ввели неправильный пароль')
