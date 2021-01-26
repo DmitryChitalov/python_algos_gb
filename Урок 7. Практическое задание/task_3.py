@@ -13,3 +13,12 @@
 arr[m]
 from statistics import median
 """
+from random import randint
+from statistics import median
+
+
+if __name__ == '__main__':
+    m = int(input('Введите m: '))
+    my_lst = [randint(-100, 100) for _ in range(2*m+1)]
+    print(my_lst)
+    print(median(my_lst))
