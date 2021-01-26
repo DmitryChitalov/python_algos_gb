@@ -25,3 +25,47 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple, deque
+
+
+class MagStat:
+    def __init__(self):
+        self.stat = deque()
+        self.n = int(input('Введите количество компаний: '))
+        self.hi = ''
+        self.low = ''
+        self.avg = 0
+
+    def add_stat(self, name, prof):
+        nt = namedtuple('Stat', 'name prof')
+        self.stat.appendleft(nt(name=name, prof=prof))
+
+    def calc_avg(self):
+        self.hi = 'Компании с прибылью выше среднего: '
+        self.low = 'Компании с прибылью ниже среднего: '
+        self.avg = sum([elem.prof for elem in self.stat]) / self.n
+        while len(self.stat):
+            el = self.stat.popleft()
+            if el.prof >= self.avg:
+                self.hi += f'{el.name}, '
+            else:
+                self.low += f'{el.name}, '
+        print(f'Средняя прибыль: {self.avg}')
+        print(self.hi[:-2])
+        print(self.low[:-2])
+
+    def main(self):
+        for i in range(self.n):
+            self.add_stat(input('Введите название компании: '), int(input('Введите прибыль компании: ')))
+        self.calc_avg()
+
+
+if __name__ == '__main__':
+    el = MagStat()
+    el.main()
+
+
+
+
+
+
