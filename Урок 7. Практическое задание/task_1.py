@@ -1,3 +1,5 @@
+import timeit
+import random
 """
 1. Отсортируйте по убыванию методом "пузырька" одномерный целочисленный массив,
 заданный случайными числами на промежутке [-100; 100). Выведите на экран
@@ -11,4 +13,84 @@
 
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
+"""
+
+
+
+"""Сортировка пузырьком"""
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+
+""" Доработанная функция сортировки. Цикл перебора совершается, пока за один из проходов по массиву этот массив
+    не окажется отсортированным """
+
+
+def bubble_sort_optimized(lst_obj):
+    n = 1
+    x = True                    # условие выполнения цикла
+    while x:
+        x = False               # условие завершения цикла
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+                x = True
+        n += 1
+    return lst_obj
+
+
+""" Функции вывода результатов """
+
+
+def print_res(lst):
+    print(f'\n{lst} - получаемый список')
+    print(f'{bubble_sort(lst)} - отсортированный список')
+    print(f'Время выполнения: ', end='')
+
+
+def print_res_optimized(lst):
+    print(f'\n{lst} - получаемый список')
+    print(f'{bubble_sort_optimized(lst)} - отсортированный список')
+    print(f'Время выполнения: ', end='')
+
+
+if __name__ == '__main__':
+    orig_list = [random.randint(-100, 100) for _ in range(1000)]
+    # вывод массивов для первой функции
+    print_res(orig_list[:])
+    # вывод времени выполнения
+    print(timeit.timeit("bubble_sort(orig_list[:])",
+                        setup="from __main__ import bubble_sort, orig_list", number=100))
+
+    orig_list = [random.randint(-100, 100) for _ in range(1000)]
+    # вывод массивов для оптимизированной функции
+    print_res_optimized(orig_list[:])
+    # вывод времени выполнения
+    print(timeit.timeit("bubble_sort_optimized(orig_list[:])",
+                        setup="from __main__ import bubble_sort_optimized, orig_list", number=100))
+
+
+"""
+Результаты для bubble_sort:
+Время выполнения: 15.78
+
+Результаты для bubble_sort_optimized:
+Время выполнения: 15.98
+"""
+
+"""
+Вывод: 
+Оптимизированная функция является полной копией за исключением небольшой доработки. Условие цикла while изменено,
+и функция будет выполняться до тех пор, пока не встретит на своем пути полностью отсортированный массив.
+Оптимизированная функция может выполнить сортировку за более короткое время, чем первая функция, но для этого
+массив должен иметь уже отсортированные участки. При рандомном заполнении такого не происходит. 
+В итоге обе функции показывают примерно одинаковые результаты.
 """
