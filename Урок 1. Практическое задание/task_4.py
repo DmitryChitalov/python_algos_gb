@@ -74,7 +74,7 @@ def check_user2(user_name, user_pass):
 
     res = 0
 
-    for idx, val in enumerate(USERS):
+    for val in USERS:
         data = USERS[val]
         if data["name"] == user_name:
             res = True
@@ -89,7 +89,8 @@ def check_user2(user_name, user_pass):
 
     return "Успешная авторизация"
 
-#Задаем список пользователей
+
+# Задаем список пользователей
 USERS = {'usr1': {'name': "root", 'password': "123456", 'active': True},
          'usr2': {'name': "admin", 'password': "admin", 'active': True},
          'usr3': {'name': "oper", 'password': "qwerty", 'active': True},
