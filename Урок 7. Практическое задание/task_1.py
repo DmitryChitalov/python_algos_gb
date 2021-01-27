@@ -12,3 +12,93 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+
+import timeit
+import random
+
+
+def bubble_sort(lst_obj):
+    print(f'Исходный список: {lst_obj}')
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+        n += 1
+    print(f'Отсортированный список: {lst_obj}')
+    return lst_obj
+
+
+def bubble_sort_max_to_min(lst_obj):
+    print(f'Исходный список: {lst_obj}')
+    n = 1
+    swap = True
+    while swap:
+        swap = False
+        for i in range(len(lst_obj) - n):
+            if lst_obj[i] < lst_obj[i + 1]:
+                lst_obj[i], lst_obj[i + 1] = lst_obj[i + 1], lst_obj[i]
+                swap = True
+        n += 1
+    print(f'Отсортированный список: {lst_obj}')
+    return lst_obj
+
+
+orig_list = [random.randint(-100, 100) for _ in range(10)]
+
+# замеры 10
+print(timeit.timeit("bubble_sort(orig_list[:])", \
+                    setup="from __main__ import bubble_sort, orig_list", number=1))
+print(timeit.timeit("bubble_sort_max_to_min(orig_list[:])", \
+                    setup="from __main__ import bubble_sort_max_to_min, orig_list", number=1))
+
+orig_list = [random.randint(-100, 100) for _ in range(100)]
+
+# замеры 100
+print(timeit.timeit("bubble_sort(orig_list[:])", \
+                    setup="from __main__ import bubble_sort, orig_list", number=1))
+print(timeit.timeit("bubble_sort_max_to_min(orig_list[:])", \
+                    setup="from __main__ import bubble_sort_max_to_min, orig_list", number=1))
+
+orig_list = [random.randint(-100, 100) for _ in range(1000)]
+
+# замеры 1000
+print(timeit.timeit("bubble_sort(orig_list[:])", \
+                    setup="from __main__ import bubble_sort, orig_list", number=1))
+print(timeit.timeit("bubble_sort_max_to_min(orig_list[:])", \
+                    setup="from __main__ import bubble_sort_max_to_min, orig_list", number=1))
+
+'''
+Попытка оптимизации с прерыванием цикла не дала ощутимых результатов,ументшение времени выполнения совсем незначительное
+##########################################################################
+bubble_sort
+Исходный список: [86, 74, -28, -92, 43, -57, -2, -81, 25, -68]
+Отсортированный список: [86, 74, 43, 25, -2, -28, -57, -68, -81, -92]
+2.7499999999999747e-05
+##########################################################################
+bubble_sort_max_to_min
+Исходный список: [86, 74, -28, -92, 43, -57, -2, -81, 25, -68]
+Отсортированный список: [86, 74, 43, 25, -2, -28, -57, -68, -81, -92]
+1.6300000000000342e-05
+##########################################################################
+bubble_sort
+Исходный список: [7, -98, -100, -19, -6, -98, 36, -49, 38, 94, 76, 61, ... 92, -43, 61, -91, 83, 38, 100, 32, -77, -96]
+Отсортированный список: [100, 100, 99, 94, 93, 92, 91, ... -92, -94, -96, -96, -98, -98, -98, -100, -100]
+0.0004273999999999979
+###########################################################################
+bubble_sort_max_to_min
+Исходный список: [7, -98, -100, -19, -6, -98, ... -91, 83, 38, 100, 32, -77, -96]
+Отсортированный список: [100, 100, 99, 94, 93, 92, 91, ... -92, -94, -96, -96, -98, -98, -98, -100, -100]
+0.00044320000000000123
+###########################################################################
+bubble_sort
+Исходный список: [63, 21, 43, -94, -23, -40, -33, ... -59, 12, 28, 11, 24, -1, 58, -33, -55, -50, -58]
+Отсортированный список: [100, 100, 100, 100, 100, 99, ... -99, -99, -100, -100, -100, -100, -100, -100]
+0.053206
+###########################################################################
+bubble_sort_max_to_min
+Исходный список: [63, 21, 43, -94, -23, -40, -33, 83,... 28, 11, 24, -1, 58, -33, -55, -50, -58]
+Отсортированный список: [100, 100, 100, 100, 100, 99, 99, 99, ... -99, -100, -100, -100, -100, -100, -100]
+0.052368399999999996
+
+'''
