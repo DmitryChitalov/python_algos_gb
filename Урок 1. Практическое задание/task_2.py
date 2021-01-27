@@ -17,3 +17,25 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+def min_n( in_list ):
+    out_min = 0
+    for j in range(len(in_list)):          # O(N)
+        if j == 0 : out_min = in_list[j]
+        if out_min > in_list[j]: out_min = in_list[j]
+    return out_min
+
+def min_nn( in_list ):
+    out_min = 0
+    for j in range(len(in_list)):          # O(N^2)
+        for k in range(len(in_list)):
+            if in_list[k] < in_list[j]: out_min = in_list[k]
+    return out_min
+
+if __name__ == '__main__':
+    v_list = [ 1,5,7,3,6,2 ]
+    x = min_n(v_list)
+    print("O(n):" + str(x))
+    x = min_nn(v_list)
+    print("O(n):" + str(x))
+
