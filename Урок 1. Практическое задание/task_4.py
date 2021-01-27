@@ -65,6 +65,29 @@ def check_user1(user_name, user_pass):
 
     return "Успешная авторизация"
 
+def check_user2(user_name, user_pass):
+    """проверяем корректность пароля и активен пользователь или нет.
+    Если не активен, то предлагаем активироваться
+
+    Сложность O(n)
+    """
+
+    res = 0
+
+    for idx, val in enumerate(USERS):
+        data = USERS[val]
+        if data["name"] == user_name:
+            res = True
+            if data["password"] != user_pass:
+                return "Введен не правильный пароль"
+            if not data['active']:
+                if not activate_user(user_name):
+                    return "Пользователь не активен"
+
+    if not res:
+        return "Пользователь не найден"
+
+    return "Успешная авторизация"
 
 #Задаем список пользователей
 USERS = {'usr1': {'name': "root", 'password': "123456", 'active': True},
@@ -76,9 +99,10 @@ USERS = {'usr1': {'name': "root", 'password': "123456", 'active': True},
 
 print(USERS)
 
-USR=str(input("Введите имя пользователя: "))
-PASSWD=str(input("Введите пароль: "))
+USR = str(input("Введите имя пользователя: "))
+PASSWD = str(input("Введите пароль: "))
 
 print(check_user1(USR, PASSWD))
+print(check_user2(USR, PASSWD))
 
 print(USERS)
