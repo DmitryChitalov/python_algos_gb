@@ -10,6 +10,9 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+from timeit import timeit
+
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -37,5 +40,42 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    counter = max(
+        i for i in array if array.count(i) == max(map(array.count, array)))
+    return f'Чаще всего встречается число {counter}'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+print('Замер func_1: ')
+print(
+    timeit(
+        "func_1()",
+        globals=globals(),
+        number=1000))
+
+print('Замер func_2: ')
+print(
+    timeit(
+        "func_2()",
+        globals=globals(),
+        number=1000))
+
+print('Замер func_3: ')
+print(
+    timeit(
+        "func_3()",
+        globals=globals(),
+        number=1000))
+
+"""
+уменьшить время исполнения задачи не удалось, в том числе,
+прибегая к встроенным
+функциям map. Это связано с тем, что map применят передаваемую
+ему аргументом функцию ->
+к каждому элементу по принципу итератора, тем самым увеличивая время работы.
+Наиболее удачным - явлется первое исполнение функции
+"""
