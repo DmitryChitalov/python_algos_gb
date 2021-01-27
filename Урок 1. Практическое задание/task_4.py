@@ -27,3 +27,58 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+def activate_user(user_name):
+    """процедура активации пользователя
+
+    Сложность O(n)
+    """
+
+    act = str(input("Пользователь не активирован. Активировать? (Y - для активации): "))
+
+    if act == "Y":
+        for i in USERS:
+            if USERS[i]['name'] == user_name:
+                USERS[i]['active'] = True
+        return True
+    return False
+
+
+def check_user1(user_name, user_pass):
+    """проверяем корректность пароля и активен пользователь или нет.
+    Если не активен, то предлагаем активироваться
+
+    Сложность O(n)
+    """
+
+    res = list(filter(lambda x: x.get('name') == user_name, USERS.values()))
+
+    if not res:
+        return "Пользователь не найден"
+
+    if res[0]['password'] != user_pass:
+        return "Введен не правильный пароль"
+
+    if not res[0]['active']:
+        if not activate_user(user_name):
+            return "Пользователь не активен"
+
+    return "Успешная авторизация"
+
+
+#Задаем список пользователей
+USERS = {'usr1': {'name': "root", 'password': "123456", 'active': True},
+         'usr2': {'name': "admin", 'password': "admin", 'active': True},
+         'usr3': {'name': "oper", 'password': "qwerty", 'active': True},
+         'usr4': {'name': "test", 'password': "zxc", 'active': False},
+         'usr5': {'name': "user", 'password': "123", 'active': False}
+        }
+
+print(USERS)
+
+USR=str(input("Введите имя пользователя: "))
+PASSWD=str(input("Введите пароль: "))
+
+print(check_user1(USR, PASSWD))
+
+print(USERS)
