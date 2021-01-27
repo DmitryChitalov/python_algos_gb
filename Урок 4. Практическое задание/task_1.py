@@ -21,3 +21,16 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for i, x in enumerate(nums) if not x % 2]
+
+
+list = [i for i in range(100)]  # список из 100 элементов
+print(timeit(stmt='func_1(list)', globals=globals()))  # 18.2287617 сек.
+print(timeit(stmt='func_2(list)', globals=globals()))  # 10.306235500000003 сек.
+
+# вариант c enumerate работает быстрее, так как в этом случае не нужно
+# обращаться к элементу по индексу, вместо этого функция сама создаёт
+# дополнительный счетчик
