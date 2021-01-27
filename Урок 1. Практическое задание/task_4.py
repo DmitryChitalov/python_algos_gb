@@ -27,3 +27,40 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+def auth(in_users, in_active): # O(1), так как все используемые операции над словарем имеют сложность О(1)
+    print('Please input username:')
+    v_user=input()
+    print('Please input password:')
+    v_pass=input()
+    if v_user not in in_users:
+        print('Invalid username or password!')
+        return
+    if v_pass != in_users[v_user]:
+        print('Invalid username or password!')
+        return
+    if in_active[v_user] != 'Y':
+        print('Your account is not active, would you like to activate it?(Y/N)')
+        v_act = input()
+        if v_act.upper() == 'Y':
+            in_active[v_user]='Y'
+            print('Your account is active now!')
+    print('You are logged in.')
+
+if __name__ == '__main__':
+    v_users =  {'Ivan':'qwerty',
+                'admin':'admin',
+                'John':'Doe',
+                'Odin':'Wednesday',
+                'V':'Silverhand',
+                'Jacky':'Afterlife',
+                'Test':'Test'}
+
+    v_active =  {'Ivan':'Y',
+                'admin':'Y',
+                'John':'N',
+                'Odin':'N',
+                'V':'Y',
+                'Jacky':'N',
+                'Test':'Y'}
+
+    auth(v_users, v_active)
