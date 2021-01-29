@@ -12,7 +12,6 @@
 """
 
 from timeit import timeit
-from random import randint
 
 
 def recursive_reverse(number):
@@ -79,3 +78,7 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+print(f'Время работы без мемоизации: {timeit("recursive_reverse(number)", setup="from __main__ import recursive_reverse, number")}')
+print(f'Время работы с мемоизацией: {timeit("recursive_reverse_with_memo(number)", setup="from __main__ import recursive_reverse_with_memo, number")}')
