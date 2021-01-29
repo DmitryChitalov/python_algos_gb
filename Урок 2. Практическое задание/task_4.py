@@ -9,3 +9,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+n = input('Введите количество элементов:')
+
+
+def summarize(n=n, i=n, summ=1, el=1):
+    if not isinstance(i, int):
+        i = int(i)
+
+    if i == 1:
+        print('Количество элементов - {}, их сумма - {}'.format(n, summ))
+        return None
+
+    else:
+        el = el / 2 * -1
+        summ += el
+        i -= 1
+        return summarize(n, i, summ=summ, el=el)
+
+summarize(n=n)

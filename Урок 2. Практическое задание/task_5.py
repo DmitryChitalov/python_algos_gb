@@ -18,3 +18,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+asciiDict = [(i, chr(i)) for i in range(32, 128)]
+
+
+def print_lines(a):
+    lines = []
+
+    if len(a) < 10:
+        for x in range(len(a)):
+            lines.append(str(a[x][0]) + ' - ' + str(a[x][1]))
+        print(' '.join(lines))
+        return None
+    else:
+        for x in range(10):
+            lines.append(str(a[x][0]) + ' - ' + str(a[x][1]))
+        print(' '.join(lines))
+        a = a[10:]
+        return print_lines(a)
