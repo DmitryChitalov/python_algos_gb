@@ -28,3 +28,54 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+import operator
+
+def first_valid_number_input(a):
+    try:
+        return int(a)
+    except ValueError:
+        print('Вы ввели не число, исправьте')
+        return False
+
+def valid_operator_input(a, ops):
+    try:
+        return ops[a]
+    except KeyError:
+        print('Вы ввели неверную операцию, исправьте')
+        return False
+
+def second_valid_number_input(a, o, b):
+    try:
+        ops = { "+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.truediv}
+        return ops[o](int(a), int(b))
+    except ZeroDivisionError:
+        print('Делить на 0 нельзя, введите число, отличное от 0')
+        return False
+
+
+def operations():
+    ops = {"+": operator.add, "-": operator.sub, "*": operator.mul, "/": operator.truediv, "0": "0"}
+
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода):')
+
+    while not valid_operator_input(operation, ops):
+        operation = input('Введите операцию (+, -, *, / или 0 для выхода):')
+
+    while valid_operator_input(operation, ops):
+
+        if operation == '0':
+            print('Закончили')
+            break
+        else:
+            first_number = input('Введите первое число:')
+            while valid_number_input(first_number):
+
+                second_number = input('Введите второе число:')
+
+                while second_valid_number_input(first_number, operation, second_number):
+                    print(operation_check(first_number, operation, second_number))
+
+                    return operations()
+
+

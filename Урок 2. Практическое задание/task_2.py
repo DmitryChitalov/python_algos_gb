@@ -16,3 +16,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def numbers_count(s, even=0, odd=0):
+    if isinstance(s, int):
+        s = list(str(s))
+
+    if len(s) == 0:
+
+        print('Количество четных и нечетных цифр в числе равно: ({}, {})'.format(even, odd))
+        return None
+    else:
+        el = int(s.pop())
+
+        if el % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+
+        return numbers_count(s, even=even, odd=odd)
