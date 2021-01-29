@@ -15,3 +15,29 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+
+class QueueClass:
+
+    def __init__(self):
+        self.doing = []
+        self.done = []
+        self.bugs = []
+
+    def is_empty(self, queue):
+        return queue == []
+
+    def to_queue(self, el):
+        self.doing.append(el)
+
+    def from_queue(self, from_queue, to_queue):
+        if len(from_queue) > 0:
+            val = from_queue.pop(0)
+            to_queue.append(val)
+        else:
+            print('В извлекаемой очереди нет задач.')
+            val = None
+        return val
+
+    def size(self, queue):
+        return len(queue)
