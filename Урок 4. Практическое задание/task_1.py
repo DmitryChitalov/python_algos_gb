@@ -21,3 +21,13 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+def func_2(nums):
+    return [i for i in nums if i % 2 == 0]
+
+nums = list(range(100000))
+
+print(timeit("func_1(nums)", setup="from __main__ import func_1, nums", number=1000))
+print(timeit("func_2(nums)", setup="from __main__ import func_2, nums", number=1000))
+
+# Использование list comprehantion ускорило процесс относительно создания списка при помощи append
