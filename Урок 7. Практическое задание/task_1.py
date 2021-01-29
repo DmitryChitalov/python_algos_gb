@@ -12,3 +12,96 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+
+
+import random
+import timeit
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+
+def bubble_sort_2(lst_obj):
+    n = 1
+    FLAG = False
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+                FLAG = True
+        if not FLAG:
+            break
+        n += 1
+        FLAG = False
+    return lst_obj
+
+
+orig_list = [random.randint(-100, 100) for _ in range(100)]
+
+print(f"Исходный массив: {orig_list}")
+print(f"Отсортированный массив: {bubble_sort(orig_list[:])}")
+
+
+print(f"Исходный массив: {orig_list}")
+print(f"Отсортированный массив: {bubble_sort_2(orig_list[:])}")
+
+
+# замеры 10
+orig_list = [random.randint(-100, 100) for _ in range(10)]
+print(timeit.timeit("bubble_sort(orig_list[:])",
+    setup="from __main__ import bubble_sort, orig_list", number=100))
+
+orig_list = [random.randint(-100, 100) for _ in range(100)]
+
+# замеры 100
+print(timeit.timeit("bubble_sort(orig_list[:])",
+    setup="from __main__ import bubble_sort, orig_list", number=100))
+
+orig_list = [random.randint(-100, 100) for _ in range(1000)]
+
+# замеры 1000
+print(timeit.timeit("bubble_sort(orig_list[:])",
+    setup="from __main__ import bubble_sort, orig_list", number=100))
+
+
+# замеры 10
+orig_list = [random.randint(-100, 100) for _ in range(10)]
+print(timeit.timeit("bubble_sort_2(orig_list[:])",
+    setup="from __main__ import bubble_sort_2, orig_list", number=100))
+
+orig_list = [random.randint(-100, 100) for _ in range(100)]
+
+# замеры 100
+print(timeit.timeit("bubble_sort_2(orig_list[:])",
+    setup="from __main__ import bubble_sort_2, orig_list", number=100))
+
+orig_list = [random.randint(-100, 100) for _ in range(1000)]
+
+# замеры 1000
+print(timeit.timeit("bubble_sort_2(orig_list[:])",
+    setup="from __main__ import bubble_sort_2, orig_list", number=100))
+
+
+"""
+Исходный массив: [-16, -43, 72, 97, -39, 99, -31, -16, -51, 38, -45, -4, -73, -77, 33, -37, 66, 6, 78, 9, 43, 35, 79, -32, -57, -38, -15, 34, 82, -45, 95, 53, -42, 58, 54, 30, -48, 30, -46, 47, -22, 94, 4, 66, 16, 65, 77, 56, 94, 88, 63, -15, -77, 34, 5, -1, 35, 80, -20, 10, -56, 15, -93, -41, 27, -65, 78, 53, 36, -91, 12, -75, -12, -39, 70, 33, -58, -49, -97, 7, -3, 43, -94, -83, -77, -70, -79, -70, -81, -15, 56, -76, -73, -80, 24, 8, 82, 91, 3, 67]
+Отсортированный массив: [99, 97, 95, 94, 94, 91, 88, 82, 82, 80, 79, 78, 78, 77, 72, 70, 67, 66, 66, 65, 63, 58, 56, 56, 54, 53, 53, 47, 43, 43, 38, 36, 35, 35, 34, 34, 33, 33, 30, 30, 27, 24, 16, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, -1, -3, -4, -12, -15, -15, -15, -16, -16, -20, -22, -31, -32, -37, -38, -39, -39, -41, -42, -43, -45, -45, -46, -48, -49, -51, -56, -57, -58, -65, -70, -70, -73, -73, -75, -76, -77, -77, -77, -79, -80, -81, -83, -91, -93, -94, -97]
+Исходный массив: [-16, -43, 72, 97, -39, 99, -31, -16, -51, 38, -45, -4, -73, -77, 33, -37, 66, 6, 78, 9, 43, 35, 79, -32, -57, -38, -15, 34, 82, -45, 95, 53, -42, 58, 54, 30, -48, 30, -46, 47, -22, 94, 4, 66, 16, 65, 77, 56, 94, 88, 63, -15, -77, 34, 5, -1, 35, 80, -20, 10, -56, 15, -93, -41, 27, -65, 78, 53, 36, -91, 12, -75, -12, -39, 70, 33, -58, -49, -97, 7, -3, 43, -94, -83, -77, -70, -79, -70, -81, -15, 56, -76, -73, -80, 24, 8, 82, 91, 3, 67]
+Отсортированный массив: [99, 97, 95, 94, 94, 91, 88, 82, 82, 80, 79, 78, 78, 77, 72, 70, 67, 66, 66, 65, 63, 58, 56, 56, 54, 53, 53, 47, 43, 43, 38, 36, 35, 35, 34, 34, 33, 33, 30, 30, 27, 24, 16, 15, 12, 10, 9, 8, 7, 6, 5, 4, 3, -1, -3, -4, -12, -15, -15, -15, -16, -16, -20, -22, -31, -32, -37, -38, -39, -39, -41, -42, -43, -45, -45, -46, -48, -49, -51, -56, -57, -58, -65, -70, -70, -73, -73, -75, -76, -77, -77, -77, -79, -80, -81, -83, -91, -93, -94, -97]
+0.0005893999999999969
+0.049966699999999996
+6.2590612
+
+
+Результаты очень похожи и с оптимизацией:
+0.0005014000000000962
+0.05464380000000002
+6.125698700000001
+
+"""
