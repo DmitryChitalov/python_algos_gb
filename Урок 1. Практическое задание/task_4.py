@@ -27,3 +27,44 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+class User:
+    users = {}
+
+    def __init__(self, login, password, is_activated):
+        self.login = login
+        self.password = password
+        self.is_activated = is_activated
+        users[login] = password, is_activated
+
+
+def check(login_value, password_value):  # итоговая сложность: константная
+
+    if login_value not in users:  # сложность — константная (1)
+        print('Такого логина не существует. Пройдите регистрацию')  # сложность — константная (1)
+
+    else:
+        if users[login_value][0] != password_value:  # сложность — константная (1)
+            print('Неверный пароль')  # сложность — константная (1)
+        else:
+            if users[login_value][1] == 1:  # сложность — константная (1)
+                print('Авторизация прошла')  # сложность — константная (1)
+            else:
+                print('Ваш аккаунт не активирован. Пройдите активацию')  # сложность — константная (1)
+
+    return None   # сложность: константная (1)
+
+
+def check_v2(login_value, password_value):
+    if login_value not in users:  # сложность — константная (1)
+        print('Такого логина не существует. Пройдите регистрацию')  # сложность — константная (1)
+
+    else:
+        if users[login_value][0] == password_value and users[login_value][1] == 1:  # сложность — константная (1)
+            print('Авторизация прошла')  # сложность — константная (1)
+        elif users[login_value][0] == password_value and users[login_value][1] == 0:  # сложность — константная (1)
+            print('Ваш аккаунт не активирован. Пройдите активацию')  # сложность — константная (1)
+        else:
+            print('Неверный пароль')  # сложность — константная (1)
+    return None  # сложность — константная (1)
