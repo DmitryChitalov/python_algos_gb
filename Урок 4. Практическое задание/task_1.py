@@ -21,3 +21,14 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    new_arr = [i for i in nums if not i % 2]
+    return new_arr
+
+
+"""
+Второй вариант получается быстрее. Почему? Из того, что нашел в сети --
+список физически создается в памяти, а генератор формируется в момент вызова
+"""
