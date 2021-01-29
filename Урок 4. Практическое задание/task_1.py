@@ -13,6 +13,7 @@
 """
 
 from timeit import timeit
+from random import randint
 
 
 def func_1(nums):
@@ -21,3 +22,19 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_1_optimized(nums):
+    l = len(nums)
+    return [i for i in range(l) if nums[i] % 2 == 0]
+
+
+tlst = [randint(1, 100) for a in range(randint(1, 300))]
+print(f'Длина входных данных {len(tlst)}')
+print(f'Время выполнения функции func_1: ', timeit('func_1(tlst)', globals=globals()))
+print(f'Время выполнения функции func_1_optimized: ', timeit('func_1_optimized(tlst)', globals=globals()))
+
+"""
+Заменил цикл списковым включением. Оно работает быстрее.
+На малом количестве элементов входного массива заметил проигрыш по времени.
+"""

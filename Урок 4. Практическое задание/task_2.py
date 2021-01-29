@@ -79,3 +79,37 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+чем длинее число - тем вероятнее повторы
+чем больше повторов - тем больше пользы от мемоизации
+в данном случае мемоизация приносит ощутимое ускорение
+"""
+
+
+# свой вариант через срезы строки без использования арифметики, результат тоже не плохой)
+@memoize
+def recursive_str_reverse_num_mem(number):
+    if type(number) is int:
+        number = str(number)
+    if len(number) == 1:
+        return number
+    return f'{number[-1:]}{recursive_str_reverse_num_mem(number[:-1])}'
+
+
+print('Оптимизированная функция recursive_str_reverse_num_mem')
+print(
+    timeit(
+        'recursive_str_reverse_num_mem(num_100)',
+        setup='from __main__ import recursive_str_reverse_num_mem, num_100',
+        number=10000))
+print(
+    timeit(
+        'recursive_str_reverse_num_mem(num_1000)',
+        setup='from __main__ import recursive_str_reverse_num_mem, num_1000',
+        number=10000))
+print(
+    timeit(
+        'recursive_str_reverse_num_mem(num_10000)',
+        setup='from __main__ import recursive_str_reverse_num_mem, num_10000',
+        number=10000))
