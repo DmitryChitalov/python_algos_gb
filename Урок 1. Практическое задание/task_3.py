@@ -22,3 +22,44 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+# решение 1
+# Хранилище - словарь: {str : float, str : float, ...}
+# Алгоритм - один проход по словарю с формированием списка из трех самых прибыльных компаний
+# Сложность - O(n)
+print("Решение 1")
+companies = dict(company1=123321.9, company2=32112399, company3=4312322, company4=4312325, company5=4312323,
+                 company6=4312324)
+
+print(companies)
+# вытащить из словаря три первых компании и полчить из них список, сортированный по убыванию прибыли
+max_list = sorted((companies.popitem(), companies.popitem(), companies.popitem()), key=lambda item: item[1],
+                  reverse=True)
+
+for key, value in companies.items():
+    if value > max_list[0][1]:  # поставить на первое место
+        max_list[2] = max_list[1]
+        max_list[1] = max_list[0]
+        max_list[0] = (key, value)
+    elif value > max_list[1][1]:  # поставить на второе место
+        max_list[2] = max_list[1]
+        max_list[1] = (key, value)
+    elif value > max_list[2][1]:  # поставить на третье место
+        max_list[2] = (key, value)
+
+print(*max_list, sep='\n')
+
+# Решение 2
+# Хранилище - Список кортежей: [(str, float),(str, float),...]
+# Алгоритм - Сортировка списка по ключу "прибыль" и вывод трех элементов
+# Сложность - O(n*log(n))
+print("Решение 2")
+companies = [('company1', 123321.9), ('company2', 32112399), ('company3', 4312322), ('company4', 4312325),
+             ('company5', 4312323), ('company6', 4312324)]
+print(companies)
+print(*sorted(companies, key=lambda item: item[1], reverse=True)[:3], sep='\n')
+
+# Вывод:
+# Решение 1 эффективнее с точки зрения производительности на больших данных. O(n) лучше чем O(n*log(n))
+# решение 2 легче для понимания, быстрее и лаконичнее пишется, уменьшается вероятность ошибок при написании по
+# сравнению с решением 1.
