@@ -27,3 +27,49 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {'Mark': {'password': '45umaU', 'active': True},
+             'Tom': {'password': 'vpm5of', 'active': False},
+             'Eva': {'password': '78omaU', 'active': True},
+             'Max': {'password': 'vg4maU', 'active': True}
+             }
+
+# Алгоритм №1- Сложность O(n)
+
+def authentication_1(name, password):
+    for key, value in users.items():
+        if key == name:
+            if value['password'] == password and value['active']:
+                return f'{name}, доступ разрешен!'
+            elif value['password'] == password and not value['active']:
+                return f'{name}, учетная запись не активирована! Хотите пройти активацию?'
+            elif value['password'] != password:
+                return 'Доступ запрещен!'
+    return f"Учетная запись {name} не существует!"
+
+# Алгоритм №2 -Сложность O(1)
+
+def authentication_2(name, password):
+    if users.get(name):
+        if password == users[name]['password']:
+            if users[name]['active']:
+                return f'{name}, доступ разрешен!'
+            else:
+                return f'{name}, учетная запись не активирована! Хотите пройти активацию?'
+        else:
+            return 'Доступ запрещен!'
+    else:
+        return f"Учетная запись {name} не существует!"
+
+
+print(authentication_1('Tom', 'vpm5of'))
+print(authentication_1('Tim', 'v77777'))
+print(authentication_1('Max', 'vg4maU'))
+
+print(authentication_2('Tom', 'vpm5of'))
+print(authentication_2('Tim', 'v77777'))
+print(authentication_2('Max', 'vg4maU'))
+
+
+# Второй вариант O(1) быстрее и лучше.
+
