@@ -14,3 +14,20 @@
 р
 а
 """
+import hashlib
+
+s = input("Введите строку из латинских букв: ")
+d = set()
+N = len(s)
+for i in range(N):
+    if i == 0:
+        N = len(s) - 1
+    else:
+        N = len(s)
+    for j in range(N, i, -1):
+        print(s[i:j])
+        d.add(hashlib.sha1(s[i:j].encode('utf-8')).hexdigest())
+print(d)
+
+print("Количество различных подстрок в строке '%s' равно %d" % (s, len(d)))
+
