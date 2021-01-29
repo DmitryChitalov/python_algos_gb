@@ -16,3 +16,24 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count_even_odd(num, even=0, odd=0):
+    if (num % 10 % 2) == 0:
+        even += 1
+    else:
+        odd += 1
+
+    num = num // 10
+    if num == 0:
+        return even, odd
+    else:
+        return count_even_odd(num, even, odd)
+
+
+# number = int(input('Введите число: '))
+# print(count_even_odd(number))
+
+print(count_even_odd(34560))
+print(count_even_odd(123))
+print(count_even_odd(0))
