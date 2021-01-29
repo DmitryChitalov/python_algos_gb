@@ -21,3 +21,28 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for i in nums if i % 2 == 0]
+
+
+list_nums = [i for i in range(1000)]
+list_nums_2 = [i for i in range(100000)]
+print('Результат функции с циклом (1000 элементов): ',
+      timeit("func_1(list_nums)", globals=globals(), number=1000))
+print('Результат функции с генератором списков (1000 элементов):',
+      timeit("func_2(list_nums)", globals=globals(), number=1000))
+print('Результат функции с циклом (100000 элементов): ',
+      timeit("func_1(list_nums_2)", globals=globals(), number=1000))
+print('Результат функции с генератором списков (100000 элементов): ',
+      timeit("func_2(list_nums_2)", globals=globals(), number=1000))
+
+"""
+Результат функции с циклом (1000 элементов): 0.1983859
+Результат функции с генератором списков (1000 элементов): 0.07242093499999999
+Результат функции с циклом (100000 элементов): 16.275621466
+Результат функции с генератором списков (100000 элементов): 7.299527134999998
+
+Генераторы списков работают быстрее
+"""
