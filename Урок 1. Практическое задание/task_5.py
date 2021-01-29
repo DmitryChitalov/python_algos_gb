@@ -93,3 +93,8 @@ for i in range(n1):
 
 print(my)
 print(my.get_val())
+
+for i in range(n1 + 2):
+    my.pop_out()
+
+print(my)
