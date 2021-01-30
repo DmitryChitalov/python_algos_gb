@@ -38,7 +38,7 @@ users_data = {
 
 
 def get_access_1(login, password):
-    if login in users_data:
+    if users_data[login]:
         if password == users_data[login][0]:  # 1
             if users_data[login][1]:          # 2
                 print(f'Welcome {login}')
@@ -67,9 +67,9 @@ def get_access_2(login, password):
 т.к. в первый раз мы делали проверки 1 и 2 по индексу и сложность была O(1), 
 а во втором случае, мы делали проверки 3 и 4 через итерацию по всему списку, а это уже сложность O(n)
 Конечная сложность алгоритмов:
-O(n) + O(1) + O(1) =    O(n) + 2   = O(n) 
+O(1) + O(1) + O(1) =    O(1) * 3   = O(1) 
 O(n) + O(n) + O(n) =    3 * O(n)   = O(n) 
-И пусть итоговая сложность алгоритма одинаковая, у первой больше линейных, чем у второй
+у первой константная, у второй линейная
 """
 
 check_list = [['Vova', '123'], ['Vlad', 'aa'], ['Vlad', 'aaa'], ['Yan', 'aaa']]
