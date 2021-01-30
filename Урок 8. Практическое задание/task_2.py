@@ -10,6 +10,7 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных.
 """
 
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -21,48 +22,29 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
-        # если у узла нет левого потомка
+        # введенное значение должно быть меньше корня
         if self.root > new_node:
             if self.left_child == None:
-                # тогда узел просто вставляется в дерево
-                # формируется новое поддерево
                 self.left_child = BinaryTree(new_node)
-            # если у узла есть левый потомок
             else:
-                old_val = self.left_child
-                if new_node < old_val.root:
-                    # тогда вставляем новый узел
-                    tree_obj = BinaryTree(new_node)
-                    # и спускаем имеющегося потомка на один уровень ниже
-                    tree_obj.left_child = self.left_child
-                    self.left_child = tree_obj
-                else:
-                  print('Число больше значения потомка')
+                tree_obj = BinaryTree(new_node)
+                tree_obj.left_child = self.left_child
+                self.left_child = tree_obj
         else:
             print('Число больше значения корня')
 
     # добавить правого потомка
     def insert_right(self, new_node):
-        # если у узла нет правого потомка
+        # введенное значение должно быть больше корня
         if self.root < new_node:
             if self.right_child == None:
-                # тогда узел просто вставляется в дерево
-                # формируется новое поддерево
                 self.right_child = BinaryTree(new_node)
-            # если у узла есть правый потомок
             else:
-                old_val = self.right_child
-                if new_node > old_val.root:
-                    # тогда вставляем новый узел
-                    tree_obj = BinaryTree(new_node)
-                    # и спускаем имеющегося потомка на один уровень ниже
-                    tree_obj.right_child = self.right_child
-                    self.right_child = tree_obj
-                else:
-                  print('Число меньше значения потомка')
+                tree_obj = BinaryTree(new_node)
+                tree_obj.right_child = self.right_child
+                self.right_child = tree_obj
         else:
             print('Число меньше значения корня')
-            
 
     # метод доступа к правому потомку
     def get_right_child(self):
@@ -81,13 +63,12 @@ class BinaryTree:
         return self.root
 
 
-
 try:
     r = BinaryTree(8)
     print(r.get_root_val())
     print(r.get_left_child())
-    r.insert_left(40)
-    r.insert_left(3)
+    r.insert_left(50)
+    r.insert_left(6)
     print(r.get_left_child())
     print(r.get_left_child().get_root_val())
     r.insert_right(10)
