@@ -28,7 +28,7 @@ def check_1(lst_obj):
 
     Сложность: !!!.
     """
-    lst_to_set = set(lst_obj)  # !!!
+    lst_to_set = set(lst_obj)  # !!! O(len(lst_obj)) , (1) линейная
     return lst_to_set
 
 
@@ -43,9 +43,9 @@ def check_2(lst_obj):
 
     Сложность: !!!.
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
+    for j in range(len(lst_obj)):          # !!! (1) - поиск длинны массива
+        if lst_obj[j] in lst_obj[j+1:]:    # !!! (n (поиск элемента в списке)  +  n(создание среза)) * n (цикл c n шагов) + (1) = (2n)**2 + 1
+            return False                   # !!! O(N**2) - квадратичная
     return True                            # !!!
 
 
@@ -59,11 +59,11 @@ def check_3(lst_obj):
 
     Сложность: !!!
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
+    lst_copy = list(lst_obj)                 # !!! n  копирование
+    lst_copy.sort()                          # !!! n log n  сортировка
+    for i in range(len(lst_obj) - 1):        # !!! n  (поиск элемента) + 1 (поиск длинны, отбрасываем)
+        if lst_copy[i] == lst_copy[i+1]:     # !!! 1(поиск i) + 1(сравнение) + 1(поиск i+1), отрбасываем
+            return False                     # !!! итого n + nlog(n) + n = O(N*log(N))
     return True                              # !!!
 
 #############################################################################################

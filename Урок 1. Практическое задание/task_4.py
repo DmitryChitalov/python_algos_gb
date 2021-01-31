@@ -27,3 +27,50 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+users = {
+    'Vasyan': [12345, True],
+    'Denis': [111, False],
+    'Anna': ['password', False],
+    'Max': ['login', True]
+ }
+
+def checkAuth ():
+    userName = input('Пожалуйста введите логин: ')
+
+    if userName not in users.keys():
+        return print('Пользователь с таким логином не найден')
+    else:
+        print('привет: ', userName)
+
+    profile = users[userName]
+    passwd = input('Пожалуйста введите пароль: ')
+
+    pwdCheck = False
+
+
+    if str(profile[0]) != passwd:
+        for i in range(2):
+            passwd = input('Неверный пароль, пожалуйста введите пароль заново: ')
+            if passwd != str(profile[0]):
+                continue
+            else:
+                pwdCheck = True
+                break
+    else:
+        pwdCheck = True
+
+    if pwdCheck:
+        print('Авторизация пройдена')
+        print('====================')
+        print('Проверка статуса учетной записи....')
+
+        if profile[1]:
+            print("Учетная запись активна, добро пожаловать!")
+        else:
+            print("Учетная запись неактивна, просьба пройти процедуру активации")
+    else:
+        print('с 3х раз не вспомнил пароль....')
+        print('ПОШЕЛ ВОН C МОЕГО САЙТА!')
+
+checkAuth()

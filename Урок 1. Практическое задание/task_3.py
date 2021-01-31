@@ -22,3 +22,34 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+dict = {
+    'Horns&Hoofs': 10000,
+    'Google': 100,
+    'Yandex': 50,
+    'Mail': 50,
+    'Pyaterochka': 400,
+    'Shesterochka': 300
+ }
+
+# вариант 1
+def maxProfit (dict):
+
+    keysList = sorted( list((dict.values())), reverse=True) [:3]
+    resultDict = {}
+
+    for i in dict:
+        if dict[i] in keysList:
+            resultDict[i] = dict[i]
+    return resultDict
+
+# вариант 2
+def maxProfit2 (dict):
+    return sorted(dict.items(), key=lambda x: x[1], reverse=True) [:3]
+
+print(maxProfit(dict))
+print(maxProfit2(dict))
+
+
+# вариант 2 лучше, т.к количество действий минимально, отсутствуют лишние переменные
+
