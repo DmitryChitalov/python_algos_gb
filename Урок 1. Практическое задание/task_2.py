@@ -17,3 +17,25 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+my_list = [6, 8, 3, 7, 1, 34, 3, 7]
+
+
+def find_min_1(my_list_1):
+    for el in my_list_1:
+        flag = True
+        for i in my_list_1:
+            if i < el:
+                flag = False
+        if flag:
+            return el
+
+
+def find_min_2(my_list_1):
+    minimum = my_list_1[0]
+    for el in my_list_1[1:]:
+        if el < minimum:
+            minimum = el
+    return minimum
+
+print(find_min_1(my_list))
