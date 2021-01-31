@@ -10,6 +10,7 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных.
 """
 
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -19,10 +20,21 @@ class BinaryTree:
         # правый потомок
         self.right_child = None
 
+    # проверка на величину входных данных
+    def my_check(self, name_function, new_node):
+        if name_function == 'insert_left' and self.root < new_node:
+            raise Exception('left element must be smaller')
+        elif name_function == 'insert_right' and self.root > new_node:
+            raise Exception('right element must be bigger')
+
     # добавить левого потомка
     def insert_left(self, new_node):
+        try:
+            self.my_check('insert_left', new_node)
+        except Exception as err:
+            return print(err)
         # если у узла нет левого потомка
-        if self.left_child == None:
+        if self.left_child is None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.left_child = BinaryTree(new_node)
@@ -36,8 +48,12 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        try:
+            self.my_check('insert_right', new_node)
+        except Exception as err:
+            return print(err)
         # если у узла нет правого потомка
-        if self.right_child == None:
+        if self.right_child is None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.right_child = BinaryTree(new_node)
@@ -77,3 +93,5 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+r.insert_right(5)
+r.insert_left(10)
