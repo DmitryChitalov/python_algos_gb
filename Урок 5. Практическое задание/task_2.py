@@ -11,3 +11,18 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+
+from functools import reduce
+
+user_input1 = input("Введите 1-ое число: ")
+user_input2 = input("Введите 2-ое число: ")
+
+
+def func_reducer(el_prev, el):
+    res_add = hex(el_prev + el)
+    res_mult = hex(el_prev * el)
+    return print(f"Сумма чисел - {list(res_add[2:].swapcase())}",
+                 f"Произведение чисел - {list(res_mult[2:].swapcase())}")
+
+
+reduce(func_reducer, [int(user_input1, 16), int(user_input2, 16)])
