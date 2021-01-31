@@ -27,3 +27,49 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+print('Первый вариант - сложность O(n):')
+
+objects_1 = [{"login": "Masha", "passw": "qwerty", "auth": True}, {"login": "Dasha", "passw": "12345", "auth": False},
+             {"login": "Glasha", "passw": "love", "auth": False}]
+
+
+def check_user_1(uname, upass):
+    for el in objects_1:  # O(n)
+        if el["login"] == uname:  # O(1)
+            if el["passw"] == upass:  # O(1)
+                if el["auth"]:  # O(1)
+                    print('Добро пожаловать!')
+                    break
+                else:
+                    print('Вам необходимо пройти активацию!')
+                    break
+            else:
+                print('Пароль неверный!')
+                break
+    else:
+        print('Такого пользователя не существует!')
+
+
+check_user_1(input('Представьтесь пожалуйста:     '), input('Введите пароль:      '))
+
+print('Второй вариант - сложность O(1):')
+
+objects_2 = {"Masha": {"passw": "qwerty", "auth": True}, "Dasha": {"passw": "12345", "auth": False},
+             "Glasha": {"passw": "love", "auth": False}}
+
+
+def check_user_2(uname, upass):
+    el = objects_2.get(uname)           # O(1)
+    if el is not None:                  # O(1)
+        if el["passw"] == upass:        # O(1)
+            if el["auth"]:              # O(1)
+                print('Добро пожаловать!')
+            else:
+                print('Вам необходимо пройти активацию!')
+        else:
+            print('Пароль неверный!')
+    else:
+        print('Такого пользователя не существует!')
+
+
+check_user_2(input('Представьтесь пожалуйста:     '), input('Введите пароль:      '))

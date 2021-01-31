@@ -22,3 +22,27 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+objects = {"Рога и Копыта": 23587, "СуперИнк": 54754, "Мечта": 254554, "Вера": 3453, "Казино": 3465987}
+
+only_values = list(objects.values())
+only_keys = list(objects.keys())
+
+print('Первый вариант - сложность O(n log n):')
+sorted_values = sorted(objects.values(), reverse=True)[:3]  # O(n log n)
+
+for el in sorted_values:                    # O(1)
+    find_index_1 = only_values.index(el)    # O(n)
+    max_key_1 = only_keys[find_index_1]
+    print(max_key_1)
+
+print('Второй вариант - сложность O(n):')
+only_values_copy = only_values.copy()
+
+for i in range(3):                          # O(1)
+    max_val_1 = max(only_values_copy)       # O(n)
+    find_index_1 = only_values.index(max_val_1)     # O(n)
+    max_key_1 = only_keys[find_index_1]     # O(1)
+    print(max_key_1)
+    only_values_copy.remove(max_val_1)      # O(n)
+
