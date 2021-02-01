@@ -27,3 +27,58 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# O(n) - неэффективное
+class User(object):
+    def __init__(self, username, password, is_activated=False):
+        self.username = username
+        self.password = password
+        self.is_activated = is_activated
+
+
+def check_access(users_lst, username, password):
+    for i in range(len(users_lst)):
+        if users_lst[i].username == username:
+            if users_lst[i].password != password:
+                break
+            elif not users_lst[i].is_activated:
+                print('Необходимо пройти активацию учётной записи')
+                return
+            else:
+                print('Пользователь может быть допущен')
+                return
+    print('Неверный пользователь или пароль')
+    return
+
+
+# O(1) - эффективное
+class UserRepository(object):
+    def __init__(self, users_list):
+        self.rep = {u[0]: (u[1], u[2]) for u in users_list}
+
+    def add(self, username, password, is_activated=False):
+        self.rep[username] = (password, is_activated)
+
+    def pop(self, username):
+        return self.rep.pop(username)
+
+    def check_access(self, username, password):
+        user_rec = self.rep.get(username)
+        if user_rec is None or user_rec[0] != password:
+            print('Неверный пользователь или пароль')
+            return
+        elif not user_rec[1]:
+            print('Необходимо пройти активацию учётной записи')
+            return
+        else:
+            print('Пользователь может быть допущен')
+            return
+
+
+users = [('A', 'qwerty', True), ('B', 'password', False), ('C', 'alligator', True)]
+ur = UserRepository(users)
+# ur.add('D', 'asdfg')
+# ur.pop('C')
+
+ur.check_access('B', 'password')
