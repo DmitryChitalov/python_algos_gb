@@ -15,3 +15,21 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def reverse(current_number):
+    var_int = int(current_number)
+    if len(current_number) == 1:
+        return current_number
+    item = var_int % 10
+    var_int = var_int // 10
+    return str(item) + reverse(str(var_int))
+
+
+inp_str = input("Введите число:")
+while not inp_str.isdigit():
+    print("Введено не число")
+    inp_str = input("Введите число:")
+
+var_reverse = reverse(inp_str)
+print(f'Реверс = {var_reverse}')

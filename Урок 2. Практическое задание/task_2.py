@@ -16,3 +16,32 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def sum_even_odd(current_number):
+    var_int = int(current_number)
+    if len(current_number) == 1:
+        if var_int % 2 == 0:
+            return 1, 0
+        else:
+            return 0, 1
+    else:
+        item = var_int % 10
+        var_int = var_int // 10
+        var_even, var_odd = sum_even_odd(str(var_int))
+        if item % 2 == 0:
+            var_even += 1
+        else:
+            var_odd += 1
+        return var_even, var_odd
+
+
+inp_str = input("Введите число:")
+while not inp_str.isdigit():
+    print("Введено не число")
+    inp_str = input("Введите число:")
+
+var_even, var_odd = sum_even_odd(inp_str)
+
+print(f"Четных чисел: {var_even}")
+print(f"Нечетных чисел: {var_odd}")
