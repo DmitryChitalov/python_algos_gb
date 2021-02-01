@@ -28,3 +28,41 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def recurs(var_char=None):
+    if var_char is None:
+        var_char = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if var_char == '0':
+        return
+    var_str = input("Введите первое число: ")
+    while not var_str.isdigit():
+        print("Введено не число")
+        var_str = input("Введите первое число: ")
+    var_num1 = float(var_str)
+
+    var_str = input("Введите второе число: ")
+    while not var_str.isdigit():
+        print("Введено не число")
+        var_str = input("Введите второе число: ")
+    var_num2 = float(var_str)
+
+    if var_char == "+":
+        print(f"Ваш результат {var_num1 + var_num2}")
+    elif var_char == "-":
+        print(f"Ваш результат {var_num1 - var_num2}")
+    elif var_char == "*":
+        print(f"Ваш результат {var_num1 * var_num2}")
+    elif var_char == "/":
+        try:
+            print(f"Ваш результат {var_num1 / var_num2}")
+        except ZeroDivisionError:
+            print("Деление на 0!")
+    else:
+        print("Неизвестная операция")
+        recurs()
+    var_char = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    recurs(var_char)
+
+
+recurs()
