@@ -27,3 +27,20 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+# autoriz O(n) с циклом
+def a1( us, us_n, passw):
+    for
+        if
+            if
+                return
+            elif
+                return
+return
+
+# autoriz O(1) без цикла попытаться получить константную сложность
+def a2
+    if
+        return
+    elif
+        return
+return

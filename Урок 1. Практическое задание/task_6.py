@@ -15,3 +15,18 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+class Queue_class:
+    def soms(self):
+
+    def soms(self):
+    return
+
+    def soms(self):
+    return
+
+    def soms(self):
+    return
+
+if
+
+print()
