@@ -9,3 +9,33 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import random
+
+
+def try_to_guess(num: int, row:int):
+    """Пользователь должен отгадать число num не более чем за 10 попыток"""
+
+    if row == 0:
+        return "Неугадали"
+
+    if row > 10:
+        return "Запрошено слишком много попыток"
+
+    print(f"Попытка № {11 - row}")
+    user_num = int(input("Введите число: "))
+
+    if user_num == num:
+        return "Угадали!"
+
+    if user_num > num:
+        print("Больше загаданного")
+    else:
+        print("Меньше загаданного")
+
+    return try_to_guess(num, row - 1)
+
+
+N = random.randint(0, 100)
+print("Угадайте число от 0 до 100 за 10 попыток")
+print(try_to_guess(N, 10))

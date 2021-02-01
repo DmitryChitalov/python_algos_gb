@@ -28,3 +28,48 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def action():
+    """Функция, которая будет складывать, вычитать, умножать или делить
+        два числа. Числа и знак операции вводятся пользователем
+
+    """
+    input_correct = True
+    oper = input("Введите операцию (+, -, *, / или 0 для выхода):")
+    if oper not in ["+", "-", "*", "/", "0"]:
+        print("Некорректный ввод")
+        input_correct = False
+
+    if oper == "0":
+        # Завершение рекурсии
+        return
+
+    if input_correct:
+        try:
+            a = float(input("Введите первое число:"))
+            try:
+                b = float(input("Введите второе число:"))
+            except ValueError:
+                print("Некорректный ввод")
+                input_correct = False
+        except ValueError:
+            print("Некорректный ввод")
+            input_correct = False
+
+    if input_correct:
+        if oper == "+":
+            print("Ваш результат = ", a + b)
+        elif oper == "-":
+            print("Ваш результат = ", a - b)
+        elif oper == "*":
+            print("Ваш результат = ", a * b)
+        else:
+            if b != 0:
+                print("Ваш результат = ", a / b)
+            else:
+                print("На ноль делить нельзя")
+
+    action()
+
+
+action()
