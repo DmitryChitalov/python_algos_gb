@@ -18,3 +18,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def print_ascii(i_start, i_end, i_car):
+    if i_start > i_end:
+        return
+
+    i_car += 1
+
+    if(i_car % 10 == 0 and i_car != 10):
+        print(f'{i_start} - {chr(i_start)} ')
+    else:
+        print(f'{i_start} - {chr(i_start)} ', end='')
+
+    return print_ascii(i_start+1, i_end, i_car)
+
+print_ascii(32, 127, 10)

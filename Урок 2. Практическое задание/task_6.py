@@ -9,3 +9,25 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+def guess_number(i_try, i_rand_num):
+    if i_try < 1:
+        return
+
+    l_user_num = int(input('Введите число: '))
+
+    if l_user_num == i_rand_num:
+        print('Ура! Вы отгадали число!')
+        return
+
+    if(l_user_num < i_rand_num):
+        print('Введенное число меньше загадонного.')
+    else:
+        print('Введенное число больше загадонного.')
+
+    return guess_number(i_try-1, i_rand_num)
+
+
+g_rand_num = random.randint(0, 100)
+guess_number(10, g_rand_num)

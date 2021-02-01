@@ -16,3 +16,25 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def calc_even_ord(i_num, i_counter):
+    if i_num <= 0 and i_counter[0] == 0 and i_counter[1] == 0:
+        i_counter[0] += 1
+        return
+
+    if i_num <= 0:
+        return
+
+    if i_num % 2 == 0:
+        i_counter[0] += 1
+    else:
+        i_counter[1] += 1
+
+    return calc_even_ord(i_num // 10, i_counter)
+
+
+g_counter = [0, 0]
+
+calc_even_ord(123, g_counter)
+
+print(f'Количество четных и нечетных цифр в числе равно: ({g_counter[0]}, {g_counter[1]}).')
