@@ -21,34 +21,15 @@
 import random
 
 
-class stack:
+class Stack:
     count: int
     items = []
-
-    # def __init__(self, count):
-    #     self.count = count
-    #     self.items.append(0)
 
     def __init__(self, count):
         self.count = count
 
     def __str__(self):
         return str(self.items)
-
-    # def push(self):
-    #     if len(self.items) > 0:
-    #         if self.items[len(self.items) - 1] >= self.count:
-    #             self.items.append(1)
-    #         else:
-    #             self.items[len(self.items) - 1] += 1
-    #     else:
-    #         self.items.append(1)
-    #
-    # def pop(self):
-    #     if len(self.items) > 0:
-    #         self.items[len(self.items) - 1] -= 1
-    #         if self.items[len(self.items) - 1] == 0:
-    #             del (self.items[len(self.items) - 1])
 
     def push(self, item):
         count_stack = len(self.items)
@@ -75,7 +56,7 @@ class stack:
             return item
 
 
-stack_1 = stack(7)
+stack_1 = Stack(7)
 for i in range(16):
     stack_1.push(random.randint(1, 10))
     print(stack_1)

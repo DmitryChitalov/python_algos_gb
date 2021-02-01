@@ -29,15 +29,16 @@
 """
 
 """
-auth_1 - оптимальнее исходя из расчета сложности О-большое, потребуется меньше времени 
+auth_2 - оптимальнее исходя из расчета сложности О-большое, потребуется меньше времени 
 """
+
 
 def auth_1(login, pwd):
     """
     сложность N - линейная
     """
-    for item in storage:
-        if item["login"] == login and item["password"] == pwd:
+    for key, item in storage.items():
+        if key == login and item["password"] == pwd:
             if item["act"] == 1:
                 print("Успешный вход")
                 return
@@ -51,21 +52,26 @@ def auth_1(login, pwd):
 
 def auth_2(login, pwd):
     """
-    сложность 2+N ~ линейная
+    сложность O(1)
     """
-    item = {"login": login, "password": pwd, "act": 0}
-    item_act = {"login": login, "password": pwd, "act": 1}
-
-    if item_act in storage:
-        print("Успешный вход")
-    elif item in storage:
-        print("Необходимо выполнить активацию")
+    item = storage.get(login)
+    if not (item is None):
+        if item["password"] == pwd:
+            if item["act"] == 1:
+                print("Успешный вход")
+                return
+            else:
+                print("Необходимо выполнить активацию")
+                return
+        else:
+            print("Неправильный логин/пароль")
+            return
     else:
         print("Неправильный логин/пароль")
+        return
 
-
-storage = [{"login": "login1", "password": "pass1", "act": 0}, {"login": "login2", "password": "pass2", "act": 1},
-           {"login": "login3", "password": "pass3", "act": 1}]
+storage = {"login1": {"password": "pass1", "act": 0}, "login2": {"password": "pass2", "act": 1},
+           "login3": {"password": "pass3", "act": 1}}
 
 auth_1("login1", "pass2")
 auth_1("login1", "pass1")
