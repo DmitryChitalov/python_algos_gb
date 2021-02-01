@@ -21,7 +21,7 @@ import json
 from binascii import hexlify
 from hashlib import pbkdf2_hmac
 
-user_data_file_name = 'users_data.json'
+user_data_file_name = 'task_2_users_login_password.json'
 
 
 def hash_password(user_name, user_password):
