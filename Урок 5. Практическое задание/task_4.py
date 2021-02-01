@@ -32,6 +32,11 @@ print('ordered_dict_test_1 :', timeit('ordered_dict_test_1()',
                                 globals=globals(),
                                 number=1000))
 
+"""
+dict_test_1 : 0.4459006
+ordered_dict_test_1 : 0.5228404999999999
+"""
+
 #Заполнение словаря тест №2
 
 def dict_test_2():
@@ -54,4 +59,13 @@ print('ordered_dict_test_2 :', timeit('ordered_dict_test_2()',
                                 globals=globals(),
                                 number=1000))
 
+"""
+dict_test_2 : 1.6197659999999998
+ordered_dict_test_2 : 1.9851899
+"""
+
 #Вывод: Стандартный способ заполнения словаря показал лучий результат по сравнению с коллекцией OrderedDict.
+
+
+
+
