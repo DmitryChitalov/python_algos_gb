@@ -9,6 +9,7 @@
 """
 
 
+#1
 def rec(number, sum=0, q=-0.5, count=0):
     if number == 0:
         return f'Количество элементов - {count}, их сумма - {sum}'
@@ -17,3 +18,16 @@ def rec(number, sum=0, q=-0.5, count=0):
 
 
 print(rec(int(input('Введите количество элементов: '))))
+
+
+#2
+def rec_2(i, numb, count, sum):
+    """Рекурсия"""
+    if i == count:
+        print(f"Количество элементов - {count}, их сумма - {sum}")
+    elif i < count:
+        return rec_2(i + 1, numb / 2 * -1, count, sum + numb)
+
+
+COUNT = int(input("Введите количество элементов: "))
+rec_2(0, 1, COUNT, 0)

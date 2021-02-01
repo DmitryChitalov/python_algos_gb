@@ -26,7 +26,7 @@ for i in range(32, 128):
         count = 0
         print(f'{i} - {chr(i)}', end='\n')
 
-#2 рекурсия
+#2 рекурсия 1
 
 
 def rec(count=1, i=32):
@@ -42,3 +42,22 @@ def rec(count=1, i=32):
 
 
 rec()
+
+#3 рекурсия 2
+
+
+def rec_2(from_symbol, to_symbol, output_str=''):
+    for i in range(from_symbol, to_symbol):
+        if i <= LAST_ASCII_NUM:
+            output_str += f'{i} - {chr(i)} '
+    print(output_str)
+    if to_symbol < LAST_ASCII_NUM:
+        return rec_2(from_symbol + STEP, to_symbol + STEP)
+
+
+first_ascii_num = 32
+LAST_ASCII_NUM = 127
+STEP = 10
+
+print("Это вывод рекурсии: ")
+rec_2(first_ascii_num, first_ascii_num + STEP)
