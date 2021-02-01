@@ -18,3 +18,16 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def print_ascii(num):
+    if num == 127:
+        return str(num) + " - " + chr(num)
+    if num % 10 == 1:
+        var_str = str(num) + " - " + chr(num) + "\n\r" + print_ascii(num + 1)
+    else:
+        var_str = str(num) + " - " + chr(num) + "\t" + print_ascii(num + 1)
+    return var_str
+
+
+print(print_ascii(32))

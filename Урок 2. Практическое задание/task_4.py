@@ -9,3 +9,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sum_recur(n):
+    if n == 1:
+        return 1
+    else:
+        return 1 * (-0.5) ** (n - 1) + sum_recur(n - 1)
+
+
+inp_str = input("Введите целое число > 0:")
+while not inp_str.isdigit():
+    print("Введено не число")
+    inp_str = input("Введите целое число > 0:")
+
+var_int = int(inp_str)
+var_sum = sum_recur(var_int)
+
+print(var_sum)
