@@ -28,3 +28,43 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def get_number(i_ord, i_opr):
+    while True:
+        try:
+            if i_ord == 1:
+                l_num = int(input('Введите первое число: '))
+            else:
+                l_num = int(input('Введите второе число: '))
+
+            if i_ord == 2 and i_opr == '/' and l_num == 0:
+                print('Ноль в качестве делителя недопустим. Исправьтесь.')
+            else:
+                return l_num
+        except ValueError:
+            print('Вы вместо трехзначного числа ввели строку (((. Исправьтесь.')
+
+def calc_numbers():
+    l_opr = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+
+    if l_opr == '0' or l_opr not in ['+', '-', '*', '/', '0']:
+        return
+
+    l_num01 = get_number(1, l_opr)
+    l_num02 = get_number(2, l_opr)
+
+    if l_opr == '+':
+        l_res = l_num01 + l_num02
+    elif l_opr == '-':
+        l_res = l_num01 - l_num02
+    elif l_opr == '*':
+        l_res = l_num01 * l_num02
+    else:
+        l_res = l_num01 / l_num02
+
+    print('Ваш результат: ', l_res)
+
+    return calc_numbers()
+
+
+calc_numbers()

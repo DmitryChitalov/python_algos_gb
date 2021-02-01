@@ -9,3 +9,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def calc_spec_nums(i_n, i_num):
+    if i_n <= 0:
+        return 0
+
+    if i_n <= 1:
+        return i_num
+
+    return i_num + calc_spec_nums(i_n-1, i_num/(-2))
+
+
+g_n = int(input('Введите количество элементов: '))
+
+print(calc_spec_nums(g_n, 1))
