@@ -22,3 +22,41 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+
+"""
+search_2 оптимальнее исходя из расчета сложности О-большое, потребуется меньше времени
+"""
+
+def search_1(storage):
+    """
+    сложность NlogN - линейно-логарифмическая
+    """
+    storage.sort(key=lambda x: x["profit"], reverse=True)
+    return list(storage[0:3])
+
+
+def search_2(storage):
+    """
+    сложность 3(N+1) ~ N - линейная
+    """
+    var_list = []
+    for i in range(3):
+        x = {}
+        for item in storage:
+            if len(x) == 0 and item not in var_list:
+                x = item
+            if len(x) > 0 and item["profit"] > x["profit"] and item != x and item not in var_list:
+                x = item
+        var_list.append(x)
+    return var_list
+
+
+storage = [{"name": "name_1", "profit": 100}, {"name": "name_2", "profit": 50}, {"name": "name_3", "profit": 200},
+           {"name": "name_4", "profit": 150}, {"name": "name_5", "profit": 100}, {"name": "name_6", "profit": 400}]
+
+x = search_1(storage)
+print(x)
+
+x = search_2(storage)
+print(x)
