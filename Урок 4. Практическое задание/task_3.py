@@ -9,6 +9,8 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
+from timeit import timeit
+from random import randint
 
 
 def revers(enter_num, revers_num=0):
@@ -34,3 +36,40 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+def memoize(f):
+    cache = {}
+
+    def decorate(*args):
+
+        if args in cache:
+            return cache[args]
+        else:
+            cache[args] = f(*args)
+            return cache[args]
+
+    return decorate
+
+
+@memoize
+def revers_4(enter_num, revers_num=0):
+    if enter_num == 0:
+        return
+    else:
+        num = enter_num % 10
+        revers_num = (revers_num + num / 10) * 10
+        enter_num //= 10
+        revers(enter_num, revers_num)
+
+
+my_lst = randint(10 ** 30, 10 ** 40)
+
+print(timeit("revers(my_lst)", globals=globals(), number=10000))  # 0.1543315
+print(timeit("revers_2(my_lst)", globals=globals(), number=10000))  # 0.1096354
+print(timeit("revers_3(my_lst)", globals=globals(), number=10000))  # 0.0067128
+print(timeit("revers_4(my_lst)", globals=globals(), number=10000))  # 0.0023492
+
+"""
+Самой долго конечно будет рекурсия, т.к. приходитися 
+
+"""

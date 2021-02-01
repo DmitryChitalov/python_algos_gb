@@ -9,6 +9,7 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -39,3 +40,6 @@ def func_2():
 
 print(func_1())
 print(func_2())
+
+print(timeit("func_1()", globals=globals(), number=100000))  #
+print(timeit("func_2()", globals=globals(), number=100000))  #
