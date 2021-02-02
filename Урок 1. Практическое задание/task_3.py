@@ -22,3 +22,63 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+dic1 = {'рога и копыта': 500,
+        'ООО загот.скота': 1000,
+        'колхоз имени ленина': 23,
+        'мегафон': 100500,
+        'похоронное бюро': 230000,
+        'MMM': 23000000000}
+
+
+##############################
+# variant1
+
+# сложность O(N)
+def comp_max_profit(dic):
+    tmp_dic = dic.copy()
+    for i in range(0, 3):
+        max_comp = max(tmp_dic, key=tmp_dic.get)
+        print(max_comp)
+        del tmp_dic[max_comp]
+
+
+comp_max_profit(dic1)
+
+##############################
+# variant2
+print('--------variant2--------------')
+
+# сложность Nlog(N)
+def comp_max_profit2(dic):
+    list1 = list(dic.items())  # список кортежей ключ,значение
+    list1.sort(key=lambda j: j[1], reverse=True)
+    print(f'{list1[0][0]},{list1[1][0]},{list1[2][0]}')
+
+
+comp_max_profit2(dic1)
+
+################################
+# variant3
+# variant2
+print('--------variant3--------------')
+
+# сложность O(N^2)
+def comp_max_profit3(dic):
+    list2 = list(dic.keys())  # список ключей
+    list3 = []  # список компаний с самым большим доходом
+
+    for i in range(0, 3):
+        max_val = 0
+        for company in list2:
+            if company not in list3:
+                if dic1[company] > max_val:
+                    max_val = dic1[company]
+                    max_comp = company
+        list3.append(max_comp)
+        print(max_comp)
+
+
+comp_max_profit3(dic1)
+
+# самое эффективное первое решение с наименьшей сложностью а самое красивое второе
