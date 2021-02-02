@@ -13,6 +13,7 @@
 """
 
 from timeit import timeit
+# i will make oi later
 
 
 def func_1(nums):
