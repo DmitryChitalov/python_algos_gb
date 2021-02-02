@@ -9,3 +9,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def get_sum(n):
+    if n < 0:
+        return None
+    if n == 0:
+        return 0
+    if n == 1:
+        return 1
+    else:
+        return get_sum(n-1) + (-0.5)**(n-1)
+
+
+print('Введите n')
+n_el = input()
+if not n_el.isdigit():
+    print('Введённое не является натуральным числом')
+else:
+    print('Сумма = ', get_sum(int(n_el)))

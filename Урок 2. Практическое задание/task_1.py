@@ -28,3 +28,42 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+import operator
+
+op_dict = {'+': operator.add, '-': operator.sub, '*': operator.mul, '/': operator.truediv}
+
+
+def process_new_operation():
+    print('Введите операцию (+, -, *, / или 0 для выхода):')
+    op = input()
+
+    if op == '0':
+        return
+
+    if op not in op_dict.keys():
+        print('Неизвестная операция')
+        process_new_operation()
+        return
+
+    try:
+        print('Введите первое число:')
+        x = float(input())
+        print('Введите второе число:')
+        y = float(input())
+    except ValueError:
+        print('Введено не число')
+        process_new_operation()
+        return
+
+    if op == '/' and y == 0:
+        print('undefined')
+        process_new_operation()
+        return
+
+    print(op_dict[op](x, y))
+    process_new_operation()
+
+
+process_new_operation()

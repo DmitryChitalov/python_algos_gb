@@ -16,3 +16,26 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+# намеренно игнорирует нули в старших разрядах. я так понял считаем именно число, не строку
+def count_even_uneven_digits(target):
+    if not target.isdigit():
+        print('Введённое не является натуральным числом')
+        return None, None
+    target_number = int(target)
+    uc = get_uneven_digits_count(target_number)
+    return len(str(target_number)) - uc, uc
+
+
+def get_uneven_digits_count(target):
+    x, y = divmod(target, 10)
+    if x == 0:
+        return y % 2
+    else:
+        return y % 2 + get_uneven_digits_count(x)
+
+
+print('Введите число')
+e, u = count_even_uneven_digits(input())
+print(f'Количество четных : {e}  нечетных : {u}')
