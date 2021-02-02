@@ -9,3 +9,33 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+num = random.randint(0, 100)
+attempts = 10
+
+
+def game(counter=0):
+    print('количество попыток осталось: ', attempts - counter)
+    try:
+        n = int(input('Пожалуйста введите число: '))
+    except ValueError:
+        print('некорректный формат числа, попробуйте заново')
+        game()
+    if n == num:
+        print('Победа! ты угадал')
+        return 0
+    elif counter == attempts:
+        print('Попытки закончились, ты проиграл, загаданное число: ', num)
+        return 0
+    elif num > n:
+        counter += 1
+        print('загаданное число меньше введенного')
+        return game(counter)
+    else:
+        counter += 1
+        print('загаданное число больше введенного')
+        return + game(counter)
+
+
+game()
