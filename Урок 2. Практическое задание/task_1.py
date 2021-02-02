@@ -12,8 +12,8 @@
 
 Подсказка:
 Вариант исполнения:
-- условие рекурсивного вызова - введена операция +, -, *, /
-- условие завершения рекурсии - введена операция 0
+- условие рекурсивного вызова - введена операция +, -, *, / - ШАГ РЕКУРСИИ
+- условие завершения рекурсии - введена операция 0 - БАЗОВЫЙ СЛУЧАЙ
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
@@ -28,3 +28,69 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def summa(a, b):
+    if b > 0:
+        return sum(a + 1, b - 1)
+    else:
+        return a
+
+
+def subs(a, b):
+    if b > 0:
+        return subs(a - 1, b - 1)
+    else:
+        return a
+
+
+def mult(a, b):
+    if b > 1:
+        return a + mult(a, b - 1)
+    else:
+        return a
+
+
+def div(a, b, answer=0):
+    if a >= b:
+        return div(a - b, b, answer=answer + 1)
+    else:
+        return answer
+
+
+def operation():
+    z = input('Введите операцию (+, -, *, / или 0 для выхода) и числа в формате "*,2,3": ')
+    if z != '0':
+        try:
+            a = int(z.split(',')[1])
+            b = int(z.split(',')[2])
+            z = z.split(',')[0]
+            if z == '+':
+                return f'{print(summa(a, b))} {operation()}'
+            elif z == '-':
+                print(f'{print(subs(a, b))} {operation()}')
+            elif z == '*':
+                print(f'{print(mult(a, b))} {operation()}')
+            elif z == '/':
+                print(f'{print(div(a, b))} {operation()}')
+            else:
+                return 'Неправильный знак операции'
+        except IndexError:
+            return f'{print("Проверьте ввод")} {operation()}'
+    else:
+        return 'Конец программы!'
+
+
+print(operation())
+
+"""
+z = input('Введите операцию (+, -, *, / или 0 для выхода) и числа в формате "*,2,3": ')
+
+a = z.split(',')[1]
+b = z.split(',')[2]
+z = z.split(',')[0]
+
+print(a,b,z)
+"""
+
+# Не совсем понимаю почему выводятся None values
