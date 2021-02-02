@@ -2,7 +2,7 @@
 Задание 4.
 
 Для этой задачи:
-1) придумайте 1-3 решения (желательно хотя бы два)
+1) придумайте 2-3 решения (желательно хотя бы два)
 2) оцените сложность каждого решения в нотации О-большое
 3) сделайте вывод, какое решение эффективнее и почему
 
@@ -27,3 +27,47 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+data = {'john': ['qwerty', True], 'lisa': ['12wer', False], 'andrei': ['15letauf', True],
+        'spiderman': ['thereal1', False]}
+
+
+def resolution_1(database, user, password):
+    for nick, info in database.items():
+        if user == nick:
+            if (password == info[0]) and (info[1] is True):
+                return 'You have been succesfully logged in'
+            elif password == info[0] and info[1] is False:
+                return 'Refused in logging in. Please activate your account first'
+            elif password != info[0] and info[1] is False:
+                return 'Your password is incorrect. Additionally, activate your account before next log in'
+            elif password != info[0] and info[1] is True:
+                return 'Your password is incorrect'
+        else:
+            return f"User with nickname \"{user}\" does not exist in the system"
+
+
+def resolution_2(database, user, password):
+    try:
+        user_data = database[user]
+        if user_data[0] == password and user_data[1] is True:
+            return 'You have been succesfully logged in'
+        elif user_data[0] == password and user_data[1] is False:
+            return 'Refused in logging in. Please activate your account first'
+        elif user_data[0] != password and user_data[1] is False:
+            return 'Your password is incorrect. Additionally, activate your account before next log in'
+        elif user_data[0] != password and user_data[1] is True:
+            return 'Your password is incorrect'
+    except KeyError:
+        return 'User does not exist'
+
+
+print(resolution_1(data, 'john', 'qwety'))
+print(resolution_2(data, 'john', 'qwety'))
+
+
+# Ответ: resolution_1 сложность O(n)
+#        resolution_2 сложность 0(1)
+# Более оптимальным вариантом будет второе решение так как на его исполнение требуется меньше ресурсов и не требуется
+# цикл перебора for.
