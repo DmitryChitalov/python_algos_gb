@@ -15,3 +15,24 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def mirror_number(target):
+    if not target.isdigit():
+        print('Введённое не является натуральным числом')
+        return None
+    target_number = int('1' + target)
+
+    return rebuild_digits(target_number)[:-1]
+
+
+def rebuild_digits(target_number):
+    x, y = divmod(target_number, 10)
+    if x == 0:
+        return str(y)
+    else:
+        return str(y) + rebuild_digits(x)
+
+
+print('Введите число, которое требуется перевернуть:')
+print(f'Перевёрнутое число: {mirror_number(input())}')

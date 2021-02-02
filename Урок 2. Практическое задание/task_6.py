@@ -9,3 +9,38 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+import random
+
+
+def process_next_guess(x, attempt_n):
+    print('Введите следующую попытку')
+    guess = input()
+    try:
+        y = int(guess)
+    except ValueError:
+        print('Введённое не является натуральным числом. Попытка не засчитана')
+        process_next_guess(x, attempt_n)
+        return
+
+    if x < 0 or x > 100:
+        print('Введено число вне диапазона. Попытка не засчитана')
+        process_next_guess(x, attempt_n)
+        return
+
+    if x == y:
+        print('Отгадано')
+        return
+    if attempt_n == 10:
+        print('Все попытки исчерпаны')
+        return
+    if y > x:
+        print('Загаданное число меньше введённого')
+    else:
+        print('Загаданное число больше введённого')
+    process_next_guess(x, attempt_n + 1)
+
+
+rand_num = random.randint(0, 100)
+process_next_guess(rand_num, 1)

@@ -6,3 +6,21 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def check_sum(cur, limit, cur_sum):
+    if cur > limit:
+        return True
+    cur_sum += cur
+    if cur_sum != cur*(cur + 1)/2:
+        return False
+    return check_sum(cur + 1, limit, cur_sum)
+
+
+print('Введите натуральное n, до которого нужно проверять')
+n = input()
+if not n.isdigit():
+    print('Введённое не является натуральным числом')
+    exit()
+
+print('Выполняется' if check_sum(1, int(n), 0) else 'Не выполняется')
