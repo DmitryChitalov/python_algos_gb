@@ -9,3 +9,24 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def try_to_guess(tries_left, number):
+    try:
+        guess_number = int(input(f"Осталось попыток: {tries_left}. Введите число: "))
+    except ValueError:
+        print("Вы ввели не число!")
+        try_to_guess(tries_left, number)
+        return
+    if guess_number == number:
+        print("Точно!")
+        return
+    elif tries_left == 1:
+        print("Попытки закончились!")
+        return
+    else:
+        try_to_guess(tries_left - 1, number)
+
+
+try_to_guess(10, random.randint(0, 100))

@@ -16,3 +16,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def chetnechet(number, chet=0, nechet=0):
+    if number == 0:
+        return (chet, nechet)
+    number, digit = divmod(number, 10)
+    if digit % 2 == 0:
+        return chetnechet(number, chet + 1, nechet)
+    else:
+        return chetnechet(number, chet, nechet + 1)
+
+
+number = input("Введите число: ")
+if not number.isdigit():
+    print("Вы ввели не число!")
+    exit()
+result = chetnechet(int(number))
+print(f"Количество четных и нечетных цифр в числе равно: {result}")
