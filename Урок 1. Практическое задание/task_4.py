@@ -27,3 +27,46 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+"""
+f = open('pwd.txt', 'a+')
+f.write('user1 user1 1\n')
+f.write('user2 user2 1\n')
+f.write('user3 user3 0\n')
+f.write('user4 user4 0\n')
+f.close()
+"""
+# Сложность O(N)
+
+login = input("введите логин:")
+password = input("введите пароль:")
+
+
+def check_authentification(log, pwd):
+    f = open('pwd.txt', 'r')
+    for line in f:
+        line = line.rstrip('\n')
+        user_list = line.split(" ")
+        if (user_list[0] + " " + user_list[1]) == (login + " " + password):
+            if user_list[2] == "1":
+                print("You've passed!")
+                f.close()
+                return 1
+            else:
+                print("You're not activated! Print 1 if you wanna be activated right now")
+
+                while True:
+                    is_activated = input(":")
+                    if is_activated == "1":
+                        print("You've been activated successfully!")
+                        f.close()
+                        return 1
+                    else:
+                        print("You're wrong! Try again")
+
+    print("You've not passed!")
+    f.close()
+    return 0
+
+
+check_authentification(login, password)

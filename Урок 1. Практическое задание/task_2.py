@@ -17,3 +17,33 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+# variant1 O(n^2)
+############################################
+# list_obj = [9, 3, 4, 5, 6, 7, 2, 8]
+list_obj = [i for i in range(3, 15)]
+
+
+def find_min_val(lst_obj):
+    # min_val=list_obj[0]
+
+    for i in range(len(lst_obj)):
+        is_min = 1
+        for j in range(len(lst_obj)):
+            if list_obj[i] > lst_obj[j]:
+                is_min = 0
+
+        if is_min == 1:
+            return lst_obj[i]
+
+
+##############################################
+
+
+# variant2 O(n)
+############################################
+list_obj = [9, 3, 4, 5, 6, 7, 2, 8]
+
+
+def find_min_val2(lst_obj):
+    return min(lst_obj)  # !!! O(n)
