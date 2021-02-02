@@ -28,3 +28,50 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def arithmetic(in_op):
+    if in_op == '+' or in_op == '-' or in_op == '*' or in_op == '/':
+        v_res = 0
+        print('Enter value 1:')
+        v_v1 = input()
+        if not v_v1.isnumeric():
+            print('Entered value is not numeric!')
+            arithmetic(in_op)
+            exit(0)
+
+        print('Enter value 2:')
+        v_v2 = input()
+        if not v_v2.isnumeric():
+            print('Entered value is not numeric!')
+            arithmetic(in_op)
+            exit(0)
+
+        if in_op == '+':
+            v_res = int(v_v1) + int(v_v2)
+        if in_op == '-':
+            v_res = int(v_v1) - int(v_v2)
+        if in_op == '*':
+            v_res = int(v_v1) * int(v_v2)
+        if in_op == '/':
+            if int(v_v2)==0:
+                print('Division by zero is restricted!')
+                arithmetic(in_op)
+                exit(0)
+            else:
+                v_res = int(v_v1) / int(v_v2)
+        print('Result: ' + v_v1 + in_op + v_v2 + '=' + str(v_res))
+    else:
+        if in_op == '0':
+            print('Exiting...')
+            exit(0)
+        else:
+            print('Entered value is not numeric!')
+
+    print('Enter operation (+,-,*,/, 0 to exit):')
+    v_op = input()
+    arithmetic(v_op)
+
+if __name__ == '__main__':
+    print('Enter operation (+,-,*,/, 0 to exit):')
+    v_op = input()
+    arithmetic(v_op)
