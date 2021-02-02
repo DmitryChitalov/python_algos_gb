@@ -8,6 +8,7 @@
 """
 import sys
 
+
 def numbers_sum(number):
     if number == 1:
         return number
@@ -16,13 +17,13 @@ def numbers_sum(number):
 
 
 def proof(n):
-    if n ==0:
+    if n == 0:
         return
-    if numbers_sum(n) != n* (n + 1) / 2:
+    if numbers_sum(n) != n * (n + 1) / 2:
         print(f"Гипотеза неверна для n= {n}!!!")
     else:
-        #print(f"Гипотеза верна для n= {n}")
-        proof(n-1)
+        # print(f"Гипотеза верна для n= {n}")
+        proof(n - 1)
 
 
 try:
@@ -30,6 +31,6 @@ try:
 except ValueError:
     print("Вы ввели не число!")
     exit()
-sys.setrecursionlimit(n+3)
+sys.setrecursionlimit(n + 3)
 proof(n)
 print(f"Проверка проведена для n в диапазоне [1,{n}]")
