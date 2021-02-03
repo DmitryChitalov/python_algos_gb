@@ -14,7 +14,6 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 
-
 Сама задача:
 Имеется хранилище с информацией о компаниях: название и годовая прибыль.
 Для реализации хранилища можно применить любой подход,
@@ -22,3 +21,28 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+company = {
+    'apple': 2000,
+    'samsung': 3000,
+    'sony': 15000,
+    'LG': 50000,
+    'HTC': 300
+}
+# 0(Nlog N)
+porog = 3
+def search2(comp, p):
+    res = sorted(comp, key=comp.get, reverse=True)[:p]
+    print(res)
+
+search2(company, porog)
+
+# O(n)
+def search(company):
+    for i in range(3):
+        max_key = max(company, key = company.get)
+        max_value = max(company.values())
+        del company[max_key]
+        print(max_key + ' - '+ str(max_value))
+
+search(company)
+
