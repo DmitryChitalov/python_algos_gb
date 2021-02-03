@@ -28,7 +28,7 @@
 который вы придумаете, например, реализовать словарь.
 """
 
-
+# O(1)
 def autorisation1(users_data, login, password):
     if users_data.get(login):
         if users_data[login][0] == password:
@@ -42,6 +42,7 @@ def autorisation1(users_data, login, password):
         print("Пользователь не найден.")
 
 
+# O(N)
 def autorisation2(users_data, login, password):
     for key in users_data:
         if key == login:
@@ -62,3 +63,5 @@ users_data = {"ivan": ["1231", True], "petr": ["11111", False], "ira": ["22222",
 
 autorisation1(users_data, "ira", "22222")
 autorisation2(users_data, "petr", "11111")
+
+# Первое решение эффективнее, т.к. во втором появляется цикл.
