@@ -22,3 +22,33 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+company = {"test0": 5657, "tes1": 100, "test2": 556, "test3": 123, "test4": 3949, "test5": 63534543}
+max_companys = 3
+
+
+def method1(comp_dict, m):
+    company_list = []
+    price_list = []
+    result_company = []
+    for i in comp_dict.values():
+        price_list.append(i)
+    for i in comp_dict.keys():
+        company_list.append(i)
+    for i in range(m):
+        a = max(price_list)
+        index = price_list.index(a)
+        result_company.append(company_list[index])
+        price_list.remove(a)
+        company_list.remove(company_list[index])
+
+    print(result_company)
+
+
+def method2(comp_dict, m):
+    h = sorted(comp_dict, key=comp_dict.get, reverse=True)[:m]
+    print(h)
+
+
+method1(company, max_companys)  # O(n^2)
+method2(company, max_companys)  # O(n log n ) - самый дешевый вариант т.к. меньше чем O(n^2)
