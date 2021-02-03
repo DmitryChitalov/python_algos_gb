@@ -9,3 +9,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def numN(n):
+    if n == 1:
+        return 1
+    return -numN(n-1)/2
+
+
+def summ(n):
+    if n == 1:
+        return 1
+    return summ(n-1)+numN(n)
+
+
+if __name__ == '__main__':
+    N = input("Введите число:")
+    print(str(numN(int(N))))
+    print(str(summ(int(N))))

@@ -16,3 +16,53 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_dig(n):
+    if n == 0:
+        return 0
+    if (n % 10) % 2 == 0:
+        return 1 + even_dig(n // 10)
+    else:
+        return even_dig(n // 10)
+
+
+def odd_dig(n):
+    if n == 0:
+        return 0
+    return (n % 10) % 2 + odd_dig(n // 10)
+
+
+
+
+
+    """
+    sum_even = 0  # четное
+    sum_odd = 0  # нечетное
+    if not n:
+        return 0
+
+    # return int(n) % 10 + sum_dig(int(n) // 10)
+    i = 0
+    if int(n[i]) % 2 == 0:
+        return str(int(sum_dig(n[1:])) + int(n[i]))
+    else:
+        return str(sum_dig(n[1:]))
+
+
+
+    for i in n:
+        if int(i) % 2 == 0:
+            sum_even += int(i)
+        else:
+            sum_odd += int(i)
+    print("Сумма четных = " + str(sum_even))
+    print("Сумма нечетных = " + str(sum_odd))
+"""
+
+
+if __name__ == '__main__':
+    N = input("Введите число:")
+    # print(str(int(N) // 10))
+    print("количество четных чисел равно "+str(even_dig(int(N))))
+    print("количество нечетных чисел равно "+str(odd_dig(int(N))))

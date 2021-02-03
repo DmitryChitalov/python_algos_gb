@@ -15,3 +15,15 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def reverse(n):
+    if not n:
+        return ""
+    i = len(n)-1
+    return n[i] + reverse(n[:i:])
+
+
+if __name__ == '__main__':
+    N = input("Введите число:")
+    print(reverse(N))
