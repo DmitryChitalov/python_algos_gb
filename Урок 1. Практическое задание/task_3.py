@@ -22,3 +22,36 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+# O(N)
+def find_max3_1(companies):
+    top_thee = {}
+    for i in range(3):
+        max = 0
+        for index in companies:
+            if max < companies[index]:
+                max_index = index
+        top_thee[max_index] = companies[max_index]
+        companies.pop(max_index)
+    return top_thee
+
+
+# O(N log N)
+def find_max3_2(companies):
+    sorted_companies = {k: v for k, v in sorted(companies.items(), reverse=True, key=lambda x: x[1])}
+    i = 0
+    top3 = {}
+    for key in sorted_companies:
+        top3[key] = sorted_companies[key]
+        if i > 1:
+            break
+        i += 1
+    return top3
+
+
+companies = {"Арена": 300, "Трибуна": 200, "Самовар": 400, "Система": 1000, "Меридиан": 400}
+
+print(find_max3_2(companies))
+print(find_max3_1(companies))
+
+# Первое решение эффективнее, т.к. имееет меньшую сложность вычислений.

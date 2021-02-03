@@ -27,3 +27,41 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# O(1)
+def autorisation1(users_data, login, password):
+    if users_data.get(login):
+        if users_data[login][0] == password:
+            if users_data[login][1]:
+                print(f"Добро пожаловать, {login} !")
+            else:
+                print(f"{login}, вам нужно активировать аккаунт.")
+        else:
+            print("Пароль неверный")
+    else:
+        print("Пользователь не найден.")
+
+
+# O(N)
+def autorisation2(users_data, login, password):
+    for key in users_data:
+        if key == login:
+            if users_data[login][0] == password:
+                if users_data[login][1]:
+                    print(f"Добро пожаловать, {login} !")
+                    return
+                else:
+                    print(f"{login}, вам нужно активировать аккаунт.")
+                    return
+            else:
+                print("Пароль неверный")
+                return
+    print("Пользователь не найден.")
+
+
+users_data = {"ivan": ["1231", True], "petr": ["11111", False], "ira": ["22222", True]}
+
+autorisation1(users_data, "ira", "22222")
+autorisation2(users_data, "petr", "11111")
+
+# Первое решение эффективнее, т.к. во втором появляется цикл.
