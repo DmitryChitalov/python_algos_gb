@@ -11,6 +11,7 @@
 """
 from timeit import timeit
 from random import randint
+from cProfile import run
 
 
 def revers(enter_num, revers_num=0):
@@ -52,7 +53,7 @@ def memoize(f):
 
 
 @memoize
-def revers_4(enter_num, revers_num=0):
+def revers_plus_memo(enter_num, revers_num=0):
     if enter_num == 0:
         return
     else:
@@ -67,9 +68,24 @@ my_lst = randint(10 ** 30, 10 ** 40)
 print(timeit("revers(my_lst)", globals=globals(), number=10000))  # 0.1543315
 print(timeit("revers_2(my_lst)", globals=globals(), number=10000))  # 0.1096354
 print(timeit("revers_3(my_lst)", globals=globals(), number=10000))  # 0.0067128
-print(timeit("revers_4(my_lst)", globals=globals(), number=10000))  # 0.0023492
+print(timeit("revers_plus_memo(my_lst)", globals=globals(), number=10000))  # 0.0023492
+
+
+def main():
+    revers(my_lst)
+    revers_2(my_lst)
+    revers_3(my_lst)
+    revers_plus_memo(my_lst)
+
+
+run('main()')
 
 """
-Самой долго конечно будет рекурсия, т.к. приходитися 
-
+ещё добавил вариант с мемоизацией рекурсии, что сократило время её работы более чем в 65 раз
+за счёт сокращения количества подсчетов.
+ 
+Самой долго конечно будет рекурсия revers, т.к. приходитися каждый раз высчитывать значения
+Далее идет revers_2, тут тоже нужны математические расчеты, потому она занимает определенное время
+а в revers_3 просто срезы, потому время минимальное
+хотя рекурсия с мемоизацией работает ещё в 3 раза быстрее, чем срезы...
 """
