@@ -27,3 +27,49 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+class user_info:
+    def __init__(self, user_id, login, password, is_activated):
+        self.user_id = user_id
+        self.login = login
+        self.password = password
+        self.is_activated = is_activated
+
+
+users = [user_info(1, "login1", 'password1', False),
+         user_info(2, "login2", 'password2', False),
+         user_info(3, "login3", 'password3', False),
+         user_info(4, "login4", 'password4', False)]
+
+user_name_map = dict()
+for user in users:
+    user_name_map[user.login] = user
+
+while True:
+    while True:
+        input_string = input('Введите логин пользователя > ')
+        login = (input_string if input_string is not None else '').strip()
+        user = user_name_map.get(login)
+        if user is None:
+            print(f"Пользователь '{login}' не найден")
+            continue
+        break
+    if user.is_activated == True:
+        print('Допуск к ресурсу есть')
+    while True:
+        if input('Введите 1 для активации > ') == '1':
+            user.is_activated = True
+            print(f"Пользователь '{user.login}' активирован и может войти в систему.")
+            break
+    while True:
+        password = input('Введите пароль:')
+        if password == user.password:
+            print(f'Пользователь успешно авторизован')
+            break
+        else:
+            print(f'Неверный пароль')
+    break
+
+# Сложность алгоритма - O(1)
+# Очевидно выбираем алгоритм с наименее растущей функцией сложности.
