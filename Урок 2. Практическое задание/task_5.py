@@ -18,3 +18,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+g_columns = 10
+
+def print_char(in_index, in_count, in_total):
+    v_str = ''
+    if in_count > 0:
+        v_str = str(in_index) + ' - ' + chr(in_index)
+        if (in_total-(in_count-1)) % g_columns == 0:
+            v_str = v_str + '\n'
+        else:
+            v_str = v_str + ' '
+        v_str = v_str + print_char(in_index + 1, in_count - 1, in_total)
+    return v_str
+
+if __name__ == '__main__':
+    v_start_ch_code = 32
+    v_chars_count = 95
+    v_str = print_char(v_start_ch_code, v_chars_count, v_chars_count)
+    print(v_str)

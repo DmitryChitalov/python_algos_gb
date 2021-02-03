@@ -16,3 +16,18 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+def odd_even(in_str, in_index):
+    v_odd = 0
+    if in_index < len(in_str):
+        if (str(in_str[in_index])).isnumeric():
+            if int(in_str[in_index]) % 2 != 0:
+                v_odd = v_odd + 1
+        v_odd = odd_even(in_str, (in_index+1)) + v_odd
+    return v_odd
+
+if __name__ == '__main__':
+    print('Enter value:')
+    v_val = input()
+    v_odd = odd_even(v_val, 0)
+    print(str(v_odd) + ' odd, ' + str(len(v_val)-v_odd) + ' even numbers')

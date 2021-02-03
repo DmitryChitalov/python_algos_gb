@@ -15,3 +15,15 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+def str_reverse(in_str, in_index):
+    v_rev = ''
+    if in_index < len(in_str):
+        v_rev = str_reverse(in_str, (in_index+1)) + in_str[in_index]
+    return v_rev
+
+if __name__ == '__main__':
+    print('Enter value:')
+    v_val = input()
+    v_rev = str_reverse(v_val, 0)
+    print('Reverse value: ' + v_rev)
