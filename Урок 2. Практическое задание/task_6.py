@@ -35,7 +35,7 @@ def game(counter=0):
     else:
         counter += 1
         print('загаданное число больше введенного')
-        return + game(counter)
+        return game(counter)
 
 
 game()
