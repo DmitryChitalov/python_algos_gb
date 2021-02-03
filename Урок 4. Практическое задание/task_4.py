@@ -9,15 +9,14 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from timeit import timeit
 
-array = [1, 3, 1, 3, 4, 5, 1]
 
-
-def func_1():
+def func_1(array):
     m = 0
     num = 0
-    for i in array:
-        count = array.count(i)
+    for i in array:  # он проходит по каждому эл-ту, а можно было бы убрать дубли через set
+        count = array.count(i)  # тогда и здесь бы лишний раз считать не пришлось
         if count > m:
             m = count
             num = i
@@ -25,10 +24,10 @@ def func_1():
            f'оно появилось в массиве {m} раз(а)'
 
 
-def func_2():
+def func_2(array):
     new_array = []
-    for el in array:
-        count2 = array.count(el)
+    for el in array:  # та же проблема, что и выше
+        count2 = array.count(el)  # потому опять приходится по нескольку раз считать один и тот же эл-т
         new_array.append(count2)
 
     max_2 = max(new_array)
@@ -37,5 +36,44 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+array_1 = [
+    1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5,
+    1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5,
+    1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5,
+    1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1, 3, 1, 3, 4, 5, 1
+]  # пришлось увеличить список что бы получить более валидиные данные на тестах
+
+print(func_1(array_1))
+print(func_2(array_1))
+
+print(timeit("func_1(array_1)", globals=globals(), number=7000))  # 1.1325456999999999
+print(timeit("func_2(array_1)", globals=globals(), number=7000))  # 1.2139917
+
+
+# давайте для начала оптимизируем функцию выше, а потом сделаем своё решение
+def func_3(array):
+    m = 0
+    num = 0
+    set_array = set(array)
+    for i in set_array:
+        count = array.count(i)
+        if count > m:
+            m = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+print(func_3(array_1))
+print(timeit("func_3(array_1)", globals=globals(), number=7000))  # 0.05152630000000036 увеличение скорости в 50 раз
+
+
+# давайте попробуем решить в 1 строку
+def func_4(array):
+    numb = max(array, key=array.count)
+    return f"Чаще всего встречается число {numb}, оно появилось в массиве {array.count(numb)} раз(а)"
+
+
+print(func_4(array_1))
+print(timeit("func_4(array_1)", globals=globals(), number=7000))
+# 1.0907 предложенное решение в 1 строку лаконичное, но по скорости оно уступает предложенному мною
