@@ -28,7 +28,7 @@ def check_1(lst_obj):
 
     Сложность: O(N).
     """
-    lst_to_set = set(lst_obj)  # O(len(arg))
+    lst_to_set = set(lst_obj)  # O(N)
     return lst_to_set
 
 
