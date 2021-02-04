@@ -21,12 +21,12 @@
 
 
 def print_symbols(start, stop, interval):
-    result, ostatok = divmod(stop - start, interval)
+    result, rest = divmod(stop - start, interval)
     if result == 0:
-        print(*[str(el) + ' - ' + chr(el) for el in range(start, start + ostatok + 1)])
+        print(*[str(el) + ' - ' + chr(el) for el in range(start, start + rest + 1)])
     else:
         print_symbols(start, start + (result * interval - 1), interval)
-        print(*[str(el) + ' - ' + chr(el) for el in range(stop - ostatok, stop + 1)])
+        print(*[str(el) + ' - ' + chr(el) for el in range(stop - rest, stop + 1)])
 
 
 print_symbols(32, 127, 10)
