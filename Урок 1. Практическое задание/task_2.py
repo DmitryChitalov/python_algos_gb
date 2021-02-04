@@ -17,3 +17,31 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+from random import randint
+
+
+def find_min_1(inp_list):
+    for i in inp_list:
+        less_than = True
+        for j in inp_list:
+            if i > j:
+                less_than = False
+        if less_than:
+            min = i
+    return min
+
+
+def find_min_2(inp_list):
+    min = inp_list[0]
+    for i in inp_list:
+        if i < min:
+            min = i
+    return min
+
+
+lst = [randint(0, 100) for i in range(10)]
+
+print(f'Исходный список: {lst}')
+print(f'Минимальное значение, найденное первой функцией: {find_min_1(lst)}')
+print(f'Минимальное значение, найденное второй функцией: {find_min_2(lst)}')
