@@ -22,3 +22,32 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+db = {'Microsoft': 10000, "Apple": 18000, 'Samsung': 13000, 'Huawei': 20000, 'MTC': 1000}
+
+#Общая сложность O(n), а не O(n^2) т.к. во вложенном цикле число итераций не зависит от n
+def find_max_1(inp_db):
+    i = 0
+    top_comp = list()
+    for company in inp_db.items():
+        if i < 3:
+            top_comp.append(company)
+        else:
+            for j in range(3):
+                if top_comp[j][1] < company[1]:
+                    top_comp.pop(j)
+                    top_comp.insert(j, company)
+                    break
+        i += 1
+    return top_comp
+
+#Общая сложность O(n * log n) т.к. используется встроенная функция сортировки
+def find_max_2(inp_db):
+    input_list=list(inp_db.items())
+    input_list.sort(key=lambda x:x[1],reverse=True)
+    return(input_list[0:3])
+
+#Первое решение эффективнее, т.к. имеет меньшую общую сложность
+
+print(find_max_1(db))
+print(find_max_2(db))

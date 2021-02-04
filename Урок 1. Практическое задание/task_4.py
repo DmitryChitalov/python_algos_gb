@@ -27,3 +27,42 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+db = {'user1': {'password': 'password', 'activated': True},
+      'user2': {'password': '123', 'activated': True},
+      'user3': {'password': 'qwerty', 'activated': False}
+      }
+
+
+# Общая сложность O(n) т.к. используется один цикл
+def login_1(users):
+    lgn = input('Введите имя пользователя: ')
+    pwd = input('Введите пароль: ')
+    in_db = False
+    for log, passwd in users.items():
+        if log == lgn:
+            if passwd['password'] == pwd and passwd['activated']:
+                return 'Пользователь успешно вошел в систему'
+            elif passwd['password'] == pwd and not passwd['activated']:
+                return 'Пользователю необходимо активировать аккаунт!'
+            else:
+                return 'Неверный пароль!'
+    return 'Пользователь не найден!'
+
+# Общая сложность O(1) т.к. используется поиск по словарю
+def login_2(users):
+    lgn = input('Введите имя пользователя: ')
+    pwd = input('Введите пароль: ')
+    usr = users.get(lgn)
+    if usr != None:
+        if usr['password'] == pwd and usr['activated']:
+            return 'Пользователь успешно вошел в систему'
+        elif usr['password'] == pwd and not usr['activated']:
+            return 'Пользователю необходимо активировать аккаунт!'
+        else:
+            return 'Неверный пароль!'
+    return 'Пользователь не найден!'
+
+#Второе решение эффективнее, т.к. имеет меньшую общую сложность
+
+print(login_2(db))
