@@ -18,16 +18,3 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
-
-
-def even_odd(n, even=0, odd=0):
-    if n != 0:
-        if (n % 10) % 2 == 0:
-            return f'{even_odd(n // 10, even + 1, odd)}'
-        else:
-            return f'{even_odd(n // 10, even, odd + 1)}'
-    else:
-        return f'Количество четных и нечетных цифр в числе равно: ({even},{odd})'
-
-
-print(even_odd(34560))

@@ -23,16 +23,3 @@
 и допускается комб-е - цикл и рекурсия
 """
 
-import sys
-
-
-def output(n=32):
-    if n == 128:
-        sys.exit()
-    print(f' {n} - {chr(n)}', end=' ')
-    if (n - 31) % 10 == 0:
-        print()
-    output(n+1)
-
-
-print(output())

@@ -12,13 +12,3 @@
 Подсказка:
 Каждый очередной элемент в 2 раза меньше предыдущего и имеет противоположный знак
 """
-
-
-def sumelem(n, elem=1, summa=0):
-    if n > 0:
-        return sumelem(n - 1, elem / 2 * -1, summa + elem)
-    else:
-        return summa
-
-
-print(sumelem(3))

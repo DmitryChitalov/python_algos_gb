@@ -13,18 +13,3 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
-
-
-def check(n):
-    if n > 1:
-        return n+check(n-1)
-    else:
-        return n
-
-
-def outer_check(a):
-    b = a*(a+1)/2
-    print(check(a) == b)
-
-
-outer_check(5)
