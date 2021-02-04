@@ -7,5 +7,31 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
-Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+
+Подсказка:
+Базовый случай здесь - угадали число или закончились попытки
 """
+import random
+
+
+def guessing_game(wished_n: int, trial: int):
+    if trial > 10:
+        print(f"Вы не успели за 10 попыток. Было загадано число: {wished_n}")
+    try:
+        guess = int(input(f"Попытка {trial}. Введите число: "))
+    except ValueError:
+        print("Некорректный ввод")
+        guessing_game(wished_n, trial)
+    if guess > wished_n:
+        print(f"Загаданное число меньше {guess}")
+    elif guess < wished_n:
+        print(f"Загаданное число больше {guess}")
+    else:
+        print("Вы угадали!")
+        return
+    trial += 1
+    return guessing_game(wished_n, trial)
+
+
+number = random.randint(0, 100)
+guessing_game(number, 1)
