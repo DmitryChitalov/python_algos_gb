@@ -27,3 +27,22 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+all_users = {'login1': {'password': 12345, 'active': True}, 'login2': {'password': 54321, 'active': False},
+             'login3': {'password':3456,'active':True},'login4': {'password':345656,'active':False},
+             'login5': {'password':333456,'active':False},'login6': {'password':2234,'active':True}}
+
+def aut(user_dic,login,password):
+    if user_dic.get(login):
+        if user_dic[login]['password']==password and user_dic[login]['active']:
+            return "Welcome!"
+        elif user_dic[login]['password']==password and not user_dic[login]['active']:
+            return "You need to activate account"
+        elif user_dic[login]['password']!= password:
+            return "Wrong password"
+    else:
+        return "Account not found"
+
+print(aut(all_users,'login7',12345))
+
+
