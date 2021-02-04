@@ -14,3 +14,12 @@
 р
 а
 """
+
+str1 = "papa"
+
+set1 = set()
+for i in range(len(str1)):
+    for j in range(len(str1) - 1 if i == 0 else len(str1), i, -1):
+        set1.add(hash(str1[i:j]))
+
+print("Количество различных подстрок в строке '"+str1+"' равно", len(set1))
