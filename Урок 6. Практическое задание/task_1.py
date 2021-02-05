@@ -189,3 +189,89 @@ Line #    Mem usage    Increment  Occurences   Line Contents
 Использование Решета Эратосфена сокращает количество операций и ускоряет код.
 
 """
+
+# 3. Удаление из первого списка все вхождений во втором списке
+
+my_list_1 = list(range(1000))
+my_list_2 = [23, 74, 102, 300, 45, 456]
+
+
+@profile
+def func_1(lst1, lst2):
+    j = len(lst1)
+    i = 0
+
+    for el1 in lst1:
+        i = 0
+        if el1 in lst2:
+            while i < j:
+                if lst1[i] == el1:
+                    del lst1[i]
+                    j -= 1
+                    i -= 1
+                i += 1
+    return lst1
+
+
+@profile
+def func_2(lst1, lst2):
+    return [el for el in lst1 if el not in lst2]
+
+
+@profile
+def func_3(lst1, lst2):
+    for el_1 in lst1.copy():
+        if el_1 in lst2:
+            lst1.remove(elem1)
+    return lst1
+
+
+func_1(my_list_1, my_list_2)
+func_2(my_list_1, my_list_2)
+func_3(my_list_1, my_list_2)
+
+
+"""
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+   200     35.0 MiB     35.0 MiB           1   @profile
+   201                                         def func_1(lst1, lst2):
+   202     35.0 MiB      0.0 MiB           1       j = len(lst1)
+   203     35.0 MiB      0.0 MiB           1       i = 0
+   204                                         
+   205     35.0 MiB      0.0 MiB         995       for elem1 in lst1:
+   206     35.0 MiB      0.0 MiB         994           i = 0
+   207     35.0 MiB      0.0 MiB         994           if elem1 in lst2:
+   208     35.0 MiB      0.0 MiB        5991               while i < j:
+   209     35.0 MiB      0.0 MiB        5985                   if lst1[i] == elem1:
+   210     35.0 MiB      0.0 MiB           6                       del lst1[i]
+   211     35.0 MiB      0.0 MiB           6                       j -= 1
+   212     35.0 MiB      0.0 MiB           6                       i -= 1
+   213     35.0 MiB      0.0 MiB        5985                   i += 1
+   214     35.0 MiB      0.0 MiB           1       return lst1
+
+
+
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+   217     35.0 MiB     35.0 MiB           1   @profile
+   218                                         def func_2(lst1, lst2):
+   219     35.0 MiB      0.0 MiB         997       return [elem for elem in lst1 if elem not in lst2]
+
+
+
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+   222     35.0 MiB     35.0 MiB           1   @profile
+   223                                         def func_3(lst1, lst2):
+   224     35.0 MiB      0.0 MiB         995       for elem1 in lst1.copy():
+   225     35.0 MiB      0.0 MiB         994           if elem1 in lst2:
+   226                                                     lst1.remove(elem1)
+   227     35.0 MiB      0.0 MiB           1       return lst1
+
+  
+Из статистики видно, что удаление из первого списка все вхождений во втором списке  лучше использовать 
+списковые включения func_2 - значительно снижает количество операций
+
+
+"""
