@@ -18,3 +18,33 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+ascii_chars = [chr(i) for i in range(128)]
+
+
+def show_recursion(from_i, total, ascii_chars, **kwargs):
+    text = ''
+    ittr = 1
+    if kwargs.get('text'):
+        text = kwargs.get('text')
+    if kwargs.get('ittr'):
+        ittr = kwargs.get('ittr')
+    if len(ascii_chars) == 0:
+        print(text)
+        exit()
+    if ittr > 10:
+        ittr = 1
+        print(text)
+        text = ''
+    if from_i > total:
+        print(text)
+        exit()
+    text += '{} - {} '.format(from_i, ascii_chars[0])
+    del ascii_chars[0]
+    from_i += 1
+    ittr += 1
+
+    show_recursion(from_i, total, ascii_chars, text=text, ittr=ittr)
+
+
+show_recursion(32, 127, ascii_chars[32: 128])

@@ -16,3 +16,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+chet: int = 0
+nechet: int = 0
+
+
+def counter(i: str):
+    global chet, nechet
+    n = int(i[0])
+    if n % 2 == 0:
+        chet += 1
+    else:
+        nechet += 1
+    if len(i) == 1:
+        pass
+    else:
+        counter(i[1:])
+
+
+try:
+    user_n = int(input('Введите число: '))
+    counter(str(user_n))
+    print('Количество четных и нечетных цифр в числе равно: ({}, {})'.format(chet, nechet))
+except ValueError:
+    print('введена строка !')
