@@ -13,3 +13,30 @@
 arr[m]
 from statistics import median
 """
+from statistics import median
+from random import randint
+
+
+def gnome_sort(lst):
+    i, size = 1, len(lst)
+    while i < size:
+        if lst[i - 1] <= lst[i]:
+            i += 1
+        else:
+            lst[i - 1], lst[i] = lst[i], lst[i - 1]
+            if i > 1:
+                i -= 1
+    return lst
+
+
+def median_find(lst):
+    if not len(lst) % 2:
+        raise Exception('Неверная длина списка: должна быть нечетной')
+
+    return gnome_sort(lst)[len(lst) // 2]
+
+
+lst = [randint(0, 21) for i in range(301)]
+
+print(median_find(lst.copy()))
+print(median(lst.copy()))

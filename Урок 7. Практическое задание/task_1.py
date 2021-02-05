@@ -12,3 +12,62 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+from random import randint
+from timeit import default_timer
+
+
+def dec(func):
+    def wrap(*args, **kwargs):
+        time1 = default_timer()
+        el = func(*args, **kwargs)
+        time2 = default_timer()
+        print('Время: ', time2 - time1)
+        return el
+    return wrap
+
+
+lst = [randint(-100, 100) for i in range(10000)]
+
+
+@dec
+def bubble_sort(lst):
+    n = len(lst)
+    for i in range(n - 1):
+        for j in range(n - i - 1):
+            if lst[j] < lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+    return lst
+
+
+@dec
+def bubble_sort_opt(lst):
+    n = len(lst)
+    flag = 0
+    for i in range(n - 1):
+        for j in range(n - i - 1):
+            if lst[j] < lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+                flag += 1
+        if flag == 0:
+            print('pos number: ', i)
+            return lst
+        else:
+            flag = 0
+    return lst
+
+
+if __name__ == '__main__':
+    bubble_sort(lst.copy())
+    bubble_sort_opt(lst.copy())
+
+'''
+Время:  17.87560935
+pos number:  9748
+Время:  16.580826105
+
+Был реализован алгоритм сортировки пузырьком по убыванием и проведена попытка оптимизации алгоритма, 
+однако в некоторых случаях оптимизация или прироста не дала вообще, или замедлила время выполнения из-за 
+дополнительных действий. Связано это с тем, что оптимизацию имеет смысл делать в случае, когда массив уже частично
+отсортирован. В случае генерации рандомного массива о как-то частичной сортировке говорить нет смысла.
+Иногда все же оптимизация давала совсем небольшой прирост.
+'''
