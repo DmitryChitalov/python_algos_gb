@@ -16,3 +16,22 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def oddeven(digit, odd=0, even=0):
+    if digit != 0:
+        if digit % 10 % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+        digit = digit // 10
+        return oddeven(digit, odd, even)
+    else:
+        return even, odd
+
+
+try:
+    i = int(input("Введите число: "))
+    print(f"Количество четных и нечетных цифр в числе равно: {oddeven(i)}")
+except ValueError:
+    print("Ошибка! Введите чило.")

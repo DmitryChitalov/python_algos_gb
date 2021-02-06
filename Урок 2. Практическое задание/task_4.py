@@ -9,3 +9,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def sumrow(count, el=[]):
+    if count == -1:
+        return sum(el)
+    else:
+        if count % 2 == 0:
+            el.append(1 / (2 ** count))
+        else:
+            el.append(1 / (2 ** count) * -1)
+        count -= 1
+        return sumrow(count, el)
+
+
+try:
+    i = int(input("Введите количество элементов: "))
+    print(f"Количество элементов - {i}, их сумма - {sumrow(i-1)}")
+except ValueError:
+    print("Ошибка! Введите чило.")
