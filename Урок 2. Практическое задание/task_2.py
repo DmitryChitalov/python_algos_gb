@@ -16,3 +16,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+a = int(input('Введите длинное число:   '))
+
+even = 0
+odd = 0
+
+
+def fun(a):
+    global even, odd
+    if a == 0:
+        return
+    if a % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+    a = a // 10
+    fun(a)
+
+
+fun(a)
+print(f"Четных: {even}, нечетных: {odd}")

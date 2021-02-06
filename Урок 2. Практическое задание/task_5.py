@@ -18,3 +18,14 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def charact(ascii_sym = 32):
+    if ascii_sym == 128:
+        return
+    print(f'{ascii_sym} - {chr(ascii_sym)} ', end='')
+    if (ascii_sym - 31) % 10 == 0:
+        print('\n')
+    charact(ascii_sym + 1)
+
+
+charact()
+
