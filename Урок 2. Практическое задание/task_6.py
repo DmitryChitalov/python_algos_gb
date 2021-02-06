@@ -9,3 +9,23 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+
+def find_number(number, gues=-1, count=1):
+    gues = int(input(f"Ведите число от 0 до 100, попытка {count} : "))
+    if count > 10:
+        print(f"Вы не угадали, я загадал {number}")
+        return
+    elif number == gues:
+        print("Вы угадали!")
+        return
+    if gues > number:
+        print("Загаданое число меньше.")
+    else:
+        print("Загаданое число больше.")
+    count += 1
+    find_number(number, gues, count)
+
+
+find_number(randint(0, 100))

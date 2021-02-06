@@ -18,3 +18,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def ascii_print(curr_char):
+    if curr_char > 127:
+        return 0
+    else:
+        print(f"{curr_char} - {chr(curr_char)}", end=" ")
+        if (curr_char - 31) % 10 == 0:
+            print("")
+        curr_char += 1
+        return ascii_print(curr_char)
+
+
+ascii_print(32)
