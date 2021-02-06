@@ -28,3 +28,63 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def plus(a, b):
+    if b == 0:
+        return a
+    else:
+        return plus(a, b - 1) + 1
+
+
+def minus(a, b):
+    if b == 0:
+        return a
+    else:
+        return minus(a, b - 1) - 1
+
+
+def multi(a, b):
+    if b == 1:
+        return a
+    else:
+        return multi(a, b - 1) + a
+
+
+def divide(a, b, r=0):
+    if a < b:
+        return r
+    elif b == 0:
+        return print('На ноль делить нельзя!')
+    else:
+        return divide(a - b, b, r + 1)
+
+
+def fun():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода):   ')
+    if operation not in ('+', '-', '/', '*', '0'):
+        print('Ошибка при выборе знака операции.')
+    else:
+        if operation == '0':
+            return
+        try:
+            one = int(input('Введите первое число:   '))
+        except ValueError:
+            print('Это не число!')
+        try:
+            two = int(input('Введите второе число:   '))
+        except ValueError:
+            print('Это не число!')
+        else:
+            if operation == '+' and one > 0 and two > 0:
+                print(f'Ваш результат: {plus(one, two)}')
+            elif operation == '-' and one > 0 and two > 0:
+                print(f'Ваш результат: {minus(one, two)}')
+            elif operation == '*' and one > 0 and two > 0:
+                print(f'Ваш результат: {multi(one, two)}')
+            elif operation == '/' and one > 0 and two > 0:
+                print(f'Ваш результат: {divide(one, two)}')
+            else:
+                print('Непредвиденная ошибка.')
+    fun()
+
+fun()
