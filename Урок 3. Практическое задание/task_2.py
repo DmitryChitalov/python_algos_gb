@@ -15,3 +15,34 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+from hashlib import pbkdf2_hmac
+
+
+def passwd_checker():
+    first_input = input('пожалуйста введите пароль: ')
+    second_input = input('пожалуйста повторите ввод пароля: ')
+    salt = 'two big spoons of salt'
+
+    pwd_hash_first = pbkdf2_hmac(hash_name='sha256',
+                                 password=first_input.encode(),
+                                 salt=salt.encode(),
+                                 iterations=1000)
+
+    pwd_hash_second = pbkdf2_hmac(hash_name='sha256',
+                                  password=second_input.encode(),
+                                  salt=salt.encode(),
+                                  iterations=1000)
+
+    if pwd_hash_first == pwd_hash_second:
+        print('Пароли совпадают')
+        print(f'хэш паролей: {pwd_hash_first}')
+    else:
+        print('Пароли отличаются')
+        print(f'хэш первого пароля {pwd_hash_first}'
+              '\n'
+              f'хэш второго пароля {pwd_hash_second}'
+              )
+
+
+passwd_checker()
