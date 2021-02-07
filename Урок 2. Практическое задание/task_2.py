@@ -35,6 +35,7 @@ def count(string: int):
             summary[1] += 1
         return summary
 
-value=113185
+value=12413185
+result=count(value)
 
-print(f'Число четных и нечетных цифр в числе {value} составляет {count(value)[0]} и {count(value)[1]} соответственно')
+print(f'Число четных и нечетных цифр в числе {value} составляет {result[0]} и {result[1]} соответственно')
