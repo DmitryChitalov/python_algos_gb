@@ -12,3 +12,54 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+import random
+from timeit import repeat
+
+
+def bubble_reverted(lst):
+    n = 1
+    while n < len(lst):
+        for i in range(len(lst) - n):
+            if lst[i] < lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+        n += 1
+    return lst
+
+
+def bubble_reverted_opt(lst):
+    n = 1
+    changes = True
+    while (n < len(lst)) and changes:
+        for i in range(len(lst) - n):
+            changes = False
+            if lst[i] < lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+                changes = True
+        n += 1
+    return lst
+
+
+my_list = [random.randint(-100, 100) for _ in range(1000)]  # такая большая длина, чтобы были повторяющиеся элементы
+my_list_cp = my_list
+print(my_list)
+print(bubble_reverted(my_list))
+print(min(repeat(
+    'bubble_reverted(my_list)',
+    globals=globals(),
+    repeat=5,
+    number=50
+)))
+
+print(bubble_reverted_opt(my_list_cp))
+print(min(repeat(
+    'bubble_reverted_opt(my_list_cp)',
+    globals=globals(),
+    repeat=5,
+    number=50
+)))
+
+"""
+без оптимизации - 1.8477229
+с оптимизацией - 0.003696699999998998
+разница колоссальная благодаря тому, что лишние разы не бегает по списку после того, как уже всё выстроено
+"""

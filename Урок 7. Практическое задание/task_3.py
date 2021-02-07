@@ -13,3 +13,17 @@
 arr[m]
 from statistics import median
 """
+
+from statistics import median
+from random import randint
+
+m = randint(50, 100)
+
+array = [randint(-1000, 1000) for _ in range(2 * m + 1)]
+print(array)
+print(median(array))  # 1 способ
+
+for i in range(m):  # 2 способ
+    array.pop(array.index(min(array)))
+
+print(min(array))
