@@ -9,3 +9,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def f_sum(v_qty, v_sum=1, v_next=1):
+    if v_qty == 1:
+        print(f'сумма n элементов следующего ряда чисел 1, -0.5, 0.25... равна {v_sum}')
+        return
+    else:
+        v_next = v_next / -2
+        v_sum = v_sum + v_next
+        v_qty -= 1
+        f_sum(v_qty, v_sum, v_next)
+
+
+v_data = int(input("Enter qty(n) of elements: "))
+f_sum(v_data)
