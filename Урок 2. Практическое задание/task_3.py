@@ -24,4 +24,4 @@ def reverse(string: int):
         return int(str(string % 10) + str(reverse(string // 10)))
 
 
-print(reverse(123456))
+print(reverse(123456789))
