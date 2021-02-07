@@ -21,3 +21,29 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums, n=0, new_arr=[]):
+    if len(nums) == 0:
+        return new_arr
+    else:
+        el = nums.pop(0)
+        if el % 2 == 0:
+            new_arr.append(n)
+        n += 1
+        return func_2(nums, n, new_arr)
+
+
+setup = 'elms = [i for i in range(1,150)]'
+print(timeit("func_1(elms)", setup, globals=globals(), number=100000))
+print(timeit("func_2(elms)", setup, globals=globals(), number=100000))
+
+"""
+1.501879435
+0.01571249600000013
+Сложность обоих функций одинаковая O(N) но за счет того что в случае с рекурсией речь идет об аппаратном стеке, т.е.
+мы не создаем его сами, он уже заложен в библиотеку Python. А так как это встроенный метод то он уже оптимизирован по
+скорости выполнения, поэтому вторая функция выполняется быстрее. Правда тут существует ограничение по количеству
+елементов списка передаваемых в функцию из за переполнения стека.
+
+"""
