@@ -16,3 +16,25 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def count(string: int):
+    if string // 10 == 0:
+        if string % 2 == 0:
+            return [1, 0]
+        else:
+            return [0, 1]
+    else:
+        head = string // 10
+        tail = string % 10
+        if tail % 2 == 0:
+            summary=count(head)
+            summary[0]+=1
+        else:
+            summary = count(head)
+            summary[1] += 1
+        return summary
+
+value=113185
+
+print(f'Число четных и нечетных цифр в числе {value} составляет {count(value)[0]} и {count(value)[1]} соответственно')
