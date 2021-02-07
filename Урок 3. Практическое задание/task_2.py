@@ -15,3 +15,38 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+from hashlib import pbkdf2_hmac
+from binascii import hexlify
+
+user_data_1 = input('Введите пароль:   ').encode('utf-8')
+
+# Здесь мы создаем хеш sha256 в пароле при помощи соли со 100,000 итераций.
+obj = pbkdf2_hmac(hash_name='sha256',
+                         password=user_data_1,
+                         salt=b'any_salt_1',
+                         iterations=100000)
+
+obj = pbkdf2_hmac(hash_name='sha256',
+                         password=user_data_1,
+                         salt=b'any_salt_2',
+                         iterations=100000)
+
+
+print(f'В базе данных хранится строка: {hexlify(obj)}')
+
+user_data_2 = input('Введите пароль еще раз для проверки:   ').encode('utf-8')
+
+obj_2 = pbkdf2_hmac(hash_name='sha256',
+                         password=user_data_2,
+                         salt=b'any_salt_1',
+                         iterations=100000)
+
+obj_2 = pbkdf2_hmac(hash_name='sha256',
+                         password=user_data_2,
+                         salt=b'any_salt_2',
+                         iterations=100000)
+
+if hexlify(obj) == hexlify(obj_2):
+    print('Вы ввели правильный пароль')
+else:
+    print('Вы ввели неправильный пароль')
