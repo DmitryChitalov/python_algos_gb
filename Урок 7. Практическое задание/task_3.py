@@ -13,3 +13,37 @@
 arr[m]
 from statistics import median
 """
+
+import statistics
+import random
+
+def median(lst, m):
+    start = True
+    while start:
+        med_el = lst[m]
+        left = []
+        right = []
+        for el in lst[:m]:
+            if el <= lst[m]:
+                left.append(el)
+            else:
+                right.append(el)
+        for el in lst[m+1:]:
+            if el >= lst[m]:
+                right.append(el)
+            else:
+                left.append(el)
+        if len(left) == len(right):
+            start = False
+        else:
+            lst = left + [lst[m]] + right
+    return med_el
+
+
+
+m = int(input('Введите m для построения массива длиной 2m+1: '))
+my_lst = [random.randrange(0, 100) for _ in range(2*m+1)]
+
+print('Массив: ', my_lst)
+print('Медиана равна: ', median(my_lst, m))
+print('Проверка: ', statistics.median(my_lst))
