@@ -9,3 +9,18 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+from random import randint
+
+def guess(answer: int, attmpts: int):
+    if attmpts == 0:
+        print(f'Вы использовали все попытки! Было загадано число {answer}')
+    else:
+        inp = int(input(f'Осталось попыток: {attmpts}. Введите число от 0 до 100: '))
+        if inp == answer:
+            print(f'Верно! Было загадано число {answer}')
+        else:
+            print('Не угадали!')
+            guess(answer, attmpts - 1)
+
+
+guess(randint(1,100), 10)
