@@ -15,3 +15,26 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+import hashlib
+from uuid import uuid4
+
+database_dict = {}
+salt = uuid4().hex
+
+passwd = input('Введите пароль: ')
+
+
+resulting_hash = hashlib.sha256(salt.encode() + passwd.encode()).hexdigest()
+database_dict[0] = resulting_hash
+
+for _ in range(3):
+    check_passwd = input('Введите пароль повторно: ')
+    check_passwd_hash = hashlib.sha256(salt.encode() + check_passwd.encode()).hexdigest()
+    database_dict[1] = check_passwd_hash
+    if database_dict[0] == database_dict[1]:
+        print('Успех!Вы ввели правильный пароль')
+        break
+    else:
+        print('Пароли не совпадают.')
+print('Вы использовали слишком много попыток, повторите аутентификацию позже')

@@ -21,3 +21,30 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+# для начала создадим массив nums
+
+
+nums1 = range(10)  # 2.7669981
+nums2 = [i for i in range(10)]  # 1.7377228000000002 - генератор списка выдает более быстрый результат
+
+
+# на этом основании можем изменить саму функцию, сделав не через цикл, а генератором
+def func_2(nums):
+        new_arr = [i for i in nums if not i % 2]
+        return new_arr
+
+
+print(timeit("func_1(nums1)", globals=globals(), number=1000000))
+print(timeit("func_1(nums2)", globals=globals()))  # По умолчанию number=1000000.
+print(timeit("func_2(nums1)", globals=globals()))
+print(timeit("func_2(nums2)", globals=globals()))
+
+"""
+2.7029027
+2.0138420000000004
+0.9978910000000001
+0.9616113999999998
+"""
+# Вывод: встроенные методы и функции оптимизированы по скорости,
+# их использование приводит к уменньшению времени выполнения программы
