@@ -13,3 +13,30 @@
 arr[m]
 from statistics import median
 """
+from statistics import median
+import random
+
+my_list = [random.randint(0, 50) for _ in range(11)]
+
+
+def find_median(array):
+    if len(array) == 1:
+        return array[0]
+    else:
+        max_ind = max(enumerate(array), key=lambda x: x[1])[0]
+        array.pop(max_ind)
+        min_ind = min(enumerate(array), key=lambda x: x[1])[0]
+        array.pop(min_ind)
+        return find_median(array)
+
+
+print(my_list)
+print(find_median(my_list))
+print(median(my_list))
+
+'''
+Использовал рекурсию (очень нравиться) просто удалял по максимальному и минимальному элементу из списка за один проход
+Для выхода использовал длинну м ассива в 1 элемент он и будет медианой. 
+'''
+
+
