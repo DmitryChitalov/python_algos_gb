@@ -7,18 +7,22 @@
 
 Сделайте профилировку каждого алгоритма через cProfile и через timeit
 
-Сделайте вывод, какая из трех реализаций эффективнее и почему
+Сделайте вывод, какая из трех реализаций эффективнее и почему!!!
+
+И можете предложить еще свой вариант решения!
+Без аналитики задание считается не принятым
 """
+from cProfile import run
+from random import randint
 
-
-def revers(enter_num, revers_num=0):
+def revers_1(enter_num, revers_num=0):
     if enter_num == 0:
-        return
+        return revers_num
     else:
         num = enter_num % 10
         revers_num = (revers_num + num / 10) * 10
         enter_num //= 10
-        revers(enter_num, revers_num)
+        return revers_1(enter_num, revers_num)
 
 
 def revers_2(enter_num, revers_num=0):
@@ -34,3 +38,10 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+def main():
+    num_10000 = randint(100000000, 10000000000000)
+    revers_1(num_10000)
+    revers_2(num_10000)
+    revers_3(num_10000)
+
+run('main()')
