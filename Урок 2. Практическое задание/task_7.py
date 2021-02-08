@@ -6,3 +6,16 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def recur_method(numb, s=0, m=1):
+    print(s)
+    if s == m:
+        print(f'Equal! {s} == {m}!')
+    elif s < m:
+        return recur_method(numb, s+1, numb * (numb + 1) // 2)
+
+try:
+    NUMB = int(input('Enter number: '))
+    recur_method(NUMB)
+except ValueError:
+    print('Data error!')

@@ -18,3 +18,20 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def task_5(length=1, num=32):
+    """
+        ASCII [32:127]
+    """
+    if num == 128:
+        return
+    if length != 10:
+        print(f'[{num} - {chr(num)}]', end=' ')
+        return task_5(length + 1, num + 1)
+    else:
+        length = 0
+        print(f'[{num} - {chr(num)}]')
+        return task_5(length + 1, num + 1)
+
+
+task_5()
