@@ -41,17 +41,17 @@ def func_4(nums):
     return [idx for idx, el in enumerate(nums) if el % 2 == 0]
 
 
-randomlist = sample(range(0, 1000000), 10000)
+random_list = sample(range(0, 1000000), 10000)
 
 print("Замеры двух функций на случайном массиве из 10, 100 и 1000 элементов")
 
 for arr_len in [10, 100, 1000]:
-    randomlist = sample(range(0, 1000000), arr_len)
+    random_list = sample(range(0, 1000000), arr_len)
     print(f"func_1, {arr_len} элементов:", end=' ')
     print(timeit("func_1(randomlist)", number=10000, globals=globals()))
 
 for arr_len in [10, 100, 1000]:
-    randomlist = sample(range(0, 1000000), arr_len)
+    random_list = sample(range(0, 1000000), arr_len)
     print(f"func_2, {arr_len} элементов:", end=' ')
     print(timeit("func_2(randomlist)", number=10000, globals=globals()))
 
@@ -64,7 +64,7 @@ func_2, 10 элементов: 0.03149859999999993
 func_2, 100 элементов: 0.15629420000000005
 func_2, 1000 элементов: 1.5674729999999997
 
-func2 иногда проигрывает на коротких списках, но с ростом длины списка 
+func2 иногда проигрывает на коротких списках, но с ростом длины списка
 становится видно, что она работает быстрее.
 Вместо цикла и .append используется встроенная функции list и list comprehension.
 Сложность алогоритма не меняется, остается O(n), но работает быстрее за счет
