@@ -67,36 +67,49 @@ def pop_from_list(list_arg):
 
 
 @time_count
-def get_from_dict(dict_arg):
-    for id in range(len(dict_arg), 1, -1):
+def get_from_dict1(dict_arg):
+    for id in range(len(dict_arg) - 1, 1, -1):
         num = dict_arg.get(id)
+
+
+@time_count
+def get_from_dict2(dict_arg):
+    for id in range(len(dict_arg) - 1, 1, -1):
+        num = dict_arg[id]
 
 
 @time_count
 def get_from_list(list_arg):
     for id in range(len(list_arg) - 1, 0, -1):
-        num = list_arg.index(id)
+        num = list_arg[id]
 
 
-n = 10000
+n = 100000
 my_dict1 = dict_init(n)
 my_list1 = list_init(n)
 my_dict2 = copy_dict(my_dict1)
 my_list2 = copy_list(my_list1)
-get_from_dict(my_dict2)
+get_from_dict1(my_dict2)
+get_from_dict2(my_dict2)
 get_from_list(my_list2)
 pop_from_dict(my_dict1)
 pop_from_list(my_list1)
 
-# n = 10000
-# Время выполнения dict_init 0.0010004043579101562 секунд.
-# Время выполнения list_init 0.0009989738464355469 секунд.
-# Время выполнения copy_dict 0.0 секунд.
-# Время выполнения copy_list 0.0 секунд.
-# Время выполнения get_from_dict 0.001999378204345703 секунд.
-# Время выполнения get_from_list 1.0301456451416016 секунд.
-# Время выполнения pop_from_dict 0.0019991397857666016 секунд.
-# Время выполнения pop_from_list 0.002001523971557617 секунд.
 
-# при росте N доступ к элементу списка по значению сильно замедляется
-# в остальных представленных операциях разница между списком и словарем не велика.
+# n = 10000
+# Время выполнения dict_init 0.016989469528198242 секунд.
+# Время выполнения list_init 0.009012222290039062 секунд.
+# Время выполнения copy_dict 0.004008054733276367 секунд.
+# Время выполнения copy_list 0.0009965896606445312 секунд.
+# Время выполнения get_from_dict 0.009987592697143555 секунд.
+# Время выполнения get_from_list 0.0039975643157958984 секунд.
+# Время выполнения pop_from_dict 0.012973308563232422 секунд.
+# Время выполнения pop_from_list 0.006993293762207031 секунд.
+
+
+
+# Заполнение списка быстрее чем словаря.
+# Поверхностное копирование списка быстрее чем словаря.
+# Получение элемента списка по индексу быстрее чем у словаря по ключу.
+# pop у списка быстрее быстрее чем у словаря.
+

@@ -9,6 +9,7 @@
 Можете условжнить задачу, реализовав ее через ООП
 Не забудьте, что кэширование - механизм, а хеш-таблица - средство его реализации
 """
+import hashlib
 
 
 def memorize(func):
@@ -24,7 +25,6 @@ def memorize(func):
 
 @memorize
 def hash_url(url):
-    import hashlib
     salt = "any_salt"
     hashed_url = hashlib.sha256(salt.encode() + url.encode()).hexdigest()
     return hashed_url
