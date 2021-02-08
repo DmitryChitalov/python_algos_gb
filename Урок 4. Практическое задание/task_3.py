@@ -9,6 +9,8 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
+from timeit import timeit
+from cProfile import run
 
 
 def revers(enter_num, revers_num=0):
@@ -34,3 +36,45 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+def test_1():
+    return timeit(
+        'revers(g_test_num)',
+        setup='from __main__ import revers, g_test_num',
+        number=10000)
+
+
+def test_2():
+    return timeit(
+        'revers_2(g_test_num)',
+        setup='from __main__ import revers_2, g_test_num',
+        number=10000)
+
+
+def test_3():
+    return timeit(
+        'revers_3(g_test_num)',
+        setup='from __main__ import revers_3, g_test_num',
+        number=10000)
+
+
+def main():
+    test_1()
+    test_2()
+    test_3()
+
+
+g_test_num = 1234567890
+print(test_1(), test_2(), test_3())
+print()
+run('main()')
+# revers_2 лучше revers потому,что нет накладных расходов на стэк:
+# это показывает столбец ncalls для строки "task_3.py:16(revers)",
+# было 110000 вызовов функции revers.
+# revers_3 лучше revers_2 потому, что нет ненужных делений на целое
+# и остаток, а сразу перемещается символ, причем применяются
+# встроенные функции питона, которые оптимизированы на
+# быстродействие.
+# Итого: revers_3 самая быстродействующая функция: это
+# демонстрируют и timeit, и cProfile(столбец tottime) в параметре общего
+# времени выполнения.
