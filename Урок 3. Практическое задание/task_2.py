@@ -15,3 +15,29 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+from hashlib import sha256
+
+login = input("Ваш логин: ")
+password = input("Ваш пароль: ")
+
+
+def hash1(passw):
+    hash_obj1 = sha256(f"mw238v32{passw}87s3gi2d".encode("utf-8"))
+    hash_dig_res1 = hash_obj1.hexdigest()
+    return hash_dig_res1
+
+
+def hash2(passw):
+    hash_obj2 = sha256(((passw)*3).encode("utf-8"))
+    hash_dig_res2 = hash_obj2.hexdigest()
+    return hash_dig_res2
+
+
+print(hash1(password))
+print(hash2(password))
+
+password_again = input("Продублируйте пароль: ")
+
+print(hash1(password_again))
+print(hash2(password_again))
+
