@@ -40,7 +40,13 @@ def bubble_reverted_opt(lst):
 
 
 my_list = [random.randint(-100, 100) for _ in range(1000)]  # такая большая длина, чтобы были повторяющиеся элементы
-my_list_cp = my_list
+my_list_cp = [my_list[i] for i in range(len(my_list))]
+
+"""
+Исправил метод копирования списка, не думал, что данный скопированный тоже будет меняться при изменении оригинала
+Просто представленный метод на вебинаре каждый раз создаёт разные списки, и на них сравнивать нелогично
+"""
+
 print(my_list)
 print(bubble_reverted(my_list))
 print(min(repeat(
@@ -49,7 +55,7 @@ print(min(repeat(
     repeat=5,
     number=50
 )))
-
+print(my_list_cp)
 print(bubble_reverted_opt(my_list_cp))
 print(min(repeat(
     'bubble_reverted_opt(my_list_cp)',
@@ -59,7 +65,7 @@ print(min(repeat(
 )))
 
 """
-без оптимизации - 1.8477229
-с оптимизацией - 0.003696699999998998
+без оптимизации - 1.7335080000000005
+с оптимизацией - 0.00761610000000168
 разница колоссальная благодаря тому, что лишние разы не бегает по списку после того, как уже всё выстроено
 """
