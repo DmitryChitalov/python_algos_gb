@@ -18,3 +18,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def print_symbols(start, stop, interval):
+    result, rest = divmod(stop - start, interval)
+    if result == 0:
+        print(*[str(el) + ' - ' + chr(el) for el in range(start, start + rest + 1)])
+    else:
+        print_symbols(start, start + (result * interval - 1), interval)
+        print(*[str(el) + ' - ' + chr(el) for el in range(stop - rest, stop + 1)])
+
+
+print_symbols(32, 127, 10)
