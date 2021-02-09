@@ -15,3 +15,21 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+import os
+import hashlib
+from binascii import hexlify
+
+print('Enter password:')
+v_pass = input()
+salt = os.urandom(32)
+v_key = hashlib.pbkdf2_hmac('sha256', v_pass.encode('utf-8'), salt, 100000)
+v_pass_storage = salt + v_key
+print(hexlify(v_pass_storage))
+print('Re-enter password:')
+v_2nd_pass = input()
+v_check_key = hashlib.pbkdf2_hmac('sha256', v_2nd_pass.encode('utf-8'), v_pass_storage[:32], 100000)
+print(hexlify(v_pass_storage[:32] + v_check_key))
+if v_key == v_pass_storage[32:]:
+    print('Passwords are equal')
+else:
+    print('Passwords are NOT equal')
