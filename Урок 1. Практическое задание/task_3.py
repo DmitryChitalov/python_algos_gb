@@ -22,3 +22,63 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+import random
+
+def des1(d_company):
+    """ Находит  три компании с наибольшей годовой прибылью 
+    Общая сложность: n+n+n+n*logn+1 = 1+3n+n*logn -> NlogN  """
+    
+    val = list(d_company.values()) # O(N)
+    keys = list(d_company.keys())  # O(N)
+    top_comp = dict(zip(val,keys)) # новый словарь, где ключи и значения меняются местами O(N)
+    val.sort(reverse = True)  #O (NlogN)
+    return [top_comp[i] +'   ' + str(i) for i in val[:3]]  # выводим список трех компаний сложность константная
+
+def des2(d_company):
+    """ Находит три компании с максимальной прибылью. Решение производная от 3 решения
+    Общая сложность: n+n+n+n^2+1 -> N^2   """
+    val = list(d_company.values()) # O(N)
+    keys = list(d_company.keys())  # O(N)
+
+    top_comp = dict(zip(val,keys)) # новый словарь, где ключи и значения меняются местами O(N)
+
+    for el in range(len(val)-3): # O(N*1*N - > N^2)
+        val.pop(val.index(min(val))) # выбрасываем из массива наименьшие значения
+
+    return [top_comp[i] for i in val] # O(1)
+
+def des3(d_company):
+    """ Находит три компании с максимальной прибылью
+    Общая сложность n+n+n+2n^2+1 -> 2*N^2 """
+    val = list(d_company.values()) #O(N)
+    keys = list(d_company.keys())  # O(N)
+
+    top_comp = dict(zip(val,keys)) # новый словарь, где ключи и значения меняются местами O(N)
+
+    for el in range(len(val)-4): # O(N*(N+1+N)) -> 2N^2
+        key_val = min(val)
+        if key_val in top_comp.keys():
+            top_comp.pop(key_val) # выкидываем из словаря записи с минимальным значением
+
+    return top_comp.items() # выводим, то что осталось в словаре O(N) 
+    #самое эффективное решение - корректно работает с дублирующимися данными.
+
+
+# клинетская часть
+
+
+c_names = ['Alphabet', 'Microsoft', 'IBM', 'Intel', 'AMD']
+
+profit = [random.randint(1,9)*1000 for i in range(len(c_names))]
+
+test_dict = dict(zip(c_names, profit))
+
+print('Список компаний', test_dict)
+
+print('Сортировка компаний: \n')
+
+print('Вывод решения 1 \n', des1(test_dict)) # Решения 1 и 2 плохо работают с дублями 
+
+print('Вывод решения 2 \n', des2(test_dict)) # когда у компаний одинаковая прибыль
+
+print('Вывод решения 3 \n', des3(test_dict)) # вроде нормально, но не порядку в ТЗ про порядок не сказано
