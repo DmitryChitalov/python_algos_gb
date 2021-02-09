@@ -10,6 +10,8 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+from timeit import timeit
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -39,3 +41,8 @@ def func_2():
 
 print(func_1())
 print(func_2())
+# func_3() думаю можно реализовать более быстрый вариант с помощью встроеных функций, например Count
+
+print(timeit('func_1()', setup='from __main__ import func_1', number=10000))
+print(timeit('func_2()', setup='from __main__ import func_2', number=10000))
+
