@@ -14,6 +14,8 @@
 Подумайте и по возможности определите сложность каждого алгоритма
 """
 
+from timeit import timeit
+
 
 def simple(i):
     """Без использования «Решета Эратосфена»"""
@@ -35,5 +37,58 @@ def simple(i):
     return n
 
 
-i = int(input('Введите порядковый номер искомого простого числа: '))
-print(simple(i))
+def resheto(n):
+    i = 2
+    nums = []
+    end_elem = n * 10
+    for item in range(n * 10):
+        nums.append(item)
+
+    nums[1] = 0
+    while i < end_elem:
+        if nums[i] != 0:
+            j = i + i
+            while j < end_elem:
+                nums[j] = 0
+                j = j + i
+        i = i + 1
+
+    res = []
+    for item in nums:
+        if item != 0:
+            res.append(item)
+
+    return res[n - 1]
+
+
+i = 10
+print(timeit("simple(i)", setup="from __main__ import simple, i", number=100))
+print(
+    timeit("resheto(i)", setup="from __main__ import resheto, i", number=100))
+print()
+
+i = 100
+print(timeit("simple(i)", setup="from __main__ import simple, i", number=100))
+print(
+    timeit("resheto(i)", setup="from __main__ import resheto, i", number=100))
+print()
+
+i = 1000
+print(timeit("simple(i)", setup="from __main__ import simple, i", number=100))
+print(
+    timeit("resheto(i)", setup="from __main__ import resheto, i", number=100))
+print()
+
+#
+#
+# 0.004391900000000004
+# 0.007058800000000032
+#
+# 1.0913791000000002
+# 0.13428360000000006
+#
+# 92.3649366
+# 0.9123883999999975
+#
+# второй алгоритм эффективнее на больших числах
+#
