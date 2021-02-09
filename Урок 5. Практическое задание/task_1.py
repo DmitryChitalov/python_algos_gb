@@ -25,3 +25,36 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+import collections
+
+FIRM = collections.namedtuple('Firm', ['Name', 'k1', 'k2', 'k3', 'k4'])
+g_firms = []
+
+g_k_num = int(input('Введите количество предприятий для расчета прибыли: '))
+
+for i in range(g_k_num):
+    l_nam = input('Введите название предприятия: ')
+    str1 = 'через пробел введите прибыль данного предприятия\n'
+    str2 = 'за каждый квартал(Всего 4 квартала): '
+    ls_mon = input(f'{str1}{str2}')
+    ld_mon = ls_mon.split(' ')
+    l_firm = FIRM(Name=l_nam,
+                  k1=float(ld_mon[0]),
+                  k2=float(ld_mon[1]),
+                  k3=float(ld_mon[2]),
+                  k4=float(ld_mon[3]))
+    g_firms.append(l_firm)
+
+g_avg = 0
+for rec in g_firms:
+    g_avg += rec.k1 + rec.k2 + rec.k3 + rec.k4
+g_avg /= len(g_firms)
+
+g_above_avg = [rec.Name for rec in g_firms
+               if rec.k1 + rec.k2 + rec.k3 + rec.k4 > g_avg]
+g_under_avg = [rec.Name for rec in g_firms
+               if rec.k1 + rec.k2 + rec.k3 + rec.k4 < g_avg]
+
+print('Средняя годовая прибыль всех предприятий: ', g_avg)
+print('Предприятия, с прибылью выше среднего значения: ', g_above_avg)
+print('Предприятия, с прибылью ниже среднего значения: ', g_under_avg)
