@@ -10,6 +10,10 @@
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
 
+from random import randint
+from timeit import timeit
+from cProfile import run
+
 
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
@@ -34,3 +38,23 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+var_num = randint(1, 2 ** 999)
+
+# Начало тестов
+
+print(timeit("revers(var_num)", setup="from __main__ import revers,var_num", number=10000))
+run("revers(var_num)")
+
+print(
+    timeit("revers_2(var_num)", setup="from __main__ import revers_2,var_num", number=10000))
+run('revers_2(var_num)')
+
+print(
+    timeit("revers_3(var_num)", setup="from __main__ import revers_3,var_num", number=10000))
+run('revers_3(var_num)')
+
+'''
+    Судя по резултатам замеров которые показывают функции,
+    можно сделать вывод, что самой оптимально является функция 3
+'''
