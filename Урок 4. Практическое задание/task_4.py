@@ -10,6 +10,9 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+from timeit import timeit
+from collections import Counter
+
 array = [1, 3, 1, 3, 4, 5, 1]
 
 
@@ -21,8 +24,10 @@ def func_1():
         if count > m:
             m = count
             num = i
-    return f'Чаще всего встречается число {num}, ' \
-           f'оно появилось в массиве {m} раз(а)'
+    return (
+        f"Чаще всего встречается число {num}, "
+        f"оно появилось в массиве {m} раз(а)"
+    )
 
 
 def func_2():
@@ -33,9 +38,24 @@ def func_2():
 
     max_2 = max(new_array)
     elem = array[new_array.index(max_2)]
-    return f'Чаще всего встречается число {elem}, ' \
-           f'оно появилось в массиве {max_2} раз(а)'
+    return (
+        f"Чаще всего встречается число {elem}, "
+        f"оно появилось в массиве {max_2} раз(а)"
+    )
+
+
+def func_3():
+    counter = Counter(array).most_common(1)
+    num = counter[0]
+    return f"Чаще всего встречается число {num[0]}, оно появилось в массиве {num[1]} раз(а)"
 
 
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit("func_1()", globals=globals(), number=100000))
+print(timeit("func_2()", globals=globals(), number=100000))
+print(timeit("func_3()", globals=globals(), number=100000))
+
+# Решение через Counter оказалось самым медленным :(
