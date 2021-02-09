@@ -12,3 +12,80 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+"""
+1. Отсортируйте по убыванию методом "пузырька" одномерный целочисленный массив,
+заданный случайными числами на промежутке [-100; 100). Выведите на экран
+исходный и отсортированный массивы.
+
+Сортировка должна быть реализована в
+виде функции.
+
+Обязательно доработайте алгоритм (сделайте его умнее)!
+
+Идея доработки: если за проход по списку не совершается ни одной сортировки,
+то завершение
+Обязательно сделайте замеры времени обеих реализаций
+и обосновать дала ли оптимизация эффективность
+
+Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
+а по убыванию.
+
+Сделайте выводы!!!
+Опишите в чем была ваша доработка и помогла ли вам доработка??
+"""
+from timeit import timeit
+import random
+
+
+def bubble_sort(lst_obj):
+    n = 1
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+        n += 1
+    return lst_obj
+
+
+def bubble_sort_new(lst_obj):
+    n = 1
+    changed = 0
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+                changed = 1
+        if not changed == 0:
+            break
+        n += 1
+    return lst_obj
+
+
+
+lst = [random.randint(-100, 100) for _ in range(1000)]
+new_lst = [random.randint(-100, 100) for _ in range(1000)]
+
+
+print(f'Начаьный список {lst}')
+print(f'После сортировки bubble_sort: {bubble_sort(lst)}')
+print(f'Начаьный список {new_lst}')
+print(f'После сортировки bubble_sort_new: {bubble_sort_new(new_lst)}')
+
+print('Профилировка bubble_sort:')
+print(timeit("bubble_sort(lst)", setup="from __main__ import bubble_sort, lst", number=100))
+print('Профилировка bubble_sort_new:')
+print(timeit("bubble_sort_new(new_lst)", setup="from __main__ import bubble_sort_new, new_lst", number=100))
+
+
+"""
+
+Профилировка bubble_sort:
+4.4602181
+Профилировка bubble_sort_new:
+0.02176029999999951
+
+Оптимизация кода стандартной функции соритровки "пузырьком" 
+на больших вхожных данных до 1000 , показывает  зничительное уменьшение времени.
+
+"""
+
