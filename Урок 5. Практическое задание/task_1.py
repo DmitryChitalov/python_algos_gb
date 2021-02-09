@@ -25,3 +25,32 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import deque
+
+deq_obj = deque()  # -> deque(['b', 'c', 'd'])
+number_of_businesses = int(input('Введите количество предприятий для расчета прибыли: '))
+
+for number in range(number_of_businesses):
+    new_dict = {}
+    company_name = input('Введите название предприятия: ')
+    quarter_1, quarter_2, quarter_3, quarter_4, = [
+        int(n) for n in input('через пробел введите прибыль данного предприятия\n'
+                              'за каждый квартал(Всего 4 квартала): ').split()]
+    new_dict['company'] = company_name
+    new_dict['profit_by_year'] = quarter_1 + quarter_2 + quarter_3 + quarter_4
+    deq_obj.append(new_dict)
+
+all_average = 0
+num_of_comp = len(deq_obj)
+for company in deq_obj:
+    all_average += company['profit_by_year']
+average_all_comp = all_average / num_of_comp
+
+companies_with_profit_hire_average = []
+for company in deq_obj:
+    if company['profit_by_year'] > average_all_comp:
+        companies_with_profit_hire_average.append(company['company'])
+
+print('Средняя годовая прибыль всех предприятий:', average_all_comp)
+print('Предприятия, с прибылью выше среднего значения: ', list(companies_with_profit_hire_average))
