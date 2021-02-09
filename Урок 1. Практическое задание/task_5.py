@@ -18,3 +18,41 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+
+
+class PStack:
+    plates = []
+    plates_stack_sizes = []
+    current_stack = 0
+
+    def __init__(self, one_stack_size):
+        self.one_stack_size = one_stack_size
+        self.plates = [[]]
+
+    def __str__(self):
+        return str(self.plates)
+
+    def add_one_plate(self, name):
+        if len(self.plates[self.current_stack]) < self.one_stack_size:
+            self.plates[self.current_stack].append(name)
+        else:
+            self.current_stack += 1
+            self.plates.append([])
+            self.plates[self.current_stack].append(name)
+
+
+stk = PStack(2)
+
+print(stk)
+
+stk.add_one_plate('za mamu')
+print(stk)
+stk.add_one_plate('za papu')
+print(stk)
+stk.add_one_plate('za diadu olega')
+print(stk)
+stk.add_one_plate('za togo parnya')
+print(stk)
+stk.add_one_plate('za VDV')
+
+print(stk)

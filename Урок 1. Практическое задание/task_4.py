@@ -27,3 +27,65 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+#########################################################
+users = []
+
+
+#########################################################
+
+def check_the_person(login, password):
+    print("You are not authorized!")
+    ccn = input("Enter your credit card number, valid through info and 3 digits on the back of a card: ")
+    if ccn == "":
+        return 0
+    else:
+        return 1
+
+
+#########################################################
+def main_func(login, passwd):
+    counter = -1
+    my_user = ""
+    for user in users:
+        counter += 1
+        if user[0] == login:
+            my_user = user
+            break
+    if my_user == "":
+        ret = input(f"Undefined user {login}. Wished to join us? (Y/N) : ")
+        if ret == 'Y':
+            pwd = input("Enter password: ")
+            users.append([login, pwd, 0])
+            print(f"Welcome, {login}")
+        else:
+            print("have a nice day")
+        return
+
+    if passwd != users[counter][1]:
+        print(f"Не такой уж ты и {users[counter][0]}")
+        return
+    else:
+        print(f"Hello, {users[counter][0]}")
+
+    if my_user[2] != 1:
+        if check_the_person(my_user[0], my_user[1]) != 1:
+            print(f"Плохой ты, {my_user[0]}")
+            return
+        else:
+            users[counter][2] = 1
+
+    print(f"{my_user[0]}, I love you!!!")
+
+
+#########################################################
+
+while True:
+    print("---------------------------")
+    login = input("Login: ")
+    if login == "":
+        break
+    passwd = input("Password: ")
+
+    main_func(login, passwd)
+    print(f"Total users: {users}")
