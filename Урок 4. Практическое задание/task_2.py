@@ -7,8 +7,9 @@
 Выполнена попытка оптимизировать решение через мемоизацию.
 Сделаны замеры обеих реализаций.
 
-Сделайте аналитику, нужна ли здесь мемоизация или нет и почему?
-Если у вас есть идеи, предложите вариант оптимизации.
+Сделайте аналитику, нужна ли здесь мемоизация или нет и почему?!!!
+Если у вас есть идеи, предложите вариант оптимизации, если мемоизация не имеет смысла.
+Без аналитики задание считается не принятым
 """
 
 from timeit import timeit
@@ -78,4 +79,36 @@ print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
+        number=10000))
+
+# Аналитика:
+# 1) в функции recursive_reverse есть ошибка, она всегда добавляет 0 в начало строки
+# 2) при единичном запуске функции recursive_reverse_mem мемоизация не имеет смысла,
+#    т.к. все возможные аргументы при ее вызове будут уникальные.
+#    Но если мы запускаем функцию много раз, то вероятность повторения агрументов возрастает
+#    и мемоизация дает преимущество
+# 3) в данном случае рекурсия вообще не нужна и задача решается с помощью среза.
+#    Этот работает быстрее чем простая рекурсия, но на большом количестве запусков проигрывает мемоизации
+
+
+def recursive_reverse_the_best(number):
+    my_str = str(number)
+    return my_str[::-1]
+
+
+print('Функция recursive_reverse_the_best без рекурсии')
+print(
+    timeit(
+        'recursive_reverse_the_best(num_100)',
+        setup='from __main__ import recursive_reverse_the_best, num_100',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_the_best(num_1000)',
+        setup='from __main__ import recursive_reverse_the_best, num_1000',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_the_best(num_10000)',
+        setup='from __main__ import recursive_reverse_the_best, num_10000',
         number=10000))
