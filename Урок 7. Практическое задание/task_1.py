@@ -58,9 +58,9 @@ def bubble_sort_new(lst_obj):
 lst = [random.randint(-100, 100) for _ in range(1000)]
 
 
-print(f'Начаьный список {lst}')
+print(f'Начальный список {lst}')
 print(f'После сортировки bubble_sort: {bubble_sort(lst)}')
-print(f'Начаьный список {lst[:]}')
+print(f'Начальный список {lst[:]}')
 print(f'После сортировки bubble_sort_new: {bubble_sort_new(lst[:])}')
 
 print('Профилировка bubble_sort:')
