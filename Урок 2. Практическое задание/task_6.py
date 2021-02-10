@@ -30,4 +30,4 @@ def ruru(magic, count):
 
 #############################################
 
-print('Bingo!!!' if ruru(random.randint(0, 100), 2) == True else 'Looser!!!')
+print('Bingo!!!' if ruru(random.randint(0, 100), 2) is True else 'Looser!!!')
