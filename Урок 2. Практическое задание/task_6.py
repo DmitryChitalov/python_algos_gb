@@ -5,14 +5,29 @@
 число, чем то, что загадано. Если за 10 попыток число не отгадано,
 то вывести загаданное число.
 
-Решите через рекурсию. Решение через цикл не принимается.
+Решите черерз рекурсию. Решение через цикл не пинимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
 
 import random
 
-dig = input("Enter a digit: ")
-print("Looser")
 
-#Сори, не успел всё это великолепие воспрозвести
+#############################################
+def ruru(magic, count):
+    if count <= 0:
+        return False
+    print(f"{magic} {count}")
+    dig = int(input("Enter a digit: "))
+    if dig > magic:
+        print(f"Think down...")
+    elif dig < magic:
+        print(f"Think up...")
+    else:
+        return True
+    return ruru(magic, count - 1)
+
+
+#############################################
+
+print('Bingo!!!' if ruru(random.randint(0, 100), 2) == True else 'Looser!!!')

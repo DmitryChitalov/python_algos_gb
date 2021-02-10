@@ -22,7 +22,6 @@
 
 ##########################################
 def chars(ascii_code):
-    # if start_pos > 127:
     if ascii_code > 127:
         return True
     print(f' {ascii_code} - {chr(ascii_code)}', end=' ')
