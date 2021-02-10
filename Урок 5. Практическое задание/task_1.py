@@ -25,3 +25,52 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+
+import collections
+
+
+def input_profit(msg='', err_msg='', **kwargs):
+    while True:
+        try:
+            res = int(input(msg))
+        except ValueError:
+            print(err_msg)
+        else:
+            break
+    return res
+
+
+while True:
+    try:
+        companies_count = int(input('Введите количество предприятий для расчета прибыли: '))
+    except ValueError:
+        companies_count = -1
+    if companies_count >= 0:
+        break
+    print('Требуется ввести целое положительное число!')
+company = collections.namedtuple('Companies', 'name quart_1 quart_2 quart_3 quart_4')
+companies = {}
+profit = 0
+for i in range(companies_count):
+    while True:
+        company.name = input('Введите название предприятия: ')
+        if company.name not in companies:
+            break
+        print('Предприятие с таким названием уже есть!')
+    company.quart_1 = input_profit(f'Введите прибыль за 1-й квартал: ', 'Требуется ввести целое число!')
+    company.quart_2 = input_profit(f'Введите прибыль за 2-й квартал: ', 'Требуется ввести целое число!')
+    company.quart_3 = input_profit(f'Введите прибыль за 3-й квартал: ', 'Требуется ввести целое число!')
+    company.quart_4 = input_profit(f'Введите прибыль за 4-й квартал: ', 'Требуется ввести целое число!')
+    companies[company.name] = (company.quart_1 + company.quart_2 + company.quart_3 + company.quart_4) / 4
+    profit += companies[company.name]
+avg_profit = profit / companies_count
+print(f'Средняя годовая прибыль по всем предприятиям {avg_profit}')
+for comp in companies:
+    if companies[comp] < avg_profit:
+        str_profit = 'ниже'
+    elif companies[comp] > avg_profit:
+        str_profit = 'выше'
+    else:
+        str_profit = 'равна'
+    print(f'Предприятие {comp}, прибыль: {str_profit} средней.')
