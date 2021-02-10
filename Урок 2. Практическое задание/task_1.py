@@ -28,3 +28,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+###############################################################
+def calc():
+    oper = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if oper == '0':
+        return
+    if oper not in "+-*/":
+        print('Incorrect operation')
+        return calc()
+    try:
+        num_1 = int(input("Введите первое число: "))
+        num_2 = int(input("Введите второе число: "))
+    except ValueError:
+        print(
+            "Вы вместо трехзначного числа ввели строку (((. Исправьтесь")
+        return calc()
+
+    if oper == '+':
+        tot = num_1 + num_2
+    elif oper == '-':
+        tot = num_1 - num_2
+    elif oper == '*':
+        tot = num_1 * num_2
+    elif oper == '/':
+        if num_2 != 0:
+            tot = num_1 / num_2
+        else:
+            tot = 'Undefined'
+
+    print(f"Итого: {num_1} {oper} {num_2} = {tot}")
+    return calc()
+
+
+###############################################################
+
+calc()

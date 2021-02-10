@@ -16,3 +16,28 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+###################################################
+def recur(num, even=0, odd=0):
+    if num == 0:
+        return even, odd
+    else:
+        cur_n = num % 10
+        num = num // 10
+        if cur_n % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+    return recur(num, even, odd)
+
+
+###################################################
+try:
+    num = int(input('Введите натуральное число: '))
+except ValueError:
+    print("Not a valid number")
+    exit(-1)
+
+print(f"{recur(num)}")
+###################################################
