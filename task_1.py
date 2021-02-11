@@ -1,72 +1,70 @@
 """
-Задание 1.
+1. Отсортируйте по убыванию методом "пузырька" одномерный целочисленный массив,
+заданный случайными числами на промежутке [-100; 100). Выведите на экран
+исходный и отсортированный массивы.
 
-Реализуйте свои пользовательские функции, в которых реализуйте:
+Сортировка должна быть реализована в
+виде функции.
 
-a) заполнение списка и словаря программно,
-   сделайте замеры и сделайте выводы, что выполняется быстрее и почему
-b) выполните набор операций и со списком, и со словарем,
-   сделайте замеры и сделайте выводы, что и где выполняется быстрее и почему
+Обязательно доработайте алгоритм (сделайте его умнее)!
 
-Подсказка: для замеров воспользуйтесь модулем time (см. примеры урока 1)
+Идея доработки: если за проход по списку не совершается ни одной сортировки,
+то завершение
+Обязательно сделайте замеры времени обеих реализаций
+и обосновать дала ли оптимизация эффективность
 
-Примечание: eсли вы уже знаете, что такое декоратор и как его реализовать,
-то реализуйте ф-цию-декоратор для подсчета времени работы ваших пользовательских функций
-И примените ее к своим функциям!
+Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
+а по убыванию.
+
+Сделайте выводы!!!
+Опишите в чем была ваша доработка и помогла ли вам доработка??
 """
 
 """
-Заполнение словаря происходит медленнее чем заполнение списка, за счет работы хэш-функции
-для каждого создаваемого ключа. Операции поиска и изменения данных в словаре происходят быстрее чем в списке, 
-за счет прямого указания хеша ключа на его значения.
+Доработка алгоритма заключается в добавлении флага на проверку изменения последовательности.
+Скорость выполнения модифицированного алгоритма значительно выросла, и стала лишь в два (примерно) раза медленее 
+встроенной функции sorted. Оъяснить эту магию я не смог.
 """
 
-import time
+import timeit
+import random
 
 
-def dictionary_fill(count=100000, ky=1):
-    dct = {}
-    while count:
-        dct[ky] = 'asd'
-        count -= 1
-        ky +=1
-    return dct
-start_time = time.time()
-dictionary_fill()
-print(f'заполнение словаря - {time.time() - start_time}')
-
-
-
-def lst_fill(count=100000):
-    lst = []
-    while count:
-        lst.append('asd')
-        count -= 1
+def buble_sort(lst):
+    count = 1
+    while count < len(lst):
+        for i in range(len(lst) - count):
+            if lst[i] < lst[i+1]:
+                lst[i], lst[i+1] = lst[i+1], lst[i]
+        count += 1
     return lst
-start_time = time.time()
-lst_fill()
-print(f'заполнение списка - {time.time() - start_time}')
 
 
-def dictionary_operations():
-    dct = dictionary_fill()
-    start_time = time.time()
-    del dct[99989]
-    print(f'удаление из словаря - {time.time() - start_time}')
-    start_time = time.time()
-    i = dct[99999]
-    print(f'поиск в словаре - {time.time() - start_time}')
+def buble_sort_mod(lst):
+    count = 1
+    flag = False
+    while count < len(lst):
+        for i in range(len(lst) - count):
+            if lst[i] < lst[i+1]:
+                lst[i], lst[i+1] = lst[i+1], lst[i]
+                flag = True
+        if flag == False:
+            return lst
+        count += 1
+    return lst
 
-dictionary_operations()
 
+arr = [random.randint(-100, 100) for _ in range(100)]
+print(arr)
+print(buble_sort(arr))
+print(timeit.timeit('buble_sort(arr)', globals=globals(), number=1000))
 
-def lst_operations():
-    lst = lst_fill()
-    start_time = time.time()
-    del lst[99989]
-    print(f'удаление из списка - {time.time() - start_time}')
-    start_time = time.time()
-    i = lst[99989]
-    print(f'поиск в списке - {time.time() - start_time}')
+arr = [random.randint(-100, 100) for _ in range(100)]
+print(arr)
+print(buble_sort_mod(arr))
+print(timeit.timeit('buble_sort_mod(arr)', globals=globals(), number=1000))
 
-lst_operations()
+arr = [random.randint(-100, 100) for _ in range(100)]
+print(arr)
+print(sorted(arr, reverse=True))
+print(timeit.timeit('sorted(arr)', globals=globals(), number=1000))
