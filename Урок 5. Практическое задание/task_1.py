@@ -25,3 +25,28 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import Counter, deque
+
+n = int(input('Введите количество предприятий для расчета прибыли: '))
+all_profit = deque()
+comp = {}
+while n != 0:
+    company_name = input('Введите название предприятия: ')
+    profit_list = input('через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала):').split()
+    profit = []
+    for el in profit_list:
+        profit.append(int(el))
+    comp[company_name] = sum(profit)
+    all_profit.appendleft(sum(profit))
+    n -= 1
+average_profit = sum(all_profit) / sum(Counter(all_profit).values())
+good_company = deque()
+bad_company = deque()
+for key in comp:
+    if comp[key] > average_profit:
+        good_company.appendleft(key)
+    else:
+        bad_company.appendleft(key)
+print(f'Средняя годовая прибыль всех предприятий: {average_profit}')
+print(f'Предприятия, с прибылью выше среднего значения: {good_company}')
+print(f'Предприятия, с прибылью ниже среднего значения: {bad_company}')

@@ -9,3 +9,18 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+
+
+def guess(numb, val=0, n=10):
+    if val == numb:
+        return print(f"Ура вы отгадали, это число {numb}")
+    elif n == 0:
+        return print("Закончились попытки")
+    else:
+        n -= 1
+        value = int(input("Введите число от 0 до 100: "))
+        return guess(numb, value, n)
+
+
+guess(random.randint(0, 100))
