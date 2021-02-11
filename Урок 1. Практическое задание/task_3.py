@@ -22,3 +22,79 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+import random
+import uuid
+
+def max3_profit_1(lst_obj):
+    """ Ищем три самые прибыльные компании с помощью сортировки
+    списка компаний по прибыли по убыванию и возвращаем три первых
+
+    сложность O(N*log(N))
+    """
+
+    lst_obj = sorted(lst_obj, key=lambda profit: profit[1], reverse=True)
+
+    return lst_obj[0], lst_obj[1], lst_obj[2]
+
+def max3_profit_2(lst_obj):
+    """ Ищем три самые прибыльные компании тремя переборам и возвращаем их
+
+    сложность O(N)
+    """
+
+    prof1 = lst_obj[0]
+    prof2 = lst_obj[0]
+    prof3 = lst_obj[0]
+
+    #ищем самую прибыльную компанию
+    for i in range(len(lst_obj)):
+        if lst_obj[i][1]>prof1[1]:
+            prof1 = lst_obj[i]
+
+    #ищем вторую по прибыльности компанию
+    for i in range(len(lst_obj)):
+        if lst_obj[i][1] > prof2[1] and lst_obj[i][1] < prof1[1]:
+            prof2 = lst_obj[i]
+
+    #ищем третью по прибыльности компанию
+    for i in range(len(lst_obj)):
+        if lst_obj[i][1] > prof3[1] and lst_obj[i][1] < prof2[1]:
+            prof3 = lst_obj[i]
+
+    return prof1, prof2, prof3
+
+def max3_profit_3(lst_obj):
+    """ Ищем три самые прибыльные компании одним переборам и возвращаем их
+
+    сложность O(N)
+    """
+    # для начала создаем список из первых трех компаний
+    prof = (lst_obj[0], lst_obj[1], lst_obj[2])
+
+    # и сортируем его
+    # здесь считаем сложность О(1), т.к кол-во элементов сортировки предопределено и равно 3
+    prof = sorted(prof, key=lambda profit: profit[1], reverse=True)
+
+    for i in range(len(lst_obj)):
+        if lst_obj[i][1]>prof[0][1]:
+            prof[2] = prof[1]
+            prof[1] = prof[0]
+            prof[0] = lst_obj[i]
+        elif lst_obj[i][1]>prof[1][1]:
+            prof[2] = prof[1]
+            prof[1] = lst_obj[i]
+        elif lst_obj[i][1] > prof[2][1]:
+            prof[2] = lst_obj[i]
+
+    return prof
+
+#Зададим список команий со случайной прибылью
+N = 100 #кол-во команий, должно быть больще 3
+
+lst = [[uuid.uuid4(), random.sample(range(-100000, 100000), 1)] for i in range(N)]
+
+print(lst)
+print(max3_profit_1(lst))
+print(max3_profit_2(lst))
+print(max3_profit_3(lst))
