@@ -25,3 +25,17 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+from numpy import mean
+company_card = namedtuple('company_card', 'name profit_1 profit_2 profit_3 profit_4')
+companies = [company_card('Рога', 235, 345634, 55, 235), company_card('Копыта', 345, 34, 543, 34)]
+average_global = mean([mean([company.profit_1, company.profit_2, company.profit_3, company.profit_4])
+                  for company in companies])
+for company in companies:
+    in_total = mean([company.profit_1, company.profit_2, company.profit_3, company.profit_4])
+    if in_total > average_global:
+        print(f'у {company.name} результат выше среднего')
+    elif in_total < average_global:
+        print(f'у {company.name} результат ниже среднего')
+    else:
+        print(f'у {company.name} средние результаты')

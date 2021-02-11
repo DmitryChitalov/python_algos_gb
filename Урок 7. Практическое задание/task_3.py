@@ -13,3 +13,16 @@
 arr[m]
 from statistics import median
 """
+from random import randint
+
+
+def median_1(lst):
+    while len(lst) != 1:
+        lst.remove(max(lst))
+        lst.remove(min(lst))
+    return lst[0]
+
+
+my_list = [randint(-100, 100) for i in range(11)]
+print(f'базовый список {my_list}')
+print(f'медиана списка {median_1(my_list)}')

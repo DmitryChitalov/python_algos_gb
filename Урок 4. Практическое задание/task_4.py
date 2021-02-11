@@ -10,7 +10,11 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
+from timeit import timeit
+from random import randint
+
 array = [1, 3, 1, 3, 4, 5, 1]
+#array = [randint(1, 10) for i in range(100)]
 
 
 def func_1():
@@ -37,5 +41,28 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
-print(func_1())
-print(func_2())
+def my_func():
+    max_numb = max(set(array), key=array.count)
+    count = array.count(max_numb)
+    return f'Чаще всего встречается число {max_numb}, ' \
+           f'оно появилось в массиве {count} раз(а)'
+
+
+print(timeit(
+        'func_1()',
+        setup='from __main__ import func_1',
+        number=10000))
+print(timeit(
+        'func_2()',
+        setup='from __main__ import func_2',
+        number=10000))
+print(timeit(
+        'my_func()',
+        setup='from __main__ import my_func',
+        number=10000))
+
+"""
+Со списком по умолчанию выигрыша по времени выполнения не получается, все три функции
+дают сопоставимые числа. Но если применять функции к большим спискам (в примере на 100 элементов)
+скорость выполнения вырастает на порядок
+"""

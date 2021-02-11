@@ -28,3 +28,39 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def my_calc():
+    operation = input(f'Введите операцию (+, -, *, / или 0 для выхода): ')
+    if operation == '0':
+        print("Программа закрыта")
+    elif operation == '+':
+        number_1 = input(f'Введите первое число ')
+        number_2 = input(f'Введите второе число ')
+        print(f'Сумма равна: {int(number_2.strip()) + int(number_1.strip())}')
+        my_calc()
+    elif operation == '-':
+        number_1 = input(f'Введите первое число ')
+        number_2 = input(f'Введите второе число ')
+        print(f'Разнмца равна: {int(number_1.strip()) - int(number_2.strip())}')
+        my_calc()        
+    elif operation == '*':
+        number_1 = input(f'Введите первое число ')
+        number_2 = input(f'Введите второе число ')
+        print(f'Произведение равно: {int(number_2.strip()) * int(number_1.strip())}')
+        my_calc()
+    elif operation == '/':
+        number_1 = input(f'Введите первое число ')
+        number_2 = input(f'Введите второе число ')
+        if int(number_2.strip()) == 0:
+            print(f'Мы еще не проходили комплексные числа')
+            my_calc()
+        else:
+            print(f'Частное равно: {int(number_1.strip()) / int(number_2.strip())}')
+            my_calc()
+    else:
+        print(f'Вы ввели недопустимый символ, попробуйте еще раз')
+        my_calc()
+
+
+my_calc()
