@@ -22,3 +22,49 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+import random
+
+
+# первый способ
+def profitable1(info):
+    best_three = []
+    name = ''
+    info_copy = info.copy()
+
+    for i in range(3):  # O(1)
+        maximum = 0  # O(1)
+        for k, v in info_copy.items():  # O(N)
+            if v > maximum:  # O(N)
+                maximum = v  # O(1)
+                name = k  # O(1)
+        best_three.append(name)  # O(1)
+        info_copy.pop(name)  # O(1)
+    print(best_three)
+
+
+'''Общая сложность первого способа - O(N**2), не самая приятная'''
+
+
+# Второй способ
+def profitable2(info):
+    best_three = []
+    info_copy = info.copy()
+
+    for i in range(3):
+        best = max(info_copy, key=info_copy.get)
+        best_three.append(best)
+        info_copy.pop(best)
+
+    print(best_three)
+
+
+'''Общая сложность О(N), куда лучше, этот способ менее затратный, чем первый, поэтому лучше использовать его. Лучше,
+поскольку мы использовали встроенную функцию max'''
+
+my_dict = {}
+
+for i in range(random.randint(10, 100)):
+    my_dict[f'Company {i + 1}'] = random.randint(1000, 100000)
+
+profitable1(my_dict)
+profitable2(my_dict)
