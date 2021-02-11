@@ -79,3 +79,11 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+"""
+На данный момент от мемоизации смысла не много, но как только она будет запускаться многократно чтобы часто попадать в условие 
+        if args in cache:
+            return cache[args]
+то мемоизация уже будет смотреться более выигрышно
+"""
