@@ -14,4 +14,22 @@
 В базе данных хранится строка: 555a3581d37993843efd4eba1921f1dcaeeafeb855965535d77c55782349444b
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
+
+Допускаются любые усложения задания - валидация, подключение к БД, передача данных в файл
 """
+
+import hashlib
+
+password = str(input("Введите пароль: "))
+salt = 'any_salt'
+encrypted_string1 = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+print(f"В базе данных хранится строка: {encrypted_string1}")
+
+password = str(input("Введите пароль еще раз для проверки: "))
+
+encrypted_string2 = hashlib.sha256(salt.encode() + password.encode()).hexdigest()
+
+if encrypted_string1 == encrypted_string2:
+    print("Вы ввели правильный пароль")
+else:
+    print("Вы ввели неверный пароль")
