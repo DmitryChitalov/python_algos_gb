@@ -12,3 +12,87 @@
 ВНИМАНИЕ: примеры заданий будут размещены в последний день сдачи.
 Но постарайтесь обойтись без них.
 """
+
+'''
+нашел на просторах инета интересную реализацию, скопипастить не удалось так как там был pdf
+поэтому забил все ручками и погонял через дебагер что бы разобраться как работает. Интерено
+применения модуля heapq который по описанию как раз используется для бинарных деревьев.
+Было бы неплохо разобрать его работу на уроке. Но пришлось самому, вроде все понятно, основное 
+его приемущество что он дает скоррости для работы с такими типами данных как куча (очереди с приоритетами).
+'''
+
+import heapq
+from collections import Counter, namedtuple
+
+
+# создаем класс для хранения информации о структуре дерева
+class Node(namedtuple("Node", ["left", "right"])):
+    def walk(self, code, acc):
+        self.left.walk(code, acc + "0")
+        self.right.walk(code, acc + "1")
+
+
+# создаем класс листьев
+class Leaf(namedtuple("Leaf", ["char"])):
+    def walk(self, code, acc):
+        code[self.char] = acc or 0
+
+
+# функция кодирования
+def string_encode(input_sting):
+    h = []
+    # перебираем элементы counterа и добавляем в список частоту, длинну списка
+    # и экземпляр листа куда мы передаем сам элемент
+    for ch, freq in Counter(input_sting).items():
+        h.append((freq, len(h), Leaf(ch)))
+    # воспользуемся кучей для быстрого доступа к самому минимальному элементу превращаем список в кучу
+    heapq.heapify(h)
+    count = len(h)
+    # перебираем список в цикле и создаем узлы дерева
+    while len(h) > 1:
+        # при каждой итерации мы достаем из кучи минимальный элемент и добавляем в лево и в право
+        freq1, _count1, left = heapq.heappop(h)
+        freq2, _count2, right = heapq.heappop(h)
+        # добавляем в кучу узелы
+        heapq.heappush(h, (freq1 + freq2, count, Node(left, right)))
+        count += 1
+    code = {}
+    if h:
+        [(_freq, _count, root)] = h
+        root.walk(code, "")
+    return code
+
+
+# функция декодирования строки
+def string_decode(encoded, code):
+    sx = []
+    enc_ch = ""
+    # перебираем кодированную строку
+    for ch in encoded:
+        enc_ch += ch
+        # смотрим совпадение символов
+        for dec_ch in code:
+            if code.get(dec_ch) == enc_ch:
+                # при совпадении символов добавляем их в массив
+                sx.append(dec_ch)
+                enc_ch = ""
+                break
+    # возвращаем склеенную строку
+    return "".join(sx)
+
+
+# основная функция
+def main():
+    # можно запрашивать любую строку но я поставил как из урока
+    s = 'beep boop beer!'
+    code = string_encode(s)
+    encoded = "".join(code[ch] for ch in s)
+
+    print(len(code), len(encoded))
+    for ch in sorted(code):
+        print("{}: {}".format(ch, code[ch]))
+    print(encoded)
+    print(string_decode(encoded, code))
+
+
+main()
