@@ -79,3 +79,9 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+
+"""
+мемоизация помогает избежать потворных действий, в данном случае, 
+сохраняя в кеше уже найденные значения
+"""
