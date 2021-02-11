@@ -14,3 +14,20 @@
 р
 а
 """
+
+l = input("Введите строку: ")
+
+
+def my_func(l, res=set()):
+    if len(l) == 0:
+        return
+    k = 0
+    for i in range(len(l)):
+        res.add(hash(l[1:i + 1]))
+        k = i + 1
+    my_func(l[1:k], res)
+    return res
+
+
+result = my_func(l)
+print("Количество подстрок: " + str(len(result)))
