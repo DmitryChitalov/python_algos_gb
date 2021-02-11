@@ -65,3 +65,9 @@ def get_values_slovar(slovar_l):
 
 lists_v, lists_v_time = get_values_spisok(lists_l)
 slovar_v, slovar_time = get_values_slovar(slovar_l)
+
+print("Найти рандомных 10000 чисел из списка по индексу заняло: " + lists_v_time)
+print("Найти рандомных 10000 чисел из словаря по индексу заняло: " + slovar_time)
+
+#Заполнение листа происходит быстрее т.к. он не хэширует.
+#Работа с данными происходит быстрее в словаре т.к. перебор и обращение к данным словаря быстрее.
