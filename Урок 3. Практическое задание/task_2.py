@@ -15,3 +15,23 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+
+def crytpto(salt, password):
+    import hashlib
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + f"::{salt}"
+
+
+def autorization():
+    from uuid import uuid4
+    salt = uuid4().hex
+    new_password = crytpto(salt, input("Введите пароль: "))
+    print(f"хешированный пароль : {new_password}")
+    confrim_passwod = crytpto(salt, input("Введите пароль еще раз для проверки : "))
+    if new_password == confrim_passwod:
+        print("Пароль подтвержден.")
+    else:
+        print("Пароли не совпадают")
+
+
+autorization()

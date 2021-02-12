@@ -16,3 +16,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def chet_nechet(number, chet, nechet):
+    """на вход принимаеться само число и значение счетчиков для четных и не четных"""
+    if number > 0:
+        buf = number % 10
+        if buf % 2 == 0:
+            chet += 1
+            chet_nechet(number // 10, chet, nechet)
+        else:
+            nechet += 1
+            chet_nechet(number // 10, chet, nechet)
+    else:
+        print(chet, nechet)
+        return
+
+
+chet_nechet(123, 0, 0)
