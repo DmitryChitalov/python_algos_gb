@@ -28,3 +28,64 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def get_num1():
+    try:
+        return float(input("Введите первое число >>>"))
+    except ValueError:
+        return 'str'
+
+
+def get_num2():
+    try:
+        return float(input("Введите второе число >>>"))
+    except ValueError:
+        return 'str'
+
+
+def rec_calc(char):
+    if char == '0':
+        return
+    elif char == '+':
+        num1 = get_num1()
+        if num1 == 'str':
+            rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода) >>>"))
+        num2 = get_num2()
+        if num2 == 'str':
+            rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода) >>>"))
+        print(f"{num1} + {num2} = {num1 + num2}")
+    elif char == '-':
+        num1 = get_num1()
+        if num1 == 'str':
+            rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода) >>>"))
+        num2 = get_num2()
+        if num2 == 'str':
+            rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода) >>>"))
+        print(f"{num1} - {num2} = {num1 - num2}")
+    elif char == '*':
+        num1 = get_num1()
+        if num1 == 'str':
+            rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода) >>>"))
+        num2 = get_num2()
+        if num2 == 'str':
+            rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода) >>>"))
+        print(f"{num1} * {num2} = {num1 * num2}")
+    elif char == '/':
+        num1 = get_num1()
+        if num1 == 'str':
+            rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода) >>>"))
+        num2 = get_num2()
+        if num2 == 'str':
+            rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода) >>>"))
+        elif num2 == float(0):
+            print("На 0 делить нельзя")
+            rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода) >>>"))
+        print(f"{num1} / {num2} = {num1 / num2}")
+    else:
+        print("(не '0', '+', '-', '*', '/'),")
+        rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода) >>>"))
+    rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода) >>>"))
+
+
+rec_calc(input("Введите операцию (+, -, *, / или 0 для выхода >>>"))
