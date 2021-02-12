@@ -9,3 +9,25 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+#цикл
+n = int(input("Введите количество элементов:"))
+e = 1
+s = 0
+for i in range(n):
+    s += e
+    e /= -2
+print(s)
+
+
+def sum_el(i, number, count, result):
+    if i == n:
+        return f'Количество элементов - {count}, их сумма - {result}'
+    elif i < count:
+        return sum_el(i + 1, number / (-2), count, result+number)
+
+try:
+    user_count = int(input("Введите количество элементов:"))
+    print(sum_el(0, 1, user_count, 0))
+except ValueError:
+    print("Вы вместо числа ввели строку")

@@ -16,3 +16,38 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+# num = (input("Введите число:"))
+# print(num)
+#
+# def even_odd(number):
+#     if len(number) == 1:
+#         return lst_obj[0]/2 =
+#     else:
+
+#         return number[0] + get_sum_2(lst_obj[1:])
+
+# r = lambda n: 0 if not n else (not int(n[0]) % 2) + r(n[1:])
+# print(r(input("Введите число:")))
+
+def even_odd(number, even=0, odd=0):
+    even == 0
+    odd == 0
+    if number == 0:
+
+        return f"Количество четных и нечетных цифр в числе равно: {even}, {odd}"
+
+    else:
+        remainder_of_division = number % 10
+        number = number // 10
+        if remainder_of_division % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+
+        return even_odd(number, even, odd)
+
+
+print(even_odd(int(input("Введите число:"))))
+
+

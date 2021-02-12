@@ -17,3 +17,32 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+def mingen_1(mlist):
+    min_num = mlist[0]
+    for i in mlist:
+        if i < min_num:
+            min_num = i
+    return min_num
+
+
+def mingen_2(mlist):
+    for i in mlist:
+        min_num = True
+        for j in mlist:
+            if i > j:
+                min_num = False
+        if min_num:
+            return i
+
+#######################################################
+# # Генератор списка:
+import random
+
+res = random.sample(range(1, 100), 10)
+print(res)
+########################################################
+
+print(mingen_1(res))
+print(mingen_2(res))
