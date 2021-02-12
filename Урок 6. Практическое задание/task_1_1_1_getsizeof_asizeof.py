@@ -14,11 +14,10 @@
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 # """
 # Python 3.8.0 win 64x
-import memory_profiler
+# Lesson_2 Task_2
 from sys import getsizeof
 from pympler import asizeof
 
-# Lesson_2 Task_2
 new_num = 345123456434567345123456713456789098734512345643456734512345671345678909873451234564345673451234567134567890987345123456434567345123456713456789098734512345643456734512345671345678909873451234564345673451234567134567890987345123456434567345123456713456789098734512345643456734512345671345678909873451234564345673451234567134567890987
 
 
@@ -73,4 +72,9 @@ print(getsizeof(count_even_odd_3_for_if_map(new_num)))  # 28
 print(asizeof.asizeof(count_even_odd_3_for_if_map(new_num)))  # 64
 print(getsizeof(count_even_odd_4_while(new_num)))  # 28
 print(asizeof.asizeof(count_even_odd_4_while(new_num)))  # 64
-# все расчёты показали один и тот же объём занимаемой памяти
+
+'''
+даже на больших данных все расчёты показали один и тот же объём занимаемой памяти
+вывод:
+в данном случае getsizeof и asizeof беполезны, воспользуемся profile из memory_profiler
+'''
