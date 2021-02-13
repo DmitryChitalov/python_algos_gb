@@ -17,4 +17,20 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+
+Подсказка:
+Допускается исп-е встроенных ф-ций
+и допускается комб-е - цикл и рекурсия
 """
+
+
+def print_ascii_codes_recursive(code_from: int, code_to: int, current_print_position: int = 1):
+    if code_from == code_to:
+        return
+    elif code_from > code_to:
+        raise Exception('Code end value must be greater or equals to code start value.')
+    print(f'{code_from} - {chr(code_from)}', end=('\n' if not current_print_position % 10 else ' '))
+    print_ascii_codes_recursive(code_from + 1, code_to, current_print_position + 1)
+
+
+print_ascii_codes_recursive(32, 128)
