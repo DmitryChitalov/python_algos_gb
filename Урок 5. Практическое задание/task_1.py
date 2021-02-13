@@ -25,3 +25,24 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+currdata = []
+aver_data = {}
+comp_info = namedtuple("Firm", "name income")
+ncomp = int(input("Введите количество предприятий для расчета прибыли: "))
+for i in range(ncomp):
+    name = input("Введите название предприятия: ")
+    income = input(
+        "через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала):"
+    ).split()
+    currdata = comp_info(name, income)
+    aver_data[currdata.name] = sum(map(int, currdata.income)) / 4
+avg_income = sum(aver_data.values()) / len(aver_data)
+print(f"Средняя годовая прибыль всех предприятий: {avg_income}")
+
+print("Предприятия, с прибылью выше среднего значения: ", end="")
+print(*[i for i in aver_data if aver_data[i] > avg_income], sep=",")
+print("Предприятия, с прибылью ниже среднего значения: ", end="")
+print(*[i for i in aver_data if aver_data[i] < avg_income], sep=",")
