@@ -11,3 +11,21 @@
 Также попробуйте решить задачу вообще без collections и применить только ваши знания по ООП
 (в частности по перегрузке методов)
 """
+
+
+class MyHex:
+    def __init__(self, hval):
+        self.hval = hval
+
+    def __add__(self, other):
+        return hex(int(self.hval, 16) + int(other.hval, 16))
+
+    def __mul__(self, other):
+        return hex(int(self.hval, 16) * int(other.hval, 16))
+
+
+a = MyHex("A2")
+b = MyHex("C4F")
+
+print(a + b)
+print(a * b)
