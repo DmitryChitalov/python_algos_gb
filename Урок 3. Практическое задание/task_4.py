@@ -8,3 +8,25 @@
 Подсказка: задачу решите обязательно с применением 'соленого' хеширования
 Можете условжнить задачу, реализовав ее через ООП
 """
+###################################################
+
+# Не понятно чем "солить"
+
+from hashlib import pbkdf2_hmac
+
+###################################################
+url_lst = list()
+###################################################
+
+while True:
+    url = input("What do you wish for?: ")
+    if url == '0':
+        exit(0)
+    url_hash = pbkdf2_hmac('sha256', url.encode(), "0".encode(), 100000)
+    if url_hash in url_lst:
+        print(f"already visited");
+    else:
+        url_lst.append(url_hash)
+        print(f"Welcome!!");
+
+    print(url_lst)
