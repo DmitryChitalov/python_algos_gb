@@ -15,3 +15,41 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+################################################################
+from binascii import hexlify
+from hashlib import pbkdf2_hmac
+
+################################################################
+db = dict()
+
+################################################################
+while True:
+    login = input('Enter login: ')
+    if login == "0":
+        exit(0)
+    if login in db.keys():
+        print(f"welcome {login}")
+        password = input('Enter password: ')
+        password_hash = pbkdf2_hmac(hash_name='sha256',
+                                    password=password.encode(),
+                                    salt=login.encode(),
+                                    iterations=100000)
+        print(password_hash)
+        print(db[login].get("hashed_password"))
+        if hexlify(password_hash) != db[login].get("hashed_password"):
+            print("see your later")
+            continue
+        print(f"Like to see you, {login}")
+    else:
+        print(f"welcome new user {login}")
+        password = input('Enter password: ')
+        password_hash = pbkdf2_hmac(hash_name='sha256',
+                                    password=password.encode(),
+                                    salt=login.encode(),
+                                    iterations=100000)
+        print(password_hash)
+        db[login] = {"hashed_password": hexlify(password_hash)}
+    print(db)
+    print((db[login].values()))
+################################################################
