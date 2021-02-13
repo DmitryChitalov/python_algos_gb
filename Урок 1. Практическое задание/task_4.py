@@ -27,3 +27,49 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+user_list = {"vasy": ("pass", True), "fedy": ("123", True), "pop": ("123", False)}
+
+
+def check_user(user, passwrd, user_dict):
+    """Если брать по максимуму то получение по ключу из словаря и вывод сообщения
+    T(n)=2 """
+    if user_dict.get(user) == None:
+        return f"пользователя {user} нет в систе. рекомендуем пройти авторизацию"
+    bufer_user = user_dict.get(user)
+    if bufer_user[1]:
+        if bufer_user[0] == passwrd:
+            return f"пользователю {user} разрешен доступ"
+        else:
+            return f"пользователь {user} пароль не совпадает"
+    else:
+        return f"пользователь {user} заблокирован"
+
+
+def check_user_2(user, password, user_dict):
+    """Смотрим по максимуму весь цикл и еще вывод
+    в цикле точно выполниться одно присваивание и далее еще одно возвращение
+    T(n)=n+1"""
+    count = 0
+    for key, value in user_dict.items():
+        if user == key:
+            if value[1]:
+                if value[0] == password:
+                    return f"пользователю {user} разрешен доступ"
+                else:
+                    return f"пользователь {user} пароль не совпадает"
+            else:
+                return f"пользователь {user} заблокирован"
+        count += 1
+    if count == len(user_dict):
+        return f"пользователя {user} нет в систе. рекомендуем пройти авторизацию"
+
+
+print(check_user("fedy", "13", user_list))
+print(check_user_2("fedy", "123", user_list))
+
+# если сравнить формулы T(n)=2 и T(n)=n+1 для завершения первой максимально необходимо выполнить 2 действия а второй
+# N раз если пользователя нет, первая получилась быстрее.
+#
+
