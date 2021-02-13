@@ -22,3 +22,49 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+
+source_data = {"dust": 300000, "morz": 20000, "frukt": 232123, "port": 445323, "rog": 234234}
+
+
+# rez = sorted(source_data.items(),key=lambda item: item[1], reverse=True)[:3]
+
+
+def find_max_profit_1(org_list):
+    """
+    использована сортировка + lambda получение значения +получение 3 элементов списка
+    T(n)=n log n+2
+    :param org_list:
+    :return:
+    """
+    return sorted(org_list.items(), key=lambda item: item[1], reverse=True)[:3]
+
+
+def find_max_profit_2(org_list):
+    """
+    2 операции присваивания
+    цикл из 3 итераций
+    внутри 5 линейных оперций думаю dict.pop за определенный отрезок времени выполняеться
+    и цкл в нутри которого  if и  2 операции
+    T(N)=2+3(5+N*2)
+    :param org_list:
+    :return:
+    """
+    rez = {}
+    count = 3
+    while count != 0:
+        max = 0
+        buf_key=""
+        for key, value in org_list.items():
+            if max < value:
+                max = value
+                buf_key=key
+        rez[buf_key] = max
+        org_list.pop(buf_key, max)
+        count -= 1
+    return rez
+
+print(find_max_profit_1(source_data))
+print(find_max_profit_2(source_data))
+
+# формула первого   T(n)=nlog n+2 и второй T(N)=2+3(5+N*2) как мне кажеться второй быстрее даже  второй буде увеличеваться только если надо бужет не три а 4 и тд выводить
+

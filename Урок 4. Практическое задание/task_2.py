@@ -53,6 +53,7 @@ def memoize(f):
         else:
             cache[args] = f(*args)
             return cache[args]
+
     return decorate
 
 
@@ -78,4 +79,62 @@ print(
     timeit(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
+        number=10000))
+
+"""
+Функция с декоратором работает быстрее. так как выполняеться только один раз для каждого значения. 
+а далее значение береться из словаря не вызывая рекурсивную функцию
+"""
+
+"""
+наверное не самый лучший вариант но он мне нравиться.
+"""
+
+
+def recursive_reverse_str(num):
+    return int(str(num)[::-1])
+
+
+print('Свой вариант реверса')
+print(
+    timeit(
+        'recursive_reverse_str(num_100)',
+        setup='from __main__ import recursive_reverse_str, num_100',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_str(num_1000)',
+        setup='from __main__ import recursive_reverse_str, num_1000',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_str(num_10000)',
+        setup='from __main__ import recursive_reverse_str, num_10000',
+        number=10000))
+
+"""
+а если использовать кэш))))
+"""
+
+
+@memoize
+def recursive_reverse_str(num):
+    return int(str(num)[::-1])
+
+
+print('Свой вариант реверса с использование кэша')
+print(
+    timeit(
+        'recursive_reverse_str(num_100)',
+        setup='from __main__ import recursive_reverse_str, num_100',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_str(num_1000)',
+        setup='from __main__ import recursive_reverse_str, num_1000',
+        number=10000))
+print(
+    timeit(
+        'recursive_reverse_str(num_10000)',
+        setup='from __main__ import recursive_reverse_str, num_10000',
         number=10000))
