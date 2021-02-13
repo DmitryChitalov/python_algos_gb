@@ -15,3 +15,25 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+from uuid import uuid4
+import hashlib
+
+
+def f_ch_pass():
+    v_pass = input('Enter password: ')
+    salt = uuid4().hex
+    hash_pass = hashlib.sha256(salt.encode() + v_pass.encode()).hexdigest() + ':' + salt
+
+    v_pass_2 = input('Enter password one more time: ')
+    hash_pass_2 = hashlib.sha256(salt.encode() + v_pass_2.encode()).hexdigest() + ':' + salt
+
+    if hash_pass == hash_pass_2:
+        print('Correct password')
+        return True
+    else:
+        print('Incorrect password')
+        return False
+
+
+f_ch_pass()
