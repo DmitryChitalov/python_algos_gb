@@ -25,3 +25,34 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+import collections
+import functools
+
+le_list = collections.defaultdict(list)
+tot_inc_list = collections.defaultdict(list)
+
+print('Input quantity of legal entities:')
+qty = input()
+
+for i in range(int(qty)):
+    print('Input legal entity name:')
+    name = input()
+    inc_list = []
+    for j in range(4):
+        print(f'Input income for <{j + 1}> quarter')
+        inc_list.append(int(input()))
+
+    le_list[name] = inc_list
+    tot_inc_list[name] = functools.reduce(lambda a, b: a + b, le_list[name])
+    print(f'Total income is {tot_inc_list[name]}')
+
+median = functools.reduce(lambda a, b: a + b, list(tot_inc_list.values())) / len(le_list)
+print(f'Median income is {median}')
+
+gt_tot_list = dict(filter(lambda a: (a[1] > median), tot_inc_list.items()))
+lt_tot_list = dict(filter(lambda a: (a[1] < median), tot_inc_list.items()))
+
+print(f'Income greater than {median}')
+print(gt_tot_list)
+print(f'Income less than {median}')
+print(lt_tot_list)
