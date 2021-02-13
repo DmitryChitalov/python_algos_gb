@@ -12,8 +12,8 @@
 
 Подсказка:
 Вариант исполнения:
-- условие рекурсивного вызова - введена операция +, -, *, /
-- условие завершения рекурсии - введена операция 0
+- условие рекурсивного вызова - введена операция +, -, *, / - ШАГ РЕКУРСИИ
+- условие завершения рекурсии - введена операция 0 - БАЗОВЫЙ СЛУЧАЙ
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
@@ -28,3 +28,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+class InteractiveCalculator:
+    operation_list = ['+', '-', '*', '/']
+
+    def calculate_recursive(self):
+        operation = input("Введите операцию +, -, *, / или 0 для завершения программы > ")
+        if operation == '0':
+            return
+        else:
+            if operation in self.operation_list:
+                try:
+                    number_1 = int(input("Введите первое число: "))
+                    number_2 = int(input("Введите второе число: "))
+                except ValueError:
+                    print("Число должно быть целым.")
+                    return self.calculate_recursive()
+                if operation == '+':
+                    result = number_1 + number_2
+                elif operation == '-':
+                    result = number_1 - number_2
+                elif operation == '*':
+                    result = number_1 * number_2
+                elif operation == '/':
+                    if number_2 != 0:
+                        result = number_1 / number_2
+                    else:
+                        print('Деление на ноль невозможно.')
+                        return self.calculate_recursive()
+                print(f"Результат: {result}")
+            else:
+                print("Введён неверный символ.")
+            return self.calculate_recursive()
+
+
+interactive_calculator = InteractiveCalculator()
+interactive_calculator.calculate_recursive()
