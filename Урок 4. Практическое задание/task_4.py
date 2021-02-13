@@ -9,8 +9,19 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from collections import Counter
+from timeit import timeit
 
-array = [1, 3, 1, 3, 4, 5, 1]
+# На малых объемах данных лучше всего работает полный прербор.
+# Если увеличить, то func_3 работает быстрее
+
+array = [1, 3, 1, 3, 4, 5, 1,
+         1, 3, 1, 3, 4, 5, 1,
+         1, 3, 1, 3, 4, 5, 1,
+         1, 3, 1, 3, 4, 5, 1,
+         1, 3, 1, 3, 4, 5, 1,
+         77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77,
+         ]
 
 
 def func_1():
@@ -37,5 +48,18 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    data = Counter(array)
+    return f'Чаще всего встречается число {data.most_common(1)[0][0]}, ' \
+           f'оно появилось в массиве {data.most_common(1)[0][1]} раз(а)'
+
+
 print(func_1())
 print(func_2())
+print(func_3())
+
+num_iterations = 100000
+
+print(f"func_1 {timeit('func_1()', globals=globals(), number=num_iterations)}")
+print(f"func_2 {timeit('func_2()', globals=globals(), number=num_iterations)}")
+print(f"func_3 {timeit('func_3()', globals=globals(), number=num_iterations)}")
