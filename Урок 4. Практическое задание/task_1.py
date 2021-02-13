@@ -12,7 +12,7 @@
 Добавьте аналитику: что вы сделали и почему
 """
 
-from timeit import timeit
+import timeit
 
 
 def func_1(nums):
@@ -21,3 +21,11 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+NUMS = [el for el in range(1000)]
+
+print(
+    timeit.timeit(
+        "func_1(NUMS)",
+        globals=globals(),
+        number=1000))
