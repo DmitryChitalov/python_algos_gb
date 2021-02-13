@@ -13,3 +13,29 @@
 arr[m]
 from statistics import median
 """
+from random import randint
+
+
+def mediana(var_list):
+    i = len(var_list) // 2
+    for x in range(i):
+        var_list.remove(max(var_list))
+    return max(var_list)
+
+
+m = 10
+orig_list = [randint(0, 100) for _ in range(2 * m + 1)]
+
+print(orig_list)
+
+print(mediana(orig_list[:]))
+
+# Для проверки
+orig_list.sort()
+print(orig_list)
+print(orig_list[m])
+
+# [58, 50, 79, 43, 65, 39, 30, 5, 78, 28, 39, 54, 39, 53, 24, 20, 61, 40, 84, 72, 25]
+# 43
+# [5, 20, 24, 25, 28, 30, 39, 39, 39, 40, 43, 50, 53, 54, 58, 61, 65, 72, 78, 79, 84]
+# 43
