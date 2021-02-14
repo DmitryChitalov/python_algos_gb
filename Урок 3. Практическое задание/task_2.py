@@ -43,7 +43,7 @@ class User:
                 print('Пароли не совпадают! Попробуйте указать пароль еще раз.')
 
     def authorize(self):
-        username_input=input('Введите имя пользователя: ')
+        username_input = input('Введите имя пользователя: ')
         passwd_input = input('Введите пароль: ')
         passwd_check = hexlify(pbkdf2_hmac(hash_name='sha256',
                                            password=passwd_input.encode(),
@@ -53,6 +53,7 @@ class User:
             print(f'Добро пожаловать на ресурс, {self._username}!')
         else:
             print('Неверное имя пользователя или пароль!')
+
 
 new_user = User()
 new_user.authorize()
