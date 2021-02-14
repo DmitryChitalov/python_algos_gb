@@ -17,3 +17,31 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+import random
+
+list = [random.randint(-1, 1000) for el in range(1, 100)]
+print(list)
+
+
+def find2n(list):
+    min = list[0]
+    for i in list:
+        for j in list:
+            if min > i < j:
+                min = i
+    return min
+
+
+def findN(list):
+    min = list[0]
+    for num in list:
+        if num < min:
+            min = num
+    return min
+
+
+print(find2n(list))
+print(findN(list))
+

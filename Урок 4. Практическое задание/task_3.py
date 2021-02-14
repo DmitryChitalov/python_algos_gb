@@ -9,6 +9,10 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
+from cProfile import run
+from timeit import timeit
+
+num = 2143434
 
 
 def revers(enter_num, revers_num=0):
@@ -34,3 +38,35 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+print("Рекурсия")
+print(
+    timeit("revers(num)",
+           setup='from __main__ import revers, num',
+           number=10000))
+print("Цикл")
+print(
+    timeit(
+        "revers_2(num)",
+        setup='from __main__ import revers_2, num',
+        number=10000))
+print("встроенные операции")
+print(
+    timeit(
+        "revers_3(num)",
+        setup='from __main__ import revers_3, num',
+        number=10000))
+
+
+def main():
+    revers(num)
+    revers_2(num)
+    revers_3(num)
+
+
+run("main()")
+
+"""
+revers_3() самая быстрая так как в ней нет рекурсивного вызова и нет итераций.
+профайлер показал что реверс чере рекурсию запускал функцию несколько раз.
+реверс функциями revers_3 и  revers_2 вызывались по одному разу. но в revers_2 использовался цикл"""
