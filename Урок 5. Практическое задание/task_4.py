@@ -103,6 +103,6 @@ print("f_ordered_values: ", timeit("f_ordered_values(v_ordered_dict)",
 
 """
     Традиционный способ отработал медленее.
-    f_base_values:     0.0001634999999999831    
+    f_base_values:     0.0001634999999999831     
     f_ordered_values:  0.00015969999999998485
 """
