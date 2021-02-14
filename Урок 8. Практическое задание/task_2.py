@@ -10,6 +10,7 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных.
 """
 
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -19,8 +20,14 @@ class BinaryTree:
         # правый потомок
         self.right_child = None
 
+    def __str__(self):
+        return str(self.root)
+
     # добавить левого потомка
     def insert_left(self, new_node):
+        if new_node > self.root:
+            print(f'Элемент слева ({new_node}) должен быть меньше корня ({self.root})!')
+            return
         # если у узла нет левого потомка
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
@@ -36,6 +43,9 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        if new_node < self.root:
+            print(f'Элемент справа ({new_node}) должен быть больше корня ({self.root})!')
+            return
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -48,6 +58,11 @@ class BinaryTree:
             # и спускаем имеющегося потомка на один уровень ниже
             tree_obj.right_child = self.right_child
             self.right_child = tree_obj
+
+    def get_depth(self):
+        depth_left = 0 if self.left_child is None else self.left_child.get_depth() + 1
+        depth_right = 0 if self.right_child is None else self.right_child.get_depth() + 1
+        return max(depth_left, depth_right)
 
     # метод доступа к правому потомку
     def get_right_child(self):
@@ -69,11 +84,14 @@ class BinaryTree:
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
+r.insert_left(15)
+r.insert_left(2)
 r.insert_left(4)
 print(r.get_left_child())
-print(r.get_left_child().get_root_val())
+# print(r.get_left_child().get_root_val())
 r.insert_right(12)
 print(r.get_right_child())
-print(r.get_right_child().get_root_val())
+# print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+print(f'Глубина дерева: {r.get_depth()}')
