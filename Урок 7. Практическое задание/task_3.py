@@ -13,3 +13,23 @@
 arr[m]
 from statistics import median
 """
+from random import uniform
+
+source_array = [uniform(0.0, 100.0) for element in range(0, 5)]
+
+
+def median(array):
+    for index in range(0, len(array)):
+        left, right = 0, 0
+        for count_element in range(0, len(array)):
+            if array[index] != array[count_element]:
+                if array[index] < array[count_element]:
+                    left += 1
+                else:
+                    right += 1
+        if left == right:
+            return array[index]
+
+
+print(f"массив {source_array}\n медиана {median(source_array)}")
+
