@@ -18,3 +18,21 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def f_print(v_first=32):
+    if v_first == 128:
+        return
+    else:
+        v_first = v_first
+        v_code = chr(v_first)
+        if (v_first - 1) % 10 != 0:
+            print(f'{v_first} - {v_code}', end=" ")
+        else:
+            print(f'{v_first} - {v_code}')
+        v_first += 1
+        f_print(v_first)
+        return
+
+
+f_print()

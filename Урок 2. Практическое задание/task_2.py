@@ -16,3 +16,25 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def f_calc(v_num, v_even=0, v_uneven=0):
+    if len(v_num) == 0:
+        print(f'qty of even is: {v_even}')
+        print(f'qty of uneven is: {v_uneven}')
+        return
+
+    num = int(v_num[-1])
+
+    if num % 2 == 0:
+        v_even += 1
+    else:
+        v_uneven += 1
+
+    v_trim = v_num[:-1]
+    f_calc(v_trim, v_even, v_uneven)
+
+
+v_data = str(input("Please enter number: "))
+print(f'Input data is {v_data}')
+f_calc(v_data)

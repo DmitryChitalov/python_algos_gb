@@ -28,3 +28,37 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def f_calc():
+    v_operator = input('Enter operator (+, -, *, / or 0 to exit)')
+
+    if v_operator == str(0):
+        print('Exit')
+        exit()
+
+    if v_operator not in ['+', '-', '*', '/']:
+        print('Enter correct operator')
+        return f_calc()
+
+    else:
+        v_1 = int(input('Enter first number:'))
+        v_2 = int(input('Enter second number:'))
+        if v_operator == '+':
+            result = v_1 + v_2
+        if v_operator == '-':
+            result = v_1 - v_2
+        if v_operator == '*':
+            result = v_1 * v_2
+        if v_operator == '/':
+            if v_2 == 0:
+                print('Division by zero is restricted!')
+                return f_calc()
+            else:
+                result = v_1 / v_2
+
+    print(f'Ваш результат: {result}')
+    return f_calc()
+
+
+f_calc()
