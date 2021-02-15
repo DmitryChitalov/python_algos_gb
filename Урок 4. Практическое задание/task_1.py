@@ -21,3 +21,14 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def my_func(nums):
+    return [i for i, k in enumerate(nums) if i % 2 == 0]
+
+
+nums = list(range(200))
+print(timeit("func_1(nums)", globals=globals()))
+print(timeit("my_func(nums)", globals=globals()))
+print(
+    "List Comprehensions быстрее, т.к. определение списка и его содержимого происходит одновременно. В первом варианте создается пустой список и проиходит постоянно добавление в конец списка ")
