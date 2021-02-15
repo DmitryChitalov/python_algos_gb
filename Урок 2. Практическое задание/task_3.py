@@ -15,3 +15,18 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def reverse_number(number):
+    if number == 0:
+        return ''
+    else:
+        number, digit = divmod(number, 10)
+        return str(digit) + str(reverse_number(number))
+
+
+number = input("Введите число, которое требуется перевернуть: ")
+if not number.isdigit():
+    print("Вы ввели не число!")
+    exit()
+print(reverse_number(int(number)))

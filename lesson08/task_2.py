@@ -1,5 +1,5 @@
 """
-Задание 2.**
+Задание 2.
 
 Доработайте пример структуры "дерево",
 рассмотренный на уроке.
@@ -7,8 +7,9 @@
 Предложите варианты доработки и оптимизации
 (например, валидация значений узлов в соответствии с требованиями для бинарного дерева)
 
-Поработайте с доработанной структурой, позапускайте на реальных данных.
+Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
+
 
 class BinaryTree:
     def __init__(self, root_obj):
@@ -19,8 +20,14 @@ class BinaryTree:
         # правый потомок
         self.right_child = None
 
+    def insert_node(self, new_node):
+        if self.root <= new_node:
+            self.__insert_right(new_node)
+        else:
+            self.__insert_left(new_node)
+
     # добавить левого потомка
-    def insert_left(self, new_node):
+    def __insert_left(self, new_node):
         # если у узла нет левого потомка
         if self.left_child == None:
             # тогда узел просто вставляется в дерево
@@ -35,7 +42,7 @@ class BinaryTree:
             self.left_child = tree_obj
 
     # добавить правого потомка
-    def insert_right(self, new_node):
+    def __insert_right(self, new_node):
         # если у узла нет правого потомка
         if self.right_child == None:
             # тогда узел просто вставляется в дерево
@@ -58,7 +65,7 @@ class BinaryTree:
         return self.left_child
 
     # метод установки корня
-    def set_root_val(self, obj):
+    def __set_root_val(self, obj):
         self.root = obj
 
     # метод доступа к корню
@@ -69,11 +76,24 @@ class BinaryTree:
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(4)
-print(r.get_left_child())
-print(r.get_left_child().get_root_val())
-r.insert_right(12)
+r.insert_node(40)
 print(r.get_right_child())
 print(r.get_right_child().get_root_val())
-r.get_right_child().set_root_val(16)
+r.insert_node(12)
+print(r.get_right_child())
 print(r.get_right_child().get_root_val())
+print(r.get_right_child().get_right_child().get_root_val())
+# r.get_right_child().set_root_val(16)
+r.insert_node(11)
+print(r.get_right_child().get_root_val())
+print(r.get_right_child().get_right_child().get_root_val())
+r.insert_node(7)
+print(r.get_left_child().get_root_val())
+
+"""
+Моя небольшая доработка следующая. Замена пользовательских функций добавления 
+левого и правого потомков на одну insert_node().
+insert_left и insert_right сделаны приватными и вызываются из insert_node() в 
+зависимости от того больше или меньше добавляемый узел чем вершина.
+Это позволяет исключить риски некорректного заполнения пользователем бинарного дерева.
+"""
