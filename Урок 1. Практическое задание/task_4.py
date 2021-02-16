@@ -54,4 +54,13 @@ def authorization_2(users, user_name, user_password):  # O(1)
     return "Данного пользователя не существует"
 
 
+my_users = {'user_1': {'password': 1234, 'activation': True},
+            'user_2': {'password': 2345, 'activation': False},
+            'user_3': {'password': 4567, 'activation': True},
+            }
+
+print(authorization_2(my_users, 'user_2', '1111'))
+print(authorization_2(my_users, 'user_6', '1234'))
+
+
 # Второе решения является более эффективным, т.к. оно константно
