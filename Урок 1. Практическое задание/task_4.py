@@ -27,3 +27,40 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# def authorization_1(users, user_name, user_password):  # O(n)
+#     for key, value in users.items():
+#         if key == user_name:
+#             if value['password'] == user_password and value['activation']:
+#                 return "Добро пожаловать. Доступ предоставлен"
+#         elif value['password'] == user_password and not value['activation']:
+#             return "Учетная запись не активна. Пройдите активацию"
+#         elif value['password'] != user_password:
+#             return "Пароль не верный"
+#
+#     return "Данного пользователя не существует"
+
+
+def authorization_2(users, user_name, user_password):  # O(1)
+    if users.get(user_name):
+        if users[user_name]['password'] == user_password and users[user_name]['activation']:
+            return "Добро пожаловать. Доступ предоставлен"
+        elif users[user_name]['password'] == user_password and not users[user_name]['activation']:
+            return "Учетная запись не активна. Пройдите активацию"
+        elif users[user_name]['password'] != user_password:
+            return "Пароль не верный"
+
+    return "Данного пользователя не существует"
+
+
+my_users = {'user_1': {'password': 1234, 'activation': True},
+            'user_2': {'password': 2345, 'activation': False},
+            'user_3': {'password': 4567, 'activation': True},
+            }
+
+print(authorization_2(my_users, 'user_2', '1111'))
+print(authorization_2(my_users, 'user_6', '1234'))
+
+
+# Второе решения является более эффективным, т.к. оно константно
