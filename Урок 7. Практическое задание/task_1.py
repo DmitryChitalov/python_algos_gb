@@ -55,6 +55,14 @@ check_list = [-100, -100, -100, -100, -100, -100, -100, -100,  -99, -100, -99, -
 print(timeit.timeit("bubble_sort(orig_list[:])", globals=globals(), number=50))  # 6.097
 print(timeit.timeit("bubble_sort(check_list[:])", globals=globals(), number=50))  # 3.294
 
+
+random_list = [random.randint(-100, 100) for _ in range(1000)]
+print(timeit.timeit("bubble_sort(random_list[:])", globals=globals(), number=50))  # 5.49
+print(timeit.timeit("bubble_sort(random_list[:])", globals=globals(), number=50))  # 5.54
+
 """
-проверить формулу
+Выводы:
+Конечно на отсортированных данных есть прирост скорости, но если данные рандомные, то дополнительная
+проверка не даёт прироста в скорости выполнения, скорее даже немного увеличивает премя работы функции 
+замеры показали около 10% увеличения времени работы функции на дополнительную проверку равенства списков
 """
