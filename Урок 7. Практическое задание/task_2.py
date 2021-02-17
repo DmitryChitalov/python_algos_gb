@@ -51,3 +51,5 @@ if __name__ == '__main__':
     orig_list = [random.uniform(0, 50) for _ in range(lst_len)]
     print('Исходный -', orig_list)
     print('Отсортированный - ', merge_sort(orig_list))
+    print('Затрачено времени на 1000 операций сортировки:')
+    print(timeit.timeit("merge_sort(orig_list[:])", globals=globals(), number=1000))
