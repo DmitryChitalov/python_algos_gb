@@ -59,8 +59,10 @@ def my_median(list_arg):
         left = 0
         right = 0
         for idx2, el2 in enumerate(list_arg):
-            if el2 < el1: left += 1
-            if el2 > el1: right += 1
+            if el2 < el1:
+                left += 1
+            if el2 > el1:
+                right += 1
         if left < len(list_arg) / 2 and right < len(list_arg) / 2:
             return el1
 
@@ -69,3 +71,10 @@ print(f"my_median(): {my_median(my_list)}")
 print(f"median(): {median(my_list)}")
 
 
+'''
+Решение без сортировки и без доволнительных списков.
+Один из элементов берется как опорный, а по остальным идут два счетчика:
+больше опорного, меньше опорного.
+Если оба счетчика оказываются меньше половины длины списка, значит опорный 
+элемент является медианой.
+'''
