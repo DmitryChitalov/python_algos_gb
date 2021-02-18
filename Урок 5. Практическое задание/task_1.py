@@ -25,3 +25,26 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+def inp():
+    a = int(input('Введите количество предприятий для расчета прибыли: '))
+    data = dict()
+    company = namedtuple('company', 'name income')
+    for i in range(a):
+        companies = company(name=input('Введите название предприятия: '),
+                            income=sum(list(map(int, input('Через пробел введите прибыль данного предприятияза каждый квартал(Всего 4 квартала): ').split())))/4)
+        data[companies.name] = companies.income
+
+    average = sum(data.values())/2
+
+    for key, value in data.items():
+        if value > average:
+            print(f'Капитализация {key} выше среднего - {value} vs {average}')
+        elif value < average:
+            print(f'Капитализация {key} ниже среднего - {value} vs {average}')
+        else:
+            print(f'Капитализация {key} равна среднему - {value} vs {average}')
+
+inp()
