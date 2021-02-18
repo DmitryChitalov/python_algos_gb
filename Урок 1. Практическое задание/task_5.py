@@ -18,3 +18,27 @@
 
 После реализации структуры, проверьте ее работу на различных сценариях
 """
+class
+    def
+
+    def
+
+    def
+        if
+        else
+
+    def
+        if
+        return
+
+    def
+        return
+
+    def
+        for
+        return
+
+    def
+    return
+
+if
