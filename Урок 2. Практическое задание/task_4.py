@@ -9,3 +9,17 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def recur_method(i, numb, n_count, common_sum):
+    if i == n_count:
+        print(f'кол-во элементов - {n_count}, их сумма - {common_sum}')
+    elif i < n_count:
+        return recur_method(i + 1, numb / 2 * -1, n_count, common_sum+numb)
+
+try:
+    N_COUNT = int(input('Введите количество эл-ов: '))
+    recur_method(0, 1, N_COUNT, 0)
+except ValueError:
+    print('Вместо числа введена строка')
+
