@@ -25,3 +25,40 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple, Counter, defaultdict
+
+
+def check(i):
+    s = i.split()
+    if len(s) != 4:
+        return True
+    return False
+
+
+company = defaultdict(str)
+attr = "first second third fourth"
+h = Counter()
+
+while True:
+    company_name = input('Название предприятия: ')
+    amount = input('Через пробел введите прибыль предприятия по каждому из кварталов: ')
+    if check(amount):
+        print('Вы ввели не все данные')
+        continue
+    s = namedtuple(company_name, attr)
+    company[company_name] = s(*list(map(int, amount.split())))
+    go = input('Для подсчета введите любой символ. Для продолжения заполнения "enter"')
+    if len(go) > 0:
+        break
+
+for i in company:
+    h[i] = company[i].first + company[i].second + company[i].third + company[i].fourth
+
+res: float = sum(h.values()) / len(h.keys())
+
+print(f'Средняя годовая прибыль всех предприятий: {res}')
+for i in h:
+    if h[i] >= res:
+        print(f'Предприятия, с прибылью выше среднего: {i}')
+    else:
+        print(f'Предприятия, с прибылью ниже среднего: {i}')
