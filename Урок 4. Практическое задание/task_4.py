@@ -10,7 +10,10 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+from random import randint
+from timeit import timeit
+
+array = [randint(1, 9) for i in range(20)]
 
 
 def func_1():
@@ -37,5 +40,18 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():
+    num = max(array, key=array.count)
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {array.count(num)} раз(а)'
+
+print(array)
 print(func_1())
 print(func_2())
+print(func_3())
+print(timeit("func_1()", globals=globals(), number=1000))
+print(timeit("func_2()", globals=globals(), number=1000))
+print(timeit("func_3()", globals=globals(), number=1000))
+
+#второй алгоритм самый медленный, потому что создается дополнительный массив
+#третий алгоритм самый быстрый т.к. встроенные функции оптимизированы по времени
