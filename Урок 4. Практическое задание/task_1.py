@@ -21,3 +21,25 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    return [i for i in nums if i % 2 == 0]
+
+
+inp_arr = [i for i in range(100)]
+
+print(timeit("func_1(inp_arr)", globals=globals(), number=1000))
+print(timeit("func_2(inp_arr)", globals=globals(), number=1000))
+
+inp_arr = [i for i in range(1000)]
+
+print(timeit("func_1(inp_arr)", globals=globals(), number=1000))
+print(timeit("func_2(inp_arr)", globals=globals(), number=1000))
+
+inp_arr = [i for i in range(10000)]
+
+print(timeit("func_1(inp_arr)", globals=globals(), number=1000))
+print(timeit("func_2(inp_arr)", globals=globals(), number=1000))
+
+#Списковые включения работают со списками быстрее, чем простой цикл с итератором
