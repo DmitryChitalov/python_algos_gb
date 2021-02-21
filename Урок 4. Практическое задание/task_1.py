@@ -21,3 +21,23 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_mod(num):
+    element = [inx for inx, elm in enumerate(num) if elm % 2 == 0]
+    return element
+
+
+list_nums = [el for el in range(1000)]
+print(timeit("func_1(list_nums)", globals=globals(), number=1000))
+print(timeit("func_mod(list_nums)", globals=globals(), number=1000))
+
+list_nums = [el for el in range(10000)]
+print(timeit("func_1(list_nums)", globals=globals(), number=1000))
+print(timeit("func_mod(list_nums)", globals=globals(), number=1000))
+
+list_nums = [el for el in range(100000)]
+print(timeit("func_1(list_nums)", globals=globals(), number=1000))
+print(timeit("func_mod(list_nums)", globals=globals(), number=1000))
+
+# Списковые включения работают быстрее.

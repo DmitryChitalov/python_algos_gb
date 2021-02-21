@@ -9,6 +9,7 @@
 Попытайтесь написать третью версию, которая будет самой быстрой.
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
+from timeit import timeit
 
 array = [1, 3, 1, 3, 4, 5, 1]
 
@@ -21,8 +22,7 @@ def func_1():
         if count > m:
             m = count
             num = i
-    return f'Чаще всего встречается число {num}, ' \
-           f'оно появилось в массиве {m} раз(а)'
+    return f'Чаще всего встречается число {num}, оно появилось в массиве {m} раз(а)'
 
 
 def func_2():
@@ -33,9 +33,21 @@ def func_2():
 
     max_2 = max(new_array)
     elem = array[new_array.index(max_2)]
-    return f'Чаще всего встречается число {elem}, ' \
-           f'оно появилось в массиве {max_2} раз(а)'
+    return f'Чаще всего встречается число {elem}, оно появилось в массиве {max_2} раз(а)'
+
+
+def func_3():
+    el = max(array, key=array.count)
+    return f'Чаще всего встречается число {el}, оно появилось в массиве {array.count(el)} раз(а) '
 
 
 print(func_1())
 print(func_2())
+print(func_3())
+
+print(timeit("func_1()", globals=globals(), number=100000))
+print(timeit("func_2()", globals=globals(), number=100000))
+print(timeit("func_3()", globals=globals(), number=100000))
+
+
+#Дольше всего работает func_2, т.к для каждого числа из массива функция считает колличество включений.
