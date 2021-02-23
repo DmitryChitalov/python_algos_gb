@@ -28,3 +28,28 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def recurs_method():
+    method_list = ['+', '-', '*', '/']
+    operators = {'+': lambda x, y: x + y,
+                 '-': lambda x, y: x - y,
+                 '/': lambda x, y: x / y if y != 0 else 'делитель не должен быть 0',
+                 '*': lambda x, y: x * y}
+
+    user_method = str(input("Введите операцию (+, -, *, / или 0 для выхода): "))
+    if user_method == '0':
+        print('Выполнен выход из программы т.к. введен 0')
+        exit(1)
+    if user_method in method_list:
+        try:
+            user_first_n = int(input("Введите первое число: "))
+            user_second_n = int(input("Введите второе число: "))
+        except ValueError:
+            print('Вы вместо числа ввели строку (((. Исправьтесь')
+            recurs_method()
+        print('Ваш результат: {}'.format(operators[user_method](user_first_n, user_second_n)))
+    recurs_method()
+
+
+recurs_method()

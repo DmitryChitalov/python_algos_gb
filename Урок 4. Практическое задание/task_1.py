@@ -21,3 +21,11 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+def func_2(nums):
+    return [k for k,v in enumerate(nums) if v % 2 == 0]
+
+
+nums = list(range(100))
+print(timeit("func_1(nums)",globals=globals())) # 9.448442400000001
+print(timeit("func_2(nums)",globals=globals())) # 6.332066900000001 использовал list-comprehensions т.к. создание нового массива раходует больше времени

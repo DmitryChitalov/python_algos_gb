@@ -17,3 +17,29 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+from random import randrange
+
+
+# 1ый с O(n^2)
+def search1(m_list):
+    v_min = m_list[0]
+    for i in m_list:
+        for k in m_list:
+            if i < k and i < v_min:
+                v_min = i
+    return v_min
+
+
+# 2ой с O(n)
+def search2(m_list):
+    v_min = m_list[0]
+    for el in m_list:
+        if el < v_min:
+            v_min = el
+    return v_min
+
+
+input_list = [randrange(100) for x in range(1, 10)]
+print(input_list)
+print(search1(input_list))
+print(search2(input_list))
