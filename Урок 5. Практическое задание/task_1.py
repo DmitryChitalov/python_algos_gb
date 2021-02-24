@@ -25,3 +25,34 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import Counter
+
+from collections import namedtuple
+
+numer_company = int(input('Введите количество предприятий: '))
+company = namedtuple('Comp', 'Name first_quarter second_quarter third_quarter fourth_quarter average_income')
+revenue_each = {}
+
+while numer_company > 0:
+    name = input("Введите название: ")
+    revenue = list(input("Через пробел введите прибыль данного предприятия: ").split(" "))
+
+    # print(revenue[0])
+    res = company(Name=name, first_quarter=revenue[0], second_quarter=revenue[1], third_quarter=revenue[2],
+                  fourth_quarter=revenue[3], average_income=0)
+    revenue_each[res.Name] = (int(res.first_quarter) + int(res.second_quarter) + int(res.third_quarter) +
+                              int(res.fourth_quarter)) / 4
+    #print(revenue_each)
+    numer_company = numer_company - 1
+
+total = 0
+for value in revenue_each.values():
+    total += value
+total = total / len(revenue_each)
+print(f'Среднее значение: {total}')
+
+for key, value in revenue_each.items():
+    if value > total:
+        print(f'Предприятие с прибылью выше среднего значения: {key} ')
+    else:
+        print(f'Предприятие с прибылью ниже среднего значения: {key} ')
