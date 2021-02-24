@@ -56,6 +56,7 @@ def bubble_desc(in_arr):
     stop_flag = False
     while ind < len(in_arr) and not stop_flag:
         stop_flag = True
+        print(in_arr)
         for i in range(len(in_arr) - ind):
             if in_arr[ i ] < in_arr[ i + 1 ]:
                 tmp = in_arr[ i + 1 ]
@@ -104,23 +105,23 @@ print(
     timeit(
         "bubble_asc(num_arr)",
         setup='from __main__ import bubble_asc, num_arr',
-        number=1000))
+        number=1))
 num_arr = [random.randint(-100, 100) for _ in range(1000)]
 print(
     timeit(
         "bubble_desc(num_arr)",
         setup='from __main__ import bubble_desc, num_arr',
-        number=1000))
+        number=1))
 num_arr = [random.randint(-100, 100) for _ in range(1000)]
 print(
     timeit(
         "bubble_asc_n(num_arr)",
         setup='from __main__ import bubble_asc_n, num_arr',
-        number=1000))
+        number=1))
 num_arr = [random.randint(-100, 100) for _ in range(1000)]
 print(
     timeit(
         "bubble_desc_n(num_arr)",
         setup='from __main__ import bubble_desc_n, num_arr',
-        number=1000))
+        number=1))
 """
