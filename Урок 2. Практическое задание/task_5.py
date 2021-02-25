@@ -18,3 +18,27 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def get_cols(st, end = 10, row = ''):
+    """ формирует элементы строки символов """
+    if end > 0 and st <= 127: # костыль!!!
+        row +=''+ str(st) + ' - ' + chr(st)+' '
+        st +=1
+        end -= 1
+        return get_cols(st, end, row)
+    else:
+        return row
+
+
+def print_lines(st = 32, end = 127):
+    """ формирует строки таблицы символов"""
+
+    if st <= end :
+        print(get_cols(st, row = '')+'\n')
+        st += 10
+        return print_lines(st)
+    else:
+        exit()
+
+
+if __name__ == '__main__':
+    print_lines()

@@ -28,3 +28,76 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+# функции математических операций
+def summator(a,b):
+    return a + b
+
+def differ(a,b):
+    return a - b
+
+def prod(a,b):
+    return a*b
+
+def division(a,b):
+    if b == 0:
+        return 'Деление на ноль. Введите делитель отличны от нуля'
+    else:
+        return a/b
+    return
+
+
+
+# решение через цикл
+
+def loop_oper(flag = True):
+    """ Вычисляет заданную операцию над двумя числами"""
+    while flag:
+        oper = {'+': summator, '-': differ, '*': prod, '/': division}
+        op = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+        if op == '0' :
+            break
+        else:
+            if not (op in oper.keys()):
+                continue
+            a = input("Введите первое число: \n")
+            if a.isnumeric() == False:
+                print('Укажите число ')
+                continue
+            b = input("Введите второе число: \n")
+            if b.isnumeric() == False:
+                print('Укажите число ')
+                continue
+            fn = oper.get(op)
+            print(fn(float(a),float(b)))
+    return
+
+# рекурсия
+def recursive():
+    """ Реализация через рекурсию"""
+
+    oper = {'+': summator, '-': differ, '*': prod, '/': division}
+    op = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+
+    if op == '0':
+        exit()
+    if not (op in oper.keys()):
+         recursive()
+    a = input("Введите первое число: \n")
+    if a.isnumeric() == False:
+        print('Укажите число ')
+        recursive()
+    b = input("Введите второе число: \n")
+    if b.isnumeric() == False:
+        print('Укажите число ')
+        recursive()
+    fn = oper.get(op)
+    print(fn(float(a),float(b)))
+    recursive()
+    return 
+
+
+if __name__ == '__main__':
+
+    #loop_oper()
+    recursive()
