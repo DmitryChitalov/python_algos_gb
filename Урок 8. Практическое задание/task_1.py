@@ -57,3 +57,9 @@ haffman_code(haffman_tree(s))
 for i in s:
     print(code_line[i], end=' ')
 print()
+
+"""
+Код моей строки 
+1100 1101 010 10 111 011 10 000 111 10 001
+Проверяла вручную
+"""

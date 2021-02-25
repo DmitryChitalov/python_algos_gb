@@ -10,6 +10,7 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных - на клиентском коде.
 """
 
+
 class BTree:
     def __init__(self, root_obj):
         # корень
@@ -90,7 +91,6 @@ class BTree:
             print('Ошибка доступа к атрибуту класса.')
 
 
-
 r = BTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
@@ -103,3 +103,14 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+
+"""
+8
+None
+Ошибка значения
+7
+7
+12
+12
+16
+"""
