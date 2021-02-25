@@ -25,3 +25,33 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+from collections import namedtuple
+
+COMP = namedtuple('Company', 'name period_1 period_2 period_3 period_4')
+
+comp_num = int(input('Введите число компаний: '))
+
+companies = {}
+
+for i in range(comp_num):
+    company = COMP(name=input('Введите название компании: '),
+                   period_1=int(input('Введите выручку за первый квартал: ')),
+                   period_2=int(input('Введите выручку за второй квартал: ')),
+                   period_3=int(input('Введите выручку за третий квартал: ')),
+                   period_4=int(input('Введите выручку за четвертый квартал: ')))
+    companies[company.name] = (company.period_1 + company.period_2 +
+                               company.period_3 + company.period_4) / 4
+
+aver_prof = 0
+for comp_prof in companies.values():
+    aver_prof += comp_prof
+aver_prof /= comp_num
+
+for comp, prof in companies.items():
+    if prof > aver_prof:
+        print(f"Прибыль {comp} выше средней по компаниям")
+    elif prof < aver_prof:
+        print(f"Прибыль {comp} выше средней по компаниям")
+    elif prof == aver_prof:
+        print(f"Прибыль {comp} выше средней по компаниям")
