@@ -6,3 +6,22 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+n = int(input("Введите n - натуральное число "))
+
+def first(n):
+    if n == 1:
+        return n
+    elif n > 0:
+        return n + first(n-1)
+
+
+def second(n):
+    return n * (n + 1) // 2
+
+
+
+if first(n) == second(n):
+    print(f'Для n={n} - True')
+else:
+    print(f'Для n={n} - False')

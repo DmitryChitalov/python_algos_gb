@@ -9,3 +9,28 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from os import urandom as _urandom
+
+
+def random_number():
+    random = int(int.from_bytes(_urandom(7), 'big'))
+    list = [n for n in range(0, 101)]
+    return list[random % 100]
+
+
+secret = random_number()
+i = 1
+while i <= 10:
+    print(f'Попытка №{i:2} из 10')
+    user_number = int(input('Введите число от 1 до 100: '))
+    if user_number == secret:
+        print('Вы правы!')
+        break
+    elif user_number > secret:
+        print(f'Ваше число больше загаданного')
+    else:
+        print(f'Ваше число меньше загаданного')
+    i += 1
+if i > 10:
+    print(f'Ты проиграл! Я загадал {secret}')

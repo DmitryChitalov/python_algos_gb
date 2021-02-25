@@ -18,3 +18,40 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+print("= " * 50)
+print("{greeting:^100}".format(greeting="Вывести на экран коды и символы таблицы ASCII, начиная с символа "
+                                        "под номером 32 и заканчивая 127-м включительно"))
+print("= " * 50)
+
+g_res = {'max': 127, 'n': 0, 'start': 32}
+
+
+def print_ASCII_table(p_idx):
+    if p_idx == -1:
+        v_str = input("Введите число (количество элементов вывода на экран): ")
+        print("Введено: " + v_str)
+        if v_str == '':
+            v_str = -2
+
+        g_res['n'] = int(v_str)
+        p_idx = g_res['start']
+
+    if g_res['n'] == -2:
+        print("Количество элементов не определено. Пока!")
+        return
+    else:
+        if p_idx == g_res['n'] + g_res['start'] or p_idx == g_res['max'] + 1:
+            print("")
+            print("Заново? ")
+            print_ASCII_table(- 1)
+        else:
+            if (p_idx - 1) % 10 == 0:
+                print(f"{str(p_idx)} - {chr(p_idx)}")
+            else:
+                print("{:04d} -{:>2} ".format(p_idx, chr(p_idx)),end='')
+            p_idx = p_idx + 1
+            print_ASCII_table(p_idx)
+
+
+print_ASCII_table(- 1)

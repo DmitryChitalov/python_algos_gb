@@ -28,3 +28,27 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+num1 = int(input("Введите первое число ---> "))
+
+while True:
+    try:
+        operation = input("Введите операцию иои 0 для выхода ---> ")
+        num2 = int(input("Введите следующее число ---> "))
+    except ValueError:
+        print('Некорректные данные.')
+        continue
+
+    if operation == '0':
+        break
+    elif operation == '+':
+        print(f'{num1} {operation} {num2} = {num1 + num2}')
+    elif operation == '-':
+        print(f'{num1} {operation} {num2} = {num1 - num2}')
+    elif operation == '*':
+        print(f'{num1} {operation} {num2} = {num1 * num2}')
+    elif operation == '/':
+        try:
+            print(f'{num1} {operation} {num2} = {num1 / num2}')
+        except ZeroDivisionError:
+            print('Ошибка. Деление на ноль')
