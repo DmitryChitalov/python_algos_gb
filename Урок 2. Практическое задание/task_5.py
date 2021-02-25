@@ -17,4 +17,26 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+
+Подсказка:
+Допускается исп-е встроенных ф-ций
+и допускается комб-е - цикл и рекурсия
 """
+
+"""
+    Вводятся номера начального и конечного символа
+    В результате таблица символов по 10 в строке
+"""
+
+def ascii_tab(ascii_val, ascii_val_f, ascii_val_l):
+    if ascii_val == ascii_val_l+1:
+        return True
+    print(f' {ascii_val} - {chr(ascii_val)}', end=' ')
+    if (ascii_val - ascii_val_f + 1) % 10 == 0:
+        print('\n')
+    ascii_tab(ascii_val + 1, ascii_val_f, ascii_val_l)
+
+
+n_f = int(input("First ACII char num:"))
+n_l = int(input("Last ASCII char num:"))
+ascii_tab(n_f, n_f, n_l)
