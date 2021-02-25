@@ -7,5 +7,26 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
-Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+
+Подсказка:
+Базовый случай здесь - угадали число или закончились попытки
 """
+import random
+
+
+def recur_check(count, secret):
+    print(f"Попытка №{count}")
+    answer = int(input("Введите число от 0 до 100: "))
+    if count == 10 or answer == secret:
+        if answer == secret:
+            print("Верно!")
+        print(f"Загаданное число: {secret}")
+    else:
+        if answer > secret:
+            print(f"Загаданное число меньше чем {answer}")
+        else:
+            print(f"Загаданное число больше чем {answer}")
+        recur_check(count + 1, secret)
+
+
+recur_check(1, random.randint(0, 100))
