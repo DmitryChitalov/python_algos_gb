@@ -13,3 +13,94 @@
 ВНИМАНИЕ: ЗАДАНИЯ, В КОТОРЫХ БУДУТ ГОЛЫЕ ЦИФРЫ ЗАМЕРОВ (БЕЗ АНАЛИТИКИ)
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 """
+
+"""Функция возвращает список чисел из массива arr возведенного в степерь 2"""
+#OC 64-разрядная операционная система
+#Python 3.9
+
+from memory_profiler import profile
+
+from sys import getsizeof
+
+@profile
+def func():
+    arry = list(range(100000))
+    degree = []
+    for i in arry:
+        degree.append(i ** 2)
+        # print(degree)
+    #print(getsizeof(degree))
+    del degree
+    del arry
+
+
+func()
+
+"""
+Для запуска программы было выделено 19.4 MiB.
+При создании списка "arry" было выделено еще 3.8 MiB.
+Перебор элементов массива в цикле забирает еще 3.1 MiB
+Возведение каждого элемента в степерь 2 + 1.0 Mib
+
+После работы функции память забилась на 27.3 MiB включая профилеровщик
+
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    30     19.4 MiB     19.4 MiB           1   @profile
+    31                                         def func():
+    32     23.2 MiB      3.8 MiB           1       arry = list(range(100000))
+    33     23.2 MiB      0.0 MiB           1       degree = []
+    34     27.3 MiB      3.1 MiB      100001       for i in arry:
+    35     27.3 MiB      1.0 MiB      100000           degree.append(i ** 2)
+    36                                                 #print(degree)
+    37     27.3 MiB      0.0 MiB           1       return degree
+    
+
+Если удалить из папять оба массива:
+Память высвободится однако есть погрешность
+
+Незначительный инкремент обусловлен необходимостью генерации списка
+Величина инкремента может изменяться, в зависимости от объема списка
+При этом в целом инкремент находится в рамках нормы
+Оптимизация не требуется
+
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    30     19.3 MiB     19.3 MiB           1   @profile
+    31                                         def func():
+    32     23.0 MiB      3.7 MiB           1       arry = list(range(100000))
+    33     23.0 MiB      0.0 MiB           1       degree = []
+    34     27.4 MiB      3.1 MiB      100001       for i in arry:
+    35     27.4 MiB      1.3 MiB      100000           degree.append(i ** 2)
+    36                                                 #print(degree)
+    37     23.7 MiB     -3.8 MiB           1       del degree
+    38     20.0 MiB     -3.7 MiB           1       del arry
+
+    """
+
+"""Теперь попробуем улучшить функцию 1"""
+
+@profile
+def func_1():
+    arry = [el ** 2 for el in range(100000)]
+    #print(getsizeof(arry))
+    del arry
+func_1()
+
+
+"""
+При использовании спискового включения дела обстоят лучше, но мы по прежнему храним массив чисел в arry
+и память приходится высвобождать.
+
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    82     21.0 MiB     21.0 MiB           1   @profile()
+    83                                         def func_1():
+    84     24.1 MiB -18711.5 MiB      100003       arry = [el**2 for el in range(100000)]
+    85                                             #print(arry)
+    86     21.6 MiB     -2.5 MiB           1       del arry
+    
+
+
+"""
+
