@@ -101,5 +101,6 @@ Line #    Mem usage    Increment  Occurences   Line Contents
     86     21.6 MiB     -2.5 MiB           1       del arry
     
 
+
 """
 
