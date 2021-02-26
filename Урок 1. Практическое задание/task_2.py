@@ -17,3 +17,19 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+# O(n2) - цикл с вложенным циклом и вложенными if
+def al1(min_value_list):
+    for x in min_value_list:
+        qwa = True
+        for h in min_value_list:
+            if i > h:
+                qwa = False
+            if qwa:
+                return i
+# O(n) - просто цикл
+def al2(list_O_n):
+    soms = list_O_n [0]
+    for x in list_O_n:
+        if i < soms:
+            soms = i
+    return
