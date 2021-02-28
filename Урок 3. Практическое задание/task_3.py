@@ -14,3 +14,33 @@
 р
 а
 """
+
+import hashlib
+
+def substrings(s = 'papa'):
+    """ Определяет количество подстрок в заданной строке"""
+    n = len(s)
+
+    subs = dict() # пустой словарь для подстрок
+
+    for i in range(n-1,0,-1): # перебираем подстроки начиная с размера n-1
+        for j in range(n): # выбираем подстроки начиная с первого символа
+            substr = s[j:j+i] # вырезаем подстроку и переносим в словарь
+            subs[hashlib.md5(substr.encode('utf-8')).hexdigest()] = substr
+            # если подстроки одинаковы у них будет одинаковый ключ и дублей в словаре не будет они затрутся    
+    return subs
+
+
+
+# клиентская часть
+
+if __name__ == '__main__':
+    
+    sub_d = substrings()
+
+    for key in sub_d:
+        print(sub_d[key])
+
+
+    print('\nКоличество подстрок ', len(sub_d.values()))
+
