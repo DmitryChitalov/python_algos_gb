@@ -25,3 +25,47 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+from collections import namedtuple
+
+try:
+    comp_number = int(input("Введите количество предприятий для расчета прибыли: "))
+    companies = namedtuple("Company", ("comp_name quarter_1 quarter_2 quarter_3 quarter_4"))
+except ValueError:
+    print("Некорректный ввод ")
+    exit()
+name_profit_dict = {}
+
+
+for n in range(comp_number):
+    name = input("Введите название предприятия: ")
+    profit = input("Через пробел введите поквартальную прибыль данного предприятия: ")
+    profit_list = profit.split()
+    try:
+        company = companies(comp_name=name, quarter_1=int(profit_list[0]), quarter_2=int(profit_list[1]),
+                            quarter_3=int(profit_list[2]), quarter_4=int(profit_list[3]))
+    except ValueError:
+        print("Некорректный ввод ")
+
+    average = (company.quarter_1 + company.quarter_2 + company.quarter_3 + company.quarter_4) / 4
+    print(company, average)
+    name_profit_dict.setdefault(name, average)
+    print(name_profit_dict)
+
+common = 0
+
+for avg_profit in name_profit_dict.values():
+    common += avg_profit
+
+common = common/comp_number
+more_avg = ''
+less_avg = ''
+print(f"Средняя годовая прибыль всех предприятий: {common}")
+for comp_name, avg_profit in name_profit_dict.items():
+    if avg_profit > common:
+        more_avg = f"{more_avg} {comp_name}"
+    else:
+        less_avg = f"{less_avg} {comp_name}"
+
+print(f"Предприятия, с прибылью выше среднего значения: {more_avg}")
+print(f"Предприятия, с прибылью ниже среднего значения: {less_avg}")
+

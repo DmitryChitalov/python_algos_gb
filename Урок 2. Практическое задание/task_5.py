@@ -17,4 +17,28 @@
 
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
+
+Подсказка:
+Допускается исп-е встроенных ф-ций
+и допускается комб-е - цикл и рекурсия
 """
+
+
+def ascii_print(result_str: str, ascii_key: int, size: int):
+
+    if size == 0 or ascii_key > 127:
+        return result_str
+
+    result_str += str(ascii_key) + " - " + chr(ascii_key) + " "
+
+    return ascii_print(result_str, ascii_key + 1, size - 1)
+
+
+length = 10
+output = ""
+
+for i in range(0, length):
+    a_key = 32 + length*i
+    output += ascii_print("", a_key, length) + "\n"
+
+print(output)

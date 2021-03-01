@@ -11,9 +11,54 @@
 Сложность такого алгоритма: O(n) - линейная.
 
 Примечание:
-Построить список можно через генератор списка.
+Построить список можно через списковое включение.
 Если у вас возникают сложности, постарайтесь подумать как можно решить задачу,
 а не писать "мы это не проходили)".
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+import random
+
+
+def find_min_1(i_list: list):
+
+    min_el = i_list[0]
+    i = 0
+
+    for el_i in i_list:
+        if el_i < min_el:
+            for el_j in i_list:
+                if el_i > el_j:
+                    min_el = el_j
+                    i += 1
+
+    # print(i)
+
+
+def find_min_2(i_list):
+    min_el = i_list[0]
+    idx = 0
+    j = 0
+
+    while idx < len(i_list)-1:
+
+        if min_el > i_list[idx+1]:
+            min_el = i_list[idx+1]
+            j += 1
+
+        idx += 1
+
+    # print(j)
+    return min_el
+
+
+my_list = [2, 4, 2, 3, 1, 5, 2, 6, 7, -8, -2, -6, 3, 6, -7]
+
+# интересно было проверить на большом списке. Создала список чисел из 100 элементов.
+# find_min_1 - 45 итераций, find_min_2 - 7 !!! :)
+# for el in range(100):
+#     my_list.append(random.randint(-40, 60))
+
+print(my_list)
+print(find_min_1(my_list))
+print(find_min_2(my_list))
