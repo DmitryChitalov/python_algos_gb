@@ -12,12 +12,41 @@
 Добавьте аналитику: что вы сделали и почему
 """
 
-from timeit import timeit
+from timeit import Timer
 
 
+# Четные индексы перебором
 def func_1(nums):
     new_arr = []
     for i in range(len(nums)):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+# Для ускорения используем встроенную функцию
+# Четные индексы генератором
+def func_2(nums):
+    new_arr = [i for i in nums if i % 2 == 0]
+    return new_arr
+
+
+N = 10000
+
+# Создаём таймер, передаем ему вызов функции 1 и параметры. Импортируем функцию, N и создаём список из N элементов
+t1 = Timer("func_1(my_list)", setup="""from __main__ import func_1, N
+my_list = [i for i in range(N)]""")
+
+print("Замер времени работы функции, перебирающей элементы списка в цикле")
+
+# Вывод результатов замеров
+print("func_1 ", t1.timeit(number=1000), "seconds")
+
+# Создаём таймер, передаем ему вызов функции 2 и параметры. Импортируем randint для списка, функцию, N и создаём список из N элементов
+t2 = Timer("func_2(my_list)", setup="""from random import randint
+from __main__ import func_2, N
+my_list = [randint(0, 1000) for i in range(N)]""")
+
+print("Замер времени работы функции через генератор")
+
+# Вывод результатов замеров
+print("func_2 ", t2.timeit(number=1000), "seconds")

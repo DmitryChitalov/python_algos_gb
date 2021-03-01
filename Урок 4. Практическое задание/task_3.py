@@ -10,6 +10,9 @@
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
 
+from cProfile import run
+from random import randint
+from timeit import timeit
 
 def revers(enter_num, revers_num=0):
     if enter_num == 0:
@@ -33,4 +36,42 @@ def revers_3(enter_num):
     enter_num = str(enter_num)
     revers_num = enter_num[::-1]
     return revers_num
+
+
+def main():
+    for i in range(N):
+        my_num = randint(1000000000, 10000000000000)
+        revers(my_num)
+        revers_2(my_num)
+        revers_3(my_num)
+
+
+N = 10000
+
+run('main()')
+
+my_num = randint(1000000000, 10000000000000)
+print(
+    "revers   - ",
+    timeit(
+        'revers(my_num)',
+        setup='from __main__ import revers, my_num',
+        number=N))
+print(
+    "revers_2 - ",
+    timeit(
+        'revers_2(my_num)',
+        setup='from __main__ import revers_2, my_num',
+        number=N))
+print(
+    "revers_3 - ",
+    timeit(
+        'revers_3(my_num)',
+        setup='from __main__ import revers_3, my_num',
+        number=N))
+
+
+# Вариант 1 (рекурсия) самый медленный, поскольку так необходимо большое количество вызовов функции,
+# Вариант 2 (цикл) быстрее рекурсии, поскольку циклы в целом, как правило, быстрее рекурсии
+# Вариант 3 (срез) самый быстрый, т.к. это встроенная функция Питона
 
