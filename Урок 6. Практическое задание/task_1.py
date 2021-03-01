@@ -20,194 +20,172 @@
 Попытайтесь дополнительно свой декоратор используя ф-цию memory_usage из memory_profiler
 С одновременным замером времени (timeit.default_timer())!
 """
-
-from sys import getrefcount
-
-
-"""Первый урок 5ая задача."""
-
-print(getrefcount(37))
+from random import randint
+from collections import namedtuple
+from functools import reduce
+from memory_profiler import profile
+from memory_profiler import memory_usage
 
 
-users_list =[{"user": "Иванов", "pass": "Ivanov01", "active": True},
-             {"user": "Петров", "pass": "Petrov01", "active": False},
-             {"user": "Сидоров", "pass": "Sidorov01", "active": False},
-             {"user": "Попов", "pass": "Popov01", "active": True},
-             {"user": "Кравцов", "pass": "Kravtsov01", "active": False},
-             {"user": "Иванов1", "pass": "Ivanov02", "active": True},
-             {"user": "Илонова", "pass": "Ivanov02", "active": True},
-             {"user": "Исмаилова", "pass": "Ivanov02", "active": True},
-             {"user": "Иванова", "pass": "Ivanov02", "active": True},
-             {"user": "Петров2", "pass": "Petrov02", "active": False},
-             {"user": "Сидоров3", "pass": "Sidorov03", "active": False},
-             {"user": "Попов2", "pass": "Popov02", "active": True},
-             {"user": "Кравцов1", "pass": "Kravtsov02", "active": False}]
-letter_user_dict = {}
+"""
+Задача 1. Создание списка пользователей с 4мя полями.
 
+Предложено 4 решения.
+1. Посредством стандартного ООП
+2. ООП с использованием __slots__
+3. Решение с использованием словаря.
+4. Решение с использованием именнованного кортежа
 
-def activation(user_dict):
-    name = user_dict["user"]
-    print(f"Пользователь {name}, активируйтесь пожалуйста! ")
-    pass
+При решении используются профилировщик @profiler и созданный мною декоратор @memory_usage_decorator,
+Прирост по @profiler'у может быть незаметен. С другой стороны показатели по memory_usage снимаются до вызова функции и после него.
+А следовательно память уже подчищена GC
+Приведу выписки только показательные по задаче 1, остальной анализ можно увидеть запустив программу:
 
+1. Стандартное решение посредством ООП
+Line #    Mem usage    Increment  Occurences   Line Contents
+...
+    70     20.1 MiB      0.0 MiB      100001       for i in range(prime_number):
+    71     20.1 MiB      0.0 MiB      100000           user = Users(f"User_name_{i}", "some_plan", randint(1994, 2021), randint(100000001, 199999999))
+Использовано 0.27734375 Mb памяти.
 
-def step_1(user_dict):
-    name = user_dict["user"]
-    print(f"Пользователь {name}, добро пожаловать!")
-    pass
+2. Решение посредствам ООП с использованием __slots__
+Line #    Mem usage    Increment  Occurences   Line Contents
+...
+    97     20.2 MiB      0.0 MiB      100001       for i in range(prime_number):
+    98     20.2 MiB      0.0 MiB      100000           user = Users_slots(f"User_name_{i}", "some_plan", randint(1994, 2021), randint(10000001, 19999999))
+Использовано 0.01953125 Mb памяти.
 
+3. Создание обыкновенного словаря
 
-login = input("Логин: ")
-password = input("Пароль: ")
+Использовано 26.5078125 Mb памяти. (Внутри функции)
 
+Line #    Mem usage    Increment  Occurences   Line Contents
+...
+   105     20.2 MiB      0.0 MiB           1       users_dict = {}
+   106     46.7 MiB     11.0 MiB      100001       for i in range(prime_number):
+   107     46.7 MiB     15.5 MiB      100000           users_dict[f"User_name_{i}"] = ["some_plan", randint(1994, 2021), randint(10000001, 19999999)]
+Использовано 0.7890625 Mb памяти. - показания сняты до и после вызова функции. Память к этому моменту уже подчистилась GC
 
-users = {"Иванов": {"pass": "Ivanov01", "active": True},
-         "Петров": {"pass": "Petrov01", "active": False},
-         "Сидоров": {"pass": "Sidorov01", "active": False},
-         "Попов": {"pass": "Popov01", "active": True},
-         "Кравцов": {"pass": "Kravtsov01", "active": False},
-         "Иванов1": {"pass": "Ivanov02", "active": True},
-         "Илонова": {"pass": "Ivanov02", "active": True}}
+4. Создание именованного кортежа
+Line #    Mem usage    Increment  Occurences   Line Contents
+   116     21.0 MiB      0.0 MiB      100001       for i in range(prime_number):
+   117     21.0 MiB      0.0 MiB      100000           Users._make([f"User_name_{i}", "some_plan", randint(1994, 2021), randint(10000001, 19999999)])
+Использовано 0.0 Mb памяти.
 
-
-# Данное решение дополняю после урока 3, на котором Вы упомянули, что логин всегда уникален.
-# В этом случае можно иначе сформировать нашу базу ) В виде единного словаря, где ключом выступает имя.
-# Тогда это наиболее оптимальное решение O(1)
-def check_user_0(log, user_pass):
-    print(users[log].get("pass"))
-    if log in users.keys() and users[log].get("pass") == user_pass:
-        if users[log].get("active"):
-            print("Добро пожаловать!")
-        else:
-            print("Требуется активация!")
-    else:
-        print("Такого пользователя не существует!")
-
-
-# или так, еще лучше! (меньше мусора в памяти):
-users_l = {"Иванов": ["Ivanov01", True],
-         "Петров": ["Petrov01", False],
-         "Сидоров": ["Sidorov01", False],
-         "Попов": ["Popov01", True]}
-
-
-def check_user_01(log, user_pass):
-    if log in users_l.keys() and users_l[log][0] == user_pass:
-        if users_l[log][1]:
-            print("Добро пожаловать!")
-        else:
-            print("Требуется активация!")
-    else:
-        print("Такого пользователя не существует!")
-
-
-print("check_user_0()")
-check_user_0(login, password)
-print("check_user_01()")
-check_user_01(login, password)
-
-
-# решение 1 O(n) - пробегаем по всем элементам списка
-def check_user_1(log, user_pass):
-    for user_info in users_list:
-        if login == user_info["user"] and password == user_info["pass"]:
-            if user_info["active"]:
-                step_1(user_info)
-                break
-            else:
-                activation(user_info)
-                break
-    else:
-        print("Пока такого пользователя не существует!")
-
-# Второе решение, можно всех пользователей разложить по алфавиту,
-# создать словарь списков по буквам. и искаить уже среди них
-# O(n) - оценка данной функции.
-# Но, если эта функция можно быть выполнена один раз, чтоб к ней постоянно не возращаться
-# Например: вызываем ее один раз и записываем результат в какой-нибудь файл, а далее уже обращаемся
-# к этому файлу. (В в рамках этой задачи, когда а пользователи могут постоянно добавляться и
-# авторизоваться это сомнительный вариант.
-
-abc: set = {}
-
-
-# создаем {"letter1": [letter_user_lists{}, {}, {}], "Letter2": [{},{}], ...}
-def abc_user_dict(i_users_list):
-    u_list = i_users_list.copy()
-
-    # для начала вытянем первые буквы всех пользователей:
-
-    abc = {(user_info["user"][0].lower()) for user_info in u_list}
-
-    print(abc)
-
-    for letter in abc:
-        temp_list = []
-        for user_inf in u_list:
-            if letter == (user_inf["user"][0]).lower():
-                temp_list.append(user_inf)
-                u_list.remove(user_inf)
-        letter_user_dict[letter] = temp_list
-    print(letter_user_dict)
-
-
-# ЕСЛИ считать, что нам НЕ ТРЕБУЕТСЯ запускать каждый раз построение словаря с группировкой по буквам,
-# то чисто данный метод - O(n) ~ n/количество букв. Т.е. тоже линейная, но более эффективная.
-# в противном случае к этой оценке еще надо прибавить O(n) И тогда она проигрывает check_user_1.
-def check_user_2(i_login, i_password):
-    first_letter = i_login[0]
-    letter_stack = {}
-    print(first_letter)
-
-    letter_stack = letter_user_dict.get(first_letter.lower())
-    print(letter_stack)
-
-    if letter_stack is None:
-        print("Пока такого пользователя не существует.")
-        exit()
-
-    for user_info in letter_stack:
-        if login == user_info["user"] and password == user_info["pass"]:
-            if user_info["active"]:
-                step_1(user_info)
-                break
-            else:
-                activation(user_info)
-                break
-    else:
-        print("Пока такого пользователя не существует!")
-
-print("check_user_1()")
-check_user_1(login, password)
-
-# print("Cailling alghabet_user_dict:")
-abc_user_dict(users_list)
-
-print("check_user_2()")
-check_user_2(login, password)
+Итого по задаче 1: 
+4. Создание именованного кортежа - минимальный расход памяти
+2. Решение посредствам ООП с использованием __slots__ - незначительный расход памяти
+1. Стандартное решение посредством ООП - в несколько десятков раз проигрывает решению с исп __slots__
+3. Создание обыкновенного словаря - Не выдерживает никакой критики. Крайне пямятизатратное.
 
 
 
+"""
 
-"""Решение задачи 5 урока 2"""
-
-
-def ascii_print(result_str: str, ascii_key: int, size: int):
-
-    if size == 0 or ascii_key > 127:
-        return result_str
-
-    result_str += str(ascii_key) + " - " + chr(ascii_key) + " "
-
-    return ascii_print(result_str, ascii_key + 1, size - 1)
+def memory_usage_decorator(func_name):
+    def wrapper(*args):
+        m1 = memory_usage()
+        func_name(*args)
+        m2 = memory_usage()
+        print(f"Использовано {m2[0] - m1[0]} Mb памяти.")
+    return wrapper
 
 
-length = 10
-output = ""
+# решение 1. ООП
+class Users:
+    login: str
+    t_plan: str
+    agreement_year: int
+    id_number: int
 
-for i in range(0, length):
-    a_key = 32 + length*i
-    output += ascii_print("", a_key, length) + "\n"
+    def __init__(self, login, t_plan, agreement_year, id_number):
+        self.login = login
+        self.t_plan = t_plan
+        self.agreement_year = agreement_year
+        self.id_number = id_number
 
-print(output)
+    # def __new__(cls, *args, **kwargs):
 
+    def get_id_number(self, login):
+        return self.id_number
+
+    def get_agreement_year(self, login):
+        return self.agreement_year
+
+    def get_t_plan(self, login):
+        return self.t_plan
+
+
+@memory_usage_decorator
+@profile
+def oop_users(prime_number: int):
+    for i in range(prime_number):
+        user = Users(f"User_name_{i}", "some_plan", randint(1994, 2021), randint(100000001, 199999999))
+
+
+#  решение 2 с использованием __slots__
+class Users_slots:
+    __slots__ = 'login', 't_plan', 'agreement_year', 'id_number'
+
+    def __init__(self, login, t_plan, agreement_year, id_number):
+        self.login = login
+        self.t_plan = t_plan
+        self.agreement_year = agreement_year
+        self.id_number = id_number
+
+    def get_id_number(self, login):
+        return self.id_number
+
+    def get_agreement_year(self, login):
+        return self.agreement_year
+
+    def get_t_plan(self, login):
+        return self.t_plan
+
+
+@memory_usage_decorator
+@profile
+def oop_slots_users(prime_number: int):
+    for i in range(prime_number):
+        user = Users_slots(f"User_name_{i}", "some_plan", randint(1994, 2021), randint(10000001, 19999999))
+
+
+#  решение 3 с использованием словаря:
+@memory_usage_decorator
+@profile
+def dict_of_users(prime_number: int):
+    m1 = memory_usage()
+    users_dict = {}
+    for i in range(prime_number):
+        users_dict[f"User_name_{i}"] = ["some_plan", randint(1994, 2021), randint(10000001, 19999999)]
+    m2 = memory_usage()
+    print(f"Использовано {m2[0] - m1[0]} Mb памяти. (Внутри функции)")
+
+
+#  решение 4 c использованием именнованного кортежа
+@memory_usage_decorator
+@profile
+def namedtuple_of_users(prime_number: int):
+    Users = namedtuple('Users', ['login', 't_plan', 'agreement_year', 'id_number'])
+    user = []
+    for i in range(prime_number):
+        Users._make([f"User_name_{i}", "some_plan", randint(1994, 2021), randint(10000001, 19999999)])
+
+
+# Замеры задача 1. Вызовы. Объединила в отдельную функцию, чтоб удобно было отлаживать.
+def oop_func_calls():
+    prime_number = 100000
+    # 1
+    print("1. Стандартное решение посредством ООП")
+    oop_users(prime_number)
+    # 2
+    print("2. Решение посредствам ООП с использованием __slots__")
+    oop_slots_users(prime_number)
+    # 3
+    print("3. Создание обыкновенного словаря")
+    dict_of_users(prime_number)
+    # 4
+    print("4. Создание именованного кортежа")
+    namedtuple_of_users(prime_number)
+
+oop_func_calls()
