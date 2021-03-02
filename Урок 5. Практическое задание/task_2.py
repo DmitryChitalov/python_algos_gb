@@ -50,3 +50,4 @@ num_2 = my_dex(input('Введите второе число в шестнадц
 
 print(f'Сумма чисел: {my_hex(num_1 + num_2)}')
 print(f'Произведение чисел: {my_hex(num_1 * num_2)}')
+
