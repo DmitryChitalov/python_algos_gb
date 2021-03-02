@@ -15,3 +15,14 @@
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+
+def reverse(n):
+    if len(str(n)) == 0:
+        return n
+    else:
+        return str(n)[len(str(n)) - 1] + reverse(
+            (str(n)[:len(str(n)) - 1]))
+
+
+print(reverse(123283000950))

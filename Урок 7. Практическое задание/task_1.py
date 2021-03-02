@@ -12,3 +12,20 @@
 Подсказка: обратите внимание, сортируем не по возрастанию, как в примере,
 а по убыванию
 """
+import random
+
+
+def bubble(lst):
+    for i in range(len(lst) - 1):
+        for j in range(len(lst) - i - 1):
+            if lst[j] < lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+    return lst
+
+
+a = random.sample(range(-100, 100), 20)
+
+lst = [i for i in range(-100, 100)]
+
+print(a)
+print(bubble(a))
