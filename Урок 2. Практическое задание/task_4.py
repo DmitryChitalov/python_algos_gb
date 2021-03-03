@@ -9,3 +9,18 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+def sum_digit(digit, lenth):
+    if (lenth == 0):
+        return 0
+    else:
+        return digit[lenth - 1] + sum_digit(digit, lenth - 1)
+dig_lenth = int(input("Введите длину ряда чисел для вычисления : "))
+a = []
+for i in range(0, dig_lenth):
+    element = float(input("Введите любое число ( вместо знака ',' используется '.' : "))
+    a.append(element)
+print("Все введенные числа : ")
+print(a)
+print("Сумма всех введенных чисел равна : ")
+b = sum_digit(a, dig_lenth)
+print(b)

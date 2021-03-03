@@ -16,3 +16,9 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+from collections import Counter
+
+def count_digits(num):
+    return Counter('нечетных чисел' if int(d) % 2 else 'четных чисел' for d in str(num))
+
+print (count_digits(int(input("Введите любое целое число : "))))
