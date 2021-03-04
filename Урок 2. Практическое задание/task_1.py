@@ -28,3 +28,43 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+inp_num = int(input("Введите первое число ---> "))
+
+
+def recursion(num1):
+    operation = input("Введите операцию или 0 для выхода ---> ")
+    if operation != '0':
+        if operation != "0" and operation != "+" and operation != "-" and operation != "*" and operation != "/":
+            print('Некорректные данные.')
+
+        else:
+            num2: int = 0
+            try:
+                num2 = int(input("Введите следующее число ---> "))
+            except ValueError:
+                print('Некорректные данные.')
+                recursion(num1)
+
+            if operation == '+':
+                print(f'{num1} {operation} {num2} = {num1 + num2}')
+                num1 = num1 + num2
+            elif operation == '-':
+                print(f'{num1} {operation} {num2} = {num1 - num2}')
+                num1 = num1 - num2
+            elif operation == '*':
+                print(f'{num1} {operation} {num2} = {num1 * num2}')
+                num1 = num1 * num2
+            elif operation == '/':
+                try:
+                    print(f'{num1} {operation} {num2} = {num1 / num2}')
+                    num1 = num1 / num2
+                except ZeroDivisionError:
+                    print('Ошибка. Деление на ноль')
+
+        recursion(num1)
+    else:
+        print("Завершение работы")
+
+
+recursion(inp_num)

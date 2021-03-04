@@ -16,3 +16,23 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+inp_num = int(input('Введите число: '))
+
+
+def chet_nechet(number, chet=0, nechet=0):
+    if number == 0:
+        return f"Количество четных цифр {chet}, нечетных цифр {nechet}"
+
+    else:
+        divis = number % 10
+        number = number // 10
+        if divis % 2 == 0:
+            chet += 1
+        else:
+            nechet += 1
+
+        return chet_nechet(number, chet, nechet)
+
+
+print(chet_nechet(inp_num))
