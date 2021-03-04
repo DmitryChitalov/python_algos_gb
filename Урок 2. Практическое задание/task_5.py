@@ -18,3 +18,22 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+print("\nВывод на экран кодов и символов таблицы ASCII, "
+      "начиная с символа под номером 32 и заканчивая 127-м включительно\n")
+
+
+def output_ASCII(start, stop, num_elem):
+    if start != stop:
+        if num_elem % 10 == 0:
+            print(f'{start:3}: {chr(start)}')
+        else:
+            print(f'{start:3}: {chr(start)}', end=' ')
+
+        start += 1
+        num_elem += 1
+        output_ASCII(start, stop, num_elem)
+
+
+output_ASCII(start=32, stop=128, num_elem=1)
+print()
