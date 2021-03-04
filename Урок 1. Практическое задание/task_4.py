@@ -2,7 +2,7 @@
 Задание 4.
 
 Для этой задачи:
-1) придумайте 1-3 решения (желательно хотя бы два)
+1) придумайте 2-3 решения (желательно хотя бы два)
 2) оцените сложность каждого решения в нотации О-большое
 3) сделайте вывод, какое решение эффективнее и почему
 
@@ -27,3 +27,47 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+
+# var 1 O(n)
+
+
+# def authorization (users, user_name, user_password):
+#     for key, value in users.items():
+#         if key == user_name:
+#             if value['password'] == user_password and value['activation']:
+#                 return 'access granted'
+#             elif value['password'] == user_password and not value['activation']:
+#                 return 'account not activated'
+#             elif value['password'] != user_password :
+#                 return 'access denied'
+#     return "user's not found"
+
+
+
+
+# var 2 O(1)
+
+
+def authorization (users, user_name, user_password):
+    if users.get(user_name):
+        if users[user_name]['password'] == user_password and users[user_name]['activation']:
+            return 'access granted'
+        elif users[user_name]['password'] == user_password and not users[user_name]['activation']:
+            return 'account not activated'
+        elif users[user_name]['password'] != user_password:
+            return 'access denied'
+    else:
+        return "user's not found"
+
+my_users = {
+    'Main_user': {'p@ssword': '1234', 'activation': True},
+    'Admin_user': {'passw0rd': '4567', 'activation': False},
+    'Normal_user': {'PassWord': '4321', 'activation': True},
+}
+print (authorization(my_users, 'user4', '1111'))
+
+
+# вариант 2 значительно более эффективен, поскольку отсутствие цикла существенно упрощает алгоритм,
+# что может сыграть существенную роль при работе на "реальных" проектах со значительной нагрузкой
+
