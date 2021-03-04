@@ -9,6 +9,9 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
+from random import randint
+from timeit import timeit
+from cProfile import run
 
 
 def revers(enter_num, revers_num=0):
@@ -34,3 +37,15 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+enter_num = randint(10000000000000, 1000000000000000000000000000)
+
+run('revers(enter_num)')
+run('revers_2(enter_num)')
+run('revers_3(enter_num)')
+print(f" revers {timeit('revers(enter_num)', number=10000, globals=globals())}")
+print(f" revers_2 {timeit('revers_2(enter_num)', number=10000, globals=globals())}")
+print(f" revers_3 {timeit('revers_3(enter_num)', number=10000, globals=globals())}")
+
+# cProfile ничего нам не показал
+# revers и revers2 дольше из-за рекурсии. revers3 лучший вариант.

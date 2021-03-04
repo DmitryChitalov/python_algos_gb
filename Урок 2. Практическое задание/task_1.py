@@ -28,3 +28,25 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def my_func():
+    a = int(input("Введите первое число "))
+    oper = input("Введите операцию ")
+    b = int(input("Введите второе число "))
+    if oper == '-':
+        print(a - b)
+    elif oper == '+':
+        print(a + b)
+    elif oper == '*':
+        print(a * b)
+    elif oper == '/':
+        try:
+            print(a / b)
+        except ZeroDivisionError:
+            print('На ноль делить нельзя')
+    elif oper == '0':
+        exit()
+    else:
+        print("Некорректный тип операции")
+    my_func()
+
+my_func()

@@ -15,3 +15,25 @@
 Введите пароль еще раз для проверки: 123
 Вы ввели правильный пароль
 """
+
+from hashlib import sha256
+
+passwd = input("Введите пароль: ")
+db = []
+
+def pswd(passwd, db):
+    salt = 'kuku'
+    cache = sha256(passwd.encode() + salt.encode()).hexdigest()
+    if db == []:
+        db.append(cache)
+        return db
+    else:
+        if cache == db[0]:
+            print("Вы ввели правильный пароль ")
+        else:
+            print("Вы ввели неправильный пароль ")
+
+pswd(passwd, db)
+
+passwd = input("Введите пароль еще раз ")
+pswd(passwd, db)
