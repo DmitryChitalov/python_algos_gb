@@ -26,9 +26,9 @@ def check_1(lst_obj):
     Алгоритм 3:
     Создать множество из списка
 
-    Сложность: !!!.
+    Сложность: O(N).
     """
-    lst_to_set = set(lst_obj)  # !!!
+    lst_to_set = set(lst_obj)  # O(N)
     return lst_to_set
 
 
@@ -41,12 +41,12 @@ def check_2(lst_obj):
     что такой элемент отстутствует
     в оставшихся справа элементах
 
-    Сложность: !!!.
+    Сложность: O(N).
     """
-    for j in range(len(lst_obj)):          # !!!
-        if lst_obj[j] in lst_obj[j+1:]:    # !!!
-            return False                   # !!!
-    return True                            # !!!
+    for j in range(len(lst_obj)):          # 2 O(N) + O(1)
+        if lst_obj[j] in lst_obj[j+1:]:    # 3 O(N)
+            return False                   # O(1)
+    return True                            # O(1)
 
 
 #############################################################################################
@@ -57,23 +57,23 @@ def check_3(lst_obj):
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
 
-    Сложность: !!!
+    Сложность: NlogN
     """
-    lst_copy = list(lst_obj)                 # !!!
-    lst_copy.sort()                          # !!!
-    for i in range(len(lst_obj) - 1):        # !!!
-        if lst_copy[i] == lst_copy[i+1]:     # !!!
-            return False                     # !!!
-    return True                              # !!!
+    lst_copy = list(lst_obj)                 # N
+    lst_copy.sort()                          # NLogN
+    for i in range(len(lst_obj) - 1):        # N
+        if lst_copy[i] == lst_copy[i+1]:     # 1
+            return False                     # 1
+    return True                              # 1
 
 #############################################################################################
 
-
-for j in (50, 500, 1000, 5000, 1000):
+# общая сложность O(N)
+for j in (50, 500, 1000, 5000, 1000):                           #N
     # Из 100000 чисел возьмем 'j' случайно выбранных
     # Всего 10 тыс. чисел
-    lst = random.sample(range(-100000, 100000), j)
+    lst = random.sample(range(-100000, 100000), j)              #N
 
-print(check_1(lst))
-print(check_2(lst))
-print(check_3(lst))
+print(check_1(lst))                                             #1
+print(check_2(lst))                                             #1
+print(check_3(lst))                                             #1

@@ -1,5 +1,5 @@
 """
-Задание 6.
+Задание 5.
 Задание на закрепление навыков работы со стеком
 
 Примечание: в этом задании вспомните ваши знания по работе с ООП
@@ -17,4 +17,62 @@
 для реализации этой задачи.
 
 После реализации структуры, проверьте ее работу на различных сценариях
+
+Подсказка:
+Отдельне стопки можно реализовать через:
+# 1) созд-е экземпляров стека (если стопка - класс)
+# 2) lst = [[], [], [], [],....]
 """
+
+
+class StackClass:
+    def __init__(self, num):
+        self.elems = [[]]
+        self.num = num
+
+    def is_empty(self):
+        return self.elems == [[]]
+
+    def push_in(self, el):
+        if len(self.elems[len(self.elems) - 1]) < self.num:
+                self.elems[len(self.elems) - 1].append(el)
+        else:
+            self.elems.append([])
+            self.elems[len(self.elems) - 1].append(el)
+
+    def pop_out(self):
+        remove_pl = self.elems[len(self.elems) - 1].pop()
+        if len(self.elems) - 1 == 0:
+            self.elems.pop()
+        return remove_pl
+
+    def get_val(self):
+        return self.elems[len(self.elems) - 1][len(self.elems[len(self.elems) - 1])- 1]
+
+    def stack_size(self): # количество тарелок всего
+        size = 0
+        for st in self.elems:
+            size = size + len(st)
+        return size
+
+    def num_stack(self):  # количество стопок
+        return len(self.elems)
+
+
+stack_pl = StackClass(5)
+stack_pl.push_in('pl_1')
+stack_pl.push_in('pl_2')
+stack_pl.push_in('pl_3')
+stack_pl.push_in('pl_4')
+print(stack_pl.stack_size())
+print(stack_pl.get_val())
+print(stack_pl.num_stack())
+stack_pl.push_in('pl_5')
+stack_pl.push_in('pl_6')
+stack_pl.push_in('pl_7')
+print(stack_pl.stack_size())
+print(stack_pl.pop_out())
+print(stack_pl.stack_size())
+print(stack_pl.get_val())
+print(stack_pl.stack_size())
+print(stack_pl.num_stack())
