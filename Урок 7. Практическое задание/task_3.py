@@ -59,6 +59,7 @@ m = 7
 
 randnums = list(np.random.randint(min, max, size=2 * m + 1))
 # randnums = [5, 5, 5, 5, 1, 7, 7, 7, 7]
+
 print(randnums)
 print(f"median = {statistics.median(randnums)}")
 randnums.sort(reverse=True)
