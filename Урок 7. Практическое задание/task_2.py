@@ -15,13 +15,58 @@
 """
 
 import random
+from timeit import timeit
 
+
+###################################################################
+def merge(left, right):
+    res = []
+    while len(left) > 0 and len(right) > 0:
+        if left[0] <= right[0]:
+            res.append(left.pop(0))
+        else:
+            res.append(right.pop(0))
+
+    while len(left) > 0:
+        res.append(left.pop(0))
+    while len(right) > 0:
+        res.append(right.pop(0))
+    return res
+
+
+###################################################################
+
+def merge_sort(in_arr):
+    if len(in_arr) < 2:
+        return in_arr
+    left = in_arr[:len(in_arr) // 2]
+    right = in_arr[len(in_arr) // 2:]
+
+    left = merge_sort(left)
+    right = merge_sort(right)
+
+    return merge(left, right)
+
+
+###################################################################
 min = 0
 max = 50
-m = 5
+m = 5000
 
-# randnums = list(np.random.random(min, max, size=2 * m + 1))
-# randnums = np.random(2 * m + 1)
 randnums = [random.uniform(min, max) for _ in range(m)]
-
 print(randnums)
+
+
+###################################################################
+def main():
+    num_arr = merge_sort(randnums.copy())
+    print(num_arr)
+    print(
+        timeit(
+            "merge_sort(randnums)",
+            setup='from __main__ import merge_sort, randnums',
+            number=10))
+
+
+###################################################################
+main()
