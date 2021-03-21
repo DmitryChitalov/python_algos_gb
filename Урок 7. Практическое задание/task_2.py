@@ -13,3 +13,15 @@
 Исходный - [46.11436617832828, 41.62921998361278, 18.45859540989644, 12.128870723745806, 8.025098788570562]
 Отсортированный - [8.025098788570562, 12.128870723745806, 18.45859540989644, 41.62921998361278, 46.11436617832828]
 """
+
+import random
+
+min = 0
+max = 50
+m = 5
+
+# randnums = list(np.random.random(min, max, size=2 * m + 1))
+# randnums = np.random(2 * m + 1)
+randnums = [random.uniform(min, max) for _ in range(m)]
+
+print(randnums)
