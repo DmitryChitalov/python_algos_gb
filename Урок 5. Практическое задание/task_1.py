@@ -25,3 +25,41 @@
 
 Предприятия, с прибылью ниже среднего значения: Копыта
 """
+
+import collections
+
+company = collections.namedtuple('Comp', "name period_1 period_2 period_3 period_4")
+
+companies_set = dict()
+
+num_of_companies = int(input("Введите количество предприятий для расчета прибыли: "))
+
+# collecting all the companies
+for i in range(num_of_companies):
+    c_name = input("Введите название предприятия: ")
+    p1, p2, p3, p4 = input(
+        "Через пробел введите прибыль данного предприятия за каждый квартал(Всего 4 квартала): ").split()
+    companies_set[c_name] = company(name='ddd', period_1=int(p1), period_2=int(p2), period_3=int(p3), period_4=int(p4))
+
+# calculating total profit
+total_income = 0
+for comp in companies_set:
+    total_income += companies_set[comp].period_1 + companies_set[comp].period_2 + companies_set[comp].period_3 + \
+                    companies_set[comp].period_4
+print(f"Средняя годовая прибыль всех предприятий: {total_income}")
+
+# calculating avg profit
+avg_income = total_income / len(companies_set)
+
+# final activity
+for comp in companies_set:
+    total = companies_set[comp].period_1 + companies_set[comp].period_2 + companies_set[comp].period_3 + companies_set[
+        comp].period_4
+    if total > avg_income:
+        print(f"{comp} - прибыль выше среднего")
+    elif total < avg_income:
+        print(f"{comp} - прибыль ниже среднего")
+    elif total == avg_income:
+        print(f"{comp} - средняя прибыль")
+
+# print(companies_set)
