@@ -9,3 +9,43 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randint
+import sys
+
+
+def guess(number=-1, attempts=0):
+    if attempts > 9:
+        print("Слишком много попыток, это было число ", number)
+        return -1
+    if attempts==0:
+        print("Угадайте число от 0 до 100")
+        number = randint(0,100)
+    err = True
+    while err:
+        try:
+            n = int(input())
+            err = False
+        except ValueError:
+            print("Вводите только десятичные числа")
+    if n == number:
+        print("Да!")
+        return 0
+    if n>number:
+        print("Меньше...")
+    else:
+        print("Больше...")
+    return guess(number, attempts+1)
+
+# симулятор пользователя
+def myinput():
+    n = randint(0,100)
+    print(n)
+    return n
+
+# При запуске программы с аргументом
+# пользовательский ввод симулируется
+if len(sys.argv)>1:
+    input = myinput
+
+guess()
