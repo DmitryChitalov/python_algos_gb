@@ -16,3 +16,31 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+from random import randint
+import sys
+
+def even_odd(digits):
+    even = odd = 0
+    for d in digits:
+        if d%2==0:
+            even += 1
+        else:
+            odd += 1
+    return (even, odd)
+
+def count_even_odd(n, digits=[]):
+    if n == 0:
+        return even_odd(digits)
+    return count_even_odd(n//10, [n%10]+digits)
+
+# При запуске с аргументом работает в режиме симуляции,
+# без аргументов -- в интерактивном режиме
+
+if len(sys.argv)>1:
+    n = randint(1,1000000000)
+else:
+    n = int(input("Введите целое число: "))
+
+print("Считаем четные и нечетные цифры числа ", n)
+even, odd = count_even_odd(n)
+print(f"Четных {even}, нечетных {odd}")

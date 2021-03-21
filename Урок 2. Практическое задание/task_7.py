@@ -6,3 +6,18 @@
  Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+from random import randint
+
+def arith_sum(n, s=0):
+    if n==0:
+        return s
+    return arith_sum(n-1, s+n)
+
+def exact_sum(n):
+    return n*(n+1)//2
+
+n = randint(1,10)
+print(f"Считаем сумму {n} членов арифметической прогресии")
+print("Непосредственно ", arith_sum(n))
+print("По формуле", exact_sum(n))

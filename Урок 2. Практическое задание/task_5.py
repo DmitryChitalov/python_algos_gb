@@ -18,3 +18,40 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+import sys
+
+# Эта функция печатает в точности, как в задании
+def ascii(code=32, row=0):
+    if code == 128:
+        return None
+    if row==10:
+        print()
+        row = 0
+    print(f"{code} - {chr(code)} ", end="")
+    return ascii(code+1, row+1)
+
+# В эту функцию добавлены некоторые визуальные улучшения
+# (строки выровнены по десяткам, числа выровнены по правому краю,
+# добавлен разделитель между колонками)
+def ascii2(code=-1, row=0):
+    if code <0:
+        print(" "*11, end="")
+        code = 32
+        row = 2
+    if code == 128:
+        return print()
+    if row==10:
+        print()
+        row = 0
+    else:
+        print("|", end="")
+    print(f"{code:3d} {chr(code)}", end="")
+    return ascii2(code+1, row+1)
+
+# При запуске программы с аргументом
+# печатается второй вариант
+if len(sys.argv) > 1:
+    ascii2()
+else:
+    ascii()
