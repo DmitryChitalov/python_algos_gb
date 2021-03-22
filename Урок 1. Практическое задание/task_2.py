@@ -17,3 +17,33 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+from random import randint
+numbers = [randint(1,101) for _ in range(1,10)]
+print(numbers)
+
+#первый алгоритм
+#вариант O(n)
+print('проверочный вариант', min(numbers)) #автоматизированный вариант O(n)
+
+def min_numb(numb):
+    res = numb[8] #можно указать любое число, так как он перебирает весь список
+    for i in numb:
+        if res>i:
+            res = i
+    return res
+print('вариант O(n):', min_numb(numbers))
+
+#второе алгоритм
+#вариант O(n^2)
+
+def min_numb2(number:list):
+    min_numb = number[0]
+    for i in number:
+        for y in number:
+            if i < y and i < min_numb:
+                min_numb = i
+    return min_numb
+
+print('вариант O(n^2):', min_numb2(numbers))
