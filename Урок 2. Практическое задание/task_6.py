@@ -9,3 +9,22 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+from random import randint
+
+
+def guess(number, attempts):
+    if attempts == 0:
+        print("Слишком много попыток, это было число ", number)
+        return -1
+    n = int(input("> "))
+    if n == number:
+        print("Да!")
+        return 0
+    print("Меньше..." if n > number else "Больше...")
+    return guess(number, attempts-1)
+
+
+print("Угадайте целое число от 0 до 100")
+guess(randint(0, 100), 10)
