@@ -17,3 +17,26 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+def find_min_1(lst):
+	# for elem_first in lst: # O(n)
+	elem_min = lst[0]
+	# сложность алгорима - квадратичная, ибо вложенность 
+	for index in range(len(lst)): # O(n)
+		for elem_second in lst[index + 1 : ]: # O(n-1)
+			if lst[index] > elem_second:
+				elem_min = elem_second
+	return elem_min
+
+def find_min_2(lst):
+	elem_min = lst[0]
+	for index in range(len(lst)-1): # O(n)
+		if lst[index] > lst[index+1]: # коснтанта
+				elem_min = lst[index+1] 
+	return elem_min
+
+N = 20
+lst = [i for i in range(N)]
+# print(lst)
+
+print('ф-ция 1, min =', find_min_1(lst))
+print('ф-ция 2, min =', find_min_2(lst))
