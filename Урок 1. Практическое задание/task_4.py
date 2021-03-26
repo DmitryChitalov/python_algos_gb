@@ -27,3 +27,33 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+
+# system_info_dict = {'login': [password, activ_boolean]}
+system_info_dict = {'Alex': ['qwerty', 1],
+				'Sam': ['q', 0],
+				'Sveta': ['qw', 0]
+				}
+
+
+def authorization(system_info, login, password):  # O(1) - константная сложность
+	try:
+		value_list = system_info.get(login)  # O(1) 
+		# print(value_list)
+		print('Проверка...')
+		if password == value_list[0]:
+			# print('ok')
+			if value_list[1]:
+				print('Вы допущены к ресурсу')
+			else:
+				print('Выша учетка не активирована. \nПожалуйста, пройдите активацию вашей учетной записи.')
+		else:
+			print('Неверный пароль')
+	except:
+		print("Логина нету в базе")
+
+
+user_login = 'Sveta'
+user_password = 'qw'
+print("Введен логин: {} и пароль: {}".format(user_login, user_password), '\n')
+
+authorization(system_info_dict, user_login, user_password)
