@@ -28,3 +28,33 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+def calc():
+    operand = input("Введите операцию +, -, *, / \nили 0 для выхода: ")
+    if operand == '0':
+        return
+    if operand not in "+-*/":
+        print('Нужно ввести +, -, *, / \nили 0 для выхода')
+        return calc()
+    try:
+        num_1 = int(input("Введите первое число: "))
+        num_2 = int(input("Введите второе число: "))
+    except ValueError:
+        return calc()
+
+    if operand == '+':
+        total = num_1 + num_2
+    elif operand == '-':
+        total = num_1 - num_2
+    elif operand == '*':
+        total = num_1 * num_2
+    elif operand == '/':
+        if num_2 != 0:
+            total = num_1 / num_2
+        else:
+            total = 'Undefined'
+
+    print(f"Итого: {num_1} {operand} {num_2} = {total}")
+    return calc()
+
+calc()
