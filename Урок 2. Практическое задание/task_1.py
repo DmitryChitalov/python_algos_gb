@@ -28,3 +28,32 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+OPS = {
+    "+": lambda x, y: x+y,
+    "-": lambda x, y: x-y,
+    "*": lambda x, y: x*y,
+    "/": lambda x, y: x/y,
+}
+
+
+def calc():
+    op = input("Введите операцию (+, -, *, / или 0 для выхода): ")
+    if op == "0":
+        return None
+    if op in OPS:
+        try:
+            x = float(input("Введите первое число: "))
+            y = float(input("Введите первое число: "))
+            res = OPS[op](x, y)
+            print(x, op, y, '=', res)
+        except ValueError:
+            print("Ошибка при вводе числа")
+        except ZeroDivisionError:
+            print("Деление на ноль")
+    else:
+        print("Неизвестная операция, повторите ввод")
+    return calc()
+
+
+calc()
