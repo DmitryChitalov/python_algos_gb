@@ -16,3 +16,27 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+
+
+def even_odd(digits):
+    even = odd = 0
+    for d in digits:
+        if d % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+    return even, odd
+
+
+def count_even_odd(n, digits=None):
+    if digits is None:
+        digits = []
+    if n == 0:
+        return even_odd(digits)
+    return count_even_odd(n//10, [n % 10] + digits)
+
+
+max_n = int(input("Введите целое число: "))
+print("Считаем четные и нечетные цифры числа ", max_n)
+n_even, n_odd = count_even_odd(max_n)
+print(f"Четных {n_even}, нечетных {n_odd}")
