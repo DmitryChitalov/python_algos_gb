@@ -51,9 +51,9 @@ def find_top_profit_1(comp_info_dict):	# сложность алгоритма -
 
 
 def find_top_profit_2(comp_info_dict):	# сложность алгоритма - # O(n) 
-	comp_max_amount = []	# O(1)
+	comp_max_amount = []  # O(1)
 
-	list_amount = list(comp_info_dict.values()) # O(n) 
+	list_amount = list(comp_info_dict.values())  # O(n) 
 
 	max1 = max(list_amount)  # O(n) 
 	list_amount.remove(max1)  # O(n) 
@@ -62,12 +62,12 @@ def find_top_profit_2(comp_info_dict):	# сложность алгоритма -
 	max3 = max(list_amount)	 # O(n) 
 	list_amount.remove(max3)  # O(n)
 
-	for name, amount in comp_info_dict.items():	 # O(n) 
+	for name, amount in comp_info_dict.items():  # O(n) # comp_info_dict.items() - сложность O(1)
 		# print(name, amount)
-		if len(comp_max_amount) == 3:
+		if len(comp_max_amount) == 3:  # O(1)
 			break
 		elif amount == max1 or amount == max2 or amount ==max3:
-			comp_max_amount.append(name)
+			comp_max_amount.append(name)  # O(1)
 		# else:
 		# 	print('smth wrong')
 	return comp_max_amount
@@ -79,7 +79,7 @@ def find_top_profit_3(comp_info_dict):	# сложность алгоритма -
 	comp_name_max_amount = []	
 	list_amount = list(comp_info_dict.values())  # O(n), n - длина словаря
 
-	for i in range(3):  # O(n=3) = O(1)
+	for i in range(3):  # O(n=3) = O(1) - константа
 		list_max_amount.append(max(list_amount))  # O(n) 
 		val_remove = list_max_amount[i]
 		list_amount.remove(val_remove)  # O(n) 
@@ -93,7 +93,7 @@ def find_top_profit_3(comp_info_dict):	# сложность алгоритма -
 	return comp_name_max_amount
 
 # если считала правильно, то все мои решения имееют сложностью O(n)
-# считаю, что первое решение эффективне из-за отсутствия применения встроенных ф-ций, 
+# считаю, что первое решение эффективне из-за отсутствия большого применения встроенных ф-ций, 
 	# имеющих сложность O(n) и наглядности кода
 
 print('1 решение - Список компаний с наибольшей годовой прибылью:', find_top_profit_1(companies_info), '\n')
