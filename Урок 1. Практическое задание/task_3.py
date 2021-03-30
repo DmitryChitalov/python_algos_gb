@@ -92,11 +92,30 @@ def find_top_profit_3(comp_info_dict):	# сложность алгоритма -
 		# 	print('smth wrong')
 	return comp_name_max_amount
 
-# если считала правильно, то все мои решения имееют сложностью O(n)
+def find_top_profit_4(comp_info_dict): # вариант 4: O(n ^ 2)
+	
+	list_dict = list(comp_info_dict.items())  # O(n)
+	
+	for i in range(len(list_dict)):
+	    low_value = i
+	    for j in range(i + 1, len(list_dict)):
+	        if list_dict[j][1] > list_dict[low_value][1]:
+	            low_value = j
+	    list_dict[i], list_dict[low_value] = list_dict[low_value], list_dict[i]
+	# print(list_dict[0:3])
+	# for elem in list_dict[0:3]:
+	#     print(elem[0], ':', elem[1], ' ')
+	return list_dict[0:3]
+
+
+# если считала правильно, то первые три решения имееют сложностью O(n), а 4ое O(n ^ 2), что является 
+# более сложным алгоритмом, особенно при увеличении n
 # считаю, что первое решение эффективне из-за отсутствия большого применения встроенных ф-ций, 
 	# имеющих сложность O(n) и наглядности кода
+	# на маленьких n, большое число встроенных операций, имеющих сложность O(n), будет давать большое кол-во операций
 
 print('1 решение - Список компаний с наибольшей годовой прибылью:', find_top_profit_1(companies_info), '\n')
 print('2 решение - Список компаний с наибольшей годовой прибылью:', find_top_profit_2(companies_info), '\n')
 print('3 решение - Список компаний с наибольшей годовой прибылью:', find_top_profit_3(companies_info), '\n')
+print('4 решение - Список компаний с наибольшей годовой прибылью:', find_top_profit_4(companies_info), '\n')
 
