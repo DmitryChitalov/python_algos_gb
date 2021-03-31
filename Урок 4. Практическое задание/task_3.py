@@ -9,6 +9,9 @@
 
 Сделайте вывод, какая из трех реализаций эффективнее и почему
 """
+from cProfile import Profile
+from pstats import Stats
+from timeit import timeit
 
 
 def revers(enter_num, revers_num=0):
@@ -34,3 +37,48 @@ def revers_3(enter_num):
     revers_num = enter_num[::-1]
     return revers_num
 
+
+n = 846207850378
+N = 100000
+
+profiler = Profile()
+profiler.enable()
+for i in range(N):
+    revers(n)
+    revers_2(n)
+    revers_3(n)
+profiler.disable()
+Stats(profiler).strip_dirs().print_stats()
+# ---
+#    1500001 function calls (300001 primitive calls) in 0.744 seconds
+#
+#    Random listing order was used
+#
+#    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+#         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+# 1300000/
+#    100000    0.488    0.000    0.488    0.000 task_3.py:17(revers)
+#    100000    0.209    0.000    0.209    0.000 task_3.py:27(revers_2)
+#    100000    0.047    0.000    0.047    0.000 task_3.py:35(revers_3)
+# ---
+
+
+print("revers\t\t", timeit("revers(n)", globals=globals(), number=N))
+print("revers_2\t", timeit("revers_2(n)", globals=globals(), number=N))
+print("revers_3\t", timeit("revers_3(n)", globals=globals(), number=N))
+# ---
+# revers	0.29492326197214425
+# revers_2	0.20011793699814007
+# revers_3	0.03318392898654565
+# ---
+
+# Встроенная функция предсказуемо лидирует в двух испытаниях.
+# Остается неясным, почему cProfile и timeit дают разное
+# отношение времен для цикла и рекурсии, cProfile дает 2,
+# а timeit дает 1.5 Мне кажется, доверять нужно timeit,
+# как самому "тупому" и поэтому надежному методу.
+#
+# cProfile строит свою статистику на основе измерений вызовов
+# всех функций. Очевидно, при таком подходе чаще всего
+# вызывается revers_2(0). При усреднении это приводит
+# к занижению результатов по времени.

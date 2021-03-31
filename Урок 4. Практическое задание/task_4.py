@@ -10,14 +10,21 @@
 Сделайте замеры и опишите, получилось ли у вас ускорить задачу.
 """
 
-array = [1, 3, 1, 3, 4, 5, 1]
+from timeit import timeit
+from operator import itemgetter
+from random import randint
 
 
-def func_1():
+array7 = [1, 3, 1, 3, 4, 5, 1]
+# Добавим еще один массив побольше
+array1000 = [randint(1, 100) for _ in range(1000)]
+
+
+def func_1():  # O(n^2)
     m = 0
     num = 0
-    for i in array:
-        count = array.count(i)
+    for i in array:  # O(n^2)
+        count = array.count(i)  # O(n)
         if count > m:
             m = count
             num = i
@@ -25,10 +32,10 @@ def func_1():
            f'оно появилось в массиве {m} раз(а)'
 
 
-def func_2():
+def func_2():  # O(n^2)
     new_array = []
-    for el in array:
-        count2 = array.count(el)
+    for el in array:  # O(n^2)
+        count2 = array.count(el)  # O(n)
         new_array.append(count2)
 
     max_2 = max(new_array)
@@ -37,5 +44,66 @@ def func_2():
            f'оно появилось в массиве {max_2} раз(а)'
 
 
+def func_3():  # O(n)
+    # словарь {номер: число его повторений}
+    reg = {}
+    for el in array:  # O(n)
+        # увеличиваем счетчик для данного значения
+        reg[el] = reg.get(el, 0) + 1  # O(1)
+    # ищем max не по ключу, а по значению
+    elem, max_2 = max(reg.items(), key=itemgetter(1))
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_2} раз(а)'
+
+
+# Сначала пройдем много раз по маленькому массиву
+array = array7
+N = 10000
 print(func_1())
+print(timeit("func_1()", number=N, globals=globals()))
 print(func_2())
+print(timeit("func_2()", number=N, globals=globals()))
+print(func_3())
+print(timeit("func_3()", number=N, globals=globals()))
+# output:
+# ---
+# Чаще всего встречается число 1, оно появилось в массиве 3 раз(а)
+# 0.01287864800542593
+# Чаще всего встречается число 1, оно появилось в массиве 3 раз(а)
+# 0.01819467602763325
+# Чаще всего встречается число 1, оно появилось в массиве 3 раз(а)
+# 0.018526640022173524
+# ---
+
+# Самым быстрым оказывается алгоритм №1,
+# самым медленным алгоритм №3.
+
+
+# Затем несколько раз пройдем большой массив
+array = array1000
+N = 100
+print(func_1())
+print(timeit("func_1()", number=N, globals=globals()))
+print(func_2())
+print(timeit("func_2()", number=N, globals=globals()))
+print(func_3())
+print(timeit("func_3()", number=N, globals=globals()))
+# output:
+# ---
+# Чаще всего встречается число 86, оно появилось в массиве 23 раз(а)
+# 1.1288615339435637
+# Чаще всего встречается число 86, оно появилось в массиве 23 раз(а)
+# 1.1044497270486318
+# Чаще всего встречается число 86, оно появилось в массиве 23 раз(а)
+# 0.00952054699882865
+# ---
+
+# Здесь самым быстрым является алгоритм №3,
+# из-за того, что его линейная сложность
+# проявляется на достаточно на больших n.
+# Самым медленным оказывается алгоритм №1.
+
+# Вопрос, почему тогда на маленьких массивах
+# все наоборот? Я думаю, из-за того, что не
+# успевает "окупиться" создание дополнительных
+# объектов, списка для №2 и словаря для №3
