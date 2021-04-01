@@ -17,3 +17,25 @@
 Алгоритмизатор должен развивать мышление, а это прежде всего практика.
 А без столкновения со сложностями его не развить.
 """
+
+
+# O(n)
+def minn_elem_1(spis):
+    min_elem = spis[0]
+    for i in range(len(spis)):
+        if min_elem > spis[i]:
+            min_elem = spis[i]
+    return min_elem
+
+
+# O(n^2)
+def minn_elem_2(spis):
+    for i in spis:
+        true_min = True
+        for j in range:
+            if i > j:
+                true_min = False
+        if true_min:
+            return i
+
+
