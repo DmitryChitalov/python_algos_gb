@@ -18,3 +18,15 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def int_char(num, count, count_end):
+    if num == 128:
+        return count_end
+    else:
+        if count == 10:
+            return int_char(num + 1, 1, count_end + f" {num} - {chr(num)}\n")
+        else:
+            return int_char(num + 1, count + 1, count_end + f" {num} - {chr(num)}")
+
+
+print(int_char(33, 1, ""))

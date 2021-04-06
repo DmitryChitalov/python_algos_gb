@@ -16,3 +16,21 @@
 Введите число: 123
 Количество четных и нечетных цифр в числе равно: (1, 2)
 """
+def count_func(numbers, even_count=0, odd_count=0):
+    if numbers == 0:
+        return even_count, odd_count
+    else:
+        even = numbers % 10
+        numbers=numbers // 10
+        if even % 2 == 0:
+            even_count += 1
+        else:
+            odd_count += 1
+    return count_func(numbers, even_count, odd_count)
+
+try:
+    number = int(input('Введите набор цифр: '))
+except ValueError:
+    print('Вы ввели НЕ_число, просьба ввести именно число:')
+    number = int(input('Введите набор цифр: '))
+print(f'Количество чисел в вашем числе {number} по пропорции (четные, нечетные):  {count_func(number)}')
