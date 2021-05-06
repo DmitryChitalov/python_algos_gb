@@ -22,3 +22,44 @@
 Реализуйте поиск трех компаний с наибольшей годовой прибылью.
 Выведите результат.
 """
+compamy = {
+    'gazprom': 2000,
+    'navafarm': 300,
+    'microsoft': 3000,
+    'rosnano': 800,
+    'apple': 1500,
+    'adidas': 50
+}
+
+
+def sorted_n2(lst):
+    for i in range(len(lst)):
+        low_index = i
+        for j in range(i + 1, len(lst)):
+            if lst[j][1] > lst[low_index][1]:
+                low_index = j
+        lst[i], lst[low_index] = lst[low_index], lst[i]
+    return lst[0:3]
+
+
+lst_dict = list(compamy.items())
+for i in sorted_n2(lst_dict):
+    print(f'{i[0]} : {i[1]}')
+
+print('=' * 20)
+
+
+def sorted_n(lst):
+    max_value = {}
+    lstdict = dict(lst)
+    for i in range(3):
+        maximum = max(lstdict.items(), key=lambda key_val: key_val[1])
+        del lstdict[maximum[0]]
+        max_value[maximum[0]] = maximum[1]
+    return max_value
+
+
+print(sorted_n(compamy))
+
+'''лучшим вариантом будет функция sortetd_n так как имеет
+минимальную вычислительную сложность'''

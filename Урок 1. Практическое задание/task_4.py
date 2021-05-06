@@ -27,3 +27,16 @@
 Для реализации хранилища можно применить любой подход,
 который вы придумаете, например, реализовать словарь.
 """
+# сложность O(1)
+def autorizacion(users, user_name, user_pass):
+    '''реализация проверки допуска к ресурсу'''
+    if users.get(user_name):
+        if users[user_name]['passowrd'] == user_pass and user_name['active']:
+            return 'Доступ разрешен'
+        elif users[user_name]['passowrd'] == user_pass and not user_name['active']:
+            return 'Необходимо войти в учетную запись'
+        elif users[user_name]['password'] != user_pass:
+            return 'Вы ввели не верный пароль'
+    else:
+        return "Пользователя не сущестует"
+'''самая быстрая проверка которая пришла на ум. Быстрая потому что нет цикла'''
