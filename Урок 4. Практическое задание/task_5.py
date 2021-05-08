@@ -42,13 +42,13 @@ def eratosfen(i):
     #  O(n log(log n))
     #  Используй алгоритм "Решето Эратосфена"
     n = 2
-    1 = 10000
-    sieve = [x for x in range(1)]
-    sieve[1] = 0
-    while n < 1:
+    l = 10000
+    sieve = [x for x in range(l)]
+    sieve[l] = 0
+    while n < l:
         if sieve[n] != 0:
             m = n * 2
-            while m < 1:
+            while m < l:
                 sieve[m] = 0
                 m += n
         n += 1
