@@ -28,3 +28,50 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+def func():
+    operator = input('Введите арифметический оператор или 0 для выхода:')
+
+    if operator == '0':
+        return 'stop'
+    else:
+        try:
+            if operator == operator:
+                number1 = int(input())
+                number2 = int(input())
+
+                if operator == '+':
+                    result = number1 + number2
+                    print(result)
+                    return func()
+
+                elif operator == '/':
+                    try:
+                        result = number1 / number2
+                        print(result)
+
+                    except ZeroDivisionError:
+                        print('Деление на 0 невозможно')
+                        return func()
+
+                elif operator == '*':
+                    result = number1 * number2
+                    print(result)
+                    return func()
+
+                elif operator == '-':
+                    result = number1 - number2
+                    print(result)
+                    return func()
+
+        except ValueError:
+            print('Вы ввели строку. Попробуйте еще раз')
+            return func()
+
+        else:
+            print('Введен неверный орифметический оператор')
+            return func()
+
+func()
+
+# Проверка деления на 0 меня смущает. Ничего, что несколько блоков try/except в одной функции?
+# это не увеличит время исполнения кода?

@@ -9,3 +9,19 @@
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+import random
+def func(count, number):
+
+    print(f'Попытка {count}')
+    user_number = int(input('Введите число от 0 до 100: '))
+    if count == 10 or user_number == number:
+        if user_number == number:
+            print("Верно!")
+        print(f"Загаданное число: {number}")
+    else:
+        if user_number > number:
+            print('Загаданное число меньше')
+        else:
+            print('Загаданное число больше')
+        func(count + 1, number)
+func(1, random.randint(0, 100))
