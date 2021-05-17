@@ -20,8 +20,8 @@ def bubble_sort(lst_obj):
     n = 1
     while n < len(lst_obj):
         for i in range(len(lst_obj)-n):
-            if lst_obj[i] > lst_obj[i+1]:
-                lst_obj[i], lst_obj[i+1] = lst_obj[i+1], lst_obj[i]
+            if lst_obj[i] < lst_obj[i-1]:
+                lst_obj[i], lst_obj[i-1] = lst_obj[i-1], lst_obj[i]
         n += 1
     return lst_obj
 
@@ -53,3 +53,4 @@ print(
         globals=globals(),
         number=1000))
 print(orig_list)
+print(list)
