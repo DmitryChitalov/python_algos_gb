@@ -26,7 +26,8 @@ def bubble_sort(lst_obj):
     return lst_obj
 
 
-orig_list = [random.randint(-100, 100) for _ in range(10)]
+orig_list = [random.randint(-100, 100) for _ in range(100)]
+a = sorted(orig_list)
 
 # замеры 10
 print(
@@ -53,4 +54,4 @@ print(
         globals=globals(),
         number=1000))
 print(orig_list)
-print(list)
+print(a)
