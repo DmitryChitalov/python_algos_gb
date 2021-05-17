@@ -32,7 +32,6 @@ def select(a, left, right, n):
 
 def partition(a, left, right, pivot_index, n):
     pivot_value = a[pivot_index]
-    # a[pivot_index], a[right] == a[right], a[pivot_index]
     store_index = left
 
     for i in range(left, right - 1):
