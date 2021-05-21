@@ -75,7 +75,7 @@ class BinaryTree:
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(10)
+r.insert_left(4)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
 r.insert_right(12)
