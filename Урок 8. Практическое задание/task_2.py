@@ -65,11 +65,17 @@ class BinaryTree:
     def get_root_val(self):
         return self.root
 
+    Try:
+    for left_child in left_child >= root_obj
+
+    except:
+        print("Левый потомок не должен быть больше,либо равен своему предку")
+        print("Исправьте!")
 
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(4)
+r.insert_left(10)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
 r.insert_right(12)
@@ -77,3 +83,11 @@ print(r.get_right_child())
 print(r.get_right_child().get_root_val())
 r.get_right_child().set_root_val(16)
 print(r.get_right_child().get_root_val())
+"""
+try:
+    for i in range(3):
+        print(3/i)
+except:
+    print("Деление на 0")
+    print("Исключение было обработано")
+"""
