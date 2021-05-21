@@ -68,7 +68,7 @@ class BinaryTree:
     Try:
     for left_child in left_child >= root_obj
 
-    except:
+    except TypeError:
         print("Левый потомок не должен быть больше,либо равен своему предку")
         print("Исправьте!")
 
