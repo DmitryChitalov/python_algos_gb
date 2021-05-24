@@ -13,3 +13,110 @@
 ВНИМАНИЕ: ЗАДАНИЯ, В КОТОРЫХ БУДУТ ГОЛЫЕ ЦИФРЫ ЗАМЕРОВ (БЕЗ АНАЛИТИКИ)
 БУДУТ ПРИНИМАТЬСЯ С ОЦЕНКОЙ УДОВЛЕТВОРИТЕЛЬНО
 """
+from memory_profiler import profile
+from math import log
+from platform import architecture
+from sys import version
+from numpy import argmax, bincount
+
+# Разрядность 64bit
+# Версия Python 3.6.5
+
+
+array = [1, 3, 1, 3, 4, 5, 1, 1, 3, 1, 3, 4, 5, 1, 1, 3, 1, 3, 4, 5, 1, 1, 3, 1, 3, 4, 5, 1, 1, 3, 1, 3, 4, 5]
+
+
+@profile(precision=4)
+def func_1():
+    m = 0
+    num = 0
+    for i in array:
+        count = array.count(i)
+        if count > m:
+            m = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+@profile(precision=4)
+def func_2():
+    new_array = []
+    for el in array:
+        count2 = array.count(el)
+        new_array.append(count2)
+
+    max_2 = max(new_array)
+    elem = array[new_array.index(max_2)]
+    return f'Чаще всего встречается число {elem}, ' \
+           f'оно появилось в массиве {max_2} раз(а)'
+
+
+@profile(precision=4)
+def func_3():
+    m = 0
+    num = 0
+    for i in set(array):
+        count = array.count(i)
+        if count > m:
+            m = count
+            num = i
+    return f'Чаще всего встречается число {num}, ' \
+           f'оно появилось в массиве {m} раз(а)'
+
+
+@profile(precision=4)
+def func_4():
+    m = bincount(array)
+    num = argmax(m)
+    return f'Чаще всего встречается число {num},' \
+           f'оно появилось в массиве {max(m)} раз(а)'
+
+
+print(func_1())
+print(func_2())
+print(func_3())
+print(func_4())
+
+"""
+По первым двум функциям понятно, что они очень затратны в плане ресурсов процессора, но по памяти ничего не меняется
+
+По профайлеру видно, что использование методов модуля numpy требует незначительно больше памяти хоть
+с каждым разом и уменьшает increment, но ускоряет процесс за счет еденичных повторений кода в отличие от первых
+двух функций. Использование этого варината обосновано в тех случаях, когда модуль numpy уже используется в проекте
+где либо еще, в противном случае использование приведет к лишнему весу приложения.
+
+func_4
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    68  32.0195 MiB  32.0195 MiB           1   @profile(precision=4)
+    69                                         def func_4():
+    70  32.0312 MiB   0.0117 MiB           1       m = bincount(array)
+    71  32.0391 MiB   0.0078 MiB           1       num = argmax(m)
+    72  32.0430 MiB   0.0039 MiB           1       return f'Чаще всего встречается число {num},' \
+    73                                                    f'оно появилось в массиве {max(m)} раз(а)'
+
+
+Чаще всего встречается число 1,оно появилось в массиве 14 раз(а)
+=================================================================
+func_3 же оптимальный результат здесь, держит память на одном уровне и соблюдает баланс по количеству повторений
+Я бы предпочел использовать третий результат, так как функции все встроенные и их возможностей достаточно
+для решения задачи
+
+Line #    Mem usage    Increment  Occurences   Line Contents
+============================================================
+    55  32.0195 MiB  32.0195 MiB           1   @profile(precision=4)
+    56                                         def func_3():
+    57  32.0195 MiB   0.0000 MiB           1       m = 0
+    58  32.0195 MiB   0.0000 MiB           1       num = 0
+    59  32.0195 MiB   0.0000 MiB           5       for i in set(array):
+    60  32.0195 MiB   0.0000 MiB           4           count = array.count(i)
+    61  32.0195 MiB   0.0000 MiB           4           if count > m:
+    62  32.0195 MiB   0.0000 MiB           1               m = count
+    63  32.0195 MiB   0.0000 MiB           1               num = i
+    64  32.0195 MiB   0.0000 MiB           1       return f'Чаще всего встречается число {num}, ' \
+    65                                                    f'оно появилось в массиве {m} раз(а)'
+
+
+Чаще всего встречается число 1,оно появилось в массиве 14 раз(а)
+"""

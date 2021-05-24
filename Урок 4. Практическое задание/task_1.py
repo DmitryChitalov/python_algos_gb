@@ -21,3 +21,25 @@ def func_1(nums):
         if nums[i] % 2 == 0:
             new_arr.append(i)
     return new_arr
+
+
+def func_2(nums):
+    new_arr = []
+    for i, x in enumerate(nums):
+        if x % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+
+my_list = [1894, 3332, 32, 1134]
+
+print('Начальный код:')
+print(timeit(f"func_1({my_list})", setup="from __main__ import func_1", number=10000))
+
+print('Оптимизированный код:')
+print(timeit(f"func_2({my_list})", setup="from __main__ import func_2", number=10000))
+
+"""
+Смена на цикл по парам номер_элемента - значение. 
+нет операции обращения к элементу массива по номеру, следовательно быстрее.
+"""

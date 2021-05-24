@@ -6,18 +6,14 @@
 в качестве знака операции. Если пользователь вводит неверный знак
 (не '0', '+', '-', '*', '/'), то программа должна сообщать ему об ошибке и
 снова запрашивать знак операции.
-
 Также сообщать пользователю о невозможности деления на ноль,
 если он ввел 0 в качестве делителя.
-
 Подсказка:
 Вариант исполнения:
 - условие рекурсивного вызова - введена операция +, -, *, /
 - условие завершения рекурсии - введена операция 0
-
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
-
 Пример:
 Введите операцию (+, -, *, / или 0 для выхода): +
 Введите первое число: 214
@@ -28,3 +24,65 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def plus(a, b):
+    if b == 0:
+        return a
+    else:
+        return plus(a, b - 1) + 1
+
+
+def minus(a, b):
+    if b == 0:
+        return a
+    else:
+        return minus(a, b - 1) - 1
+
+
+def multi(a, b):
+    if b == 1:
+        return a
+    else:
+        return multi(a, b - 1) + a
+
+
+def divide(a, b, r=0):
+    if a < b:
+        return r
+    elif b == 0:
+        return print('На ноль делить нельзя!')
+    else:
+        return divide(a - b, b, r + 1)
+
+
+def calc():
+    operation = input('Введите операцию (+, -, *, / или 0 для выхода):   ')
+    if operation not in ('+', '-', '/', '*', '0'):
+        print('Ошибка при выборе знака операции.')
+    else:
+        if operation == '0':
+            return
+        try:
+            first = int(input('Введите первое число:   '))
+        except ValueError:
+            print('Это не число!')
+        try:
+            second = int(input('Введите второе число:   '))
+        except ValueError:
+            print('Это не число!')
+        else:
+            if operation == '+' and first > 0 and second > 0:
+                print(f'Ваш результат: {plus(first, second)}')
+            elif operation == '-' and first > 0 and second > 0:
+                print(f'Ваш результат: {minus(first, second)}')
+            elif operation == '*' and first > 0 and second > 0:
+                print(f'Ваш результат: {multi(first, second)}')
+            elif operation == '/' and first > 0 and second > 0:
+                print(f'Ваш результат: {divide(first, second)}')
+            else:
+                print('Непредвиденная ошибка.')
+    calc()
+
+
+calc()

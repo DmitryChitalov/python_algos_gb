@@ -11,6 +11,7 @@
 Если у вас есть идеи, предложите вариант оптимизации.
 """
 
+
 from timeit import timeit
 from random import randint
 
@@ -47,7 +48,6 @@ def memoize(f):
     cache = {}
 
     def decorate(*args):
-
         if args in cache:
             return cache[args]
         else:
@@ -79,3 +79,17 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+
+"""
+В случае с тройной рекурсией, используя мемоизацию, мы избегаем повторных расчетов,
+все берется из памяти, отсюда и оптимизация
+
+Не оптимизированная функция recursive_reverse
+0.0186562
+0.0214113
+0.0394946
+Оптимизированная функция recursive_reverse_mem
+0.001513500000000001
+0.0015310000000000046
+0.0015724000000000016
+"""
