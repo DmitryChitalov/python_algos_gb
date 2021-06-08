@@ -10,6 +10,7 @@
 Поработайте с доработанной структурой, позапускайте на реальных данных.
 """
 
+
 class BinaryTree:
     def __init__(self, root_obj):
         # корень
@@ -21,8 +22,11 @@ class BinaryTree:
 
     # добавить левого потомка
     def insert_left(self, new_node):
+        if new_node >= self.root:
+            print("Для вставки слева узел д.б. меньше корня")
+            return
         # если у узла нет левого потомка
-        if self.left_child == None:
+        if self.left_child is None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.left_child = BinaryTree(new_node)
@@ -36,8 +40,11 @@ class BinaryTree:
 
     # добавить правого потомка
     def insert_right(self, new_node):
+        if new_node <= self.root:
+            print("Для вставки справа узел д.б. больше корня")
+            return
         # если у узла нет правого потомка
-        if self.right_child == None:
+        if self.right_child is None:
             # тогда узел просто вставляется в дерево
             # формируется новое поддерево
             self.right_child = BinaryTree(new_node)
@@ -69,7 +76,7 @@ class BinaryTree:
 r = BinaryTree(8)
 print(r.get_root_val())
 print(r.get_left_child())
-r.insert_left(4)
+r.insert_left(7)
 print(r.get_left_child())
 print(r.get_left_child().get_root_val())
 r.insert_right(12)
